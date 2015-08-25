@@ -1,5 +1,5 @@
 fnc_DMS_cleanUp = {
-	private ["_marker","_boxes","_miscThings"];
+	private ["_marker","_boxes"];
 	_marker = _this select 0;
 	_objects  = _this select 1;
 
@@ -10,7 +10,7 @@ fnc_DMS_cleanUp = {
 
 	if (_objects = "Clean") then {
 		 
-		_this enableSimulation false;
+	    _this enableSimulation false;
 	    _this removeAllMPEventHandlers "mpkilled";
 	    _this removeAllMPEventHandlers "mphit";
 	    _this removeAllMPEventHandlers "mprespawn";
@@ -27,5 +27,5 @@ fnc_DMS_cleanUp = {
 	    _this = nil;
 	
 	};
-		diag_log format ["DMS :: Markers, vehicles, AI and loot boxes and other items have been cleaned up!"];
+	diag_log format ["DMS :: Markers, vehicles, AI and loot boxes and other items have been cleaned up!"];
 };
