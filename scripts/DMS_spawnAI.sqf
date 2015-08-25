@@ -1,8 +1,9 @@
 DMS_spawnAI = {
-	private ["_group", "_pos","_soldier","_skill","_units"];
+	private ["_group", "_pos","_soldier","_skill","_units","_playerObject"];
 	_pos  = _this select 0;
 	_units = _this select 1;
 	_skill = _this select 2;
+	//_playerObject = (owner player);
 	// Needed 4 exile
 	_group = createGroup INDEPENDENT;
 	_group setBehaviour "COMBAT";
@@ -10,9 +11,9 @@ DMS_spawnAI = {
 	_group allowFleeing 0;
 	
 	// Set AI owner to Player.
-	// _group setGroupOwner (owner player);
+	_group setGroupOwner (owner player);
 	// Not tested this one, may need to apply above one.
-	ExileServerOwnershipSwapQueue pushBack [_group,_playerObject];
+	//ExileServerOwnershipSwapQueue pushBack [_group,_playerObject];
 	
 	
 	for "_i" from 1 to _units do {
