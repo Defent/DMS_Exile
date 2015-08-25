@@ -24,7 +24,7 @@ publicVariable "GlobalHint";
 
 
 // Spawn Marker
-[_pos,_missname] execVM "mission\scripts\DMS_CreateMarker.sqf";
+[_pos,_missname] execVM "scripts\DMS_CreateMarker.sqf";
 
 // Spawn Box
 _crate = createVehicle ["Box_NATO_AmmoOrd_F",[(_pos select 0) - 10, _pos select 1,0],[], 0, "CAN_COLLIDE"];
@@ -61,4 +61,4 @@ publicVariable "GlobalHint";
 
 sleep 150;
 
-[] execVM "mission\scripts\DMS_selectMission.sqf";
+CALL DMS_selectMission.sqf;
