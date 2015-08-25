@@ -13,18 +13,10 @@ _pos = call DMS_findSafePos;
 _missname = "Main Mission 3";
 diag_log format["DMS :: Main Mission 3 started at [%1]",_pos];
 
-_misText = "<t size='1.75' align='center' color='#27612F'>Main Mission 3.<br/>
-</t>
-<br/>
-<t align='center' color='#FF0000'>------------------------------</t>
-<br/>
-<t size='1.25' color='#FFFFFF'> Mission now starting! Check your map!</t>";
-
-GlobalHint = [0,_misText];
-publicVariable "GlobalHint";
+["standardHintRequest",["Mission starting! Check your map"]] call ExileServer_system_network_send_broadcast;
 
 // Spawn Marker
-[_pos,_missname] execVM "scripts\DMS_CreateMarker.sqf";
+[_pos,_missname] call DMS_CreateMarker;
 
 // Spawn Box
 _crate = createVehicle ["Box_NATO_AmmoOrd_F",[(_pos select 0) - 10, _pos select 1,0],[], 0, "CAN_COLLIDE"];
@@ -40,15 +32,7 @@ sleep 2;
 
 waitUntil{{isPlayer _x && _x distance _pos < 30  } count playableUnits > 0}; 
 
-_missEnd = "<t size='1.75' align='center' color='#27612F'>Main Mission 3.
-</t>
-<br/>
-<t align='center' color='#FF0000'>------------------------------</t>
-<br/>
-<t size='1.25' color='#FFFFFF'> Mission has ended, good job!</t>";
-
-GlobalHint = [0,_missEnd];
-publicVariable "GlobalHint";
+["standardHintRequest",["Mission has ended, good job!"]] call ExileServer_system_network_send_broadcast;
 
 
 //  Run Cleanup
