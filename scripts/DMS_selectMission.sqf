@@ -19,7 +19,7 @@ DMS_SelectMission = {
 	_missVar = _MainArray select _slct;
 
 	// Help from secret skype group. 
-	call compile preprocessfilelinenumbers format["missions\%1.sqf",_missVar];
+	call compile preprocessfilelinenumbers format["\x\addons\DMS\missions\%1.sqf",_missVar];
 
 	//DMS_MissionRunning = 1;
 };

@@ -36,9 +36,10 @@ waitUntil{{isPlayer _x && _x distance _pos < 30  } count playableUnits > 0};
 
 
 //  Run Cleanup
-["Ended","Clean"] call DMS_CleanUp;
+[] call DMS_CleanUp;
 
- 
+ 	deleteMarker "DMS_MainMarker";
+	deleteMarker "DMS_MainDot";
 
  
 
