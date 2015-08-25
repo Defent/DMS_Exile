@@ -11,7 +11,7 @@ fnc_DMS_cleanUp = {
     _this removeAllEventHandlers "GetOut";
     _this removeAllEventHandlers "GetIn";
     _this removeAllEventHandlers "Local";
-    clearVehicleInit _this;
+  //  clearVehicleInit _this;
     deleteVehicle _this;
     deleteGroup (group _this);
     _this = nil;

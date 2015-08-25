@@ -26,8 +26,7 @@ if(isServer) then {
 	
 	*/
 
-	// LOADS THIS FAR BUT DOESNT LAUNCH SELECT MISSION - CURRENT PROBLEM
-	call DMS_selectMission;
+	//call DMS_selectMission;
 	
 	
 	//[] call compile preprocessFileLineNumbers "\x\addons\DMS\scripts\DMS_selectMission.sqf";
