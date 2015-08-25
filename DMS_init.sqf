@@ -26,7 +26,7 @@ if(isServer) then {
 	
 	*/
 
-	//call DMS_selectMission;
+	call DMS_selectMission;
 	
 	
 	//[] call compile preprocessFileLineNumbers "\x\addons\DMS\scripts\DMS_selectMission.sqf";
