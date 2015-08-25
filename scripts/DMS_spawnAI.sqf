@@ -3,7 +3,7 @@ DMS_spawnAI = {
 	_pos  = _this select 0;
 	_units = _this select 1;
 	_skill = _this select 2;
-	_group = createGroup RESISTANCE;
+	_group = createGroup WEST;
 	_group setBehaviour "COMBAT";
 	_group setCombatMode "RED";
 	_group allowFleeing 0;
