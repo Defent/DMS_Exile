@@ -5,7 +5,7 @@ DMS_spawnAI = {
 	_skill = _this select 2;
 	//_playerObject = (owner player);
 	// Needed 4 exile
-	_group = createGroup INDEPENDENT;
+	_group = createGroup RESISTANCE;
 	_group setBehaviour "COMBAT";
 	_group setCombatMode "RED";
 	_group allowFleeing 0;
