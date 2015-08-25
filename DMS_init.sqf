@@ -16,7 +16,7 @@ if(isServer) then {
 
 
 	// not fully loaded yet
-	DMS_Loaded 			= false;
+	DMS_Loaded = false;
 
 	call DMS_Config;
 
