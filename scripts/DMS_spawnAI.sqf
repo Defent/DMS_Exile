@@ -7,6 +7,13 @@ DMS_spawnAI = {
 	_group setBehaviour "COMBAT";
 	_group setCombatMode "RED";
 	_group allowFleeing 0;
+	
+	// Set AI owner to Player.
+	// _group setGroupOwner (owner player);
+	//
+	ExileServerOwnershipSwapQueue pushBack [_group,_playerObject];
+	
+	
 	for "_i" from 1 to _units do {
 		_soldier = _group createUnit ["i_g_soldier_unarmed_f", [_pos select 0, _pos select 1, 0], [], 1, "Form"];
 		removeAllAssignedItems _soldier;
