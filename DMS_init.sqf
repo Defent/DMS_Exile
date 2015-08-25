@@ -11,7 +11,7 @@ if(isServer) then {
 	DMS_spawnAI 				= compileFinal preprocessFileLineNumbers "scripts\DMS_spawnAI.sqf";
 	DMS_selectMission 			= compileFinal preprocessFileLineNumbers "scripts\DMS_selectMission.sqf";
 	DMS_CleanUp		     		= compileFinal preprocessFileLineNumbers "scripts\DMS_CleanUp.sqf";
-	DMS_Config 					= compileFinal preprocessFileLineNumbers "scripts\DMS_Config.__sqf2str";
+	DMS_Config 				= compileFinal preprocessFileLineNumbers "scripts\DMS_Config.sqf";
 
 
 
