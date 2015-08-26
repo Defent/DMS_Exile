@@ -9,6 +9,8 @@ _mainTimer = true;
 // associate pos with find safe pos
 _pos = call DMS_findSafePos; 
 
+uiSleep 1;
+
 _missname = "Main Mission 5";
 diag_log format ["DMS :: Main Mission 5 started at (%1)",_pos];
 

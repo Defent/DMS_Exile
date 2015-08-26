@@ -19,6 +19,8 @@ if(isServer) then {
 	//DMS_DetectNearWater 	= true;
 	//DMS_MissionMin 		= 60; // Timers in seconds
 	//DMS_MissionMax 		= 120; // Timers in seconds
+
+	//DMS_player_minDist = 700;
 	// CONFIGS
 
 	uiSleep 2;

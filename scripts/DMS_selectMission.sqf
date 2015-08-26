@@ -21,5 +21,7 @@
 	// Help from secret skype group. 
 	call compile preprocessfilelinenumbers format["\x\addons\DMS\missions\%1.sqf",_missVar];
 
+	uiSleep 2;
+
 	//DMS_MissionRunning = 1;
 
