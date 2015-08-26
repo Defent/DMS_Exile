@@ -20,11 +20,11 @@ diag_log format ["DMS :: Main Mission 1 started at (%1)",_pos];
 // Spawn Box
 _crate = createVehicle ["Box_NATO_AmmoOrd_F",[(_pos select 0) - 10, _pos select 1,0],[], 0, "CAN_COLLIDE"];
 [1,_crate] call DMS_createBox;
-sleep 2;
+uiSleep 2;
 //_crate = [_pos,40,4,2,2] execVM "mission\crates\MM_Box1.sqf";
 
 // spawn AI
-//[(_pos),(5),(4)] call DMS_SpawnAI;
+//[_pos,5,4] call DMS_SpawnAI;
 [(_pos),(5),(4)] call DMS_DMS_SpawnAI;
 
  waitUntil{sleep 25; {isPlayer _x && _x distance _pos < 30  } count playableUnits > 0}; 

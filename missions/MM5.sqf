@@ -27,7 +27,7 @@ _crate = createVehicle ["Box_NATO_AmmoOrd_F",[(_pos select 0) - 10, _pos select 
 // [_crate, amount of weapons, amount of ammo] call createBox;
 [1,_crate] call DMS_createBox;
 
-sleep 2;
+uiSleep 2;
 
 
 //[_pos, amount of ai ] call DMS_SpawnAI;

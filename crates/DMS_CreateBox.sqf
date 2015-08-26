@@ -1,5 +1,5 @@
 // The content of the boxes.
-private ["_type","_crate",];
+private ["_type","_crate"];
 	_type = _this select 0;
 	_crate = _this select 1;
 
