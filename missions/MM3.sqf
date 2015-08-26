@@ -8,10 +8,12 @@ _mainTimer = true;
 
 // associate pos with find safe pos
 _pos = call DMS_findSafePos;
+
+
  
 
 _missname = "Main Mission 3";
-diag_log format["DMS :: Main Mission 3 started at [%1]",_pos];
+diag_log format ["DMS :: Main Mission 3 started at (%1)",_pos];
 
 ["standardHintRequest",["Mission starting! Check your map"]] call ExileServer_system_network_send_broadcast;
 
@@ -20,7 +22,7 @@ diag_log format["DMS :: Main Mission 3 started at [%1]",_pos];
 
 // Spawn Box
 _crate = createVehicle ["Box_NATO_AmmoOrd_F",[(_pos select 0) - 10, _pos select 1,0],[], 0, "CAN_COLLIDE"];
-[_crate] call DMS_Box1;
+[_crate] call DMS_createBox;
 sleep 2;
 //_crate = [_pos,40,4,2,2] execVM "mission\crates\MM_Box1.sqf";
 

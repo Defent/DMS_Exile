@@ -10,7 +10,7 @@ _mainTimer = true;
 _pos = call DMS_findSafePos; 
 
 _missname = "Main Mission 5";
-diag_log format["DMS :: Main Mission 5 started at [%1]",_pos];
+diag_log format ["DMS :: Main Mission 5 started at (%1)",_pos];
 
 ["standardHintRequest",["Mission starting! Check your map"]] call ExileServer_system_network_send_broadcast;
 
@@ -22,7 +22,7 @@ diag_log format["DMS :: Main Mission 5 started at [%1]",_pos];
 _crate = createVehicle ["Box_NATO_AmmoOrd_F",[(_pos select 0) - 10, _pos select 1,0],[], 0, "CAN_COLLIDE"];
 //[_crate] call createBox;
 // [_crate, amount of weapons, amount of ammo] call createBox;
-[_crate] call DMS_Box1;
+[_crate] call DMS_createBox;
 
 sleep 2;
 

@@ -1,4 +1,4 @@
-DMS_CreateMarker = {
+
 	private["_mark","_name"];
 	DMS_Cords = _this select 0;
 	DMS_MainName = _this select 1;
@@ -13,4 +13,3 @@ DMS_CreateMarker = {
 	"DMS_MainDot" setMarkerColor "ColorBlack";
 	"DMS_MainDot" setMarkerType "mil_dot";
 	"DMS_MainDot" setMarkerText DMS_MainName;
-};
