@@ -25,7 +25,7 @@ diag_log format ["DMS :: Main Mission 4 started at (%1)",_pos];
 _crate = createVehicle ["Box_NATO_AmmoOrd_F",[(_pos select 0) - 10, _pos select 1,0],[], 0, "CAN_COLLIDE"];
 [1,_crate] call DMS_createBox;
 
-uiuiSleep 2;
+uiSleep 2;
 //_crate = [_pos,40,4,2,2] execVM "mission\crates\MM_Box1.sqf";
 
 // spawn AI
