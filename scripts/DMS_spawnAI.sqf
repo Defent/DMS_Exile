@@ -5,7 +5,7 @@ DMS_spawnAI = {
 	_skill = _this select 2;
 	//_playerObject = (owner player);
 	// Needed 4 exile
-	_group = createGroup INDEPENDENT;
+	_group = createGroup EAST;
 	_group setBehaviour "COMBAT";
 	_group setCombatMode "RED";
 	_group allowFleeing 0;
@@ -24,8 +24,8 @@ DMS_spawnAI = {
 		removeAllItems _soldier;
 		removeAllWeapons _soldier;
 		_soldier forceaddUniform "U_I_officerUniform";
-		_soldier addVest "V_5_Epoch"; 
-		_soldier addGoggles "G_Diving";
+		_soldier addVest " V_HarnessO_gry "; 
+		_soldier addGoggles "G_Tactical_Clear";
 		for "_i" from 1 to 3 do {
 		_soldier addItemToVest  "30Rnd_65x39_caseless_mag";
 		};
