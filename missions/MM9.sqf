@@ -8,6 +8,8 @@ _mainTimer = true;
 
 // associate pos with find safe pos
 _pos = call DMS_findSafePos; 
+
+uiSleep 1;
  
 
 _missname = "Main Mission 9";

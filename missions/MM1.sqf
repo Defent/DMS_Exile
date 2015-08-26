@@ -2,8 +2,9 @@ private ["_crate","_pos","_missname","_aiAmmount","_misText","_missEnd","_group"
  
 
 // associate pos with find safe pos fnc
-_pos = call DMS_findSafePos;
- 
+_pos = call DMS_findSafePos; 
+
+uiSleep 1;
 
 
 _missname = "Main Mission 1";
