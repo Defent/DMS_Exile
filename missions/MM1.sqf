@@ -27,7 +27,9 @@ sleep 2;
 //[(_pos),(5),(4)] call DMS_SpawnAI;
 [(_pos),(5),(4)] call DMS_DMS_SpawnAI;
 
-waitUntil{{isPlayer _x && _x distance _pos < 30  } count playableUnits > 0}; 
+ waitUntil{sleep 25; {isPlayer _x && _x distance _pos < 30  } count playableUnits > 0}; 
+ 
+uiSleep 1;
 /*
 
 [_pos] call MissionCompleted;

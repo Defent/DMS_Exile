@@ -17,11 +17,12 @@
 	_countArray = count _MainArray;
 	_slct = floor (random _countArray);
 	_missVar = _MainArray select _slct;
-
+	
+	uiSleep 2;
 	// Help from secret skype group. 
 	call compile preprocessfilelinenumbers format["\x\addons\DMS\missions\%1.sqf",_missVar];
 
-	uiSleep 2;
+	
 
 	//DMS_MissionRunning = 1;
 

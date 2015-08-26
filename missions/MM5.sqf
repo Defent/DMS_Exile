@@ -35,7 +35,9 @@ sleep 2;
 
 
 
-waitUntil{{isPlayer _x && _x distance _pos < 30  } count playableUnits > 0}; 
+ waitUntil{sleep 25; {isPlayer _x && _x distance _pos < 30  } count playableUnits > 0}; 
+ 
+uiSleep 1;
 
 
 ["standardHintRequest",["Mission has ended, good job!"]] call ExileServer_system_network_send_broadcast;
