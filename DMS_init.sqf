@@ -25,10 +25,13 @@ if(isServer) then {
 
 	call DMS_selectMission;
 	
+
+	
 	//[] call compile preprocessFileLineNumbers "\x\addons\dms\scripts\DMS_selectMission.sqf";
 	//[] execVM "\x\addons\dms\scripts\DMS_selectMission.sqf";
 	call DMS_selectMission;
 	
 	diag_log "DMS :: Functions loaded - starting the rest of the script.";
+	
 	
 };
