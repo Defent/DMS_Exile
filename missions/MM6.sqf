@@ -46,4 +46,4 @@ waitUntil{{isPlayer _x && _x distance _pos < 30  } count playableUnits > 0};
 
 sleep 150;
 
-CALL DMS_selectMission.sqf;
+[] call DMS_SelectMission;
