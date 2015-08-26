@@ -1,3 +1,4 @@
+DMS_spawnAI = {
 	private ["_group", "_pos","_soldier","_skill","_units","_playerObject"];
 	_pos  = _this select 0;
 	_units = _this select 1;
@@ -103,4 +104,4 @@
 			};
 		};
 	};
-
+};
