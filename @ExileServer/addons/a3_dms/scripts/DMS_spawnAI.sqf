@@ -11,7 +11,7 @@ DMS_spawnAI = {
 	_group allowFleeing 0;
 	
 	// Set AI owner to Player.
-	_group setGroupOwner (owner player);
+	//_group setGroupOwner (owner player);
 	// Not tested this one, may need to apply above one.
 	//ExileServerOwnershipSwapQueue pushBack [_group,_playerObject];
 	
