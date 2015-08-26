@@ -1,4 +1,4 @@
-DMS_SelectMission = {
+
 	private ["_sleepTime","_run","_countArray","_randomMiss","_missVar","_minTime","_maxTime","_missionFnc","_MainArray"];
 	// First we add the array of missions
 	_MainArray = ["MM1","MM2","MM3","MM4","MM5","MM6","MM7","MM8","MM9","MM10"];
@@ -22,4 +22,3 @@ DMS_SelectMission = {
 	call compile preprocessfilelinenumbers format["\x\addons\dms\missions\%1.sqf",_missVar];
 
 	//DMS_MissionRunning = 1;
-};

@@ -21,8 +21,13 @@ if(isServer) then {
 	//DMS_MissionMax 		= 120; // Timers in seconds
 	// CONFIGS
 
+<<<<<<< HEAD
 
 	uiSleep 2;
+=======
+	call DMS_selectMission;
+	
+>>>>>>> origin/master
 	
 	//[] call compile preprocessFileLineNumbers "\x\addons\dms\scripts\DMS_selectMission.sqf";
 	//[] execVM "\x\addons\dms\scripts\DMS_selectMission.sqf";
