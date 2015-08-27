@@ -35,7 +35,7 @@ uiSleep 1;
 ["standardHintRequest",["Mission has ended, good job!"]] call ExileServer_system_network_send_broadcast;
 
 //  Run Cleanup
-[_pos] call DMS_CleanUp;
+[_pos,_crate] call DMS_CleanUp;
 
 
 uiSleep 150;

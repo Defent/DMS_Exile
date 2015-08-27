@@ -1,5 +1,6 @@
-private ["_pos"];
+private ["_pos","_crate"];
 _pos = _this select 0;
+_crate = _this select 0;
 deleteMarker "DMS_MainMarker";
 deleteMarker "DMS_MainDot";
 uiSleep DMS_CleanUpTimer;
@@ -16,7 +17,7 @@ uiSleep DMS_CleanUpTimer;
     _x removeAllEventHandlers "GetIn";
     _x removeAllEventHandlers "Local";
      //  clearVehicleInit _this;
-    deleteVehicle _x;
+    deleteVehicle _crate;
     deleteGroup (group _x);
     _x = nil;
 

@@ -39,7 +39,7 @@ uiSleep 1;
 
 
 //  Run Cleanup
-[_pos] call DMS_CleanUp;
+[_pos,_crate] call DMS_CleanUp;
 
  
 
