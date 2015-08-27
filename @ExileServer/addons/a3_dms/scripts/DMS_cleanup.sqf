@@ -1,21 +1,21 @@
 private ["_pos"];
 _pos = _this select 0;
 {
-    _this enableSimulation false;
-    _this removeAllMPEventHandlers "mpkilled";
-    _this removeAllMPEventHandlers "mphit";
-    _this removeAllMPEventHandlers "mprespawn";
-    _this removeAllEventHandlers "FiredNear";
-    _this removeAllEventHandlers "HandleDamage";
-    _this removeAllEventHandlers "Killed";
-    _this removeAllEventHandlers "Fired";
-    _this removeAllEventHandlers "GetOut";
-    _this removeAllEventHandlers "GetIn";
-    _this removeAllEventHandlers "Local";
+    _x enableSimulation false;
+    _x removeAllMPEventHandlers "mpkilled";
+    _x removeAllMPEventHandlers "mphit";
+    _x removeAllMPEventHandlers "mprespawn";
+    _x removeAllEventHandlers "FiredNear";
+    _x removeAllEventHandlers "HandleDamage";
+    _x removeAllEventHandlers "Killed";
+    _x removeAllEventHandlers "Fired";
+    _x removeAllEventHandlers "GetOut";
+    _x removeAllEventHandlers "GetIn";
+    _x removeAllEventHandlers "Local";
      //  clearVehicleInit _this;
-    deleteVehicle _this;
-    deleteGroup (group _this);
-    _this = nil;
+    deleteVehicle _x;
+    deleteGroup (group _x);
+    _x = nil;
     deleteMarker "DMS_MainMarker";
     deleteMarker "DMS_MainDot";
 
