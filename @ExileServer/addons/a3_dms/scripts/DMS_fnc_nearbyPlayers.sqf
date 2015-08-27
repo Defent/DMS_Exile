@@ -1,3 +1,4 @@
+// Not being used at the moment.
 DMS_fnc_nearbyPlayers = {
 	private ["_pos", "_isNearList", "_isNear"];
 	_pos = [_this, 0, objNull, [objNull,[]], [2,3]] call BIS_fnc_param;

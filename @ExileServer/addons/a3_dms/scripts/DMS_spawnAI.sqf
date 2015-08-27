@@ -1,10 +1,7 @@
-DMS_spawnAI = {
 	private ["_group", "_pos","_soldier","_skill","_units","_playerObject"];
 	_pos  = _this select 0;
 	_units = _this select 1;
 	_skill = _this select 2;
-	//_playerObject = (owner player);
-	// Needed 4 exile
 	_group = createGroup EAST;
 	_group setBehaviour "COMBAT";
 	_group setCombatMode "RED";
@@ -17,7 +14,7 @@ DMS_spawnAI = {
 	
 	
 	for "_i" from 1 to _units do {
-		_soldier = _group createUnit ["i_g_soldier_unarmed_f", [_pos select 0, _pos select 1, 0], [], 1, "Form"];
+		_soldier = _group createUnit ["SoldierWB", [_pos select 0, _pos select 1, 0], [], 1, "Form"];
 		removeAllAssignedItems _soldier;
 		removeUniform _soldier;
 		removeHeadgear _soldier;
@@ -104,4 +101,4 @@ DMS_spawnAI = {
 			};
 		};
 	};
-};
+

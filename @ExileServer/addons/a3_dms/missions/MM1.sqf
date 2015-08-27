@@ -25,7 +25,8 @@ uiSleep 2;
 
 // spawn AI
 //[_pos,5,4] call DMS_SpawnAI;
-[(_pos),(5),(4)] call DMS_DMS_SpawnAI;
+//[(_pos),(5),(4)] call DMS_SpawnAI;
+[_pos,5,4] call DMS_SpawnAI;
 
  waitUntil{sleep 25; {isPlayer _x && _x distance _pos < 30  } count playableUnits > 0}; 
  
