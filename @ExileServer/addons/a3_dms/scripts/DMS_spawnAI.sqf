@@ -33,6 +33,10 @@
 		}forEach ["TARGET","AUTOTARGET","MOVE","ANIM"];
 		_soldier disableAI "FSM";
 		_soldier allowDammage true;
+
+		// FIX FOR Ai vs Ai killing.
+		[_soldier] joinSilent _group;
+
 		switch (_skill) do
 		{
 			case 1: 
