@@ -22,7 +22,7 @@ diag_log format ["DMS :: Main Mission 5 started at (%1)",_pos];
 [_pos,_missname] call DMS_CreateMarker;
 
 // Spawn Box
-_crate = createVehicle ["Box_NATO_AmmoOrd_F",[(_pos select 0) - 10, _pos select 1,0],[], 0, "CAN_COLLIDE"];
+_crate = createVehicle ["Box_NATO_Wps_F",[(_pos select 0) - 10, _pos select 1,0],[], 0, "CAN_COLLIDE"];
 //[_crate] call createBox;
 // [_crate, amount of weapons, amount of ammo] call createBox;
 [1,_crate] call DMS_createBox;

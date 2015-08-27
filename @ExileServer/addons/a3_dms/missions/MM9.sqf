@@ -21,7 +21,7 @@ diag_log format ["DMS :: Main Mission 9 started at (%1)",_pos];
 [_pos,_missname] call DMS_CreateMarker;
 
 // Spawn Box
-_crate = createVehicle ["Box_NATO_AmmoOrd_F",[(_pos select 0) - 10, _pos select 1,0],[], 0, "CAN_COLLIDE"];
+_crate = createVehicle ["Box_NATO_Wps_F",[(_pos select 0) - 10, _pos select 1,0],[], 0, "CAN_COLLIDE"];
 [1,_crate] call DMS_createBox;
 
 uiSleep 2;
@@ -33,7 +33,7 @@ uiSleep 2;
 
 
 
- waitUntil{sleep 25;  {isPlayer _x && _x distance _pos < 30  } count playableUnits > 0}; 
+ waitUntil{sleep 1; {(isPlayer _x) && (_x distance _pos < 30)  } count playableUnits > 0}; 
  
 uiSleep 1;
 

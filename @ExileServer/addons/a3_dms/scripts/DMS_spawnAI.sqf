@@ -15,11 +15,14 @@
 	
 	for "_i" from 1 to _units do {
 		_soldier = _group createUnit ["i_g_soldier_unarmed_f", [_pos select 0, _pos select 1, 0], [], 1, "Form"];
+		_soldier addeventhandler ["fired", {(_this select 0) setvehicleammo 1}];
+
 		removeAllAssignedItems _soldier;
 		removeUniform _soldier;
 		removeHeadgear _soldier;
 		removeAllItems _soldier;
 		removeAllWeapons _soldier;
+		uiSleep 1;
 		_soldier forceaddUniform "U_I_officerUniform";
 		_soldier addVest " V_TacVest_blk_POLICE "; 
 		_soldier addGoggles "G_Tactical_Clear";
@@ -105,5 +108,4 @@
 			};
 		};
 	};
-
 _soldier

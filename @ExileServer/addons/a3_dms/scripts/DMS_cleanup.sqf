@@ -1,5 +1,8 @@
 private ["_pos"];
 _pos = _this select 0;
+deleteMarker "DMS_MainMarker";
+deleteMarker "DMS_MainDot";
+uiSleep DMS_CleanUpTimer;
 {
     _x enableSimulation false;
     _x removeAllMPEventHandlers "mpkilled";
@@ -16,10 +19,10 @@ _pos = _this select 0;
     deleteVehicle _x;
     deleteGroup (group _x);
     _x = nil;
-    deleteMarker "DMS_MainMarker";
-    deleteMarker "DMS_MainDot";
 
- } forEach (_pos nearObjects 50);
+ } forEach (_pos nearObjects 80);
+
+ diag_log "DMS :: Mission got cleaned up!";
 
 
 
