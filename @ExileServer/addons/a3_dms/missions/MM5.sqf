@@ -31,7 +31,7 @@ uiSleep 2;
 
 
 //[_pos, amount of ai ] call DMS_SpawnAI;
-[_pos,4] call DMS_SpawnAI;
+[_pos,4,5] call DMS_SpawnAI;
 
 
 
