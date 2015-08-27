@@ -14,7 +14,7 @@
 	
 	
 	for "_i" from 1 to _units do {
-		_soldier = _group createUnit ["SoldierWB", [_pos select 0, _pos select 1, 0], [], 1, "Form"];
+		_soldier = _group createUnit ["i_g_soldier_unarmed_f", [_pos select 0, _pos select 1, 0], [], 1, "Form"];
 		removeAllAssignedItems _soldier;
 		removeUniform _soldier;
 		removeHeadgear _soldier;
@@ -102,3 +102,4 @@
 		};
 	};
 
+_soldier
