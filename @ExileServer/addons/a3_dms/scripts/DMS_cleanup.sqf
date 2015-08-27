@@ -1,4 +1,6 @@
-
+private ["_pos"];
+_pos = _this select 0;
+{
     _this enableSimulation false;
     _this removeAllMPEventHandlers "mpkilled";
     _this removeAllMPEventHandlers "mphit";
@@ -14,6 +16,12 @@
     deleteVehicle _this;
     deleteGroup (group _this);
     _this = nil;
-    
-    diag_log format ["DMS :: Markers, vehicles, AI and loot boxes and other items have been cleaned up!"];
+    deleteMarker "DMS_MainMarker";
+    deleteMarker "DMS_MainDot";
+
+ } forEach (_pos nearObjects 50);
+
+
+
+
 

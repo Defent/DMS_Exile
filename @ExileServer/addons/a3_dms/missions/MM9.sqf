@@ -40,12 +40,8 @@ uiSleep 1;
 ["standardHintRequest",["Mission has ended, good job!"]] call ExileServer_system_network_send_broadcast;
 
 //  Run Cleanup
-[] call DMS_CleanUp;
- 
+[_pos] call DMS_CleanUp;
 
- 	deleteMarker "DMS_MainMarker";
-	deleteMarker "DMS_MainDot";
-
-sleep 150;
+uiSleep 150;
 
 [] call DMS_SelectMission;

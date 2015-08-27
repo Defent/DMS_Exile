@@ -31,7 +31,7 @@ uiSleep 2;
 
 
 
- waitUntil{sleep 25; {isPlayer _x && _x distance _pos < 30  } count playableUnits > 0}; 
+ waitUntil{sleep 1; {(isPlayer _x) && (_x distance _pos < 30)  } count playableUnits > 0}; 
  
 uiSleep 1;
 
@@ -39,13 +39,10 @@ uiSleep 1;
 
 
 //  Run Cleanup
-[] call DMS_CleanUp;
-
- 	deleteMarker "DMS_MainMarker";
-	deleteMarker "DMS_MainDot";
+[_pos] call DMS_CleanUp;
 
  
 
-sleep 150;
+uiSleep 150;
 
 [] call DMS_SelectMission;
