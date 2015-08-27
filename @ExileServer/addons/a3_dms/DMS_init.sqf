@@ -17,7 +17,10 @@
 	//DMS_MissionMin 		= 60; // Timers in seconds
 	//DMS_MissionMax 		= 120; // Timers in seconds
 	//DMS_player_minDist = 700;
-	DMS_CleanUpTimer = 25; // set to 300 for 5 minutes to clean up the missions.
+
+	DMS_MisMinTime   = 600; // 10 mins
+	DMS_MisMaxTime   = 1200; // 20 mins
+	DMS_CleanUpTimer = 300; // set to 300 for 5 minutes to clean up the missions.
 	// CONFIGS
 
 	uiSleep 2;
