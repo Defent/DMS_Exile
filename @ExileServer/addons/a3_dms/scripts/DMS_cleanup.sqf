@@ -1,6 +1,6 @@
 private ["_pos","_crate"];
 _pos = _this select 0;
-_crate = _this select 0;
+_crate = _this select 1;
 deleteMarker "DMS_MainMarker";
 deleteMarker "DMS_MainDot";
 uiSleep DMS_CleanUpTimer;
