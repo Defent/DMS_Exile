@@ -21,7 +21,7 @@
 		removeAllItems _soldier;
 		removeAllWeapons _soldier;
 		_soldier forceaddUniform "U_I_officerUniform";
-		_soldier addVest " V_HarnessO_gry "; 
+		_soldier addVest " V_TacVest_blk_POLICE "; 
 		_soldier addGoggles "G_Tactical_Clear";
 		for "_i" from 1 to 3 do {
 		_soldier addItemToVest  "30Rnd_65x39_caseless_mag";
