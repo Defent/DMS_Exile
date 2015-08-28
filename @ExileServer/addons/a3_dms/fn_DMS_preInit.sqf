@@ -3,9 +3,10 @@
 	Written by eraser1 (trainwreckdayz.com)
 */
 
+// Initialize "DMS_Mission_Arr"
+DMS_Mission_Arr = [];
 
-
-// compiles
+/* compiles
 DMS_CreateMarker 		= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\DMS_CreateMarker.sqf";
 DMS_spawnAI 			= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\DMS_spawnAI.sqf";
 DMS_selectMission 		= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\DMS_selectMission.sqf";
@@ -21,6 +22,7 @@ bandit_behaviour		= compileFinal preprocessFileLineNumbers "\x\addons\dms\script
 vehicle_monitor			= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\vehicle_monitor.sqf";
 find_position			= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\find_position.sqf";
 load_ammo				= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\load_ammo.sqf";
+*/
 
 //Completed
 DMS_MissionStatusCheck				= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\MissionStatusCheck.sqf";
@@ -31,5 +33,5 @@ DMS_CleanUp		     				= compileFinal preprocessFileLineNumbers "\x\addons\dms\sc
 DMS_isPlayerNearbyARRAY				= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\IsPlayerNearbyARRAY.sqf";
 DMS_FillCrate						= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\FillCrate.sqf";
 DMS_isNearWater						= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\IsNearWater.sqf";
-DMS_RemoveMarkers					= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\RemoveMarkers.sqf";//<--- TODO
+DMS_RemoveMarkers					= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\RemoveMarkers.sqf";
 DMS_selectMagazine					= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\SelectMagazine.sqf";

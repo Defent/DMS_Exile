@@ -3,9 +3,10 @@
 	https://github.com/nerdalertdk/WICKED-AI
 
 	Created by eraser1
-	[_delay, _function, _params, _persistance] call ExileServer_system_thread_addTask;
 */
-	DMS_DEBUG							= false;
+DMS_DEBUG							= false;
+
+
 
 /* Mission System Settings */
 	DMS_DynamicMission					= true;						// Enable/disable dynamic mission system
@@ -18,6 +19,8 @@
 	DMS_MissionMarkerLoseDot			= true;						// Keep the mission marker dot with a "lose" message after mission is over
 	DMS_MissionMarkerWinDotTime			= 30;						// How many seconds the "win" mission dot will remain on the map
 	DMS_MissionMarkerLoseDotTime		= 30;						// How many seconds the "lose" mission dot will remain on the map
+	DMS_MissionMarkerWinDotColor		= "ColorBlue";				// The color of the "win" marker dot
+	DMS_MissionMarkerLoseDotColor		= "ColorRed";				// The color of the "lose" marker dot
 
 	DMS_CompletedMissionCleanup			= true;						// Cleanup mission-spawned buildings and AI bodies after some time
 	DMS_CompletedMissionCleanupTime		= 3600;						// How long until mission-spawned buildings and AI are cleaned up
@@ -55,7 +58,14 @@
 
 /* AI Settings */
 	DMS_ai_wep_accessories				= ["acc_pointer_IR","acc_flashlight"];
-	DMS_ai_wep_suppressors				= ["muzzle_snds_H","muzzle_snds_L","muzzle_snds_M","muzzle_snds_B","muzzle_snds_H_MG","muzzle_snds_acp"];
+	DMS_ai_wep_suppressors =			[
+											"muzzle_snds_H",
+											"muzzle_snds_L",
+											"muzzle_snds_M",
+											"muzzle_snds_B",
+											"muzzle_snds_H_MG",
+											"muzzle_snds_acp"
+										];
 
 
 	DMS_banditSide						= EAST;						// The side (team) that AI Bandits will spawn on
@@ -81,39 +91,227 @@
 	DMS_ai_skill_random					= [ai_skill_extreme,ai_skill_hard,ai_skill_hard,ai_skill_hard,ai_skill_hard,ai_skill_medium,ai_skill_medium,ai_skill_medium,ai_skill_medium,ai_skill_easy];
 	DMS_static_weapons					= ["O_HMG_01_F","O_HMG_01_high_F"];	// Static weapons for AI
 
-	DMS_assault_weps					= ["arifle_Katiba_GL_F","arifle_MX_GL_Black_F","arifle_Mk20_GL_F","arifle_TRG21_GL_F","arifle_Katiba_F","arifle_MX_Black_F","arifle_TRG21_F","arifle_TRG20_F","arifle_Mk20_plain_F","arifle_Mk20_F"];	// Assault
-	DMS_assault_pistols 				= ["hgun_PDW2000_F","hgun_ACPC2_F","hgun_Rook40_F","hgun_P07_F","hgun_Pistol_heavy_01_F","hgun_Pistol_heavy_02_F"];
-	DMS_assault_scopes					= ["optic_Arco","optic_Hamr","optic_Aco","optic_Holosight","optic_MRCO","optic_DMS"];
-	DMS_assault_scope_chance			= 0.75;						// Percentage chance that assault AI will get a scope on their weapon
+	DMS_assault_weps =					[							// Assault Rifles
+											"arifle_Katiba_GL_F",
+											"arifle_MX_GL_Black_F",
+											"arifle_Mk20_GL_F",
+											"arifle_TRG21_GL_F",
+											"arifle_Katiba_F",
+											"arifle_MX_Black_F",
+											"arifle_TRG21_F",
+											"arifle_TRG20_F",
+											"arifle_Mk20_plain_F",
+											"arifle_Mk20_F"
+										];
+	DMS_assault_pistols =				[							// Pistols for Assault Class
+											"hgun_PDW2000_F",
+											"hgun_ACPC2_F",
+											"hgun_Rook40_F",
+											"hgun_P07_F",
+											"hgun_Pistol_heavy_01_F",
+											"hgun_Pistol_heavy_02_F"
+										];
+	DMS_assault_optics =				[							// Optics for Assault Class
+											"optic_Arco",
+											"optic_Hamr",
+											"optic_Aco",
+											"optic_Holosight",
+											"optic_MRCO",
+											"optic_DMS"
+										];
+	DMS_assault_scope_chance			= 0.75;						// Percentage chance that Assault class AI will get an optic on their weapons
 	DMS_assault_items					= ["ItemGPS"];
-	DMS_assault_helmets					= ["H_HelmetSpecB_paint1","H_HelmetIA_camo","H_HelmetLeaderO_ocamo","H_HelmetLeaderO_oucamo"];
-	DMS_assault_clothes					= ["U_O_CombatUniform_ocamo","U_O_PilotCoveralls","U_B_Wetsuit","U_BG_Guerilla3_1","U_BG_Guerilla2_3","U_BG_Guerilla2_2","U_BG_Guerilla1_1","U_BG_Guerrilla_6_1","U_IG_Guerilla3_2","U_B_SpecopsUniform_sgg","U_I_OfficerUniform","U_B_CTRG_3","U_I_G_resistanceLeader_F"];
-	DMS_assault_vests					= ["V_PlateCarrierH_CTRG","V_PlateCarrierSpec_rgr","V_PlateCarrierGL_blk","V_PlateCarrierGL_mtp","V_PlateCarrierGL_rgr","V_PlateCarrierSpec_blk","V_PlateCarrierSpec_mtp","V_PlateCarrierL_CTRG","V_TacVest_blk_POLICE","V_PlateCarrierIA2_dgtl"];
-	DMS_assault_backpacks				= ["B_Bergen_rgr","B_Carryall_oli","B_Kitbag_mcamo","B_Carryall_cbr","B_FieldPack_oucamo","B_FieldPack_cbr","B_Bergen_blk"];
+	DMS_assault_helmets	=				[							// Helmets for Assault Class
+											"H_HelmetSpecB_paint1",
+											"H_HelmetIA_camo",
+											"H_HelmetLeaderO_ocamo",
+											"H_HelmetLeaderO_oucamo"
+										];
+	DMS_assault_clothes	=				[							// Uniforms for Assault Class
+											"U_O_CombatUniform_ocamo",
+											"U_O_PilotCoveralls",
+											"U_B_Wetsuit",
+											"U_BG_Guerilla3_1",
+											"U_BG_Guerilla2_3",
+											"U_BG_Guerilla2_2",
+											"U_BG_Guerilla1_1",
+											"U_BG_Guerrilla_6_1",
+											"U_IG_Guerilla3_2",
+											"U_B_SpecopsUniform_sgg",
+											"U_I_OfficerUniform",
+											"U_B_CTRG_3",
+											"U_I_G_resistanceLeader_F"
+										];
+	DMS_assault_vests =					[							// Vests for Assault Class
+											"V_PlateCarrierH_CTRG",
+											"V_PlateCarrierSpec_rgr",
+											"V_PlateCarrierGL_blk",
+											"V_PlateCarrierGL_mtp",
+											"V_PlateCarrierGL_rgr",
+											"V_PlateCarrierSpec_blk",
+											"V_PlateCarrierSpec_mtp",
+											"V_PlateCarrierL_CTRG",
+											"V_TacVest_blk_POLICE",
+											"V_PlateCarrierIA2_dgtl"
+										];
+	DMS_assault_backpacks =				[							// Backpacks for Assault Class
+											"B_Bergen_rgr",
+											"B_Carryall_oli",
+											"B_Kitbag_mcamo",
+											"B_Carryall_cbr",
+											"B_FieldPack_oucamo",
+											"B_FieldPack_cbr",
+											"B_Bergen_blk"
+										];
 
-	DMS_MG_weps							= ["LMG_Zafir_F","LMG_Mk200_F","arifle_MX_SW_Black_F","MMG_01_hex_F"];	// LMGs
-	DMS_MG_pistols 						= ["hgun_PDW2000_F","hgun_ACPC2_F","hgun_Rook40_F","hgun_P07_F","hgun_Pistol_heavy_01_F","hgun_Pistol_heavy_02_F"];
-	DMS_MG_scopes						= ["optic_Hamr","optic_Aco","optic_Holosight","optic_MRCO"];
-	DMS_MG_scope_chance					= 0.5;						// Percentage chance that MG AI will get a scope on their weapon
+	DMS_MG_weps	=						[							// Machine Guns
+											"LMG_Zafir_F",
+											"LMG_Mk200_F",
+											"arifle_MX_SW_Black_F",
+											"MMG_01_hex_F"
+										];
+	DMS_MG_pistols =					[							// Pistols for MG Class
+											"hgun_PDW2000_F",
+											"hgun_ACPC2_F",
+											"hgun_Rook40_F",
+											"hgun_P07_F",
+											"hgun_Pistol_heavy_01_F",
+											"hgun_Pistol_heavy_02_F"
+										];
+	DMS_MG_optics =						[							//	Optics for MG Class
+											"optic_Hamr",
+											"optic_Aco",
+											"optic_Holosight",
+											"optic_MRCO"
+										];
+	DMS_MG_scope_chance					= 0.5;						// Percentage chance that MG Class AI will get an optic on their weapons
 	DMS_MG_items						= ["ItemWatch","ItemMap","ItemCompass","Binocular"];
-	DMS_MG_helmets						= ["H_PilotHelmetHeli_I","H_PilotHelmetHeli_O","H_PilotHelmetFighter_I","H_PilotHelmetFighter_O","H_HelmetCrew_O","H_CrewHelmetHeli_I","H_HelmetSpecB_paint1","H_HelmetIA_camo","H_HelmetLeaderO_ocamo","H_HelmetLeaderO_oucamo"];
-	DMS_MG_clothes						= ["U_O_CombatUniform_ocamo","U_O_PilotCoveralls","U_B_Wetsuit","U_BG_Guerilla3_1","U_BG_Guerilla2_3","U_BG_Guerilla2_2","U_BG_Guerilla1_1","U_BG_Guerrilla_6_1","U_IG_Guerilla3_2","U_B_SpecopsUniform_sgg","U_I_OfficerUniform","U_B_CTRG_3","U_I_G_resistanceLeader_F"];
-	DMS_MG_vests						= ["V_PlateCarrierH_CTRG","V_PlateCarrierSpec_rgr","V_PlateCarrierGL_blk","V_PlateCarrierGL_mtp","V_PlateCarrierGL_rgr","V_PlateCarrierSpec_blk","V_PlateCarrierSpec_mtp","V_PlateCarrierL_CTRG","V_TacVest_blk_POLICE","V_PlateCarrierIA2_dgtl","V_HarnessO_brn","V_HarnessO_gry"];
-	DMS_MG_backpacks					= ["B_Bergen_rgr","B_Carryall_oli","B_Kitbag_mcamo","B_Carryall_cbr","B_Bergen_blk"];
+	DMS_MG_helmets =					[							// Helmets for MG Class
+											"H_PilotHelmetHeli_I",
+											"H_PilotHelmetHeli_O",
+											"H_PilotHelmetFighter_I",
+											"H_PilotHelmetFighter_O",
+											"H_HelmetCrew_O",
+											"H_CrewHelmetHeli_I",
+											"H_HelmetSpecB_paint1",
+											"H_HelmetIA_camo",
+											"H_HelmetLeaderO_ocamo",
+											"H_HelmetLeaderO_oucamo"
+										];
+	DMS_MG_clothes =					[							// Uniforms for MG Class
+											"U_O_CombatUniform_ocamo",
+											"U_O_PilotCoveralls",
+											"U_B_Wetsuit",
+											"U_BG_Guerilla3_1",
+											"U_BG_Guerilla2_3",
+											"U_BG_Guerilla2_2",
+											"U_BG_Guerilla1_1",
+											"U_BG_Guerrilla_6_1",
+											"U_IG_Guerilla3_2",
+											"U_B_SpecopsUniform_sgg",
+											"U_I_OfficerUniform",
+											"U_B_CTRG_3",
+											"U_I_G_resistanceLeader_F"
+										];
+	DMS_MG_vests =						[							// Vests for MG Class
+											"V_PlateCarrierH_CTRG",
+											"V_PlateCarrierSpec_rgr",
+											"V_PlateCarrierGL_blk",
+											"V_PlateCarrierGL_mtp",
+											"V_PlateCarrierGL_rgr",
+											"V_PlateCarrierSpec_blk",
+											"V_PlateCarrierSpec_mtp",
+											"V_PlateCarrierL_CTRG",
+											"V_TacVest_blk_POLICE",
+											"V_PlateCarrierIA2_dgtl",
+											"V_HarnessO_brn",
+											"V_HarnessO_gry"
+										];
+	DMS_MG_backpacks =					[							// Backpacks for MG Class
+											"B_Bergen_rgr",
+											"B_Carryall_oli",
+											"B_Kitbag_mcamo",
+											"B_Carryall_cbr",
+											"B_Bergen_blk"
+										];
 
-	DMS_sniper_weps						= ["srifle_EBR_F","srifle_DMR_01_F","srifle_GM6_F","srifle_LRR_F","arifle_MXM_F","arifle_MXM_Black_F","srifle_DMR_02_F"];	// Sniper rifles
-	DMS_sniper_pistols 					= ["hgun_PDW2000_F","hgun_ACPC2_F","hgun_Rook40_F","hgun_P07_F","hgun_Pistol_heavy_01_F","hgun_Pistol_heavy_02_F"];
-	DMS_sniper_scopes					= ["optic_SOS","optic_DMS","optic_LRPS"];
-	DMS_sniper_scope_chance				= 1;						// Percentage chance that sniper AI will get a scope on their weapon
+	DMS_sniper_weps =					[							// Sniper Rifles
+											"srifle_EBR_F",
+											"srifle_DMR_01_F",
+											"srifle_GM6_F",
+											"srifle_LRR_F",
+											"arifle_MXM_F",
+											"arifle_MXM_Black_F",
+											"srifle_DMR_02_F"
+										];
+	DMS_sniper_pistols =				[							// Pistols for Sniper Class
+											"hgun_PDW2000_F",
+											"hgun_ACPC2_F",
+											"hgun_Rook40_F",
+											"hgun_P07_F",
+											"hgun_Pistol_heavy_01_F",
+											"hgun_Pistol_heavy_02_F"
+										];
+	DMS_sniper_optics =					[							// Optics for Sniper Class
+											"optic_SOS",
+											"optic_DMS",
+											"optic_LRPS"
+										];
+	DMS_sniper_scope_chance				= 1;						// Percentage chance that Sniper Class AI will get an optic on their weapons
 	DMS_sniper_items					= ["Rangefinder","ItemGPS"];
-	DMS_sniper_helmets					= ["H_HelmetSpecB_paint1","H_HelmetIA_camo","H_HelmetLeaderO_ocamo","H_HelmetLeaderO_oucamo"];
-	DMS_sniper_clothes					= ["U_O_GhillieSuit","U_B_FullGhillie_ard","U_B_FullGhillie_lsh","U_B_FullGhillie_sard","U_B_GhillieSuit","U_I_FullGhillie_ard","U_I_FullGhillie_lsh","U_I_FullGhillie_sard","U_I_GhillieSuit","U_O_FullGhillie_ard","U_O_FullGhillie_lsh","U_O_FullGhillie_sard"];
-	DMS_sniper_vests					= ["V_PlateCarrierH_CTRG","V_PlateCarrierSpec_rgr","V_PlateCarrierGL_blk","V_PlateCarrierGL_mtp","V_PlateCarrierGL_rgr","V_PlateCarrierSpec_blk","V_PlateCarrierSpec_mtp","V_PlateCarrierL_CTRG","V_TacVest_blk_POLICE","V_PlateCarrierIA2_dgtl","V_HarnessO_brn","V_HarnessO_gry"];
-	DMS_sniper_backpacks				= ["B_Bergen_rgr","B_Carryall_oli","B_Kitbag_mcamo","B_Carryall_cbr","B_Bergen_blk"];
-	DMS_random_AI						= ["assault","assault","assault","sniper","machine"];	// random weapon 60% chance assault rifle,20% light machine gun,20% sniper rifle
+	DMS_sniper_helmets =				[							// Helmets for Sniper Class
+											"H_HelmetSpecB_paint1",
+											"H_HelmetIA_camo",
+											"H_HelmetLeaderO_ocamo",
+											"H_HelmetLeaderO_oucamo"
+										];
+	DMS_sniper_clothes =				[							// Uniforms for Sniper Class
+											"U_O_GhillieSuit",
+											"U_B_FullGhillie_ard",
+											"U_B_FullGhillie_lsh",
+											"U_B_FullGhillie_sard",
+											"U_B_GhillieSuit",
+											"U_I_FullGhillie_ard",
+											"U_I_FullGhillie_lsh",
+											"U_I_FullGhillie_sard",
+											"U_I_GhillieSuit",
+											"U_O_FullGhillie_ard",
+											"U_O_FullGhillie_lsh",
+											"U_O_FullGhillie_sard"
+										];
+	DMS_sniper_vests =					[							// Vests for Sniper Class
+											"V_PlateCarrierH_CTRG",
+											"V_PlateCarrierSpec_rgr",
+											"V_PlateCarrierGL_blk",
+											"V_PlateCarrierGL_mtp",
+											"V_PlateCarrierGL_rgr",
+											"V_PlateCarrierSpec_blk",
+											"V_PlateCarrierSpec_mtp",
+											"V_PlateCarrierL_CTRG",
+											"V_TacVest_blk_POLICE",
+											"V_PlateCarrierIA2_dgtl",
+											"V_HarnessO_brn",
+											"V_HarnessO_gry"
+										];
+	DMS_sniper_backpacks =				[							// Backpacks for Sniper Class
+											"B_Bergen_rgr",
+											"B_Carryall_oli",
+											"B_Kitbag_mcamo",
+											"B_Carryall_cbr",
+											"B_Bergen_blk"
+										];
+
+	DMS_random_AI =						[							// The classes that a "random" AI can spawn as | DEFAULT: 60% Assault, 20% MG, 20% Sniper
+											"assault",
+											"assault",
+											"assault",
+											"machine",
+											"sniper"
+										];
 
 	DMS_AI_wep_launchers				= ["Exile_Melee_Axe"];
 /* AI Settings */
+
 
 /* Loot Settings */
 	DMS_BoxWeapons =					[							//List of weapons that can potentially spawn in a crate
@@ -179,23 +377,62 @@
 											"B_Bergen_blk"
 										];
 	DMS_BoxItems						= DMS_BoxSurvivalSupplies+DMS_BoxBuildingSupplies+DMS_BoxOptics;	// Random "items" can spawn optics, survival supplies, or building supplies
+
 	DMS_RareLoot						= true;																// Potential chance to spawn rare loot in any crate.
-	DMS_RareLootList					= ["Exile_Item_SafeKit","Exile_Item_CodeLock"];						// List of rare loot to spawn
-	DMS_RareLootChance					= 0.1;																// Chance to spawn rare loot in any crate | Default: 10%
+	DMS_RareLootList =					[							// List of rare loot to spawn
+											"Exile_Item_SafeKit",
+											"Exile_Item_CodeLock"
+										];
+	DMS_RareLootChance					= 0.1;						// Chance to spawn rare loot in any crate | Default: 10%
 
 	// Vehicles
-	DMS_ArmedVehicles	 				= ["Exile_Car_Offroad_Armed_Guerilla01"];
-	DMS_RefuelTrucks					= ["Exile_Car_Van_Fuel_Black","Exile_Car_Van_Fuel_White","Exile_Car_Van_Fuel_Red","Exile_Car_Van_Fuel_Guerilla01","Exile_Car_Van_Fuel_Guerilla02","Exile_Car_Van_Fuel_Guerilla03"];
-	DMS_TransportTrucks 				= ["Exile_Car_Van_Guerilla01","Exile_Car_Van_Black"];
-	
-	DMS_TransportHelis 					= ["Exile_Chopper_Hummingbird_Green","Exile_Chopper_Orca_BlackCustom","Exile_Chopper_Mohawk_FIA","Exile_Chopper_Huron_Black","Exile_Chopper_Hellcat_Green","Exile_Chopper_Taru_Transport_Black"];
-	DMS_MilitaryVehicles 				= ["Exile_Car_Strider","Exile_Car_Hunter","Exile_Car_Ifrit"];
+	DMS_ArmedVehicles =					[							// List of armed vehicles that can spawn
+											"Exile_Car_Offroad_Armed_Guerilla01"
+										];
+										
+	DMS_MilitaryVehicles =				[							// List of military vehicles that can spawn
+											"Exile_Car_Strider",
+											"Exile_Car_Hunter",
+											"Exile_Car_Ifrit"
+										];
 
-	DMS_CivilianVehicles 				= ["Exile_Car_Hatchback_Rusty1","Exile_Car_Hatchback_Rusty2","Exile_Car_Hatchback_Sport_Red","Exile_Car_SUV_Red","Exile_Car_Offroad_Rusty2","Exile_Bike_QuadBike_Fia"];
+	DMS_TransportTrucks =				[							// List of transport trucks that can spawn
+											"Exile_Car_Van_Guerilla01",
+											"Exile_Car_Van_Black"
+										];
+
+	DMS_RefuelTrucks =					[							// List of refuel trucks that can spawn
+											"Exile_Car_Van_Fuel_Black",
+											"Exile_Car_Van_Fuel_White",
+											"Exile_Car_Van_Fuel_Red",
+											"Exile_Car_Van_Fuel_Guerilla01",
+											"Exile_Car_Van_Fuel_Guerilla02",
+											"Exile_Car_Van_Fuel_Guerilla03"
+										];
+
+	DMS_CivilianVehicles =				[							// List of civilian vehicles that can spawn
+											"Exile_Car_SUV_Red",
+											"Exile_Car_Hatchback_Rusty1",
+											"Exile_Car_Hatchback_Rusty2",
+											"Exile_Car_Hatchback_Sport_Red",
+											"Exile_Car_SUV_Red",
+											"Exile_Car_Offroad_Rusty2",
+											"Exile_Bike_QuadBike_Fia"
+										];
+	
+	DMS_TransportHelis =				[							// List of transport helis that can spawn
+											"Exile_Chopper_Hummingbird_Green",
+											"Exile_Chopper_Orca_BlackCustom",
+											"Exile_Chopper_Mohawk_FIA",
+											"Exile_Chopper_Huron_Black",
+											"Exile_Chopper_Hellcat_Green",
+											"Exile_Chopper_Taru_Transport_Black"
+										];
 /* Loot Settings */
 
-	// Debug Overwrites
-	if(DMS_DEBUG) then {
-		DMS_TimeBetweenMissions			= [60,60];
-		DMS_MissionTimeOut				= [300,300];
-	};
+
+// Debug Overwrites
+if(DMS_DEBUG) then {
+	DMS_TimeBetweenMissions			= [60,60];
+	DMS_MissionTimeOut				= [300,300];
+};
