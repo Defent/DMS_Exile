@@ -8,9 +8,6 @@
 	[_delay, _function, _params, _persistance] call ExileServer_system_thread_addTask;
 */
 
-//Load config
-#include "config.sqf";
-
 RESISTANCE setFriend[WEST,0];
 WEST setFriend[RESISTANCE,0];
 RESISTANCE setFriend[EAST,0];
@@ -23,6 +20,7 @@ if(DMS_StaticMission) then {
 };
 
 if (DMS_DynamicMission) then {
-	call compileFinal preprocessFileLineNumbers "\x\addons\dms\missions\mission_init.sqf";//<---- TODO
+	// Use FSM to spawn missions instead
+	//call compileFinal preprocessFileLineNumbers "\x\addons\dms\missions\mission_init.sqf";
 	[1, DMS_MissionStatusCheck, [], true] call ExileServer_system_thread_addTask;
 };

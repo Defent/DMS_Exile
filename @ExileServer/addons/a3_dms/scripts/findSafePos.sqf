@@ -1,47 +1,64 @@
-private ["_i","_safePosParams","_validspot","_position"];
+private ["_nearestObjectMinDistance","_maxTerrainGradient","_safePosParams","_validspot","_i","_pos","_markerName"];
+
+params [["_nearestObjectMinDistance",25,[0]],["_maxTerrainGradient",10,[0]]];
 
 if (worldName=="Altis") then {
-	_safePosParams		= [[16000,16000],0,16000,(_this select 0),0,0.5,0,DMS_findSafePosBlacklist];
+	_safePosParams		= [[16000,16000],0,16000,_nearestObjectMinDistance,0,_maxTerrainGradient,0,DMS_findSafePosBlacklist];
 } else {
-	_safePosParams		= [[],0,-1,(_this select 0),0,0.5,0,DMS_findSafePosBlacklist];
+	_safePosParams		= [[],0,-1,_nearestObjectMinDistance,0,_maxTerrainGradient,0,DMS_findSafePosBlacklist];
 };
 
 _validspot 	= false;
 _i = 0;
 while{!_validspot} do {
-	_position 	= _safePosParams call BIS_fnc_findSafePos;
-	_validspot	= true;
+	_pos 	= _safePosParams call BIS_fnc_findSafePos;
 	_i = _i+1;
-	call {
-		if ([_position,wai_near_water] call DMS_isNearWater) exitWith 
+	try {
+		// Check for nearby water
+		if ([_pos,DMS_WaterNearBlacklist] call DMS_isNearWater) exitWith 
 		{
-			_validspot = false;
-			if (DMS_DEBUG) then {diag_log "Position is too close to water!";};
+			throw ("water");
 		};
 		
-		if ([_position,DMS_PlayerNearBlacklist] call ExileServer_util_position_isPlayerNearby) exitWith
+		// Check for nearby players
+		if ([_pos,DMS_PlayerNearBlacklist] call ExileServer_util_position_isPlayerNearby) exitWith
 		{
-			_validspot = false;
-			if (DMS_DEBUG) then {diag_log "Position has players nearby!";};
+			throw ("players");
 		};
-
-		/*
-		markertype _x=="ExileSpawnZone" || "ExileTraderZone"
-
-		if(DMS_DEBUG) then { diag_log("WAI DEBUG: FINDPOS: Checking nearby mission markers: " + str(wai_mission_markers)); };
+		
 		{
-			if ({getMarkerColor _x != "" && {_position distance (getMarkerPos _x) < wai_avoid_missions}}) exitWith
+			// Check for nearby spawn points
+			if (((markertype _x) isEqualTo "ExileSpawnZone") && {((getMarkerPos _x) distance2D _pos)<=DMS_SpawnZoneNearBlacklist}) exitWith
 			{
-				_validspot = false;
-				if (DMS_DEBUG) then {diag_log "Position is too close to another mission!";};
+				throw ("a spawn zone");
+			};
+
+			// Check for nearby trader zones
+			if (((markertype _x) isEqualTo "ExileTraderZone") && {((getMarkerPos _x) distance2D _pos)<=DMS_TraderZoneNearBlacklist}) exitWith
+			{
+				throw ("a trader zone");
+			};
+
+			// Check for nearby missions
+			if (((_x find "DMS_MissionMarkerDot")>-1) && {((getMarkerPos _x) distance2D _pos)<=DMS_MissionNearBlacklist}) exitWith
+			{
+				throw ("another mission");
 			};
 			false;
 		} count allMapMarkers;
-		*/
-	};
-	if(_validspot) then {
-		if(DMS_DEBUG) then { diag_log format["Mission position %1 with %2 params found in %3 attempts.",_position,_safePosParams,_i]; };	
+
+		// No exceptions found
+		_validspot	= true;
+	}
+	catch
+	{
+		if (DMS_DEBUG) then {
+			diag_log format ["DMS_DEBUG findSafePos :: Exception in attempt %1 | Position %2 is too close to %3!",_i,_pos,_exception];
+		};
 	};
 };
-_position set [2, 0];
-_position;
+if(DMS_DEBUG) then {
+	diag_log format["DMS_DEBUG findSafePos :: Mission position %1 with %2 params found in %3 attempts.",_pos,_safePosParams,_i];
+};
+_pos set [2, 0];
+_pos;
