@@ -1,112 +1,103 @@
-private ["_ammo","_tool","_crate","_weapon","_item","_backpack","_num_tools","_num_items","_num_backpacks","_num_weapons","_weapons_array","_tool_array","_item_array","_backpack_array"];
+/*
+Original credit goes to WAI: https://github.com/nerdalertdk/WICKED-AI
+Edited by eraser1
 
-_crate = _this select 0;
-_crate allowdamage true;
+[
+	_weapons,
+	_tools,
+	_items,
+	_backpacks
+]
+Each argument can be an explicitly defined array of weapons with a number to spawn, or simply a number and weapons defined in the config.sqf are used
+*/
+
+
+private ["_ammo","_tool","_box","_weapon","_item","_backpack","_toolCount","_itemCount","_backpackCount","_wepCount","_weps","_tools","_items","_backpacks"];
+
+_box = _this select 0;
 
 // WEAPONS
 if(typeName (_this select 1) == "ARRAY") then {
-	_num_weapons	= (_this select 1) select 0;
-	_weapons_array	= (_this select 1) select 1;
+	_wepCount	= (_this select 1) select 0;
+	_weps	= (_this select 1) select 1;
 } else {
-	_num_weapons	= _this select 1;
-	_weapons_array	= [ai_assault_wep,ai_machine_wep,ai_sniper_wep] call BIS_fnc_selectRandom;
+	_wepCount	= _this select 1;
+	_weps	= DMS_boxWeapons;
 };
 // TOOLS
 if(typeName (_this select 2) == "ARRAY") then {
-	_num_tools	= (_this select 2) select 0;
-	_tool_array = (_this select 2) select 1;
+	_toolCount	= (_this select 2) select 0;
+	_tools = (_this select 2) select 1;
 } else {
-	_num_tools	= _this select 2;
-	_tool_array = crate_tools + ai_assault_scope + crate_tools;
+	_toolCount	= _this select 2;
+	_tools = DMS_boxTools;
 };
 // RANDOM
 if(typeName (_this select 3) == "ARRAY") then {
-	_num_items	= (_this select 3) select 0;
-	_item_array	= (_this select 3) select 1;
+	_itemCount	= (_this select 3) select 0;
+	_items	= (_this select 3) select 1;
 } else {
-	_num_items	= _this select 3;
-	_item_array	= crate_random call BIS_fnc_selectRandom;
+	_itemCount	= _this select 3;
+	_items	= DMS_boxItems;
 };
 // BACKPACK
 if(typeName (_this select 4) == "ARRAY") then {
-	_num_backpacks	= (_this select 4) select 0;
-	_backpack_array = (_this select 4) select 1;
+	_backpackCount	= (_this select 4) select 0;
+	_backpacks = (_this select 4) select 1;
 } else {
-	_num_backpacks = _this select 4;
-	_backpack_array = crate_backpacks_all;
+	_backpackCount = _this select 4;
+	_backpacks = DMS_boxBackpacks;
 };
+
 
 if(DMS_DEBUG) then {
-	diag_log format["DMS :: Spawning in a dynamic crate with %1 guns, %2 tools, %3 items and %4 backpacks",_num_weapons,_num_tools,_num_items,_num_backpacks];
+	diag_log format["DMS :: Filling a dynamic crate with %1 guns, %2 tools, %3 items and %4 backpacks",_wepCount,_toolCount,_itemCount,_backpackCount];
 };
 
-if(_num_weapons > 0) then {
 
-	_num_weapons = (ceil((_num_weapons) / 2) + floor(random (_num_weapons / 2)));
+if ((_wepCount>0) && {count _weps>0}) then {
 
-	for "_i" from 1 to _num_weapons do {
-		_weapon = _weapons_array call BIS_fnc_selectRandom;
-		_ammo = _weapon call find_suitable_ammunition;
-		_crate addWeaponCargoGlobal [_weapon,1];
-		_crate addMagazineCargoGlobal [_ammo, (1 + floor(random 5))];
+	for "_i" from 1 to _wepCount do {
+		_weapon = _weps call BIS_fnc_selectRandom;
+		_ammo = _weapon call DMS_selectMagazine;
+		_box addWeaponCargoGlobal _weapon;
+		_box addMagazineCargoGlobal [_ammo, (2 + floor(random 3))];
 	};
 
 };
 
-if(_num_tools > 0) then {
+if ((_toolCount > 0) && {count _tools>0}) then {
 
-	_num_tools	= (ceil((_num_tools) / 2) + floor(random (_num_tools / 2)));
-
-	for "_i" from 1 to _num_tools do {
-		_tool = _tool_array call BIS_fnc_selectRandom;
-
-		if(typeName (_tool) == "ARRAY") then {
-			_crate addItemCargoGlobal  [_tool select 0,_tool select 1];
-		} else {
-			_crate addItemCargoGlobal  [_tool,1];
-		};
+	for "_i" from 1 to _toolCount do {
+		_tool = _tools call BIS_fnc_selectRandom;
+		_box addItemCargoGlobal  _tool;
 	};
 
 };
 
-if(_num_items > 0) then {
+if ((_itemCount > 0) && {count _items>0}) then {
 
-	_num_items	= (ceil((_num_items) / 2) + floor(random (_num_items / 2)));
-
-	for "_i" from 1 to _num_items do {
-		_item = _item_array call BIS_fnc_selectRandom;
-
-		if(typeName (_item) == "ARRAY") then {
-			_crate addItemCargoGlobal [_item select 0,_item select 1];
-		} else {
-			_crate addItemCargoGlobal [_item,1];
-		};
+	for "_i" from 1 to _itemCount do {
+		_item = _items call BIS_fnc_selectRandom;
+		_box addItemCargoGlobal _item;
 	};
 
 };
 
-if(_num_backpacks > 0) then {
+if ((_backpackCount > 0) && {count _backpacks>0}) then {
 
-	_num_backpacks	= (ceil((_num_backpacks) / 2) + floor(random (_num_backpacks / 2)));
-
-	for "_i" from 1 to _num_backpacks do {
-		_backpack = _backpack_array call BIS_fnc_selectRandom;
-
-		if(typeName (_backpack) == "ARRAY") then {
-			_crate addBackpackCargoGlobal [_backpack select 0,_backpack select 1];
-		} else {
-			_crate addBackpackCargoGlobal [_backpack,1];
-		};
+	for "_i" from 1 to _backpackCount do {
+		_backpack = _backpacks call BIS_fnc_selectRandom;
+		_box addBackpackCargoGlobal _backpack;
 	};
 
 };
 
-if(wai_high_value) then {
+if(DMS_RareLoot && {count DMS_RareLoot>0}) then {
 
-	if(random 100 < wai_high_value_chance) then {
-
-		_item = crate_items_high_value call BIS_fnc_selectRandom;
-		_crate addItemCargoGlobal [_item,1];
+	if(random 100 < DMS_RareLootChance) then {
+		_item = DMS_RareLoot call BIS_fnc_selectRandom;
+		_box addItemCargoGlobal _item;
 	};
 
 };
