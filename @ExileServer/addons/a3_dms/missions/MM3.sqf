@@ -3,8 +3,6 @@ private ["_crate","_pos","_missname","_aiAmmount","_misText","_missEnd","_group"
 // associate pos with find safe pos
 _pos = call DMS_findSafePos; 
 
-uiSleep 1;
-
 _missname = "Main Mission 3";
 diag_log format ["DMS :: Main Mission 3 started at (%1)",_pos];
 
