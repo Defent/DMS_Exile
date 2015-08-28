@@ -15,6 +15,8 @@
 	
 	for "_i" from 1 to _units do {
 		_soldier = _group createUnit ["i_g_soldier_unarmed_f", [_pos select 0, _pos select 1, 0], [], 1, "Form"];
+		
+		// Unlimmited ammo
 		_soldier addeventhandler ["fired", {(_this select 0) setvehicleammo 1}];
 
 		removeAllAssignedItems _soldier;
