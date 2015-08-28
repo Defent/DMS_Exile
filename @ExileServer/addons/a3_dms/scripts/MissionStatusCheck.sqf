@@ -19,11 +19,11 @@
 		_markers
 	]
 */
-if (DMS_Mission_Arr isEqualTo []) exitWith
+if (DMS_Mission_Arr isEqualTo []) exitWith 				// Empty array, no missions running
 {
 	if (DMS_DEBUG) then
 	{
-		diag_log "DMS_DEBUG MissionStatusCheck :: DMS_Mission_Arr is empty!";
+		//diag_log "DMS_DEBUG MissionStatusCheck :: DMS_Mission_Arr is empty!";
 	};
 };
 
@@ -50,8 +50,9 @@ _index = 0;
 
 		if (_success) exitWith
 		{
-			//Use FSM instead
+			//Use FSM for cleanup instead
 			//[DMS_CompletedMissionCleanupTime,DMS_CleanUp,(_units+_buildings),false] call ExileServer_system_thread_addTask;
+			DMS_CleanUpList pushBack [_units+_building,diag_tickTime,DMS_CompletedMissionCleanupTime];
 			_arr = DMS_Mission_Arr deleteAt _index;
 
 			[_loot select 0,_crate_loot_values] call DMS_FillCrate;
@@ -76,6 +77,7 @@ _index = 0;
 
 		if ((diag_tickTime-_timeStarted)>_timeUntilFail) exitWith
 		{
+			//Nobody is nearby so just cleanup objects from here
 			(_units+_buildings+_loot) call DMS_CleanUp;
 			_arr = DMS_Mission_Arr deleteAt _index;
 

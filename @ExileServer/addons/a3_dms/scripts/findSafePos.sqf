@@ -14,11 +14,11 @@ private ["_nearestObjectMinDistance","_maxTerrainGradient","_safePosParams","_va
 
 params [["_nearestObjectMinDistance",25,[0]],["_maxTerrainGradient",10,[0]]];
 
-if (worldName=="Altis") then {
-	_safePosParams		= [[16000,16000],0,16000,_nearestObjectMinDistance,0,_maxTerrainGradient,0,DMS_findSafePosBlacklist];
-} else {
-	_safePosParams		= [[],0,-1,_nearestObjectMinDistance,0,_maxTerrainGradient,0,DMS_findSafePosBlacklist];
-};
+_safePosParams =
+[
+	[[],0,-1,_nearestObjectMinDistance,0,_maxTerrainGradient,0,DMS_findSafePosBlacklist],
+	[[16000,16000],0,16000,_nearestObjectMinDistance,0,_maxTerrainGradient,0,DMS_findSafePosBlacklist]		//[16000,16000] w/ radius of 16000 works well for Altis
+] select (worldName=="Altis");
 
 _validspot 	= false;
 _i = 0;

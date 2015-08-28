@@ -6,6 +6,7 @@
 // Initialize Variables
 DMS_Mission_Arr = [];
 DMS_MissionCount = 0;
+DMS_CleanUpList = [];
 
 /* compiles
 DMS_CreateMarker 		= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\DMS_CreateMarker.sqf";
@@ -27,10 +28,11 @@ load_ammo				= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\loa
 
 //Completed
 DMS_MissionStatusCheck				= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\MissionStatusCheck.sqf";
-DMS_MissionSuccessState 			= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\MissionSuccessState.sqf";//<--- TODO
+DMS_MissionSuccessState 			= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\MissionSuccessState.sqf";
 DMS_findSafePos						= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\FindSafePos.sqf";
 DMS_BroadcastMissionStatus			= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\BroadcastMissionStatus.sqf";
 DMS_CleanUp		     				= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\CleanUp.sqf";
+DMS_CleanUpManager					= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\CleanUpManager.sqf";
 DMS_isPlayerNearbyARRAY				= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\IsPlayerNearbyARRAY.sqf";
 DMS_FillCrate						= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\FillCrate.sqf";
 DMS_isNearWater						= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\IsNearWater.sqf";
