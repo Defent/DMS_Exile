@@ -1,6 +1,6 @@
 if (DMS_DEBUG) then
 {
-	diag_log format["DMS :: Notification types: |%1| for broadcasting mission status: %2",DMS_player_notification_types,_this];
+	diag_log format["DMS :: Notification types: |%1| for broadcasting mission status: %2",DMS_PlayerNotificationTypes,_this];
 };
 {
 	switch (_x) do
@@ -11,4 +11,4 @@ if (DMS_DEBUG) then
 		case "systemChatRequest":{[_x, [_this]] call ExileServer_system_network_send_broadcast;};
 	};
 	false;
-} count DMS_player_notification_types;
+} count DMS_PlayerNotificationTypes;

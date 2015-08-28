@@ -11,11 +11,11 @@ class CfgFunctions {
 	class dms {
 		class main {
 			file = "\x\addons\dms";
-			class init_dms
+			class DMS_preInit
 			{
 				preInit = 1;
 			};
-			class start_dms {
+			class DMS_postInit {
 				postInit = 1;
 			};
 		};

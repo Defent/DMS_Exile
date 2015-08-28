@@ -8,7 +8,8 @@
 			[_cleanupObj1,_cleanupObj2,...,_cleanupObjX],
 			[_crate,_vehicle1,_vehicle2,...,_vehicleX]
 		],
-		[_msgWIN,_msgLose]
+		[_msgWIN,_msgLose],
+		_markers
 	]
 */
 if !(DMS_Mission_Arr isEqualTo []) then {
@@ -21,7 +22,7 @@ if !(DMS_Mission_Arr isEqualTo []) then {
 				diag_log ("DMS :: Checking Mission Status: "+str _x);
 			};
 			_position					= _x select 0;
-			_success					= (_x select 1) call MissionSuccessState;
+			_success					= (_x select 1) call DMS_MissionSuccessState;
 			_timeStarted				= _x select 2 select 0;
 			_timeUntilFail				= _x select 2 select 1;
 			_units						= _x select 3;
@@ -29,15 +30,17 @@ if !(DMS_Mission_Arr isEqualTo []) then {
 			_loot						= _x select 4 select 1;
 			_msgSuccess					= _x select 5 select 0;
 			_msgFail					= _x select 5 select 1;
+			_markers 					= _x select 6;
 
 			if (_success) exitWith {
-				[DMS_CompletedMissionCleanup_Time,DMS_CleanUp,(_units+_buildings),false] call ExileServer_system_thread_addTask;
+				[DMS_CompletedMissionCleanupTime,DMS_CleanUp,(_units+_buildings),false] call ExileServer_system_thread_addTask;
 				_arr = DMS_Mission_Arr deleteAt _index;
 				(_loot select 0) call DMS_FillCrate;
 				_msgSuccess call DMS_BroadcastMissionStatus;
+				[_markers,"win"] call DMS_RemoveMarkers;
 			};
 
-			if (DMS_player_reset_timeout && {[_position,DMS_player_reset_timeout_range] call ExileServer_util_position_isPlayerNearby}) exitWith
+			if (DMS_MissionTimeoutReset && {[_position,DMS_MissionTimeoutResetRange] call ExileServer_util_position_isPlayerNearby}) exitWith
 			{
 				_x set [2,[diag_tickTime,_timeUntilFail]];
 			};
@@ -47,6 +50,7 @@ if !(DMS_Mission_Arr isEqualTo []) then {
 				_arr = DMS_Mission_Arr deleteAt _index;
 				(_units+_buildings+_loot) call DMS_CleanUp;
 				_msgFail call DMS_BroadcastMissionStatus;
+				[_markers,"lose"] call DMS_RemoveMarkers;
 			};
 		};
 		false;

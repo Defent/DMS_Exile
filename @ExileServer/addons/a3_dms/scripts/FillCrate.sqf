@@ -12,11 +12,11 @@ Each argument can be an explicitly defined array of weapons with a number to spa
 */
 
 
-private ["_ammo","_tool","_box","_weapon","_item","_backpack","_toolCount","_itemCount","_backpackCount","_wepCount","_weps","_tools","_items","_backpacks"];
+private ["_ammo","_tool","_box","_weapon","_item","_backpack","_itemCount","_backpackCount","_wepCount","_weps","_items","_backpacks"];
 
 _box = _this select 0;
 
-// WEAPONS
+// Weapons
 if(typeName (_this select 1) == "ARRAY") then {
 	_wepCount	= (_this select 1) select 0;
 	_weps	= (_this select 1) select 1;
@@ -24,34 +24,26 @@ if(typeName (_this select 1) == "ARRAY") then {
 	_wepCount	= _this select 1;
 	_weps	= DMS_boxWeapons;
 };
-// TOOLS
+// Items
 if(typeName (_this select 2) == "ARRAY") then {
-	_toolCount	= (_this select 2) select 0;
-	_tools = (_this select 2) select 1;
+	_itemCount	= (_this select 2) select 0;
+	_items	= (_this select 2) select 1;
 } else {
-	_toolCount	= _this select 2;
-	_tools = DMS_boxTools;
-};
-// RANDOM
-if(typeName (_this select 3) == "ARRAY") then {
-	_itemCount	= (_this select 3) select 0;
-	_items	= (_this select 3) select 1;
-} else {
-	_itemCount	= _this select 3;
+	_itemCount	= _this select 2;
 	_items	= DMS_boxItems;
 };
-// BACKPACK
-if(typeName (_this select 4) == "ARRAY") then {
-	_backpackCount	= (_this select 4) select 0;
-	_backpacks = (_this select 4) select 1;
+// Backpacks
+if(typeName (_this select 3) == "ARRAY") then {
+	_backpackCount	= (_this select 3) select 0;
+	_backpacks = (_this select 3) select 1;
 } else {
-	_backpackCount = _this select 4;
+	_backpackCount = _this select 3;
 	_backpacks = DMS_boxBackpacks;
 };
 
 
 if(DMS_DEBUG) then {
-	diag_log format["DMS :: Filling a dynamic crate with %1 guns, %2 tools, %3 items and %4 backpacks",_wepCount,_toolCount,_itemCount,_backpackCount];
+	diag_log format["DMS :: Filling a dynamic crate with %1 guns, %2 items and %3 backpacks",_wepCount,_itemCount,_backpackCount];
 };
 
 
@@ -62,15 +54,6 @@ if ((_wepCount>0) && {count _weps>0}) then {
 		_ammo = _weapon call DMS_selectMagazine;
 		_box addWeaponCargoGlobal _weapon;
 		_box addMagazineCargoGlobal [_ammo, (2 + floor(random 3))];
-	};
-
-};
-
-if ((_toolCount > 0) && {count _tools>0}) then {
-
-	for "_i" from 1 to _toolCount do {
-		_tool = _tools call BIS_fnc_selectRandom;
-		_box addItemCargoGlobal  _tool;
 	};
 
 };
