@@ -41,7 +41,10 @@
 
 		// FIX FOR Ai vs Ai killing.
 		[_soldier] joinSilent _group;
-
+		
+		// Trigger for AI being killed.
+		//_soldier addEventHandler ["Killed",{ [(_this select 0), (_this select 1)] call on_kill; }];
+		
 		switch (_skill) do
 		{
 			case 1: 
