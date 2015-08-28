@@ -1,10 +1,7 @@
-DMS_spawnAI = {
 	private ["_group", "_pos","_soldier","_skill","_units","_playerObject"];
 	_pos  = _this select 0;
 	_units = _this select 1;
 	_skill = _this select 2;
-	//_playerObject = (owner player);
-	// Needed 4 exile
 	_group = createGroup EAST;
 	_group setBehaviour "COMBAT";
 	_group setCombatMode "RED";
@@ -18,13 +15,16 @@ DMS_spawnAI = {
 	
 	for "_i" from 1 to _units do {
 		_soldier = _group createUnit ["i_g_soldier_unarmed_f", [_pos select 0, _pos select 1, 0], [], 1, "Form"];
+		_soldier addeventhandler ["fired", {(_this select 0) setvehicleammo 1}];
+
 		removeAllAssignedItems _soldier;
 		removeUniform _soldier;
 		removeHeadgear _soldier;
 		removeAllItems _soldier;
 		removeAllWeapons _soldier;
+		uiSleep 1;
 		_soldier forceaddUniform "U_I_officerUniform";
-		_soldier addVest " V_HarnessO_gry "; 
+		_soldier addVest " V_TacVest_blk_POLICE "; 
 		_soldier addGoggles "G_Tactical_Clear";
 		for "_i" from 1 to 3 do {
 		_soldier addItemToVest  "30Rnd_65x39_caseless_mag";
@@ -36,6 +36,10 @@ DMS_spawnAI = {
 		}forEach ["TARGET","AUTOTARGET","MOVE","ANIM"];
 		_soldier disableAI "FSM";
 		_soldier allowDammage true;
+
+		// FIX FOR Ai vs Ai killing.
+		[_soldier] joinSilent _group;
+
 		switch (_skill) do
 		{
 			case 1: 
@@ -104,4 +108,4 @@ DMS_spawnAI = {
 			};
 		};
 	};
-};
+_soldier
