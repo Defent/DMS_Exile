@@ -6,7 +6,6 @@
 
 
 // compiles
-DMS_findSafePos			= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\DMS_findSafePos.sqf";
 DMS_CreateMarker 		= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\DMS_CreateMarker.sqf";
 DMS_spawnAI 			= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\DMS_spawnAI.sqf";
 DMS_selectMission 		= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\DMS_selectMission.sqf";
@@ -25,7 +24,8 @@ load_ammo				= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\loa
 
 //Completed
 DMS_MissionStatusCheck				= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\MissionStatusCheck.sqf";
-DMS_MissionSuccessState 			= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\MissionSuccessState.sqf";
+DMS_MissionSuccessState 			= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\MissionSuccessState.sqf";//<--- TODO
+DMS_findSafePos						= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\findSafePos.sqf";//<--- TODO
 DMS_BroadcastMissionStatus			= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\BroadcastMissionStatus.sqf";
 DMS_CleanUp		     				= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\CleanUp.sqf";
 DMS_isPlayerNearbyARRAY				= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\isPlayerNearbyARRAY.sqf";
