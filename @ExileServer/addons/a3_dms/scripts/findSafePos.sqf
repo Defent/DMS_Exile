@@ -1,4 +1,16 @@
-private ["_nearestObjectMinDistance","_maxTerrainGradient","_safePosParams","_validspot","_i","_pos","_markerName"];
+/*
+	DMS_findSafePos
+	Created by eraser1
+
+	Usage:
+	[
+		_nearestObjectMinDistance,
+		_maxTerrainGradient
+	] call DMS_findSafePos;
+*/
+
+
+private ["_nearestObjectMinDistance","_maxTerrainGradient","_safePosParams","_validspot","_i","_pos"];
 
 params [["_nearestObjectMinDistance",25,[0]],["_maxTerrainGradient",10,[0]]];
 
@@ -13,7 +25,8 @@ _i = 0;
 while{!_validspot} do {
 	_pos 	= _safePosParams call BIS_fnc_findSafePos;
 	_i = _i+1;
-	try {
+	try
+	{
 		// Check for nearby water
 		if ([_pos,DMS_WaterNearBlacklist] call DMS_isNearWater) exitWith 
 		{

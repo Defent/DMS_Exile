@@ -1,3 +1,22 @@
+/*
+	DMS_isPlayerNearbyARRAY
+	Created by eraser1
+
+	Usage:
+	[
+		[
+			_position_or_object1,
+			_position_or_object2,
+			...
+			_position_or_objectN
+		],
+		_radius
+	] call DMS_isPlayerNearbyARRAY;
+
+
+	***DEPRECATED***
+*/
+
 private["_posArray","_radius","_result"];
 _posArray = _this select 0;
 _radius = _this select 1;
@@ -13,7 +32,7 @@ _result = false;
 				_result = true;
 				if (DMS_DEBUG) then
 				{
-					diag_log format["DMS :: %1 is within %2m of %3!",_plyr,_radius,_x];
+					diag_log format["DMS_DEBUG IsPlayerNearbyARRAY :: %1 is within %2m of %3!",_plyr,_radius,_x];
 				};
 			};
 			false;

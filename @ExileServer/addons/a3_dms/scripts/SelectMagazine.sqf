@@ -1,3 +1,14 @@
+/*
+	DMS_selectMagazine
+	Created by eraser1
+
+	Usage:
+	_weaponClassName call DMS_selectMagazine;
+
+	Apply magazine type filters if needed
+*/
+
+
 private["_result","_ammoArray"];
 
 _result 	= "";
