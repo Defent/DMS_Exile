@@ -16,7 +16,8 @@
 			[_crate_loot_values]
 		],
 		[_msgWIN,_msgLose],
-		_markers
+		_markers,
+		_missionSide
 	]
 */
 if (DMS_Mission_Arr isEqualTo []) exitWith 				// Empty array, no missions running
@@ -47,12 +48,23 @@ _index = 0;
 		_msgWIN						= _x select 5 select 0;
 		_msgLose					= _x select 5 select 1;
 		_markers 					= _x select 6;
+		_missionSide				= _x select 7;
 
 		if (_success) exitWith
 		{
 			//Use FSM for cleanup instead
 			//[DMS_CompletedMissionCleanupTime,DMS_CleanUp,(_units+_buildings),false] call ExileServer_system_thread_addTask;
 			DMS_CleanUpList pushBack [_units+_building,diag_tickTime,DMS_CompletedMissionCleanupTime];
+
+			if (_missionSide isEqualTo "bandit") then
+			{
+				DMS_RunningBMissionCount = DMS_RunningBMissionCount -1;
+			}
+			else
+			{
+				// Not yet implemented
+			};
+
 			_arr = DMS_Mission_Arr deleteAt _index;
 
 			[_loot select 0,_crate_loot_values] call DMS_FillCrate;
@@ -79,6 +91,16 @@ _index = 0;
 		{
 			//Nobody is nearby so just cleanup objects from here
 			(_units+_buildings+_loot) call DMS_CleanUp;
+
+			if (_missionSide isEqualTo "bandit") then
+			{
+				DMS_RunningBMissionCount = DMS_RunningBMissionCount -1;
+			}
+			else
+			{
+				// Not yet implemented
+			};
+			
 			_arr = DMS_Mission_Arr deleteAt _index;
 
 			_msgLose call DMS_BroadcastMissionStatus;

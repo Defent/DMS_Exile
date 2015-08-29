@@ -3,15 +3,9 @@
 	Written by eraser1 (trainwreckdayz.com)
 */
 
-// Initialize Variables
-DMS_Mission_Arr = [];
-DMS_MissionCount = 0;
-DMS_CleanUpList = [];
-
 /* compiles
 DMS_CreateMarker 		= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\DMS_CreateMarker.sqf";
 DMS_spawnAI 			= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\DMS_spawnAI.sqf";
-DMS_selectMission 		= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\DMS_selectMission.sqf";
 spawn_group				= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\spawn_group.sqf";
 spawn_soldier			= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\spawn_soldier.sqf";
 spawn_static			= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\spawn_static.sqf";
@@ -22,11 +16,10 @@ vehicle_patrol			= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts
 on_kill					= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\on_kill.sqf";
 bandit_behaviour		= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\bandit_behaviour.sqf";
 vehicle_monitor			= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\vehicle_monitor.sqf";
-find_position			= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\find_position.sqf";
-load_ammo				= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\load_ammo.sqf";
 */
 
 //Completed
+DMS_selectMission 					= compileFinal preprocessFileLineNumbers "\x\addons\dms\missions\SelectMission.sqf";
 DMS_MissionStatusCheck				= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\MissionStatusCheck.sqf";
 DMS_MissionSuccessState 			= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\MissionSuccessState.sqf";
 DMS_findSafePos						= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\FindSafePos.sqf";
