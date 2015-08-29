@@ -7,10 +7,8 @@ private ["_rockets","_launcher","_type","_mission","_unit","_player"];
 
 	call {
 
-	 	 // then is faster than exitWith
-			if(_type == "ground") 	then { 
-				ai_ground_units = (ai_ground_units -1);
-			};
+	 // then is faster than exitWith
+		if(_type == "ground") 	then { ai_ground_units = (ai_ground_units -1);};
 
 	// Not defined yet -->
 	//	if(_type == "air") 		exitWith { ai_air_units = (ai_air_units -1); };
