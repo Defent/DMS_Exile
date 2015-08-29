@@ -108,8 +108,8 @@ class FSM
                                         priority = 1.000000;
                                         to="Check_Mission_Running";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"((diag_tickTime - _missionStatusCheck) > 60)"/*%FSM</CONDITION""">*/;
-                                        action=/*%FSM<ACTION""">*/"_missionStatusCheck = time;"/*%FSM</ACTION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"((diag_tickTime - _missionsMonitor) > 60)"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/"_missionsMonitor = time;"/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
                         };
@@ -120,7 +120,7 @@ class FSM
                 {
                         name = "Check_Mission_Running";
                         itemno = 6;
-                        init = /*%FSM<STATEINIT""">*/"call DMS_MissionStatusCheck;"/*%FSM</STATEINIT""">*/;
+                        init = /*%FSM<STATEINIT""">*/"call DMS_MissionsMonitor;"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
@@ -166,10 +166,10 @@ class FSM
                 {
                         name = "PREPARE";
                         itemno = 14;
-                        init = /*%FSM<STATEINIT""">*/"private [""_missionStatusCheck"",""_cleanupTime"",""_selectMission""];" \n
+                        init = /*%FSM<STATEINIT""">*/"private [""_missionsMonitor"",""_cleanupTime"",""_selectMission""];" \n
                          "diag_log (""DMS :: Initializing FSM mission script"");" \n
                          "" \n
-                         "_missionStatusCheck = diag_tickTime;" \n
+                         "_missionsMonitor = diag_tickTime;" \n
                          "_cleanupTime = diag_tickTime;" \n
                          "_selectMission = diag_tickTime;"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;

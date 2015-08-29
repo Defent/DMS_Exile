@@ -19,7 +19,7 @@ vehicle_monitor			= compileFinal preprocessFileLineNumbers "\x\addons\dms\script
 
 //Completed
 DMS_selectMission 					= compileFinal preprocessFileLineNumbers "\x\addons\dms\missions\SelectMission.sqf";
-DMS_MissionStatusCheck				= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\MissionStatusCheck.sqf";
+DMS_MissionsMonitor					= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\MissionsMonitor.sqf";
 DMS_MissionSuccessState 			= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\MissionSuccessState.sqf";
 DMS_findSafePos						= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\FindSafePos.sqf";
 DMS_BroadcastMissionStatus			= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\BroadcastMissionStatus.sqf";
