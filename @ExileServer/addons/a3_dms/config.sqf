@@ -1,5 +1,5 @@
 /*
-	Most of this stuff is stolen from WAI :P
+	A lot of these configs are influenced from WAI :P
 	https://github.com/nerdalertdk/WICKED-AI
 
 	Created by eraser1
@@ -63,6 +63,8 @@ DMS_DEBUG = false;
 	DMS_clear_AI_body					= false;					// Clear AI body when they die
 	DMS_remove_roadkill					= false; 					// Delete AI bodies that are roadkill
 	DMS_remove_roadkill_chance			= 0;						// Percentage chance that roadkilled AI bodies will be deleted
+
+	DMS_ai_offload_to_client			= true;						// Offload spawned AI groups to random clients. Helps with server performance.
 
 	DMS_ai_share_info					= true;						// Share info about killer
 	DMS_ai_share_info_distance			= 300;						// The distance killer's info will be shared to other AI

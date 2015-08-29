@@ -12,12 +12,11 @@ group_waypoints			= compileFinal preprocessFileLineNumbers "\x\addons\dms\script
 heli_para				= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\heli_para.sqf";
 heli_patrol				= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\heli_patrol.sqf";
 vehicle_patrol			= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\vehicle_patrol.sqf";
-on_kill					= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\on_kill.sqf";
 bandit_behaviour		= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\bandit_behaviour.sqf";
 vehicle_monitor			= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\vehicle_monitor.sqf";
 */
 
-//Completed
+//Completed or WIP
 DMS_selectMission 					= compileFinal preprocessFileLineNumbers "\x\addons\dms\missions\SelectMission.sqf";
 DMS_MissionsMonitor					= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\MissionsMonitor.sqf";
 DMS_MissionSuccessState 			= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\MissionSuccessState.sqf";
@@ -33,6 +32,7 @@ DMS_selectMagazine					= compileFinal preprocessFileLineNumbers "\x\addons\dms\s
 DMS_TargetsKilled					= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\TargetsKilled.sqf";
 DMS_SpawnAIGroup					= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\SpawnAIGroup.sqf";
 DMS_SpawnAISoldier					= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\SpawnAISoldier.sqf";
+DMS_OnKilled						= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\OnKilled.sqf";//<--- TODO
 
 //Load config
 #include "config.sqf";
