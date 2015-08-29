@@ -69,10 +69,7 @@ DMS_DEBUG = false;
 	DMS_ai_share_info					= true;						// Share info about killer
 	DMS_ai_share_info_distance			= 300;						// The distance killer's info will be shared to other AI
 
-	DMS_ai_use_launchers				= true;						// Enable/disable spawning an AI in a group with a launcher
-	DMS_ai_use_launchers_chance			= 50;						// Percentage chance to actually spawn the launcher (per-group)
 	DMS_ai_nighttime_accessory_chance	= 75;						// Percentage chance that AI will have a flashlight or laser pointer on their guns if spawned during nighttime
-	DMS_ai_remove_launchers				= false;					// Remove rocket launchers on AI death
 	DMS_ai_enable_water_equipment		= true;						// Enable/disable overriding default weapons of an AI if it spawns on/in water
 
 	// https://community.bistudio.com/wiki/AI_Sub-skills#general
@@ -83,6 +80,10 @@ DMS_DEBUG = false;
 	DMS_ai_skill_difficult				= [["aimingAccuracy",0.70],["aimingShake",0.70],["aimingSpeed",0.70],["spotDistance",0.70],["spotTime",0.80],["courage",1.00],["reloadSpeed",1.00],["commanding",1.00],["general",0.70]]; 	// Difficult
 	DMS_ai_skill_hardcore				= [["aimingAccuracy",1.00],["aimingShake",1.00],["aimingSpeed",1.00],["spotDistance",1.00],["spotTime",1.00],["courage",1.00],["reloadSpeed",1.00],["commanding",1.00],["general",1.00]]; 	// Hardcore
 	DMS_ai_skill_random					= ["hardcore","difficult","difficult","difficult","moderate","moderate","moderate","moderate","easy","easy"];	// Skill frequencies for "random" AI skills | Default: 10% hardcore, 30% difficult, 40% moderate, and 20% easy
+	DMS_AI_WP_Radius_easy				= 20;						// Waypoint radius for "easy" AI
+	DMS_AI_WP_Radius_moderate			= 40;						// Waypoint radius for "moderate" AI
+	DMS_AI_WP_Radius_difficult			= 75;						// Waypoint radius for "difficult" AI
+	DMS_AI_WP_Radius_hardcore			= 150;						// Waypoint radius for "hardcore" AI
 
 	DMS_static_weapons =				[							// Static weapons for AI
 											"O_HMG_01_F",
@@ -340,7 +341,19 @@ DMS_DEBUG = false;
 											"sniper"
 										];
 
-	DMS_AI_wep_launchers				= ["Exile_Melee_Axe"];
+	DMS_ai_use_launchers				= true;						// Enable/disable spawning an AI in a group with a launcher
+	DMS_ai_use_launchers_chance			= 50;						// Percentage chance to actually spawn the launcher (per-group)
+	DMS_AI_launcher_ammo_count			= 2;						// How many rockets an AI will get with its launcher
+	DMS_ai_remove_launchers				= false;					// Remove rocket launchers on AI death
+
+	DMS_AI_wep_launchers_AT =			[							// AT Launchers
+											"launch_NLAW_F",
+											"launch_RPG32_F",
+											"launch_B_Titan_short_F"
+										];
+	DMS_AI_wep_launchers_AA =			[							// AA Launchers
+											"launch_B_Titan_F"
+										];
 
 /* AI Settings */
 

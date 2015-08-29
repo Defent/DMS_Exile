@@ -26,6 +26,8 @@
 		_vest,					// String | EG: "V_PlateCarrierGL_blk"
 		_backpack				// String | EG: "B_Carryall_oli"
 	]
+
+	Returns AI Unit
 */
 
 private ["_OK", "_useCustomGear", "_unarmed", "_type", "_customGear", "_unit", "_side", "_nighttime", "_weapon", "_muzzle", "_suppressor", "_pistols", "_pistol", "_customGearSet", "_helmet", "_uniform", "_vest", "_backpack", "_magazines", "_weaponAttachments", "_pistolAttachments", "_items", "_difficulty", "_skillArray"];
@@ -80,13 +82,6 @@ if !(DMS_ai_default_items isEqualTo []) then
 	{_unit linkItem _x;false;} count DMS_ai_default_items;
 };
 
-/*
-call {
-	if(_side == "bandit") 	exitWith { _unit setVariable ["Bandit",true];};
-	if(_side == "hero") 	exitWith { _unit setVariable ["Hero",true];};
-	if(_side == "special") 	exitWith { _unit setVariable ["Special",true];};
-};
-*/
 
 call
 {
@@ -123,7 +118,7 @@ if (!_useCustomGear) then
 	if (!_unarmed) then
 	{
 		_weapon = (missionNamespace getVariable [format ["DMS_%1_weps",_type],[]) call BIS_fnc_selectRandom;
-		_muzzle = [_unit, _weapon, 4 + floor(random 3)] call BIS_fnc_addWeapon;
+		[_unit, _weapon, 4 + floor(random 3)] call BIS_fnc_addWeapon;
 		_unit selectWeapon _weapon;
 		
 		
@@ -141,7 +136,6 @@ if (!_useCustomGear) then
 		{
 			_unit addPrimaryWeaponItem (DMS_ai_BipodList call BIS_fnc_selectRandom);
 		};
-		
 
 		if((random 100) <= (missionNamespace getVariable [format["DMS_%1_suppressor_chance",_type],0])) then
 		{
@@ -160,14 +154,14 @@ if (!_useCustomGear) then
 			_unit forceAddUniform "U_O_Wetsuit";
 			_unit addVest "V_RebreatherIA";
 			_unit addGoggles "G_Diving";
-			_muzzle = [_unit, "arifle_SDAR_F", 4 + floor(random 3), "20Rnd_556x45_UW_mag"] call BIS_fnc_addWeapon;
+			[_unit, "arifle_SDAR_F", 4 + floor(random 3), "20Rnd_556x45_UW_mag"] call BIS_fnc_addWeapon;
 		};
 
-		_pistols = missionNamespace getVariable [format ["DMS_%1_pistols",_type],[];
+		_pistols = missionNamespace getVariable [format ["DMS_%1_pistols",_type],[]];
 		if !(_pistols isEqualTo []) then
 		{
 			_pistol = _pistols call BIS_fnc_selectRandom;
-			_muzzle = [_unit, _pistol, 2 + floor(random 2)] call BIS_fnc_addWeapon;
+			[_unit, _pistol, 2 + floor(random 2)] call BIS_fnc_addWeapon;
 		};
 
 		// Infinite Ammo
@@ -273,7 +267,6 @@ else
 
 // Soldier killed event handler
 _unit addEventHandler ["Killed",{[_this, "soldier"] call DMS_OnKilled;}];
-//_unit addEventHandler ["Killed",{[_unit, _group, "soldier"] call TargetsKilled;}];
 
 _unit enableAI "TARGET";
 _unit enableAI "AUTOTARGET";
