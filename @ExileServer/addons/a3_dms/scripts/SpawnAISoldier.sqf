@@ -10,10 +10,10 @@
 		_type,					// "random","assault","MG","sniper" or "unarmed"
 		_difficulty,			// "random","hardcore","difficult","moderate", or "easy"
 		_side, 					// "bandit","hero", etc.
-		_optionalGearSet		// OPTIONAL: Manually defined AI gear.
+		_customGearSet		// OPTIONAL: Manually defined AI gear.
 	] call DMS_SpawnAIGroup;
 
-	Usage for _optionalGearSet:
+	Usage for _customGearSet:
 	[
 		_weapon,				// String | EG: "LMG_Zafir_F"
 		_weaponAttachments,		// Array of strings | EG: ["optic_dms","bipod_03_F_blk"]
@@ -27,7 +27,8 @@
 		_backpack				// String | EG: "B_Carryall_oli"
 	]
 */
-//<------ TODO: SETUP PRIVATE VARS
+
+private ["_OK", "_useCustomGear", "_unarmed", "_type", "_customGear", "_unit", "_side", "_nighttime", "_weapon", "_muzzle", "_suppressor", "_pistols", "_pistol", "_customGearSet", "_helmet", "_uniform", "_vest", "_backpack", "_magazines", "_weaponAttachments", "_pistolAttachments", "_items", "_difficulty", "_skillArray"];
 
 _OK = params
 [
@@ -51,6 +52,11 @@ else
 		_customGear = _this select 5;
 		_useCustomGear = true;
 	};
+};
+
+if(_difficulty isEqualTo "random") then
+{
+	_difficulty = DMS_ai_skill_random call BIS_fnc_selectRandom;
 };
 
 //Create unit
@@ -170,7 +176,7 @@ if (!_useCustomGear) then
 }
 else
 {
-	_OK = _optionalGearSet params
+	_OK = _customGearSet params
 	[
 		["_weapon","",[""]],
 		["_weaponAttachments",[],[[]]],
@@ -184,9 +190,14 @@ else
 		["_backpack","",[""]]
 	];
 
-	if (!_OK) exitWith
+	if (!_OK) then
 	{
-		diag_log format ["DMS ERROR :: Calling DMS_SpawnAISoldier with invalid _optionalGearSet: %1 | _this: %2",_optionalGearSet,_this];
+		diag_log format ["DMS ERROR :: Calling DMS_SpawnAISoldier with invalid _customGearSet: %1 | _this: %2",_customGearSet,_this];
+	};
+
+	if (DMS_DEBUG) then
+	{
+		diag_log format ["DMS_DEBUG SpawnAISoldier :: Equipping unit %1 with _customGearSet: %2",_unit,_customGearSet];
 	};
 
 	// Clothes
@@ -254,26 +265,25 @@ else
 	} count _items;
 };
 
-if(_difficulty isEqualTo "random") then
-{
-	_difficulty = DMS_ai_skill_random call BIS_fnc_selectRandom;
-};
-
-_skillArray = missionNamespace getVariable [format["DMS_ai_skill_%1",_difficulty],[]];
-
 {
 	_unit setSkill [(_x select 0),(_x select 1)];
 	false;
-} count _skillArray;
+} count (missionNamespace getVariable [format["DMS_ai_skill_%1",_difficulty],[]]);
 
-// Ground unit
-//_unit addEventHandler ["Killed",{[_this, "soldier"] call DMS_OnKill;}];
-_unit addEventHandler ["Killed",{[_unit, _group, "soldier"] call TargetsKilled;}];
+
+// Soldier killed event handler
+_unit addEventHandler ["Killed",{[_this, "soldier"] call DMS_OnKilled;}];
+//_unit addEventHandler ["Killed",{[_unit, _group, "soldier"] call TargetsKilled;}];
 
 _unit enableAI "TARGET";
 _unit enableAI "AUTOTARGET";
 _unit enableAI "MOVE";
 _unit enableAI "ANIM";
 _unit enableAI "FSM";
+
+if (DMS_DEBUG) then
+{
+	diag_log format ["DMS_DEBUG SpawnAISoldier :: Spawned a %1 %2 AI at %3 with %4 difficulty to group %5",_type,_side,_pos,_difficulty,_group];
+};
 
 _unit
