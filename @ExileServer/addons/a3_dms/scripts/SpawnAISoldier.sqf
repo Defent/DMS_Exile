@@ -267,7 +267,8 @@ _skillArray = missionNamespace getVariable [format["DMS_ai_skill_%1",_difficulty
 } count _skillArray;
 
 // Ground unit
-_unit addEventHandler ["Killed",{[_this, "soldier"] call DMS_OnKill;}];
+//_unit addEventHandler ["Killed",{[_this, "soldier"] call DMS_OnKill;}];
+_unit addEventHandler ["Killed",{[_unit, _group, "soldier"] call TargetsKilled;}];
 
 _unit enableAI "TARGET";
 _unit enableAI "AUTOTARGET";
