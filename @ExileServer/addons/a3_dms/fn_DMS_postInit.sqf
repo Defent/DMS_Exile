@@ -21,5 +21,5 @@ if(DMS_StaticMission) then {
 
 if (DMS_DynamicMission) then {
 	call compileFinal preprocessFileLineNumbers "\x\addons\dms\missions\mission_init.sqf";
-	//execFSM "\x\addons\dms\missions\missions.fsm";
+	execFSM "\x\addons\dms\FSM\missions.fsm";
 };
