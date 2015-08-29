@@ -58,16 +58,6 @@ DMS_DEBUG = false;
 
 
 /* AI Settings */
-	DMS_ai_wep_accessories				= ["acc_pointer_IR","acc_flashlight"];
-	DMS_ai_wep_suppressors =			[
-											"muzzle_snds_H",
-											"muzzle_snds_L",
-											"muzzle_snds_M",
-											"muzzle_snds_B",
-											"muzzle_snds_H_MG",
-											"muzzle_snds_acp"
-										];
-
 
 	DMS_banditSide						= EAST;						// The side (team) that AI Bandits will spawn on
 	DMS_clear_AI_body					= false;					// Clear AI body when they die
@@ -78,7 +68,8 @@ DMS_DEBUG = false;
 	DMS_ai_share_info_distance			= 300;						// The distance killer's info will be shared to other AI
 
 	DMS_ai_use_launchers				= true;						// Enable/disable spawning an AI in a group with a launcher
-	DMS_ai_use_launchers_chance			= 0.5;						// Percentage chance to actually spawn the launcher (per-group)
+	DMS_ai_use_launchers_chance			= 50;						// Percentage chance to actually spawn the launcher (per-group)
+	DMS_ai_nighttime_accessory_chance	= 75;						// Percentage chance that AI will have a flashlight or laser pointer on their guns if spawned during nighttime
 	DMS_ai_remove_launchers				= false;					// Remove rocket launchers on AI death
 	DMS_ai_enable_water_equipment		= true;						// Enable/disable overriding default weapons of an AI if it spawns on/in water
 
@@ -96,6 +87,24 @@ DMS_DEBUG = false;
 											"O_HMG_01_high_F"
 										];
 
+	DMS_ai_default_items =				[							// Toolbelt items each AI will spawn with
+											"ItemWatch",
+											"ItemMap",
+											"ItemCompass",
+											"ItemRadio"
+										];
+	
+	DMS_ai_BipodList =					[
+											"bipod_01_F_blk",
+											"bipod_01_F_mtp",
+											"bipod_01_F_snd",
+											"bipod_02_F_blk",
+											"bipod_02_F_hex",
+											"bipod_02_F_tan",
+											"bipod_03_F_blk",
+											"bipod_03_F_oli"
+										];
+
 	//Assault Class
 	DMS_assault_weps =					[							// Assault Rifles
 											"arifle_Katiba_GL_F",
@@ -109,7 +118,7 @@ DMS_DEBUG = false;
 											"arifle_Mk20_plain_F",
 											"arifle_Mk20_F"
 										];
-	DMS_assault_pistols =				[							// Pistols for Assault Class
+	DMS_assault_pistols =				[							// Pistols for Assault Class (Set to empty array if you don't want to give them any pistols)
 											"hgun_PDW2000_F",
 											"hgun_ACPC2_F",
 											"hgun_Rook40_F",
@@ -125,7 +134,9 @@ DMS_DEBUG = false;
 											"optic_MRCO",
 											"optic_DMS"
 										];
-	DMS_assault_scope_chance			= 0.75;						// Percentage chance that Assault class AI will get an optic on their weapons
+	DMS_assault_optic_chance			= 75;						// Percentage chance that an Assault Class AI will get an optic
+	DMS_assault_bipod_chance			= 25;						// Percentage chance that an Assault Class AI will get a bipod
+	DMS_assault_suppressor_chance		= 25;						// Percentage chance that an Assault Class AI will get a suppressor
 	DMS_assault_items					= ["ItemGPS"];
 	DMS_assault_helmets	=				[							// Helmets for Assault Class
 											"H_HelmetSpecB_paint1",
@@ -177,7 +188,7 @@ DMS_DEBUG = false;
 											"arifle_MX_SW_Black_F",
 											"MMG_01_hex_F"
 										];
-	DMS_MG_pistols =					[							// Pistols for MG Class
+	DMS_MG_pistols =					[							// Pistols for MG Class (Set to empty array if you don't want to give them any pistols)
 											"hgun_PDW2000_F",
 											"hgun_ACPC2_F",
 											"hgun_Rook40_F",
@@ -191,8 +202,10 @@ DMS_DEBUG = false;
 											"optic_Holosight",
 											"optic_MRCO"
 										];
-	DMS_MG_scope_chance					= 0.5;						// Percentage chance that MG Class AI will get an optic on their weapons
-	DMS_MG_items						= ["ItemWatch","ItemMap","ItemCompass","Binocular"];
+	DMS_MG_optic_chance					= 50;						// Percentage chance that an MG Class AI will get an optic
+	DMS_MG_bipod_chance					= 90;						// Percentage chance that an MG Class AI will get a bipod
+	DMS_MG_suppressor_chance			= 10;						// Percentage chance that an MG Class AI will get a suppressor
+	DMS_MG_items						= ["Binocular"];
 	DMS_MG_helmets =					[							// Helmets for MG Class
 											"H_PilotHelmetHeli_I",
 											"H_PilotHelmetHeli_O",
@@ -252,7 +265,7 @@ DMS_DEBUG = false;
 											"arifle_MXM_Black_F",
 											"srifle_DMR_02_F"
 										];
-	DMS_sniper_pistols =				[							// Pistols for Sniper Class
+	DMS_sniper_pistols =				[							// Pistols for Sniper Class (Set to empty array if you don't want to give them any pistols)
 											"hgun_PDW2000_F",
 											"hgun_ACPC2_F",
 											"hgun_Rook40_F",
@@ -265,7 +278,9 @@ DMS_DEBUG = false;
 											"optic_DMS",
 											"optic_LRPS"
 										];
-	DMS_sniper_scope_chance				= 1;						// Percentage chance that Sniper Class AI will get an optic on their weapons
+	DMS_sniper_optic_chance				= 100;						// Percentage chance that a Sniper Class AI will get an optic
+	DMS_sniper_bipod_chance				= 90;						// Percentage chance that a Sniper Class AI will get a bipod
+	DMS_sniper_suppressor_chance		= 15;						// Percentage chance that a Sniper Class AI will get a suppressor
 	DMS_sniper_items					= ["Rangefinder","ItemGPS"];
 	DMS_sniper_helmets =				[							// Helmets for Sniper Class
 											"H_HelmetSpecB_paint1",
@@ -308,16 +323,23 @@ DMS_DEBUG = false;
 											"B_Carryall_cbr",
 											"B_Bergen_blk"
 										];
+	
+	DMS_ai_SupportedClasses =			[							// Allowed AI classes. If you want to create your own class, make sure you define everything as I've defined above, and add it here
+											"assault",
+											"MG",
+											"sniper"
+										];
 
 	DMS_random_AI =						[							// The classes that a "random" AI can spawn as | DEFAULT: 60% Assault, 20% MG, 20% Sniper
 											"assault",
 											"assault",
 											"assault",
-											"machine",
+											"MG",
 											"sniper"
 										];
 
 	DMS_AI_wep_launchers				= ["Exile_Melee_Axe"];
+
 /* AI Settings */
 
 
@@ -386,12 +408,12 @@ DMS_DEBUG = false;
 										];
 	DMS_BoxItems						= DMS_BoxSurvivalSupplies+DMS_BoxBuildingSupplies+DMS_BoxOptics;	// Random "items" can spawn optics, survival supplies, or building supplies
 
-	DMS_RareLoot						= true;																// Potential chance to spawn rare loot in any crate.
+	DMS_RareLoot						= true;						// Potential chance to spawn rare loot in any crate.
 	DMS_RareLootList =					[							// List of rare loot to spawn
 											"Exile_Item_SafeKit",
 											"Exile_Item_CodeLock"
 										];
-	DMS_RareLootChance					= 0.1;						// Chance to spawn rare loot in any crate | Default: 10%
+	DMS_RareLootChance					= 10;						// Percentage Chance to spawn rare loot in any crate | Default: 10%
 
 	// Vehicles
 	DMS_ArmedVehicles =					[							// List of armed vehicles that can spawn

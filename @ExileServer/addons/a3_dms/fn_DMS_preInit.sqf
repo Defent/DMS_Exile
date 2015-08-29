@@ -5,7 +5,6 @@
 
 /* compiles
 DMS_CreateMarker 		= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\DMS_CreateMarker.sqf";
-DMS_spawnAI 			= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\DMS_spawnAI.sqf";
 spawn_group				= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\spawn_group.sqf";
 spawn_soldier			= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\spawn_soldier.sqf";
 spawn_static			= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\spawn_static.sqf";
@@ -32,6 +31,8 @@ DMS_isNearWater						= compileFinal preprocessFileLineNumbers "\x\addons\dms\scr
 DMS_RemoveMarkers					= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\RemoveMarkers.sqf";
 DMS_selectMagazine					= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\SelectMagazine.sqf";
 DMS_TargetsKilled					= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\TargetsKilled.sqf";
+DMS_SpawnAIGroup					= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\SpawnAIGroup.sqf";
+DMS_SpawnAISoldier					= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\SpawnAISoldier.sqf";
 
 //Load config
 #include "config.sqf";

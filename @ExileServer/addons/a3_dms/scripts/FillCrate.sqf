@@ -89,7 +89,7 @@ if ((_wepCount>0) && {count _weps>0}) then
 		_weapon = _weps call BIS_fnc_selectRandom;
 		_ammo = _weapon call DMS_selectMagazine;
 		_box addWeaponCargoGlobal _weapon;
-		_box addMagazineCargoGlobal [_ammo, (2 + floor(random 3))];
+		_box addMagazineCargoGlobal [_ammo, (4 + floor(random 3))];
 	};
 };
 
