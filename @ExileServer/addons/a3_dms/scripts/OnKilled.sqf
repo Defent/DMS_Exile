@@ -98,7 +98,7 @@ private ["_rockets","_launcher","_type","_mission","_unit","_player"];
 	};
 
 	if(DMS_RemoveNVG) then {
-		if (_unit hasWeapon "NVGoggles" && floor(random 100) < 20) then {
+		if (_unit hasWeapon "NVGoggles") then {
 			_unit removeWeapon "NVGoggles";
 		};
 	};
