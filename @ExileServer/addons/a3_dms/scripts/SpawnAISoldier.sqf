@@ -32,7 +32,7 @@ private ["_OK", "_useCustomGear", "_unarmed", "_type", "_customGear", "_unit", "
 
 _OK = params
 [
-	["_group",(createGroup DMS_banditSide),[grpNull]],
+	["_group",grpNull,[grpNull]],
 	["_pos",[0,0,0],[[]],[3]],
 	["_type","random",[""]],
 	["_difficulty","random",[""]],
