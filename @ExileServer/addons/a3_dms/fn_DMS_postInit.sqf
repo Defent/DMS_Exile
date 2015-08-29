@@ -20,8 +20,6 @@ if(DMS_StaticMission) then {
 };
 
 if (DMS_DynamicMission) then {
-	// Use FSM to spawn missions and check mission status instead
-	
-	//call compileFinal preprocessFileLineNumbers "\x\addons\dms\missions\mission_init.sqf";
-	//[1, DMS_MissionStatusCheck, [], true] call ExileServer_system_thread_addTask;
+	call compileFinal preprocessFileLineNumbers "\x\addons\dms\missions\mission_init.sqf";
+	//execFSM "\x\addons\dms\missions\missions.fsm";
 };

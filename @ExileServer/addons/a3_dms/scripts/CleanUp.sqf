@@ -41,7 +41,6 @@ private "_skippedObjects";
 
 _skippedObjects = [];
 
-
 {
     if ((typeName _x) isEqualTo "OBJECT") then {
         if !([_x,DMS_CleanUp_PlayerNearLimit] call ExileServer_util_position_isPlayerNearby) then {

@@ -15,7 +15,7 @@
 		_timeUntilClean
 	]
 
-	A single object can also be placed for (_this select 0)
+	A single object can also be used for (_this select 0)
 */
 if (DMS_CleanUpList isEqualTo []) exitWith {};		// Empty array, no objects to clean :)
 
