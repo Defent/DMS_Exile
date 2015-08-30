@@ -49,14 +49,14 @@ if (!_OK) then
 }
 else
 {
-	if ((_type isEqualTo "custom") && {((count _this)>5)}) then
+	if ((_type == "custom") && {((count _this)>5)}) then
 	{
 		_customGear = _this select 5;
 		_useCustomGear = true;
 	};
 };
 
-if(_difficulty isEqualTo "random") then
+if(_difficulty == "random") then
 {
 	_difficulty = DMS_ai_skill_random call BIS_fnc_selectRandom;
 };
@@ -85,8 +85,8 @@ if !(DMS_ai_default_items isEqualTo []) then
 
 call
 {
-	if (_type isEqualTo "random") exitWith  { _type = DMS_random_AI call BIS_fnc_selectRandom;};
-	if (_type isEqualTo "unarmed") exitWith { _type = "assault";_unarmed = true; };
+	if (_type == "random") exitWith  { _type = DMS_random_AI call BIS_fnc_selectRandom;};
+	if (_type == "unarmed") exitWith { _type = "assault";_unarmed = true; };
 };
 
 // Unit name

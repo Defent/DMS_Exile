@@ -24,10 +24,10 @@ if (DMS_DEBUG) then
 	diag_log format["DMS_DEBUG RemoveMarkers :: Calling DMS_RemoveMarkers with parameters %1.",_this];
 };
 
+deleteMarker _markerCircle;
 
 if (_status == "win") then
 {
-	deleteMarker _markerCircle;
 	if (!DMS_MissionMarkerWinDot) exitWith {
 		deleteMarker _markerDot;
 	};
@@ -41,7 +41,6 @@ if (_status == "win") then
 }
 else
 {
-	deleteMarker _markerCircle;
 	if (!DMS_MissionMarkerLoseDot) exitWith {
 		deleteMarker _markerDot;
 	};

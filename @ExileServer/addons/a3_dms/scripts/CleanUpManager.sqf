@@ -24,13 +24,16 @@ if (DMS_CleanUpList isEqualTo []) exitWith {};		// Empty array, no objects to cl
 	{
 		diag_log format ["DMS_DEBUG CleanUpManager :: Checking Cleaning Status for: %1",_x];
 	};
+
 	private ["_objs","_timeAddedToList","_timeUntilClean"];
+
 	_OK = params
 	[
 		["_objs",[objNull],[objNull,[]]],
 		["_timeAddedToList",diag_tickTime,[0]],
 		["_timeUntilClean",DMS_CompletedMissionCleanupTime,[0]]
 	];
+	
 	if (!_OK) then
 	{
 		diag_log format ["DMS ERROR :: Invalid parameters for DMS_CleanUpManager: %1 replaced with %2",_x,[_objs,_timeAddedToList,_timeUntilClean]];

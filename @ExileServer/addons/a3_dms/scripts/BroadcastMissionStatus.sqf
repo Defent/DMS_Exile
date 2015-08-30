@@ -16,7 +16,7 @@ if (DMS_DEBUG) then
 	diag_log format["DMS_DEBUG BroadcastMissionStatus :: Notification types: |%1| for broadcasting mission status: %2",DMS_PlayerNotificationTypes,_this];
 };
 
-if !((typeName _this) isEqualTo "STRING") then {
+if !((typeName _this) == "STRING") then {
 	if (DMS_DEBUG) then
 	{
 		diag_log format["DMS_DEBUG BroadcastMissionStatus :: Converting %1 to string...",_this];
@@ -30,7 +30,7 @@ if !((typeName _this) isEqualTo "STRING") then {
 	[
 		[_x, [_this]],
 		[_x, [_this,0,DMS_dynamicText_Size,DMS_dynamicText_Color]]
-	] select (_x isEqualTo "dynamicTextRequest");
+	] select (_x == "dynamicTextRequest");
 
 	_args call ExileServer_system_network_send_broadcast;
 	false;

@@ -10,7 +10,8 @@
 		[_completionTypeN,_completionArgsN]
 	] call DMS_MissionSuccessState;
 */
-if !((typeName _this) isEqualTo "ARRAY") exitWith
+
+if !((typeName _this) == "ARRAY") exitWith
 {
 	diag_log format ["DMS ERROR :: DMS_MissionSuccessState called with invalid parameter: %1",_this];
 };
@@ -48,12 +49,16 @@ _success = true;
 		{
 			_success = _completionArgs call DMS_TargetsKilled;
 		};
+		case "killPercent":
+		{
+			_success = _completionArgs call DMS_TargetsKilledPercent;//<---TODO
+		};
 		case "playerNear":
 		{
 			_success = _completionArgs call ExileServer_util_position_isPlayerNearby;
 		};
 	};
 	false;
-} count _completionTypes;
+} count _this;
 
 _success;

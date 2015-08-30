@@ -10,4 +10,6 @@ for "_i" from 0 to 359 step 45 do {
 		_result = true; 
 	};
 };
+
+
 _result

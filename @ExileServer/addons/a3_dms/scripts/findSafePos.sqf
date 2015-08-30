@@ -41,13 +41,13 @@ while{!_validspot} do {
 		
 		{
 			// Check for nearby spawn points
-			if (((markertype _x) isEqualTo "ExileSpawnZone") && {((getMarkerPos _x) distance2D _pos)<=DMS_SpawnZoneNearBlacklist}) exitWith
+			if (((markertype _x) == "ExileSpawnZone") && {((getMarkerPos _x) distance2D _pos)<=DMS_SpawnZoneNearBlacklist}) exitWith
 			{
 				throw ("a spawn zone");
 			};
 
 			// Check for nearby trader zones
-			if (((markertype _x) isEqualTo "ExileTraderZone") && {((getMarkerPos _x) distance2D _pos)<=DMS_TraderZoneNearBlacklist}) exitWith
+			if (((markertype _x) == "ExileTraderZone") && {((getMarkerPos _x) distance2D _pos)<=DMS_TraderZoneNearBlacklist}) exitWith
 			{
 				throw ("a trader zone");
 			};

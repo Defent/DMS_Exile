@@ -6,8 +6,8 @@
 	Each mission has its own index in "DMS_Mission_Arr".
 	Every index is a subarray with the values:
 	[
-		_position,
-		_completionInfo,
+		_pos,
+		_completionInfo,	//<--- More info in "DMS_AddMissionToMonitor"
 		[_timeStarted,_timeUntilFail],
 		[_AIUnit1,_AIUnit2,...,_AIUnitX],
 		[
@@ -16,15 +16,15 @@
 			[_crate_loot_values]
 		],
 		[_msgWIN,_msgLose],
-		_markers,
-		_missionSide
+		[_markerDot,_markerCircle],
+		_side
 	]
 */
 if (DMS_Mission_Arr isEqualTo []) exitWith 				// Empty array, no missions running
 {
 	if (DMS_DEBUG) then
 	{
-		//diag_log "DMS_DEBUG MissionStatusCheck :: DMS_Mission_Arr is empty!";
+		diag_log "DMS_DEBUG MissionStatusCheck :: DMS_Mission_Arr is empty!";
 	};
 };
 
@@ -37,7 +37,7 @@ _index = 0;
 		{
 			diag_log format ["DMS_DEBUG MissionStatusCheck :: Checking Mission Status (index %1): %2",_index,_x];
 		};
-		_position					= _x select 0;
+		_pos						= _x select 0;
 		_success					= (_x select 1) call DMS_MissionSuccessState;
 		_timeStarted				= _x select 2 select 0;
 		_timeUntilFail				= _x select 2 select 1;
@@ -52,13 +52,11 @@ _index = 0;
 
 		if (_success) exitWith
 		{
-			//Use FSM for cleanup instead
-			//[DMS_CompletedMissionCleanupTime,DMS_CleanUp,(_units+_buildings),false] call ExileServer_system_thread_addTask;
 			DMS_CleanUpList pushBack [_units+_building,diag_tickTime,DMS_CompletedMissionCleanupTime];
 
-			if (_missionSide isEqualTo "bandit") then
+			if (_missionSide == "bandit") then
 			{
-				DMS_RunningBMissionCount = DMS_RunningBMissionCount -1;
+				DMS_RunningBMissionCount = DMS_RunningBMissionCount - 1;
 			}
 			else
 			{
@@ -73,17 +71,17 @@ _index = 0;
 
 			if (DMS_DEBUG) then
 			{
-				diag_log format ["DMS_DEBUG MissionStatusCheck :: Mission Success at %1 with message %2.",_position,_msgWIN];
+				diag_log format ["DMS_DEBUG MissionStatusCheck :: Mission Success at %1 with message %2.",_pos,_msgWIN];
 			};
 		};
 
-		if (DMS_MissionTimeoutReset && {[_position,DMS_MissionTimeoutResetRange] call ExileServer_util_position_isPlayerNearby}) exitWith
+		if (DMS_MissionTimeoutReset && {[_pos,DMS_MissionTimeoutResetRange] call ExileServer_util_position_isPlayerNearby}) exitWith
 		{
 			_x set [2,[diag_tickTime,_timeUntilFail]];
 
 			if (DMS_DEBUG) then
 			{
-				diag_log format ["DMS_DEBUG MissionStatusCheck :: Mission Timeout Extended at %1 with timeout after %2 seconds. Position: %3",diag_tickTime,_timeUntilFail,_position];
+				diag_log format ["DMS_DEBUG MissionStatusCheck :: Mission Timeout Extended at %1 with timeout after %2 seconds. Position: %3",diag_tickTime,_timeUntilFail,_pos];
 			};
 		};
 
@@ -92,9 +90,9 @@ _index = 0;
 			//Nobody is nearby so just cleanup objects from here
 			(_units+_buildings+_loot) call DMS_CleanUp;
 
-			if (_missionSide isEqualTo "bandit") then
+			if (_missionSide == "bandit") then
 			{
-				DMS_RunningBMissionCount = DMS_RunningBMissionCount -1;
+				DMS_RunningBMissionCount = DMS_RunningBMissionCount - 1;
 			}
 			else
 			{
@@ -108,7 +106,7 @@ _index = 0;
 
 			if (DMS_DEBUG) then
 			{
-				diag_log format ["DMS_DEBUG MissionStatusCheck :: Mission Fail at %1 with message %2.",_position,_msgLose];
+				diag_log format ["DMS_DEBUG MissionStatusCheck :: Mission Fail at %1 with message %2.",_pos,_msgLose];
 			};
 		};
 	};

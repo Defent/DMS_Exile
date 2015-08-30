@@ -25,15 +25,15 @@ if (isNil "_this") exitWith
 
 private ["_box","_lootValues","_wepCount","_weps","_itemCount","_items","_backpackCount","_backpacks","_weapon","_ammo","_item","_backpack"];
 
-params
+_OK = params
 [
 	["_box",objNull,[objNull]],
 	["_lootValues",[0,0,0],[[]],[3]];
 ];
 
-if (isNull _box) exitWith
+if (!_OK || {isNull _box}) exitWith
 {
-	diag_log format ["DMS ERROR :: Calling DMS_FillCrate with null _box | _this: %1",_this];
+	diag_log format ["DMS ERROR :: Calling DMS_FillCrate with invalid parameters: %1",_this];
 };
 
 // Weapons

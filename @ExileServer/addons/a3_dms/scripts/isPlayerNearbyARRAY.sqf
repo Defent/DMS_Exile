@@ -18,9 +18,12 @@
 */
 
 private["_posArray","_radius","_result"];
+
+
 _posArray = _this select 0;
 _radius = _this select 1;
 _result = false;
+
 {
 	if (_result) exitWith {};
 	_plyr = _x;

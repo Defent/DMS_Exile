@@ -20,7 +20,7 @@ if (DMS_DEBUG) then
     diag_log ("DMS_DEBUG CleanUp :: CLEANING UP: "+str _this);
 };
 
-if !((typeName _this) isEqualTo "ARRAY") then
+if !((typeName _this) == "ARRAY") then
 {
     if (DMS_DEBUG) then
     {
@@ -59,7 +59,7 @@ _clean =
 
 
 {
-    if ((typeName _x) isEqualTo "OBJECT") then
+    if ((typeName _x) == "OBJECT") then
     {
         if (isNull _x) exitWith {};
 
@@ -78,7 +78,7 @@ _clean =
     }
     else
     {
-        if ((typeName _x) isEqualTo "GROUP") exitWith
+        if ((typeName _x) == "GROUP") exitWith
         {
             if (!isNull _x) then
             {
