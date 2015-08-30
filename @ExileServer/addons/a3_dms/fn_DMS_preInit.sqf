@@ -5,14 +5,10 @@
 
 /* compiles
 DMS_CreateMarker 		= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\DMS_CreateMarker.sqf";
-spawn_group				= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\spawn_group.sqf";
-spawn_soldier			= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\spawn_soldier.sqf";
 spawn_static			= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\spawn_static.sqf";
-group_waypoints			= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\group_waypoints.sqf";
 heli_para				= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\heli_para.sqf";
 heli_patrol				= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\heli_patrol.sqf";
 vehicle_patrol			= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\vehicle_patrol.sqf";
-bandit_behaviour		= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\bandit_behaviour.sqf";
 vehicle_monitor			= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\vehicle_monitor.sqf";
 */
 
@@ -32,7 +28,7 @@ DMS_selectMagazine					= compileFinal preprocessFileLineNumbers "\x\addons\dms\s
 DMS_TargetsKilled					= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\TargetsKilled.sqf";
 DMS_SpawnAIGroup					= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\SpawnAIGroup.sqf";
 DMS_SpawnAISoldier					= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\SpawnAISoldier.sqf";
-DMS_OnKilled						= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\OnKilled.sqf";//<--- TODO
+DMS_OnKilled						= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\OnKilled.sqf";
 DMS_SetGroupBehavior				= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\SetGroupBehavior.sqf";
 DMS_AddMissionToMonitor				= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\AddMissionToMonitor.sqf";
 
