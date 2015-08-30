@@ -14,6 +14,7 @@ DMS_DEBUG = false;
 	DMS_StaticMission					= false;					// Enable/disable static missions
 	DMS_TimeBetweenMissions				= [600,900];				// [Minimum,Maximum] time between missions (if mission limit is not reached) | DEFAULT: 10-15 mins
 	DMS_MissionTimeOut					= [900,1800]; 				// [Minimum,Maximum] time it will take for a mission to timeout | Default: 15-30 mins
+	DMS_AI_KillPercent					= 100;						// The percent amount of AI that need to be killed for "killPercent" mission requirement
 
 	DMS_MissionMarkerWinDot				= true;						// Keep the mission marker dot with a "win" message after mission is over
 	DMS_MissionMarkerLoseDot			= true;						// Keep the mission marker dot with a "lose" message after mission is over
@@ -41,7 +42,9 @@ DMS_DEBUG = false;
 	DMS_MinServerFPS					= 10; 						// Minimum server FPS for missions to start
 
 	//Mission notification settings
-	DMS_PlayerNotificationTypes			= ["standardHintRequest"];	// Notification types. Supported values are: ["advancedHintRequest","dynamicTextRequest","standardHintRequest","systemChatRequest"]
+	DMS_PlayerNotificationTypes =		[							// Notification types. Supported values are: ["advancedHintRequest","dynamicTextRequest","standardHintRequest","systemChatRequest"]
+											"standardHintRequest"
+										];
 	DMS_dynamicText_Size				= 0.55;						// Dynamic Text size for "dynamicTextRequest" notification type.
 	DMS_dynamicText_Color				= "#FFCC00";				// Dynamic Text color for "dynamicTextRequest" notification type.
 
@@ -140,7 +143,15 @@ DMS_DEBUG = false;
 	DMS_assault_optic_chance			= 75;						// Percentage chance that an Assault Class AI will get an optic
 	DMS_assault_bipod_chance			= 25;						// Percentage chance that an Assault Class AI will get a bipod
 	DMS_assault_suppressor_chance		= 25;						// Percentage chance that an Assault Class AI will get a suppressor
-	DMS_assault_items					= ["ItemGPS"];
+
+	DMS_assault_items =					[							// Items for Assault Class AI (Loot stuff that goes in uniform/vest/backpack)
+											"Exile_Item_InstaDoc",
+											"Exile_Item_BBQSandwich",
+											"Exile_Item_Energydrink"
+										];
+	DMS_assault_equipment =				[							// Equipment for Assault Class AI (stuff that goes in toolbelt slots)
+											"ItemGPS"
+										];
 	DMS_assault_helmets	=				[							// Helmets for Assault Class
 											"H_HelmetSpecB_paint1",
 											"H_HelmetIA_camo",
@@ -208,7 +219,16 @@ DMS_DEBUG = false;
 	DMS_MG_optic_chance					= 50;						// Percentage chance that an MG Class AI will get an optic
 	DMS_MG_bipod_chance					= 90;						// Percentage chance that an MG Class AI will get a bipod
 	DMS_MG_suppressor_chance			= 10;						// Percentage chance that an MG Class AI will get a suppressor
-	DMS_MG_items						= ["Binocular"];
+
+	DMS_MG_items =						[							// Items for MG Class AI (Loot stuff that goes in uniform/vest/backpack)
+											"Exile_Item_InstaDoc",
+											"Exile_Item_Catfood_Cooked",
+											"Exile_Item_PlasticBottleFreshWater",
+											"Exile_Item_CookingPot"
+										];
+	DMS_MG_equipment =					[							// Equipment for MG Class AI (stuff that goes in toolbelt slots)
+											"Binocular"
+										];
 	DMS_MG_helmets =					[							// Helmets for MG Class
 											"H_PilotHelmetHeli_I",
 											"H_PilotHelmetHeli_O",
@@ -284,7 +304,18 @@ DMS_DEBUG = false;
 	DMS_sniper_optic_chance				= 100;						// Percentage chance that a Sniper Class AI will get an optic
 	DMS_sniper_bipod_chance				= 90;						// Percentage chance that a Sniper Class AI will get a bipod
 	DMS_sniper_suppressor_chance		= 15;						// Percentage chance that a Sniper Class AI will get a suppressor
-	DMS_sniper_items					= ["Rangefinder","ItemGPS"];
+
+	DMS_sniper_items =					[							// Items for Sniper Class AI (Loot stuff that goes in uniform/vest/backpack)
+											"Exile_Item_InstaDoc",
+											"Exile_Item_Surstromming_Cooked",
+											"Exile_Item_PlasticBottleFreshWater",
+											"Exile_Item_PlasticBottleFreshWater",
+											"Exile_Item_Matches"
+										];
+	DMS_sniper_equipment =				[							// Equipment for Sniper Class AI (stuff that goes in toolbelt slots)
+											"Rangefinder",
+											"ItemGPS"
+										];
 	DMS_sniper_helmets =				[							// Helmets for Sniper Class
 											"H_HelmetSpecB_paint1",
 											"H_HelmetIA_camo",

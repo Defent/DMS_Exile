@@ -5,7 +5,7 @@
 	Initializes variables for DMS
 */
 
-diag_log "DMS :: Initializing";
+diag_log "DMS :: Initializing Mission Variables";
 
 // Initialize Variables
 DMS_Mission_Arr					= [];

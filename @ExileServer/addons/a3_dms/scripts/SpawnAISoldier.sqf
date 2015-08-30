@@ -99,8 +99,12 @@ if (!_useCustomGear) then
 		diag_log format ["DMS ERROR :: DMS_SpawnAISoldier called with unsupported _type: %1 | _this: %2",_type,_this];
 	};// No more idiot-proofing for the following configs
 
-	// Items
-	{_unit linkItem _x;false;} count (missionNamespace getVariable [format ["DMS_%1_items",_type],[]]);
+	// Equipment (Stuff that goes in the toolbelt slots)
+	{_unit linkItem _x;false;} count (missionNamespace getVariable [format ["DMS_%1_equipment",_type],[]]);
+
+	// Items (Loot stuff that goes in uniform/vest/backpack)
+	{_unit addItem _x;false;} count (missionNamespace getVariable [format ["DMS_%1_items",_type],[]]);
+
 
 	// Clothes
 	_unit addHeadgear 		((missionNamespace getVariable [format ["DMS_%1_helmets",_type],[]]) call BIS_fnc_selectRandom);

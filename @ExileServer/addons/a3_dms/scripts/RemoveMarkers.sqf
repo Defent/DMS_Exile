@@ -21,8 +21,9 @@ _status 		= _this select 1;
 
 if (DMS_DEBUG) then
 {
-	diag_log format["DMS_DEBUG RemoveMarkers :: Calling DMS_RemoveMarkers with parameters %1.",_this];
+	diag_log format ["DMS_DEBUG RemoveMarkers :: Calling DMS_RemoveMarkers with parameters %1.",_this];
 };
+
 
 deleteMarker _markerCircle;
 
@@ -36,7 +37,7 @@ if (_status == "win") then
 	[DMS_MissionMarkerWinDotTime, {deleteMarker _this;}, _markerDot, false] call ExileServer_system_thread_addTask;
 	if (DMS_DEBUG) then
 	{
-		diag_log format["DMS_DEBUG RemoveMarkers :: %1 Marker will be removed in %2 seconds!",DMS_MissionMarkerWinDotTime,_markerDot];
+		diag_log format ["DMS_DEBUG RemoveMarkers :: %1 Marker will be removed in %2 seconds!",_markerDot,DMS_MissionMarkerWinDotTime];
 	};
 }
 else
@@ -49,6 +50,6 @@ else
 	[DMS_MissionMarkerLoseDotTime, {deleteMarker _this;}, _markerDot, false] call ExileServer_system_thread_addTask;
 	if (DMS_DEBUG) then
 	{
-		diag_log format["DMS_DEBUG RemoveMarkers :: %1 Marker will be removed in %2 seconds!",DMS_MissionMarkerLoseDotTime,_markerDot];
+		diag_log format ["DMS_DEBUG RemoveMarkers :: %1 Marker will be removed in %2 seconds!",_markerDot,DMS_MissionMarkerLoseDotTime];
 	};
 };

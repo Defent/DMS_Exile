@@ -47,7 +47,7 @@
 	 "_completionInfo", "_timeOutInfo", "_inputUnits", "_missionObjs", "_messages", "_markers", "_side", "_timeStarted", "_timeUntilFail"
 */
 
-private ["_added", "_pos", "_OK", "_completionInfo", "_timeOutInfo", "_inputUnits", "_missionObjs", "_messages", "_markers", "_timeStarted", "_timeUntilFail", "_buildings", "_loot", "_crate_loot_values", "_msgWIN", "_msgLose", "_markerDot", "_markerCircle", "_side"];
+private ["_added", "_pos", "_OK", "_completionInfo", "_timeOutInfo", "_inputUnits", "_missionObjs", "_messages", "_markers", "_timeStarted", "_timeUntilFail", "_buildings", "_loot", "_crate_loot_values", "_msgWIN", "_msgLose", "_markerDot", "_markerCircle", "_side","_arr"];
 
 
 _added = false;
@@ -138,7 +138,7 @@ try
 		throw format["_markers |%1|",_markers];
 	};
 
-	DMS_Mission_Arr pushBack
+	_arr = 
 	[
 		_pos,
 		_completionInfo,
@@ -162,7 +162,13 @@ try
 		],
 		_side
 	];
+	DMS_Mission_Arr pushBack _arr;
 	_added = true;
+
+	if (DMS_DEBUG) then
+	{
+		diag_log format ["DMS_DEBUG AddMissionToMonitor :: Added |%1| to DMS_Mission_Arr!",_arr];
+	};
 }
 catch
 {
