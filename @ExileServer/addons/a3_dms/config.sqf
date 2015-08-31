@@ -15,7 +15,10 @@ DMS_DEBUG = false;
 	DMS_TimeBetweenMissions				= [600,900];				// [Minimum,Maximum] time between missions (if mission limit is not reached) | DEFAULT: 10-15 mins
 	DMS_MissionTimeOut					= [900,1800]; 				// [Minimum,Maximum] time it will take for a mission to timeout | Default: 15-30 mins
 
-	DMS_AI_KillPercent					= 100;						// The percent amount of AI that need to be killed for "killPercent" mission requirement
+	DMS_playerNearRadius				= 75;						// How close a player has to be to a mission in order to satisfy the "playerNear" mission requirement (can be customized per mission).
+
+	DMS_AI_KillPercent					= 100;						// The percent amount of AI that need to be killed for "killPercent" mission requirement (NOT IMPLEMENTED)
+
 	DMS_BanditMoneyGainOnKill			= 250;						// The amount of Poptabs gained for killing a bandit
 	DMS_BanditRepGainOnKill				= 100;						// The amount of Respect gained for killing a bandit
 
@@ -66,7 +69,7 @@ DMS_DEBUG = false;
 /* AI Settings */
 
 	DMS_banditSide						= EAST;						// The side (team) that AI Bandits will spawn on
-	DMS_clear_AI_body					= false;					// Clear AI body when they die
+	DMS_clear_AI_body					= false;					// Clear AI body as soon as they die
 	DMS_remove_roadkill					= false; 					// Remove gear from AI bodies that are roadkilled
 	DMS_remove_roadkill_chance			= 0;						// Percentage chance that roadkilled AI bodies will be deleted
 	DMS_RemoveNVG						= false;					// Remove NVGs from AI bodies
@@ -513,6 +516,6 @@ DMS_DEBUG = false;
 
 // Debug Overwrites
 if(DMS_DEBUG) then {
-	DMS_TimeBetweenMissions			= [60,60];
-	DMS_MissionTimeOut				= [300,300];
+	DMS_TimeBetweenMissions			= [30,60];
+	DMS_MissionTimeOut				= [240,300];
 };

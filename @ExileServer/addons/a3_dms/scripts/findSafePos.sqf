@@ -4,15 +4,19 @@
 
 	Usage:
 	[
-		_nearestObjectMinDistance,
-		_maxTerrainGradient
+		_nearestObjectMinDistance,	// (OPTIONAL) Number: Minimum distance from nearest object
+		_maxTerrainGradient			// (OPTIONAL) Number: Maximum terrain gradient (slope)
 	] call DMS_findSafePos;
 */
 
 
 private ["_nearestObjectMinDistance","_maxTerrainGradient","_safePosParams","_validspot","_i","_pos"];
 
-params [["_nearestObjectMinDistance",25,[0]],["_maxTerrainGradient",10,[0]]];
+params
+[
+	["_nearestObjectMinDistance",25,[0]],
+	["_maxTerrainGradient",10,[0]]
+];
 
 _safePosParams =
 [
