@@ -49,7 +49,8 @@ DMS_DEBUG = false;
 
 	//Mission notification settings
 	DMS_PlayerNotificationTypes =		[							// Notification types. Supported values are: ["dynamicTextRequest", "standardHintRequest", "systemChatRequest"]
-											"dynamicTextRequest",
+											//"dynamicTextRequest", <--- Currently won't work.
+											"standardHintRequest",
 											"systemChatRequest"
 										];
 	DMS_dynamicText_Size				= "0.55";					// Dynamic Text size for "dynamicTextRequest" notification type.
