@@ -14,7 +14,7 @@ if (DMS_RunningBMissionCount isEqualTo DMS_MaxBanditMissions) then
 	DMS_BMissionLastStart = _time;
 };
 
-if ((_time - DMS_BMissionLastStart >= DMS_TimeBetweenMissions) && {diag_fps >= DMS_MinServerFPS && {(count allPlayers) >= DMS_MinPlayerCount}}) then
+if ((_time - DMS_BMissionLastStart > DMS_BMissionDelay) && {diag_fps >= DMS_MinServerFPS && {(count allPlayers) >= DMS_MinPlayerCount}}) then
 {
 	private "_mission";
 
