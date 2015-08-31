@@ -128,12 +128,12 @@ if ((_backpackCount > 0) && {count _backpacks>0}) then
 };
 
 
-if(DMS_RareLoot && {count DMS_RareLoot>0}) then
+if(DMS_RareLoot && {count DMS_RareLootList>0}) then
 {
 	// (Maybe) Add rare loot
 	if(random 100 < DMS_RareLootChance) then
 	{
-		_item = DMS_RareLoot call BIS_fnc_selectRandom;
+		_item = DMS_RareLootList call BIS_fnc_selectRandom;
 		if ((typeName _item)=="STRING") then
 		{
 			_item = [_item,1];

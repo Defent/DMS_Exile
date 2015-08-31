@@ -16,7 +16,7 @@ _side = "bandit";
 
 
 // find position
-_pos = call DMS_findSafePos;
+_pos = [10,100] call DMS_findSafePos;
 
 
 // Set general mission difficulty
