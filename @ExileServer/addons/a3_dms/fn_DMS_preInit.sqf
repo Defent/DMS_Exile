@@ -4,7 +4,6 @@
 */
 
 /* compiles
-DMS_CreateMarker 		= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\DMS_CreateMarker.sqf";
 spawn_static			= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\spawn_static.sqf";
 heli_para				= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\heli_para.sqf";
 heli_patrol				= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\heli_patrol.sqf";
@@ -31,6 +30,7 @@ DMS_SpawnAISoldier					= compileFinal preprocessFileLineNumbers "\x\addons\dms\s
 DMS_OnKilled						= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\OnKilled.sqf";
 DMS_SetGroupBehavior				= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\SetGroupBehavior.sqf";
 DMS_AddMissionToMonitor				= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\AddMissionToMonitor.sqf";
+DMS_CreateMarker 					= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\CreateMarker.sqf";
 
 //Load config
 #include "config.sqf";
