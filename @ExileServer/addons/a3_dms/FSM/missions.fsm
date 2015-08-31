@@ -1,4 +1,4 @@
-/*%FSM<COMPILE "C:\Program Files (x86)\Bohemia Interactive\Tools\FSM Editor Personal Edition\scriptedFSM.cfg, dms_main">*/
+/*%FSM<COMPILE "scriptedFSM.cfg, missions">*/
 /*%FSM<HEAD>*/
 /*
 item0[] = {"",7,210,821.012817,321.000000,829.012817,329.000000,0.000000,""};
@@ -6,17 +6,17 @@ item1[] = {"INIT",0,250,516.749146,-106.908607,606.749146,-56.908607,0.000000,"I
 item2[] = {"true",8,218,775.000000,25.000000,875.000000,75.000000,0.000000,"true"};
 item3[] = {"Waiting",2,250,775.000000,100.000000,875.000000,150.000000,0.000000,"Waiting"};
 item4[] = {"",7,210,596.000000,321.000000,604.000000,329.000000,0.000000,""};
-item5[] = {"___min_loop_1",4,218,625.012756,175.000000,725.012756,225.000000,1.000000,"1 min loop"};
+item5[] = {"__5_sec_loop_",4,218,625.012756,175.000000,725.012756,225.000000,1.000000,"15 sec loop" \n ""};
 item6[] = {"Check_Mission_Running",2,250,624.311890,250.000000,724.311890,300.000000,0.000000,"Check Mission" \n "Running" \n "Status"};
 item7[] = {"",7,210,521.000000,321.000000,529.000000,329.000000,0.000000,""};
-item8[] = {"___min_loop",4,218,777.816040,173.598328,867.816040,223.598328,2.000000,"1 min loop"};
+item8[] = {"___min_loop_1",4,218,777.816040,173.598328,867.816040,223.598328,2.000000,"5 min loop"};
 item9[] = {"",7,210,521.000000,46.000000,529.000000,54.000000,0.000000,""};
 item10[] = {"",7,210,670.311951,321.000000,678.311951,329.000000,0.000000,""};
 item11[] = {"Mission_Cleanup",2,250,774.311890,250.000000,874.311890,300.000000,0.000000,"Mission Cleanup"};
 item12[] = {"INITIALIZE",4,218,655.694763,-107.164581,745.694763,-57.164581,0.000000,"INITIALIZE"};
 item13[] = {"PREPARE",2,250,780.348511,-108.565193,870.348511,-58.565193,0.000000,"PREPARE"};
-item14[] = {"___Min_loop",4,218,914.967773,173.130890,1004.967773,223.130890,3.000000,"1 Min loop"};
-item15[] = {"Select_Mission",2,4346,915.668457,249.519714,1005.668518,299.519714,0.000000,"Select Mission"};
+item14[] = {"___min_loop",4,4314,914.967773,173.130890,1004.967773,223.130890,3.000000,"1 min loop"};
+item15[] = {"Select_Mission",2,250,915.668457,249.519714,1005.668518,299.519714,0.000000,"Select Mission"};
 item16[] = {"",7,210,956.270142,321.086121,964.270142,329.086121,0.000000,""};
 link0[] = {0,10};
 link1[] = {1,12};
@@ -37,185 +37,199 @@ link15[] = {13,2};
 link16[] = {14,15};
 link17[] = {15,16};
 link18[] = {16,0};
-globals[] = {0.000000,0,0,0,0,640,480,2,451,6316128,1,326.983643,1179.875732,440.842163,-196.198654,1217,1041,1};
-window[] = {2,-1,-1,-1,-1,784,50,1344,50,3,1235};
+globals[] = {0.000000,0,0,0,0,640,480,2,451,6316128,1,326.983643,1179.875732,440.842163,-196.198654,1217,909,1};
+window[] = {2,-1,-1,-32000,-32000,873,-170,1124,139,3,1235};
 *//*%FSM</HEAD>*/
 class FSM
 {
-  fsmName = "dms_main";
-  class States
-  {
-    /*%FSM<STATE "INIT">*/
-    class INIT
-    {
-      name = "INIT";
-      init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
-      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
-      class Links
-      {
-        /*%FSM<LINK "INITIALIZE">*/
-        class INITIALIZE
+        fsmName = "missions";
+        class States
         {
-          priority = 0.000000;
-          to="PREPARE";
-          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-          condition=/*%FSM<CONDITION""">*/"!isnil ""bis_fnc_init"""/*%FSM</CONDITION""">*/;
-          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                /*%FSM<STATE "INIT">*/
+                class INIT
+                {
+                        name = "INIT";
+                        itemno = 1;
+                        init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "INITIALIZE">*/
+                                class INITIALIZE
+                                {
+                                        itemno = 12;
+                                        priority = 0.000000;
+                                        to="PREPARE";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"!isnil ""bis_fnc_init"""/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Waiting">*/
+                class Waiting
+                {
+                        name = "Waiting";
+                        itemno = 3;
+                        init = /*%FSM<STATEINIT""">*/"// Waiting for next task to proceed with."/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "___min_loop">*/
+                                class ___min_loop
+                                {
+                                        itemno = 14;
+                                        priority = 3.000000;
+                                        to="Select_Mission";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"((diag_tickTime - _selectMission) > 60)" \n
+                                         ""/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "___min_loop_1">*/
+                                class ___min_loop_1
+                                {
+                                        itemno = 8;
+                                        priority = 2.000000;
+                                        to="Mission_Cleanup";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"((diag_tickTime - _cleanupTime) > 300)"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/"_missionsMonitor = time;"/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "__5_sec_loop_">*/
+                                class __5_sec_loop_
+                                {
+                                        itemno = 5;
+                                        priority = 1.000000;
+                                        to="Check_Mission_Running";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"((diag_tickTime - _missionsMonitor) > 15)"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Check_Mission_Running">*/
+                class Check_Mission_Running
+                {
+                        name = "Check_Mission_Running";
+                        itemno = 6;
+                        init = /*%FSM<STATEINIT""">*/"if(DMS_DEBUG) then {" \n
+                         "   diag_log format [""DMS_DEBUG FSM CHECK :: calling DMS_MissionsMonitor""];" \n
+                         "};" \n
+                         "" \n
+                         "_missionsMonitor = diag_tickTime;" \n
+                         "call DMS_MissionsMonitor;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "true">*/
+                                class true
+                                {
+                                        itemno = 2;
+                                        priority = 0.000000;
+                                        to="Waiting";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Mission_Cleanup">*/
+                class Mission_Cleanup
+                {
+                        name = "Mission_Cleanup";
+                        itemno = 11;
+                        init = /*%FSM<STATEINIT""">*/"if(DMS_DEBUG) then {" \n
+                         "   diag_log format [""DMS_DEBUG FSM CHECK :: calling DMS_CleanUpManager""];" \n
+                         "};" \n
+                         "" \n
+                         "_cleanupTime = diag_tickTime;" \n
+                         "call DMS_CleanUpManager;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "true">*/
+                                class true
+                                {
+                                        itemno = 2;
+                                        priority = 0.000000;
+                                        to="Waiting";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "PREPARE">*/
+                class PREPARE
+                {
+                        name = "PREPARE";
+                        itemno = 13;
+                        init = /*%FSM<STATEINIT""">*/"private [""_missionsMonitor"",""_cleanupTime"",""_selectMission""];" \n
+                         "diag_log (""DMS :: Initializing FSM mission script"");" \n
+                         "" \n
+                         "_missionsMonitor = diag_tickTime;" \n
+                         "_cleanupTime = diag_tickTime;" \n
+                         "_selectMission = diag_tickTime;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "true">*/
+                                class true
+                                {
+                                        itemno = 2;
+                                        priority = 0.000000;
+                                        to="Waiting";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Select_Mission">*/
+                class Select_Mission
+                {
+                        name = "Select_Mission";
+                        itemno = 15;
+                        init = /*%FSM<STATEINIT""">*/"if(DMS_DEBUG) then {" \n
+                         "   diag_log format [""DMS_DEBUG FSM CHECK :: calling DMS_selectMission""];" \n
+                         "};" \n
+                         "" \n
+                         "_selectMission = diag_tickTime;" \n
+                         "call DMS_selectMission;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "true">*/
+                                class true
+                                {
+                                        itemno = 2;
+                                        priority = 0.000000;
+                                        to="Waiting";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
         };
-        /*%FSM</LINK>*/
-      };
-    };
-    /*%FSM</STATE>*/
-    /*%FSM<STATE "Waiting">*/
-    class Waiting
-    {
-      name = "Waiting";
-      init = /*%FSM<STATEINIT""">*/"// Waiting for next task to proceed with."/*%FSM</STATEINIT""">*/;
-      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
-      class Links
-      {
-        /*%FSM<LINK "___Min_loop">*/
-        class ___Min_loop
+        initState="INIT";
+        finalStates[] =
         {
-          priority = 3.000000;
-          to="Select_Mission";
-          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-          condition=/*%FSM<CONDITION""">*/"((diag_tickTime - _selectMission) > 60)" \n
-           ""/*%FSM</CONDITION""">*/;
-          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
         };
-        /*%FSM</LINK>*/
-        /*%FSM<LINK "___min_loop">*/
-        class ___min_loop
-        {
-          priority = 2.000000;
-          to="Mission_Cleanup";
-          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-          condition=/*%FSM<CONDITION""">*/"((diag_tickTime - _cleanupTime) > 60)"/*%FSM</CONDITION""">*/;
-          action=/*%FSM<ACTION""">*/"_cleanupTime = time;"/*%FSM</ACTION""">*/;
-        };
-        /*%FSM</LINK>*/
-        /*%FSM<LINK "___min_loop_1">*/
-        class ___min_loop_1
-        {
-          priority = 1.000000;
-          to="Check_Mission_Running";
-          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-          condition=/*%FSM<CONDITION""">*/"((diag_tickTime - _missionsMonitor) > 60)"/*%FSM</CONDITION""">*/;
-          action=/*%FSM<ACTION""">*/"_missionsMonitor = time;"/*%FSM</ACTION""">*/;
-        };
-        /*%FSM</LINK>*/
-      };
-    };
-    /*%FSM</STATE>*/
-    /*%FSM<STATE "Check_Mission_Running">*/
-    class Check_Mission_Running
-    {
-      name = "Check_Mission_Running";
-      init = /*%FSM<STATEINIT""">*/"if(DMS_DEBUG) then {" \n
-       "   diag_log format [""DMS_DEBUG FSM CHECK :: calling DMS_MissionsMonitor""];" \n
-       "};" \n
-       "" \n
-       "_missionsMonitor = diag_tickTime;" \n
-       "call DMS_MissionsMonitor;"/*%FSM</STATEINIT""">*/;
-      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
-      class Links
-      {
-        /*%FSM<LINK "true">*/
-        class true
-        {
-          priority = 0.000000;
-          to="Waiting";
-          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-          condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
-          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
-        };
-        /*%FSM</LINK>*/
-      };
-    };
-    /*%FSM</STATE>*/
-    /*%FSM<STATE "Mission_Cleanup">*/
-    class Mission_Cleanup
-    {
-      name = "Mission_Cleanup";
-      init = /*%FSM<STATEINIT""">*/"if(DMS_DEBUG) then {" \n
-       "   diag_log format [""DMS_DEBUG FSM CHECK :: calling DMS_CleanUpManager""];" \n
-       "};" \n
-       "" \n
-       "_cleanupTime = diag_tickTime;" \n
-       "call DMS_CleanUpManager;"/*%FSM</STATEINIT""">*/;
-      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
-      class Links
-      {
-        /*%FSM<LINK "true">*/
-        class true
-        {
-          priority = 0.000000;
-          to="Waiting";
-          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-          condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
-          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
-        };
-        /*%FSM</LINK>*/
-      };
-    };
-    /*%FSM</STATE>*/
-    /*%FSM<STATE "PREPARE">*/
-    class PREPARE
-    {
-      name = "PREPARE";
-      init = /*%FSM<STATEINIT""">*/"private [""_missionsMonitor"",""_cleanupTime"",""_selectMission""];" \n
-       "diag_log (""DMS :: Initializing FSM mission script"");" \n
-       "" \n
-       "_missionsMonitor = diag_tickTime;" \n
-       "_cleanupTime = diag_tickTime;" \n
-       "_selectMission = diag_tickTime;"/*%FSM</STATEINIT""">*/;
-      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
-      class Links
-      {
-        /*%FSM<LINK "true">*/
-        class true
-        {
-          priority = 0.000000;
-          to="Waiting";
-          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-          condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
-          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
-        };
-        /*%FSM</LINK>*/
-      };
-    };
-    /*%FSM</STATE>*/
-    /*%FSM<STATE "Select_Mission">*/
-    class Select_Mission
-    {
-      name = "Select_Mission";
-      init = /*%FSM<STATEINIT""">*/"if(DMS_DEBUG) then {" \n
-       "   diag_log format [""DMS_DEBUG FSM CHECK :: calling DMS_selectMission""];" \n
-       "};" \n
-       "" \n
-       "_selectMission = diag_tickTime;" \n
-       "call DMS_selectMission;"/*%FSM</STATEINIT""">*/;
-      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
-      class Links
-      {
-        /*%FSM<LINK "true">*/
-        class true
-        {
-          priority = 0.000000;
-          to="Waiting";
-          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-          condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
-          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
-        };
-        /*%FSM</LINK>*/
-      };
-    };
-    /*%FSM</STATE>*/
-  };
-  initState="INIT";
-  finalStates[] =
-  {
-  };
 };
 /*%FSM</COMPILE>*/
