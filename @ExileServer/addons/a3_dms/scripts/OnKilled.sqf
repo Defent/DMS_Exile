@@ -16,6 +16,12 @@
 
 
 private ["_unit", "_player", "_playerObj", "_side", "_type", "_launcher", "_rockets", "_money", "_respect", "_moneyGain", "_repGain"];
+
+
+if (DMS_DEBUG) then
+{
+	diag_log format ["DMS_DEBUG OnKilled :: Logging AI death with parameters: %1",_this];
+};
 	
 _unit 		= _this select 0 select 0;
 _player 	= _this select 0 select 1;
