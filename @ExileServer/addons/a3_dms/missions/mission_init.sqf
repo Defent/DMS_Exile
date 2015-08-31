@@ -18,7 +18,7 @@ DMS_BMissionDelay = (DMS_TimeBetweenMissions select 0) + random((DMS_TimeBetween
 
 if (DMS_DEBUG) then
 {
-	diag_log format ["DMS_DEBUG mission_init :: Random time between missions is initialized at %1s | DMS_BMissionLastStart: %2",DMS_BMissionDelay,DMS_BMissionLastStart];
+	diag_log format ["DMS_DEBUG mission_init :: Random time between missions is initially set to %1s | DMS_BMissionLastStart: %2",DMS_BMissionDelay,DMS_BMissionLastStart];
 };
 
 // Set mission frequencies from config

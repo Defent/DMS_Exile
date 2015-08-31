@@ -82,7 +82,7 @@ _clean =
         {
             if (!isNull _x) then
             {
-                // Group cleanup should only be called when mission times out, so no need to check for nearby players
+                // Group cleanup should only be called when it has to be deleted regardless, so no need to check for nearby players
                 {
                     _x call _clean;
                     false;

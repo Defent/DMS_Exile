@@ -35,7 +35,7 @@
 		[
 			[_cleanupObj1,_cleanupObj2,...,_cleanupObjX],
 			[_crate,_vehicle1,_vehicle2,...,_vehicleX],
-			[_crate_loot_values]
+			_crate_loot_values
 		],
 		[_msgWIN,_msgLose],
 		[_markerDot,_markerCircle],

@@ -31,6 +31,7 @@ DMS_OnKilled						= compileFinal preprocessFileLineNumbers "\x\addons\dms\script
 DMS_SetGroupBehavior				= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\SetGroupBehavior.sqf";
 DMS_AddMissionToMonitor				= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\AddMissionToMonitor.sqf";
 DMS_CreateMarker 					= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\CreateMarker.sqf";
+DMS_FindSuppressor					= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\FindSuppressor.sqf";//<--- TODO Improve
 
 //Load config
 #include "config.sqf";
