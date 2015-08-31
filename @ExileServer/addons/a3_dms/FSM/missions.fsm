@@ -7,40 +7,38 @@ item2[] = {"true",8,218,775.000000,25.000000,875.000000,75.000000,0.000000,"true
 item3[] = {"Waiting",2,250,775.000000,100.000000,875.000000,150.000000,0.000000,"Waiting"};
 item4[] = {"",7,210,596.000000,321.000000,604.000000,329.000000,0.000000,""};
 item5[] = {"___min_loop_2",4,218,625.012756,175.000000,725.012756,225.000000,1.000000,"1 min loop"};
-item6[] = {"Check_Mission_Running",2,250,624.311890,250.000000,724.311890,300.000000,0.000000,"Check Mission" \n "Running" \n "Status"};
+item6[] = {"Check_Mission_Running",2,4346,624.311890,250.000000,724.311890,300.000000,0.000000,"Check Mission" \n "Running" \n "Status"};
 item7[] = {"",7,210,521.000000,321.000000,529.000000,329.000000,0.000000,""};
 item8[] = {"___min_loop_1",4,218,777.816040,173.598328,867.816040,223.598328,2.000000,"1 min loop"};
 item9[] = {"",7,210,521.000000,46.000000,529.000000,54.000000,0.000000,""};
 item10[] = {"",7,210,670.311951,321.000000,678.311951,329.000000,0.000000,""};
 item11[] = {"Mission_Cleanup",2,250,774.311890,250.000000,874.311890,300.000000,0.000000,"Mission Cleanup"};
-item12[] = {"",7,210,669.887329,234.306717,677.887329,242.306702,0.000000,""};
-item13[] = {"INITIALIZE",4,218,655.694763,-107.164581,745.694763,-57.164581,0.000000,"INITIALIZE"};
-item14[] = {"PREPARE",2,250,780.348511,-108.565193,870.348511,-58.565193,0.000000,"PREPARE"};
-item15[] = {"___Min_loop",4,218,914.967773,173.130890,1004.967773,223.130890,3.000000,"1 Min loop"};
-item16[] = {"Select_Mission",2,250,915.668457,249.519714,1005.668518,299.519714,0.000000,"Select Mission"};
-item17[] = {"",7,210,956.270142,321.086121,964.270142,329.086121,0.000000,""};
+item12[] = {"INITIALIZE",4,218,655.694763,-107.164581,745.694763,-57.164581,0.000000,"INITIALIZE"};
+item13[] = {"PREPARE",2,250,780.348511,-108.565193,870.348511,-58.565193,0.000000,"PREPARE"};
+item14[] = {"___Min_loop",4,218,914.967773,173.130890,1004.967773,223.130890,3.000000,"1 Min loop"};
+item15[] = {"Select_Mission",2,250,915.668457,249.519714,1005.668518,299.519714,0.000000,"Select Mission"};
+item16[] = {"",7,210,956.270142,321.086121,964.270142,329.086121,0.000000,""};
 link0[] = {0,10};
-link1[] = {1,13};
+link1[] = {1,12};
 link2[] = {2,3};
 link3[] = {3,5};
 link4[] = {3,8};
-link5[] = {3,15};
+link5[] = {3,14};
 link6[] = {4,7};
-link7[] = {5,12};
+link7[] = {5,6};
 link8[] = {6,10};
 link9[] = {7,9};
 link10[] = {8,11};
 link11[] = {9,2};
 link12[] = {10,4};
 link13[] = {11,0};
-link14[] = {12,6};
-link15[] = {13,14};
-link16[] = {14,2};
+link14[] = {12,13};
+link15[] = {13,2};
+link16[] = {14,15};
 link17[] = {15,16};
-link18[] = {16,17};
-link19[] = {17,0};
+link18[] = {16,0};
 globals[] = {0.000000,0,0,0,0,640,480,2,451,6316128,1,326.983643,1179.875732,440.842163,-196.198654,1217,909,1};
-window[] = {2,-1,-1,-1,-1,903,208,1502,169,3,1235};
+window[] = {2,-1,-1,-1,-1,838,104,1398,104,3,1235};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -59,7 +57,7 @@ class FSM
                                 /*%FSM<LINK "INITIALIZE">*/
                                 class INITIALIZE
                                 {
-                                        itemno = 13;
+                                        itemno = 12;
                                         priority = 0.000000;
                                         to="PREPARE";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
@@ -82,11 +80,12 @@ class FSM
                                 /*%FSM<LINK "___Min_loop">*/
                                 class ___Min_loop
                                 {
-                                        itemno = 15;
+                                        itemno = 14;
                                         priority = 3.000000;
                                         to="Select_Mission";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"((diag_tickTime - _selectMission) > 60)"/*%FSM</CONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"((diag_tickTime - _selectMission) > 60)" \n
+                                         ""/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
@@ -120,7 +119,12 @@ class FSM
                 {
                         name = "Check_Mission_Running";
                         itemno = 6;
-                        init = /*%FSM<STATEINIT""">*/"call DMS_MissionsMonitor;"/*%FSM</STATEINIT""">*/;
+                        init = /*%FSM<STATEINIT""">*/"call DMS_MissionsMonitor;" \n
+                         "" \n
+                         "" \n
+                         "if(DMS_DEBUG) then {" \n
+                         "   diag_log format [""DMS_DEBUG FSM CHECK :: calling missionsmonitor""];" \n
+                         "};"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
@@ -143,7 +147,11 @@ class FSM
                 {
                         name = "Mission_Cleanup";
                         itemno = 11;
-                        init = /*%FSM<STATEINIT""">*/"call DMS_CleanUpManager;"/*%FSM</STATEINIT""">*/;
+                        init = /*%FSM<STATEINIT""">*/"call DMS_CleanUpManager;" \n
+                         "" \n
+                         "if(DMS_DEBUG) then {" \n
+                         "   diag_log format [""DMS_DEBUG FSM CHECK :: calling mission cleanup""];" \n
+                         "};"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
@@ -165,7 +173,7 @@ class FSM
                 class PREPARE
                 {
                         name = "PREPARE";
-                        itemno = 14;
+                        itemno = 13;
                         init = /*%FSM<STATEINIT""">*/"private [""_missionsMonitor"",""_cleanupTime"",""_selectMission""];" \n
                          "diag_log (""DMS :: Initializing FSM mission script"");" \n
                          "" \n
@@ -193,8 +201,12 @@ class FSM
                 class Select_Mission
                 {
                         name = "Select_Mission";
-                        itemno = 16;
-                        init = /*%FSM<STATEINIT""">*/"call DMS_selectMission;"/*%FSM</STATEINIT""">*/;
+                        itemno = 15;
+                        init = /*%FSM<STATEINIT""">*/"call DMS_selectMission;" \n
+                         "" \n
+                         "if(DMS_DEBUG) then {" \n
+                         "   diag_log format [""DMS_DEBUG FSM CHECK :: calling mission select""];" \n
+                         "};"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
