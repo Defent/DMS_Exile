@@ -41,8 +41,8 @@ DMS_DEBUG = false;
 	DMS_MissionNearBlacklist			= 4000;						// Missions won't spawn in a position this many meters close to another mission
 	DMS_WaterNearBlacklist				= 750;						// Missions won't spawn in a position this many meters close to water
 
-	DMS_SpawnBoxSmoke					= true;						// Spawn a smoke grenade on mission box upon misson completion
-	DMS_SpawnBoxIRGrenade				= true;						// Spawn an IR grenade on mission box upon misson completion
+	DMS_SpawnBoxSmoke					= true;						// Spawn a smoke grenade on mission box upon misson completion during daytime
+	DMS_SpawnBoxIRGrenade				= true;						// Spawn an IR grenade on mission box upon misson completion during nighttime
 	
 	DMS_MinPlayerCount					= 0; 						// Minimum number of players until mission start
 	DMS_MinServerFPS					= 10; 						// Minimum server FPS for missions to start

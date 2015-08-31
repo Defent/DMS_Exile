@@ -28,7 +28,7 @@ _group =
 [
 	_pos,					// Position of AI
 	_AICount,				// Number of AI
-	"random",				// "random","hardcore","difficult","moderate", or "easy"
+	"difficult",			// "random","hardcore","difficult","moderate", or "easy"
 	"random", 				// "random","assault","MG","sniper" or "unarmed" OR [_type,_launcher]
 	_side 					// "bandit","hero", etc.
 ] call DMS_SpawnAIGroup;
@@ -71,7 +71,7 @@ _msgLOSE = format["The mercenaries are no longer at %1!",mapGridPosition _pos];
 
 
 // Define mission name (for map marker and logging)
-_missionName = "Mercenary Group3";
+_missionName = "Mercenary Group";
 
 // Create Markers
 _markers =

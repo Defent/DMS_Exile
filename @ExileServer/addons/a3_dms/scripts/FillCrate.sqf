@@ -23,15 +23,15 @@ if (isNil "_this") exitWith
 };
 
 
-private ["_box","_lootValues","_wepCount","_weps","_itemCount","_items","_backpackCount","_backpacks","_weapon","_ammo","_item","_backpack"];
+private ["_crate","_lootValues","_wepCount","_weps","_itemCount","_items","_backpackCount","_backpacks","_weapon","_ammo","_item","_backpack"];
 
 _OK = params
 [
-	["_box",objNull,[objNull]],
+	["_crate",objNull,[objNull]],
 	["_lootValues",[0,0,0],[[]],[3]]
 ];
 
-if (!_OK || {isNull _box}) exitWith
+if (!_OK || {isNull _crate}) exitWith
 {
 	diag_log format ["DMS ERROR :: Calling DMS_FillCrate with invalid parameters: %1",_this];
 };
@@ -77,7 +77,7 @@ else
 
 if(DMS_DEBUG) then
 {
-	diag_log format["DMS_DEBUG FillCrate :: Filling %4 with %1 guns, %2 items and %3 backpacks",_wepCount,_itemCount,_backpackCount,_box];
+	diag_log format["DMS_DEBUG FillCrate :: Filling %4 with %1 guns, %2 items and %3 backpacks",_wepCount,_itemCount,_backpackCount,_crate];
 };
 
 
@@ -92,8 +92,8 @@ if ((_wepCount>0) && {count _weps>0}) then
 		{
 			_weapon = [_weapon,1];
 		};
-		_box addWeaponCargoGlobal _weapon;
-		_box addItemCargoGlobal [_ammo, (4 + floor(random 3))];
+		_crate addWeaponCargoGlobal _weapon;
+		_crate addItemCargoGlobal [_ammo, (4 + floor(random 3))];
 	};
 };
 
@@ -108,7 +108,7 @@ if ((_itemCount > 0) && {count _items>0}) then
 		{
 			_item = [_item,1];
 		};
-		_box addItemCargoGlobal _item;
+		_crate addItemCargoGlobal _item;
 	};
 };
 
@@ -123,7 +123,7 @@ if ((_backpackCount > 0) && {count _backpacks>0}) then
 		{
 			_backpack = [_backpack,1];
 		};
-		_box addBackpackCargoGlobal _backpack;
+		_crate addBackpackCargoGlobal _backpack;
 	};
 };
 
@@ -138,6 +138,19 @@ if(DMS_RareLoot && {count DMS_RareLootList>0}) then
 		{
 			_item = [_item,1];
 		};
-		_box addItemCargoGlobal _item;
+		_crate addItemCargoGlobal _item;
 	};
+};
+
+
+if(DMS_SpawnBoxSmoke && {sunOrMoon == 1}) then {
+	_marker = "SmokeShellPurple" createVehicle getPosATL _crate;
+	_marker setPosATL (getPosATL _crate);
+	_marker attachTo [_crate,[0,0,0]];
+};
+
+if (DMS_SpawnBoxIRGrenade && {sunOrMoon != 1}) then {
+	_marker = "B_IR_Grenade" createVehicle getPosATL _crate;
+	_marker setPosATL (getPosATL _crate);
+	_marker attachTo [_crate, [0,0,0]];
 };
