@@ -14,11 +14,6 @@
 
 if ((typeName _this) in ["GROUP","OBJECT"]) then
 {
-	if (DMS_DEBUG) then
-	{
-		diag_log format ["DMS_DEBUG TargetsKilled :: Converting %1 into ARRAY",_this];
-	};
-
 	_this = [_this];
 };
 

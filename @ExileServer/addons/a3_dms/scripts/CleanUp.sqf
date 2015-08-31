@@ -98,6 +98,14 @@ _clean =
                 };
             };
         };
+        if ((typeName _x) == "ARRAY") exitWith
+        {
+            if (DMS_DEBUG) then
+            {
+                diag_log format ["DMS_DEBUG CleanUp :: Doing recursive call for ARRAY: %1",_x];
+            };
+            _x call DMS_CleanUp;
+        };
         diag_log format ["DMS ERROR :: Attempted to call DMS_CleanUp on non- group or object %1 from array %2",_x,_this];
     };
 

@@ -88,6 +88,10 @@ if ((_wepCount>0) && {count _weps>0}) then
 	{
 		_weapon = _weps call BIS_fnc_selectRandom;
 		_ammo = _weapon call DMS_selectMagazine;
+		if ((typeName _weapon)=="STRING") then
+		{
+			_weapon = [_weapon,1];
+		};
 		_box addWeaponCargoGlobal _weapon;
 		_box addItemCargoGlobal [_ammo, (4 + floor(random 3))];
 	};
@@ -100,6 +104,10 @@ if ((_itemCount > 0) && {count _items>0}) then
 	for "_i" from 1 to _itemCount do
 	{
 		_item = _items call BIS_fnc_selectRandom;
+		if ((typeName _item)=="STRING") then
+		{
+			_item = [_item,1];
+		};
 		_box addItemCargoGlobal _item;
 	};
 };
@@ -111,6 +119,10 @@ if ((_backpackCount > 0) && {count _backpacks>0}) then
 	for "_i" from 1 to _backpackCount do
 	{
 		_backpack = _backpacks call BIS_fnc_selectRandom;
+		if ((typeName _backpack)=="STRING") then
+		{
+			_backpack = [_backpack,1];
+		};
 		_box addBackpackCargoGlobal _backpack;
 	};
 };
@@ -122,6 +134,10 @@ if(DMS_RareLoot && {count DMS_RareLoot>0}) then
 	if(random 100 < DMS_RareLootChance) then
 	{
 		_item = DMS_RareLoot call BIS_fnc_selectRandom;
+		if ((typeName _item)=="STRING") then
+		{
+			_item = [_item,1];
+		};
 		_box addItemCargoGlobal _item;
 	};
 };

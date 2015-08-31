@@ -34,7 +34,7 @@ _success = true;
 	_OK = _x params
 	[
 		["_completionType", "", [""] ],
-		["_completionArgs", [], [[]] ]
+		["_completionArgs", [], [[],grpNull] ]
 	];
 
 	if (!_OK) exitWith

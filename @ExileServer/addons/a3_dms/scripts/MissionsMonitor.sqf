@@ -22,10 +22,12 @@
 */
 if (DMS_Mission_Arr isEqualTo []) exitWith 				// Empty array, no missions running
 {
+	/* Removed because RPT spam
 	if (DMS_DEBUG) then
 	{
 		diag_log "DMS_DEBUG MissionStatusCheck :: DMS_Mission_Arr is empty!";
 	};
+	*/
 };
 
 
@@ -52,7 +54,7 @@ _index = 0;
 
 		if (_success) exitWith
 		{
-			DMS_CleanUpList pushBack [_units+_building,diag_tickTime,DMS_CompletedMissionCleanupTime];
+			DMS_CleanUpList pushBack [_units+_buildings,diag_tickTime,DMS_CompletedMissionCleanupTime];
 
 			if (_missionSide == "bandit") then
 			{

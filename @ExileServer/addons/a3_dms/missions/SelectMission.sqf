@@ -28,7 +28,7 @@ if ((_time - DMS_BMissionLastStart > DMS_BMissionDelay) && {diag_fps >= DMS_MinS
 
 	if (DMS_DEBUG) then
 	{
-		diag_log format ["DMS_DEBUG SelectMission :: Spawning mission: %1 | DMS_BMissionDelay set to %2",_mission,DMS_TimeBetweenMissions];
+		diag_log format ["DMS_DEBUG SelectMission :: Spawning mission: %1 | DMS_BMissionDelay set to %2",_mission,DMS_BMissionDelay];
 	};
 
 	call compile preprocessFileLineNumbers (format ["\x\addons\DMS\missions\%1.sqf",_mission]);
