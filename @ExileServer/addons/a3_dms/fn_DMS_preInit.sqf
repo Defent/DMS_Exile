@@ -35,4 +35,4 @@ DMS_FindSuppressor					= compileFinal preprocessFileLineNumbers "\x\addons\dms\s
 DMS_SpawnCrate						= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\SpawnCrate.sqf";
 
 //Load config
-#include "config.sqf";
+call compileFinal preprocessFileLineNumbers "\x\addons\dms\config.sqf";
