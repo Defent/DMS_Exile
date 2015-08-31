@@ -24,7 +24,13 @@ _ammoName	= getText  (configFile >> "cfgWeapons" >> _weapon >> "displayName");
 
 switch (_ammoName) do {
 
-	case ((_ammoName find "6.5") > -1): {if (_ammoName find "LMG_Mk200" > -1) then {_result = "muzzle_snds_H";} else {_result = "muzzle_snds_H_MG";};};	
+	case ((_ammoName find "6.5") > -1): {
+		if (_ammoName find "LMG_Mk200" > -1) then {
+				_result = "muzzle_snds_H_MG";
+		   } else {
+		   		_result = "muzzle_snds_H";
+		   };
+		};	
 
 	case ((_ammoName find "5.56") > -1): {_result = "muzzle_snds_M";};	
 
