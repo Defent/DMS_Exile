@@ -121,14 +121,14 @@ if (!_useCustomGear) then
 
 	if (!_unarmed) then
 	{
-		_weapon = (missionNamespace getVariable [format ["DMS_%1_weps",_type],[]) call BIS_fnc_selectRandom;
+		_weapon = (missionNamespace getVariable [format ["DMS_%1_weps",_type],[]]) call BIS_fnc_selectRandom;
 		[_unit, _weapon, 4 + floor(random 3)] call BIS_fnc_addWeapon;
 		_unit selectWeapon _weapon;
 		
 		
 		if((random 100) <= (missionNamespace getVariable [format["DMS_%1_optic_chance",_type],0])) then
 		{
-			_unit addPrimaryWeaponItem ((missionNamespace getVariable [format ["DMS_%1_optics",_type],[]) call BIS_fnc_selectRandom);
+			_unit addPrimaryWeaponItem ((missionNamespace getVariable [format ["DMS_%1_optics",_type],[]]) call BIS_fnc_selectRandom);
 		};
 		
 		if (_nighttime && {(random 100) <= DMS_ai_nighttime_accessory_chance}) then

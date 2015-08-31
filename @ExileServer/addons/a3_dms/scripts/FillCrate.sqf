@@ -28,7 +28,7 @@ private ["_box","_lootValues","_wepCount","_weps","_itemCount","_items","_backpa
 _OK = params
 [
 	["_box",objNull,[objNull]],
-	["_lootValues",[0,0,0],[[]],[3]];
+	["_lootValues",[0,0,0],[[]],[3]]
 ];
 
 if (!_OK || {isNull _box}) exitWith
