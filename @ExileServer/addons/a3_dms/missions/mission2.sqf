@@ -22,7 +22,7 @@ _difficulty = "easy";
 
 // Create AI
 // TODO: Spawn AI only when players are nearby
-_AICount = 6 + (round (random 2));
+_AICount = 4 + (round (random 2));
 
 _group =
 [
@@ -71,7 +71,7 @@ _msgLOSE = format["The mercenaries are no longer at %1!",mapGridPosition _pos];
 
 
 // Define mission name (for map marker and logging)
-_missionName = "Mercenary Group2";
+_missionName = "Mercenary Group";
 
 // Create Markers
 _markers =
