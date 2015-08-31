@@ -10,7 +10,7 @@ DMS_DEBUG = false;
 
 /* Mission System Settings */
 	DMS_DynamicMission					= true;						// Enable/disable dynamic mission system
-	DMS_MaxBanditMissions				= 1;						// Maximum number of Bandit Missions
+	DMS_MaxBanditMissions				= 3;						// Maximum number of Bandit Missions
 	DMS_StaticMission					= false;					// Enable/disable static missions
 	DMS_TimeBetweenMissions				= [600,900];				// [Minimum,Maximum] time between missions (if mission limit is not reached) | DEFAULT: 10-15 mins
 	DMS_MissionTimeOut					= [900,1800]; 				// [Minimum,Maximum] time it will take for a mission to timeout | Default: 15-30 mins
@@ -132,7 +132,6 @@ DMS_DEBUG = false;
 											"arifle_Mk20_F"
 										];
 	DMS_assault_pistols =				[							// Pistols for Assault Class (Set to empty array if you don't want to give them any pistols)
-											"hgun_PDW2000_F",
 											"hgun_ACPC2_F",
 											"hgun_Rook40_F",
 											"hgun_P07_F",
@@ -210,7 +209,6 @@ DMS_DEBUG = false;
 											"MMG_01_hex_F"
 										];
 	DMS_MG_pistols =					[							// Pistols for MG Class (Set to empty array if you don't want to give them any pistols)
-											"hgun_PDW2000_F",
 											"hgun_ACPC2_F",
 											"hgun_Rook40_F",
 											"hgun_P07_F",
@@ -296,7 +294,6 @@ DMS_DEBUG = false;
 											"srifle_DMR_02_F"
 										];
 	DMS_sniper_pistols =				[							// Pistols for Sniper Class (Set to empty array if you don't want to give them any pistols)
-											"hgun_PDW2000_F",
 											"hgun_ACPC2_F",
 											"hgun_Rook40_F",
 											"hgun_P07_F",
