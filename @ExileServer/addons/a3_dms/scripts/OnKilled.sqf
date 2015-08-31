@@ -80,6 +80,14 @@ if(DMS_RemoveNVG) then
 	_unit unlinkItem "NVGoggles";
 };
 
+// credit: https://github.com/SMVampire/VEMF/
+if (((count (units group _unit)) > 1) && {(leader group _unit) == _unit}) then
+{
+	_grpUnits = units group _unit;
+	_grpUnits = _grpUnits - [_unit];
+	(group _unit) selectLeader (_grpUnits call BIS_fnc_selectRandom);
+};
+
 
 
 if ((!isNull _playerObj) && {(getPlayerUID _playerObj) != ""}) then
