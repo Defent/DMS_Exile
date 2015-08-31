@@ -98,10 +98,9 @@ if ((!isNull _playerObj) && {(getPlayerUID _playerObj) != ""}) then
 			_money = _money + _moneyGain;
 			_playerObj setVariable ["ExileMoney",_money];
 
-			// Send updated money value to client
-			ExileClientPlayerMoney = _money;
-			(owner _playerObj) publicVariableClient "ExileClientPlayerMoney";
-			ExileClientPlayerMoney = nil;
+			// Send notification and update client's money stats
+			// Somebody done fucked up so you don't see the sender for the money sending ;)
+			[_playerObj, "moneyReceivedRequest", [str _money, "AI KILL"]] call ExileServer_system_network_send_to;
 		};
 
 		if (_repGain>0) then
