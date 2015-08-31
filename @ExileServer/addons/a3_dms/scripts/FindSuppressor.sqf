@@ -40,7 +40,7 @@ switch (_ammoName) do {
 
 	case ((_ammoName find "9 mm") > -1): {_result = "muzzle_snds_L";};	
 
-	case ((_ammoName find ".388") > -1): {_result = _rnd338 call BIS_fnc_selectRandom;};
+	case ((_ammoName find ".338") > -1): {_result = _rnd338 call BIS_fnc_selectRandom;};
 
 	case ((_ammoName find "9.3 mm") > -1): {_result = _rnd93 call BIS_fnc_selectRandom;};
 
