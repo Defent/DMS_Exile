@@ -17,7 +17,7 @@ _pos = call DMS_findSafePos;
 
 
 // Set general mission difficulty
-_difficulty = "moderate";
+_difficulty = "hardcore";
 
 
 // Create AI
