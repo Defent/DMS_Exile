@@ -111,7 +111,7 @@ if ((!isNull _playerObj) && {(getPlayerUID _playerObj) != ""}) then
 			_playerObj setVariable ["ExileScore",_respect];
 
 			// Send frag message
-			[_playerObj, "showFragRequest", [[["AI Kill",_repGain]]]] call ExileServer_system_network_send_to;
+			[_playerObj, "showFragRequest", [ [["AI KILL",_repGain]] ] ] call ExileServer_system_network_send_to;
 
 			// Send updated respect value to client
 			ExileClientPlayerScore = _respect;
