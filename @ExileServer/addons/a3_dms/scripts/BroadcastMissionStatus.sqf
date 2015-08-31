@@ -16,13 +16,11 @@ if (DMS_DEBUG) then
 	diag_log format["DMS_DEBUG BroadcastMissionStatus :: Notification types: |%1| for broadcasting mission status: %2",DMS_PlayerNotificationTypes,_this];
 };
 
-if !((typeName _this) == "STRING") then {
-	if (DMS_DEBUG) then
-	{
-		diag_log format["DMS_DEBUG BroadcastMissionStatus :: Converting %1 to string...",_this];
-	};
+if ((typeName _this) != "STRING") then
+{
 	_this = str _this;
 };
+
 {
 	private "_args";
 

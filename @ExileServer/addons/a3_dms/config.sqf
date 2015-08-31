@@ -48,10 +48,11 @@ DMS_DEBUG = false;
 	DMS_MinServerFPS					= 10; 						// Minimum server FPS for missions to start
 
 	//Mission notification settings
-	DMS_PlayerNotificationTypes =		[							// Notification types. Supported values are: ["advancedHintRequest","dynamicTextRequest","standardHintRequest","systemChatRequest"]
-											"standardHintRequest"
+	DMS_PlayerNotificationTypes =		[							// Notification types. Supported values are: ["dynamicTextRequest", "standardHintRequest", "systemChatRequest"]
+											"dynamicTextRequest",
+											"systemChatRequest"
 										];
-	DMS_dynamicText_Size				= 0.55;						// Dynamic Text size for "dynamicTextRequest" notification type.
+	DMS_dynamicText_Size				= "0.55";					// Dynamic Text size for "dynamicTextRequest" notification type.
 	DMS_dynamicText_Color				= "#FFCC00";				// Dynamic Text color for "dynamicTextRequest" notification type.
 
 	DMS_MissionTypes =					[							//	List of missions with spawn chances. If they add up to 100%, they represent the percentage chance each one will spawn
