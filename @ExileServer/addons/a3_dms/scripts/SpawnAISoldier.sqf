@@ -270,7 +270,7 @@ else
 
 
 // Soldier killed event handler
-_unit addMPEventHandler ["MPKilled",{[_this, _side, "soldier"] call DMS_OnKilled;}];
+_unit addMPEventHandler ["MPKilled",'[_this, '+str _side+', "soldier"] call DMS_OnKilled;'];
 
 _unit enableAI "TARGET";
 _unit enableAI "AUTOTARGET";

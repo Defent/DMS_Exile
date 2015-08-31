@@ -35,7 +35,7 @@ _group =
 
 
 // Create Crate
-_crate = createVehicle ["Box_NATO_Wps_F",_pos,[], 0, "CAN_COLLIDE"];
+_crate = ["Box_NATO_Wps_F",_pos] call DMS_SpawnCrate;
 
 // Set crate loot values
 _crate_loot_values =
