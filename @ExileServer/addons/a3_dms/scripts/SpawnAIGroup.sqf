@@ -103,7 +103,7 @@ if(_pos_z == 0) then
 };
 
 
-/*
+
 if (DMS_ai_offload_to_client) then
 {
 	_client = (allPlayers call BIS_fnc_selectRandom);
@@ -113,7 +113,7 @@ if (DMS_ai_offload_to_client) then
 		diag_log format["DMS_DEBUG SpawnAIGroup :: Swapping group ownership of %1 to %2",_group,_client];
 	};
 };
-*/
+
 
 diag_log format ["DMS_SpawnAIGroup :: Spawned %1 AI at %2.",_count,_pos];
 

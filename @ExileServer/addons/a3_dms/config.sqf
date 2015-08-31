@@ -75,7 +75,7 @@ DMS_DEBUG = false;
 	DMS_remove_roadkill_chance			= 0;						// Percentage chance that roadkilled AI bodies will be deleted
 	DMS_RemoveNVG						= false;					// Remove NVGs from AI bodies
 
-	DMS_ai_offload_to_client			= true;						// Offload spawned AI groups to random clients. Helps with server performance.
+	DMS_ai_offload_to_client			= false;					// Offload spawned AI groups to random clients. Helps with server performance.
 
 	DMS_ai_share_info					= true;						// Share info about killer
 	DMS_ai_share_info_distance			= 300;						// The distance killer's info will be shared to other AI
