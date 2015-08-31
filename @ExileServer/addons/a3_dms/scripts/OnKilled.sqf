@@ -108,7 +108,7 @@ if ((!isNull _playerObj) && {(getPlayerUID _playerObj) != ""}) then
 
 			// Send notification and update client's money stats
 			// Somebody done fucked up so you don't see the sender for the money sending ;)
-			[_playerObj, "moneyReceivedRequest", [str _money, "AI KILL"]] call ExileServer_system_network_send_to;
+			[_playerObj, "moneyReceivedRequest", [str _money, "killing AI"]] call ExileServer_system_network_send_to;
 		};
 
 		if (_repGain>0) then
