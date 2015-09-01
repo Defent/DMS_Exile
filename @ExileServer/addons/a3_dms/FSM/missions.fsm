@@ -18,8 +18,8 @@ item13[] = {"PREPARE",2,250,763.528931,-107.864372,853.528931,-57.864372,0.00000
 item14[] = {"___min_loop",4,218,838.578918,171.729218,928.578918,221.729218,3.000000,"1 min loop"};
 item15[] = {"Select_Mission",2,250,839.279602,248.118042,929.279663,298.118042,0.000000,"Select Mission"};
 item16[] = {"",7,210,880.582092,366.639160,888.582092,374.639160,0.000000,""};
-item17[] = {"___min_loop_2",4,218,975.237671,175.934219,1065.237793,225.934219,0.000000,"5 min loop"};
-item18[] = {"Set_AI_Ownership",2,4346,975.237732,250.921417,1065.237305,300.921417,0.000000,"Set AI Ownership"};
+item17[] = {"___min_loop_2",4,4314,975.237671,175.934219,1065.237793,225.934219,0.000000,"5 min loop"};
+item18[] = {"Set_AI_Ownership",2,250,975.237732,250.921417,1065.237305,300.921417,0.000000,"Set AI Ownership"};
 item19[] = {"",7,210,1016.540222,366.725281,1024.540283,374.725281,0.000000,""};
 link0[] = {0,10};
 link1[] = {1,12};
@@ -44,8 +44,8 @@ link19[] = {16,0};
 link20[] = {17,18};
 link21[] = {18,19};
 link22[] = {19,16};
-globals[] = {0.000000,0,0,0,0,640,480,2,454,6316128,1,70.838631,1581.788208,823.258911,-305.297394,1217,949,1};
-window[] = {2,-1,-1,-1,-1,924,1957,3251,190,3,1235};
+globals[] = {0.000000,0,0,0,0,640,480,2,454,6316128,1,70.838631,1581.788208,823.258911,-305.297394,1217,909,1};
+window[] = {2,-1,-1,-1,-1,890,156,1450,156,3,1235};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -125,7 +125,7 @@ class FSM
                                         priority = 0.000000;
                                         to="Set_AI_Ownership";
                                         precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-                                        condition=/*%FSM<CONDITION""">*/"((diag_tickTime - _cleanupTime) > 300)"/*%FSM</CONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"((diag_tickTime - _aiLocality) > 300)"/*%FSM</CONDITION""">*/;
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
@@ -199,7 +199,7 @@ class FSM
                          "_missionsMonitor = diag_tickTime;" \n
                          "_cleanupTime = diag_tickTime;" \n
                          "_selectMission = diag_tickTime;" \n
-                         "_groupCheck = diag_tickTime;"/*%FSM</STATEINIT""">*/;
+                         "_aiLocality = diag_tickTime;"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
@@ -254,8 +254,8 @@ class FSM
                          "   diag_log format [""DMS_DEBUG FSM CHECK :: calling DMS_SetAILocality""];" \n
                          "};" \n
                          "" \n
-                         "_selectMission = diag_tickTime;" \n
-                         "[_group,_pos] call DMS_SetAILocality;"/*%FSM</STATEINIT""">*/;
+                         "_aiLocality = diag_tickTime;" \n
+                         "call DMS_AILocalityManager;"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
