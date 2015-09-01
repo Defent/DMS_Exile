@@ -1,5 +1,8 @@
 /*
 	Spawn a non-saved vehicle in Exile
+
+    _exampleVeh = ['Exile_Chopper_Hummingbird_Green',_pos] call DMS_SpawnNonPersistentVehicle;
+
 	Created by Zupa
 */
 
