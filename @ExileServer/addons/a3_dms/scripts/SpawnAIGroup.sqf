@@ -80,16 +80,12 @@ for "_i" from 1 to _count do {
 // An AI will definitely spawn with a launcher if you define type
 if ((!isNil "_launcher") || {DMS_ai_use_launchers && {(random 100) <= DMS_ai_use_launchers_chance}}) then
 {
-	/*
-	if (!isNil "_launcher") then
+	if (isNil "_launcher") then
 	{
 		_launcher = "AT";
 	};
 
 	_launcher = ((missionNamespace getVariable [format ["DMS_AI_wep_launchers_%1",_launcher],["launch_NLAW_F"]]) call BIS_fnc_selectRandom);
-	*/
-
-	_launcher = DMS_AI_wep_launchers_AT call BIS_fnc_selectRandom;
 
 	_unit addBackpack "B_Carryall_mcamo";
 
