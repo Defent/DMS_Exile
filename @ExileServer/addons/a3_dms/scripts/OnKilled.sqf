@@ -51,7 +51,7 @@ else
 		_playerObj = driver _player;
 	};
 
-	if (DMS_clear_AI_body || {DMS_remove_roadkill && {(random 100) <= DMS_remove_roadkill_chance}}) then
+	if ((DMS_clear_AI_body && {(random 100) <= DMS_clear_AI_body_chance}) || {DMS_remove_roadkill && {(random 100) <= DMS_remove_roadkill_chance}}) then
 	{
 		removeAllWeapons 				_unit;
 		removeAllAssignedItems 			_unit;
