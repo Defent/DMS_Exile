@@ -39,7 +39,6 @@ _group =
 
 // Create Crate
 _crate = ["Box_NATO_Wps_F",_pos] call DMS_SpawnCrate;
-uiSleep 3;
 _crate2 = ["Box_NATO_Wps_F",_pos] call DMS_SpawnCrate;
 
 // Set crate loot values
