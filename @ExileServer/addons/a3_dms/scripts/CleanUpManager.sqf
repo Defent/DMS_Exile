@@ -27,9 +27,9 @@ if (DMS_CleanUpList isEqualTo []) exitWith {};		// Empty array, no objects to cl
 
 	private ["_objs","_timeAddedToList","_timeUntilClean"];
 
-	_OK = params
+	_OK = _x params
 	[
-		["_objs",[objNull],[objNull,[]]],
+		["_objs",[objNull],[objNull,[],grpNull]],
 		["_timeAddedToList",diag_tickTime,[0]],
 		["_timeUntilClean",DMS_CompletedMissionCleanupTime,[0]]
 	];
