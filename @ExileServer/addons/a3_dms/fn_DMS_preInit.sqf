@@ -34,6 +34,7 @@ DMS_CreateMarker 					= compileFinal preprocessFileLineNumbers "\x\addons\dms\sc
 DMS_FindSuppressor					= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\FindSuppressor.sqf";
 DMS_SpawnCrate						= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\SpawnCrate.sqf";
 DMS_SetAILocality					= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\SetAILocality.sqf";
+DMS_SpawnNonPersistentVehicle		= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\SpawnNonPersistentVehicle.sqf";
 
 //Load config
 call compileFinal preprocessFileLineNumbers "\x\addons\dms\config.sqf";
