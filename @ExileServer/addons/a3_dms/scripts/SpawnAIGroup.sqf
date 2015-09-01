@@ -116,7 +116,7 @@ if (DMS_ai_offload_to_client) then
 	ExileServerOwnershipSwapQueue pushBack [_group,_client];
 	*/
 
-//	[_group,_pos] call DMS_SetAILocality;
+	[_group,_pos] call DMS_SetAILocality;
 
 	if(DMS_DEBUG) then
 	{
