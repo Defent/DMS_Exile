@@ -14,7 +14,7 @@ _result 	= "";
 _weapon 	= _this;
 
 // Zafir accepts no suppressors :(
-if (_weapon=="LMG_Zafir_F") exitWith {""};
+if ((_weapon find "Zafir")>-1) exitWith {""};
 
 _rnd338 = ["muzzle_snds_338_black","muzzle_snds_338_green","muzzle_snds_338_sand"];
 _rnd93 = ["muzzle_snds_93mmg","muzzle_snds_93mmg_tan"];
