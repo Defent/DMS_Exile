@@ -1,5 +1,5 @@
 /*
-	A lot of these configs are influenced from WAI :P
+	A lot of these configs are influenced by WAI :P
 	https://github.com/nerdalertdk/WICKED-AI
 
 	Created by eraser1
@@ -76,7 +76,7 @@ DMS_DEBUG = false;
 	DMS_remove_roadkill_chance			= 0;						// Percentage chance that roadkilled AI bodies will be deleted
 	DMS_RemoveNVG						= false;					// Remove NVGs from AI bodies
 
-	DMS_ai_offload_to_client			= false;					// Offload spawned AI groups to random clients. Helps with server performance.
+	DMS_ai_offload_to_client			= true;						// Offload spawned AI groups to random clients. Helps with server performance.
 
 	DMS_ai_share_info					= true;						// Share info about killer
 	DMS_ai_share_info_distance			= 300;						// The distance killer's info will be shared to other AI
@@ -381,7 +381,7 @@ DMS_DEBUG = false;
 	DMS_ai_use_launchers				= true;						// Enable/disable spawning an AI in a group with a launcher
 	DMS_ai_use_launchers_chance			= 50;						// Percentage chance to actually spawn the launcher (per-group)
 	DMS_AI_launcher_ammo_count			= 2;						// How many rockets an AI will get with its launcher
-	DMS_ai_remove_launchers				= false;					// Remove rocket launchers on AI death
+	DMS_ai_remove_launchers				= true;					// Remove rocket launchers on AI death
 
 	DMS_AI_wep_launchers_AT =			[							// AT Launchers
 											"launch_NLAW_F",

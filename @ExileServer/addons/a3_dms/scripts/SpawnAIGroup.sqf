@@ -9,7 +9,7 @@
 		_count,					// Number of AI
 		_difficulty,			// "random","hardcore","difficult","moderate", or "easy"
 		_type 					// "random","assault","MG","sniper" or "unarmed" OR [_type,_launcher]
-		_side 					// "bandit","hero", etc.
+		_side 					// Only "bandit" is supported atm
 	] call DMS_SpawnAIGroup;
 
 	Returns AI Group
@@ -77,9 +77,12 @@ for "_i" from 1 to _count do {
 	_unit = [_group,[_pos_x,_pos_y,_pos_z],_type,_difficulty,_side] call DMS_SpawnAISoldier;
 };
 
-
-if (DMS_ai_use_launchers && {(!isNil "_launcher") && {(random 100) <= DMS_ai_use_launchers_chance}}) then
 {
+	if (!isNil "_launcher") then
+	{
+		_launcher = "AT";
+	};
+
 	_launcher = ((missionNamespace getVariable [format ["DMS_AI_wep_launchers_%1",_launcher],["launch_NLAW_F"]]) call BIS_fnc_selectRandom);
 
 	_unit addBackpack "B_Carryall_mcamo";
