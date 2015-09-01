@@ -1,44 +1,51 @@
 /*%FSM<COMPILE "scriptedFSM.cfg, missions">*/
 /*%FSM<HEAD>*/
 /*
-item0[] = {"",7,210,821.012817,321.000000,829.012817,329.000000,0.000000,""};
-item1[] = {"INIT",0,250,516.749146,-106.908607,606.749146,-56.908607,0.000000,"INIT"};
-item2[] = {"true",8,218,775.000000,25.000000,875.000000,75.000000,0.000000,"true"};
-item3[] = {"Waiting",2,250,775.000000,100.000000,875.000000,150.000000,0.000000,"Waiting"};
-item4[] = {"",7,210,596.000000,321.000000,604.000000,329.000000,0.000000,""};
-item5[] = {"__5_sec_loop_",4,218,625.012756,175.000000,725.012756,225.000000,1.000000,"15 sec loop" \n ""};
-item6[] = {"Check_Mission_Running",2,250,624.311890,250.000000,724.311890,300.000000,0.000000,"Check Mission" \n "Running" \n "Status"};
-item7[] = {"",7,210,521.000000,321.000000,529.000000,329.000000,0.000000,""};
-item8[] = {"___min_loop_1",4,218,777.816040,173.598328,867.816040,223.598328,2.000000,"5 min loop"};
-item9[] = {"",7,210,521.000000,46.000000,529.000000,54.000000,0.000000,""};
-item10[] = {"",7,210,670.311951,321.000000,678.311951,329.000000,0.000000,""};
-item11[] = {"Mission_Cleanup",2,250,774.311890,250.000000,874.311890,300.000000,0.000000,"Mission Cleanup"};
-item12[] = {"INITIALIZE",4,218,655.694763,-107.164581,745.694763,-57.164581,0.000000,"INITIALIZE"};
-item13[] = {"PREPARE",2,250,780.348511,-108.565193,870.348511,-58.565193,0.000000,"PREPARE"};
-item14[] = {"___min_loop",4,4314,914.967773,173.130890,1004.967773,223.130890,3.000000,"1 min loop"};
-item15[] = {"Select_Mission",2,250,915.668457,249.519714,1005.668518,299.519714,0.000000,"Select Mission"};
-item16[] = {"",7,210,956.270142,321.086121,964.270142,329.086121,0.000000,""};
+item0[] = {"",7,210,743.923157,366.553040,751.923157,374.553040,0.000000,""};
+item1[] = {"INIT",0,250,499.929565,-106.207787,589.929565,-56.207787,0.000000,"INIT"};
+item2[] = {"true",8,218,758.881348,3.975540,858.881348,53.975540,0.000000,"true"};
+item3[] = {"Waiting",2,250,758.881226,84.582077,858.881226,134.582092,0.000000,"Waiting"};
+item4[] = {"",7,210,518.910339,366.553040,526.910339,374.553040,0.000000,""};
+item5[] = {"__5_sec_loop_",4,218,547.923096,174.999939,647.923096,224.999939,1.000000,"15 sec loop" \n ""};
+item6[] = {"Check_Mission_Running",2,250,547.923035,248.598328,647.923035,298.598328,0.000000,"Check Mission" \n "Running" \n "Status"};
+item7[] = {"",7,210,518.897522,321.700806,526.897522,329.700806,0.000000,""};
+item8[] = {"___min_loop_1",4,218,702.828857,170.094177,792.828857,220.094177,2.000000,"5 min loop"};
+item9[] = {"",7,210,518.897522,24.975555,526.897522,32.975555,0.000000,""};
+item10[] = {"",7,210,593.923096,366.553040,601.923096,374.553040,0.000000,""};
+item11[] = {"Mission_Cleanup",2,250,697.923035,248.598328,797.923035,298.598328,0.000000,"Mission Cleanup"};
+item12[] = {"INITIALIZE",4,218,638.875183,-106.463760,728.875183,-56.463760,0.000000,"INITIALIZE"};
+item13[] = {"PREPARE",2,250,763.528931,-107.864372,853.528931,-57.864372,0.000000,"PREPARE"};
+item14[] = {"___min_loop",4,218,838.578918,171.729218,928.578918,221.729218,3.000000,"1 min loop"};
+item15[] = {"Select_Mission",2,250,839.279602,248.118042,929.279663,298.118042,0.000000,"Select Mission"};
+item16[] = {"",7,210,880.582092,366.639160,888.582092,374.639160,0.000000,""};
+item17[] = {"___min_loop_2",4,218,975.237671,175.934219,1065.237793,225.934219,0.000000,"5 min loop"};
+item18[] = {"Set_AI_Ownership",2,4346,975.237732,250.921417,1065.237305,300.921417,0.000000,"Set AI Ownership"};
+item19[] = {"",7,210,1016.540222,366.725281,1024.540283,374.725281,0.000000,""};
 link0[] = {0,10};
 link1[] = {1,12};
 link2[] = {2,3};
 link3[] = {3,5};
 link4[] = {3,8};
 link5[] = {3,14};
-link6[] = {4,7};
-link7[] = {5,6};
-link8[] = {6,10};
-link9[] = {7,9};
-link10[] = {8,11};
-link11[] = {9,2};
-link12[] = {10,4};
-link13[] = {11,0};
-link14[] = {12,13};
-link15[] = {13,2};
-link16[] = {14,15};
-link17[] = {15,16};
-link18[] = {16,0};
-globals[] = {0.000000,0,0,0,0,640,480,2,451,6316128,1,326.983643,1179.875732,440.842163,-196.198654,1217,909,1};
-window[] = {2,-1,-1,-32000,-32000,873,-170,1124,139,3,1235};
+link6[] = {3,17};
+link7[] = {4,7};
+link8[] = {5,6};
+link9[] = {6,10};
+link10[] = {7,9};
+link11[] = {8,11};
+link12[] = {9,2};
+link13[] = {10,4};
+link14[] = {11,0};
+link15[] = {12,13};
+link16[] = {13,2};
+link17[] = {14,15};
+link18[] = {15,16};
+link19[] = {16,0};
+link20[] = {17,18};
+link21[] = {18,19};
+link22[] = {19,16};
+globals[] = {0.000000,0,0,0,0,640,480,2,454,6316128,1,70.838631,1581.788208,823.258911,-305.297394,1217,909,1};
+window[] = {2,-1,-1,-1,-1,812,78,1372,78,3,1235};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -111,6 +118,17 @@ class FSM
                                         action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
                                 };
                                 /*%FSM</LINK>*/
+                                /*%FSM<LINK "___min_loop_2">*/
+                                class ___min_loop_2
+                                {
+                                        itemno = 17;
+                                        priority = 0.000000;
+                                        to="Set_AI_Ownership";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"((diag_tickTime - _cleanupTime) > 300)"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
                         };
                 };
                 /*%FSM</STATE>*/
@@ -180,7 +198,8 @@ class FSM
                          "" \n
                          "_missionsMonitor = diag_tickTime;" \n
                          "_cleanupTime = diag_tickTime;" \n
-                         "_selectMission = diag_tickTime;"/*%FSM</STATEINIT""">*/;
+                         "_selectMission = diag_tickTime;" \n
+                         "_groupCheck = diag_tickTime;"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
@@ -209,6 +228,34 @@ class FSM
                          "" \n
                          "_selectMission = diag_tickTime;" \n
                          "call DMS_selectMission;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "true">*/
+                                class true
+                                {
+                                        itemno = 2;
+                                        priority = 0.000000;
+                                        to="Waiting";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Set_AI_Ownership">*/
+                class Set_AI_Ownership
+                {
+                        name = "Set_AI_Ownership";
+                        itemno = 18;
+                        init = /*%FSM<STATEINIT""">*/"if(DMS_DEBUG) then {" \n
+                         "   diag_log format [""DMS_DEBUG FSM CHECK :: calling DMS_SetAILocality""];" \n
+                         "};" \n
+                         "" \n
+                         "_selectMission = diag_tickTime;" \n
+                         "call DMS_SetAILocality;"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
