@@ -25,7 +25,7 @@ _success = true;
 	{
 		if (DMS_DEBUG) then
 		{
-			diag_log format ["DMS_DEBUG MissionSuccessState :: Mission not completed with parameters: %1 | at time %2",_this,diag_tickTime];
+			diag_log format ["DMS_DEBUG MissionSuccessState :: Mission not yet completed with parameters: %1 | at time %2",_this,diag_tickTime];
 		};
 	};
 
