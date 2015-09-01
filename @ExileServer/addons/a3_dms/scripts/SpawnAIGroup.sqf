@@ -77,6 +77,8 @@ for "_i" from 1 to _count do {
 	_unit = [_group,[_pos_x,_pos_y,_pos_z],_type,_difficulty,_side] call DMS_SpawnAISoldier;
 };
 
+// An AI will definitely spawn with a launcher if you define type
+if ((!isNil "_launcher") || {DMS_ai_use_launchers && {(random 100) <= DMS_ai_use_launchers_chance}}) then
 {
 	if (!isNil "_launcher") then
 	{
