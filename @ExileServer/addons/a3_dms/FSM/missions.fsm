@@ -44,8 +44,8 @@ link19[] = {16,0};
 link20[] = {17,18};
 link21[] = {18,19};
 link22[] = {19,16};
-globals[] = {0.000000,0,0,0,0,640,480,2,454,6316128,1,70.838631,1581.788208,823.258911,-305.297394,1217,909,1};
-window[] = {2,-1,-1,-1,-1,812,78,1372,78,3,1235};
+globals[] = {0.000000,0,0,0,0,640,480,2,454,6316128,1,70.838631,1581.788208,823.258911,-305.297394,1217,949,1};
+window[] = {2,-1,-1,-1,-1,924,1957,3251,190,3,1235};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -255,7 +255,7 @@ class FSM
                          "};" \n
                          "" \n
                          "_selectMission = diag_tickTime;" \n
-                         "call DMS_SetAILocality;"/*%FSM</STATEINIT""">*/;
+                         "[_group,_pos] call DMS_SetAILocality;"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
