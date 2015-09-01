@@ -1,28 +1,62 @@
 /*
-	Makes a random player within 3 KM of the AI the owner.
+	DMS_SetAILocality
+	Created by Defent and eraser1
+
+	Usage:
+	[
+		_groupOrUnit,
+		_posOrObject 		// Does not have to be defined if element 1 is a unit
+	] call DMS_SetAILocality;
+
+	Makes a random player within 3 KM of the AI unit or group the owner.
 	Offloading AI can increase server performance.
 	Could however have negative effects if target player has a potato PC.
 
-	How To Use:
-	[_pos, _group] call DMS_SetAILocality;
-	Posistion of the player and the group that the AIs are in.
-
 */
-private ["_group","_position","_exit","_randomPlayer"];
+private ["_AI", "_pos", "_exit", "_client"];
 
-_group = _this select 0;
-_position = _this select 1;
-_exit = false;
+_AI = param [0,objNull,[objNull,grpNull]];
 
-while {!_exit} do 
+if (isNull _AI) exitWith
 {
-	_randomPlayer = call ExileServer_system_session_getRandomPlayer;
-	if((_randomPlayer distance2D _position) < 3000)then
-	{
-		_exit = true;
-	};
+	diag_log format ["DMS ERROR :: Calling DMS_SetAILocality with null parameter; _this: %1",_this];
 };
 
-ExileServerOwnershipSwapQueue pushBack [_group,_randomPlayer];
+if ((typeName _AI)=="OBJECT") then
+{
+	_pos = _AI;
+}
+else
+{
+	_pos = param [1,"",[objNull,[]],[2,3]];
+};
 
-true
+if (_pos isEqualTo "") exitWith
+{
+	diag_log format ["DMS ERROR :: Calling DMS_SetAILocality with invalid position; this: %1",_this];
+};
+
+_client = objNull;
+
+{
+	if ((alive _x) && {(_x distance2D _pos)<=3000}) exitWith
+	{
+		_client = _x;
+	};
+	false;
+} count allPlayers;
+
+if (!isNull _client) then{
+	ExileServerOwnershipSwapQueue pushBack [_AI,_client];
+	if (DMS_DEBUG) then
+	{
+		diag_log format ["DMS_DEBUG SetAILocality :: Ownership swap of %1 (%4) to %2 (%3) is added to ExileServerOwnershipSwapQueue.",_AI,name _client,getPlayerUID _client,typeName _AI];
+	};
+}
+else
+{
+	if (DMS_DEBUG) then
+	{
+		diag_log format ["DMS_DEBUG SetAILocality :: No viable client found for the ownership of %1!",_AI];
+	};
+};

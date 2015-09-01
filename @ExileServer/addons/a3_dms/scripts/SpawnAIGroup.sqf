@@ -110,14 +110,7 @@ if(_pos_z == 0) then
 
 
 if (DMS_ai_offload_to_client) then
-{	
-	/*
-	_client = (allPlayers call BIS_fnc_selectRandom);
-	ExileServerOwnershipSwapQueue pushBack [_group,_client];
-	*/
-
-	[_group,_pos] call DMS_SetAILocality;
-
+{
 	if(DMS_DEBUG) then
 	{
 		diag_log format["DMS_DEBUG SpawnAIGroup :: Swapping group ownership of %1 to clients.",_group];
