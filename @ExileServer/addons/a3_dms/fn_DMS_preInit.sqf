@@ -33,6 +33,7 @@ DMS_AddMissionToMonitor				= compileFinal preprocessFileLineNumbers "\x\addons\d
 DMS_CreateMarker 					= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\CreateMarker.sqf";
 DMS_FindSuppressor					= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\FindSuppressor.sqf";
 DMS_SpawnCrate						= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\SpawnCrate.sqf";
+DMS_SetAILocality					= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\SetAILocality.sqf";
 
 //Load config
 call compileFinal preprocessFileLineNumbers "\x\addons\dms\config.sqf";

@@ -58,9 +58,12 @@ DMS_DEBUG = false;
 
 	DMS_MissionTypes =					[							//	List of missions with spawn chances. If they add up to 100%, they represent the percentage chance each one will spawn
 											["mission1",25],
-											["mission2",50],
+											["mission2",25],
 											["mission3",15],
-											["mission4",10]
+											["mission4",10],
+											["bauhaus",45],
+											["lost_battalion",30],
+											["walmart",20]
 										];
 
 	DMS_findSafePosBlacklist =			[							// For BIS_fnc_findSafePos position blacklist info refer to: https://community.bistudio.com/wiki/BIS_fnc_findSafePos
