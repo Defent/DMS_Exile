@@ -122,7 +122,7 @@ if (!_useCustomGear) then
 	if (!_unarmed) then
 	{
 		_weapon = (missionNamespace getVariable [format ["DMS_%1_weps",_type],[]]) call BIS_fnc_selectRandom;
-		[_unit, _weapon, 4 + floor(random 3)] call BIS_fnc_addWeapon;
+		[_unit, _weapon, 6 + floor(random 3)] call BIS_fnc_addWeapon;
 		_unit selectWeapon _weapon;
 		
 		
@@ -169,6 +169,7 @@ if (!_useCustomGear) then
 		};
 
 		// Infinite Ammo
+		// This will NOT work if AI unit is offloaded to client
 		_unit addeventhandler ["Fired", {(_this select 0) setvehicleammo 1;}];
 	};
 }
