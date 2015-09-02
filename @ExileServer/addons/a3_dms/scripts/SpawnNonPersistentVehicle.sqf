@@ -14,6 +14,9 @@
 
 	Returns the vehicle object of the created vehicle.
 
+	EXAMPLE:
+	_exampleVeh = ['Exile_Chopper_Hummingbird_Green',_pos] call DMS_SpawnNonPersistentVehicle;
+
 */
 
 private ["_vehicleClass","_position","_vehpos","_maxDistance","_vehObj"];
