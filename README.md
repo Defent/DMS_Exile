@@ -12,3 +12,13 @@ _aLocalM = ["DMS_MissionMarkerCircle","DMS_MissionMarkerDot"];
 OPTIONAL:
 Download the a3_dms folder and edit the config.sqf to your preferences.
 Repack the a3_dms folder with a PBO tool and follow the "To install:" steps :D
+
+
+HEADLESS CLIENT:
+Add this code to the TOP if your initPlayerLocal.sqf
+
+if (!hasInterface && !isServer) then
+{
+	DMS_HC_Object = player;
+	publicVariableServer "DMS_HC_Object";
+};

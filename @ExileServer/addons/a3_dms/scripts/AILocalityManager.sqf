@@ -17,20 +17,31 @@ if !(DMS_ai_offload_to_client) exitWith {};
 		_group = _x;
 		if ((!isNull _leader) && {(alive _leader) && {!isPlayer _leader}}) then
 		{
-			_owner = objNull;
-
+			if (isNull DMS_HC_Object) then
 			{
-				if ((groupOwner _group) isEqualTo (owner _x)) exitWith
+				_owner = objNull;
+
 				{
-					_owner = _x;
+					if ((groupOwner _group) isEqualTo (owner _x)) exitWith
+					{
+						_owner = _x;
+					};
+
+					false;
+				} count allPlayers;
+
+				if ((isNull _owner) || {(_owner distance2D _leader)>3500}) then
+				{
+					[_group,_leader] call DMS_SetAILocality;
 				};
-
-				false;
-			} count allPlayers;
-
-			if ((isNull _owner) || {(_owner distance2D _leader)>3500}) then
+			}
+			else
 			{
-				[_group,_leader] call DMS_SetAILocality;
+				if (DMS_DEBUG) then
+				{
+					diag_log format ["Setting ownership of group %1 to HC (%2)",DMS_HC_Object];
+				};
+				_group setGroupOwner (owner DMS_HC_Object);
 			};
 		};
 	};
