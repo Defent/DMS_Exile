@@ -60,8 +60,8 @@ _missionAIUnits =
 // Define mission-spawned objects and loot values
 _missionObjs =
 [
-	[],			// No spawned buildings
-	[_crate,_wreck],
+	[_wreck],
+	[_crate],
 	_crate_loot_values
 ];
 
