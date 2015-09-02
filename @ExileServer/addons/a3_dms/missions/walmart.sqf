@@ -43,7 +43,7 @@ _wreck1 = createVehicle ["Land_i_Shop_01_V1_F",[(_pos select 0) - 10, (_pos sele
 _wreck2 = createVehicle ["Land_Sacks_goods_F",[(_pos select 0) - 2, (_pos select 1),-0.8],[], 0, "CAN_COLLIDE"];
 _wreck3 = createVehicle ["Land_StallWater_F",[(_pos select 0) - 5, (_pos select 1),-0.8],[], 0, "CAN_COLLIDE"];
 _wreck4 = createVehicle ["Land_WoodenCart_F",[(_pos select 0) - 16, (_pos select 1),-0.5],[], 0, "CAN_COLLIDE"];
-_wreck4 = createVehicle ["Land_CratesWooden_F",[(_pos select 0) - 16, (_pos select 1),-0.3],[], 0, "CAN_COLLIDE"];
+_wreck5 = createVehicle ["Land_CratesWooden_F",[(_pos select 0) - 16, (_pos select 1),-0.3],[], 0, "CAN_COLLIDE"];
 
 // Set crate loot values
 _crate_loot_values =
@@ -63,7 +63,7 @@ _missionAIUnits =
 // Define mission-spawned objects and loot values
 _missionObjs =
 [
-	[_wreck1,_wreck2,_wreck3,_wreck4],			// No spawned buildings
+	[_wreck1,_wreck2,_wreck3,_wreck4,_wreck5],
 	[_crate],
 	_crate_loot_values
 ];
