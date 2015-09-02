@@ -4,6 +4,8 @@
 
 	Created by eraser1
 */
+
+// If you're gonna make any changes to DMS functions and/or create any new missions, it's a good idea to enable this :)
 DMS_DEBUG = false;
 
 
@@ -385,7 +387,7 @@ DMS_DEBUG = false;
 	DMS_ai_use_launchers				= true;						// Enable/disable spawning an AI in a group with a launcher
 	DMS_ai_use_launchers_chance			= 50;						// Percentage chance to actually spawn the launcher (per-group)
 	DMS_AI_launcher_ammo_count			= 2;						// How many rockets an AI will get with its launcher
-	DMS_ai_remove_launchers				= true;					// Remove rocket launchers on AI death
+	DMS_ai_remove_launchers				= true;						// Remove rocket launchers on AI death
 
 	DMS_AI_wep_launchers_AT =			[							// AT Launchers
 											"launch_NLAW_F",
@@ -400,7 +402,7 @@ DMS_DEBUG = false;
 
 
 /* Loot Settings */
-	DMS_BoxWeapons =					[							//List of weapons that can potentially spawn in a crate
+	DMS_BoxWeapons =					[							// List of weapons that can spawn in a crate
 											"Exile_Melee_Axe",
 											"arifle_Katiba_GL_F",
 											"arifle_MX_GL_Black_F",
@@ -424,7 +426,7 @@ DMS_DEBUG = false;
 											"arifle_MXM_Black_F",
 											"srifle_DMR_02_F"
 										];
-	DMS_BoxSurvivalSupplies	=			[							//List of survival supplies (food/drink/meds)
+	DMS_BoxSurvivalSupplies	=			[							//List of survival supplies (food/drink/meds) that can spawn in a crate
 											"Exile_Item_Catfood_Cooked",
 											"Exile_Item_SausageGravy_Cooked",
 											"Exile_Item_BBQSandwich_Cooked",
@@ -433,7 +435,7 @@ DMS_DEBUG = false;
 											"Exile_Item_Matches",
 											"Exile_Item_CookingPot"
 										];
-	DMS_BoxBuildingSupplies	=			[							//List of building supplies
+	DMS_BoxBuildingSupplies	=			[							// List of building supplies that can spawn in a crate
 											"Exile_Item_CamoTentKit",
 											"Exile_Item_MetalPole",
 											"Exile_Item_MetalBoard",
@@ -442,7 +444,7 @@ DMS_DEBUG = false;
 											"Exile_Item_ExtensionCord",
 											"Exile_Item_DuctTape"
 										];
-	DMS_BoxOptics =						[
+	DMS_BoxOptics =						[							// List of optics that can spawn in a crate
 											"optic_Arco",
 											"optic_Hamr",
 											"optic_Aco",
@@ -453,7 +455,7 @@ DMS_DEBUG = false;
 											"optic_LRPS",
 											"optic_Nightstalker"
 										];
-	DMS_BoxBackpacks =					[							//List of backpacks that can potentially spawn in a crate
+	DMS_BoxBackpacks =					[							//List of backpacks that can spawn in a crate
 											"B_Bergen_rgr",
 											"B_Carryall_oli",
 											"B_Kitbag_mcamo",

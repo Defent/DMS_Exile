@@ -1,23 +1,50 @@
 /*
+	DMS_SpawnNonPersistentVehicle
+
 	Spawn a non-saved vehicle in Exile
 
-    _exampleVeh = ['Exile_Chopper_Hummingbird_Green',_pos] call DMS_SpawnNonPersistentVehicle;
-
 	Created by Zupa
+	Edited by eraser1
+	
+	Usage: 
+    [
+    	_vehicleClass,					// STRING: Classname of the vehicle
+    	_pos 							// ARRAY: Position to spawn it at (roughly)
+    ] call DMS_SpawnNonPersistentVehicle;
+
+	Returns the vehicle object of the created vehicle.
+
 */
 
 private ["_vehicleClass","_position","_vehpos","_maxDistance","_vehObj"];
 
-_vehicleClass = _this select 0;
-_position = _this select 1;
-_vehpos = [];
-_maxDistance = 40;
+_OK = params
+[
+	["_vehicleClass","",[""]],
+	["_position","",[[]],[2,3]]
+];
 
-while{count _vehpos < 1} do {
-	_vehpos = _position findEmptyPosition[20,_maxDistance,_vehicleClass];
+if (!_OK) exitWith
+{
+	diag_log format ["DMS ERROR :: Calling DMS_SpawnNonPersistentVehicle with invalid parameters: %1",_this];
+};
+
+_vehpos = [];
+_maxDistance = 10;
+
+while{count _vehpos < 1} do
+{
+	_vehpos = _position findEmptyPosition [20,_maxDistance,_vehicleClass];
 	_maxDistance = (_maxDistance + 15);
 };
 
 _vehObj = ObjNull;
 _vehObj = [_vehicleClass, _vehpos, (random 360), true] call ExileServer_object_vehicle_createNonPersistentVehicle;
+
+if (DMS_DEBUG) then
+{
+	diag_log format ["DMS_DEBUG SpawnNonPersistentVehicle :: Created %1 at %2 with calling parameters: %3",_vehObj,_vehpos,_this];
+};
+
+
 _vehObj
