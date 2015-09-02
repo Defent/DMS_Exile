@@ -28,6 +28,7 @@ _player 	= _this select 0 select 1;
 _side 		= _this select 1;
 _type 		= _this select 2;
 _launcher 	= secondaryWeapon _unit;
+_playerObj	= objNull;
 
 if (isPlayer _player) then
 {
@@ -44,12 +45,15 @@ if (isPlayer _player) then
 }
 else
 {
+	// Remove this due to reports of issues
+	/*
 	_playerObj = gunner _player;
 
 	if (isNull _playerObj) then
 	{
 		_playerObj = driver _player;
 	};
+	*/
 
 	if ((DMS_clear_AI_body && {(random 100) <= DMS_clear_AI_body_chance}) || {DMS_remove_roadkill && {(random 100) <= DMS_remove_roadkill_chance}}) then
 	{
