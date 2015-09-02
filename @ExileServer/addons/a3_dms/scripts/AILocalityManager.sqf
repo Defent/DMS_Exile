@@ -19,6 +19,10 @@ if !(DMS_ai_offload_to_client) exitWith {};
 		{
 			if (isNull DMS_HC_Object) then
 			{
+				if (DMS_DEBUG) then
+				{
+					diag_log format ["DMS_DEBUG AILocalityManager :: DMS_HC_Object is null! Finding owner for group: %1",_group];
+				};
 				_owner = objNull;
 
 				{
@@ -39,7 +43,7 @@ if !(DMS_ai_offload_to_client) exitWith {};
 			{
 				if (DMS_DEBUG) then
 				{
-					diag_log format ["Setting ownership of group %1 to HC (%2)",_group,DMS_HC_Object];
+					diag_log format ["DMS_DEBUG AILocalityManager :: Setting ownership of group %1 to HC (%2)",_group,DMS_HC_Object];
 				};
 				_group setGroupOwner (owner DMS_HC_Object);
 			};

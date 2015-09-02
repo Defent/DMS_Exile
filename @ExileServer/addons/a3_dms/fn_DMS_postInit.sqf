@@ -15,6 +15,12 @@ EAST setFriend[RESISTANCE,0];
 EAST setFriend[WEST,0];
 WEST setFriend[EAST,0];
 
+"DMS_HC_INIT" addPublicVariableEventHandler
+{
+	DMS_HC_Object = _this select 1 select 0;
+	diag_log format ["DMS Headless Client :: DMS_HC_Object = %1 | serverTime: %2",DMS_HC_Object,(_this select 1 select 1)];
+};
+
 if(DMS_StaticMission) then {
 	call compileFinal preprocessFileLineNumbers "\x\addons\dms\static\static_init.sqf";//<---- TODO
 };

@@ -15,10 +15,14 @@ Repack the a3_dms folder with a PBO tool and follow the "To install:" steps :D
 
 
 HEADLESS CLIENT:
-Add this code to the TOP if your initPlayerLocal.sqf
+Add this code to the TOP of your initPlayerLocal.sqf
 
 if (!hasInterface && !isServer) then
 {
-	DMS_HC_Object = player;
-	publicVariableServer "DMS_HC_Object";
+	1 spawn
+	{
+		waitUntil {player==player};
+		DMS_HC_INIT = [player,serverTime];
+		publicVariableServer "DMS_HC_INIT";
+	};
 };
