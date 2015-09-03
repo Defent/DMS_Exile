@@ -13,7 +13,6 @@ DMS_CleanUpList					= [];
 DMS_MissionCount 				= 0;
 DMS_RunningBMissionCount		= 0;
 DMS_BMissionLastStart			= diag_tickTime;
-DMS_HC_Object 					= objNull;
 
 DMS_BMissionDelay = (DMS_TimeBetweenMissions select 0) + random((DMS_TimeBetweenMissions select 1) - (DMS_TimeBetweenMissions select 0));
 
