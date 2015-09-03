@@ -22,7 +22,7 @@ if (!hasInterface && !isServer) then
 	1 spawn
 	{
 		waitUntil {player==player};
-		DMS_HC_INIT = [player,serverTime];
-		publicVariableServer "DMS_HC_INIT";
+		DMS_HC_Object = player;
+		publicVariableServer "DMS_HC_Object";
 	};
 };
