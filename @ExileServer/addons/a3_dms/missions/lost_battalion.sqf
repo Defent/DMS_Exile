@@ -122,8 +122,7 @@ if !(_added) exitWith
 	_cleanup = [];
 	{
 		_cleanup pushBack _x;
-		false;
-	} count _missionAIUnits;
+	} forEach _missionAIUnits;
 
 	_cleanup pushBack ((_missionObjs select 0)+(_missionObjs select 1));
 
@@ -131,7 +130,7 @@ if !(_added) exitWith
 
 
 	// Delete the markers directly
-	{deleteMarker _x;false;} count _markers;
+	{deleteMarker _x;} forEach _markers;
 
 
 	// Reset the mission count

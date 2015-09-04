@@ -44,12 +44,9 @@ try
 				{
 					throw _x;
 				};
-				false;
-			} count (units _x);
+			} forEach (units _x);
 		};
-
-		false;
-	} count _this;
+	} forEach _this;
 
 	_killed = true;
 }

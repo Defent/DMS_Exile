@@ -38,9 +38,7 @@ _result = false;
 					diag_log format["DMS_DEBUG IsPlayerNearbyARRAY :: %1 is within %2m of %3!",_plyr,_radius,_x];
 				};
 			};
-			false;
-		} count _posArray;
+		} forEach _posArray;
 	};
-	false;
-} count allPlayers;
+} forEach allPlayers;
 _result

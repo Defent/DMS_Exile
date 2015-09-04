@@ -29,14 +29,6 @@ if !((typeName _this) == "ARRAY") then
     _this = [_this];
 };
 
-
-/*
-if ([_this,20] call DMS_isPlayerNearbyARRAY) exitWith //<-----Not sure if it's more/less efficient
-{
-    [30, DMS_CleanUp, _this, false] call ExileServer_system_thread_addTask;
-};
-*/
-
 private ["_skippedObjects","_clean"];
 
 _skippedObjects = [];
@@ -85,8 +77,7 @@ _clean =
                 // Group cleanup should only be called when it has to be deleted regardless, so no need to check for nearby players
                 {
                     _x call _clean;
-                    false;
-                } count (units _x);
+                } forEach (units _x);
 
                 if(local _x)then
                 {
@@ -108,9 +99,7 @@ _clean =
         };
         diag_log format ["DMS ERROR :: Attempted to call DMS_CleanUp on non- group or object %1 from array %2",_x,_this];
     };
-
-    false;
-} count _this;
+} forEach _this;
 
 
 if !(_skippedObjects isEqualTo []) then

@@ -61,8 +61,7 @@ while{!_validspot} do {
 			{
 				throw ("another mission");
 			};
-			false;
-		} count allMapMarkers;
+		} forEach allMapMarkers;
 
 		// No exceptions found
 		_validspot	= true;

@@ -30,9 +30,7 @@ if !(DMS_ai_offload_to_client) exitWith {};
 					{
 						_owner = _x;
 					};
-
-					false;
-				} count allPlayers;
+				} forEach allPlayers;
 
 				if ((isNull _owner) || {(_owner distance2D _leader)>3500}) then
 				{
@@ -49,5 +47,4 @@ if !(DMS_ai_offload_to_client) exitWith {};
 			};
 		};
 	};
-	false;
-} count allGroups;
+} forEach allGroups;

@@ -43,8 +43,7 @@ _client = objNull;
 	{
 		_client = _x;
 	};
-	false;
-} count allPlayers;
+} forEach allPlayers;
 
 if (!isNull _client) then{
 	ExileServerOwnershipSwapQueue pushBack [_AI,_client];

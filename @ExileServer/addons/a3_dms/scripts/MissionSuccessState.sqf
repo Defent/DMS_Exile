@@ -58,7 +58,6 @@ _success = true;
 			_success = _completionArgs call ExileServer_util_position_isPlayerNearby;
 		};
 	};
-	false;
-} count _this;
+} forEach _this;
 
 _success;

@@ -31,5 +31,4 @@ if ((typeName _this) != "STRING") then
 	] select (_x == "dynamicTextRequest");
 
 	_args call ExileServer_system_network_send_broadcast;
-	false;
-} count DMS_PlayerNotificationTypes;
+} forEach DMS_PlayerNotificationTypes;

@@ -79,7 +79,7 @@ removeGoggles _unit;
 // Give default items
 if !(DMS_ai_default_items isEqualTo []) then
 {
-	{_unit linkItem _x;false;} count DMS_ai_default_items;
+	{_unit linkItem _x;} forEach DMS_ai_default_items;
 };
 
 
@@ -100,10 +100,10 @@ if (!_useCustomGear) then
 	};// No more idiot-proofing for the following configs
 
 	// Equipment (Stuff that goes in the toolbelt slots)
-	{_unit linkItem _x;false;} count (missionNamespace getVariable [format ["DMS_%1_equipment",_type],[]]);
+	{_unit linkItem _x;} forEach (missionNamespace getVariable [format ["DMS_%1_equipment",_type],[]]);
 
 	// Items (Loot stuff that goes in uniform/vest/backpack)
-	{_unit addItem _x;false;} count (missionNamespace getVariable [format ["DMS_%1_items",_type],[]]);
+	{_unit addItem _x;} forEach (missionNamespace getVariable [format ["DMS_%1_items",_type],[]]);
 
 
 	// Clothes
@@ -228,8 +228,7 @@ else
 			_x = [_x,1];
 		};
 		_unit addMagazines _x;
-		false;
-	} count _magazines;
+	} forEach _magazines;
 
 
 	// Add gun and attachments
@@ -239,8 +238,7 @@ else
 
 		{
 			_unit addPrimaryWeaponItem _x;
-			false;
-		} count _weaponAttachments;
+		} forEach _weaponAttachments;
 
 		_unit selectWeapon _weapon;
 	};
@@ -253,25 +251,22 @@ else
 
 		{
 			_unit addPrimaryWeaponItem _x;
-			false;
-		} count _pistolAttachments;
+		} forEach _pistolAttachments;
 	};
 
 	// Add items
 	{
 		_unit addItem _x;
-		false;
-	} count _items;
+	} forEach _items;
 };
 
 {
 	_unit setSkill [(_x select 0),(_x select 1)];
-	false;
-} count (missionNamespace getVariable [format["DMS_ai_skill_%1",_difficulty],[]]);
+} forEach (missionNamespace getVariable [format["DMS_ai_skill_%1",_difficulty],[]]);
 
 
 // Soldier killed event handler
-_unit addMPEventHandler ["MPKilled",'[_this, '+str _side+', "soldier"] call DMS_OnKilled;'];
+_unit addMPEventHandler ["MPKilled",'if (isServer) then {[_this, '+str _side+', "soldier"] call DMS_OnKilled;};'];
 
 _unit enableAI "TARGET";
 _unit enableAI "AUTOTARGET";

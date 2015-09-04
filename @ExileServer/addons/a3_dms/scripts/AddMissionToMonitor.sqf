@@ -97,12 +97,10 @@ try
 			{
 				{
 					_units pushBack _x;
-					false;
-				} count (units _x);
+				} forEach (units _x);
 			};
 		};
-		false;
-	} count _inputUnits;
+	} forEach _inputUnits;
 
 	_OK = _missionObjs params
 	[

@@ -40,7 +40,7 @@ if (isPlayer _player) then
 			if (((position _x) distance (position _unit)) <= DMS_ai_share_info_distance ) then {
 				_x reveal [_player, 4.0];
 			};
-		} count allUnits;
+		} forEach allUnits;
 	};
 }
 else
@@ -75,8 +75,7 @@ if(DMS_ai_remove_launchers && {_launcher != ""}) then
 		if(_x == _rockets) then {
 			_unit removeMagazine _x;
 		};
-		false;
-	} count magazines _unit;
+	} forEach magazines _unit;
 };
 
 if(DMS_RemoveNVG) then

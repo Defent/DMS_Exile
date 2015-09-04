@@ -27,5 +27,4 @@ DMS_MissionTypesArray = [];
 	for "_i" from 1 to (_x select 1) do {
 		DMS_MissionTypesArray pushBack (_x select 0);
 	};
-	false;
-} count DMS_MissionTypes;
+} forEach DMS_MissionTypes;

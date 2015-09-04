@@ -50,6 +50,4 @@ if (DMS_CleanUpList isEqualTo []) exitWith {};		// Empty array, no objects to cl
 			diag_log format ["DMS_DEBUG CleanUpManager :: %1 is not yet ready to clean!",_x];
 		};
 	};
-
-	false;
-} count DMS_CleanUpList;
+} forEach DMS_CleanUpList;

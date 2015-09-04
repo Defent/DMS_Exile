@@ -113,5 +113,4 @@ _index = 0;
 		};
 	};
 	_index = _index + 1;
-	false;
-} count DMS_Mission_Arr;
+} forEach DMS_Mission_Arr;
