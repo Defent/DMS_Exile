@@ -14,6 +14,7 @@ Download the a3_dms folder and edit the config.sqf to your preferences.
 Repack the a3_dms folder with a PBO tool and follow the "To install:" steps :D
 
 
+!!!!!!!!!!!!!!!!!DO NOT USE HEADLESS CLIENT. IT IS CURRENTLY BUGGED AS OF SEPTEMBER 4TH, 2015. IT WILL CRASH YOUR SERVER!!!!!!!!!!!!
 HEADLESS CLIENT:
 Add this code to the TOP of your initPlayerLocal.sqf
 
