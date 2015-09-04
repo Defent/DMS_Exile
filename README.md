@@ -16,14 +16,14 @@ Repack the a3_dms folder with a PBO tool and follow the "To install:" steps :D
 
 !!!!!!!!!!!!!!!!!DO NOT USE HEADLESS CLIENT. IT IS CURRENTLY BUGGED AS OF SEPTEMBER 4TH, 2015. IT WILL CRASH YOUR SERVER!!!!!!!!!!!!
 HEADLESS CLIENT:
-Add this code to the TOP of your initPlayerLocal.sqf
+Add this code to the TOP of your initPlayerLocal.sqf 	//DO NOT USE!!!
 
-if (!hasInterface && !isServer) then
-{
-	1 spawn
-	{
-		waitUntil {player==player};
-		DMS_HC_Object = player;
-		publicVariableServer "DMS_HC_Object";
-	};
-};
+if (!hasInterface && !isServer) then //DO NOT USE!!!
+{ //DO NOT USE!!!
+	1 spawn //DO NOT USE!!!
+	{ //DO NOT USE!!!
+		waitUntil {player==player}; //DO NOT USE!!!
+		DMS_HC_Object = player; //DO NOT USE!!!
+		publicVariableServer "DMS_HC_Object"; //DO NOT USE!!!
+	}; //DO NOT USE!!!
+}; //DO NOT USE!!!
