@@ -83,10 +83,10 @@ if !(DMS_ai_default_items isEqualTo []) then
 };
 
 
-call
+switch (_type) do
 {
-	if (_type == "random") exitWith  { _type = DMS_random_AI call BIS_fnc_selectRandom;};
-	if (_type == "unarmed") exitWith { _type = "assault";_unarmed = true; };
+	case "random" :  {_type = DMS_random_AI call BIS_fnc_selectRandom;};
+	case "unarmed" : {_type = "assault";_unarmed = true;};
 };
 
 // Unit name

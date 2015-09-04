@@ -37,13 +37,13 @@ if ((_pos isEqualTo "ERROR") || ("_text" isEqualTo "ERROR")) exitWith
 
 _num = DMS_MissionCount;
 
-call
+switch (_difficulty) do
 {
-	if(_difficulty == "easy")		exitWith {_color = "ColorGreen"};
-	if(_difficulty == "moderate")		exitWith {_color = "ColorYellow"};
-	if(_difficulty == "difficult")		exitWith {_color = "ColorRed"};
-	if(_difficulty == "hardcore") 	exitWith {_color = "ColorBlack"};
-	_color = _difficulty;
+	case "easy": 		{_color = "ColorGreen";};
+	case "moderate": 	{_color = "ColorYellow";};
+	case "difficult": 	{_color = "ColorRed";};
+	case "hardcore" : 	{_color = "ColorBlack";};
+	default 			{_color = _difficulty;};
 };
 
 _circle = createMarker [format ["DMS_MissionMarkerCircle%1",_num], _pos];
