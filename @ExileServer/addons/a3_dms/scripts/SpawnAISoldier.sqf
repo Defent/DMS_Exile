@@ -223,7 +223,7 @@ else
 
 	// Add Magazines before weapon so that gun will be loaded
 	{
-		if ((typeName _x) isEqualTo "STRING") then
+		if ((typeName _x) == "STRING") then
 		{
 			_x = [_x,1];
 		};
