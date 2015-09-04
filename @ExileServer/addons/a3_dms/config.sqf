@@ -6,7 +6,7 @@
 */
 
 // If you're gonna make any changes to DMS functions and/or create any new missions, it's a good idea to enable this :)
-DMS_DEBUG = true;
+DMS_DEBUG = false;
 
 
 
