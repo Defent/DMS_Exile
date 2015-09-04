@@ -93,7 +93,7 @@ if (((count (units group _unit)) > 1) && {(leader group _unit) == _unit}) then
 
 
 
-if ((!isNull _playerObj) && {(getPlayerUID _playerObj) != ""}) then
+if ((!isNull _playerObj) && {((getPlayerUID _playerObj) != "") && {((vehicle _playerObj) == _playerObj)}}) then
 {
 	_moneyGain = missionNamespace getVariable [format ["DMS_%1MoneyGainOnKill",_side],0];
 	_repGain = missionNamespace getVariable [format ["DMS_%1RepGainOnKill",_side],0];
