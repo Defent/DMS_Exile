@@ -17,20 +17,35 @@ if !(DMS_ai_offload_to_client) exitWith {};
 		_group = _x;
 		if ((!isNull _leader) && {(alive _leader) && {!isPlayer _leader}}) then
 		{
-			_owner = objNull;
-
+			if (isNull DMS_HC_Object) then
 			{
-				if ((groupOwner _group) isEqualTo (owner _x)) exitWith
+				if (DMS_DEBUG) then
 				{
-					_owner = _x;
+					diag_log format ["DMS_DEBUG AILocalityManager :: DMS_HC_Object is null! Finding owner for group: %1",_group];
 				};
+				_owner = objNull;
 
-				false;
-			} count allPlayers;
+				{
+					if ((groupOwner _group) isEqualTo (owner _x)) exitWith
+					{
+						_owner = _x;
+					};
 
-			if ((isNull _owner) || {(_owner distance2D _leader)>3500}) then
+					false;
+				} count allPlayers;
+
+				if ((isNull _owner) || {(_owner distance2D _leader)>3500}) then
+				{
+					[_group,_leader] call DMS_SetAILocality;
+				};
+			}
+			else
 			{
-				[_group,_leader] call DMS_SetAILocality;
+				if (DMS_DEBUG) then
+				{
+					diag_log format ["DMS_DEBUG AILocalityManager :: Setting ownership of group %1 to HC (%2)",_group,DMS_HC_Object];
+				};
+				_group setGroupOwner (owner DMS_HC_Object);
 			};
 		};
 	};

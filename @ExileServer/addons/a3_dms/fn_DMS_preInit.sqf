@@ -11,6 +11,8 @@ vehicle_patrol			= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts
 vehicle_monitor			= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\vehicle_monitor.sqf";
 */
 
+DMS_HC_Object 						= objNull;
+
 //Completed or WIP
 DMS_selectMission 					= compileFinal preprocessFileLineNumbers "\x\addons\dms\missions\SelectMission.sqf";
 DMS_MissionsMonitor					= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\MissionsMonitor.sqf";
