@@ -74,7 +74,7 @@ if (!hasInterface && !isServer) then
 
 
 ## Changelog:
-#### September 5, 2015 (12:00 AM CST-America):
+#### September 5, 2015 (1:00 AM CST-America):
 * Created new function "DMS_fnc_IsPlayerNearby" to replace "ExileServer_util_position_isPlayerNearby".
 * Fix IR Strobes spawning inside the crate and not appearing.
 
