@@ -13,7 +13,7 @@ so your ```_aLocalM``` would look like:
 
 ## OPTIONAL:
 * Download the a3_dms folder
-* Ddit the config.sqf to your preferences.
+* Edit the config.sqf to your preferences.
 * Repack the a3_dms folder with a PBO tool
 * Follow the "To install:" steps :D
 
@@ -37,3 +37,5 @@ if (!hasInterface && !isServer) then
 	};
 };
 ```
+
+Thanks to [shaworth](https://github.com/shaworth) for making the README all nice and pretty :)
