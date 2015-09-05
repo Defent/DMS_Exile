@@ -21,8 +21,8 @@ DMS_DEBUG = true;
 
 	DMS_AI_KillPercent					= 100;						// The percent amount of AI that need to be killed for "killPercent" mission requirement (NOT IMPLEMENTED)
 
-	DMS_BanditMoneyGainOnKill			= 100;						// The amount of Poptabs gained for killing a bandit
-	DMS_BanditRepGainOnKill				= 25;						// The amount of Respect gained for killing a bandit
+	DMS_BanditMoneyGainOnKill			= 50;						// The amount of Poptabs gained for killing a bandit
+	DMS_BanditRepGainOnKill				= 10;						// The amount of Respect gained for killing a bandit
 
 	DMS_MissionMarkerWinDot				= true;						// Keep the mission marker dot with a "win" message after mission is over
 	DMS_MissionMarkerLoseDot			= true;						// Keep the mission marker dot with a "lose" message after mission is over
