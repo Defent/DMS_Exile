@@ -5,7 +5,7 @@
 	Called from DMS_selectMission
 */
 
-private ["_num", "_side", "_pos", "_difficulty", "_AICount", "_group", "_crate", "_crate_loot_values", "_msgStart", "_msgWIN", "_msgLOSE", "_missionName", "_missionAIUnits", "_missionObjs", "_markers", "_time", "_added","_wreck"];
+private ["_num", "_side", "_pos", "_difficulty", "_AICount", "_group", "_crate1", "_crate_loot_values1", "_crate2", "_crate_loot_values2", "_msgStart", "_msgWIN", "_msgLOSE", "_missionName", "_missionAIUnits", "_missionObjs", "_markers", "_time", "_added","_wreck"];
 
 // For logging purposes
 _num = DMS_MissionCount;
@@ -37,17 +37,24 @@ _group =
 ] call DMS_SpawnAIGroup;
 
 
-// Create Crate
-_crate = ["Box_NATO_Wps_F",_pos] call DMS_SpawnCrate;
+// Create Crates
+_crate1 = ["Box_NATO_Wps_F",_pos] call DMS_SpawnCrate;
+_crate2 = ["Box_NATO_Wps_F",[(_pos select 0)+2,(_pos select 1)-1,0]] call DMS_SpawnCrate;
 
 _wreck = createVehicle ["Land_Wreck_Ural_F",[(_pos select 0) - 10, (_pos select 1),-0.2],[], 0, "CAN_COLLIDE"];
 
 // Set crate loot values
-_crate_loot_values =
+_crate_loot_values1 =
 [
 	2,		// Weapons
 	15,		// Items
 	2 		// Backpacks
+];
+_crate_loot_values2 =
+[
+	1,		// Weapons
+	20,		// Items
+	5 		// Backpacks
 ];
 
 
@@ -61,8 +68,8 @@ _missionAIUnits =
 _missionObjs =
 [
 	[_wreck],
-	[_crate],
-	_crate_loot_values
+	[],
+	[[_crate1,_crate_loot_values1],[_crate2,_crate_loot_values2]]
 ];
 
 // Define Mission Start message
@@ -126,6 +133,10 @@ if !(_added) exitWith
 	} forEach _missionAIUnits;
 
 	_cleanup pushBack ((_missionObjs select 0)+(_missionObjs select 1));
+	
+	{
+		_cleanup pushBack (_x select 0);
+	} foreach (_missionObjs select 2);
 
 	_cleanup call DMS_CleanUp;
 

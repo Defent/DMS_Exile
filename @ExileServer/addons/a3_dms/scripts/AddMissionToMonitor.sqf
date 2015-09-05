@@ -34,8 +34,11 @@
 		],
 		[
 			[_cleanupObj1,_cleanupObj2,...,_cleanupObjX],
-			[_crate,_vehicle1,_vehicle2,...,_vehicleX],
-			_crate_loot_values
+			[_vehicle1,_vehicle2,...,_vehicleX],
+			[
+				[_crate1,_crate_loot_values1],
+				[_crate2,_crate_loot_values2]
+			]
 		],
 		[_msgWIN,_msgLose],
 		[_markerDot,_markerCircle],
@@ -47,7 +50,7 @@
 	 "_completionInfo", "_timeOutInfo", "_inputUnits", "_missionObjs", "_messages", "_markers", "_side", "_timeStarted", "_timeUntilFail"
 */
 
-private ["_added", "_pos", "_OK", "_completionInfo", "_timeOutInfo", "_inputUnits", "_missionObjs", "_messages", "_markers", "_timeStarted", "_timeUntilFail", "_buildings", "_loot", "_crate_loot_values", "_msgWIN", "_msgLose", "_markerDot", "_markerCircle", "_side","_arr"];
+private ["_added", "_pos", "_OK", "_completionInfo", "_timeOutInfo", "_inputUnits", "_missionObjs", "_messages", "_markers", "_timeStarted", "_timeUntilFail", "_buildings", "_vehs", "_crate_info_array", "_msgWIN", "_msgLose", "_markerDot", "_markerCircle", "_side","_arr"];
 
 
 _added = false;
@@ -105,8 +108,8 @@ try
 	_OK = _missionObjs params
 	[
 		["_buildings","",[[]]],
-		["_loot","",[[]]],
-		["_crate_loot_values","",[[]],[3]]
+		["_vehs","",[[]]],
+		["_crate_info_array","",[[]]]
 	];
 
 	if (!_OK) then
@@ -147,8 +150,8 @@ try
 		_units,
 		[
 			_buildings,
-			_loot,
-			_crate_loot_values
+			_vehs,
+			_crate_info_array
 		],
 		[
 			_msgWIN,

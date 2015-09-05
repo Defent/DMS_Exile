@@ -22,10 +22,6 @@ if (DMS_DEBUG) then
 
 if !((typeName _this) == "ARRAY") then
 {
-    if (DMS_DEBUG) then
-    {
-        diag_log ("DMS_DEBUG CleanUp :: Converting single object into array: "+str _this);
-    };
     _this = [_this];
 };
 

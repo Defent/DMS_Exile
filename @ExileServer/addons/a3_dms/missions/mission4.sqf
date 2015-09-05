@@ -56,8 +56,8 @@ _missionAIUnits =
 _missionObjs =
 [
 	[],			// No spawned buildings
-	[_crate],
-	_crate_loot_values
+	[],
+	[[_crate,_crate_loot_values]]
 ];
 
 // Define Mission Start message
@@ -121,6 +121,10 @@ if !(_added) exitWith
 	} forEach _missionAIUnits;
 
 	_cleanup pushBack ((_missionObjs select 0)+(_missionObjs select 1));
+	
+	{
+		_cleanup pushBack (_x select 0);
+	} foreach (_missionObjs select 2);
 
 	_cleanup call DMS_CleanUp;
 
