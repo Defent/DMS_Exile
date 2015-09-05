@@ -42,5 +42,5 @@ if (!hasInterface && !isServer) then
 ```
 #### Thanks:
 - [shaworth](https://github.com/shaworth) for making the README all nice and pretty :)
-- [Defent] for creating Defent's Mission System.
-- [eraser1] for his constant codebase improvments.
+- [Defent](https://github.com/Defent) for creating Defent's Mission System.
+- [eraser1](https://github.com/eraser1) for his constant codebase improvments.
