@@ -79,7 +79,17 @@ removeGoggles _unit;
 // Give default items
 if !(DMS_ai_default_items isEqualTo []) then
 {
-	{_unit linkItem _x;} forEach DMS_ai_default_items;
+	{
+		// "Why doesn't linkItem work with any of these? Because fuck you, that's why" - BIS
+		if (_x in ["Binocular","Rangefinder","Laserdesignator","Laserdesignator_02","Laserdesignator_03"]) then
+		{
+			_unit addWeapon _x;
+		}
+		else
+		{
+			_unit linkItem _x;
+		};
+	} forEach DMS_ai_default_items;
 };
 
 
@@ -97,10 +107,21 @@ if (!_useCustomGear) then
 	if !(_type in DMS_ai_SupportedClasses) exitWith
 	{
 		diag_log format ["DMS ERROR :: DMS_SpawnAISoldier called with unsupported _type: %1 | _this: %2",_type,_this];
-	};// No more idiot-proofing for the following configs
+	};
+
 
 	// Equipment (Stuff that goes in the toolbelt slots)
-	{_unit linkItem _x;} forEach (missionNamespace getVariable [format ["DMS_%1_equipment",_type],[]]);
+	{
+		if (_x in ["Binocular","Rangefinder","Laserdesignator","Laserdesignator_02","Laserdesignator_03"]) then
+		{
+			_unit addWeapon _x;
+		}
+		else
+		{
+			_unit linkItem _x;
+		};
+	} forEach (missionNamespace getVariable [format ["DMS_%1_equipment",_type],[]]);
+
 
 	// Items (Loot stuff that goes in uniform/vest/backpack)
 	{_unit addItem _x;} forEach (missionNamespace getVariable [format ["DMS_%1_items",_type],[]]);
