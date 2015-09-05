@@ -18,14 +18,14 @@ so your ```_aLocalM``` would look like:
 ### To modify the config:
 * Download the a3_dms folder
 * Edit the config.sqf to your preferences.
-* Pack the a3_dms folder with a PBO tool (**PBO Manager** or Arma 3 Tools suite)
-* Follow the "To install:" steps useing the PBO you just created instead of the pre-packed one.
+* Pack the a3_dms folder with a PBO tool (**PBO Manager**, Eliteness, or Arma 3 Tools suite)
+* Follow the "To install:" steps using the PBO you just created instead of the pre-packed one.
 
 
 ### ~~HEADLESS CLIENT:~~
 ![Warning](https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Achtung.svg/200px-Achtung.svg.png)
 
-**Headless client is currently broken as of the 4th of September, do not use it as it WILL crash your server.**
+**Headless Client is currently broken in ArmA as of the 4th of September, do not use it as it WILL crash your server.**
 
 ~~Add this code to the TOP of your initPlayerLocal.sqf~~ 
 
@@ -41,6 +41,6 @@ if (!hasInterface && !isServer) then
 };
 ```
 #### Thanks:
-- [shaworth](https://github.com/shaworth) for making the README all nice and pretty :)
+- [shaworth](https://github.com/shaworth) and [KawaiiPotato](https://github.com/KawaiiPotato) for making the README all nice and pretty :)
 - [Defent](https://github.com/Defent) for creating Defent's Mission System.
 - [eraser1](https://github.com/eraser1) for his constant codebase improvments.
