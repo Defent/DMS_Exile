@@ -37,6 +37,7 @@ class CfgFunctions
 			class FillCrate 					{};
 			class FindSafePos 					{};
 			class FindSuppressor 				{};
+			class IsPlayerNearby				{};
 			class IsNearWater 					{};
 			class MissionsMonitor 				{};
 			class MissionSuccessState 			{};

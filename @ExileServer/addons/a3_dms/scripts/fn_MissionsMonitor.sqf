@@ -73,7 +73,7 @@ private ["_pos", "_success", "_timeStarted", "_timeUntilFail", "_units", "_build
 			throw format ["Mission Success at %1 with message %2.",_pos,_msgWIN];
 		};
 
-		if (DMS_MissionTimeoutReset && {[_pos,DMS_MissionTimeoutResetRange] call ExileServer_util_position_isPlayerNearby}) then
+		if (DMS_MissionTimeoutReset && {[_pos,DMS_MissionTimeoutResetRange] call DMS_fnc_IsPlayerNearby}) then
 		{
 			_x set [2,[diag_tickTime,_timeUntilFail]];
 

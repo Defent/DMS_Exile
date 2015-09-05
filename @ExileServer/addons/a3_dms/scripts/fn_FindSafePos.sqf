@@ -38,7 +38,7 @@ while{!_validspot} do {
 		};
 		
 		// Check for nearby players
-		if ([_pos,DMS_PlayerNearBlacklist] call ExileServer_util_position_isPlayerNearby) exitWith
+		if ([_pos,DMS_PlayerNearBlacklist] call DMS_fnc_IsPlayerNearby) exitWith
 		{
 			throw ("players");
 		};

@@ -150,7 +150,7 @@ if(DMS_SpawnBoxSmoke && {sunOrMoon == 1}) then {
 };
 
 if (DMS_SpawnBoxIRGrenade && {sunOrMoon != 1}) then {
-	_marker = "B_IR_Grenade" createVehicle getPosATL _crate;
+	_marker = "B_IRStrobe" createVehicle getPosATL _crate;
 	_marker setPosATL (getPosATL _crate);
-	_marker attachTo [_crate, [0,0,0]];
+	_marker attachTo [_crate, [0,0,0.5]];
 };

@@ -51,7 +51,7 @@ _clean =
     {
         if (isNull _x) exitWith {};
 
-        if !([_x,DMS_CleanUp_PlayerNearLimit] call ExileServer_util_position_isPlayerNearby) then
+        if !([_x,DMS_CleanUp_PlayerNearLimit] call DMS_fnc_IsPlayerNearby) then
         {
             _x call _clean;
         }

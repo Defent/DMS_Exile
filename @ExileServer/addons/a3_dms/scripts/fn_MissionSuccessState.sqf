@@ -55,7 +55,7 @@ _success = true;
 		};
 		case "playerNear":
 		{
-			_success = _completionArgs call ExileServer_util_position_isPlayerNearby;
+			_success = _completionArgs call DMS_fnc_IsPlayerNearby;
 		};
 	};
 } forEach _this;

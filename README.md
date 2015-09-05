@@ -74,6 +74,10 @@ if (!hasInterface && !isServer) then
 
 
 ## Changelog:
+#### September 5, 2015 (12:00 AM CST-America):
+* Created new function "DMS_fnc_IsPlayerNearby" to replace "ExileServer_util_position_isPlayerNearby".
+* Fix IR Strobes spawning inside the crate and not appearing.
+
 #### September 4, 2015 (11:20 PM CST-America):
 * Improved crate handling by DMS. You can now spawn multiple crates with different loot, or simply no crates at all. (REQUIRES FILE CHANGES FOR EACH MISSION)
 * Accounted for case sensitivity in switch-do statements for SpawnAISolder.
