@@ -14,7 +14,7 @@ so your ```_aLocalM``` would look like:
 The crate loot system has undergone an improvement. You can now define loot values for different crates for the same mission, or none at all!
 HOWEVER: This requires you to change the organization of the crate in the mission.
 
-Previously, you _missionObjs was defined with the format:
+Previously, _missionObjs was defined with the format:
 ```
 [
 	[_cleanupObj1,_cleanupObj2,...,_cleanupObjX],
