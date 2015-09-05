@@ -83,7 +83,7 @@ if !(DMS_ai_default_items isEqualTo []) then
 };
 
 
-switch (_type) do
+switch (toLower _type) do
 {
 	case "random" :  {_type = DMS_random_AI call BIS_fnc_selectRandom;};
 	case "unarmed" : {_type = "assault";_unarmed = true;};
