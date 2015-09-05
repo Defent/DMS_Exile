@@ -1,5 +1,5 @@
 /*
-    DMS_CleanUp
+    DMS_fnc_CleanUp
     Created by eraser1
 
     Usage:
@@ -8,10 +8,10 @@
         _objectOrGroup2,
         ...
         _objectOrGroupN
-    ] call DMS_CleanUp;
+    ] call DMS_fnc_CleanUp;
 
     Alternative Usage:
-    _objectOrGroup call DMS_CleanUp;
+    _objectOrGroup call DMS_fnc_CleanUp;
 */
 
 
@@ -22,10 +22,6 @@ if (DMS_DEBUG) then
 
 if !((typeName _this) == "ARRAY") then
 {
-    if (DMS_DEBUG) then
-    {
-        diag_log ("DMS_DEBUG CleanUp :: Converting single object into array: "+str _this);
-    };
     _this = [_this];
 };
 
@@ -95,9 +91,9 @@ _clean =
             {
                 diag_log format ["DMS_DEBUG CleanUp :: Doing recursive call for ARRAY: %1",_x];
             };
-            _x call DMS_CleanUp;
+            _x call DMS_fnc_CleanUp;
         };
-        diag_log format ["DMS ERROR :: Attempted to call DMS_CleanUp on non- group or object %1 from array %2",_x,_this];
+        diag_log format ["DMS ERROR :: Attempted to call DMS_fnc_CleanUp on non- group or object %1 from array %2",_x,_this];
     };
 } forEach _this;
 

@@ -1,12 +1,12 @@
 /*
-	DMS_SetAILocality
+	DMS_fnc_SetAILocality
 	Created by Defent and eraser1
 
 	Usage:
 	[
 		_groupOrUnit,
 		_posOrObject 		// Does not have to be defined if element 1 is a unit
-	] call DMS_SetAILocality;
+	] call DMS_fnc_SetAILocality;
 
 	Makes a random player within 3 KM of the AI unit or group the owner.
 	Offloading AI can increase server performance.

@@ -1,3 +1,15 @@
+/*
+	DMS_fnc_IsNearWater
+	All credit goes to WAI
+
+	Usage:
+	[
+		_position,
+		_radius
+	] call DMS_fnc_IsNearWater
+
+*/
+
 private["_result","_position","_radius"];
 
 _result 	= false;

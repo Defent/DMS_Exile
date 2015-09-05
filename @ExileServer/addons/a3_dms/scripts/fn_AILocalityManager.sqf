@@ -1,5 +1,5 @@
 /*
-	DMS_AILocalityManager
+	DMS_fnc_AILocalityManager
 	Created by Defent and eraser1
 
 	Offloads AI groups to a nearby client in order to improve server performance.
@@ -34,7 +34,7 @@ if !(DMS_ai_offload_to_client) exitWith {};
 
 				if ((isNull _owner) || {(_owner distance2D _leader)>3500}) then
 				{
-					[_group,_leader] call DMS_SetAILocality;
+					[_group,_leader] call DMS_fnc_SetAILocality;
 				};
 			}
 			else

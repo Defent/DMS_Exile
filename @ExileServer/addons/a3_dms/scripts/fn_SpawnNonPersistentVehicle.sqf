@@ -1,5 +1,5 @@
 /*
-	DMS_SpawnNonPersistentVehicle
+	DMS_fnc_SpawnNonPersistentVehicle
 
 	Spawn a non-saved vehicle in Exile
 
@@ -10,12 +10,12 @@
     [
     	_vehicleClass,					// STRING: Classname of the vehicle
     	_pos 							// ARRAY: Position to spawn it at (roughly)
-    ] call DMS_SpawnNonPersistentVehicle;
+    ] call DMS_fnc_SpawnNonPersistentVehicle;
 
 	Returns the vehicle object of the created vehicle.
 
 	EXAMPLE:
-	_exampleVeh = ['Exile_Chopper_Hummingbird_Green',_pos] call DMS_SpawnNonPersistentVehicle;
+	_exampleVeh = ['Exile_Chopper_Hummingbird_Green',_pos] call DMS_fnc_SpawnNonPersistentVehicle;
 
 */
 

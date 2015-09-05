@@ -1,12 +1,12 @@
 /*
-	DMS_SpawnCrate
+	DMS_fnc_SpawnCrate
 	Created by eraser1
 
 	Usage:
 	[
 		_crateClassName,
 		_pos
-	] call DMS_SpawnCrate;
+	] call DMS_fnc_SpawnCrate;
 	Returns crate object
 
 */

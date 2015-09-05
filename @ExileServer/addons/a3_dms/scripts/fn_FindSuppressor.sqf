@@ -1,10 +1,10 @@
 /*
-	DMS_FindSuppressor
-	Taken from WAI
+	DMS_fnc_FindSuppressor
+	Originally from WAI
 	Modified by eraser1 & Defent
 
 	Usage:
-	_weaponClassName call DMS_FindSuppressor;
+	_weaponClassName call DMS_fnc_FindSuppressor;
 
 */
 

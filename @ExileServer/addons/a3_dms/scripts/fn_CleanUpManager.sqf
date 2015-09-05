@@ -1,5 +1,5 @@
 /*
-	DMS_CleanUpManager
+	DMS_fnc_CleanUpManager
 	Created by eraser1
 
 	Objects to be cleaned up together have an entry in "DMS_CleanUpList"
@@ -36,12 +36,12 @@ if (DMS_CleanUpList isEqualTo []) exitWith {};		// Empty array, no objects to cl
 	
 	if (!_OK) then
 	{
-		diag_log format ["DMS ERROR :: Invalid parameters for DMS_CleanUpManager: %1 replaced with %2",_x,[_objs,_timeAddedToList,_timeUntilClean]];
+		diag_log format ["DMS ERROR :: Invalid parameters for DMS_fnc_CleanUpManager: %1 replaced with %2",_x,[_objs,_timeAddedToList,_timeUntilClean]];
 	};
 
 	if ((diag_tickTime-_timeAddedToList)>=_timeUntilClean) then
 	{
-		_objs call DMS_CleanUp;
+		_objs call DMS_fnc_CleanUp;
 	}
 	else
 	{

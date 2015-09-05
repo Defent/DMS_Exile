@@ -1,5 +1,5 @@
 /*
-	DMS_TargetsKilled
+	DMS_fnc_TargetsKilled
 	Created by eraser1
 	
 	Usage:
@@ -7,7 +7,7 @@
 		_unit,
 		_group,
 		_object
-	] call DMS_TargetsKilled;
+	] call DMS_fnc_TargetsKilled;
 
 	Will accept non-array argument of group, unit, or object.
 */

@@ -1,5 +1,5 @@
 /*
-	DMS_MissionSuccessState
+	DMS_fnc_MissionSuccessState
 	Created by eraser1
 	
 	Usage:
@@ -8,7 +8,7 @@
 		[_completionType2,_completionArgs2],
 		...
 		[_completionTypeN,_completionArgsN]
-	] call DMS_MissionSuccessState;
+	] call DMS_fnc_MissionSuccessState;
 */
 
 if !((typeName _this) == "ARRAY") exitWith
@@ -47,11 +47,11 @@ _success = true;
 		// Using switch-do so that future cases can be added easily
 		case "kill":
 		{
-			_success = _completionArgs call DMS_TargetsKilled;
+			_success = _completionArgs call DMS_fnc_TargetsKilled;
 		};
 		case "killPercent":
 		{
-			_success = _completionArgs call DMS_TargetsKilledPercent;//<---TODO
+			_success = _completionArgs call DMS_fnc_TargetsKilledPercent;//<---TODO
 		};
 		case "playerNear":
 		{

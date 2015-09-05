@@ -1,9 +1,9 @@
 /*
-	DMS_BroadcastMissionStatus
+	DMS_fnc_BroadcastMissionStatus
 	Created by eraser1
 
 	Usage:	
-	_message call DMS_BroadcastMissionStatus;
+	_message call DMS_fnc_BroadcastMissionStatus;
 
 	Requires "DMS_PlayerNotificationTypes".
 

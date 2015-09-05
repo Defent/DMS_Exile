@@ -1,5 +1,5 @@
 /*
-	DMS_RemoveMarkers
+	DMS_fnc_RemoveMarkers
 	Created by eraser1
 
 	Usage:
@@ -9,7 +9,7 @@
 			_markerCircle
 		],
 		_status
-	] call DMS_RemoveMarkers;
+	] call DMS_fnc_RemoveMarkers;
 */
 
 private ["_markerDot","_markerCircle","_status"];

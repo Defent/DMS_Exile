@@ -138,11 +138,11 @@ class FSM
                         name = "Check_Mission_Running";
                         itemno = 6;
                         init = /*%FSM<STATEINIT""">*/"if(DMS_DEBUG) then {" \n
-                         "   diag_log format [""DMS_DEBUG FSM CHECK :: calling DMS_MissionsMonitor""];" \n
+                         "   diag_log format [""DMS_DEBUG FSM CHECK :: calling DMS_fnc_MissionsMonitor""];" \n
                          "};" \n
                          "" \n
                          "_missionsMonitor = diag_tickTime;" \n
-                         "call DMS_MissionsMonitor;"/*%FSM</STATEINIT""">*/;
+                         "call DMS_fnc_MissionsMonitor;"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
@@ -166,11 +166,11 @@ class FSM
                         name = "Mission_Cleanup";
                         itemno = 11;
                         init = /*%FSM<STATEINIT""">*/"if(DMS_DEBUG) then {" \n
-                         "   diag_log format [""DMS_DEBUG FSM CHECK :: calling DMS_CleanUpManager""];" \n
+                         "   diag_log format [""DMS_DEBUG FSM CHECK :: calling DMS_fnc_CleanUpManager""];" \n
                          "};" \n
                          "" \n
                          "_cleanupTime = diag_tickTime;" \n
-                         "call DMS_CleanUpManager;"/*%FSM</STATEINIT""">*/;
+                         "call DMS_fnc_CleanUpManager;"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
@@ -223,11 +223,11 @@ class FSM
                         name = "Select_Mission";
                         itemno = 15;
                         init = /*%FSM<STATEINIT""">*/"if(DMS_DEBUG) then {" \n
-                         "   diag_log format [""DMS_DEBUG FSM CHECK :: calling DMS_selectMission""];" \n
+                         "   diag_log format [""DMS_DEBUG FSM CHECK :: calling DMS_fnc_SelectMission""];" \n
                          "};" \n
                          "" \n
                          "_selectMission = diag_tickTime;" \n
-                         "call DMS_selectMission;"/*%FSM</STATEINIT""">*/;
+                         "call DMS_fnc_SelectMission;"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
@@ -251,11 +251,11 @@ class FSM
                         name = "Set_AI_Ownership";
                         itemno = 18;
                         init = /*%FSM<STATEINIT""">*/"if(DMS_DEBUG) then {" \n
-                         "   diag_log format [""DMS_DEBUG FSM CHECK :: calling DMS_SetAILocality""];" \n
+                         "   diag_log format [""DMS_DEBUG FSM CHECK :: calling DMS_fnc_SetAILocality""];" \n
                          "};" \n
                          "" \n
                          "_aiLocality = diag_tickTime;" \n
-                         "call DMS_AILocalityManager;"/*%FSM</STATEINIT""">*/;
+                         "call DMS_fnc_AILocalityManager;"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
                         {
