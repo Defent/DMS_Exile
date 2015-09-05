@@ -1,5 +1,5 @@
 /*
-	DMS_SpawnAISoldier
+	DMS_fnc_SpawnAISoldier
 	Created by eraser1
 	Based off of WAI
 
@@ -11,7 +11,7 @@
 		_difficulty,			// "random","hardcore","difficult","moderate", or "easy"
 		_side, 					// "bandit","hero", etc.
 		_customGearSet		// OPTIONAL: Manually defined AI gear.
-	] call DMS_SpawnAIGroup;
+	] call DMS_fnc_SpawnAIGroup;
 
 	Usage for _customGearSet:
 	[
@@ -143,7 +143,7 @@ if (!_useCustomGear) then
 
 		if((random 100) <= (missionNamespace getVariable [format["DMS_%1_suppressor_chance",_type],0])) then
 		{
-			_suppressor = _weapon call DMS_FindSuppressor;
+			_suppressor = _weapon call DMS_fnc_FindSuppressor;
 			if(_suppressor != "") then
 			{
 				_unit addPrimaryWeaponItem _suppressor;
@@ -266,7 +266,7 @@ else
 
 
 // Soldier killed event handler
-_unit addMPEventHandler ["MPKilled",'if (isServer) then {[_this, '+str _side+', "soldier"] call DMS_OnKilled;};'];
+_unit addMPEventHandler ["MPKilled",'if (isServer) then {[_this, '+str _side+', "soldier"] call DMS_fnc_OnKilled;};'];
 
 _unit enableAI "TARGET";
 _unit enableAI "AUTOTARGET";

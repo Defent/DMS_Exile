@@ -1,5 +1,5 @@
 /*
-	DMS_FillCrate
+	DMS_fnc_FillCrate
 
 	Original credit goes to WAI: https://github.com/nerdalertdk/WICKED-AI
 	Edited by eraser1
@@ -12,7 +12,7 @@
 			_items,
 			_backpacks
 		]
-	] call DMS_FillCrate;
+	] call DMS_fnc_FillCrate;
 	
 	Each loot argument can be an explicitly defined array of weapons with a number to spawn, or simply a number and weapons defined in the config.sqf are used
 */
@@ -87,7 +87,7 @@ if ((_wepCount>0) && {count _weps>0}) then
 	for "_i" from 1 to _wepCount do
 	{
 		_weapon = _weps call BIS_fnc_selectRandom;
-		_ammo = _weapon call DMS_selectMagazine;
+		_ammo = _weapon call DMS_fnc_selectMagazine;
 		if ((typeName _weapon)=="STRING") then
 		{
 			_weapon = [_weapon,1];

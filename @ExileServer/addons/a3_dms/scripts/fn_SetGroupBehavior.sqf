@@ -1,5 +1,5 @@
 /*
-	DMS_SetGroupBehavior
+	DMS_fnc_SetGroupBehavior
 	Created by eraser1
 
 	Usage:
@@ -7,7 +7,7 @@
 		_group,
 		_pos,
 		_difficulty
-	] call DMS_SetGroupBehavior;
+	] call DMS_fnc_SetGroupBehavior;
 
 */
 

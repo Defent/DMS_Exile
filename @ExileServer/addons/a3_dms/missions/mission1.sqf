@@ -16,7 +16,7 @@ _side = "bandit";
 
 
 // find position
-_pos = [10,100] call DMS_findSafePos;
+_pos = [10,100] call DMS_fnc_findSafePos;
 
 
 // Set general mission difficulty
@@ -34,11 +34,11 @@ _group =
 	"random",				// "random","hardcore","difficult","moderate", or "easy"
 	"random", 				// "random","assault","MG","sniper" or "unarmed" OR [_type,_launcher]
 	_side 					// "bandit","hero", etc.
-] call DMS_SpawnAIGroup;
+] call DMS_fnc_SpawnAIGroup;
 
 
 // Create Crate
-_crate = ["Box_NATO_Wps_F",_pos] call DMS_SpawnCrate;
+_crate = ["Box_NATO_Wps_F",_pos] call DMS_fnc_SpawnCrate;
 
 // Set crate loot values
 _crate_loot_values =
@@ -82,7 +82,7 @@ _markers =
 	_pos,
 	_missionName,
 	_difficulty
-] call DMS_CreateMarker;
+] call DMS_fnc_CreateMarker;
 
 // Record time here (for logging purposes, otherwise you could just put "diag_tickTime" into the "DMS_AddMissionToMonitor" parameters directly)
 _time = diag_tickTime;
@@ -110,7 +110,7 @@ _added =
 	[_msgWIN,_msgLOSE],
 	_markers,
 	_side
-] call DMS_AddMissionToMonitor;
+] call DMS_fnc_AddMissionToMonitor;
 
 // Check to see if it was added correctly, otherwise delete the stuff
 if !(_added) exitWith
@@ -129,7 +129,7 @@ if !(_added) exitWith
 		_cleanup pushBack (_x select 0);
 	} foreach (_missionObjs select 2);
 
-	_cleanup call DMS_CleanUp;
+	_cleanup call DMS_fnc_CleanUp;
 
 
 	// Delete the markers directly
@@ -142,7 +142,7 @@ if !(_added) exitWith
 
 
 // Notify players
-_msgStart call DMS_BroadcastMissionStatus;
+_msgStart call DMS_fnc_BroadcastMissionStatus;
 
 
 

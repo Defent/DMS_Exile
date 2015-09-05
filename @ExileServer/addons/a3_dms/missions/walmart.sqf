@@ -16,7 +16,7 @@ _side = "bandit";
 
 
 // find position
-_pos = [10,100] call DMS_findSafePos;
+_pos = [10,100] call DMS_fnc_findSafePos;
 
 
 // Set general mission difficulty
@@ -34,11 +34,11 @@ _group =
 	"random",				// "random","hardcore","difficult","moderate", or "easy"
 	"random", 				// "random","assault","MG","sniper" or "unarmed" OR [_type,_launcher]
 	_side 					// "bandit","hero", etc.
-] call DMS_SpawnAIGroup;
+] call DMS_fnc_SpawnAIGroup;
 
 
 // Create Crate
-_crate = ["Box_NATO_Wps_F",_pos] call DMS_SpawnCrate;
+_crate = ["Box_NATO_Wps_F",_pos] call DMS_fnc_SpawnCrate;
 _wreck1 = createVehicle ["Land_i_Shop_01_V1_F",[(_pos select 0) - 10, (_pos select 1),-0.1],[], 0, "CAN_COLLIDE"];
 _wreck2 = createVehicle ["Land_Sacks_goods_F",[(_pos select 0) - 2, (_pos select 1),-0.8],[], 0, "CAN_COLLIDE"];
 _wreck3 = createVehicle ["Land_StallWater_F",[(_pos select 0) - 5, (_pos select 1),-0.8],[], 0, "CAN_COLLIDE"];
@@ -64,8 +64,8 @@ _missionAIUnits =
 _missionObjs =
 [
 	[_wreck1,_wreck2,_wreck3,_wreck4,_wreck5],
-	[_crate],
-	_crate_loot_values
+	[],
+	[[_crate,_crate_loot_values]]
 ];
 
 // Define Mission Start message
@@ -87,7 +87,7 @@ _markers =
 	_pos,
 	_missionName,
 	_difficulty
-] call DMS_CreateMarker;
+] call DMS_fnc_CreateMarker;
 
 // Record time here (for logging purposes, otherwise you could just put "diag_tickTime" into the "DMS_AddMissionToMonitor" parameters directly)
 _time = diag_tickTime;
@@ -115,7 +115,7 @@ _added =
 	[_msgWIN,_msgLOSE],
 	_markers,
 	_side
-] call DMS_AddMissionToMonitor;
+] call DMS_fnc_AddMissionToMonitor;
 
 // Check to see if it was added correctly, otherwise delete the stuff
 if !(_added) exitWith
@@ -130,7 +130,7 @@ if !(_added) exitWith
 
 	_cleanup pushBack ((_missionObjs select 0)+(_missionObjs select 1));
 
-	_cleanup call DMS_CleanUp;
+	_cleanup call DMS_fnc_CleanUp;
 
 
 	// Delete the markers directly
@@ -143,7 +143,7 @@ if !(_added) exitWith
 
 
 // Notify players
-_msgStart call DMS_BroadcastMissionStatus;
+_msgStart call DMS_fnc_BroadcastMissionStatus;
 
 
 

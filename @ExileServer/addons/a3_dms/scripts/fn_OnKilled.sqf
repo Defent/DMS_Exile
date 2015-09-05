@@ -1,5 +1,5 @@
 /*
-	DMS_OnKilled
+	DMS_fnc_OnKilled
 	Created by eraser1 and Defent
 	Influenced by WAI
 
@@ -11,7 +11,7 @@
 		],
 		_side,				// "bandit" only for now
 		_type				// not currently used
-	] call DMS_OnKilled;
+	] call DMS_fnc_OnKilled;
 */
 
 
@@ -68,7 +68,7 @@ else
 
 if(DMS_ai_remove_launchers && {_launcher != ""}) then
 {
-	_rockets = _launcher call DMS_selectMagazine;
+	_rockets = _launcher call DMS_fnc_selectMagazine;
 	_unit removeWeapon _launcher;
 	
 	{

@@ -1,5 +1,5 @@
 /*
-	DMS_MissionStatusCheck
+	DMS_fnc_MissionStatusCheck
 
 	Created by eraser1
 
@@ -36,7 +36,7 @@ private ["_pos", "_success", "_timeStarted", "_timeUntilFail", "_units", "_build
 			diag_log format ["DMS_DEBUG MissionStatusCheck :: Checking Mission Status (index %1): %2",_forEachIndex,_x];
 		};
 		_pos						= _x select 0;
-		_success					= (_x select 1) call DMS_MissionSuccessState;
+		_success					= (_x select 1) call DMS_fnc_MissionSuccessState;
 		_timeStarted				= _x select 2 select 0;
 		_timeUntilFail				= _x select 2 select 1;
 		_units						= _x select 3;
@@ -64,11 +64,11 @@ private ["_pos", "_success", "_timeStarted", "_timeUntilFail", "_units", "_build
 			_arr = DMS_Mission_Arr deleteAt _forEachIndex;
 
 			{
-				_x call DMS_FillCrate;
+				_x call DMS_fnc_FillCrate;
 			} forEach _crate_info_array;
 
-			_msgWIN call DMS_BroadcastMissionStatus;
-			[_markers,"win"] call DMS_RemoveMarkers;
+			_msgWIN call DMS_fnc_BroadcastMissionStatus;
+			[_markers,"win"] call DMS_fnc_RemoveMarkers;
 
 			throw format ["Mission Success at %1 with message %2.",_pos,_msgWIN];
 		};
@@ -89,7 +89,7 @@ private ["_pos", "_success", "_timeStarted", "_timeUntilFail", "_units", "_build
 				_cleanupList pushBack (_x select 0);
 			} forEach _crate_info_array;
 
-			_cleanupList call DMS_CleanUp;
+			_cleanupList call DMS_fnc_CleanUp;
 
 
 			if (_missionSide == "bandit") then
@@ -103,8 +103,8 @@ private ["_pos", "_success", "_timeStarted", "_timeUntilFail", "_units", "_build
 			
 			_arr = DMS_Mission_Arr deleteAt _forEachIndex;
 
-			_msgLose call DMS_BroadcastMissionStatus;
-			[_markers,"lose"] call DMS_RemoveMarkers;
+			_msgLose call DMS_fnc_BroadcastMissionStatus;
+			[_markers,"lose"] call DMS_fnc_RemoveMarkers;
 
 			throw format ["Mission Fail at %1 with message %2.",_pos,_msgLose];
 		};

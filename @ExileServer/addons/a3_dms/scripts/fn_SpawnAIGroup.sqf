@@ -1,5 +1,5 @@
 /*
-	DMS_SpawnAIGroup
+	DMS_fnc_SpawnAIGroup
 	Created by eraser1
 	Based off of WAI
 
@@ -10,7 +10,7 @@
 		_difficulty,			// "random","hardcore","difficult","moderate", or "easy"
 		_type 					// "random","assault","MG","sniper" or "unarmed" OR [_type,_launcher]
 		_side 					// Only "bandit" is supported atm
-	] call DMS_SpawnAIGroup;
+	] call DMS_fnc_SpawnAIGroup;
 
 	Returns AI Group
 */
@@ -74,7 +74,7 @@ if(_pos_z == 0) then
 _group = createGroup (missionNamespace getVariable [format ["DMS_%1Side",_side],EAST]);
 
 for "_i" from 1 to _count do {
-	_unit = [_group,[_pos_x,_pos_y,_pos_z],_type,_difficulty,_side] call DMS_SpawnAISoldier;
+	_unit = [_group,[_pos_x,_pos_y,_pos_z],_type,_difficulty,_side] call DMS_fnc_SpawnAISoldier;
 };
 
 // An AI will definitely spawn with a launcher if you define type
@@ -104,7 +104,7 @@ _group setFormation "WEDGE";
 
 if(_pos_z == 0) then
 {
-	[_group,_pos,_difficulty] call DMS_SetGroupBehavior;
+	[_group,_pos,_difficulty] call DMS_fnc_SetGroupBehavior;
 };
 
 

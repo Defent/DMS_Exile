@@ -1,5 +1,5 @@
 /*
-	DMS_CreateMarker
+	DMS_fnc_CreateMarker
 	Created by Defent and eraser1
 
 	Usage:
@@ -7,7 +7,7 @@
 		_pos,					// Array: Position of the markers
 		_text,					// String: The text on the map marker that will appear on the map
 		_difficulty,			// !!!OPTIONAL!!! String: "hardcore","difficult","moderate", "easy", OR custom color
-	] call DMS_CreateMarker;
+	] call DMS_fnc_CreateMarker;
 
 	Returns markers in format:
 	[

@@ -1,9 +1,9 @@
 /*
-	DMS_selectMagazine
+	DMS_fnc_selectMagazine
 	Created by eraser1
 
 	Usage:
-	_weaponClassName call DMS_selectMagazine;
+	_weaponClassName call DMS_fnc_selectMagazine;
 
 	Apply magazine type filters if needed
 */

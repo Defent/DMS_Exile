@@ -1,5 +1,5 @@
 /*
-	DMS_AddMissionToMonitor
+	DMS_fnc_AddMissionToMonitor
 	Created by eraser1
 
 	Parses and adds mission information to "DMS_Mission_Arr" for Mission Monitoring.
@@ -43,7 +43,7 @@
 		[_msgWIN,_msgLose],
 		[_markerDot,_markerCircle],
 		_side
-	] call DMS_AddMissionToMonitor;
+	] call DMS_fnc_AddMissionToMonitor;
 
 	Returns whether or not info was added successfully
 
@@ -69,7 +69,7 @@ _OK = params
 
 if (!_OK) exitWith
 {
-	diag_log format ["DMS ERROR :: Calling DMS_AddMissionToMonitor with invalid parameters: %1",_this];
+	diag_log format ["DMS ERROR :: Calling DMS_fnc_AddMissionToMonitor with invalid parameters: %1",_this];
 	false;
 };
 
