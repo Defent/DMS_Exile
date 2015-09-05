@@ -11,18 +11,21 @@ so your ```_aLocalM``` would look like:
     _aLocalM = ["DMS_MissionMarkerCircle","DMS_MissionMarkerDot"];
 ```
 
-## OPTIONAL:
+
+## Optional:
+
+
+### To modify the config:
 * Download the a3_dms folder
 * Edit the config.sqf to your preferences.
-* Repack the a3_dms folder with a PBO tool
-* Follow the "To install:" steps :D
+* Pack the a3_dms folder with a PBO tool (**PBO Manager** or Arma 3 Tools suite)
+* Follow the "To install:" steps useing the PBO you just created instead of the pre-packed one.
 
 
-## ~~HEADLESS CLIENT:~~
+### ~~HEADLESS CLIENT:~~
 ![Warning](https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Achtung.svg/200px-Achtung.svg.png)
 
-DO NOT USE HEADLESS CLIENT. IT IS CURRENTLY BUGGED AS OF SEPTEMBER 4TH, 2015. 
-IT WILL CRASH YOUR SERVER
+**Headless client is currently broken as of the 4th of September, do not use it as it WILL crash your server.**
 
 ~~Add this code to the TOP of your initPlayerLocal.sqf~~ 
 
@@ -37,5 +40,7 @@ if (!hasInterface && !isServer) then
 	};
 };
 ```
-
-Thanks to [shaworth](https://github.com/shaworth) for making the README all nice and pretty :)
+#### Thanks:
+- [shaworth](https://github.com/shaworth) for making the README all nice and pretty :)
+- [Defent](https://github.com/Defent) for creating Defent's Mission System.
+- [eraser1](https://github.com/eraser1) for his constant codebase improvments.
