@@ -52,7 +52,7 @@ DMS_DEBUG = false;
 	//Mission notification settings
 	DMS_PlayerNotificationTypes =		[							// Notification types. Supported values are: ["dynamicTextRequest", "standardHintRequest", "systemChatRequest"]
 											//"dynamicTextRequest", <--- Won't work in Exile v0.9.19
-											"standardHintRequest",
+											"standardHintRequest"
 											//"systemChatRequest"
 										];
 	DMS_dynamicText_Size				= "0.65";					// Dynamic Text size for "dynamicTextRequest" notification type.
