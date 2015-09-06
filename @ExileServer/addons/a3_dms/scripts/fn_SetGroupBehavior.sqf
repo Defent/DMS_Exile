@@ -34,7 +34,7 @@ if(_difficulty == "random") then
 	_difficulty = DMS_ai_skill_random call BIS_fnc_selectRandom;
 };
 
-_radius = missionNamespace getVariable [format["DMS_AI_WP_Radius_%1"],40];
+_radius = missionNamespace getVariable [format["DMS_AI_WP_Radius_%1",_difficulty],40];
 
 for "_i" from 0 to 359 step 45 do {
 	_npos = [(_pos select 0) + (sin(_i)*_radius), (_pos select 1) + (cos(_i)*_radius)];
