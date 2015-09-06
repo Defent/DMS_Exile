@@ -53,18 +53,26 @@ DMS_DEBUG = false;
 	DMS_PlayerNotificationTypes =		[							// Notification types. Supported values are: ["dynamicTextRequest", "standardHintRequest", "systemChatRequest"]
 											//"dynamicTextRequest", <--- Won't work in Exile v0.9.19
 											"standardHintRequest",
-											"systemChatRequest"
+											//"systemChatRequest"
 										];
 	DMS_dynamicText_Size				= "0.65";					// Dynamic Text size for "dynamicTextRequest" notification type.
 	DMS_dynamicText_Color				= "#FFCC00";				// Dynamic Text color for "dynamicTextRequest" notification type.
 
 	DMS_MissionTypes =					[							//	List of missions with spawn chances. If they add up to 100%, they represent the percentage chance each one will spawn
-											["mission1",25],
-											["mission2",25],
-											["mission3",15],
-											["mission4",10],
-											["bauhaus",45],
-											["lost_battalion",30],
+											["bandits",25],
+											["bauhaus",25],
+											["beertransport",15],
+											["behindenemylines",10],
+											["blackhawkdown",45],
+											["cardealer",25],
+											["constructionsite",35],
+											["donthasslethehoff",30],
+											["foodtransport",25],
+											["guntransport",20],
+											["humanitarian",25],
+											["lost_battalion",10],
+											["mercenaries",20],
+											["roguenavyseals",15],
 											["walmart",20]
 										];
 
