@@ -70,6 +70,7 @@ if (!hasInterface && !isServer) then
 - [Defent](https://github.com/Defent) for creating Defent's Mission System.
 - [eraser1](https://github.com/eraser1) for his constant codebase improvments.
 - [Zupa](https://github.com/Windmolders) for suggestions and coding help.
+- [Nawuko](https://github.com/Nawuko) for catching a silly mistake :P
 - [shaworth](https://github.com/shaworth) and [KawaiiPotato](https://github.com/KawaiiPotato) for making the README all nice and pretty :)
 
 
