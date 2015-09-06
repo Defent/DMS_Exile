@@ -5,7 +5,7 @@
 	Called from DMS_selectMission
 */
 
-private ["_num", "_side", "_pos", "_difficulty", "_AICount", "_group", "_crate", "_crate2", "_crate_loot_values", "_msgStart", "_msgWIN", "_msgLOSE", "_missionName", "_missionAIUnits", "_missionObjs", "_markers", "_time", "_added"];
+private ["_num", "_side", "_pos", "_difficulty", "_AICount", "_group", "_crate1", "_crate_loot_values1", "_crate2", "_crate_loot_values2", "_msgStart", "_msgWIN", "_msgLOSE", "_missionName", "_missionAIUnits", "_missionObjs", "_markers", "_time", "_added","_wreck"];
 
 // For logging purposes
 _num = DMS_MissionCount;
@@ -20,12 +20,12 @@ _pos = [10,100] call DMS_fnc_findSafePos;
 
 
 // Set general mission difficulty
-_difficulty = "random";
+_difficulty = "difficult";
 
 
 // Create AI
 // TODO: Spawn AI only when players are nearby
-_AICount = 7 + (round (random 2));
+_AICount = 6 + (round (random 2));
 
 _group =
 [
@@ -37,14 +37,16 @@ _group =
 ] call DMS_fnc_SpawnAIGroup;
 
 
-// Create Crate
-_crate = ["Box_NATO_Wps_F",_pos] call DMS_fnc_SpawnCrate;
+// Create Crates
+_crate1 = ["Box_NATO_Wps_F",_pos] call DMS_fnc_SpawnCrate;
+
+_wreck = createVehicle ["Land_UWreck_Heli_Attack_02_F",[(_pos select 0) - 10, (_pos select 1),-0.2],[], 0, "CAN_COLLIDE"];
 
 // Set crate loot values
-_crate_loot_values =
+_crate_loot_values1 =
 [
 	8,		// Weapons
-	5,		// Items
+	4,		// Items
 	2 		// Backpacks
 ];
 
@@ -58,22 +60,22 @@ _missionAIUnits =
 // Define mission-spawned objects and loot values
 _missionObjs =
 [
+	[_wreck],
 	[],
-	[],
-	[[_crate,_crate_loot_values]]
+	[[_crate1,_crate_loot_values1]]
 ];
 
 // Define Mission Start message
-_msgStart = format["<t color='#FFFF00' size='1.25'>Lost Battalion! </t><br/> A battalion of soldiers have gotten lost in convict land! Eliminate them!"];
+_msgStart = format["<t color='#FFFF00' size='1.25'>Blackhawk down! </t><br/> We got a Blackhawk down, Super 6-1 is down, secure the perimeter and claim what can be claimed!"];
 
 // Define Mission Win message
-_msgWIN = format["<t color='#0080ff' size='1.25'>Lost Battalion! </t><br/> Convicts have successfully eliminated the lost battalion!"];
+_msgWIN = format["<t color='#0080ff' size='1.25'>Blackhawk down! </t><br/> Convicts have secured the blackhawk and claimed the remaining loot!"];
 
 // Define Mission Lose message
-_msgLOSE = format["<t color='#FF0000' size='1.25'>Lost Battalion! </t><br/> Whittlesey escaped with his Lost Battalion!"];
+_msgLOSE = format["<t color='#FF0000' size='1.25'>Blackhawk down! </t><br/> The blackhawk has been sized by the enemy and the loot has been destroyed!"];
 
 // Define mission name (for map marker and logging)
-_missionName = "Lost Battalion";
+_missionName = "Blackhawk Down";
 
 // Create Markers
 _markers =

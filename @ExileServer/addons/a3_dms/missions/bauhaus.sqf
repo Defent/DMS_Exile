@@ -72,15 +72,14 @@ _missionObjs =
 	[[_crate1,_crate_loot_values1],[_crate2,_crate_loot_values2]]
 ];
 
-// Define Mission Start message
-_msgStart = format["A Bauhaus truck has crashed and lost all its building supplies, get there quickly!"];
+
+_msgStart = format["<t color='#FFFF00' size='1.25'>Bauhaus Truck </t><br/> A Bauhaus truck has crashed and lost all its building supplies, get there quickly!"];
 
 // Define Mission Win message
-_msgWIN = format["Convicts have successfully claimed the crashed Buahaus truck %1!"];
+_msgWIN = format["<t color='#0080ff' size='1.25'>Bauhaus Truck </t><br/> Convicts have successfully claimed the crashed Buahaus truck!"];
 
 // Define Mission Lose message
-_msgLOSE = format["The Bauhause truck has been repaired and escaped!"];
-
+_msgLOSE = format["<t color='#FF0000' size='1.25'>Bauhaus Truck! </t><br/> The Bauhause truck has been repaired and escaped!"];
 
 // Define mission name (for map marker and logging)
 _missionName = "Bauhaus Truck";

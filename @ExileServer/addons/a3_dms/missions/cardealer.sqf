@@ -1,8 +1,11 @@
 /*
-	Sample mission (duplicate for testing purposes)
+	Sample mission
+	Created by Defent and eraser1
+
+	Called from DMS_selectMission
 */
 
-private ["_num", "_side", "_pos", "_difficulty", "_AICount", "_group", "_crate", "_crate_loot_values", "_msgStart", "_msgWIN", "_msgLOSE", "_missionName", "_missionAIUnits", "_missionObjs", "_markers", "_time", "_added"];
+private ["_num", "_side", "_pos", "_difficulty", "_AICount", "_group", "_crate1", "_crate_loot_values1", "_crate2", "_crate_loot_values2", "_msgStart", "_msgWIN", "_msgLOSE", "_missionName", "_missionAIUnits", "_missionObjs", "_markers", "_time", "_added","_vehicle1","_vehicle2","_wreck"];
 
 // For logging purposes
 _num = DMS_MissionCount;
@@ -13,36 +16,43 @@ _side = "bandit";
 
 
 // find position
-_pos = call DMS_fnc_findSafePos;
+_pos = [10,100] call DMS_fnc_findSafePos;
 
 
 // Set general mission difficulty
-_difficulty = "difficult";
+_difficulty = "easy";
 
 
 // Create AI
 // TODO: Spawn AI only when players are nearby
-_AICount = 6 + (round (random 2));
+_AICount = 3 + (round (random 2));
 
 _group =
 [
 	_pos,					// Position of AI
 	_AICount,				// Number of AI
-	"difficult",			// "random","hardcore","difficult","moderate", or "easy"
+	"random",				// "random","hardcore","difficult","moderate", or "easy"
 	"random", 				// "random","assault","MG","sniper" or "unarmed" OR [_type,_launcher]
 	_side 					// "bandit","hero", etc.
 ] call DMS_fnc_SpawnAIGroup;
 
 
-// Create Crate
-_crate = ["Box_NATO_Wps_F",_pos] call DMS_fnc_SpawnCrate;
+// Create Crates
+_crate1 = ["Box_NATO_Wps_F",_pos] call DMS_fnc_SpawnCrate;
+
+_wreck = createVehicle ["Land_FuelStation_Build_F",[(_pos select 0) - 10, (_pos select 1),-0.2],[], 0, "CAN_COLLIDE"];
+
+_vehicle1 = ["Exile_Car_SUV_Red",_pos] call DMS_fnc_SpawnNonPersistentVehicle;
+_vehicle2 = ["Exile_Car_SUV_Grey",_pos] call DMS_fnc_SpawnNonPersistentVehicle;
+
+
 
 // Set crate loot values
-_crate_loot_values =
+_crate_loot_values1 =
 [
 	5,		// Weapons
-	10,		// Items
-	3 		// Backpacks
+	5,		// Items
+	2 		// Backpacks
 ];
 
 
@@ -55,23 +65,22 @@ _missionAIUnits =
 // Define mission-spawned objects and loot values
 _missionObjs =
 [
-	[],			// No spawned buildings
-	[],
-	[[_crate,_crate_loot_values]]
+	[_wreck],
+	[_vehicle1,_vehicle2],
+	[[_crate1,_crate_loot_values1]]
 ];
 
 // Define Mission Start message
-_msgStart = format["A group of mercenaries has been spotted at %1! Kill them and take their equipment!",mapGridPosition _pos];
+_msgStart = format["<t color='#FFFF00' size='1.25'>Car Dealer Robbery! </t><br/> A local car dealership is being robbed by bandits, stop them!"];
 
 // Define Mission Win message
-_msgWIN = format["Convicts have successfully eliminated the mercenaries at %1!",mapGridPosition _pos];
+_msgWIN = format["<t color='#0080ff' size='1.25'>Car Dealer Robbery! </t><br/> Convicts have secured the local dealership and removed the bandits!"];
 
 // Define Mission Lose message
-_msgLOSE = format["The mercenaries are no longer at %1!",mapGridPosition _pos];
-
+_msgLOSE = format["<t color='#FF0000' size='1.25'>Car Dealer Robbery! </t><br/> The bandits have escaped with the cars and left nothing but a trail of smoke behind!"];
 
 // Define mission name (for map marker and logging)
-_missionName = "Mercenary Group";
+_missionName = "Car Dealer Robbery";
 
 // Create Markers
 _markers =

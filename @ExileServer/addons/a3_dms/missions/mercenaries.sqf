@@ -1,5 +1,8 @@
 /*
-	Sample mission (duplicate for testing purposes)
+	Sample mission
+	Created by Defent and eraser1
+
+	Called from DMS_selectMission
 */
 
 private ["_num", "_side", "_pos", "_difficulty", "_AICount", "_group", "_crate", "_crate_loot_values", "_msgStart", "_msgWIN", "_msgLOSE", "_missionName", "_missionAIUnits", "_missionObjs", "_markers", "_time", "_added"];
@@ -13,16 +16,16 @@ _side = "bandit";
 
 
 // find position
-_pos = call DMS_fnc_findSafePos;
+_pos = [10,100] call DMS_fnc_findSafePos;
 
 
 // Set general mission difficulty
-_difficulty = "easy";
+_difficulty = "moderate";
 
 
 // Create AI
 // TODO: Spawn AI only when players are nearby
-_AICount = 4 + (round (random 2));
+_AICount = 6 + (round (random 2));
 
 _group =
 [
@@ -55,19 +58,19 @@ _missionAIUnits =
 // Define mission-spawned objects and loot values
 _missionObjs =
 [
-	[],			// No spawned buildings
+	[],
 	[],
 	[[_crate,_crate_loot_values]]
 ];
+
 // Define Mission Start message
-_msgStart = format["A group of mercenaries has been spotted at %1! Kill them and take their equipment!",mapGridPosition _pos];
+_msgStart = format["<t color='#FFFF00' size='1.25'>Mercenary Group! </t><br/> A group of mercenaries has been spotted. Kill them and take their equipment!"];
 
 // Define Mission Win message
-_msgWIN = format["Convicts have successfully eliminated the mercenaries at %1!",mapGridPosition _pos];
+_msgWIN = format["<t color='#0080ff' size='1.25'>Mercenary Group! </t><br/> Convicts have successfully eliminated the mercenaries"];
 
 // Define Mission Lose message
-_msgLOSE = format["The mercenaries are no longer at %1!",mapGridPosition _pos];
-
+_msgLOSE = format["<t color='#FF0000' size='1.25'>Mercenary Group! </t><br/> The mercenaries have escaped and they took all their loot with them!"];
 
 // Define mission name (for map marker and logging)
 _missionName = "Mercenary Group";

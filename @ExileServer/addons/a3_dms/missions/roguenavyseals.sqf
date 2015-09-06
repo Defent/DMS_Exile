@@ -1,5 +1,8 @@
 /*
-	Sample mission (duplicate for testing purposes)
+	Sample mission
+	Created by Defent and eraser1
+
+	Called from DMS_selectMission
 */
 
 private ["_num", "_side", "_pos", "_difficulty", "_AICount", "_group", "_crate", "_crate_loot_values", "_msgStart", "_msgWIN", "_msgLOSE", "_missionName", "_missionAIUnits", "_missionObjs", "_markers", "_time", "_added"];
@@ -13,7 +16,7 @@ _side = "bandit";
 
 
 // find position
-_pos = call DMS_fnc_findSafePos;
+_pos = [10,100] call DMS_fnc_findSafePos;
 
 
 // Set general mission difficulty
@@ -22,13 +25,13 @@ _difficulty = "hardcore";
 
 // Create AI
 // TODO: Spawn AI only when players are nearby
-_AICount = 5 + (round (random 2));
+_AICount = 4 + (round (random 2));
 
 _group =
 [
 	_pos,					// Position of AI
 	_AICount,				// Number of AI
-	"hardcore",				// "random","hardcore","difficult","moderate", or "easy"
+	"random",				// "random","hardcore","difficult","moderate", or "easy"
 	"random", 				// "random","assault","MG","sniper" or "unarmed" OR [_type,_launcher]
 	_side 					// "bandit","hero", etc.
 ] call DMS_fnc_SpawnAIGroup;
@@ -41,8 +44,8 @@ _crate = ["Box_NATO_Wps_F",_pos] call DMS_fnc_SpawnCrate;
 _crate_loot_values =
 [
 	7,		// Weapons
-	15,		// Items
-	5 		// Backpacks
+	2,		// Items
+	3 		// Backpacks
 ];
 
 
@@ -55,23 +58,22 @@ _missionAIUnits =
 // Define mission-spawned objects and loot values
 _missionObjs =
 [
-	[],			// No spawned buildings
+	[],
 	[],
 	[[_crate,_crate_loot_values]]
 ];
 
 // Define Mission Start message
-_msgStart = format["A group of mercenaries has been spotted at %1! Kill them and take their equipment!",mapGridPosition _pos];
+_msgStart = format["<t color='#FFFF00' size='1.25'>Car Dealer Robbery! </t><br/> A squad of proffesional Navy Seals team is performing gorilla warfare in convict land, deal with them!"];
 
 // Define Mission Win message
-_msgWIN = format["Convicts have successfully eliminated the mercenaries at %1!",mapGridPosition _pos];
+_msgWIN = format["<t color='#0080ff' size='1.25'>Car Dealer Robbery! </t><br/> Convicts have successfully taken care of the Navy Seals, you must be the top of your class!"];
 
 // Define Mission Lose message
-_msgLOSE = format["The mercenaries are no longer at %1!",mapGridPosition _pos];
-
+_msgLOSE = format["<t color='#FF0000' size='1.25'>Car Dealer Robbery! </t><br/> The Navy Seals have escaped and are now planning their next raid!"];
 
 // Define mission name (for map marker and logging)
-_missionName = "Mercenary Group";
+_missionName = "Rogue Navy Seals";
 
 // Create Markers
 _markers =

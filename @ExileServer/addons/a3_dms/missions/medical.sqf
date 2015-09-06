@@ -1,11 +1,8 @@
 /*
-	Sample mission
-	Created by Defent and eraser1
-
-	Called from DMS_selectMission
+	Sample mission (duplicate for testing purposes)
 */
 
-private ["_num", "_side", "_pos", "_difficulty", "_AICount", "_group", "_crate", "_crate2", "_crate_loot_values", "_msgStart", "_msgWIN", "_msgLOSE", "_missionName", "_missionAIUnits", "_missionObjs", "_markers", "_time", "_added"];
+private ["_num", "_side", "_pos", "_difficulty", "_AICount", "_group", "_crate", "_crate_loot_values", "_msgStart", "_msgWIN", "_msgLOSE", "_missionName", "_missionAIUnits", "_missionObjs", "_markers", "_time", "_added","_building","_vehicle"];
 
 // For logging purposes
 _num = DMS_MissionCount;
@@ -16,22 +13,22 @@ _side = "bandit";
 
 
 // find position
-_pos = [10,100] call DMS_fnc_findSafePos;
+_pos = call DMS_fnc_findSafePos;
 
 
 // Set general mission difficulty
-_difficulty = "random";
+_difficulty = "easy";
 
 
 // Create AI
 // TODO: Spawn AI only when players are nearby
-_AICount = 7 + (round (random 2));
+_AICount = 4 + (round (random 2));
 
 _group =
 [
 	_pos,					// Position of AI
 	_AICount,				// Number of AI
-	"random",				// "random","hardcore","difficult","moderate", or "easy"
+	"difficult",			// "random","hardcore","difficult","moderate", or "easy"
 	"random", 				// "random","assault","MG","sniper" or "unarmed" OR [_type,_launcher]
 	_side 					// "bandit","hero", etc.
 ] call DMS_fnc_SpawnAIGroup;
@@ -40,12 +37,17 @@ _group =
 // Create Crate
 _crate = ["Box_NATO_Wps_F",_pos] call DMS_fnc_SpawnCrate;
 
+_building = createVehicle ["Land_Medevac_HQ_V1_F",[(_pos select 0) - 10, (_pos select 1),-0.1],[], 0, "CAN_COLLIDE"];
+
+_vehicle = ["I_Truck_02_medical_F",_pos] call DMS_fnc_SpawnNonPersistentVehicle;
+
+
 // Set crate loot values
 _crate_loot_values =
 [
-	8,		// Weapons
-	5,		// Items
-	2 		// Backpacks
+	5,		// Weapons
+	[9,["Exile_Item_InstaDoc","Exile_Item_PlasticBottleFreshWater"]],		// Items
+	3 		// Backpacks
 ];
 
 
@@ -58,22 +60,22 @@ _missionAIUnits =
 // Define mission-spawned objects and loot values
 _missionObjs =
 [
-	[],
-	[],
+	[_building],			// No spawned buildings
+	[_vehicle],
 	[[_crate,_crate_loot_values]]
 ];
 
 // Define Mission Start message
-_msgStart = format["<t color='#FFFF00' size='1.25'>Lost Battalion! </t><br/> A battalion of soldiers have gotten lost in convict land! Eliminate them!"];
+_msgStart = format["<t color='#FFFF00' size='1.25'>Deranged Doctors! </t><br/> A group of deranged doctors have set up a field hospital, sieze it for your own!"];
 
 // Define Mission Win message
-_msgWIN = format["<t color='#0080ff' size='1.25'>Lost Battalion! </t><br/> Convicts have successfully eliminated the lost battalion!"];
+_msgWIN = format["<t color='#0080ff' size='1.25'>Deranged Doctors! </t><br/> Convicts have claimed the medical supplies for their own!"];
 
 // Define Mission Lose message
-_msgLOSE = format["<t color='#FF0000' size='1.25'>Lost Battalion! </t><br/> Whittlesey escaped with his Lost Battalion!"];
+_msgLOSE = format["<t color='#FF0000' size='1.25'>Deranged Doctors! </t><br/> Hawkeye has ran off with the medical supplies, everything is gone!"];
 
 // Define mission name (for map marker and logging)
-_missionName = "Lost Battalion";
+_missionName = "Deranged Doctors";
 
 // Create Markers
 _markers =
