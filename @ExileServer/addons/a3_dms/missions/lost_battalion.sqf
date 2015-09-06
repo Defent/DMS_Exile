@@ -12,7 +12,7 @@ _num = DMS_MissionCount;
 
 
 // Set mission side (only "bandit" is supported for now)
-_side = "bandit";
+_side = "moderate";
 
 
 // find position
