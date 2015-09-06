@@ -12,7 +12,7 @@ _num = DMS_MissionCount;
 
 
 // Set mission side (only "bandit" is supported for now)
-_side = "moderate";
+_side = "bandit";
 
 
 // find position
@@ -20,7 +20,7 @@ _pos = [10,100] call DMS_fnc_findSafePos;
 
 
 // Set general mission difficulty
-_difficulty = "random";
+_difficulty = "moderate";
 
 
 // Create AI
