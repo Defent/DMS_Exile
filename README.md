@@ -75,6 +75,9 @@ if (!hasInterface && !isServer) then
 
 
 ## Changelog:
+#### September 7, 2015 (7:00 PM CST-America):
+* AI bodies should now be cleared if configured to do so with "DMS_clear_AI_body" and "DMS_clear_AI_body_chance".
+
 #### September 5, 2015 (1:00 AM CST-America):
 * Created new function "DMS_fnc_IsPlayerNearby" to replace "ExileServer_util_position_isPlayerNearby".
 * Fix IR Strobes spawning inside the crate and not appearing.

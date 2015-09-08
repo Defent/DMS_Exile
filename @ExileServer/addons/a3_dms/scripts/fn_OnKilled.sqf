@@ -42,6 +42,17 @@ if (isPlayer _player) then
 			};
 		} forEach allUnits;
 	};
+
+	if (DMS_clear_AI_body && {(random 100) <= DMS_clear_AI_body_chance}) then
+	{
+		removeAllWeapons 				_unit;
+		removeAllAssignedItems 			_unit;
+		removeAllItemsWithMagazines 	_unit;
+		removeHeadgear 					_unit;
+		removeUniform 					_unit;
+		removeVest 						_unit;
+		removeBackpack 					_unit;
+	};
 }
 else
 {
@@ -60,6 +71,7 @@ else
 		removeAllWeapons 				_unit;
 		removeAllAssignedItems 			_unit;
 		removeAllItemsWithMagazines 	_unit;
+		removeHeadgear 					_unit;
 		removeUniform 					_unit;
 		removeVest 						_unit;
 		removeBackpack 					_unit;
