@@ -87,8 +87,9 @@ DMS_DEBUG = false;
 	DMS_banditSide						= EAST;						// The side (team) that AI Bandits will spawn on
 	DMS_clear_AI_body					= false;					// Clear AI body as soon as they die
 	DMS_clear_AI_body_chance			= 50;						// Percentage chance that AI bodies will be cleared when they die
-	DMS_remove_roadkill					= false; 					// Remove gear from AI bodies that are roadkilled
-	DMS_remove_roadkill_chance			= 0;						// Percentage chance that roadkilled AI bodies will be deleted
+	DMS_credit_roadkill					= false;					// Credit players with respect/poptabs if they kill an AI by running it over
+	DMS_remove_roadkill					= true; 					// Remove gear from AI bodies that are roadkilled
+	DMS_remove_roadkill_chance			= 50;						// Percentage chance that roadkilled AI bodies will be deleted
 	DMS_RemoveNVG						= false;					// Remove NVGs from AI bodies
 
 	DMS_ai_offload_to_client			= true;						// Offload spawned AI groups to random clients. Helps with server performance.

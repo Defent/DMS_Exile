@@ -30,58 +30,22 @@ _type 		= _this select 2;
 _launcher 	= secondaryWeapon _unit;
 _playerObj	= objNull;
 
-if (isPlayer _player) then
+// Remove gear according to configs
+if (DMS_clear_AI_body && {(random 100) <= DMS_clear_AI_body_chance}) then
 {
-	_playerObj = _player;
-
-	if (DMS_ai_share_info) then
-	{
-		{
-			if (((position _x) distance (position _unit)) <= DMS_ai_share_info_distance ) then {
-				_x reveal [_player, 4.0];
-			};
-		} forEach allUnits;
-	};
-
-	if (DMS_clear_AI_body && {(random 100) <= DMS_clear_AI_body_chance}) then
-	{
-		removeAllWeapons 				_unit;
-		removeAllAssignedItems 			_unit;
-		removeAllItemsWithMagazines 	_unit;
-		removeHeadgear 					_unit;
-		removeUniform 					_unit;
-		removeVest 						_unit;
-		removeBackpack 					_unit;
-	};
-}
-else
-{
-	// Remove this due to reports of issues
-	/*
-	_playerObj = gunner _player;
-
-	if (isNull _playerObj) then
-	{
-		_playerObj = driver _player;
-	};
-	*/
-
-	if ((DMS_clear_AI_body && {(random 100) <= DMS_clear_AI_body_chance}) || {DMS_remove_roadkill && {(random 100) <= DMS_remove_roadkill_chance}}) then
-	{
-		removeAllWeapons 				_unit;
-		removeAllAssignedItems 			_unit;
-		removeAllItemsWithMagazines 	_unit;
-		removeHeadgear 					_unit;
-		removeUniform 					_unit;
-		removeVest 						_unit;
-		removeBackpack 					_unit;
-	};
+	removeAllWeapons 				_unit;
+	removeAllAssignedItems 			_unit;
+	removeAllItemsWithMagazines 	_unit;
+	removeHeadgear 					_unit;
+	removeUniform 					_unit;
+	removeVest 						_unit;
+	removeBackpack 					_unit;
 };
 
 if(DMS_ai_remove_launchers && {_launcher != ""}) then
 {
 	_rockets = _launcher call DMS_fnc_selectMagazine;
-	_unit removeWeapon _launcher;
+	_unit removeWeaponGlobal _launcher;
 	
 	{
 		if(_x == _rockets) then {
@@ -95,6 +59,8 @@ if(DMS_RemoveNVG) then
 	_unit unlinkItem "NVGoggles";
 };
 
+
+// Give the AI a new leader if the killed unit was the leader
 // credit: https://github.com/SMVampire/VEMF/
 if (((count (units group _unit)) > 1) && {(leader group _unit) == _unit}) then
 {
@@ -105,7 +71,58 @@ if (((count (units group _unit)) > 1) && {(leader group _unit) == _unit}) then
 
 
 
-if ((!isNull _playerObj) && {((getPlayerUID _playerObj) != "") && {((vehicle _playerObj) == _playerObj)}}) then
+
+if (isPlayer _player) then
+{
+	_veh = vehicle _player;
+
+	_playerObj = _player;
+
+	// Reveal the killer to the AI units
+	if (DMS_ai_share_info) then
+	{
+		{
+			if (((position _x) distance (position _unit)) <= DMS_ai_share_info_distance ) then
+			{
+				_x reveal [_player, 4.0];
+			};
+		} forEach allUnits;
+	};
+
+	// Fix for players killing AI from mounted vehicle guns
+	if (!(_player isKindOf "Exile_Unit_Player") && {!isNull (gunner _player)}) then
+	{
+		_playerObj = gunner _player;
+	};
+
+
+	if (!(_veh isEqualTo _player) && {(driver _veh) isEqualTo _player}) then
+	{
+		_playerObj = driver _veh;
+
+
+		// Don't reward players with poptabs/respect if configured to do so
+		if !(DMS_credit_roadkill) then
+		{
+			_playerObj = objNull;
+		};
+
+
+		// Remove gear from roadkills if configured to do so
+		if (DMS_remove_roadkill && {(random 100) <= DMS_remove_roadkill_chance}) then
+		{
+			removeAllWeapons 				_unit;
+			removeAllAssignedItems 			_unit;
+			removeAllItemsWithMagazines 	_unit;
+			removeHeadgear 					_unit;
+			removeUniform 					_unit;
+			removeVest 						_unit;
+			removeBackpack 					_unit;
+		};
+	};};
+
+
+if ((!isNull _playerObj) && {((getPlayerUID _playerObj) != "")}) then
 {
 	_moneyGain = missionNamespace getVariable [format ["DMS_%1MoneyGainOnKill",_side],0];
 	_repGain = missionNamespace getVariable [format ["DMS_%1RepGainOnKill",_side],0];
