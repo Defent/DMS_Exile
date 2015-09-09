@@ -65,7 +65,7 @@ DMS_DEBUG = false;
 											["behindenemylines",10],
 											["blackhawkdown",45],
 											["cardealer",25],
-											["constructionsite",35],
+											["construction",35],
 											["donthasslethehoff",30],
 											["foodtransport",25],
 											["guntransport",20],
