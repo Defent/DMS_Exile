@@ -78,6 +78,14 @@ if (!hasInterface && !isServer) then
 
 
 ## Changelog:
+#### September 9, 2015 (10:00 PM CST-America):
+* Added static AI! The "donthasslethehoff" mission has them included by default. :D
+* New config values: ```DMS_Bandit_Static_MoneyGain``` and ```DMS_Bandit_Static_RepGain```.
+* Future-proofed ```DMS_fnc_OnKilled```. As a result, "DMS_BanditMoneyGainOnKill" is now ```DMS_Bandit_Soldier_MoneyGain```, and "DMS_BanditRepGainOnKill" is now ```DMS_Bandit_Soldier_RepGain```.
+* Added config value ```DMS_ai_disable_ramming_damage```. Check the comment for more info :)
+* Removed config value "DMS_ai_static_skills"
+* Randomized vehicle spawn position for "cardealer" mission.
+
 #### September 8, 2015 (11:00 PM CST-America):
 * AI Bodies should now be properly cleaned when run over (if configured to do so with ```DMS_remove_roadkill``` and ```DMS_remove_roadkill_chance```).
 * Added config option ```DMS_credit_roadkill```. If set to true, players will get poptabs/respect for running over AI. Default: false.

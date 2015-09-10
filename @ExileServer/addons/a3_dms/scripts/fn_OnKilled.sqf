@@ -10,12 +10,12 @@
 			_killer
 		],
 		_side,				// "bandit" only for now
-		_type				// not currently used
+		_type				// Type of AI: "soldier","static","vehicle","heli", etc.
 	] call DMS_fnc_OnKilled;
 */
 
 
-private ["_unit", "_player", "_playerObj", "_side", "_type", "_launcher", "_rockets", "_money", "_respect", "_moneyGain", "_repGain"];
+private ["_unit", "_player", "_side", "_type", "_launcher", "_playerObj", "_rockets", "_grpUnits", "_veh", "_moneyGain", "_repGain", "_money", "_respect"];
 
 
 if (DMS_DEBUG) then
@@ -124,8 +124,8 @@ if (isPlayer _player) then
 
 if ((!isNull _playerObj) && {((getPlayerUID _playerObj) != "")}) then
 {
-	_moneyGain = missionNamespace getVariable [format ["DMS_%1MoneyGainOnKill",_side],0];
-	_repGain = missionNamespace getVariable [format ["DMS_%1RepGainOnKill",_side],0];
+	_moneyGain = missionNamespace getVariable [format ["DMS_%1_%2_MoneyGain",_side,_type],0];
+	_repGain = missionNamespace getVariable [format ["DMS_%1_%2_RepGain",_side,_type],0];
 
 	if ((_moneyGain>0) || (_repGain>0)) then
 	{

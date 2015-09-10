@@ -49,6 +49,7 @@ class CfgFunctions
 			class SetGroupBehavior 				{};
 			class SpawnAIGroup 					{};
 			class SpawnAISoldier 				{};
+			class SpawnAIStatic 				{};
 			class SpawnCrate 					{};
 			class SpawnNonPersistentVehicle 	{};
 			class TargetsKilled 				{};
