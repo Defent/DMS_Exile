@@ -1,5 +1,5 @@
 # Instructions
-See also: http://www.exilemod.com/forums/topic/dms-defents-mission-system/#post-10434 
+See also: http://www.exilemod.com/forum/topic/61-dms-defents-mission-system/
 
 ## To install:
 Put the pre-packed PBO in your ```@ExileServer\addons\``` directory. It should be alongside ```exile_server``` and ```exile_server_config```.
