@@ -4,7 +4,6 @@
 */
 
 /* Future stuff
-DMS_SpawnStatic			= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\SpawnStatic.sqf";
 DMS_HeliPara			= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\HeliPara.sqf";
 DMS_HeliPatrol			= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\HeliPatrol.sqf";
 DMS_VehPatrol			= compileFinal preprocessFileLineNumbers "\x\addons\dms\scripts\VehPatrol.sqf";
