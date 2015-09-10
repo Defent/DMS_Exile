@@ -1,10 +1,10 @@
 # Instructions
-See also: http://www.exilemod.com/forum/topic/61-dms-defents-mission-system/
+See also: http://www.exilemod.com/topic/61-dms-defents-mission-system/?do=findComment&comment=242
 
 ## To install:
 Put the pre-packed PBO in your ```@ExileServer\addons\``` directory. It should be alongside ```exile_server``` and ```exile_server_config```.
 
-### NOTE: It is heavily suggested that you use [The Unofficial Exile v0.9.19 SP3](http://www.exilemod.com/forums/topic/exile-server-0-9-19-rse-sp3-unofficial-download-here/) with DMS, as it will resolve several issues.
+### NOTE: It is heavily suggested that you use [The Unofficial Exile v0.9.19 SP3](http://www.exilemod.com/topic/169-download-link-for-banana-sp3/?do=findComment&comment=961) with DMS, as it will resolve several issues.
 
 If you are using infiSTAR and want to keep ```_CGM = true;```, then set ```_UMW = true;```, and add ```DMS_MissionMarkerCircle```, ```DMS_MissionMarkerDot``` to ```_aLocalM```,
 so your ```_aLocalM``` would look like:
@@ -74,7 +74,7 @@ if (!hasInterface && !isServer) then
 - [Zupa](https://github.com/Windmolders) for suggestions and coding help.
 - [Nawuko](https://github.com/Nawuko) for catching a silly mistake :P
 - [shaworth](https://github.com/shaworth) and [KawaiiPotato](https://github.com/KawaiiPotato) for making the README all nice and pretty :)
-- Everbody's feedback on [the DMS thread on exile forums](http://www.exilemod.com/forums/topic/dms-defents-mission-system/#post-10353)
+- Everbody's feedback on [the DMS thread on exile forums](http://www.exilemod.com/topic/61-dms-defents-mission-system/?do=findComment&comment=242)
 
 
 ## Changelog:
