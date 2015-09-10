@@ -85,6 +85,8 @@ if (!hasInterface && !isServer) then
 * Added config value ```DMS_ai_disable_ramming_damage```. Check the comment for more info :)
 * Removed config value "DMS_ai_static_skills"
 * Randomized vehicle spawn position for "cardealer" mission.
+* NOTE: If you use custom ```DMS_fnc_SpawnAISoldier``` calls, you will have to update your calling parameters! Make sure you add "Soldier" at the end of the array, or before ```_customGearSet``` if you're using it!
+* Added ```_launcher``` option for ```_customGearSet``` in ```DMS_fnc_SpawnAISoldier```. NOTE: This changes the order of the gearset parameters for the AI. ```_launcher``` is between ```_items``` and ```_helmet```! Use empty string ```""``` if you don't want any launcher on the AI unit.
 
 #### September 8, 2015 (11:00 PM CST-America):
 * AI Bodies should now be properly cleaned when run over (if configured to do so with ```DMS_remove_roadkill``` and ```DMS_remove_roadkill_chance```).
