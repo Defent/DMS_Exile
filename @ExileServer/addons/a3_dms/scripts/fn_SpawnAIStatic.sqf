@@ -20,6 +20,8 @@
 	Returns an array of static gun objects.
 */
 
+private ["_OK", "_guns", "_pos", "_gun", "_unit", "_group", "_class", "_difficulty", "_side", "_positions"];
+
 
 _OK = params
 [

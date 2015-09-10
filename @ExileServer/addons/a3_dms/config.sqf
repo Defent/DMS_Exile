@@ -535,6 +535,6 @@ DMS_DEBUG = true;
 if(DMS_DEBUG) then {
 	DMS_TimeBetweenMissions			= [30,60];
 	DMS_MissionTimeOut				= [60,90];
-	DMS_MissionTypes = ["staticstuff",1];
+	DMS_MissionTypes = [["staticstuff",1]];
 	diag_log format ["DMS_DEBUG CONFIG :: Overriding DMS_TimeBetweenMissions (%1) and DMS_MissionTimeOut (%2)",DMS_TimeBetweenMissions,DMS_MissionTimeOut];
 };
