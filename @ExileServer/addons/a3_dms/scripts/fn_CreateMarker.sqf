@@ -6,7 +6,8 @@
 	[
 		_pos,					// Array: Position of the markers
 		_text,					// String: The text on the map marker that will appear on the map
-		_difficulty,			// !!!OPTIONAL!!! String: "hardcore","difficult","moderate", "easy", OR custom color
+		_difficulty,			// (OPTIONAL) String: "hardcore","difficult","moderate", "easy", OR custom color
+		_randomMarker			// (OPTIONAL) Boolean: Whether or not to place the map marker on a random offset from mission, defined by DMS_MarkerPosRandomRadius
 	] call DMS_fnc_CreateMarker;
 
 	Returns markers in format:
@@ -18,14 +19,15 @@
 */
 
 
-private["_pos", "_text", "_difficulty", "_num", "_color", "_dot", "_circle"];
+private["_pos", "_text", "_difficulty", "_randomMarker", "_num", "_color", "_dot", "_circle", "_dir", "_dis", "_npos"];
 
 
 params
 [
 	["_pos","ERROR",[[]],[2,3]],
 	["_text","ERROR",[""]],
-	["_difficulty","moderate",[""]]
+	["_difficulty","moderate",[""]],
+	["_randomMarker",DMS_MarkerPosRandomization,[false]]
 ];
 
 if ((_pos isEqualTo "ERROR") || ("_text" isEqualTo "ERROR")) exitWith
@@ -49,7 +51,7 @@ switch (_difficulty) do
 _circle = createMarker [format ["DMS_MissionMarkerCircle%1",_num], _pos];
 _circle setMarkerColor _color;
 _circle setMarkerShape "ELLIPSE";
-_circle setMarkerBrush "Grid";
+_circle setMarkerBrush "Solid";
 _circle setMarkerSize [150,150];
 
 _dot = createMarker [format ["DMS_MissionMarkerDot%1",_num], _pos];
@@ -57,9 +59,25 @@ _dot setMarkerColor "ColorBlack";
 _dot setMarkerType "mil_dot";
 _dot setMarkerText _text;
 
+if (_randomMarker) then
+{
+	_dir = random 360;
+	_dis = DMS_MarkerPosRandomRadius call DMS_fnc_SelectRandomVal;
+	_npos = [_pos,_dis,_dir] call DMS_fnc_SelectOffsetPos;
+
+	_circle setMarkerPos _npos;
+	_dot setMarkerPos _npos;
+	_circle setMarkerBrush DMS_RandomMarkerBrush;
+
+	if (DMS_DEBUG) then
+	{
+		diag_log format ["Moving markers %1 from %2 to %3 (%4m away)",[_dot,_circle],_pos,_npos,_dis];
+	};
+};
+
 if (DMS_DEBUG) then
 {
-	diag_log format ["Created markers |%1| at %2 with text |%3| colored %4",[_dot,_circle],_pos,_text,_color];
+	diag_log format ["DMS_DEBUG CreateMarker :: Created markers |%1| at %2 with text |%3| colored %4",[_dot,_circle],_pos,_text,_color];
 };
 
 

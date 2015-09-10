@@ -1,6 +1,7 @@
 /*
 	DMS_fnc_IsNearWater
-	All credit goes to WAI
+	Original function by WAI
+	Improved by eraser1
 
 	Usage:
 	[
@@ -16,12 +17,19 @@ _result 	= false;
 _position 	= _this select 0;
 _radius		= _this select 1;
 
-for "_i" from 0 to 359 step 45 do {
-	_position = [(_position select 0) + (sin(_i)*_radius), (_position select 1) + (cos(_i)*_radius)];
-	if (surfaceIsWater _position) exitWith {
-		_result = true; 
+try
+{
+	for "_i" from 0 to 359 step 45 do
+	{
+		if (surfaceIsWater ([_position,_radius,_i] call DMS_fnc_SelectOffsetPos)) then
+		{
+			throw true;
+		};
 	};
+}
+catch
+{
+	_result = true;
 };
-
 
 _result

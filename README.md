@@ -78,6 +78,15 @@ if (!hasInterface && !isServer) then
 
 
 ## Changelog:
+#### September 10, 2015 (6:00 PM CST-America):
+* NEW CONFIG VALUES: ```DMS_MarkerPosRandomization```, ```DMS_MarkerPosRandomRadius```, and ```DMS_RandomMarkerBrush```
+* With the above configs, you can randomize the marker positions in a random position around the actual mission center.
+* You can also "force" DMS_fnc_CreateMarker to randomize (or not randomize) the marker position with optional boolean parameter of index 3.
+* Changed the default (non-randomized) circle marker "brush". It should be a solid circle.
+* Created new functions ```DMS_fnc_SelectOffsetPos``` and ```DMS_fnc_SelectRandomVal```
+* Adjusted a couple functions to use them.
+* Fixed ```DMS_fnc_IsNearWater```.
+
 #### September 9, 2015 (10:00 PM CST-America):
 * Added static AI! The "donthasslethehoff" mission has them included by default. :D
 * New config values: ```DMS_Bandit_Static_MoneyGain``` and ```DMS_Bandit_Static_RepGain```.

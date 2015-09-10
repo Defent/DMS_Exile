@@ -24,7 +24,7 @@ if ((_time - DMS_BMissionLastStart > DMS_BMissionDelay) && {diag_fps >= DMS_MinS
 	DMS_BMissionLastStart 		= _time;
 	_mission					= DMS_MissionTypesArray call BIS_fnc_selectRandom;
 
-	DMS_BMissionDelay 			= (DMS_TimeBetweenMissions select 0) + random((DMS_TimeBetweenMissions select 1) - (DMS_TimeBetweenMissions select 0));
+	DMS_BMissionDelay 			= DMS_TimeBetweenMissions call DMS_fnc_SelectRandomVal;
 
 	if (DMS_DEBUG) then
 	{

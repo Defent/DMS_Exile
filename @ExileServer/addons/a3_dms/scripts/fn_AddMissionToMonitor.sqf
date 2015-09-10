@@ -84,7 +84,7 @@ try
 	_timeOutInfo params
 	[
 		["_timeStarted",diag_tickTime,[0]],
-		["_timeUntilFail",(DMS_MissionTimeOut select 0) + random((DMS_MissionTimeOut select 1) - (DMS_MissionTimeOut select 0)),[0]]
+		["_timeUntilFail",DMS_MissionTimeOut call DMS_fnc_SelectRandomVal,[0]]
 	];
 
 	_units = [];

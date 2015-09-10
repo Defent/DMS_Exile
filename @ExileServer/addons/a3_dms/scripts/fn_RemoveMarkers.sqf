@@ -29,7 +29,8 @@ deleteMarker _markerCircle;
 
 if (_status == "win") then
 {
-	if (!DMS_MissionMarkerWinDot) exitWith {
+	if (!DMS_MissionMarkerWinDot) exitWith
+	{
 		deleteMarker _markerDot;
 	};
 	_markerDot setMarkerText ("COMPLETED: "+markerText _markerDot);
@@ -42,7 +43,8 @@ if (_status == "win") then
 }
 else
 {
-	if (!DMS_MissionMarkerLoseDot) exitWith {
+	if (!DMS_MissionMarkerLoseDot) exitWith
+	{
 		deleteMarker _markerDot;
 	};
 	_markerDot setMarkerText ("FAILED: "+markerText _markerDot);

@@ -21,6 +21,9 @@ DMS_DEBUG = false;
 
 	DMS_AI_KillPercent					= 100;						// The percent amount of AI that need to be killed for "killPercent" mission requirement (NOT IMPLEMENTED)
 
+	DMS_MarkerPosRandomization			= false;					// Randomize the position of the circle marker of a mission
+	DMS_MarkerPosRandomRadius			= [25,100];					// Minimum/Maximum distance that the circle marker position will be randomized | Default: 0 meters to 200 meters
+	DMS_RandomMarkerBrush				= "Cross";					// See: https://community.bistudio.com/wiki/setMarkerBrush
 	DMS_MissionMarkerWinDot				= true;						// Keep the mission marker dot with a "win" message after mission is over
 	DMS_MissionMarkerLoseDot			= true;						// Keep the mission marker dot with a "lose" message after mission is over
 	DMS_MissionMarkerWinDotTime			= 30;						// How many seconds the "win" mission dot will remain on the map

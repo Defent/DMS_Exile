@@ -43,8 +43,10 @@ class CfgFunctions
 			class MissionSuccessState 			{};
 			class OnKilled 						{};
 			class RemoveMarkers 				{};
+			class SelectRandomVal				{};
 			class SelectMagazine 				{};
 			class SelectMission 				{};
+			class SelectOffsetPos				{};
 			class SetAILocality 				{};
 			class SetGroupBehavior 				{};
 			class SpawnAIGroup 					{};
