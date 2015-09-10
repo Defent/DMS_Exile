@@ -36,7 +36,8 @@ _group =
 _staticGuns =
 [
 	[
-		[(_pos select 0)+(5+(random 5)),(_pos select 1)+(5+(random 5)),0]
+		[(_pos select 0)+(5+(random 5)),(_pos select 1)+(5+(random 5)),0],
+		[(_pos select 0) + -1*(5+(random 5)),(_pos select 1) + -1*(5+(random 5)),0]
 	],
 	_group,
 	"assault",
