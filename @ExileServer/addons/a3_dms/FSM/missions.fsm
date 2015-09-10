@@ -251,7 +251,7 @@ class FSM
                         name = "Set_AI_Ownership";
                         itemno = 18;
                         init = /*%FSM<STATEINIT""">*/"if(DMS_DEBUG) then {" \n
-                         "   diag_log format [""DMS_DEBUG FSM CHECK :: calling DMS_fnc_SetAILocality""];" \n
+                         "   diag_log format [""DMS_DEBUG FSM CHECK :: calling DMS_fnc_AILocalityManager""];" \n
                          "};" \n
                          "" \n
                          "_aiLocality = diag_tickTime;" \n
