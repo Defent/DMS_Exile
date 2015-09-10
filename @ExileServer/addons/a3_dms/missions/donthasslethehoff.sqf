@@ -36,6 +36,18 @@ _group =
 	_side 					// "bandit","hero", etc.
 ] call DMS_fnc_SpawnAIGroup;
 
+_staticGuns =
+[
+	[
+		[(_pos select 0)+(5+(random 5)),(_pos select 1)+(5+(random 5)),0],
+		[(_pos select 0) + -1*(5+(random 5)),(_pos select 1) + -1*(5+(random 5)),0]
+	],
+	_group,
+	"assault",
+	"static",
+	"bandit"
+] call DMS_fnc_SpawnAIStatic;
+
 
 // Create Crates
 _crate1 = ["Box_NATO_Wps_F",_pos] call DMS_fnc_SpawnCrate;
@@ -62,7 +74,7 @@ _missionAIUnits =
 // Define mission-spawned objects and loot values
 _missionObjs =
 [
-	[_wreck],
+	[_wreck]+_staticGuns,
 	[_vehicle],
 	[[_crate1,_crate_loot_values1]]
 ];

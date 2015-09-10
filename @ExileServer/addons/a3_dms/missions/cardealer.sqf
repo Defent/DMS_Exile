@@ -42,8 +42,8 @@ _crate1 = ["Box_NATO_Wps_F",_pos] call DMS_fnc_SpawnCrate;
 
 _wreck = createVehicle ["Land_FuelStation_Build_F",[(_pos select 0) - 10, (_pos select 1),-0.2],[], 0, "CAN_COLLIDE"];
 
-_vehicle1 = ["Exile_Car_SUV_Red",_pos] call DMS_fnc_SpawnNonPersistentVehicle;
-_vehicle2 = ["Exile_Car_SUV_Grey",_pos] call DMS_fnc_SpawnNonPersistentVehicle;
+_vehicle1 = ["Exile_Car_SUV_Red",[(_pos select 0) + -1*(5+(random 5)),(_pos select 1) + -1*(5+(random 5)),0]] call DMS_fnc_SpawnNonPersistentVehicle;
+_vehicle2 = ["Exile_Car_SUV_Grey",[(_pos select 0)+(5+(random 5)),(_pos select 1)+(5+(random 5)),0]] call DMS_fnc_SpawnNonPersistentVehicle;
 
 
 
