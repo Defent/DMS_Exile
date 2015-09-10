@@ -7,21 +7,21 @@
 	[
 		_pos,					// Position of AI
 		_count,					// Number of AI
-		_difficulty,			// "random","hardcore","difficult","moderate", or "easy"
-		_type 					// "random","assault","MG","sniper" or "unarmed" OR [_type,_launcher]
+		_difficulty,			// AI Difficulty: "random","hardcore","difficult","moderate", or "easy"
+		_class 					// AI Class: "random","assault","MG","sniper" or "unarmed" OR [_class,_launcher]
 		_side 					// Only "bandit" is supported atm
 	] call DMS_fnc_SpawnAIGroup;
 
 	Returns AI Group
 */
-private ["_OK", "_pos", "_count", "_difficulty", "_type", "_side", "_pos_x", "_pos_y", "_pos_z", "_launcher", "_unit", "_client"];
+private ["_OK", "_pos", "_count", "_difficulty", "_class", "_side", "_pos_x", "_pos_y", "_pos_z", "_launcher", "_unit", "_client"];
 
 _OK = params
 [
 	["_pos",[0,0,0],[[]],[3]],
 	["_count",0,[0]],
 	["_difficulty","random",[""]],
-	["_type","random",[""]],
+	["_class","random",[""]],
 	["_side","bandit",[""]]
 ];
 
@@ -42,14 +42,14 @@ _pos_z 			= _pos select 2;
 
 if(DMS_DEBUG) then
 {
-	diag_log format["DMS_DEBUG SpawnAIGroup :: Spawning %1 %2 %3 AI at %4 with %5 difficulty.",_count,_type,_side,_pos,_difficulty];
+	diag_log format["DMS_DEBUG SpawnAIGroup :: Spawning %1 %2 %3 AI at %4 with %5 difficulty.",_count,_class,_side,_pos,_difficulty];
 };
 
 // if soldier have AT/AA weapons
-if (typeName _type == "ARRAY") then
+if (typeName _class == "ARRAY") then
 {
-	_launcher		= _type select 1;
-	_type			= _type select 0;
+	_launcher		= _class select 1;
+	_class			= _class select 0;
 };
 	
 // Randomize position
@@ -74,7 +74,7 @@ if(_pos_z == 0) then
 _group = createGroup (missionNamespace getVariable [format ["DMS_%1Side",_side],EAST]);
 
 for "_i" from 1 to _count do {
-	_unit = [_group,[_pos_x,_pos_y,_pos_z],_type,_difficulty,_side] call DMS_fnc_SpawnAISoldier;
+	_unit = [_group,[_pos_x,_pos_y,_pos_z],_class,_difficulty,_side,"Soldier"] call DMS_fnc_SpawnAISoldier;
 };
 
 // An AI will definitely spawn with a launcher if you define type
