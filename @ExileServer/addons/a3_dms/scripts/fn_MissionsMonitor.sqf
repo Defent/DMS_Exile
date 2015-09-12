@@ -64,6 +64,11 @@ private ["_pos", "_success", "_timeStarted", "_timeUntilFail", "_units", "_build
 			_arr = DMS_Mission_Arr deleteAt _forEachIndex;
 
 			{
+				_x lock 0;
+				_x allowDamage true;
+			} forEach _vehs;
+
+			{
 				_x call DMS_fnc_FillCrate;
 			} forEach _crate_info_array;
 

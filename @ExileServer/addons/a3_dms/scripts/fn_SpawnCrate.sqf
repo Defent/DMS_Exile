@@ -26,6 +26,8 @@ if (!_OK) then
 
 _crate = createVehicle [_crateClassName,_pos,[], 0, "CAN_COLLIDE"];
 
+_crate allowDamage false;
+
 clearWeaponCargoGlobal 		_crate;
 clearItemCargoGlobal 		_crate;
 clearMagazineCargoGlobal 	_crate;

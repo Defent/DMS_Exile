@@ -78,6 +78,17 @@ if (!hasInterface && !isServer) then
 
 
 ## Changelog:
+#### September 10, 2015 (8:30 PM CST-America):
+* NEW CONFIG VALUES: ```DMS_GodmodeCrates``` and ```DMS_CrateCase_Sniper```. DMS_GodmodeCrates is pretty self-explanatory :P
+* NEW FEATURE FOR "DMS_fnc_FillCrate": You can now define "crate cases" in the config (such as "DMS_CrateCase_Sniper"). Passing the "crate case" name (such as "Sniper") will make the crate spawn with the exact gear defined in the config. Refer to the testmission.sqf (line 80) and "DMS_CrateCase_Sniper" config for an example.
+* Spawned vehicles will now be LOCKED and INVINCIBLE until the mission is completed.
+* Spawned vehicles spawn with 100% fuel.
+* "Fixed" some cases where killing from a mounted gun would reset your money/respect (maybe).
+* Fixed some spelling errors and incorrect names in some of the mission messages/markers.
+* Fixed DMS_fnc_FindSafePos for Bornholm. If you have any issues with custom maps, please let us know.
+* Fixed backpack spawning on the ground behind an AI unit that was supposed to get a launcher.
+
+
 #### September 10, 2015 (6:00 PM CST-America):
 * NEW CONFIG VALUES: ```DMS_MarkerPosRandomization```, ```DMS_MarkerPosRandomRadius```, and ```DMS_RandomMarkerBrush```
 * With the above configs, you can randomize the marker positions in a random position around the actual mission center.
@@ -86,6 +97,7 @@ if (!hasInterface && !isServer) then
 * Created new functions ```DMS_fnc_SelectOffsetPos``` and ```DMS_fnc_SelectRandomVal```
 * Adjusted a couple functions to use them.
 * Fixed ```DMS_fnc_IsNearWater```.
+
 
 #### September 9, 2015 (10:00 PM CST-America):
 * Added static AI! The "donthasslethehoff" mission has them included by default. :D
@@ -97,18 +109,22 @@ if (!hasInterface && !isServer) then
 * NOTE: If you use custom ```DMS_fnc_SpawnAISoldier``` calls, you will have to update your calling parameters! Make sure you add "Soldier" at the end of the array, or before ```_customGearSet``` if you're using it!
 * Added ```_launcher``` option for ```_customGearSet``` in ```DMS_fnc_SpawnAISoldier```. NOTE: This changes the order of the gearset parameters for the AI. ```_launcher``` is between ```_items``` and ```_helmet```! Use empty string ```""``` if you don't want any launcher on the AI unit.
 
+
 #### September 8, 2015 (11:00 PM CST-America):
 * AI Bodies should now be properly cleaned when run over (if configured to do so with ```DMS_remove_roadkill``` and ```DMS_remove_roadkill_chance```).
 * Added config option ```DMS_credit_roadkill```. If set to true, players will get poptabs/respect for running over AI. Default: false.
 * Fixed giving poptabs/respect for killing AI from vehicles. Passengers and mounted gunners should properly receive poptabs/respect when they kill AI.
 * Launchers should now be reliably removed from AI bodies that have them.
 
+
 #### September 7, 2015 (7:00 PM CST-America):
 * AI bodies should now be cleared if configured to do so with "DMS_clear_AI_body" and "DMS_clear_AI_body_chance".
+
 
 #### September 5, 2015 (1:00 AM CST-America):
 * Created new function "DMS_fnc_IsPlayerNearby" to replace "ExileServer_util_position_isPlayerNearby".
 * Fix IR Strobes spawning inside the crate and not appearing.
+
 
 #### September 4, 2015 (11:20 PM CST-America):
 * Improved crate handling by DMS. You can now spawn multiple crates with different loot, or simply no crates at all. (REQUIRES FILE CHANGES FOR EACH MISSION)

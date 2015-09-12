@@ -87,6 +87,7 @@ if ((!isNil "_launcher") || {DMS_ai_use_launchers && {(random 100) <= DMS_ai_use
 
 	_launcher = ((missionNamespace getVariable [format ["DMS_AI_wep_launchers_%1",_launcher],["launch_NLAW_F"]]) call BIS_fnc_selectRandom);
 
+	removeBackpack _unit;
 	_unit addBackpack "B_Carryall_mcamo";
 
 	[_unit, _launcher, DMS_AI_launcher_ammo_count] call BIS_fnc_addWeapon;

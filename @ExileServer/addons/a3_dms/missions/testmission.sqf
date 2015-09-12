@@ -33,11 +33,12 @@ _group =
 	_side 					// "bandit","hero", etc.
 ] call DMS_fnc_SpawnAIGroup;
 
+_dir = random 180;
 _staticGuns =
 [
 	[
-		[(_pos select 0)+(5+(random 5)),(_pos select 1)+(5+(random 5)),0],
-		[(_pos select 0) + -1*(5+(random 5)),(_pos select 1) + -1*(5+(random 5)),0]
+		[_pos,5+random 5,_dir] call DMS_fnc_SelectOffsetPos,
+		[_pos,5+random 5,_dir+180] call DMS_fnc_SelectOffsetPos
 	],
 	_group,
 	"assault",
@@ -48,7 +49,13 @@ _staticGuns =
 
 // Create Crate
 _crate = ["Box_NATO_Wps_F",_pos] call DMS_fnc_SpawnCrate;
-_vehicle = ["Exile_Car_Offroad_Armed_Guerilla01",_pos] call DMS_fnc_SpawnNonPersistentVehicle;
+
+// Spawn vehicle
+_vehicle = ["Exile_Car_Offroad_Armed_Guerilla01",[_pos,3+random 10,_dir+90] call DMS_fnc_SelectOffsetPos] call DMS_fnc_SpawnNonPersistentVehicle;
+
+//trololol
+_crate setObjectTextureGlobal [0,"#(rgb,8,8,3)color(1,0,0.1,1)"];
+_crate setObjectTextureGlobal [1,"#(rgb,8,8,3)color(1,0,0.1,1)"];
 
 // Set crate loot values
 _crate_loot_values =
@@ -70,7 +77,7 @@ _missionObjs =
 [
 	_staticGuns,			// We only spawn the static guns
 	[_vehicle],
-	[[_crate,_crate_loot_values]]
+	[[_crate,"Sniper"]]
 ];
 
 // Define Mission Start message

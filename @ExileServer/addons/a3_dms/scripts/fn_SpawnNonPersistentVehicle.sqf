@@ -41,8 +41,10 @@ while{count _vehpos < 1} do
 	_maxDistance = (_maxDistance + 15);
 };
 
-_vehObj = ObjNull;
 _vehObj = [_vehicleClass, _vehpos, (random 360), true] call ExileServer_object_vehicle_createNonPersistentVehicle;
+_vehObj allowDamage false;
+_vehObj setFuel 1;
+_vehObj lock 2;
 
 if (DMS_DEBUG) then
 {

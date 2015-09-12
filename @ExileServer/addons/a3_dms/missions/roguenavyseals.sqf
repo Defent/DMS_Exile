@@ -64,13 +64,13 @@ _missionObjs =
 ];
 
 // Define Mission Start message
-_msgStart = format["<t color='#FFFF00' size='1.25'>Car Dealer Robbery! </t><br/> A squad of proffesional Navy Seals team is performing gorilla warfare in convict land, deal with them!"];
+_msgStart = format["<t color='#FFFF00' size='1.25'>Navy Seals! </t><br/> A squad of professional Navy Seals team is performing gorilla warfare in convict land, deal with them!"];
 
 // Define Mission Win message
-_msgWIN = format["<t color='#0080ff' size='1.25'>Car Dealer Robbery! </t><br/> Convicts have successfully taken care of the Navy Seals, you must be the top of your class!"];
+_msgWIN = format["<t color='#0080ff' size='1.25'>Navy Seals! </t><br/> Convicts have successfully taken care of the Navy Seals, you must be the top of your class!"];
 
 // Define Mission Lose message
-_msgLOSE = format["<t color='#FF0000' size='1.25'>Car Dealer Robbery! </t><br/> The Navy Seals have escaped and are now planning their next raid!"];
+_msgLOSE = format["<t color='#FF0000' size='1.25'>Navy Seals! </t><br/> The Navy Seals have escaped and are now planning their next raid!"];
 
 // Define mission name (for map marker and logging)
 _missionName = "Rogue Navy Seals";

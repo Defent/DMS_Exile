@@ -417,6 +417,40 @@ DMS_DEBUG = false;
 
 
 /* Loot Settings */
+	DMS_GodmodeCrates 					= true;						// Whether or not crates will have godmode after being filled with loot.
+	DMS_CrateCase_Sniper =				[							// If you pass "Sniper" in _lootValues, then it will spawn these weapons/items/backpacks
+											[
+												["Rangefinder",1],
+												["srifle_GM6_F",1],
+												["srifle_LRR_F",1],
+												["srifle_EBR_DMS_pointer_snds_F",1],
+												["hgun_Pistol_heavy_01_MRD_F",1],
+												["hgun_PDW2000_Holo_snds_F",1]
+											],
+											[
+												["ItemGPS",1],
+												["U_B_FullGhillie_ard",1],
+												["U_I_FullGhillie_lsh",1],
+												["U_O_FullGhillie_sard",1],
+												["U_O_GhillieSuit",1],
+												["V_PlateCarrierGL_blk",1],
+												["V_HarnessO_brn",1],
+												["Exile_Item_InstaDoc",3],
+												["Exile_Item_Surstromming_Cooked",5],
+												["Exile_Item_PlasticBottleFreshWater",5],
+												["optic_LRPS",1],
+												["muzzle_snds_acp",1],
+												["5Rnd_127x108_APDS_Mag",3],
+												["7Rnd_408_Mag",3],
+												["20Rnd_762x51_Mag",5],
+												["11Rnd_45ACP_Mag",3],
+												["30Rnd_9x21_Mag",3]
+											],
+											[
+												["B_Carryall_cbr",1],
+												["B_Kitbag_mcamo",1]
+											]
+										];
 	DMS_BoxWeapons =					[							// List of weapons that can spawn in a crate
 											"Exile_Melee_Axe",
 											"arifle_Katiba_GL_F",

@@ -122,7 +122,7 @@ if (isPlayer _player) then
 	};};
 
 
-if ((!isNull _playerObj) && {((getPlayerUID _playerObj) != "")}) then
+if ((!isNull _playerObj) && {((getPlayerUID _playerObj) != "") && {_playerObj isKindOf "Exile_Unit_Player"}}) then
 {
 	_moneyGain = missionNamespace getVariable [format ["DMS_%1_%2_MoneyGain",_side,_type],0];
 	_repGain = missionNamespace getVariable [format ["DMS_%1_%2_RepGain",_side,_type],0];

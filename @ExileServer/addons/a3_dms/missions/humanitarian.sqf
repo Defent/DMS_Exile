@@ -75,7 +75,7 @@ _msgWIN = format["<t color='#0080ff' size='1.25'>Humantarian Supplies! </t><br/>
 _msgLOSE = format["<t color='#FF0000' size='1.25'>Humantarian Supplies! </t><br/> The bandits have taken the humanitarian supplies and escaped!"];
 
 // Define mission name (for map marker and logging)
-_missionName = "Humantarian Supplies";
+_missionName = "Humanitarian Supplies";
 
 // Create Markers
 _markers =
