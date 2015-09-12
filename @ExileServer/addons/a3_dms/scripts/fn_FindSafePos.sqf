@@ -25,7 +25,8 @@ switch (toLower worldName) do
 { 
 	case "altis" : { _safePosParams = [[16000,16000],0,16000,_nearestObjectMinDistance,0,_maxTerrainGradient,0,DMS_findSafePosBlacklist]; }; //[16000,16000] w/ radius of 16000 works well for Altis
 	case "bornholm" : { _safePosParams = [[11264,11264],0,12000,_nearestObjectMinDistance,0,_maxTerrainGradient,0,DMS_findSafePosBlacklist]; }; // Thanks to thirdhero for testing this info
-	default { _safePosParams = [[],0,-1,_nearestObjectMinDistance,0,_maxTerrainGradient,0,DMS_findSafePosBlacklist]; }; 
+	case "esseker" : { _safePosParams = [[6144,6144],0,12288,_nearestObjectMinDistance,0,_maxTerrainGradient,0,DMS_findSafePosBlacklist]; }; // Thanks to Flowrider for this info
+	default { _safePosParams = [[],0,-1,_nearestObjectMinDistance,0,_maxTerrainGradient,0,DMS_findSafePosBlacklist]; };
 };
 
 

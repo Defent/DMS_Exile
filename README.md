@@ -78,7 +78,10 @@ if (!hasInterface && !isServer) then
 
 
 ## Changelog:
-#### September 10, 2015 (8:30 PM CST-America):
+#### September 12, 2015 (1:30 AM CST-America):
+* Added Esseker map safe pos params. (thanks Flowrider!)
+
+#### September 11, 2015 (8:30 PM CST-America):
 * NEW CONFIG VALUES: ```DMS_GodmodeCrates``` and ```DMS_CrateCase_Sniper```. DMS_GodmodeCrates is pretty self-explanatory :P
 * NEW FEATURE FOR "DMS_fnc_FillCrate": You can now define "crate cases" in the config (such as "DMS_CrateCase_Sniper"). Passing the "crate case" name (such as "Sniper") will make the crate spawn with the exact gear defined in the config. Refer to the testmission.sqf (line 80) and "DMS_CrateCase_Sniper" config for an example.
 * Spawned vehicles will now be LOCKED and INVINCIBLE until the mission is completed.
