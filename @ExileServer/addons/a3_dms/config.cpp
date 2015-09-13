@@ -31,12 +31,14 @@ class CfgFunctions
 			class AddMissionToMonitor 			{};
 			class AILocalityManager 			{};
 			class BroadcastMissionStatus 		{};
+			class CalcPos						{};
 			class CleanUp 						{};
 			class CleanUpManager 				{};
 			class CreateMarker 					{};
 			class FillCrate 					{};
 			class FindSafePos 					{};
 			class FindSuppressor 				{};
+			class ImportFromM3E					{};
 			class IsPlayerNearby				{};
 			class IsNearWater 					{};
 			class MissionsMonitor 				{};

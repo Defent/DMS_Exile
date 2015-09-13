@@ -78,8 +78,19 @@ if (!hasInterface && !isServer) then
 
 
 ## Changelog:
+#### September 13, 2015 (1:00 AM CST-America):
+* New config value: ```DMS_AI_WP_Radius_base``` . Tiny waypoint radius for "base defence".
+* New mission: "mercbase". Known issue: Stuff gets messed up when the mission spawns on a steep slope. Blame BIS for breaking "BIS_fnc_findSafePos" :P
+* Added Taviana map safe pos params. (thanks JamieKG!)
+* New functions: "DMS_fnc_CalcPos" and "DMS_fnc_ImportFromM3E".
+* You can now import bases from Maca's awesome M3 Editor! Simply create the file under the "objects" folder, then call "DMS_fnc_ImportFromM3E"! Refer to the new "mercbase" mission as an example.
+* "DMS_fnc_ImportFromM3E" supports static position (make sure you pass [0,0,0] as the second parameter), relative position, as well as bank/pitch. In addition, you get parameter parsing, just like any other DMS function, so if you're messing around with stuff and make a mistake, it will tell you ;)
+* You can now specify which gun that an static AI spawns with.
+
+
 #### September 12, 2015 (1:30 AM CST-America):
 * Added Esseker map safe pos params. (thanks Flowrider!)
+
 
 #### September 11, 2015 (8:30 PM CST-America):
 * NEW CONFIG VALUES: ```DMS_GodmodeCrates``` and ```DMS_CrateCase_Sniper```. DMS_GodmodeCrates is pretty self-explanatory :P

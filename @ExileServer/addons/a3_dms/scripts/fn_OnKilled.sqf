@@ -48,7 +48,8 @@ if(DMS_ai_remove_launchers && {_launcher != ""}) then
 	_unit removeWeaponGlobal _launcher;
 	
 	{
-		if(_x == _rockets) then {
+		if(_x == _rockets) then
+		{
 			_unit removeMagazine _x;
 		};
 	} forEach magazines _unit;

@@ -15,12 +15,13 @@
 		_class,			// Class: "random","assault","MG","sniper" or "unarmed"
 		_difficulty,	// Difficulty: "random","static","hardcore","difficult","moderate", or "easy"
 		_side			// "bandit","hero", etc.
+		_MGClass		// !OPTIONAL) String: classname of the MG. Use "random" to select a random one from DMS_static_weapons
 	] call DMS_fnc_SpawnAIStatic;
 
 	Returns an array of static gun objects.
 */
 
-private ["_OK", "_guns", "_pos", "_gun", "_unit", "_group", "_class", "_difficulty", "_side", "_positions"];
+private ["_OK", "_guns", "_pos", "_MGClassInput", "_MGClass", "_gun", "_unit", "_group", "_class", "_difficulty", "_side", "_positions"];
 
 
 _OK = params
@@ -37,13 +38,21 @@ if (!_OK) exitWith
 	diag_log format ["DMS ERROR :: Calling DMS_fnc_SpawnAIStatic with invalid parameters: %1",_this];
 };
 
+_MGClassInput = param [5,"random",[""]];
+
 
 _guns = [];
 
 {
 	_pos = _x;
+
+	_MGClass = _MGClassInput;
+	if (_MGClass == "random") then
+	{
+		_MGClass = DMS_static_weapons call BIS_fnc_selectRandom;
+	};
 	
-	_gun = createVehicle [(DMS_static_weapons call BIS_fnc_selectRandom), _pos, [], 0, "CAN_COLLIDE"];
+	_gun = createVehicle [_MGClass, _pos, [], 0, "CAN_COLLIDE"];
 	_gun setDir (random 360);
 	_gun setPosATL _pos;
 	_gun addEventHandler ["GetOut",{(_this select 0) setDamage 1;}];

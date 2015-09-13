@@ -73,7 +73,8 @@ DMS_DEBUG = false;
 											["lost_battalion",10],
 											["mercenaries",20],
 											["roguenavyseals",15],
-											["walmart",20]
+											["walmart",20],
+											["mercbase",5]
 										];
 
 	DMS_findSafePosBlacklist =			[							// For BIS_fnc_findSafePos position blacklist info refer to: https://community.bistudio.com/wiki/BIS_fnc_findSafePos
@@ -117,6 +118,7 @@ DMS_DEBUG = false;
 	DMS_AI_WP_Radius_moderate			= 40;						// Waypoint radius for "moderate" AI
 	DMS_AI_WP_Radius_difficult			= 75;						// Waypoint radius for "difficult" AI
 	DMS_AI_WP_Radius_hardcore			= 150;						// Waypoint radius for "hardcore" AI
+	DMS_AI_WP_Radius_base				= 5;						// Waypoint radius for AI in bases
 
 	DMS_static_weapons =				[							// Static weapons for AI
 											"O_HMG_01_F",
@@ -569,9 +571,11 @@ DMS_DEBUG = false;
 
 
 // Debug Overwrites
-if(DMS_DEBUG) then {
+if(DMS_DEBUG) then
+{
 	DMS_TimeBetweenMissions			= [30,60];
 	DMS_MissionTimeOut				= [60,90];
 	//DMS_MissionTypes = [["testmission",1]];
+	//DMS_MissionTypes = [["mercbase",1]];
 	diag_log format ["DMS_DEBUG CONFIG :: Overriding DMS_TimeBetweenMissions (%1) and DMS_MissionTimeOut (%2)",DMS_TimeBetweenMissions,DMS_MissionTimeOut];
 };
