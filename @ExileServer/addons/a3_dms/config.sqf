@@ -5,7 +5,8 @@
 	Created by eraser1
 */
 
-// If you're gonna make any changes to DMS functions and/or create any new missions, it's a good idea to enable this :)
+// Enables debug logging in DMS functions. This will also make missions spawn and timeout more quickly (for testing purposes).
+// Disable this on live servers, unless you know what you're doing.
 DMS_DEBUG = false;
 
 
