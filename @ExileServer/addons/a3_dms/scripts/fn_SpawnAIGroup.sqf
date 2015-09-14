@@ -73,7 +73,8 @@ if(_pos_z == 0) then
 
 _group = createGroup (missionNamespace getVariable [format ["DMS_%1Side",_side],EAST]);
 
-for "_i" from 1 to _count do {
+for "_i" from 1 to _count do
+{
 	_unit = [_group,[_pos_x,_pos_y,_pos_z],_class,_difficulty,_side,"Soldier"] call DMS_fnc_SpawnAISoldier;
 };
 
@@ -87,14 +88,15 @@ if ((!isNil "_launcher") || {DMS_ai_use_launchers && {(random 100) <= DMS_ai_use
 
 	_launcher = ((missionNamespace getVariable [format ["DMS_AI_wep_launchers_%1",_launcher],["launch_NLAW_F"]]) call BIS_fnc_selectRandom);
 
-	removeBackpack _unit;
+	removeBackpackGlobal _unit;
 	_unit addBackpack "B_Carryall_mcamo";
+	_rocket = _launcher call DMS_fnc_selectMagazine;
 
-	[_unit, _launcher, DMS_AI_launcher_ammo_count] call BIS_fnc_addWeapon;
+	[_unit, _launcher, DMS_AI_launcher_ammo_count,_rocket] call BIS_fnc_addWeapon;
 	
 	if(DMS_DEBUG) then
 	{
-		diag_log format["DMS_DEBUG SpawnAIGroup :: Giving %1 a %2 launcher.",_unit,_launcher];
+		diag_log format["DMS_DEBUG SpawnAIGroup :: Giving %1 a %2 launcher with %3 %4 rockets",_unit,_launcher,DMS_AI_launcher_ammo_count,_rocket];
 	};
 };
 

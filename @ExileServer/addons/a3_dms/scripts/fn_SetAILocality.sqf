@@ -45,7 +45,8 @@ _client = objNull;
 	};
 } forEach allPlayers;
 
-if (!isNull _client) then{
+if (!isNull _client) then
+{
 	ExileServerOwnershipSwapQueue pushBack [_AI,_client];
 	if (DMS_DEBUG) then
 	{

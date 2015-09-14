@@ -78,6 +78,11 @@ if (!hasInterface && !isServer) then
 
 
 ## Changelog:
+#### September 13, 2015 (11:45 PM CST-America):
+* Updated parameter type for "DMS_dynamicText_Size", as well as commented out description for "dynamicTextRequest". Will try to work on functionality for it soon.
+* Improved cleaning of AI units. There may still be issues, specifically with launchers. If there are, please let me know, and test it. The more info I have, the quicker it can be fixed :)
+
+
 #### September 13, 2015 (1:00 AM CST-America):
 * New config value: ```DMS_AI_WP_Radius_base``` . Tiny waypoint radius for "base defence".
 * New mission: "mercbase". Known issue: Stuff gets messed up when the mission spawns on a steep slope. Blame BIS for breaking "BIS_fnc_findSafePos" :P
