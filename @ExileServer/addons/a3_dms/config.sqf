@@ -35,6 +35,7 @@ DMS_DEBUG = false;
 	DMS_CompletedMissionCleanup			= true;						// Cleanup mission-spawned buildings and AI bodies after some time
 	DMS_CompletedMissionCleanupTime		= 3600;						// Minimum time until mission-spawned buildings and AI are cleaned up
 	DMS_CleanUp_PlayerNearLimit			= 20;						// Cleanup of an object is aborted if a player is this many meters close to the object
+	DMS_AIVehCleanUpTime				= 900;						// Time until a destroyed AI vehicle is cleaned up.
 	DMS_MissionTimeoutReset				= true;						// Enable mission timeout timer reset if a player is close
 	DMS_MissionTimeoutResetRange		= 1000;						// If a player is this close to a mission then it won't time-out
 
@@ -43,6 +44,8 @@ DMS_DEBUG = false;
 	DMS_TraderZoneNearBlacklist			= 3000;						// Missions won't spawn in a position this many meters close to a trader zone
 	DMS_MissionNearBlacklist			= 4000;						// Missions won't spawn in a position this many meters close to another mission
 	DMS_WaterNearBlacklist				= 750;						// Missions won't spawn in a position this many meters close to water
+
+	DMS_MinWaterDepth					= 20;						// Minimum depth of water that an underwater mission can spawn at.
 
 	DMS_SpawnBoxSmoke					= true;						// Spawn a smoke grenade on mission box upon misson completion during daytime
 	DMS_SpawnBoxIRGrenade				= true;						// Spawn an IR grenade on mission box upon misson completion during nighttime
@@ -56,7 +59,7 @@ DMS_DEBUG = false;
 											"standardHintRequest"
 											//"systemChatRequest"
 										];
-	DMS_dynamicText_Size				= 0.65;					// Dynamic Text size for "dynamicTextRequest" notification type.
+	DMS_dynamicText_Size				= 0.65;						// Dynamic Text size for "dynamicTextRequest" notification type.
 	DMS_dynamicText_Color				= "#FFCC00";				// Dynamic Text color for "dynamicTextRequest" notification type.
 
 	DMS_MissionTypes =					[							//	List of missions with spawn chances. If they add up to 100%, they represent the percentage chance each one will spawn
@@ -88,8 +91,10 @@ DMS_DEBUG = false;
 
 	DMS_Bandit_Soldier_MoneyGain		= 50;						// The amount of Poptabs gained for killing a bandit soldier
 	DMS_Bandit_Soldier_RepGain			= 10;						// The amount of Respect gained for killing a bandit soldier
-	DMS_Bandit_Static_MoneyGain			= 100;						// The amount of Poptabs gained for killing a bandit static gunner
-	DMS_Bandit_Static_RepGain			= 25;						// The amount of Respect gained for killing a bandit static gunner
+	DMS_Bandit_Static_MoneyGain			= 75;						// The amount of Poptabs gained for killing a bandit static gunner
+	DMS_Bandit_Static_RepGain			= 15;						// The amount of Respect gained for killing a bandit static gunner
+	DMS_Bandit_Vehicle_MoneyGain		= 100;						// The amount of Poptabs gained for killing a bandit vehicle crew member
+	DMS_Bandit_Vehicle_RepGain			= 25;						// The amount of Respect gained for killing a bandit vehicle crew member
 
 	DMS_banditSide						= EAST;						// The side (team) that AI Bandits will spawn on
 	DMS_clear_AI_body					= false;					// Clear AI body as soon as they die
@@ -576,7 +581,7 @@ if(DMS_DEBUG) then
 {
 	DMS_TimeBetweenMissions			= [30,60];
 	DMS_MissionTimeOut				= [60,90];
-	//DMS_MissionTypes = [["testmission",1]];
+	DMS_MissionTypes = [["testmission",1]];
 	//DMS_MissionTypes = [["mercbase",1]];
 	diag_log format ["DMS_DEBUG CONFIG :: Overriding DMS_TimeBetweenMissions (%1) and DMS_MissionTimeOut (%2)",DMS_TimeBetweenMissions,DMS_MissionTimeOut];
 };

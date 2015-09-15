@@ -40,32 +40,32 @@ while{!_validspot} do
 	try
 	{
 		// Check for nearby water
-		if ([_pos,DMS_WaterNearBlacklist] call DMS_fnc_isNearWater) then 
+		if ((DMS_WaterNearBlacklist>0) && {[_pos,DMS_WaterNearBlacklist] call DMS_fnc_isNearWater}) then 
 		{
 			throw ("water");
 		};
 		
 		// Check for nearby players
-		if ([_pos,DMS_PlayerNearBlacklist] call DMS_fnc_IsPlayerNearby) then
+		if ((DMS_PlayerNearBlacklist>0) && {[_pos,DMS_PlayerNearBlacklist] call DMS_fnc_IsPlayerNearby}) then
 		{
 			throw ("players");
 		};
 		
 		{
 			// Check for nearby spawn points
-			if (((markertype _x) == "ExileSpawnZone") && {((getMarkerPos _x) distance2D _pos)<=DMS_SpawnZoneNearBlacklist}) then
+			if ((DMS_SpawnZoneNearBlacklist>0) && {((markertype _x) == "ExileSpawnZone") && {((getMarkerPos _x) distance2D _pos)<=DMS_SpawnZoneNearBlacklist}}) then
 			{
 				throw ("a spawn zone");
 			};
 
 			// Check for nearby trader zones
-			if (((markertype _x) == "ExileTraderZone") && {((getMarkerPos _x) distance2D _pos)<=DMS_TraderZoneNearBlacklist}) then
+			if ((DMS_TraderZoneNearBlacklist>0) && {((markertype _x) == "ExileTraderZone") && {((getMarkerPos _x) distance2D _pos)<=DMS_TraderZoneNearBlacklist}}) then
 			{
 				throw ("a trader zone");
 			};
 
 			// Check for nearby missions
-			if (((_x find "DMS_MissionMarkerDot")>-1) && {((getMarkerPos _x) distance2D _pos)<=DMS_MissionNearBlacklist}) then
+			if ((DMS_MissionNearBlacklist>0) && {((_x find "DMS_MissionMarkerDot")>-1) && {((getMarkerPos _x) distance2D _pos)<=DMS_MissionNearBlacklist}}) then
 			{
 				throw ("another mission");
 			};

@@ -15,7 +15,7 @@
 */
 
 
-private ["_unit", "_player", "_side", "_type", "_launcher", "_playerObj", "_rockets", "_grpUnits", "_veh", "_moneyGain", "_repGain", "_money", "_respect"];
+private ["_unit", "_player", "_side", "_type", "_launcher", "_playerObj", "_rockets", "_grpUnits", "_av", "_memCount", "_gunner", "_driver", "_veh", "_moneyGain", "_repGain", "_money", "_respect"];
 
 
 if (DMS_DEBUG) then
@@ -78,7 +78,47 @@ if (((count (units group _unit)) > 1) && {(leader group _unit) == _unit}) then
 	(group _unit) selectLeader (_grpUnits call BIS_fnc_selectRandom);
 };
 
+_av = _unit getVariable ["DMS_AssignedVeh",objNull];
+if (!isNull _av) then
+{
+	// Determine whether or not the vehicle has any active crew remaining.
+	_memCount = {alive _x} count (crew _av);
 
+
+	// Destroy the vehicle and add it to cleanup if there are no active crew members of the vehicle.
+	if (_memCount<1) then
+	{
+		_av setDamage 1;
+		DMS_CleanUpList pushBack [_av,diag_tickTime,DMS_AIVehCleanUpTime];
+
+
+		if (DMS_DEBUG) then
+		{
+			diag_log format["DMS_DEBUG OnKilled :: Destroying used AI vehicle %1 and adding to cleanup.",typeOf _av];
+		};
+	}
+	else
+	{
+		// Only check for this stuff for ground vehicles that have guns...
+		if (_av isKindOf "LandVehicle" && {(count (weapons _av))>1}) then
+		{
+			_gunner = gunner _av;
+			_driver = driver _av;
+
+			// If the gunner is dead but the driver is alive, then the driver becomes the gunner.
+			// Helps with troll AI vehicles driving around aimlessly after the gunner is shot off. More realistic imo
+			// Yes, I know, so many nested conditions. eraser is a scrublord. blah blah blah. Deal with it
+			if (((isNull _gunner) || {!(alive _gunner)}) && {!(isNull _driver) && {alive _driver}}) then
+			{
+				_driver moveInGunner _av;
+				if (DMS_DEBUG) then
+				{
+					diag_log format["DMS_DEBUG OnKilled :: Switching driver of AI Vehicle (%1) to gunner.",typeOf _av];
+				};
+			};
+		};
+	};
+};
 
 
 if (isPlayer _player) then
@@ -122,7 +162,8 @@ if (isPlayer _player) then
 		{
 			_unit call _removeAll;
 		};
-	};};
+	};
+};
 
 
 if ((!isNull _playerObj) && {((getPlayerUID _playerObj) != "") && {_playerObj isKindOf "Exile_Unit_Player"}}) then

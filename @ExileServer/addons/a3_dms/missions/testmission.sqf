@@ -65,6 +65,17 @@ _crate_loot_values =
 	3 		// Backpacks
 ];
 
+[
+	[
+		[_pos,100,random 360] call DMS_fnc_SelectOffsetPos,
+		_pos
+	],
+	_group,
+	"assault",
+	_difficulty,
+	_side
+] call DMS_fnc_SpawnAIVehicle;
+
 
 // Define mission-spawned AI Units
 _missionAIUnits =

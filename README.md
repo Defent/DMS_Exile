@@ -78,6 +78,16 @@ if (!hasInterface && !isServer) then
 
 
 ## Changelog:
+#### September 14, 2015 (11:00 PM CST-America):
+* NEW CONFIG VALUES: DMS_AIVehCleanUpTime, DMS_MinWaterDepth, DMS_Bandit_Vehicle_MoneyGain, DMS_Bandit_Vehicle_RepGain.
+* Changed default value of DMS_Bandit_Static_MoneyGain to 75, DMS_Bandit_Static_RepGain to 15.
+* NEW FUNCTION: DMS_fnc_SpawnAIVehicle.
+* You can now spawn AI in vehicles.
+* Improved cleanup method for AI in static guns.
+* Working on improving OnKilled EH for AI in vehicles.
+* FindSafePos should no longer check for parameters if the corresponding blacklist radius is set to 0.
+
+
 #### September 13, 2015 (11:45 PM CST-America):
 * Updated parameter type for "DMS_dynamicText_Size", as well as commented out description for "dynamicTextRequest". Will try to work on functionality for it soon.
 * Improved cleaning of AI units. There may still be issues, specifically with launchers. If there are, please let me know, and test it. The more info I have, the quicker it can be fixed :)

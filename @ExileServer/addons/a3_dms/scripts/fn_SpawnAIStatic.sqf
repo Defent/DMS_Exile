@@ -14,7 +14,7 @@
 		_group,			// Group to which the AI unit(s) belongs to
 		_class,			// Class: "random","assault","MG","sniper" or "unarmed"
 		_difficulty,	// Difficulty: "random","static","hardcore","difficult","moderate", or "easy"
-		_side			// "bandit","hero", etc.
+		_side,			// "bandit","hero", etc.
 		_MGClass		// !OPTIONAL) String: classname of the MG. Use "random" to select a random one from DMS_static_weapons
 	] call DMS_fnc_SpawnAIStatic;
 
@@ -62,8 +62,9 @@ _guns = [];
 
 	_unit = [_group,_pos,_class,_difficulty,_side,"Static"] call DMS_fnc_SpawnAISoldier;
 	
-	_unit moveingunner _gun;
+	_unit moveInGunner _gun;
 	reload _unit;
+	_unit setVariable ["DMS_AssignedVeh",_gun];
 
 	if (DMS_DEBUG) then
 	{

@@ -52,6 +52,7 @@ class CfgFunctions
 			class SetAILocality 				{};
 			class SetGroupBehavior 				{};
 			class SpawnAIGroup 					{};
+			class SpawnAIVehicle				{};
 			class SpawnAISoldier 				{};
 			class SpawnAIStatic 				{};
 			class SpawnCrate 					{};
