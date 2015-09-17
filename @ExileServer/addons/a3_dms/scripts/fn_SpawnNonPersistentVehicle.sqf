@@ -45,6 +45,7 @@ _vehObj = [_vehicleClass, _vehpos, (random 360), true] call ExileServer_object_v
 _vehObj allowDamage false;
 _vehObj setFuel 1;
 _vehObj lock 2;
+_vehObj setVectorUp (surfaceNormal _vehpos);
 
 if (DMS_DEBUG) then
 {

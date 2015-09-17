@@ -88,32 +88,56 @@ if (!isNull _av) then
 	// Destroy the vehicle and add it to cleanup if there are no active crew members of the vehicle.
 	if (_memCount<1) then
 	{
+		moveOut _unit;
+
 		_av setDamage 1;
 		DMS_CleanUpList pushBack [_av,diag_tickTime,DMS_AIVehCleanUpTime];
+		_av spawn {sleep 1;_this enableSimulationGlobal false;};
 
 
 		if (DMS_DEBUG) then
 		{
-			diag_log format["DMS_DEBUG OnKilled :: Destroying used AI vehicle %1 and adding to cleanup.",typeOf _av];
+			diag_log format["DMS_DEBUG OnKilled :: Destroying used AI vehicle %1, disabling simulation, and adding to cleanup.",typeOf _av];
 		};
 	}
 	else
 	{
 		// Only check for this stuff for ground vehicles that have guns...
-		if (_av isKindOf "LandVehicle" && {(count (weapons _av))>1}) then
+		if ((_av isKindOf "LandVehicle") && {(count (weapons _av))>0}) then
 		{
 			_gunner = gunner _av;
 			_driver = driver _av;
 
 			// If the gunner is dead but the driver is alive, then the driver becomes the gunner.
 			// Helps with troll AI vehicles driving around aimlessly after the gunner is shot off. More realistic imo
-			// Yes, I know, so many nested conditions. eraser is a scrublord. blah blah blah. Deal with it
 			if (((isNull _gunner) || {!(alive _gunner)}) && {!(isNull _driver) && {alive _driver}}) then
 			{
-				_driver moveInGunner _av;
-				if (DMS_DEBUG) then
+				[_driver,_av] spawn
 				{
-					diag_log format["DMS_DEBUG OnKilled :: Switching driver of AI Vehicle (%1) to gunner.",typeOf _av];
+					_driver = _this select 0;
+					_av = _this select 1;
+					_av setVehicleAmmoDef 1;
+					sleep 5+(random 3); // 3 to 6 seconds delay after gunner death, to simulate reaction/switching time.
+
+					// The unit has to be local or else some of the commands won't work. Might as well eject the driver from the vehicle and make him useful.
+					moveOut _driver;
+					if (!local _driver) exitWith {};
+
+					//doGetOut _driver;
+					//unassignVehicle _driver;
+					waitUntil {(vehicle _driver)==_driver};
+
+					_driver assignAsGunner _av;
+					[_driver] orderGetIn true;
+
+					sleep 1.5;
+
+					_driver moveInGunner _av;
+
+					if (DMS_DEBUG) then
+					{
+						diag_log format["DMS_DEBUG OnKilled :: Switching driver of AI Vehicle (%1) to gunner.",typeOf _av];
+					};
 				};
 			};
 		};
@@ -131,7 +155,7 @@ if (isPlayer _player) then
 	if (DMS_ai_share_info) then
 	{
 		{
-			if (((position _x) distance (position _unit)) <= DMS_ai_share_info_distance ) then
+			if (((position _x) distance2D (position _unit)) <= DMS_ai_share_info_distance ) then
 			{
 				_x reveal [_player, 4.0];
 			};

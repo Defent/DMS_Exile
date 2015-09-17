@@ -195,7 +195,7 @@ if (!_useCustomGear) then
 
 		// Infinite Ammo
 		// This will NOT work if AI unit is offloaded to client
-		_unit addeventhandler ["Fired", {(_this select 0) setvehicleammo 1;}];
+		_unit addeventhandler ["Fired", {(vehicle (_this select 0)) setvehicleammo 1;}];
 	};
 }
 else
@@ -318,6 +318,12 @@ _unit enableAI "AUTOTARGET";
 _unit enableAI "MOVE";
 _unit enableAI "ANIM";
 _unit enableAI "FSM";
+
+if (_type=="Soldier") then
+{
+	_unit setVariable ["DMS_AISpawnPos",_pos];
+	_unit setVariable ["DMS_LastAIDistanceCheck",time];
+};
 
 if (DMS_DEBUG) then
 {

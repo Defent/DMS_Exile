@@ -78,6 +78,19 @@ if (!hasInterface && !isServer) then
 
 
 ## Changelog:
+#### September 16, 2015 (10:30 PM CST-America):
+* NEW CONFIG VALUES: DMS_MaxAIDistance and DMS_AIDistanceCheckFrequency
+* You can now use the above config values to kill AI that flee from their spawn position. Only "Soldier" AI will be killed.
+* Removed "O_HMG_01_F" from AI Static Weapons. AI were pretty useless on it... unless the AI were facing the right direction.
+* Reduced AI count and removed the "playerNear" parameter from testmission for easier testing.
+* NEW: When an AI vehicle gunner is killed, and the driver is still alive, after a little delay, the driver is then switched to the gunner seat. You should no longer have AI vehicles with a dead gunner that's driving around aimlessly :) There is a 5-8 second delay to simulate reaction time. Then the driver is ejected, then after 1.5 seconds the AI is then forced into the  gunner seat.
+* NOTE: The above feature only works when the AI is still local (not offloaded). If the AI is offloaded, the AI is simply ejected and becomes a foot soldier.
+* AI assigned vehicles are destroyed when the crew is empty. Simulation is also disabled on them.
+* Reduced some of the "params" RPT spam, from DMS_fnc_SetGroupBehavior.
+* Tweaked AI Vehicle spawning logic. The AI are initially assigned to a temporary group and then behavior is set, then they join the assigned group to prevent overriding behavior of other ground units.
+* Non-persistent vehicles should now be fit properly to the terrain.
+
+
 #### September 14, 2015 (11:00 PM CST-America):
 * NEW CONFIG VALUES: DMS_AIVehCleanUpTime, DMS_MinWaterDepth, DMS_Bandit_Vehicle_MoneyGain, DMS_Bandit_Vehicle_RepGain.
 * Changed default value of DMS_Bandit_Static_MoneyGain to 75, DMS_Bandit_Static_RepGain to 15.

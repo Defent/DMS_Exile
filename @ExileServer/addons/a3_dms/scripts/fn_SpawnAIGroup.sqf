@@ -107,7 +107,7 @@ _group setFormation "WEDGE";
 
 if(_pos_z == 0) then
 {
-	[_group,_pos,_difficulty] call DMS_fnc_SetGroupBehavior;
+	[_group,_pos,_difficulty,"COMBAT"] call DMS_fnc_SetGroupBehavior;
 };
 
 

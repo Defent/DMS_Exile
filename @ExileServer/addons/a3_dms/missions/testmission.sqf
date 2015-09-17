@@ -22,7 +22,7 @@ _difficulty = "moderate";
 
 // Create AI
 // TODO: Spawn AI only when players are nearby
-_AICount = 4 + (round (random 2));
+_AICount = 1;
 
 _group =
 [
@@ -37,8 +37,7 @@ _dir = random 180;
 _staticGuns =
 [
 	[
-		[_pos,5+random 5,_dir] call DMS_fnc_SelectOffsetPos,
-		[_pos,5+random 5,_dir+180] call DMS_fnc_SelectOffsetPos
+		[_pos,5+random 5,_dir] call DMS_fnc_SelectOffsetPos
 	],
 	_group,
 	"assault",
@@ -65,6 +64,7 @@ _crate_loot_values =
 	3 		// Backpacks
 ];
 
+_veh =
 [
 	[
 		[_pos,100,random 360] call DMS_fnc_SelectOffsetPos,
@@ -86,7 +86,7 @@ _missionAIUnits =
 // Define mission-spawned objects and loot values
 _missionObjs =
 [
-	_staticGuns,			// We only spawn the static guns
+	_staticGuns+[_veh],
 	[_vehicle],
 	[[_crate,"Sniper"]]
 ];
@@ -122,10 +122,6 @@ _added =
 		[
 			"kill",
 			_group
-		],
-		[
-			"playerNear",
-			[_pos,DMS_playerNearRadius]
 		]
 	],
 	[

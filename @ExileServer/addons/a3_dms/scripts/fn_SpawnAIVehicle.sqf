@@ -18,7 +18,7 @@
 	Returns the spawned vehicle.
 */
 
-private ["_OK", "_positions", "_veh", "_spawnPos", "_gotoPos", "_vehClass", "_driver", "_gunner", "_group", "_class", "_difficulty", "_side"];
+private ["_OK", "_positions", "_veh", "_spawnPos", "_gotoPos", "_vehClass", "_driver", "_gunner", "_tmpGroup", "_group", "_class", "_difficulty", "_side"];
 
 
 _OK = params
@@ -56,16 +56,16 @@ if (_vehClass == "random") then
 	_vehClass = DMS_ArmedVehicles call BIS_fnc_selectRandom;
 };
 
+_tmpGroup = createGroup (missionNamespace getVariable [format ["DMS_%1Side",_side],EAST]);
 
 _veh = createVehicle [_vehClass, _spawnPos, [], 0, "NONE"];
 _veh setDir (random 360);
 _veh setPosATL _spawnPos;
-_veh addEventHandler ["GetOut",{(_this select 0) setDamage 1;}];
 _veh lock 2;
 
 
-_driver = [_group,_spawnPos,_class,_difficulty,_side,"Vehicle"] call DMS_fnc_SpawnAISoldier;
-_gunner = [_group,_spawnPos,_class,_difficulty,_side,"Vehicle"] call DMS_fnc_SpawnAISoldier;
+_driver = [_tmpGroup,_spawnPos,_class,_difficulty,_side,"Vehicle"] call DMS_fnc_SpawnAISoldier;
+_gunner = [_tmpGroup,_spawnPos,_class,_difficulty,_side,"Vehicle"] call DMS_fnc_SpawnAISoldier;
 
 _driver moveInDriver _veh;
 _gunner moveInGunner _veh;
@@ -73,7 +73,10 @@ _gunner moveInGunner _veh;
 _driver setVariable ["DMS_AssignedVeh",_veh];
 _gunner setVariable ["DMS_AssignedVeh",_veh];
 
-[_group,_gotoPos,_difficulty,"AWARE"] call DMS_fnc_SetGroupBehavior;
+
+[_tmpGroup,_gotoPos,_difficulty,"AWARE"] call DMS_fnc_SetGroupBehavior;
+
+[_driver,_gunner] joinSilent _group;
 
 if (DMS_DEBUG) then
 {
