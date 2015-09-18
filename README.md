@@ -78,6 +78,15 @@ if (!hasInterface && !isServer) then
 
 
 ## Changelog:
+#### September 18, 2015 (6:30 PM CST-America):
+* NEW CONFIG VALUE: "DMS_HideBox".
+* Loot vehicles cannot be lifted, pushed, or damaged until the mission is completed successfully. Then the vehicle will be added to the Exile simulation monitor.
+* AI in vehicles will be automatically ejected on death.
+* Another potential fix for launchers not despawning off of AI sometimes.
+* When an AI gunner from an armed ground vehicle is killed, the driver will be switched to the gunner seat after 5-10 seconds. This prevents the driver from driving around aimlessly and trolling.
+* The above feature should now also work on AI that have been offloaded now (doing so was a major, major pain in the ass, and is the reason why there was no update yesterday).
+
+
 #### September 16, 2015 (10:30 PM CST-America):
 * NEW CONFIG VALUES: DMS_MaxAIDistance and DMS_AIDistanceCheckFrequency
 * You can now use the above config values to kill AI that flee from their spawn position. Only "Soldier" AI will be killed.

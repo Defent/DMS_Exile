@@ -45,6 +45,8 @@ if !(DMS_GodmodeCrates) then
 	_crate allowDamage true;
 };
 
+_crate hideObjectGlobal false;
+
 
 if ((typeName _lootValues)=="ARRAY") then
 {

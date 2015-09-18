@@ -47,6 +47,7 @@ DMS_DEBUG = false;
 
 	DMS_MinWaterDepth					= 20;						// Minimum depth of water that an underwater mission can spawn at.
 
+	DMS_HideBox							= false;					// "Hide" the box from being visible by players until the mission is completed.
 	DMS_SpawnBoxSmoke					= true;						// Spawn a smoke grenade on mission box upon misson completion during daytime
 	DMS_SpawnBoxIRGrenade				= true;						// Spawn an IR grenade on mission box upon misson completion during nighttime
 	
@@ -581,7 +582,7 @@ DMS_DEBUG = false;
 // Debug Overwrites
 if(DMS_DEBUG) then
 {
-	DMS_TimeBetweenMissions			= [30,40];
+	DMS_TimeBetweenMissions			= [10,15];
 	DMS_MissionTimeOut				= [60,70];
 	DMS_MissionTypes = [["testmission",1]];
 	//DMS_MissionTypes = [["mercbase",1]];
