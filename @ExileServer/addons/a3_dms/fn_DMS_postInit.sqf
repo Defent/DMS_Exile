@@ -15,6 +15,7 @@ WEST setFriend[EAST,0];
 if ((!isNil "A3XAI_isActive") && {!DMS_ai_offload_Only_DMS_AI}) then
 {
 	diag_log 'DMS DETECTED A3XAI. Enabling "DMS_ai_offload_Only_DMS_AI"!';
+	DMS_ai_offload_Only_DMS_AI = true;
 };
 
 
