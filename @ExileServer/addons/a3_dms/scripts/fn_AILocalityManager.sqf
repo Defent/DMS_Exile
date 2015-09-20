@@ -9,8 +9,7 @@
 if !(DMS_ai_offload_to_client) exitWith {};
 
 {
-	// Exile already has a group cleanup system, so we'll leave empty groups for it
-	if (((count (units _x))>1) && {!(_x getVariable ["DMS_LockLocality",false])}) then
+	if (((count (units _x))>1) && {!((DMS_ai_offload_Only_DMS_AI && {!(_x getVariable ["DMS_SpawnedGroup",false])}) || {(_x getVariable ["DMS_LockLocality",false])})}) then
 	{
 		private ["_leader", "_group", "_owner"];
 		_leader = leader _x;

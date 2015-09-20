@@ -4,58 +4,95 @@
 	
 	Usage:
 	[
-		[_completionType1,_completionArgs1],
-		[_completionType2,_completionArgs2],
+		[_completionType1,_completionArgs1,_isAbsoluteCondition],
+		[_completionType2,_completionArgs2,_isAbsoluteCondition],
 		...
-		[_completionTypeN,_completionArgsN]
+		[_completionTypeN,_completionArgsN,_isAbsoluteCondition]
 	] call DMS_fnc_MissionSuccessState;
 */
 
-if !((typeName _this) == "ARRAY") exitWith
+if ((typeName _this) != "ARRAY") exitWith
 {
-	diag_log format ["DMS ERROR :: DMS_MissionSuccessState called with invalid parameter: %1",_this];
+	diag_log format ["DMS ERROR :: DMS_fnc_MissionSuccessState called with invalid parameter: %1",_this];
 };
 
-private "_success";
+private ["_success", "_exit"];
 
 _success = true;
+_exit = false;
 
 {
-	if (!_success) exitWith
+	if (_exit) exitWith {};
+
+	try
 	{
+		private ["_OK","_completionType","_completionArgs","_absoluteWinCondition"];
+
+		_OK = _x params
+		[
+			["_completionType", "", [""] ],
+			["_completionArgs", [], [[],grpNull] ]
+		];
+
+		if (!_OK) then
+		{
+			diag_log format ["DMS ERROR :: DMS_fnc_MissionSuccessState has invalid parameters in: %1",_x];
+			throw "ERROR";
+		};
+
+
+		_absoluteWinCondition = false;
+		if (((count _x)>2) && {_x select 2}) then
+		{
+			_absoluteWinCondition = true;
+		};
+
+		if (!_success && {!_absoluteWinCondition}) then
+		{
+			throw format ["Skipping completion check for condition |%1|; Condition is not absolute and a previous condition has already been failed.",_x];
+		};
+
+
 		if (DMS_DEBUG) then
 		{
-			diag_log format ["DMS_DEBUG MissionSuccessState :: Mission not yet completed with parameters: %1 | at time %2",_this,diag_tickTime];
+			diag_log format ["DMS_DEBUG MissionSuccessState :: Checking completion type %1 with parameter %2. Absolute: %3",_completionType,_completionArgs,_absoluteWinCondition];
 		};
-	};
 
-	private ["_OK","_completionType","_completionArgs"];
+		switch (toLower _completionType) do 
+		{
+			case "kill":
+			{
+				_success = _completionArgs call DMS_fnc_TargetsKilled;
+			};
+			/*
+			case "killpercent":
+			{
+				_success = _completionArgs call DMS_fnc_TargetsKilledPercent;//<---TODO
+			};
+			*/
+			case "playernear":
+			{
+				_success = _completionArgs call DMS_fnc_IsPlayerNearby;
+			};
+			default
+			{
+				diag_log format ["DMS ERROR :: Invalid completion type (%1) with args: %2",_completionType,_completionArgs];
+				throw "ERROR";
+			};
+		};
 
-	_OK = _x params
-	[
-		["_completionType", "", [""] ],
-		["_completionArgs", [], [[],grpNull] ]
-	];
 
-	if (!_OK) exitWith
+		if (_success && {_absoluteWinCondition}) then
+		{
+			_exit = true;
+			throw format ["Mission completed because of absolute win condition: %1",_x];
+		};
+	}
+	catch
 	{
-		diag_log format ["DMS ERROR :: DMS_MissionSuccessState has invalid parameters in: %1",_x];
-	};
-
-	switch (_completionType) do 
-	{
-		// Using switch-do so that future cases can be added easily
-		case "kill":
+		if (true) then
 		{
-			_success = _completionArgs call DMS_fnc_TargetsKilled;
-		};
-		case "killPercent":
-		{
-			_success = _completionArgs call DMS_fnc_TargetsKilledPercent;//<---TODO
-		};
-		case "playerNear":
-		{
-			_success = _completionArgs call DMS_fnc_IsPlayerNearby;
+			diag_log format ["DMS_DEBUG MissionSuccessState :: %1",_exception];
 		};
 	};
 } forEach _this;

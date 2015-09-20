@@ -121,7 +121,13 @@ _added =
 	[
 		[
 			"kill",
-			_group
+			_group,
+			true
+		],
+		[
+			"playerNear",
+			[_pos,DMS_playerNearRadius],
+			true
 		]
 	],
 	[

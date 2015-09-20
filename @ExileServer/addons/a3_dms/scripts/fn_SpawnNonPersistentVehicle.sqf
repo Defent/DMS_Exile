@@ -57,6 +57,11 @@ _vehObj setDir (random 360);
 _vehObj setPosATL _vehpos;
 _vehObj setVectorUp (surfaceNormal _vehpos);
 
+if (!isNil "RS_VLS") then
+{
+	[_vehicle] call RS_VLS_sanitizeVehicle;
+};
+
 _vehObj lock 2;
 _vehObj allowDamage false;
 _vehObj enableRopeAttach false;

@@ -78,6 +78,14 @@ if (!hasInterface && !isServer) then
 
 
 ## Changelog:
+#### September 20, 2015 (12:30 AM CST-America):
+* NEW CONFIG VALUE: "DMS_ai_offload_Only_DMS_AI"
+* You can use "DMS_ai_offload_Only_DMS_AI" to offload only AI spawned by DMS. This should resolve any issues with other mission systems from DMS.
+* Increased "DMS_playerNearRadius" from 75 meters to 100 meters.
+* You can now define "absolute" mission conditions. If this mission condition is met, it immediately counts the mission as completed. Add "true" after the completion argument to turn it into an "absolute" win condition.
+* Added compatibility with RS_VLS by [Rod Serling](https://github.com/Rod-Serling).
+
+
 #### September 18, 2015 (6:30 PM CST-America):
 * NEW CONFIG VALUE: "DMS_HideBox".
 * Loot vehicles cannot be lifted, pushed, or damaged until the mission is completed successfully. Then the vehicle will be added to the Exile simulation monitor.

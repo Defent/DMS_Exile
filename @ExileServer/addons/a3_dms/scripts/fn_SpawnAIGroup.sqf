@@ -74,6 +74,7 @@ if(_pos_z == 0) then
 _group = createGroup (missionNamespace getVariable [format ["DMS_%1Side",_side],EAST]);
 
 _group setVariable ["DMS_LockLocality",nil];
+_group setVariable ["DMS_SpawnedGroup",true];
 
 for "_i" from 1 to _count do
 {
