@@ -10,6 +10,8 @@
 		_pos 							// Object or Array: Center position
 	] call DMS_fnc_ImportFromM3E;
 
+	It takes RELATIVE POSITION as argument. In order to get relative positions, check this link: http://maca134.co.uk/portfolio/m3editor-arma-3-map-editor/
+
 	Returns all created objects.
 */
 
@@ -31,7 +33,7 @@ if (!_OK) exitWith
 // Get the position if an object was supplied instead of position
 if ((typeName _pos)=="OBJECT") then
 {
-	_pos = getPos _pos;
+	_pos = getPosATL _pos;
 };
 
 // Set the center pos to 0 if it isn't defined

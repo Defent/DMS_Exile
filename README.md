@@ -78,6 +78,15 @@ if (!hasInterface && !isServer) then
 
 
 ## Changelog:
+#### September 20, 2015 (3:30 PM CST-America):
+* NEW CONFIG VALUE: "DMS_MaxSurfaceNormal"
+* The above config value now determines the maximum incline that a mission can spawn on. Default value is 0.95, which should be sufficiently flat.
+* Added some grouping explanations in mission config settings.
+* Added check for A3XAI for the lovely ["Face"/"dayzai"](https://github.com/dayzai)
+* Added ability for people to use a static export from M3Editor. DMS will then calculate the relative position, and spawn it at the mission. Example provided in testmission.sqf.
+* Fixed an issue with DMS_fnc_TargetsKilled always returning false.
+
+
 #### September 20, 2015 (12:30 AM CST-America):
 * NEW CONFIG VALUE: "DMS_ai_offload_Only_DMS_AI"
 * You can use "DMS_ai_offload_Only_DMS_AI" to offload only AI spawned by DMS. This should resolve any issues with other mission systems from DMS.

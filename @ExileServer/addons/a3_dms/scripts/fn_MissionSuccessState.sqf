@@ -90,7 +90,7 @@ _exit = false;
 	}
 	catch
 	{
-		if (true) then
+		if (DMS_DEBUG) then
 		{
 			diag_log format ["DMS_DEBUG MissionSuccessState :: %1",_exception];
 		};

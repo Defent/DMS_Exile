@@ -31,8 +31,13 @@ try
 	{
 		if (((typeName _x) == "OBJECT") && {!isNull _x && {alive _x}}) then
 		{
-			// It only seems long... but it's only evaluating 3 conditions.
-			if ((DMS_MaxAIDistance>0) && {((time - (_x getVariable ["DMS_LastAIDistanceCheck",time]))>DMS_AIDistanceCheckFrequency) && {((getPosWorld _x) distance2D (_x getVariable ["DMS_AISpawnPos",getPosWorld _x]))>DMS_MaxAIDistance}}) then
+			private ["_lastDistanceCheckTime", "_spawnPos"];
+
+			_lastDistanceCheckTime = _x getVariable ["DMS_LastAIDistanceCheck",time];
+			_pos = getPosWorld _x;
+			_spawnPos = _x getVariable ["DMS_AISpawnPos",_pos];
+
+			if ((DMS_MaxAIDistance>0) && {((time - _lastDistanceCheckTime)>DMS_AIDistanceCheckFrequency) && {(_pos distance2D _spawnPos)>DMS_MaxAIDistance}}) then
 			{
 				_x setDamage 1;
 				diag_log format ["Killed a runaway unit! |%1| was more than %2m away from its spawn position %3!",_x,DMS_MaxAIDistance,_x getVariable "DMS_AISpawnPos"];
@@ -49,14 +54,23 @@ try
 				diag_log format ["DMS ERROR :: %1 is neither OBJECT nor GROUP!",_x];
 			};
 			{
-				if ((DMS_MaxAIDistance>0) && {((time - (_x getVariable ["DMS_LastAIDistanceCheck",time]))>DMS_AIDistanceCheckFrequency) && {((getPosWorld _x) distance2D (_x getVariable ["DMS_AISpawnPos",getPosWorld _x]))>DMS_MaxAIDistance}}) then
+				if (alive _x) then
 				{
-					_x setDamage 1;
-					diag_log format ["Killed a runaway unit! |%1| was more than %2m away from its spawn position %3!",_x,DMS_MaxAIDistance,_x getVariable "DMS_AISpawnPos"];
-				}
-				else
-				{
-					throw _x;
+					private ["_lastDistanceCheckTime", "_spawnPos"];
+
+					_lastDistanceCheckTime = _x getVariable ["DMS_LastAIDistanceCheck",time];
+					_pos = getPosWorld _x;
+					_spawnPos = _x getVariable ["DMS_AISpawnPos",_pos];
+
+					if ((DMS_MaxAIDistance>0) && {((time - _lastDistanceCheckTime)>DMS_AIDistanceCheckFrequency) && {(_pos distance2D _spawnPos)>DMS_MaxAIDistance}}) then
+					{
+						_x setDamage 1;
+						diag_log format ["Killed a runaway unit! |%1| was more than %2m away from its spawn position %3!",_x,DMS_MaxAIDistance,_x getVariable "DMS_AISpawnPos"];
+					}
+					else
+					{
+						throw _x;
+					};
 				};
 			} forEach (units _x);
 		};
@@ -66,7 +80,8 @@ try
 }
 catch
 {
-	if (DMS_DEBUG) then {
+	if (DMS_DEBUG) then
+	{
 		diag_log format ["DMS_DEBUG TargetsKilled :: %1 is still alive! All of %2 are not yet killed!",_exception,_this];
 	};
 };

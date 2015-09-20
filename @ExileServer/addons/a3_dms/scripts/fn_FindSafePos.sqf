@@ -50,6 +50,12 @@ while{!_validspot} do
 		{
 			throw ("players");
 		};
+
+		if (((surfaceNormal _pos) select 2)<DMS_MaxSurfaceNormal) then
+		{
+			diag_log format ["%1 is too steep.",_pos];
+			throw ("a steep location");
+		};
 		
 		{
 			// Check for nearby spawn points

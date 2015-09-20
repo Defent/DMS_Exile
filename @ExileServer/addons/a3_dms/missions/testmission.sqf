@@ -77,6 +77,15 @@ _veh =
 ] call DMS_fnc_SpawnAIVehicle;
 
 
+_baseObjs =
+[
+	"base1STATIC",
+	_pos
+] call DMS_fnc_ImportFromM3E_Convert;
+
+
+
+
 // Define mission-spawned AI Units
 _missionAIUnits =
 [
@@ -86,7 +95,7 @@ _missionAIUnits =
 // Define mission-spawned objects and loot values
 _missionObjs =
 [
-	_staticGuns+[_veh],
+	_staticGuns+[_veh]+_baseObjs,
 	[_vehicle],
 	[[_crate,"Sniper"]]
 ];

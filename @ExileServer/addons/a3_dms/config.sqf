@@ -12,16 +12,19 @@ DMS_DEBUG = false;
 
 
 /* Mission System Settings */
+	/*General settings for dynamic missions*/
 	DMS_DynamicMission					= true;						// Enable/disable dynamic mission system
 	DMS_MaxBanditMissions				= 3;						// Maximum number of Bandit Missions running at the same time
 	DMS_StaticMission					= false;					// Enable/disable static missions
 	DMS_TimeBetweenMissions				= [600,900];				// [Minimum,Maximum] time between missions (if mission limit is not reached) | DEFAULT: 10-15 mins
 	DMS_MissionTimeOut					= [900,1800]; 				// [Minimum,Maximum] time it will take for a mission to timeout | Default: 15-30 mins
+	/*General settings for dynamic missions*/
 
 	DMS_playerNearRadius				= 100;						// How close a player has to be to a mission in order to satisfy the "playerNear" mission requirement (can be customized per mission).
 
 	DMS_AI_KillPercent					= 100;						// The percent amount of AI that need to be killed for "killPercent" mission requirement (NOT IMPLEMENTED)
 
+	/*Mission Marker settings*/
 	DMS_MarkerPosRandomization			= false;					// Randomize the position of the circle marker of a mission
 	DMS_MarkerPosRandomRadius			= [25,100];					// Minimum/Maximum distance that the circle marker position will be randomized | Default: 0 meters to 200 meters
 	DMS_RandomMarkerBrush				= "Cross";					// See: https://community.bistudio.com/wiki/setMarkerBrush
@@ -31,30 +34,38 @@ DMS_DEBUG = false;
 	DMS_MissionMarkerLoseDotTime		= 30;						// How many seconds the "lose" mission dot will remain on the map
 	DMS_MissionMarkerWinDotColor		= "ColorBlue";				// The color of the "win" marker dot
 	DMS_MissionMarkerLoseDotColor		= "ColorRed";				// The color of the "lose" marker dot
+	/*Mission Marker settings*/
 
+	/*Mission Cleanup/Timeout settings*/
 	DMS_CompletedMissionCleanup			= true;						// Cleanup mission-spawned buildings and AI bodies after some time
 	DMS_CompletedMissionCleanupTime		= 3600;						// Minimum time until mission-spawned buildings and AI are cleaned up
 	DMS_CleanUp_PlayerNearLimit			= 20;						// Cleanup of an object is aborted if a player is this many meters close to the object
 	DMS_AIVehCleanUpTime				= 900;						// Time until a destroyed AI vehicle is cleaned up.
 	DMS_MissionTimeoutReset				= true;						// Enable mission timeout timer reset if a player is close
 	DMS_MissionTimeoutResetRange		= 1000;						// If a player is this close to a mission then it won't time-out
+	/*Mission Cleanup/Timeout settings*/
 
+	/*Mission spawn location settings*/
 	DMS_PlayerNearBlacklist				= 2000;						// Missions won't spawn in a position this many meters close to a player
 	DMS_SpawnZoneNearBlacklist			= 2500;						// Missions won't spawn in a position this many meters close to a spawn zone
 	DMS_TraderZoneNearBlacklist			= 3000;						// Missions won't spawn in a position this many meters close to a trader zone
 	DMS_MissionNearBlacklist			= 4000;						// Missions won't spawn in a position this many meters close to another mission
 	DMS_WaterNearBlacklist				= 750;						// Missions won't spawn in a position this many meters close to water
+	DMS_MaxSurfaceNormal				= 0.95;						// Missions won't spawn if the surface normal of the location is less than this amount. The lower the value, the steeper the location. Greater values means flatter locations
+	/*Mission spawn location settings*/
 
 	DMS_MinWaterDepth					= 20;						// Minimum depth of water that an underwater mission can spawn at.
 
+	/*Crate/Box settings*/
 	DMS_HideBox							= false;					// "Hide" the box from being visible by players until the mission is completed.
 	DMS_SpawnBoxSmoke					= true;						// Spawn a smoke grenade on mission box upon misson completion during daytime
 	DMS_SpawnBoxIRGrenade				= true;						// Spawn an IR grenade on mission box upon misson completion during nighttime
+	/*Crate/Box settings*/
 	
 	DMS_MinPlayerCount					= 0; 						// Minimum number of players until mission start
 	DMS_MinServerFPS					= 5; 						// Minimum server FPS for missions to start
 
-	//Mission notification settings
+	/*Mission notification settings*/
 	DMS_PlayerNotificationTypes =		[							// Notification types. Supported values are: ["dynamicTextRequest", "standardHintRequest", "systemChatRequest"]
 											//"dynamicTextRequest", <--- Text formatting makes this weird...
 											"standardHintRequest"
@@ -62,6 +73,7 @@ DMS_DEBUG = false;
 										];
 	DMS_dynamicText_Size				= 0.65;						// Dynamic Text size for "dynamicTextRequest" notification type.
 	DMS_dynamicText_Color				= "#FFCC00";				// Dynamic Text color for "dynamicTextRequest" notification type.
+	/*Mission notification settings*/
 
 	DMS_MissionTypes =					[							//	List of missions with spawn chances. If they add up to 100%, they represent the percentage chance each one will spawn
 											["bandits",25],
