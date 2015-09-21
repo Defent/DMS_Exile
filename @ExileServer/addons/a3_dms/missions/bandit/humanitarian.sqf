@@ -66,13 +66,13 @@ _missionObjs =
 ];
 
 // Define Mission Start message
-_msgStart = format["<t color='#FFFF00' size='1.25'>Humantarian Supplies! </t><br/> A truck carrying humanitarian supplies has been sized by bandits, stop them!"];
+_msgStart = format["<t color='#FFFF00' size='1.25'>Humanitarian Supplies! </t><br/> A truck carrying humanitarian supplies has been sized by bandits, stop them!"];
 
 // Define Mission Win message
-_msgWIN = format["<t color='#0080ff' size='1.25'>Humantarian Supplies! </t><br/> Convicts have successfully claimed the humanitarian supplies for themselves!"];
+_msgWIN = format["<t color='#0080ff' size='1.25'>Humanitarian Supplies! </t><br/> Convicts have successfully claimed the humanitarian supplies for themselves!"];
 
 // Define Mission Lose message
-_msgLOSE = format["<t color='#FF0000' size='1.25'>Humantarian Supplies! </t><br/> The bandits have taken the humanitarian supplies and escaped!"];
+_msgLOSE = format["<t color='#FF0000' size='1.25'>Humanitarian Supplies! </t><br/> The bandits have taken the humanitarian supplies and escaped!"];
 
 // Define mission name (for map marker and logging)
 _missionName = "Humanitarian Supplies";

@@ -22,10 +22,10 @@ if (DMS_DEBUG) then
 };
 
 // Set mission frequencies from config
-DMS_MissionTypesArray = [];
+DMS_BanditMissionTypesArray = [];
 {
 	for "_i" from 1 to (_x select 1) do
 	{
-		DMS_MissionTypesArray pushBack (_x select 0);
+		DMS_BanditMissionTypesArray pushBack (_x select 0);
 	};
-} forEach DMS_MissionTypes;
+} forEach DMS_BanditMissionTypes;

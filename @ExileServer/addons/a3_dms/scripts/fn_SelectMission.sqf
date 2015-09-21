@@ -9,27 +9,19 @@ private "_time";
 
 _time = diag_tickTime;
 
-if (DMS_RunningBMissionCount isEqualTo DMS_MaxBanditMissions) then
+if (DMS_RunningBMissionCount >= DMS_MaxBanditMissions) then
 {
 	DMS_BMissionLastStart = _time;
 };
 
-if ((_time - DMS_BMissionLastStart > DMS_BMissionDelay) && {diag_fps >= DMS_MinServerFPS && {(count allPlayers) >= DMS_MinPlayerCount}}) then
+if (diag_fps >= DMS_MinServerFPS && {(count allPlayers) >= DMS_MinPlayerCount}) then
 {
-	private "_mission";
-
-	DMS_MissionCount 			= DMS_MissionCount + 1;
-	DMS_RunningBMissionCount 	= DMS_RunningBMissionCount + 1;
-	
-	DMS_BMissionLastStart 		= _time;
-	_mission					= DMS_MissionTypesArray call BIS_fnc_selectRandom;
-
-	DMS_BMissionDelay 			= DMS_TimeBetweenMissions call DMS_fnc_SelectRandomVal;
-
-	if (DMS_DEBUG) then
+	// More Mission types coming soon
+	if (_time - DMS_BMissionLastStart > DMS_BMissionDelay) then
 	{
-		diag_log format ["DMS_DEBUG SelectMission :: Spawning mission: %1 | DMS_BMissionDelay set to %2",_mission,DMS_BMissionDelay];
-	};
+		private "_mission";
+		_mission = DMS_BanditMissionTypesArray call BIS_fnc_selectRandom;
 
-	call compile preprocessFileLineNumbers (format ["\x\addons\DMS\missions\%1.sqf",_mission]);
+		[_mission] call DMS_fnc_SpawnBanditMission;
+	};
 };

@@ -58,6 +58,7 @@ class CfgFunctions
 			class SpawnAIVehicle				{};
 			class SpawnAISoldier 				{};
 			class SpawnAIStatic 				{};
+			class SpawnBanditMission			{};
 			class SpawnCrate 					{};
 			class SpawnNonPersistentVehicle 	{};
 			class TargetsKilled 				{};

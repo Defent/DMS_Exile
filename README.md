@@ -78,6 +78,15 @@ if (!hasInterface && !isServer) then
 
 
 ## Changelog:
+#### September 20, 2015 (11:30 PM CST-America):
+* CONFIG VALUES: Changed "DMS_MissionTypes" to "DMS_BanditMissionTypes"
+* Renamed some variables to "future-proof" them
+* Placed all current missions under "bandit" subfolder to for easier future integration.
+* Created function "DMS_fnc_SpawnBanditMission" to handle bandit mission spawning (makes it easier to spawn missions via admin console).
+* Attached vehicle eventhandlers to DMS-spawned non-persistent vehicles.
+* Fixed the "lock" option appearing on DMS-spawned vehicles.
+
+
 #### September 20, 2015 (3:30 PM CST-America):
 * NEW CONFIG VALUE: "DMS_MaxSurfaceNormal"
 * The above config value now determines the maximum incline that a mission can spawn on. Default value is 0.95, which should be sufficiently flat.

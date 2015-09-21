@@ -75,7 +75,7 @@ DMS_DEBUG = false;
 	DMS_dynamicText_Color				= "#FFCC00";				// Dynamic Text color for "dynamicTextRequest" notification type.
 	/*Mission notification settings*/
 
-	DMS_MissionTypes =					[							//	List of missions with spawn chances. If they add up to 100%, they represent the percentage chance each one will spawn
+	DMS_BanditMissionTypes =			[							//	List of missions with spawn chances. If they add up to 100%, they represent the percentage chance each one will spawn
 											["bandits",25],
 											["bauhaus",25],
 											["beertransport",15],
@@ -597,7 +597,7 @@ if(DMS_DEBUG) then
 {
 	DMS_TimeBetweenMissions			= [10,15];
 	DMS_MissionTimeOut				= [60,70];
-	DMS_MissionTypes = [["testmission",1]];
-	//DMS_MissionTypes = [["mercbase",1]];
+	//DMS_BanditMissionTypes = [["testmission",1]];
+	//DMS_BanditMissionTypes = [["mercbase",1]];
 	diag_log format ["DMS_DEBUG CONFIG :: Overriding DMS_TimeBetweenMissions (%1) and DMS_MissionTimeOut (%2)",DMS_TimeBetweenMissions,DMS_MissionTimeOut];
 };
