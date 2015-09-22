@@ -15,7 +15,7 @@
 */
 
 
-private ["_unit", "_killer", "_side", "_type", "_launcher", "_playerObj", "_rockets", "_grpUnits", "_av", "_memCount", "_gunner", "_driver", "_veh", "_moneyGain", "_repGain", "_money", "_respect"];
+private ["_unit", "_killer", "_side", "_type", "_launcher", "_playerObj", "_rockets", "_grpUnits", "_av", "_memCount", "_gunner", "_driver", "_veh", "_moneyChange", "_repChange", "_money", "_respect", "_roadKilled"];
 
 
 if (DMS_DEBUG) then
@@ -237,6 +237,7 @@ if (!isNull _av) then
 	};
 };
 
+_roadKilled = false;
 
 if (isPlayer _killer) then
 {
@@ -266,12 +267,7 @@ if (isPlayer _killer) then
 	{
 		_playerObj = driver _veh;
 
-
-		// Don't reward players with poptabs/respect if configured to do so
-		if !(DMS_credit_roadkill) then
-		{
-			_playerObj = objNull;
-		};
+		_roadKilled = true;
 
 
 		// Remove gear from roadkills if configured to do so
@@ -285,33 +281,56 @@ if (isPlayer _killer) then
 
 if ((!isNull _playerObj) && {((getPlayerUID _playerObj) != "") && {_playerObj isKindOf "Exile_Unit_Player"}}) then
 {
-	_moneyGain = missionNamespace getVariable [format ["DMS_%1_%2_MoneyGain",_side,_type],0];
-	_repGain = missionNamespace getVariable [format ["DMS_%1_%2_RepGain",_side,_type],0];
+	_moneyChange = missionNamespace getVariable [format ["DMS_%1_%2_MoneyGain",_side,_type],0];
+	_repChange = missionNamespace getVariable [format ["DMS_%1_%2_RepGain",_side,_type],0];
 
-	if ((_moneyGain>0) || (_repGain>0)) then
+	if (_roadKilled && {DMS_Diff_RepOrTabs_on_roadkill}) then
+	{
+		_moneyChange = missionNamespace getVariable [format ["DMS_%1_%2_RoadkillMoney",_side,_type],0];
+		_repChange = missionNamespace getVariable [format ["DMS_%1_%2_RoadkillRep",_side,_type],0];
+	};
+
+	if ((_moneyChange!=0) || (_repChange!=0)) then
 	{
 		_money = _playerObj getVariable ["ExileMoney", 0];
 		_respect = _playerObj getVariable ["ExileScore", 0];
 		
-		if (_moneyGain>0) then
+		if (_moneyChange!=0) then
 		{
+			private ["_msgType", "_msgParams"];
+
 			// Set client's money
-			_money = _money + _moneyGain;
+			// I also make sure that they don't get negative poptabs
+			_money = (_money + _moneyChange) max 0;
 			_playerObj setVariable ["ExileMoney",_money];
 
+			// Change message for players when they're actually LOSING poptabs
+			_msgType = "moneyReceivedRequest";
+			_msgParams = [str _money, format ["killing a %1 AI",_type]];
+
+			if (_moneyChange<0) then
+			{
+				_msgType = "notificationRequest";
+				_msgParams = ["Whoops",[format ["Lost %1 poptabs from running over a %2 AI!",abs _moneyChange,_type]]];
+
+				// With the error message the money value won't be updated on the client, so I just directly PVC the value.
+				ExileClientPlayerMoney = _money;
+				(owner _playerObj) publicVariableClient "ExileClientPlayerMoney";
+				ExileClientPlayerMoney = nil;
+			};
+
 			// Send notification and update client's money stats
-			// Somebody done fucked up so you don't see the sender for the money sending ;)
-			[_playerObj, "moneyReceivedRequest", [str _money, "killing AI"]] call ExileServer_system_network_send_to;
+			[_playerObj, _msgType, _msgParams] call ExileServer_system_network_send_to;
 		};
 
-		if (_repGain>0) then
+		if (_repChange!=0) then
 		{
 			// Set client's respect
-			_respect = _respect + _repGain;
+			_respect = _respect + _repChange;
 			_playerObj setVariable ["ExileScore",_respect];
 
 			// Send frag message
-			[_playerObj, "showFragRequest", [ [["AI KILL",_repGain]] ] ] call ExileServer_system_network_send_to;
+			[_playerObj, "showFragRequest", [ [[format ["%1 AI KILL",toUpper _type],_repChange]] ] ] call ExileServer_system_network_send_to;
 
 			// Send updated respect value to client
 			ExileClientPlayerScore = _respect;

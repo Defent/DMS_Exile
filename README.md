@@ -12,33 +12,6 @@ so your ```_aLocalM``` would look like:
 ```
     _aLocalM = ["DMS_MissionMarkerCircle","DMS_MissionMarkerDot"];
 ```
-## IF YOU ARE UPDATING YOUR DMS FROM BEFORE THE 5th OF SEPTEMBER, PLEASE READ BELOW:
-The crate loot system has undergone an improvement. You can now define loot values for different crates for the same mission, or none at all!
-HOWEVER: This requires you to change the organization of the crate in the mission.
-
-Previously, _missionObjs was defined with the format:
-```
-[
-	[_cleanupObj1,_cleanupObj2,...,_cleanupObjX],
-	[_crate,_vehicle1,_vehicle2,...,_vehicleX],
-	_crate_loot_values
-]
-```
-
-
-Now you must define it as:
-```
-[
-	[_cleanupObj1,_cleanupObj2,...,_cleanupObjX],
-	[_vehicle1,_vehicle2,...,_vehicleX],
-	[
-		[_crate1,_crate_loot_values1],
-		[_crate2,_crate_loot_values2]
-	]
-]
-```
-
-Please refer to the current default missions if you are unsure. The Bauhaus truck mission shows an example of spawning 2 crates.
 
 ## Optional:
 
@@ -78,6 +51,22 @@ if (!hasInterface && !isServer) then
 
 
 ## Changelog:
+#### September 21, 2015 (11:30 PM CST-America):
+* NEW CONFIG VALUES:
+		DMS_Diff_RepOrTabs_on_roadkill
+		DMS_Bandit_Soldier_RoadkillMoney
+		DMS_Bandit_Soldier_RoadkillRep
+		DMS_Bandit_Static_RoadkillMoney
+		DMS_Bandit_Static_RoadkillRep
+		DMS_Bandit_Vehicle_RoadkillMoney
+		DMS_Bandit_Vehicle_RoadkillRep
+* Removed config value: "DMS_credit_roadkill"
+* You can now REDUCE a player's respect/poptabs when the player roadkills an AI. The default values are -10 poptabs and -5 respect (hardly noticeable, but I didn't want it to be extreme).
+* Alternatively, you can simply reduce the amount of poptabs gained by giving each corresponding config a positive value less than the regular. Set the value to 0 if you don't want to credit the poptabs/respect.
+* The player will get an appropriately colored message if he/she LOSES poptabs (as opposed to gaining them).
+* The player also gets a little more information regarding the type of AI he/she has killed.
+
+
 #### September 20, 2015 (11:30 PM CST-America):
 * CONFIG VALUES: Changed "DMS_MissionTypes" to "DMS_BanditMissionTypes"
 * Renamed some variables to "future-proof" them
