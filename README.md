@@ -48,6 +48,7 @@ if (!hasInterface && !isServer) then
 - [Nawuko](https://github.com/Nawuko) for catching a silly mistake :P
 - [shaworth](https://github.com/shaworth) and [KawaiiPotato](https://github.com/KawaiiPotato) for making the README all nice and pretty :)
 - Everbody's feedback on [the DMS thread on exile forums](http://www.exilemod.com/topic/61-dms-defents-mission-system/?do=findComment&comment=242)
+- [maca134](http://maca134.co.uk/portfolio/m3editor-arma-3-map-editor/) for M3Editor Stuff
 
 
 ## Changelog:
