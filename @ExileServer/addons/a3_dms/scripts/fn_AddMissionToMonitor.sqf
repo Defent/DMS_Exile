@@ -50,7 +50,7 @@
 	 "_completionInfo", "_timeOutInfo", "_inputUnits", "_missionObjs", "_messages", "_markers", "_side", "_timeStarted", "_timeUntilFail"
 */
 
-private ["_added", "_pos", "_OK", "_completionInfo", "_timeOutInfo", "_inputUnits", "_missionObjs", "_messages", "_markers", "_timeStarted", "_timeUntilFail", "_buildings", "_vehs", "_crate_info_array", "_msgWIN", "_msgLose", "_markerDot", "_markerCircle", "_side","_arr"];
+private ["_added", "_pos", "_OK", "_completionInfo", "_timeOutInfo", "_inputUnits", "_missionObjs", "_mines", "_messages", "_markers", "_timeStarted", "_timeUntilFail", "_buildings", "_vehs", "_crate_info_array", "_msgWIN", "_msgLose", "_markerDot", "_markerCircle", "_side","_arr"];
 
 
 _added = false;
@@ -61,7 +61,7 @@ _OK = params
 	["_completionInfo","",[[]]],
 	["_timeOutInfo","",[[]],[1,2]],
 	["_inputUnits","",[[]]],
-	["_missionObjs","",[[]],[3]],
+	["_missionObjs","",[[]],[3,4]],
 	["_messages","",[[]],[2]],
 	["_markers","",[[]],[2]],
 	["_side","bandit",[""]]
@@ -117,6 +117,14 @@ try
 		throw format["_missionObjs |%1|",_missionObjs];
 	};
 
+	_mines = [];
+	
+	if ((count _missionObjs)>3) then
+	{
+		_mines = _missionObjs param [3,[],[[]]];
+	};
+
+
 	_OK = _messages params
 	[
 		["_msgWIN","",[""]],
@@ -151,7 +159,8 @@ try
 		[
 			_buildings,
 			_vehs,
-			_crate_info_array
+			_crate_info_array,
+			_mines
 		],
 		[
 			_msgWIN,

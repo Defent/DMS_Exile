@@ -60,6 +60,7 @@ class CfgFunctions
 			class SpawnAIStatic 				{};
 			class SpawnBanditMission			{};
 			class SpawnCrate 					{};
+			class SpawnMinefield				{};
 			class SpawnNonPersistentVehicle 	{};
 			class TargetsKilled 				{};
 		};

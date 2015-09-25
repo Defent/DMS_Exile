@@ -269,6 +269,16 @@ if (isPlayer _killer) then
 
 		_roadKilled = true;
 
+		if (DMS_explode_onRoadkill) then
+		{
+			_boom = createVehicle ["SLAMDirectionalMine_Wire_Ammo", ASLToAGL(getPosWorld _unit), [], 0, "CAN_COLLIDE"];
+			_boom setDamage 1;
+			if (DMS_DEBUG) then
+			{
+				diag_log format ["DMS_DEBUG OnKilled :: %1 roadkilled an AI! Creating mine at the roadkilled AI's position!",name _killer];
+			};
+		};
+
 
 		// Remove gear from roadkills if configured to do so
 		if (DMS_remove_roadkill && {(random 100) <= DMS_remove_roadkill_chance}) then

@@ -25,7 +25,7 @@
 */
 if (DMS_Mission_Arr isEqualTo []) exitWith {};				// Empty array, no missions running
 
-private ["_pos", "_success", "_timeStarted", "_timeUntilFail", "_units", "_buildings", "_vehs", "_crate_info_array", "_msgWIN", "_msgLose", "_markers", "_missionSide", "_arr", "_cleanupList"];
+private ["_pos", "_success", "_timeStarted", "_timeUntilFail", "_units", "_buildings", "_vehs", "_crate_info_array", "_mines", "_msgWIN", "_msgLose", "_markers", "_missionSide", "_arr", "_cleanupList"];
 
 
 {
@@ -43,6 +43,7 @@ private ["_pos", "_success", "_timeStarted", "_timeUntilFail", "_units", "_build
 		_buildings					= _x select 4 select 0;
 		_vehs						= _x select 4 select 1;
 		_crate_info_array			= _x select 4 select 2;
+		_mines						= _x select 4 select 3;
 		_msgWIN						= _x select 5 select 0;
 		_msgLose					= _x select 5 select 1;
 		_markers 					= _x select 6;
@@ -74,6 +75,13 @@ private ["_pos", "_success", "_timeStarted", "_timeUntilFail", "_units", "_build
 			{
 				_x call DMS_fnc_FillCrate;
 			} forEach _crate_info_array;
+
+			if (DMS_despawnMines_onCompletion) then
+			{
+				{
+					deleteVehicle _x;
+				} forEach _mines;
+			};
 
 			_msgWIN call DMS_fnc_BroadcastMissionStatus;
 			[_markers,"win"] call DMS_fnc_RemoveMarkers;

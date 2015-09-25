@@ -13,7 +13,7 @@ _side = "bandit";
 
 
 // find position
-_pos = call DMS_fnc_findSafePos;
+_pos = [10,10] call DMS_fnc_findSafePos;
 
 
 // Set general mission difficulty
@@ -76,14 +76,21 @@ _veh =
 	_side
 ] call DMS_fnc_SpawnAIVehicle;
 
-
+/*
 _baseObjs =
 [
 	"base1STATIC",
 	_pos
 ] call DMS_fnc_ImportFromM3E_Convert;
+*/
+_baseObjs = [];
 
-
+_mines =
+[
+	_pos,
+	_difficulty,
+	_side
+] call DMS_fnc_SpawnMinefield;
 
 
 // Define mission-spawned AI Units
@@ -97,7 +104,8 @@ _missionObjs =
 [
 	_staticGuns+[_veh]+_baseObjs,
 	[_vehicle],
-	[[_crate,"Sniper"]]
+	[[_crate,"Sniper"]],
+	_mines
 ];
 
 // Define Mission Start message

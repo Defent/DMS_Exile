@@ -188,17 +188,20 @@ if(DMS_RareLoot && {count DMS_RareLootList>0}) then
 	};
 };
 
-
-if(DMS_SpawnBoxSmoke && {sunOrMoon == 1}) then
+// In case somebody wants to use fillCrate on a vehicle but also wants to use smoke, don't create smoke/IR strobe unless it's a crate
+if (_crate isKindOf "ReammoBox_F") then
 {
-	_marker = "SmokeShellPurple" createVehicle getPosATL _crate;
-	_marker setPosATL (getPosATL _crate);
-	_marker attachTo [_crate,[0,0,0]];
-};
+	if(DMS_SpawnBoxSmoke && {sunOrMoon == 1}) then
+	{
+		_marker = "SmokeShellPurple" createVehicle getPosATL _crate;
+		_marker setPosATL (getPosATL _crate);
+		_marker attachTo [_crate,[0,0,0]];
+	};
 
-if (DMS_SpawnBoxIRGrenade && {sunOrMoon != 1}) then
-{
-	_marker = "B_IRStrobe" createVehicle getPosATL _crate;
-	_marker setPosATL (getPosATL _crate);
-	_marker attachTo [_crate, [0,0,0.5]];
+	if (DMS_SpawnBoxIRGrenade && {sunOrMoon != 1}) then
+	{
+		_marker = "B_IRStrobe" createVehicle getPosATL _crate;
+		_marker setPosATL (getPosATL _crate);
+		_marker attachTo [_crate, [0,0,0.5]];
+	};
 };

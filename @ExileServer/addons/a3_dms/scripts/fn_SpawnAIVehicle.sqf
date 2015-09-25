@@ -48,8 +48,11 @@ if (!_OK) exitWith
 // Simply use _spawnPos if _gotoPos isn't defined. Yes, you might get "param"/"params" RPT spam. Deal with it ;)
 _gotoPos = _positions param [1,_spawnPos,[[]],[2,3]];
 
-
-_vehClass = param [5,"random",[""]];
+_vehClass = "random";
+if ((count _this)>5) then
+{
+	_vehClass = param [5,"random",[""]];
+};
 
 if (_vehClass == "random") then
 {

@@ -38,7 +38,11 @@ if (!_OK) exitWith
 	diag_log format ["DMS ERROR :: Calling DMS_fnc_SpawnAIStatic with invalid parameters: %1",_this];
 };
 
-_MGClassInput = param [5,"random",[""]];
+_MGClassInput = "random";
+if ((count _this)>5) then
+{
+	_MGClassInput = param [5,"random",[""]];
+};
 
 
 _guns = [];
