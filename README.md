@@ -58,8 +58,9 @@ if (!hasInterface && !isServer) then
 
 #### September 25, 2015 (7:30 PM CST-America):
 * NEW CONFIG VALUES:
-		DMS_SpawnMineWarningSigns
-		DMS_BulletProofMines
+
+		|DMS_SpawnMineWarningSigns|
+		|DMS_BulletProofMines|
 * You can now manually define the rare loot chance per crate.
 * You can now define the mine amount and radius directly from the call for DMS_fnc_SpawnMinefield.
 * You can now define the classname of the mine to be spawned in the minefield.
@@ -68,13 +69,14 @@ if (!hasInterface && !isServer) then
 
 #### September 25, 2015 (1:30 AM CST-America):
 * NEW CONFIG VALUES:
-		DMS_SpawnMinesAroundMissions
-		DMS_despawnMines_onCompletion
-		DMS_MineInfo_easy
-		DMS_MineInfo_moderate
-		DMS_MineInfo_difficult
-		DMS_MineInfo_hardcore
-		DMS_explode_onRoadkill
+
+		|DMS_SpawnMinesAroundMissions|
+		|DMS_despawnMines_onCompletion|
+		|DMS_MineInfo_easy|
+		|DMS_MineInfo_moderate|
+		|DMS_MineInfo_difficult|
+		|DMS_MineInfo_hardcore|
+		|DMS_explode_onRoadkill|
 * You can now spawn randomly generated minefields around missions! Numberof mines and radius is dependent on difficulty.
 * Also, you can now spawn an explosion on an AI when it is roadkilled, causing a wheel or two of the roadkilling vehicle to break.
 * Commented out the spawning of static-relative conversion of base objects in test mission.
@@ -85,13 +87,14 @@ if (!hasInterface && !isServer) then
 
 #### September 21, 2015 (11:30 PM CST-America):
 * NEW CONFIG VALUES:
-		DMS_Diff_RepOrTabs_on_roadkill
-		DMS_Bandit_Soldier_RoadkillMoney
-		DMS_Bandit_Soldier_RoadkillRep
-		DMS_Bandit_Static_RoadkillMoney
-		DMS_Bandit_Static_RoadkillRep
-		DMS_Bandit_Vehicle_RoadkillMoney
-		DMS_Bandit_Vehicle_RoadkillRep
+
+		|DMS_Diff_RepOrTabs_on_roadkill|
+		|DMS_Bandit_Soldier_RoadkillMoney|
+		|DMS_Bandit_Soldier_RoadkillRep|
+		|DMS_Bandit_Static_RoadkillMoney|
+		|DMS_Bandit_Static_RoadkillRep|
+		|DMS_Bandit_Vehicle_RoadkillMoney|
+		|DMS_Bandit_Vehicle_RoadkillRep|
 * Removed config value: "DMS_credit_roadkill"
 * You can now REDUCE a player's respect/poptabs when the player roadkills an AI. The default values are -10 poptabs and -5 respect (hardly noticeable, but I didn't want it to be extreme).
 * Alternatively, you can simply reduce the amount of poptabs gained by giving each corresponding config a positive value less than the regular. Set the value to 0 if you don't want to credit the poptabs/respect.
