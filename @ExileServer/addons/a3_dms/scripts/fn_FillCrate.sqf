@@ -6,8 +6,9 @@
 
 	Usage:
 	[
-		_crate,						// The crate object
-		_lootValues					// Array, string, or number. String or number refers to a crate case in config.cfg; array determines random crate weapons/items/backpacks
+		_crate,						// OBJECT: The crate object
+		_lootValues,				// ARRAY, STRING, or NUMBER: String or number refers to a crate case in config.cfg; array determines random crate weapons/items/backpacks
+		_rareLootChance				// (OPTIONAL) NUMBER: Manually define the percentage chance of spawning some rare items.
 	] call DMS_fnc_FillCrate;
 	
 	Loot values can be a number or a string with a corresponding "Crate Case" defined in the config. EG: DMS_CrateCase_Sniper. Or it can be an array.
@@ -25,7 +26,7 @@
 	or an array as [_wepCount,_weps], where _wepCount is the number of weapons, and _weps is an array of weapons from which the guns are randomly selected.
 */
 
-private ["_crate","_lootValues","_wepCount","_weps","_itemCount","_items","_backpackCount","_backpacks","_weapon","_ammo","_item","_backpack","_crateValues"];
+private ["_crate","_lootValues","_wepCount","_weps","_itemCount","_items","_backpackCount","_backpacks","_weapon","_ammo","_item","_backpack","_crateValues","_rareLootChance","_marker"];
 
 
 
@@ -176,8 +177,14 @@ else
 
 if(DMS_RareLoot && {count DMS_RareLootList>0}) then
 {
+	_rareLootChance = DMS_RareLootChance;
+	if ((count _this)>2) then
+	{
+		_rareLootChance = param [2,DMS_RareLootChance,[0]];
+	};
+
 	// (Maybe) Add rare loot
-	if(random 100 < DMS_RareLootChance) then
+	if(random 100 < _rareLootChance) then
 	{
 		_item = DMS_RareLootList call BIS_fnc_selectRandom;
 		if ((typeName _item)=="STRING") then

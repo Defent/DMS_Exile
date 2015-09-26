@@ -30,11 +30,6 @@ if (!_OK) then
 	diag_log format ["DMS ERROR :: Calling DMS_SpawnAIGroup with invalid parameters: %1",_this];
 };
 
-if (_count < 1) exitWith
-{
-	diag_log format ["DMS ERROR :: Calling DMS_SpawnAIGroup with less than 1 _count! _this: %1",_this];
-};
-
 _pos_x 			= _pos select 0;
 _pos_y 			= _pos select 1;
 _pos_z 			= _pos select 2;
@@ -75,6 +70,12 @@ _group = createGroup (missionNamespace getVariable [format ["DMS_%1Side",_side],
 
 _group setVariable ["DMS_LockLocality",nil];
 _group setVariable ["DMS_SpawnedGroup",true];
+
+if (_count < 1) exitWith
+{
+	diag_log format ["DMS ERROR :: Calling DMS_SpawnAIGroup with less than 1 _count! _this: %1",_this];
+	_group
+};
 
 for "_i" from 1 to _count do
 {

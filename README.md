@@ -52,6 +52,14 @@ if (!hasInterface && !isServer) then
 
 
 ## Changelog:
+#### September 25, 2015 (7:30 PM CST-America):
+* NEW CONFIG VALUES:
+		DMS_SpawnMineWarningSigns
+		DMS_BulletProofMines
+* You can now manually define the rare loot chance per crate.
+* You can now define the mine amount and radius directly from the call for DMS_fnc_SpawnMinefield.
+
+
 #### September 25, 2015 (1:30 AM CST-America):
 * NEW CONFIG VALUES:
 		DMS_SpawnMinesAroundMissions
