@@ -52,12 +52,18 @@ if (!hasInterface && !isServer) then
 
 
 ## Changelog:
+#### September 25, 2015 (11:30 PM CST-America):
+* Improved DMS_fnc_FindSafePos when checking for nearby missions - it should now use the proper mission location (if it was given correctly in the parameters for DMS_fnc_CreateMarker) instead of the marker position, which could be offset. Thanks to [Rod Serling](https://github.com/Rod-Serling) for complaining about this "issue" :P
+
+
 #### September 25, 2015 (7:30 PM CST-America):
 * NEW CONFIG VALUES:
 		DMS_SpawnMineWarningSigns
 		DMS_BulletProofMines
 * You can now manually define the rare loot chance per crate.
 * You can now define the mine amount and radius directly from the call for DMS_fnc_SpawnMinefield.
+* You can now define the classname of the mine to be spawned in the minefield.
+* Mines can now be configured to be bulletproof (AT mines by default will explode when shot).
 
 
 #### September 25, 2015 (1:30 AM CST-America):

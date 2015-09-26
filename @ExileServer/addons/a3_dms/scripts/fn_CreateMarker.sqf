@@ -65,6 +65,8 @@ _dot setMarkerColor "ColorBlack";
 _dot setMarkerType "mil_dot";
 _dot setMarkerText _text;
 
+missionNamespace setVariable [format ["%1_pos",_dot], _pos];
+
 if (_randomMarker) then
 {
 	_dir = random 360;
