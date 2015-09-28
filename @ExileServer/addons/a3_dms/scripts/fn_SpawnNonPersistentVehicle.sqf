@@ -73,7 +73,7 @@ if (_vehObj isKindOf "Helicopter") then
 
 if (!isNil "RS_VLS") then
 {
-	[_vehicle] call RS_VLS_sanitizeVehicle;
+	[_vehObj] call RS_VLS_sanitizeVehicle;
 };
 
 _vehObj lock 2;
