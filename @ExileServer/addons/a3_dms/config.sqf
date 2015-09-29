@@ -63,6 +63,7 @@ DMS_DEBUG = false;
 	/*Crate/Box settings*/
 
 	/*Mine settings*/
+	DMS_SpawnMinefieldForEveryMission	= false;					// Whether or not to spawn a minefield for every dynamic mission.
 	DMS_SpawnMinesAroundMissions		= true;						// Whether or not to spawn mines around AI missions that have them.
 	DMS_despawnMines_onCompletion		= true;						// Despawn mines spawned around missions when the mission is completed
 	DMS_MineInfo_easy					= [5,50];					// Mine info for "easy" missions. This will spawn 5 mines within a 50m radius.
