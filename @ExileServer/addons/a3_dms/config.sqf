@@ -610,14 +610,3 @@ DMS_DEBUG = false;
 											"Exile_Chopper_Taru_Transport_Black"
 										];
 /* Loot Settings */
-
-
-// Debug Overwrites
-if(DMS_DEBUG) then
-{
-	DMS_TimeBetweenMissions			= [10,15];
-	DMS_MissionTimeOut				= [60,70];
-	//DMS_BanditMissionTypes = [["testmission",1]];
-	//DMS_BanditMissionTypes = [["mercbase",1]];
-	diag_log format ["DMS_DEBUG CONFIG :: Overriding DMS_TimeBetweenMissions (%1) and DMS_MissionTimeOut (%2)",DMS_TimeBetweenMissions,DMS_MissionTimeOut];
-};

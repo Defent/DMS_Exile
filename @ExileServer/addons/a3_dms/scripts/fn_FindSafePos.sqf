@@ -74,8 +74,6 @@ while{!_validspot} do
 			if (DMS_MissionNearBlacklist>0) then
 			{
 				_missionPos = missionNamespace getVariable [format ["%1_pos",_x], []];
-
-				diag_log format["Marker %1 has _missionPos: %2",_x,_missionPos];
 				if (!(_missionPos isEqualTo []) && {(_missionPos distance2D _pos)<=DMS_MissionNearBlacklist}) then
 				{
 					throw ("another mission");

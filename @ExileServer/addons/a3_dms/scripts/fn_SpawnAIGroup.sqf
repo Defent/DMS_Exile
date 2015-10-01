@@ -8,7 +8,7 @@
 		_pos,					// Position of AI
 		_count,					// Number of AI
 		_difficulty,			// AI Difficulty: "random","hardcore","difficult","moderate", or "easy"
-		_class 					// AI Class: "random","assault","MG","sniper" or "unarmed" OR [_class,_launcher]
+		_class,					// AI Class: "random","assault","MG","sniper" or "unarmed" OR [_class,_launcher]
 		_side 					// Only "bandit" is supported atm
 	] call DMS_fnc_SpawnAIGroup;
 

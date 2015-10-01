@@ -42,15 +42,16 @@
 		],
 		[_msgWIN,_msgLose],
 		[_markerDot,_markerCircle],
-		_side
+		_side,
+		_difficulty,
+		_missionEvents
 	] call DMS_fnc_AddMissionToMonitor;
 
 	Returns whether or not info was added successfully
 
-	 "_completionInfo", "_timeOutInfo", "_inputUnits", "_missionObjs", "_messages", "_markers", "_side", "_timeStarted", "_timeUntilFail"
 */
 
-private ["_added", "_pos", "_OK", "_completionInfo", "_timeOutInfo", "_inputUnits", "_missionObjs", "_mines", "_messages", "_markers", "_timeStarted", "_timeUntilFail", "_buildings", "_vehs", "_crate_info_array", "_msgWIN", "_msgLose", "_markerDot", "_markerCircle", "_side","_arr"];
+private ["_added", "_pos", "_OK", "_completionInfo", "_timeOutInfo", "_inputUnits", "_missionObjs", "_mines", "_messages", "_markers", "_timeStarted", "_timeUntilFail", "_buildings", "_vehs", "_crate_info_array", "_msgWIN", "_msgLose", "_markerDot", "_markerCircle", "_side", "_difficulty", "_missionEvents", "_arr"];
 
 
 _added = false;
@@ -64,7 +65,9 @@ _OK = params
 	["_missionObjs","",[[]],[3,4]],
 	["_messages","",[[]],[2]],
 	["_markers","",[[]],[2]],
-	["_side","bandit",[""]]
+	["_side","bandit",[""]],
+	["_difficulty","moderate",[""]],
+	["_missionEvents",[],[[]]]
 ];
 
 if (!_OK) exitWith
@@ -124,6 +127,12 @@ try
 		_mines = _missionObjs param [3,[],[[]]];
 	};
 
+	// Don't spawn a minefield if there is one already defined in _missionObjs.
+	if (DMS_SpawnMinefieldForEveryMission && {_mines isEqualTo []}) then
+	{
+		_mines = [_pos, _difficulty, _side] call DMS_fnc_SpawnMinefield;
+	};
+
 
 	_OK = _messages params
 	[
@@ -170,7 +179,9 @@ try
 			_markerDot,
 			_markerCircle
 		],
-		_side
+		_side,
+		_difficulty,
+		_missionEvents
 	];
 	DMS_Mission_Arr pushBack _arr;
 	_added = true;

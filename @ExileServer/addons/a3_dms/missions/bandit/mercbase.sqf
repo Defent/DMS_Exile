@@ -32,11 +32,18 @@ _group =
 	_side
 ] call DMS_fnc_SpawnAIGroup;
 
-// Use "base" waypoint instead
-while {(count (waypoints _group)) > 0} do
-{
-	deleteWaypoint ((waypoints _group) select 0);
-};
+_veh =
+[
+	[
+		[_pos,100,random 360] call DMS_fnc_SelectOffsetPos,
+		_pos
+	],
+	_group,
+	"assault",
+	_difficulty,
+	_side
+] call DMS_fnc_SpawnAIVehicle;
+
 
 [
 	_group,
@@ -84,7 +91,7 @@ _missionAIUnits =
 // Define mission-spawned objects and loot values
 _missionObjs =
 [
-	_staticGuns+_baseObjs,			// base objects and static gun
+	_staticGuns+_baseObjs+[_veh],			// armed AI vehicle, base objects, and static gun
 	[],
 	[[_crate,"Sniper"]]
 ];
@@ -134,7 +141,9 @@ _added =
 	_missionObjs,
 	[_msgWIN,_msgLOSE],
 	_markers,
-	_side
+	_side,
+	_difficulty,
+	[]
 ] call DMS_fnc_AddMissionToMonitor;
 
 // Check to see if it was added correctly, otherwise delete the stuff

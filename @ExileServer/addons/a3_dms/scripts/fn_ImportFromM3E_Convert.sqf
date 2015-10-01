@@ -58,7 +58,7 @@ _export = call compile preprocessFileLineNumbers (format ["\x\addons\DMS\objects
 	if (_x select 4) then
 	{
 		_obj setDir (_x select 2);
-		_obj setPos _pos;
+		_obj setPosATL _pos;
 	}
 	else
 	{

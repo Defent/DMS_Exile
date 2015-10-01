@@ -36,7 +36,7 @@ _group =
 
 // Create Crate
 _crate = ["Box_NATO_Wps_F",_pos] call DMS_fnc_SpawnCrate;
-_vehicle = ["Exile_Car_Offroad_Armed_Guerilla01",_pos] call DMS_fnc_SpawnNonPersistentVehicle;
+_vehicle = ["Exile_Car_Offroad_Armed_Guerilla01",[_pos,3+(random 5),random 360] call DMS_fnc_SelectOffsetPos] call DMS_fnc_SpawnNonPersistentVehicle;
 
 // Set crate loot values
 _crate_loot_values =
@@ -106,7 +106,9 @@ _added =
 	_missionObjs,
 	[_msgWIN,_msgLOSE],
 	_markers,
-	_side
+	_side,
+	_difficulty,
+	[]
 ] call DMS_fnc_AddMissionToMonitor;
 
 // Check to see if it was added correctly, otherwise delete the stuff

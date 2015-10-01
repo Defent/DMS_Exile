@@ -104,7 +104,7 @@ switch (toLower _class) do
 };
 
 // Unit name
-_unit setName format["[DMS_Unit_%1%2]",_class,floor(random 1000)];
+_unit setName format["[DMS_%3Unit_%1%2]",_class,floor(random 1000),toUpper _side];
 
 if (!_useCustomGear) then
 {

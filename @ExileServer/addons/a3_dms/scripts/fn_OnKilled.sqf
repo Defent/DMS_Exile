@@ -15,7 +15,7 @@
 */
 
 
-private ["_unit", "_killer", "_side", "_type", "_launcher", "_playerObj", "_rockets", "_grpUnits", "_av", "_memCount", "_gunner", "_driver", "_veh", "_moneyChange", "_repChange", "_money", "_respect", "_roadKilled"];
+private ["_unit", "_killer", "_side", "_type", "_launcher", "_launcherVar", "_playerObj", "_removeAll", "_rockets", "_grpUnits", "_av", "_memCount", "_gunner", "_driver", "_gunnerIsAlive", "_driverIsAlive", "_grp", "_owner", "_start", "_roadKilled", "_veh", "_boom", "_revealAmount", "_silencer", "_moneyChange", "_repChange", "_money", "_respect", "_msgType", "_msgParams"];
 
 
 if (DMS_DEBUG) then
@@ -245,16 +245,6 @@ if (isPlayer _killer) then
 
 	_playerObj = _killer;
 
-	// Reveal the killer to the AI units
-	if (DMS_ai_share_info) then
-	{
-		{
-			if (((position _x) distance2D (position _unit)) <= DMS_ai_share_info_distance ) then
-			{
-				_x reveal [_killer, 4.0];
-			};
-		} forEach allUnits;
-	};
 
 	// Fix for players killing AI from mounted vehicle guns
 	if (!(_killer isKindOf "Exile_Unit_Player") && {!isNull (gunner _killer)}) then
@@ -285,6 +275,27 @@ if (isPlayer _killer) then
 		{
 			_unit call _removeAll;
 		};
+	};
+
+
+	// Reveal the killer to the AI units
+	if (DMS_ai_share_info) then
+	{
+		_revealAmount = 4.0;
+
+		_silencer = _playerObj weaponAccessories currentMuzzle _playerObj select 0;
+		if (!isNil "_silencer" && {_silencer != ""}) then
+		{
+			_revealAmount = 2.0;
+		};
+
+
+		{
+			if ((alive _x) && {!(isPlayer _x) && {((getPosWorld _x) distance2D (getPosWorld _unit)) <= DMS_ai_share_info_distance}}) then
+			{
+				_x reveal [_killer, _revealAmount max (_x knowsAbout _playerObj)];
+			};
+		} forEach allUnits;
 	};
 };
 

@@ -12,7 +12,7 @@
 	] call DMS_fnc_SpawnMinefield;
 */
 
-private ["_centerPos", "_difficulty", "_side", "_mines", "_minesInfo", "_AISide", "_mineCount", "_radius"];
+private ["_centerPos", "_difficulty", "_side", "_mines", "_minesInfo", "_AISide", "_mineCount", "_radius", "_randDirOffset", "_sign"];
 
 
 _mines = [];
@@ -80,9 +80,10 @@ if (DMS_SpawnMinesAroundMissions) then
 
 	if (_spawnWarningSign) then
 	{
+		_randDirOffset = random 45;
 		for "_i" from 0 to 359 step 90 do
 		{
-			_sign = createVehicle ["Land_Sign_Mines_F",[_centerPos, _radius+2, _i] call DMS_fnc_SelectOffsetPos, [], 0, "CAN_COLLIDE"];
+			_sign = createVehicle ["Land_Sign_Mines_F",[_centerPos, _radius+2, _randDirOffset+_i] call DMS_fnc_SelectOffsetPos, [], 0, "CAN_COLLIDE"];
 			_sign setDir _i;
 			_sign setVectorUp [0,0,1];
 
@@ -93,7 +94,7 @@ if (DMS_SpawnMinesAroundMissions) then
 
 	if (DMS_DEBUG) then
 	{
-		diag_log format ["DMS_DEBUG SpawnMinefield :: Spawned %1 mines around %2 with _minesInfo: %3 | _mines: %4",count _mines,_centerPos,_minesInfo,_mines];
+		diag_log format ["DMS_DEBUG SpawnMinefield :: Spawned %1 mines around %2 with _minesInfo: %3 | Warning signs spawned: %5 | _mines: %4",_mineCount,_centerPos,_minesInfo,_mines,_spawnWarningSign];
 	};
 };
 

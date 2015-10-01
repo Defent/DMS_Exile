@@ -52,6 +52,20 @@ if (!hasInterface && !isServer) then
 
 
 ## Changelog:
+#### September 30, 2015 (9:30 PM CST-America):
+* NEW CONFIG VALUE: DMS_SpawnMinefieldForEveryMission
+* You can now force-spawn an AT mine minefield on every mission with the above config. These mines will only blow up on Tanks, APCs, and MRAPs (Ifrits, Hunters, Striders).
+* ALL MISSIONS HAVE BEEN EDITED TO MATCH THE NEW STANDARD FOR DMS_fnc_AddMissionToMonitor. **If you have made any custom missions or modified any of the current mission scripts, make sure you merge your changes**!
+* Adjusted the placement of the armed car in "bandits" mission. It should no longer spawn right on the crate.
+* Marker and message names for the "foodtransport" mission have been adjusted.
+* Added the AI vehicle to the "mercbase" mission.
+* Removed some RPT spam...
+* Standardize ATL for DMS_fnc_importFromM3E_Convert
+* When revealing a player to AI, the reveal amount will be reduced if the player has a suppressor.
+* DMS_fnc_SetGroupBehavior will now remove all previous waypoints from the AI group.
+* Improved logging message for DMS_fnc_SpawnMinefield. Also, the mine warning signs should be on a random offset (instead of always spawning at 0, 90, 180, and 270 degrees)
+
+
 #### September 25, 2015 (11:30 PM CST-America):
 * Improved DMS_fnc_FindSafePos when checking for nearby missions - it should now use the proper mission location (if it was given correctly in the parameters for DMS_fnc_CreateMarker) instead of the marker position, which could be offset. Thanks to [Rod Serling](https://github.com/Rod-Serling) for complaining about this "issue" :P
 
