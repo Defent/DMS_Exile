@@ -11,24 +11,64 @@
 */
 
 
-if (DMS_DEBUG) then
+private ["_missionName", "_messageInfo", "_titleColor", "_message"];
+
+_OK = params
+[
+	["_missionName","",[""]],
+	["_messageInfo",[],[[]],[2]]
+];
+
+if (!_OK) exitWith
 {
-	diag_log format["DMS_DEBUG BroadcastMissionStatus :: Notification types: |%1| for broadcasting mission status: %2",DMS_PlayerNotificationTypes,_this];
+	diag_log format ["DMS ERROR :: Calling DMS_fnc_BroadcastMissionStatus with invalid parameters: %1",_this];
 };
 
-if ((typeName _this) != "STRING") then
+_messageInfo params
+[
+	["_titleColor","#FFFF00",[""]],
+	["_message","",[""]]
+];
+
+if (DMS_DEBUG) then
 {
-	_this = str _this;
+	diag_log format["DMS_DEBUG BroadcastMissionStatus :: Notification types: |%1| for broadcasting mission status: %2",DMS_PlayerNotificationTypes,_message];
+};
+
+if ((typeName _message) != "STRING") then
+{
+	_message = str _message;
 };
 
 {
 	private "_args";
 
-	_args =															// Only include extra parameters if using "dynamicTextRequest"
-	[
-		[_x, [_this]],
-		[_x, [_this,0,DMS_dynamicText_Size,DMS_dynamicText_Color]]
-	] select (_x == "dynamicTextRequest");
+	switch (toLower _x) do
+	{ 
+		case "systemchatrequest":
+		{
+			[_x, [format ["%1: %2",toUpper _missionName,_message]]] call ExileServer_system_network_send_broadcast;
+		};
 
-	_args call ExileServer_system_network_send_broadcast;
+		case "standardhintrequest":
+		{
+			[_x, [format ["<t color='%1' size='1.25'>%2</t><br/> %3",_titleColor,_missionName,_message]]] call ExileServer_system_network_send_broadcast;
+		};
+
+		case "dynamictextrequest":
+		{
+			//Unfortunately that doesn't work, so I have to do some funky stuff...
+			//[_x, [format ["%1<br/>%2",toUpper _missionName,_message], 0, DMS_dynamicText_Size, DMS_dynamicText_Color]] call ExileServer_system_network_send_broadcast;
+
+			[
+				format ['<t color="%1" size="1" >%2</t><br/><t color="%3" size="%4" >%5</t>',_titleColor,_missionName,DMS_dynamicText_Color,DMS_dynamicText_Size,_message],
+				0,
+				0,
+				10,
+				1
+			] remoteExec ["BIS_fnc_dynamicText", -2];
+		};
+
+		default { diag_log format ["DMS ERROR :: Unsupported Notification Type in DMS_PlayerNotificationTypes: %1 | Calling parameters: %2",_x,_this]; };
+	};
 } forEach DMS_PlayerNotificationTypes;

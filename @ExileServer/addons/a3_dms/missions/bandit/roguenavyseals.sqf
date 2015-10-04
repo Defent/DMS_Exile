@@ -16,7 +16,10 @@ _side = "bandit";
 
 
 // find position
-_pos = [10] call DMS_fnc_findSafePos;
+_pos = 
+[
+	10,DMS_WaterNearBlacklist,DMS_MaxSurfaceNormal,DMS_SpawnZoneNearBlacklist,DMS_TraderZoneNearBlacklist,DMS_MissionNearBlacklist,DMS_PlayerNearBlacklist,DMS_ThrottleBlacklists
+]call DMS_fnc_findSafePos;
 
 
 // Set general mission difficulty
@@ -64,13 +67,13 @@ _missionObjs =
 ];
 
 // Define Mission Start message
-_msgStart = format["<t color='#FFFF00' size='1.25'>Navy Seals! </t><br/> A squad of professional Navy Seals team is performing gorilla warfare in convict land, deal with them!"];
+_msgStart = ['#FFFF00',"A squad of professional Navy Seals team is performing gorilla warfare in convict land, deal with them!"];
 
 // Define Mission Win message
-_msgWIN = format["<t color='#0080ff' size='1.25'>Navy Seals! </t><br/> Convicts have successfully taken care of the Navy Seals, you must be the top of your class!"];
+_msgWIN = ['#0080ff',"Convicts have successfully taken care of the Navy Seals, you must be the top of your class!"];
 
 // Define Mission Lose message
-_msgLOSE = format["<t color='#FF0000' size='1.25'>Navy Seals! </t><br/> The Navy Seals have escaped and are now planning their next raid!"];
+_msgLOSE = ['#FF0000',"The Navy Seals have escaped and are now planning their next raid!"];
 
 // Define mission name (for map marker and logging)
 _missionName = "Rogue Navy Seals";
@@ -106,7 +109,7 @@ _added =
 	],
 	_missionAIUnits,
 	_missionObjs,
-	[_msgWIN,_msgLOSE],
+	[_missionName,_msgWIN,_msgLOSE],
 	_markers,
 	_side,
 	_difficulty,
@@ -143,7 +146,7 @@ if !(_added) exitWith
 
 
 // Notify players
-_msgStart call DMS_fnc_BroadcastMissionStatus;
+[_missionName,_msgStart] call DMS_fnc_BroadcastMissionStatus;
 
 
 

@@ -52,6 +52,25 @@ if (!hasInterface && !isServer) then
 
 
 ## Changelog:
+#### October 3, 2015 (10:30 PM CST-America):
+* **You must update all of your mission files; the mission message system as well as the calling parameters for DMS_fnc_FindSafePos have been overhauled and will be incompatible with previous versions.**
+* NEW CONFIG VALUES:
+
+	|DMS_ThrottleBlacklists|
+	|DMS_AttemptsUntilThrottle|
+	|DMS_ThrottleCoefficient|
+	|DMS_MinThrottledDistance|
+* Decreased "DMS_TraderZoneNearBlacklist","DMS_MissionNearBlacklist","DMS_WaterNearBlacklist"
+* Changed "DMS_dynamicText_Color" to "#FFFFFF" (white)
+* Replaced weapon classes in "DMS_CrateCase_Sniper" to the base classes; all attachments should now spawn in the box separately.
+* New function DMS_fnc_IsValidPosition (uses logic that was previously from "DMS_fnc_FindSafePos").
+* You can now manually define every individual parameter for DMS_fnc_findSafePos per-mission, instead of using global parameters.
+* AI will now be offloaded to an HC even with "DMS_ai_offload_to_client" set to false.
+* All of the previously "supported" values for "DMS_PlayerNotificationTypes" are now PROPERLY supported. DMS_PlayerNotificationTypes is now set to default "dynamicTextRequest" and "systemChatRequest".
+* Tweaked "cardealer" mission, the cars should no longer spawn inside of each other.
+
+
+
 #### September 30, 2015 (9:30 PM CST-America):
 * NEW CONFIG VALUE: DMS_SpawnMinefieldForEveryMission
 * You can now force-spawn an AT mine minefield on every mission with the above config. These mines will only blow up on Tanks, APCs, and MRAPs (Ifrits, Hunters, Striders).
@@ -64,6 +83,7 @@ if (!hasInterface && !isServer) then
 * When revealing a player to AI, the reveal amount will be reduced if the player has a suppressor.
 * DMS_fnc_SetGroupBehavior will now remove all previous waypoints from the AI group.
 * Improved logging message for DMS_fnc_SpawnMinefield. Also, the mine warning signs should be on a random offset (instead of always spawning at 0, 90, 180, and 270 degrees)
+* Removed obsolete DMS_DEBUG overrides in config. "DMS_fnc_SpawnBanditMission" called from console works great.
 
 
 #### September 25, 2015 (11:30 PM CST-America):

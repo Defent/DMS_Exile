@@ -31,6 +31,10 @@ _skippedObjects = [];
 
 _clean =
 {   
+    {
+        detach _x;
+        _x call _clean;
+    } forEach (attachedObjects _x);
     _this enableSimulationGlobal false;
     _this removeAllMPEventHandlers "mpkilled";
     _this removeAllMPEventHandlers "mphit";

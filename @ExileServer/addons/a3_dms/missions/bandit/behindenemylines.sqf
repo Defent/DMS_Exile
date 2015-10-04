@@ -16,7 +16,10 @@ _side = "bandit";
 
 
 // find position
-_pos = [10] call DMS_fnc_findSafePos;
+_pos = 
+[
+	10,DMS_WaterNearBlacklist,DMS_MaxSurfaceNormal,DMS_SpawnZoneNearBlacklist,DMS_TraderZoneNearBlacklist,DMS_MissionNearBlacklist,DMS_PlayerNearBlacklist,DMS_ThrottleBlacklists
+]call DMS_fnc_findSafePos;
 
 
 // Set general mission difficulty
@@ -66,13 +69,13 @@ _missionObjs =
 ];
 
 // Define Mission Start message
-_msgStart = format["<t color='#FFFF00' size='1.25'>Enemy Bunker! </t><br/> A team of soldiers have set up a bunker inside convict land. Rid them from this place!"];
+_msgStart = ['#FFFF00',"A team of soldiers have set up a bunker inside convict land. Rid them from this place!"];
 
 // Define Mission Win message
-_msgWIN = format["<t color='#0080ff' size='1.25'>Enemy Bunker! </t><br/> Convicts have successfully taken care of the enemies and their bunker!"];
+_msgWIN = ['#0080ff',"Convicts have successfully taken care of the enemies and their bunker!"];
 
 // Define Mission Lose message
-_msgLOSE = format["<t color='#FF0000' size='1.25'>Enemy Bunker! </t><br/> The soldiers became impatient and have escaped the area!"];
+_msgLOSE = ['#FF0000',"The soldiers became impatient and have escaped the area!"];
 
 // Define mission name (for map marker and logging)
 _missionName = "Enemy Bunker";
@@ -108,7 +111,7 @@ _added =
 	],
 	_missionAIUnits,
 	_missionObjs,
-	[_msgWIN,_msgLOSE],
+	[_missionName,_msgWIN,_msgLOSE],
 	_markers,
 	_side,
 	_difficulty,
@@ -145,7 +148,7 @@ if !(_added) exitWith
 
 
 // Notify players
-_msgStart call DMS_fnc_BroadcastMissionStatus;
+[_missionName,_msgStart] call DMS_fnc_BroadcastMissionStatus;
 
 
 

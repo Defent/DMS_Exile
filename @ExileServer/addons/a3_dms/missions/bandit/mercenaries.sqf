@@ -16,7 +16,10 @@ _side = "bandit";
 
 
 // find position
-_pos = [10] call DMS_fnc_findSafePos;
+_pos = 
+[
+	10,DMS_WaterNearBlacklist,DMS_MaxSurfaceNormal,DMS_SpawnZoneNearBlacklist,DMS_TraderZoneNearBlacklist,DMS_MissionNearBlacklist,DMS_PlayerNearBlacklist,DMS_ThrottleBlacklists
+]call DMS_fnc_findSafePos;
 
 
 // Set general mission difficulty
@@ -64,13 +67,13 @@ _missionObjs =
 ];
 
 // Define Mission Start message
-_msgStart = format["<t color='#FFFF00' size='1.25'>Mercenary Group! </t><br/> A group of mercenaries has been spotted. Kill them and take their equipment!"];
+_msgStart = ['#FFFF00',"A group of mercenaries has been spotted. Kill them and take their equipment!"];
 
 // Define Mission Win message
-_msgWIN = format["<t color='#0080ff' size='1.25'>Mercenary Group! </t><br/> Convicts have successfully eliminated the mercenaries"];
+_msgWIN = ['#0080ff',"Convicts have successfully eliminated the mercenaries"];
 
 // Define Mission Lose message
-_msgLOSE = format["<t color='#FF0000' size='1.25'>Mercenary Group! </t><br/> The mercenaries have escaped and they took all their loot with them!"];
+_msgLOSE = ['#FF0000',"The mercenaries have escaped and they took all their loot with them!"];
 
 // Define mission name (for map marker and logging)
 _missionName = "Mercenary Group";
@@ -106,7 +109,7 @@ _added =
 	],
 	_missionAIUnits,
 	_missionObjs,
-	[_msgWIN,_msgLOSE],
+	[_missionName,_msgWIN,_msgLOSE],
 	_markers,
 	_side,
 	_difficulty,
@@ -143,7 +146,7 @@ if !(_added) exitWith
 
 
 // Notify players
-_msgStart call DMS_fnc_BroadcastMissionStatus;
+[_missionName,_msgStart] call DMS_fnc_BroadcastMissionStatus;
 
 
 

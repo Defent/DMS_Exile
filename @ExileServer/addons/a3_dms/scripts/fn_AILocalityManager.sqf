@@ -2,11 +2,11 @@
 	DMS_fnc_AILocalityManager
 	Created by Defent and eraser1
 
-	Offloads AI groups to a nearby client in order to improve server performance.
+	Offloads AI groups to a nearby client or HC in order to improve server performance.
 */
 
 
-if !(DMS_ai_offload_to_client) exitWith {};
+if (!DMS_ai_offload_to_client && {isNull DMS_HC_Object}) exitWith {};
 
 {
 	if (((count (units _x))>1) && {!((DMS_ai_offload_Only_DMS_AI && {!(_x getVariable ["DMS_SpawnedGroup",false])}) || {(_x getVariable ["DMS_LockLocality",false])})}) then

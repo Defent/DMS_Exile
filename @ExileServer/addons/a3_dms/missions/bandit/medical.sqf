@@ -13,7 +13,10 @@ _side = "bandit";
 
 
 // find position
-_pos = call DMS_fnc_findSafePos;
+_pos = 
+[
+	10,DMS_WaterNearBlacklist,DMS_MaxSurfaceNormal,DMS_SpawnZoneNearBlacklist,DMS_TraderZoneNearBlacklist,DMS_MissionNearBlacklist,DMS_PlayerNearBlacklist,DMS_ThrottleBlacklists
+]call DMS_fnc_findSafePos;
 
 
 // Set general mission difficulty
@@ -66,13 +69,13 @@ _missionObjs =
 ];
 
 // Define Mission Start message
-_msgStart = format["<t color='#FFFF00' size='1.25'>Deranged Doctors! </t><br/> A group of deranged doctors have set up a field hospital, sieze it for your own!"];
+_msgStart = ['#FFFF00',"A group of deranged doctors have set up a field hospital, sieze it for your own!"];
 
 // Define Mission Win message
-_msgWIN = format["<t color='#0080ff' size='1.25'>Deranged Doctors! </t><br/> Convicts have claimed the medical supplies for their own!"];
+_msgWIN = ['#0080ff',"Convicts have claimed the medical supplies for their own!"];
 
 // Define Mission Lose message
-_msgLOSE = format["<t color='#FF0000' size='1.25'>Deranged Doctors! </t><br/> Hawkeye has ran off with the medical supplies, everything is gone!"];
+_msgLOSE = ['#FF0000',"Hawkeye has ran off with the medical supplies, everything is gone!"];
 
 // Define mission name (for map marker and logging)
 _missionName = "Deranged Doctors";
@@ -108,7 +111,7 @@ _added =
 	],
 	_missionAIUnits,
 	_missionObjs,
-	[_msgWIN,_msgLOSE],
+	[_missionName,_msgWIN,_msgLOSE],
 	_markers,
 	_side,
 	_difficulty,
@@ -145,7 +148,7 @@ if !(_added) exitWith
 
 
 // Notify players
-_msgStart call DMS_fnc_BroadcastMissionStatus;
+[_missionName,_msgStart] call DMS_fnc_BroadcastMissionStatus;
 
 
 

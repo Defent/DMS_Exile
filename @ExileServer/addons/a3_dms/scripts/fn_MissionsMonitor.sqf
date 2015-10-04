@@ -25,7 +25,7 @@
 */
 if (DMS_Mission_Arr isEqualTo []) exitWith {};				// Empty array, no missions running
 
-private ["_pos", "_success", "_timeStarted", "_timeUntilFail", "_units", "_buildings", "_vehs", "_crate_info_array", "_mines", "_msgWIN", "_msgLose", "_markers", "_missionSide", "_arr", "_cleanupList"];
+private ["_pos", "_success", "_timeStarted", "_timeUntilFail", "_units", "_buildings", "_vehs", "_crate_info_array", "_mines", "_missionName", "_msgWIN", "_msgLose", "_markers", "_missionSide", "_arr", "_cleanupList"];
 
 
 {
@@ -44,8 +44,9 @@ private ["_pos", "_success", "_timeStarted", "_timeUntilFail", "_units", "_build
 		_vehs						= _x select 4 select 1;
 		_crate_info_array			= _x select 4 select 2;
 		_mines						= _x select 4 select 3;
-		_msgWIN						= _x select 5 select 0;
-		_msgLose					= _x select 5 select 1;
+		_missionName				= _x select 5 select 0;
+		_msgWIN						= _x select 5 select 1;
+		_msgLose					= _x select 5 select 2;
 		_markers 					= _x select 6;
 		_missionSide				= _x select 7;
 
@@ -83,10 +84,10 @@ private ["_pos", "_success", "_timeStarted", "_timeUntilFail", "_units", "_build
 				} forEach _mines;
 			};
 
-			_msgWIN call DMS_fnc_BroadcastMissionStatus;
+			[_missionName,_msgWIN] call DMS_fnc_BroadcastMissionStatus;
 			[_markers,"win"] call DMS_fnc_RemoveMarkers;
 
-			throw format ["Mission Success at %1 with message %2.",_pos,_msgWIN];
+			throw format ["Mission (%1) Success at %2 with message %3.",_missionName,_pos,_msgWIN];
 		};
 
 		if (DMS_MissionTimeoutReset && {[_pos,DMS_MissionTimeoutResetRange] call DMS_fnc_IsPlayerNearby}) then
@@ -119,10 +120,10 @@ private ["_pos", "_success", "_timeStarted", "_timeUntilFail", "_units", "_build
 			
 			_arr = DMS_Mission_Arr deleteAt _forEachIndex;
 
-			_msgLose call DMS_fnc_BroadcastMissionStatus;
+			[_missionName,_msgLose] call DMS_fnc_BroadcastMissionStatus;
 			[_markers,"lose"] call DMS_fnc_RemoveMarkers;
 
-			throw format ["Mission Fail at %1 with message %2.",_pos,_msgLose];
+			throw format ["Mission (%1) Fail at %2 with message %3.",_missionName,_pos,_msgLose];
 		};
 	}
 	catch

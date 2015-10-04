@@ -16,7 +16,10 @@ _side = "bandit";
 
 
 // find position
-_pos = [10] call DMS_fnc_findSafePos;
+_pos = 
+[
+	10,DMS_WaterNearBlacklist,DMS_MaxSurfaceNormal,DMS_SpawnZoneNearBlacklist,DMS_TraderZoneNearBlacklist,DMS_MissionNearBlacklist,DMS_PlayerNearBlacklist,DMS_ThrottleBlacklists
+]call DMS_fnc_findSafePos;
 
 
 // Set general mission difficulty
@@ -40,10 +43,16 @@ _group =
 // Create Crates
 _crate1 = ["Box_NATO_Wps_F",_pos] call DMS_fnc_SpawnCrate;
 
-_wreck = createVehicle ["Land_FuelStation_Build_F",[(_pos select 0) - 10, (_pos select 1),-0.2],[], 0, "CAN_COLLIDE"];
+_rndDir = random 180;
 
-_vehicle1 = ["Exile_Car_SUV_Red",[(_pos select 0) + -1*(5+(random 5)),(_pos select 1) + -1*(5+(random 5)),0]] call DMS_fnc_SpawnNonPersistentVehicle;
-_vehicle2 = ["Exile_Car_SUV_Grey",[(_pos select 0)+(5+(random 5)),(_pos select 1)+(5+(random 5)),0]] call DMS_fnc_SpawnNonPersistentVehicle;
+_wreck = createVehicle ["Land_FuelStation_Build_F",[_pos,10+(random 5),_rndDir+90] call DMS_fnc_SelectOffsetPos,[], 0, "CAN_COLLIDE"];
+
+
+_vehicle1 = ["Exile_Car_SUV_Red", [_pos,5+(random 3),_rndDir] call DMS_fnc_SelectOffsetPos] call DMS_fnc_SpawnNonPersistentVehicle;
+//_vehicle1 setPosATL ([_pos,5+(random 3),_rndDir] call DMS_fnc_SelectOffsetPos);
+
+_vehicle2 = ["Exile_Car_SUV_Grey", [_pos,5+(random 3),_rndDir+180] call DMS_fnc_SelectOffsetPos] call DMS_fnc_SpawnNonPersistentVehicle;
+//_vehicle2 setPosATL ([_pos,5+(random 3),_rndDir+180] call DMS_fnc_SelectOffsetPos);
 
 
 
@@ -71,13 +80,13 @@ _missionObjs =
 ];
 
 // Define Mission Start message
-_msgStart = format["<t color='#FFFF00' size='1.25'>Car Dealer Robbery! </t><br/> A local car dealership is being robbed by bandits, stop them!"];
+_msgStart = ['#FFFF00',"A local car dealership is being robbed by bandits, stop them!"];
 
 // Define Mission Win message
-_msgWIN = format["<t color='#0080ff' size='1.25'>Car Dealer Robbery! </t><br/> Convicts have secured the local dealership and removed the bandits!"];
+_msgWIN = ['#0080ff',"Convicts have secured the local dealership and removed the bandits!"];
 
 // Define Mission Lose message
-_msgLOSE = format["<t color='#FF0000' size='1.25'>Car Dealer Robbery! </t><br/> The bandits have escaped with the cars and left nothing but a trail of smoke behind!"];
+_msgLOSE = ['#FF0000',"The bandits have escaped with the cars and left nothing but a trail of smoke behind!"];
 
 // Define mission name (for map marker and logging)
 _missionName = "Car Dealer Robbery";
@@ -113,7 +122,7 @@ _added =
 	],
 	_missionAIUnits,
 	_missionObjs,
-	[_msgWIN,_msgLOSE],
+	[_missionName,_msgWIN,_msgLOSE],
 	_markers,
 	_side,
 	_difficulty,
@@ -150,7 +159,7 @@ if !(_added) exitWith
 
 
 // Notify players
-_msgStart call DMS_fnc_BroadcastMissionStatus;
+[_missionName,_msgStart] call DMS_fnc_BroadcastMissionStatus;
 
 
 

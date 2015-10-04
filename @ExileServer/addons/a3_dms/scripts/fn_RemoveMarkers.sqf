@@ -26,6 +26,7 @@ if (DMS_DEBUG) then
 
 
 deleteMarker _markerCircle;
+missionNamespace setVariable [format ["%1_pos",_markerDot], nil];
 
 if (_status == "win") then
 {
@@ -35,7 +36,8 @@ if (_status == "win") then
 	};
 	_markerDot setMarkerText ("COMPLETED: "+markerText _markerDot);
 	_markerDot setMarkerColor DMS_MissionMarkerWinDotColor;
-	_markerDot spawn {sleep DMS_MissionMarkerWinDotTime;deleteMarker _this;};
+	//_markerDot spawn {sleep DMS_MissionMarkerWinDotTime;deleteMarker _this;};
+	[DMS_MissionMarkerWinDotTime, {deleteMarker _this;}, _markerDot, false] call ExileServer_system_thread_addTask;
 	if (DMS_DEBUG) then
 	{
 		diag_log format ["DMS_DEBUG RemoveMarkers :: %1 Marker will be removed in %2 seconds!",_markerDot,DMS_MissionMarkerWinDotTime];
@@ -49,7 +51,8 @@ else
 	};
 	_markerDot setMarkerText ("FAILED: "+markerText _markerDot);
 	_markerDot setMarkerColor DMS_MissionMarkerLoseDotColor;
-	_markerDot spawn {sleep DMS_MissionMarkerLoseDotTime;deleteMarker _this;};
+	//_markerDot spawn {sleep DMS_MissionMarkerLoseDotTime;deleteMarker _this;};
+	[DMS_MissionMarkerLoseDotTime, {deleteMarker _this;}, _markerDot, false] call ExileServer_system_thread_addTask;
 	if (DMS_DEBUG) then
 	{
 		diag_log format ["DMS_DEBUG RemoveMarkers :: %1 Marker will be removed in %2 seconds!",_markerDot,DMS_MissionMarkerLoseDotTime];

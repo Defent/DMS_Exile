@@ -44,6 +44,7 @@ class CfgFunctions
 			class ImportFromM3E_Convert			{};
 			class IsPlayerNearby				{};
 			class IsNearWater 					{};
+			class IsValidPosition				{};
 			class MissionsMonitor 				{};
 			class MissionSuccessState 			{};
 			class OnKilled 						{};

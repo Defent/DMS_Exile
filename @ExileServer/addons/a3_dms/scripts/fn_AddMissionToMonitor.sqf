@@ -41,7 +41,7 @@
 			]
 		],
 		[_msgWIN,_msgLose],
-		[_markerDot,_markerCircle],
+		[_missionName,_markerDot,_markerCircle],
 		_side,
 		_difficulty,
 		_missionEvents
@@ -63,7 +63,7 @@ _OK = params
 	["_timeOutInfo","",[[]],[1,2]],
 	["_inputUnits","",[[]]],
 	["_missionObjs","",[[]],[3,4]],
-	["_messages","",[[]],[2]],
+	["_messages","",[[]],[3]],
 	["_markers","",[[]],[2]],
 	["_side","bandit",[""]],
 	["_difficulty","moderate",[""]],
@@ -136,8 +136,9 @@ try
 
 	_OK = _messages params
 	[
-		["_msgWIN","",[""]],
-		["_msgLose","",[""]]
+		["_missionName","",[""]],
+		["_msgWIN",[],[[]],[2]],
+		["_msgLose",[],[[]],[2]]
 	];
 
 	if (!_OK) then
@@ -172,6 +173,7 @@ try
 			_mines
 		],
 		[
+			_missionName,
 			_msgWIN,
 			_msgLose
 		],
