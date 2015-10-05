@@ -66,6 +66,12 @@ _dot setMarkerType "mil_dot";
 _dot setMarkerText _text;
 
 missionNamespace setVariable [format ["%1_pos",_dot], _pos];
+missionNamespace setVariable [format ["%1_text",_dot], _text];
+
+if (DMS_MarkerText_ShowMissionPrefix) then
+{
+	_dot setMarkerText (format ["%1 %2",DMS_MarkerText_MissionPrefix,_text]);
+};
 
 if (_randomMarker) then
 {

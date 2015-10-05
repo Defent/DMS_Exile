@@ -69,10 +69,10 @@ _missionObjs =
 ];
 
 // Define Mission Start message
-_msgStart = ['#FFFF00',"A food supply truck has been sized by ruthless bandits, stop them!"];
+_msgStart = ['#FFFF00',"A food supply truck has been sized by ruthless bandits. Stop them!"];
 
 // Define Mission Win message
-_msgWIN = ['#0080ff',"Convicts have successfully claimed the food supplies for themselves!"];
+_msgWIN = ['#0080ff',"Convicts have successfully claimed the food supplies!"];
 
 // Define Mission Lose message
 _msgLOSE = ['#FF0000',"The bandits have taken the food supplies and escaped!"];

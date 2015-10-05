@@ -80,10 +80,10 @@ _missionObjs =
 ];
 
 // Define Mission Start message
-_msgStart = ['#FFFF00',"A local car dealership is being robbed by bandits, stop them!"];
+_msgStart = ['#FFFF00',"A local car dealership is being robbed by bandits. Stop them!"];
 
 // Define Mission Win message
-_msgWIN = ['#0080ff',"Convicts have secured the local dealership and removed the bandits!"];
+_msgWIN = ['#0080ff',"Convicts have secured the local dealership and eliminated the bandits!"];
 
 // Define Mission Lose message
 _msgLOSE = ['#FF0000',"The bandits have escaped with the cars and left nothing but a trail of smoke behind!"];

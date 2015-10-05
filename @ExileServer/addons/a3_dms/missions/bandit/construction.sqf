@@ -71,7 +71,7 @@ _missionObjs =
 ];
 
 // Define Mission Start message
-_msgStart = ['#FFFF00',"A group of mercenaries have set up a construction site, clear them out!"];
+_msgStart = ['#FFFF00',"A group of mercenaries have set up a construction site. Clear them out!"];
 
 // Define Mission Win message
 _msgWIN = ['#0080ff',"Convicts have successfully demolished the construction site!"];

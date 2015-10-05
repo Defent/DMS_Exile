@@ -69,13 +69,13 @@ _missionObjs =
 ];
 
 // Define Mission Start message
-_msgStart = ['#FFFF00',"A gun transport truck has crashed, secure the crash site and the guns!"];
+_msgStart = ['#FFFF00',"A gun transport truck has crashed. Secure the crash site!"];
 
 // Define Mission Win message
 _msgWIN = ['#0080ff',"Convicts have successfully secured the area and claimed the guns for their own!"];
 
 // Define Mission Lose message
-_msgLOSE = ['#FF0000',"The transport truck has been repaired and escaped the area!"];
+_msgLOSE = ['#FF0000',"The transport truck has been repaired and driven off!"];
 
 // Define mission name (for map marker and logging)
 _missionName = "Gun Transport";

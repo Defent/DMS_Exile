@@ -188,6 +188,11 @@ try
 	DMS_Mission_Arr pushBack _arr;
 	_added = true;
 
+	if (DMS_MarkerText_ShowAICount) then
+	{
+		_markerDot setMarkerText (format ["%1 (%2 %3 remaining)",markerText _markerDot,count _units,DMS_MarkerText_AIName]);
+	};
+
 	if (DMS_DEBUG) then
 	{
 		diag_log format ["DMS_DEBUG AddMissionToMonitor :: Added |%1| to DMS_Mission_Arr!",_arr];

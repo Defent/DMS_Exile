@@ -76,13 +76,13 @@ _missionObjs =
 ];
 
 
-_msgStart = ['#FFFF00',"A Bauhaus truck has crashed and lost all its building supplies, get there quickly!"];
+_msgStart = ['#FFFF00',"A Bauhaus truck has crashed and lost all its building supplies! Get there quickly!"];
 
 // Define Mission Win message
 _msgWIN = ['#0080ff',"Convicts have successfully claimed the crashed Bauhaus truck!"];
 
 // Define Mission Lose message
-_msgLOSE = ['#FF0000',"The Bauhaus truck has been repaired and escaped!"];
+_msgLOSE = ['#FF0000',"The crew have repaired the Bauhaus truck and escaped!"];
 
 // Define mission name (for map marker and logging)
 _missionName = "Bauhaus Truck";

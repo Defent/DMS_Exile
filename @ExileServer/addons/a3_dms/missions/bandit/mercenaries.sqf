@@ -70,7 +70,7 @@ _missionObjs =
 _msgStart = ['#FFFF00',"A group of mercenaries has been spotted. Kill them and take their equipment!"];
 
 // Define Mission Win message
-_msgWIN = ['#0080ff',"Convicts have successfully eliminated the mercenaries"];
+_msgWIN = ['#0080ff',"Convicts have successfully eliminated the mercenaries!"];
 
 // Define Mission Lose message
 _msgLOSE = ['#FF0000',"The mercenaries have escaped and they took all their loot with them!"];

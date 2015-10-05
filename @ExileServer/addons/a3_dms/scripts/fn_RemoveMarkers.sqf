@@ -12,11 +12,12 @@
 	] call DMS_fnc_RemoveMarkers;
 */
 
-private ["_markerDot","_markerCircle","_status"];
+private ["_markerDot", "_markerCircle", "_status", "_text"];
 
 _markerDot		= _this select 0 select 0;
 _markerCircle	= _this select 0 select 1;
 _status 		= _this select 1;
+_text 			= missionNamespace getVariable [format ["%1_text",_markerDot],markerText _markerDot];
 
 
 if (DMS_DEBUG) then
@@ -27,6 +28,7 @@ if (DMS_DEBUG) then
 
 deleteMarker _markerCircle;
 missionNamespace setVariable [format ["%1_pos",_markerDot], nil];
+missionNamespace setVariable [format ["%1_text",_markerDot], nil];
 
 if (_status == "win") then
 {
@@ -34,7 +36,7 @@ if (_status == "win") then
 	{
 		deleteMarker _markerDot;
 	};
-	_markerDot setMarkerText ("COMPLETED: "+markerText _markerDot);
+	_markerDot setMarkerText ("COMPLETED: "+_text);
 	_markerDot setMarkerColor DMS_MissionMarkerWinDotColor;
 	//_markerDot spawn {sleep DMS_MissionMarkerWinDotTime;deleteMarker _this;};
 	[DMS_MissionMarkerWinDotTime, {deleteMarker _this;}, _markerDot, false] call ExileServer_system_thread_addTask;
@@ -49,7 +51,7 @@ else
 	{
 		deleteMarker _markerDot;
 	};
-	_markerDot setMarkerText ("FAILED: "+markerText _markerDot);
+	_markerDot setMarkerText ("FAILED: "+_text);
 	_markerDot setMarkerColor DMS_MissionMarkerLoseDotColor;
 	//_markerDot spawn {sleep DMS_MissionMarkerLoseDotTime;deleteMarker _this;};
 	[DMS_MissionMarkerLoseDotTime, {deleteMarker _this;}, _markerDot, false] call ExileServer_system_thread_addTask;

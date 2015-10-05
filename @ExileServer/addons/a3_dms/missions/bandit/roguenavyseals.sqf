@@ -67,10 +67,10 @@ _missionObjs =
 ];
 
 // Define Mission Start message
-_msgStart = ['#FFFF00',"A squad of professional Navy Seals team is performing gorilla warfare in convict land, deal with them!"];
+_msgStart = ['#FFFF00',"A squad of professional Navy Seals is performing gorilla warfare in convict land. Deal with them!"];
 
 // Define Mission Win message
-_msgWIN = ['#0080ff',"Convicts have successfully taken care of the Navy Seals, you must be the top of your class!"];
+_msgWIN = ['#0080ff',"Convicts have successfully taken care of the Navy Seals. You must be the top of your class!"];
 
 // Define Mission Lose message
 _msgLOSE = ['#FF0000',"The Navy Seals have escaped and are now planning their next raid!"];

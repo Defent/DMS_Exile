@@ -27,6 +27,20 @@ if(DMS_StaticMission) then
 if (DMS_DynamicMission) then
 {
 	DMS_AttemptsUntilThrottle = DMS_AttemptsUntilThrottle + 1;
+
+	DMS_CLIENT_fnc_spawnDynamicText =
+	{
+		[
+			_this,
+			0,
+			safeZoneY,
+			10,
+			1
+		] spawn BIS_fnc_dynamicText;
+	};
+
+	publicVariable "DMS_CLIENT_fnc_spawnDynamicText";
+
 	call compileFinal preprocessFileLineNumbers "\x\addons\dms\missions\mission_init.sqf";
 	execFSM "\x\addons\dms\FSM\missions.fsm";
 };

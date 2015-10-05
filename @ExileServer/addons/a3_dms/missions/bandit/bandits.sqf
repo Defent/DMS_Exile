@@ -71,7 +71,7 @@ _msgStart = ['#FFFF00',"A heavily armed bandit group has been spotted, take them
 _msgWIN = ['#0080ff',"Convicts have successfully taken care of the bandit group!"];
 
 // Define Mission Lose message
-_msgLOSE = ['#FF0000',"The bandits have taken their vehicle and drove off, no loot today!"];
+_msgLOSE = ['#FF0000',"The bandits have driven off, no loot today!"];
 
 // Define mission name (for map markers, mission messages, and logging)
 _missionName = "Armed Bandits";

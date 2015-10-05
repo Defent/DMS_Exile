@@ -25,6 +25,10 @@ DMS_DEBUG = false;
 	DMS_AI_KillPercent					= 100;						// The percent amount of AI that need to be killed for "killPercent" mission requirement (NOT IMPLEMENTED)
 
 	/*Mission Marker settings*/
+	DMS_MarkerText_ShowMissionPrefix	= true;						// Whether or not to place a prefix before the mission marker text. Enable this if your players get confused by the marker names :P
+	DMS_MarkerText_MissionPrefix		= "Mission:";				// The text displayed before the mission name in the mission marker.
+	DMS_MarkerText_ShowAICount			= true;						// Whether or not to display the number of remaining AI in the marker name.
+	DMS_MarkerText_AIName				= "Units";					// What the AI will be called in the map marker. For example, the marker text can show: "Car Dealer (3 Units remaining)"
 	DMS_MarkerPosRandomization			= false;					// Randomize the position of the circle marker of a mission
 	DMS_MarkerPosRandomRadius			= [25,100];					// Minimum/Maximum distance that the circle marker position will be randomized | Default: 0 meters to 200 meters
 	DMS_RandomMarkerBrush				= "Cross";					// See: https://community.bistudio.com/wiki/setMarkerBrush
@@ -94,21 +98,22 @@ DMS_DEBUG = false;
 	/*Mission notification settings*/
 
 	DMS_BanditMissionTypes =			[							//	List of missions with spawn chances. If they add up to 100%, they represent the percentage chance each one will spawn
-											["bandits",25],
-											["bauhaus",25],
-											["beertransport",15],
-											["behindenemylines",10],
 											["blackhawkdown",45],
-											["cardealer",25],
 											["construction",35],
 											["donthasslethehoff",30],
-											["foodtransport",25],
-											["guntransport",20],
+											["bandits",25],
+											["bauhaus",25],
+											["cardealer",25],
 											["humanitarian",25],
-											["lost_battalion",10],
-											["mercenaries",20],
-											["roguenavyseals",15],
+											["foodtransport",25],
 											["walmart",20],
+											["mercenaries",20],
+											["guntransport",20],
+											["beertransport",15],
+											["roguenavyseals",15],
+											["thieves",10],
+											["lost_battalion",10],
+											["behindenemylines",10],
 											["mercbase",5]
 										];
 
@@ -591,7 +596,9 @@ DMS_DEBUG = false;
 
 	DMS_TransportTrucks =				[							// List of transport trucks that can spawn
 											"Exile_Car_Van_Guerilla01",
-											"Exile_Car_Van_Black"
+											"Exile_Car_Zamak",
+											"Exile_Car_Tempest",
+											"Exile_Car_HEMMT"
 										];
 
 	DMS_RefuelTrucks =					[							// List of refuel trucks that can spawn

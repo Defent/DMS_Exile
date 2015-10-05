@@ -66,10 +66,28 @@ private ["_pos", "_success", "_timeStarted", "_timeUntilFail", "_units", "_build
 			_arr = DMS_Mission_Arr deleteAt _forEachIndex;
 
 			{
-				_x lock 1;
 				_x allowDamage true;
 				_x enableRopeAttach true;
 				_x enableSimulationGlobal true;
+
+				if (_x getVariable ["ExileIsPersistent", false]) then
+				{
+					_x lock 0;
+					_x setVariable ["ExileIsLocked",0];
+
+					_x setVariable ["ExileLastLockToggleAt", time];
+					_x setVariable ["ExileAccessDenied", false];
+					_x setVariable ["ExileAccessDeniedExpiresAt", 0];
+
+					// NOW we save the vehicle in the database, since we know we're not deleting this vehicle.
+					_x call ExileServer_object_vehicle_database_insert;
+					_x call ExileServer_object_vehicle_database_update;
+				}
+				else
+				{
+					_x lock 1;
+				};
+
 				_x call ExileServer_system_simulationMonitor_addVehicle;
 			} forEach _vehs;
 
@@ -90,15 +108,17 @@ private ["_pos", "_success", "_timeStarted", "_timeUntilFail", "_units", "_build
 			throw format ["Mission (%1) Success at %2 with message %3.",_missionName,_pos,_msgWIN];
 		};
 
-		if (DMS_MissionTimeoutReset && {[_pos,DMS_MissionTimeoutResetRange] call DMS_fnc_IsPlayerNearby}) then
-		{
-			_x set [2,[diag_tickTime,_timeUntilFail]];
-
-			throw format ["Mission Timeout Extended at %1 with timeout after %2 seconds. Position: %3",diag_tickTime,_timeUntilFail,_pos];
-		};
-
 		if ((diag_tickTime-_timeStarted)>_timeUntilFail) then
 		{
+			// Check to see if the timeout should be extended before ending the mission.
+			if (DMS_MissionTimeoutReset && {[_pos,DMS_MissionTimeoutResetRange] call DMS_fnc_IsPlayerNearby}) then
+			{
+				_x set [2,[diag_tickTime,_timeUntilFail]];
+
+				throw format ["Mission Timeout Extended at %1 with timeout after %2 seconds. Position: %3",diag_tickTime,_timeUntilFail,_pos];
+			};
+
+
 			//Nobody is nearby so just cleanup objects from here
 			_cleanupList = (_units+_buildings+_vehs);
 
@@ -124,6 +144,21 @@ private ["_pos", "_success", "_timeStarted", "_timeUntilFail", "_units", "_build
 			[_markers,"lose"] call DMS_fnc_RemoveMarkers;
 
 			throw format ["Mission (%1) Fail at %2 with message %3.",_missionName,_pos,_msgLose];
+		};
+
+		if (DMS_MarkerText_ShowAICount) then
+		{
+			private ["_dot", "_text"];
+
+			_dot = _markers select 0;
+			_text = missionNamespace getVariable [format ["%1_text",_dot],_missionName];
+
+			if (DMS_MarkerText_ShowMissionPrefix) then
+			{
+				_text = format ["%1 %2",DMS_MarkerText_MissionPrefix,_text];
+			};
+
+			_dot setMarkerText (format ["%1 (%2 %3 remaining)",_text,{alive _x} count _units,DMS_MarkerText_AIName]);
 		};
 	}
 	catch

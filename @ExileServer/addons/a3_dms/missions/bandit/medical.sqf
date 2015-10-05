@@ -69,13 +69,13 @@ _missionObjs =
 ];
 
 // Define Mission Start message
-_msgStart = ['#FFFF00',"A group of deranged doctors have set up a field hospital, sieze it for your own!"];
+_msgStart = ['#FFFF00',"A group of deranged doctors have set up a field hospital. Seize it for your own!"];
 
 // Define Mission Win message
 _msgWIN = ['#0080ff',"Convicts have claimed the medical supplies for their own!"];
 
 // Define Mission Lose message
-_msgLOSE = ['#FF0000',"Hawkeye has ran off with the medical supplies, everything is gone!"];
+_msgLOSE = ['#FF0000',"Hawkeye has ran off with the medical supplies! Everything is gone!"];
 
 // Define mission name (for map marker and logging)
 _missionName = "Deranged Doctors";

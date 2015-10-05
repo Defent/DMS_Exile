@@ -1,11 +1,6 @@
 /*
-	Sample mission
-	Created by Defent and eraser1
-
-	Called from DMS_selectMission
+	Sample mission (duplicate for testing purposes)
 */
-
-private ["_num", "_side", "_pos", "_difficulty", "_AICount", "_group", "_crate1", "_crate_loot_values1", "_crate2", "_crate_loot_values2", "_msgStart", "_msgWIN", "_msgLOSE", "_missionName", "_missionAIUnits", "_missionObjs", "_markers", "_time", "_added","_wreck"];
 
 // For logging purposes
 _num = DMS_MissionCount;
@@ -18,40 +13,35 @@ _side = "bandit";
 // find position
 _pos = 
 [
-	10,DMS_WaterNearBlacklist,DMS_MaxSurfaceNormal,DMS_SpawnZoneNearBlacklist,DMS_TraderZoneNearBlacklist,DMS_MissionNearBlacklist,DMS_PlayerNearBlacklist,DMS_ThrottleBlacklists
+	15,DMS_WaterNearBlacklist,DMS_MaxSurfaceNormal,DMS_SpawnZoneNearBlacklist,DMS_TraderZoneNearBlacklist,DMS_MissionNearBlacklist,DMS_PlayerNearBlacklist,DMS_ThrottleBlacklists
 ]call DMS_fnc_findSafePos;
 
 
 // Set general mission difficulty
-_difficulty = "moderate";
+_difficulty = "easy";
 
 
 // Create AI
 // TODO: Spawn AI only when players are nearby
-_AICount = 3 + (round (random 2));
+_AICount = 3 + (round (random 1));
 
 _group =
 [
 	_pos,					// Position of AI
 	_AICount,				// Number of AI
-	"random",				// "random","hardcore","difficult","moderate", or "easy"
+	"hardcore",				// "random","hardcore","difficult","moderate", or "easy"
 	"random", 				// "random","assault","MG","sniper" or "unarmed" OR [_type,_launcher]
 	_side 					// "bandit","hero", etc.
 ] call DMS_fnc_SpawnAIGroup;
 
 
-// Create Crates
-_crate1 = ["Box_NATO_Wps_F",_pos] call DMS_fnc_SpawnCrate;
+_class = (DMS_MilitaryVehicles+DMS_TransportTrucks) call BIS_fnc_SelectRandom;
 
-_wreck = createVehicle ["Land_Wreck_Van_F",[(_pos select 0) - 10, (_pos select 1),-0.2],[], 0, "CAN_COLLIDE"];
+//DMS_fnc_SpawnPersistentVehicle will automatically turn the pincode into a string and format it.
+_pinCode = round (random 9999);
 
-// Set crate loot values
-_crate_loot_values1 =
-[
-	2,		// Weapons
-	[12,["Exile_Item_GloriousKnakWorst_Cooked","Exile_Item_PlasticBottleFreshWater","Exile_Item_PlasticBottleFreshWater","Exile_Item_BBQSandwich_Cooked","Exile_Item_Catfood_Cooked","Exile_Item_ChristmasTinner_Cooked"]],		// Items
-	2 		// Backpacks
-];
+_vehicle = [_class,_pos,_pinCode] call DMS_fnc_SpawnPersistentVehicle;
+
 
 
 // Define mission-spawned AI Units
@@ -60,25 +50,25 @@ _missionAIUnits =
 	_group 		// We only spawned the single group for this mission
 ];
 
-// Define mission-spawned objects and loot values
+// Define mission-spawned objects
 _missionObjs =
 [
-	[_wreck],
-	[],
-	[[_crate1,_crate_loot_values1]]
+	[],			// No spawned buildings
+	[_vehicle],
+	[]
 ];
 
 // Define Mission Start message
-_msgStart = ['#FFFF00',"A truck carrying humanitarian supplies has been sized by bandits. Stop them!"];
+_msgStart = ['#FFFF00',format ["A band of thieves are attempting to break into a %1. Eliminate them and you might get the car for yourself!",getText (configFile >> "CfgVehicles" >> _class >> "displayName")]];
 
 // Define Mission Win message
-_msgWIN = ['#0080ff',"Convicts have successfully claimed the humanitarian supplies for themselves!"];
+_msgWIN = ['#0080ff',format ["Convicts have eliminated the thieves! Looks like the thieves managed to figure out that the code was %1...",_pinCode]];
 
 // Define Mission Lose message
-_msgLOSE = ['#FF0000',"The bandits have taken the humanitarian supplies and escaped!"];
+_msgLOSE = ['#FF0000',"The thieves cracked the code and drove off!"];
 
-// Define mission name (for map marker and logging)
-_missionName = "Humanitarian Supplies";
+// Define mission name (for map markers, mission messages, and logging)
+_missionName = "Car Thieves";
 
 // Create Markers
 _markers =
@@ -98,7 +88,8 @@ _added =
 	[
 		[
 			"kill",
-			_group
+			_group,
+			true
 		],
 		[
 			"playerNear",

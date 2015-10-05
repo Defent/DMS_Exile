@@ -75,7 +75,7 @@ _msgStart = ['#FFFF00',"A transport truck carrying beer and guns is being robbed
 _msgWIN = ['#0080ff',"Convicts have successfully claimed all of the beer and guns. 'Murica."];
 
 // Define Mission Lose message
-_msgLOSE = ['#FF0000',"The robbers have taken off with all the beer and all the guns, what a travesty!"];
+_msgLOSE = ['#FF0000',"The robbers have taken off with all the beer and all the guns! What a travesty!"];
 
 // Define mission name (for map marker and logging)
 _missionName = "Beer N' Guns Truck";

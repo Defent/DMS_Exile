@@ -57,16 +57,15 @@ if ((typeName _message) != "STRING") then
 
 		case "dynamictextrequest":
 		{
-			//Unfortunately that doesn't work, so I have to do some funky stuff...
-			//[_x, [format ["%1<br/>%2",toUpper _missionName,_message], 0, DMS_dynamicText_Size, DMS_dynamicText_Color]] call ExileServer_system_network_send_broadcast;
-
-			[
-				format ['<t color="%1" size="1" >%2</t><br/><t color="%3" size="%4" >%5</t>',_titleColor,_missionName,DMS_dynamicText_Color,DMS_dynamicText_Size,_message],
-				0,
-				0,
-				10,
-				1
-			] remoteExec ["BIS_fnc_dynamicText", -2];
+			(format
+			[	
+				'<t color="%1" size="1" >%2</t><br/><t color="%3" size="%4" >%5</t>',
+				_titleColor,
+				_missionName,
+				DMS_dynamicText_Color,
+				DMS_dynamicText_Size,_message
+			])
+			remoteExecCall ["DMS_CLIENT_fnc_spawnDynamicText", -2];
 		};
 
 		default { diag_log format ["DMS ERROR :: Unsupported Notification Type in DMS_PlayerNotificationTypes: %1 | Calling parameters: %2",_x,_this]; };

@@ -52,14 +52,31 @@ if (!hasInterface && !isServer) then
 
 
 ## Changelog:
+#### October 4, 2015 (10:30 PM CST-America):
+* **NEW CONFIG VALUES**:
+
+		|DMS_MarkerText_ShowMissionPrefix|
+		|DMS_MarkerText_MissionPrefix|
+		|DMS_MarkerText_ShowAICount|
+		|DMS_MarkerText_AIName|
+* New function: DMS_fnc_SpawnPersistentVehicle. It will spawn inaccessible vehicles by default and convert VALID pincode inputs to the proper format.
+* New mission: "Car Thieves" (thieves.sqf). It uses the new DMS_fnc_SpawnPersistentVehicle. When the mission is completed successfully, the code is displayed in the completion message.
+* You can now add a "prefix" to the marker text of each mission.
+* You can now display the number of remaining AI in the marker text (it should update about every 15 seconds).
+* Rearranged the missions in the config to look prettier. Don't judge.
+* Added the "Zamak", "Tempest", and "HEMMT" to "DMS_TransportTrucks" array. Removed "Exile_Car_Van_Black"
+* "dynamicTextRequest" messages will now appear at the top of the screen, so it shouldn't distract/block stuff in focus.
+* Fixed some spelling, improved some grammar (will require mission updates, it's really minor though).
+
+
 #### October 3, 2015 (10:30 PM CST-America):
 * **You must update all of your mission files; the mission message system as well as the calling parameters for DMS_fnc_FindSafePos have been overhauled and will be incompatible with previous versions.**
 * NEW CONFIG VALUES:
 
-	|DMS_ThrottleBlacklists|
-	|DMS_AttemptsUntilThrottle|
-	|DMS_ThrottleCoefficient|
-	|DMS_MinThrottledDistance|
+		|DMS_ThrottleBlacklists|
+		|DMS_AttemptsUntilThrottle|
+		|DMS_ThrottleCoefficient|
+		|DMS_MinThrottledDistance|
 * Decreased "DMS_TraderZoneNearBlacklist","DMS_MissionNearBlacklist","DMS_WaterNearBlacklist"
 * Changed "DMS_dynamicText_Color" to "#FFFFFF" (white)
 * Replaced weapon classes in "DMS_CrateCase_Sniper" to the base classes; all attachments should now spawn in the box separately.

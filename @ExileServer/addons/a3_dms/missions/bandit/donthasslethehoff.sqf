@@ -83,13 +83,13 @@ _missionObjs =
 ];
 
 // Define Mission Start message
-_msgStart = ['#FFFF00',"KITT has been kidnapped, secure the position and reclaim KITT!"];
+_msgStart = ['#FFFF00',"KITT has been kidnapped! Secure the position and reclaim KITT!"];
 
 // Define Mission Win message
-_msgWIN = ['#0080ff',"Convicts secured KITT, that will show the bandits not to Hassle the Hoff!"];
+_msgWIN = ['#0080ff',"Convicts secured KITT; that will show the bandits not to Hassle the Hoff!"];
 
 // Define Mission Lose message
-_msgLOSE = ['#FF0000',"KITT was never secured and has now been dismantled by the bandits, what a grim fate."];
+_msgLOSE = ['#FF0000',"KITT was never secured and has now been dismantled by the bandits... What a grim fate."];
 
 // Define mission name (for map marker and logging)
 _missionName = "KITT's Location";

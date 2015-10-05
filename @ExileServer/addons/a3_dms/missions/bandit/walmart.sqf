@@ -72,13 +72,13 @@ _missionObjs =
 ];
 
 // Define Mission Start message
-_msgStart = ['#FFFF00',"A local Walmart shop is being raided, stop the raiders and take the loot!"];
+_msgStart = ['#FFFF00',"A local Walmart shop is being raided. Stop the raiders and take the loot!"];
 
 // Define Mission Win message
 _msgWIN = ['#0080ff',"Convicts have done a good deed and stopped the raiders!"];
 
 // Define Mission Lose message
-_msgLOSE = ['#FF0000',"The raiders has looted everything from Walmart and escaped!"];
+_msgLOSE = ['#FF0000',"The raiders have looted everything from Walmart and escaped!"];
 
 // Define mission name (for map marker and logging)
 _missionName = "Walmart Riot";
