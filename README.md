@@ -66,6 +66,7 @@ if (!hasInterface && !isServer) then
 * Rearranged the missions in the config to look prettier. Don't judge.
 * Added the "Zamak", "Tempest", and "HEMMT" to "DMS_TransportTrucks" array. Removed "Exile_Car_Van_Black"
 * "dynamicTextRequest" messages will now appear at the top of the screen, so it shouldn't distract/block stuff in focus.
+* Optimized "DMS_fnc_MissionsMonitor" slightly... it should only extend the mission (and check for nearby players, which is a bit resource intensive) when the mission is actually potentially going to despawn.
 * Fixed some spelling, improved some grammar (will require mission updates, it's really minor though).
 
 
