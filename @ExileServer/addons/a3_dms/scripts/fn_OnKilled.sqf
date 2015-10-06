@@ -282,13 +282,13 @@ if (isPlayer _killer) then
 	if (DMS_ai_share_info) then
 	{
 		_revealAmount = 4.0;
-
-		_silencer = _playerObj weaponAccessories currentMuzzle _playerObj select 0;
-		if (!isNil "_silencer" && {_silencer != ""}) then
-		{
-			_revealAmount = 2.0;
+		if (!isNumber(currentMuzzle _playerObj)) then {
+			_silencer = _playerObj weaponAccessories currentMuzzle _playerObj select 0;
+			if (!isNil "_silencer" && {_silencer != ""}) then
+			{
+				_revealAmount = 2.0;
+			};
 		};
-
 
 		{
 			if ((alive _x) && {!(isPlayer _x) && {((getPosWorld _x) distance2D (getPosWorld _unit)) <= DMS_ai_share_info_distance}}) then
