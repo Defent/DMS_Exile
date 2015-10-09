@@ -33,11 +33,11 @@ if (!_OK) exitWith
 };
 
 _vehpos = [];
-_maxDistance = 10;
+_maxDistance = 5;
 
 while{count _vehpos < 1} do
 {
-	_vehpos = _position findEmptyPosition [20,_maxDistance,_vehicleClass];
+	_vehpos = _position findEmptyPosition [0,_maxDistance,_vehicleClass];
 	_maxDistance = (_maxDistance + 5);
 };
 
@@ -50,13 +50,27 @@ clearItemCargoGlobal _vehObj;
 clearMagazineCargoGlobal _vehObj;
 clearWeaponCargoGlobal _vehObj;
 
+if (_className isKindOf "I_UGV_01_F") then 
+{
+	createVehicleCrew _vehObj;
+};
+if (getNumber (configFile >> "CfgSettings" >> "VehicleSpawn" >> "nightVision") isEqualTo 0) then 
+{
+	_vehObj disableNVGEquipment true;
+};
+if (getNumber (configFile >> "CfgSettings" >> "VehicleSpawn" >> "thermalVision") isEqualTo 0) then 
+{
+	_vehObj disableTIEquipment true;
+};
+
 _vehObj setFuel (0.75+(random 0.25));
 _vehObj setDir (random 360);
 _vehObj setPosATL _vehpos;
 _vehObj setVectorUp (surfaceNormal _vehpos);
 
 _vehObj setVariable ["ExileIsPersistent", false];
-_vehObj addEventHandler ["GetIn", { _this call ExileServer_object_vehicle_event_onGetIn}];
+_vehObj addMPEventHandler ["MPKilled", { if !(isServer) exitWith {}; _this call ExileServer_object_vehicle_event_onMPKilled;}];
+_vehObj addEventHandler ["GetIn", {_this call ExileServer_object_vehicle_event_onGetIn}];
 if (_vehObj isKindOf "Helicopter") then
 {
 	_vehObj addEventHandler ["RopeAttach", 

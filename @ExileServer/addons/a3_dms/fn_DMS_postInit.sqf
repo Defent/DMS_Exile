@@ -28,18 +28,37 @@ if (DMS_DynamicMission) then
 {
 	DMS_AttemptsUntilThrottle = DMS_AttemptsUntilThrottle + 1;
 
-	DMS_CLIENT_fnc_spawnDynamicText =
-	{
+	DMS_CLIENT_fnc_spawnDynamicText = compileFinal
+	("
+	[
+		_this,
+		0,
+		safeZoneY,
+		"+str DMS_dynamicText_Duration+",
+		"+str DMS_dynamicText_FadeTime+",
+		0,
+		24358
+	] spawn BIS_fnc_dynamicText;
+	");
+	publicVariable "DMS_CLIENT_fnc_spawnDynamicText";
+
+	DMS_CLIENT_fnc_spawnTextTiles = compileFinal
+	("
+	[
+		parseText _this,
 		[
-			_this,
 			0,
 			safeZoneY,
-			10,
+			1,
 			1
-		] spawn BIS_fnc_dynamicText;
-	};
-
-	publicVariable "DMS_CLIENT_fnc_spawnDynamicText";
+		],
+		[10,10],
+		"+str DMS_textTiles_Duration+",
+		"+str DMS_textTiles_FadeTime+",
+		0
+	] spawn BIS_fnc_textTiles;
+	");
+	publicVariable "DMS_CLIENT_fnc_spawnTextTiles";
 
 	call compileFinal preprocessFileLineNumbers "\x\addons\dms\missions\mission_init.sqf";
 	execFSM "\x\addons\dms\FSM\missions.fsm";

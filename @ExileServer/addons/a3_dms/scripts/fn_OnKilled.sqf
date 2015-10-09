@@ -38,11 +38,11 @@ _removeAll =
 	{_this unlinkItem _x;} forEach (assignedItems _this);
 	{_this removeItem _x;} forEach (items _this);
 
-	removeAllItemsWithMagazines 	_unit;
-	removeHeadgear 					_unit;
-	removeUniform 					_unit;
-	removeVest 						_unit;
-	removeBackpackGlobal 			_unit;
+	removeAllItemsWithMagazines 	_this;
+	removeHeadgear 					_this;
+	removeUniform 					_this;
+	removeVest 						_this;
+	removeBackpackGlobal 			_this;
 };
 
 moveOut _unit;
@@ -283,15 +283,20 @@ if (isPlayer _killer) then
 	{
 		_revealAmount = 4.0;
 
-		_silencer = _playerObj weaponAccessories currentMuzzle _playerObj select 0;
-		if (!isNil "_silencer" && {_silencer != ""}) then
+		_muzzle = currentMuzzle _playerObj;
+
+		if ((typeName _muzzle)=="STRING") then
 		{
-			_revealAmount = 2.0;
+			_silencer = _playerObj weaponAccessories _muzzle select 0;
+			if (!isNil "_silencer" && {_silencer != ""}) then
+			{
+				_revealAmount = 2.0;
+			};
 		};
 
 
 		{
-			if ((alive _x) && {!(isPlayer _x) && {((getPosWorld _x) distance2D (getPosWorld _unit)) <= DMS_ai_share_info_distance}}) then
+			if ((alive _x) && {!(isPlayer _x) && {(_x distance2D _unit) <= DMS_ai_share_info_distance}}) then
 			{
 				_x reveal [_killer, _revealAmount max (_x knowsAbout _playerObj)];
 			};
@@ -325,12 +330,12 @@ if ((!isNull _playerObj) && {((getPlayerUID _playerObj) != "") && {_playerObj is
 			_money = (_money + _moneyChange) max 0;
 			_playerObj setVariable ["ExileMoney",_money];
 
-			// Change message for players when they're actually LOSING poptabs
 			_msgType = "moneyReceivedRequest";
 			_msgParams = [str _money, format ["killing a %1 AI",_type]];
 
 			if (_moneyChange<0) then
 			{
+				// Change message for players when they're actually LOSING poptabs
 				_msgType = "notificationRequest";
 				_msgParams = ["Whoops",[format ["Lost %1 poptabs from running over a %2 AI!",abs _moneyChange,_type]]];
 
@@ -340,8 +345,21 @@ if ((!isNull _playerObj) && {((getPlayerUID _playerObj) != "") && {_playerObj is
 				ExileClientPlayerMoney = nil;
 			};
 
-			// Send notification and update client's money stats
-			[_playerObj, _msgType, _msgParams] call ExileServer_system_network_send_to;
+			if (DMS_Show_Kill_Poptabs_Notification) then
+			{
+				// Send notification and update client's money stats
+				[_playerObj, _msgType, _msgParams] call ExileServer_system_network_send_to;
+			}
+			else
+			{
+				// Player's money will already be updated for negative values, so let's not create unnecessary network traffic by sending another PVC
+				if (_moneyChange>0) then
+				{
+					ExileClientPlayerMoney = _money;
+					(owner _playerObj) publicVariableClient "ExileClientPlayerMoney";
+					ExileClientPlayerMoney = nil;
+				};
+			};
 		};
 
 		if (_repChange!=0) then
@@ -350,8 +368,11 @@ if ((!isNull _playerObj) && {((getPlayerUID _playerObj) != "") && {_playerObj is
 			_respect = _respect + _repChange;
 			_playerObj setVariable ["ExileScore",_respect];
 
-			// Send frag message
-			[_playerObj, "showFragRequest", [ [[format ["%1 AI KILL",toUpper _type],_repChange]] ] ] call ExileServer_system_network_send_to;
+			if (DMS_Show_Kill_Respect_Notification) then
+			{
+				// Send frag message
+				[_playerObj, "showFragRequest", [ [[format ["%1 AI KILL",toUpper _type],_repChange]] ] ] call ExileServer_system_network_send_to;
+			};
 
 			// Send updated respect value to client
 			ExileClientPlayerScore = _respect;

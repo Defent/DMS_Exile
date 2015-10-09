@@ -88,13 +88,41 @@ DMS_DEBUG = false;
 	DMS_MinServerFPS					= 5; 						// Minimum server FPS for missions to start
 
 	/*Mission notification settings*/
-	DMS_PlayerNotificationTypes =		[							// Notification types. Supported values are: ["dynamicTextRequest", "standardHintRequest", "systemChatRequest"]
-											"dynamicTextRequest",
-											//"standardHintRequest",
-											"systemChatRequest"
+	DMS_PlayerNotificationTypes =		[							// Notification types. Supported values are: ["dynamicTextRequest", "standardHintRequest", "systemChatRequest", "textTilesRequest"]
+											//"dynamicTextRequest",			// You should use either "dynamicTextRequest" or "textTilesRequest", and I think "textTilesRequest" looks better.
+											//"standardHintRequest",		// Hints are a bit wonky...
+											"textTilesRequest",				// Keep in mind you can only have 1 "text tile" message up at a time, so the message will disappear if the player gets a kill or something while the message is shown.
+											"systemChatRequest"				// Always nice to show in chat so that players can scroll up to read the info if they need to.
 										];
-	DMS_dynamicText_Size				= 0.65;						// Dynamic Text size for "dynamicTextRequest" notification type.
-	DMS_dynamicText_Color				= "#FFFFFF";				// Dynamic Text color for "dynamicTextRequest" notification type.
+
+		/*Dynamic Text Notification Settings*/
+	DMS_dynamicText_Duration			= 7;						// Number of seconds that the message will last on the screen.
+	DMS_dynamicText_FadeTime			= 1.5;						// Number of seconds that the message will fade in/out (does not affect duration).
+	DMS_dynamicText_Title_Size			= 1.2;						// Size for Client Dynamic Text mission titles.
+	DMS_dynamicText_Title_Font			= "puristaMedium";			// Font for Client Dynamic Text mission titles.
+	DMS_dynamicText_Message_Color		= "#FFFFFF";				// Dynamic Text color for "dynamicTextRequest" client notification type.
+	DMS_dynamicText_Message_Size		= 0.65;						// Dynamic Text size for "dynamicTextRequest" client notification type.
+	DMS_dynamicText_Message_Font		= "OrbitronMedium";			// Dynamic Text font for "dynamicTextRequest" client notification type.
+		/*Dynamic Text Notification Settings*/
+
+		/*Standard Hint Notification Settings*/
+	DMS_standardHint_Title_Size			= 2.5;						// Size for Client Standard Hint mission titles.
+	DMS_standardHint_Title_Font			= "puristaMedium";			// Font for Client Standard Hint mission titles.
+	DMS_standardHint_Message_Color		= "#FFFFFF";				// Standard Hint color for "standardHintRequest" client notification type.
+	DMS_standardHint_Message_Size		= 1;						// Standard Hint size for "standardHintRequest" client notification type.
+	DMS_standardHint_Message_Font		= "OrbitronMedium";			// Standard Hint font for "standardHintRequest" client notification type.
+		/*Standard Hint Notification Settings*/
+
+		/*Text Tiles Notification Settings*/
+	DMS_textTiles_Duration				= 7;						// Number of seconds that the message will last on the screen.
+	DMS_textTiles_FadeTime				= 1.5;						// Number of seconds that the message will fade in/out (does not affect duration).
+	DMS_textTiles_Title_Size			= 2.3;						// Size for Client Text Tiles mission titles.
+	DMS_textTiles_Title_Font			= "puristaMedium";			// Font for Client Text Tiles mission titles.
+	DMS_textTiles_Message_Color			= "#FFFFFF";				// Text Tiles color for "textTilesRequest" client notification type.
+	DMS_textTiles_Message_Size			= 1.25;						// Text Tiles size for "textTilesRequest" client notification type.
+	DMS_textTiles_Message_Font			= "OrbitronMedium";			// Text Tiles font for "textTilesRequest" client notification type.
+		/*Text Tiles Notification Settings*/
+
 	/*Mission notification settings*/
 
 	DMS_BanditMissionTypes =			[							//	List of missions with spawn chances. If they add up to 100%, they represent the percentage chance each one will spawn
@@ -124,6 +152,9 @@ DMS_DEBUG = false;
 
 
 /* AI Settings */
+
+	DMS_Show_Kill_Poptabs_Notification	= true;						// Whether or not to show the poptabs gained/lost message on the player's screen when killing an AI. (It will still change the player's money, it just won't show the "Money Received" notification)
+	DMS_Show_Kill_Respect_Notification	= true;						// Whether or not to show the "Frag Message" on the player's screen when killing an AI. (It will still change the player's respect, it just won't show the "AI Killed" frag message)
 
 	DMS_Bandit_Soldier_MoneyGain		= 50;						// The amount of Poptabs gained for killing a bandit soldier
 	DMS_Bandit_Soldier_RepGain			= 10;						// The amount of Respect gained for killing a bandit soldier
@@ -169,8 +200,8 @@ DMS_DEBUG = false;
 	DMS_ai_skill_hardcore				= [["aimingAccuracy",1.00],["aimingShake",1.00],["aimingSpeed",1.00],["spotDistance",1.00],["spotTime",1.00],["courage",1.00],["reloadSpeed",1.00],["commanding",1.00],["general",1.00]]; 	// Hardcore
 	DMS_ai_skill_random					= ["hardcore","difficult","difficult","difficult","moderate","moderate","moderate","moderate","easy","easy"];	// Skill frequencies for "random" AI skills | Default: 10% hardcore, 30% difficult, 40% moderate, and 20% easy
 	DMS_AI_WP_Radius_easy				= 20;						// Waypoint radius for "easy" AI
-	DMS_AI_WP_Radius_moderate			= 40;						// Waypoint radius for "moderate" AI
-	DMS_AI_WP_Radius_difficult			= 55;						// Waypoint radius for "difficult" AI
+	DMS_AI_WP_Radius_moderate			= 30;						// Waypoint radius for "moderate" AI
+	DMS_AI_WP_Radius_difficult			= 50;						// Waypoint radius for "difficult" AI
 	DMS_AI_WP_Radius_hardcore			= 75;						// Waypoint radius for "hardcore" AI
 	DMS_AI_WP_Radius_base				= 5;						// Waypoint radius for AI in bases
 

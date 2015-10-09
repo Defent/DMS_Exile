@@ -4,14 +4,10 @@ See also: http://www.exilemod.com/topic/61-dms-defents-mission-system/?do=findCo
 ## To install:
 Put the pre-packed PBO in your ```@ExileServer\addons\``` directory. It should be alongside ```exile_server``` and ```exile_server_config```.
 
-### NOTE: [Also look at the first part of this comment](http://www.exilemod.com/topic/61-dms-defents-mission-system/?do=findComment&comment=920). This will solve a few issues that you may encounter.
+If you are using Vilayer or some other GameServer hosting service, and/or the above step did not work, then create a new folder called @a3_dms in the root ArmA 3 folder, create a subfolder called "addons", and place the "a3_dms.pbo" in the "addons" subfolder. Then, edit your startup parameters/modline to include "@a3_dms". For example: ```-serverMod=@ExileServer;@a3_dms;```
 
-If you are using infiSTAR and want to keep ```_CGM = true;```, then set ```_UMW = true;```, and add ```DMS_MissionMarkerCircle```, ```DMS_MissionMarkerDot``` to ```_aLocalM```,
-so your ```_aLocalM``` would look like:
-
-```
-    _aLocalM = ["DMS_MissionMarkerCircle","DMS_MissionMarkerDot"];
-```
+## infiSTAR:
+If you are using infiSTAR and want to keep ```_CGM = true;```, then set ```_UMW = true;``` (the latest version of infiSTAR already has DMS markers whitelisted in ```_aLocalM```).
 
 ## Optional:
 
@@ -20,15 +16,14 @@ so your ```_aLocalM``` would look like:
 * Download the a3_dms folder
 * Edit the config.sqf to your preferences.
 * Pack the a3_dms folder with a PBO tool (**PBO Manager**, Eliteness, or Arma 3 Tools suite)
-* Follow the "To install:" steps using the PBO you just created instead of the pre-packed one.
+* Follow the ["To install:" steps](https://github.com/Defent/DMS_Exile#to-install) using the PBO you just created instead of the pre-packed one.
 
 
-### ~~HEADLESS CLIENT:~~
-![Warning](https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Achtung.svg/200px-Achtung.svg.png)
+### HEADLESS CLIENT:
 
-**Headless Client is currently broken in ArmA as of the 4th of September, do not use it as it WILL crash your server.**
+**People have reported Headless Client working properly in ArmA v1.52**
 
-~~Add this code to the TOP of your initPlayerLocal.sqf~~ 
+Add this code to the TOP of your initPlayerLocal.sqf
 
 ```
 if (!hasInterface && !isServer) then
@@ -41,17 +36,56 @@ if (!hasInterface && !isServer) then
 	};
 };
 ```
-#### Thanks:
-- [Defent](https://github.com/Defent) for creating Defent's Mission System.
-- [eraser1](https://github.com/eraser1) for his constant codebase improvments.
+
+## Credits:
+### Authors:
+- [Defent](https://github.com/Defent) from [NumenaDayZ](http://numenadayz.com/).
+- [eraser1](https://github.com/eraser1) from [TrainwreckDayZ](http://www.trainwreckdayz.com/home).
+
+### Thanks:
 - [Zupa](https://github.com/Windmolders) for suggestions and coding help.
 - [Nawuko](https://github.com/Nawuko) for catching a silly mistake :P
 - [shaworth](https://github.com/shaworth) and [KawaiiPotato](https://github.com/KawaiiPotato) for making the README all nice and pretty :)
-- Everbody's feedback on [the DMS thread on exile forums](http://www.exilemod.com/topic/61-dms-defents-mission-system/?do=findComment&comment=242)
 - [maca134](http://maca134.co.uk/portfolio/m3editor-arma-3-map-editor/) for M3Editor Stuff
+- Everbody's feedback on [the DMS thread on exile forums](http://www.exilemod.com/topic/61-dms-defents-mission-system/?do=findComment&comment=242)
 
 
 ## Changelog:
+#### October 8, 2015 (7:00 PM CST-America):
+* **NEW CONFIG VALUES**:
+		|DMS_Show_Kill_Poptabs_Notification|
+		|DMS_Show_Kill_Respect_Notification|
+		|DMS_dynamicText_Duration|
+		|DMS_dynamicText_FadeTime|
+		|DMS_dynamicText_Title_Size|
+		|DMS_dynamicText_Title_Font|
+		|DMS_dynamicText_Message_Color|
+		|DMS_dynamicText_Message_Size|
+		|DMS_dynamicText_Message_Font|
+		|DMS_standardHint_Title_Size|
+		|DMS_standardHint_Title_Font|
+		|DMS_standardHint_Message_Color|
+		|DMS_standardHint_Message_Size|
+		|DMS_standardHint_Message_Font|
+		|DMS_textTiles_Duration|
+		|DMS_textTiles_FadeTime|
+		|DMS_textTiles_Title_Size|
+		|DMS_textTiles_Title_Font|
+		|DMS_textTiles_Message_Color|
+		|DMS_textTiles_Message_Size|
+		|DMS_textTiles_Message_Font|
+* "DMS_PlayerNotificationTypes" has been adjusted to include "systemChatRequest" and the brand new "textTilesRequest". **NOTE:** Due to the way "text tiles" work, a player can only have one on his screen at a time. As a result, if another text tile is created while the mission message is up, the message will immediately disappear to display the new text tile. Currently, the "Frag Messages" (the ones that say "Player Kill 	+100") use text tiles. I don't think it should be a major issue (especially if you use "systemChatRequest", so the player can just scroll up), but if I get reports of it being stupid, I will default to "dynamicTextRequest", which should also look pretty damn nice.
+* These changes should make it much easier for people to use DMS notification functions for other purposes.
+* Fixed AI waypoints - the AI should now properly circle the objective at the proper radius.
+* Tweaked "DMS_AI_WP_Radius_moderate" and "DMS_AI_WP_Radius_difficult" (reduced the radii). Due to the AI pathing fix.
+* Fixed a couple typos in "DMS_fnc_SpawnAISoldier". "_customGearSet" should work now (although I'm fairly certain nobody uses it since nobody ever complained :P )
+* Improved "DMS_fnc_SpawnNonPersistentVehicle"; Vehicles should no longer spawn jumbled up in most cases (like cardealer). Also, it's updated to the latest Exile methods to ensure that vehicles have no nightvision/thermal if configured to do so in Exile configs. Also added the "MPKilled" EH used by Exile for non-persistent (persistent vehicles already had it).
+* You can now choose whether or not you want to display the poptabs or respect kill messages when killing an AI with "DMS_Show_Kill_Poptabs_Notification" and "DMS_Show_Kill_Respect_Notification". Both are enabled by default.
+* Fixed typos in the "OnKilled" EH (didn't really affect anything)
+* Fixed cases when "currentMuzzle" would return a number. Thanks to [azmodii](https://github.com/azmodii) for the reminder.
+* Optimized the "AI share info" function in "OnKilled"
+
+
 #### October 4, 2015 (10:30 PM CST-America):
 * **NEW CONFIG VALUES**:
 

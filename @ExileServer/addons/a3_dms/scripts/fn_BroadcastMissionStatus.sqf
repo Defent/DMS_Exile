@@ -3,11 +3,15 @@
 	Created by eraser1
 
 	Usage:	
-	_message call DMS_fnc_BroadcastMissionStatus;
+	[
+		_messageTitle,
+		[
+			_messageColor,
+			_message
+		]
+	] call DMS_fnc_BroadcastMissionStatus;
 
-	Requires "DMS_PlayerNotificationTypes".
-
-	Notification type "dynamicTextRequest" requires "DMS_dynamicText_Size" and "DMS_dynamicText_Color".
+	Returns nothing
 */
 
 
@@ -52,20 +56,55 @@ if ((typeName _message) != "STRING") then
 
 		case "standardhintrequest":
 		{
-			[_x, [format ["<t color='%1' size='1.25'>%2</t><br/> %3",_titleColor,_missionName,_message]]] call ExileServer_system_network_send_broadcast;
+			[
+				_x,
+				[
+					format
+					[
+						"<t color='%1' size='%2' font='%3'>%4</t><br/><t color='%5' size='%6' font='%7'>%8</t>",
+						_titleColor,
+						DMS_standardHint_Title_Size,
+						DMS_standardHint_Title_Font,
+						_missionName,
+						DMS_standardHint_Message_Color,
+						DMS_standardHint_Message_Size,
+						DMS_standardHint_Message_Font,
+						_message
+					]
+				]
+			] call ExileServer_system_network_send_broadcast;
 		};
 
 		case "dynamictextrequest":
 		{
 			(format
-			[	
-				'<t color="%1" size="1" >%2</t><br/><t color="%3" size="%4" >%5</t>',
+			[
+				"<t color='%1' size='%2' font='%3'>%4</t><br/><t color='%5' size='%6' font='%7'>%8</t>",
 				_titleColor,
+				DMS_dynamicText_Title_Size,
+				DMS_dynamicText_Title_Font,
 				_missionName,
-				DMS_dynamicText_Color,
-				DMS_dynamicText_Size,_message
-			])
-			remoteExecCall ["DMS_CLIENT_fnc_spawnDynamicText", -2];
+				DMS_dynamicText_Message_Color,
+				DMS_dynamicText_Message_Size,
+				DMS_dynamicText_Message_Font,
+				_message
+			]) remoteExecCall ["DMS_CLIENT_fnc_spawnDynamicText", -2];
+		};
+
+		case "texttilesrequest":
+		{
+			(format
+			[
+				"<t color='%1' size='%2' font='%3' align='center'>%4</t><br/><t color='%5' size='%6' font='%7' align='center'>%8</t>",
+				_titleColor,
+				DMS_textTiles_Title_Size,
+				DMS_textTiles_Title_Font,
+				_missionName,
+				DMS_textTiles_Message_Color,
+				DMS_textTiles_Message_Size,
+				DMS_textTiles_Message_Font,
+				_message
+			]) remoteExecCall ["DMS_CLIENT_fnc_spawnTextTiles", -2];
 		};
 
 		default { diag_log format ["DMS ERROR :: Unsupported Notification Type in DMS_PlayerNotificationTypes: %1 | Calling parameters: %2",_x,_this]; };

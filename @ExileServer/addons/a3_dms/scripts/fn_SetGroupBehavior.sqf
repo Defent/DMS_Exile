@@ -55,10 +55,10 @@ for "_i" from count (waypoints _group) to 1 step -1 do
 // Add waypoints around the center position.
 for "_i" from 0 to 359 step 45 do
 {
-	_npos = [(_pos select 0) + (sin(_i)*_radius), (_pos select 1) + (cos(_i)*_radius)];
-	_wp = _group addWaypoint [_npos,(_radius/5)];
+	_npos = [_pos,_radius,_i] call DMS_fnc_SelectOffsetPos;
+	_wp = _group addWaypoint [_npos,5];
 	_wp setWaypointType "MOVE";
 };
 
-_wp = _group addWaypoint [_pos,_radius];
+_wp = _group addWaypoint [[_pos,_radius,0] call DMS_fnc_SelectOffsetPos,0];
 _wp setWaypointType "CYCLE";

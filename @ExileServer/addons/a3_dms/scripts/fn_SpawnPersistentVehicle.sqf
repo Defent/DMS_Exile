@@ -78,9 +78,8 @@ try
 	_vehObj = [_vehicleClass,_pos] call DMS_fnc_SpawnNonPersistentVehicle;
 	_vehObj setPosATL _pos;
 
-	// Set up EHs
+	// Save vehicle on exit.
 	_vehObj addEventHandler ["GetOut", { _this call ExileServer_object_vehicle_event_onGetOut}];
-	_vehObj addMPEventHandler ["MPKilled", { _this call ExileServer_object_vehicle_event_onMPKilled}];
 
 	// Set up vars
 	_vehObj setVariable ["ExileIsPersistent", true];

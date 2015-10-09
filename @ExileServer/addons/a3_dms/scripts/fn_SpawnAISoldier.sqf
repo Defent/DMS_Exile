@@ -12,7 +12,7 @@
 		_side, 					// "bandit","hero", etc.
 		_type,					// Type of AI: "soldier","static","vehicle","heli", etc.
 		_customGearSet			// OPTIONAL: Manually defined AI gear.
-	] call DMS_fnc_SpawnAIGroup;
+	] call DMS_fnc_SpawnAISoldier;
 
 	Usage for _customGearSet:
 	[
@@ -32,7 +32,7 @@
 	Returns AI Unit
 */
 
-private ["_OK", "_useCustomGear", "_unarmed", "_class", "_customGear", "_type", "_unit", "_side", "_nighttime", "_weapon", "_muzzle", "_suppressor", "_pistols", "_pistol", "_customGearSet", "_helmet", "_uniform", "_vest", "_backpack", "_launcher", "_magazines", "_weaponAttachments", "_pistolAttachments", "_items", "_difficulty", "_skillArray"];
+private ["_OK", "_useCustomGear", "_unarmed", "_class", "_type", "_unit", "_side", "_nighttime", "_weapon", "_muzzle", "_suppressor", "_pistols", "_pistol", "_customGearSet", "_helmet", "_uniform", "_vest", "_backpack", "_launcher", "_magazines", "_weaponAttachments", "_pistolAttachments", "_items", "_difficulty", "_skillArray"];
 
 _OK = params
 [
@@ -55,7 +55,7 @@ else
 {
 	if ((_class == "custom") && {((count _this)>6)}) then
 	{
-		_customGear = _this select 5;
+		_customGearSet = _this select 5;
 		_useCustomGear = true;
 	};
 };
