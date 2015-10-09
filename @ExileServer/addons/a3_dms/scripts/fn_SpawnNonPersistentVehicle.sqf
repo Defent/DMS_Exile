@@ -50,7 +50,7 @@ clearItemCargoGlobal _vehObj;
 clearMagazineCargoGlobal _vehObj;
 clearWeaponCargoGlobal _vehObj;
 
-if (_className isKindOf "I_UGV_01_F") then 
+if (_vehicleClass isKindOf "I_UGV_01_F") then 
 {
 	createVehicleCrew _vehObj;
 };
