@@ -84,7 +84,7 @@ if (DMS_SpawnMinesAroundMissions) then
 		for "_i" from 0 to 359 step 90 do
 		{
 			_sign = createVehicle ["Land_Sign_Mines_F",[_centerPos, _radius+2, _randDirOffset+_i] call DMS_fnc_SelectOffsetPos, [], 0, "CAN_COLLIDE"];
-			_sign setDir _i;
+			_sign setDir (180+_i);
 			_sign setVectorUp [0,0,1];
 
 			// _mines array is for only cleanup atm, so just add them to the list

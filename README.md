@@ -51,8 +51,9 @@ if (!hasInterface && !isServer) then
 
 
 ## Changelog:
-#### October 8, 2015 (7:00 PM CST-America):
+#### October 8, 2015 (7:15 PM CST-America):
 * **NEW CONFIG VALUES**:
+
 		|DMS_Show_Kill_Poptabs_Notification|
 		|DMS_Show_Kill_Respect_Notification|
 		|DMS_dynamicText_Duration|
@@ -82,8 +83,9 @@ if (!hasInterface && !isServer) then
 * Improved "DMS_fnc_SpawnNonPersistentVehicle"; Vehicles should no longer spawn jumbled up in most cases (like cardealer). Also, it's updated to the latest Exile methods to ensure that vehicles have no nightvision/thermal if configured to do so in Exile configs. Also added the "MPKilled" EH used by Exile for non-persistent (persistent vehicles already had it).
 * You can now choose whether or not you want to display the poptabs or respect kill messages when killing an AI with "DMS_Show_Kill_Poptabs_Notification" and "DMS_Show_Kill_Respect_Notification". Both are enabled by default.
 * Fixed typos in the "OnKilled" EH (didn't really affect anything)
-* Fixed cases when "currentMuzzle" would return a number. Thanks to [azmodii](https://github.com/azmodii) for the reminder.
+* Fixed cases when "currentMuzzle" would return a number. Thanks to [azmodii](https://github.com/azmodii) for the report.
 * Optimized the "AI share info" function in "OnKilled"
+* Fixed mines facing the wrong direction. Thanks to [boLekc](https://github.com/boLekc) for the report.
 
 
 #### October 4, 2015 (10:30 PM CST-America):
