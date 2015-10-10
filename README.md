@@ -1,5 +1,5 @@
 # To the User:
-####Please read through the instructions carefully. Please read through the [DMS "config.sqf"](https://github.com/Defent/DMS_Exile/blob/master/%40ExileServer/addons/a3_dms/config.sqf) before leaving any questions regarding DMS; the majority of the questions we receive are answered (directly or indirectly) by the config.
+####Read through the instructions carefully. Before leaving any questions regarding DMS, please read through the [DMS "config.sqf"](https://github.com/Defent/DMS_Exile/blob/master/%40ExileServer/addons/a3_dms/config.sqf) ; the majority of the questions we receive are answered (directly or indirectly) by the config.
 
 ####Disclaimer:
 Defent's Mission System (DMS) is written from the ground up to be an efficient, easy to install, and vastly customizable mission system for the ArmA 3 [Exile Mod](http://www.exilemod.com/). You are perfectly welcome to port DMS or any of its functions for any other mod or (legal) purposes; and leaving credits is appreciated.
