@@ -86,8 +86,6 @@ ___
 #### October 8, 2015 (7:15 PM CST-America):
 * **NEW CONFIG VALUES**:
 
-		|NEW|
-		|:---:|
 		|DMS_Show_Kill_Poptabs_Notification|
 		|DMS_Show_Kill_Respect_Notification|
 		|DMS_dynamicText_Duration|
