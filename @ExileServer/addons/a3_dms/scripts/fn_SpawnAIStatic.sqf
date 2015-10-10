@@ -70,16 +70,10 @@ _guns = [];
 	reload _unit;
 	_unit setVariable ["DMS_AssignedVeh",_gun];
 
-	if (DMS_DEBUG) then
-	{
-		diag_log format ["DMS_DEBUG SpawnAIStatic :: Created unit %1 at %2 as static gunner in %3",_unit,_pos,_gun];
-	};
+	(format ["SpawnAIStatic :: Created unit %1 at %2 as static gunner in %3",_unit,_pos,_gun]) call DMS_fnc_DebugLog;
 } forEach _positions;
 
 
-if (DMS_DEBUG) then
-{
-	diag_log format ["DMS_DEBUG SpawnAIStatic :: Created %1 static AI with parameters: %2",count _positions,_this];
-};
+(format ["SpawnAIStatic :: Created %1 static AI with parameters: %2",count _positions,_this]) call DMS_fnc_DebugLog;
 
 _guns

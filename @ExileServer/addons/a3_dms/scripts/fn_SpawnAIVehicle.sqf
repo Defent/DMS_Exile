@@ -81,9 +81,6 @@ _gunner setVariable ["DMS_AssignedVeh",_veh];
 
 [_driver,_gunner] joinSilent _group;
 
-if (DMS_DEBUG) then
-{
-	diag_log format ["DMS_DEBUG SpawnAIVehicle :: Created a %1 armed vehicle (%2) at %3 with %4 difficulty to group %5",_side,_vehClass,_spawnPos,_difficulty,_group];
-};
+(format ["SpawnAIVehicle :: Created a %1 armed vehicle (%2) at %3 with %4 difficulty to group %5",_side,_vehClass,_spawnPos,_difficulty,_group]) call DMS_fnc_DebugLog;
 
 _veh

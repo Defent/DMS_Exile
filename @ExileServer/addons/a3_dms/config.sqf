@@ -5,10 +5,19 @@
 	Created by eraser1
 */
 
+
 // Enables debug logging in DMS functions. This will also make missions spawn and timeout more quickly (for testing purposes).
 // Disable this on live servers, unless you know what you're doing.
 DMS_DEBUG = false;
 
+
+
+DMS_Use_Map_Config = true;	// Whether or not to use config overwrites specific to the map.
+/*
+	If you are using a map other than Altis, Bornholm, Esseker, or Tavi (Taviana) you should set this to false OR create a new file within the map_configs folder for the map so that you don't get a missing file error.
+	To share your map-specific config, please create a merge request on GitHub and/or leave a message on the DMS thread in the Exile forums.
+	For any questions regarding map-specific configs, please leave a reply in the DMS thread on the Exile forums.
+*/
 
 
 /* Mission System Settings */
@@ -61,7 +70,7 @@ DMS_DEBUG = false;
 	DMS_TraderZoneNearBlacklist			= 2500;						// Missions won't spawn in a position this many meters close to a trader zone
 	DMS_MissionNearBlacklist			= 2500;						// Missions won't spawn in a position this many meters close to another mission
 	DMS_WaterNearBlacklist				= 500;						// Missions won't spawn in a position this many meters close to water
-	DMS_MaxSurfaceNormal				= 0.95;						// Missions won't spawn if the surface normal of the location is less than this amount. The lower the value, the steeper the location. Greater values means flatter locations
+	DMS_MaxSurfaceNormal				= 0.95;						// Missions won't spawn if the surface normal of the location is less than this amount. The lower the value, the steeper the location. Greater values means flatter locations. Values can range from 0-1, with 0 being sideways, and 1 being perfectly flat. For reference: SurfaceNormal of about 0.7 is when you are forced to walk up a surface.
 	/*Mission spawn location settings*/
 
 	DMS_MinWaterDepth					= 20;						// Minimum depth of water that an underwater mission can spawn at.
@@ -145,8 +154,8 @@ DMS_DEBUG = false;
 											["mercbase",5]
 										];
 
-	DMS_findSafePosBlacklist =			[							// For BIS_fnc_findSafePos position blacklist info refer to: https://community.bistudio.com/wiki/BIS_fnc_findSafePos
-											[[22500,19420],[24870,16725]]		// Salt flats
+	DMS_findSafePosBlacklist =			[							// For BIS_fnc_findSafePos position blacklist info refer to: https://community.bistudio.com/wiki/BIS_fnc_findSafePos 
+											// An example is given in the altis_config.sqf (it blacklists the salt flats).
 										];
 /* Mission System Settings */
 

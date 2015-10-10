@@ -39,8 +39,5 @@ else
 	DMS_BMissionLastStart 		= diag_tickTime;
 
 
-	if (DMS_DEBUG) then
-	{
-		diag_log format ["DMS_DEBUG SelectMission :: Spawned mission %1 with parameters (%2) | DMS_BMissionDelay set to %3 seconds",str _missionType,_parameters,DMS_BMissionDelay];
-	};
+	(format ["SelectMission :: Spawned mission %1 with parameters (%2) | DMS_BMissionDelay set to %3 seconds",str _missionType,_parameters,DMS_BMissionDelay]) call DMS_fnc_DebugLog;
 };

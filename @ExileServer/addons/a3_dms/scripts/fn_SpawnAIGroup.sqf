@@ -35,10 +35,7 @@ _pos_y 			= _pos select 1;
 _pos_z 			= _pos select 2;
 
 
-if(DMS_DEBUG) then
-{
-	diag_log format["DMS_DEBUG SpawnAIGroup :: Spawning %1 %2 %3 AI at %4 with %5 difficulty.",_count,_class,_side,_pos,_difficulty];
-};
+(format["SpawnAIGroup :: Spawning %1 %2 %3 AI at %4 with %5 difficulty.",_count,_class,_side,_pos,_difficulty]) call DMS_fnc_DebugLog;
 
 // if soldier have AT/AA weapons
 if (typeName _class == "ARRAY") then
@@ -100,10 +97,7 @@ if ((!isNil "_launcher") || {DMS_ai_use_launchers && {(random 100) <= DMS_ai_use
 
 	_unit setVariable ["DMS_AI_Launcher",_launcher];
 	
-	if(DMS_DEBUG) then
-	{
-		diag_log format["DMS_DEBUG SpawnAIGroup :: Giving %1 a %2 launcher with %3 %4 rockets",_unit,_launcher,DMS_AI_launcher_ammo_count,_rocket];
-	};
+	(format["SpawnAIGroup :: Giving %1 a %2 launcher with %3 %4 rockets",_unit,_launcher,DMS_AI_launcher_ammo_count,_rocket]) call DMS_fnc_DebugLog;
 };
 
 

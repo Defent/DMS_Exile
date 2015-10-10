@@ -35,6 +35,7 @@ class CfgFunctions
 			class CleanUp 						{};
 			class CleanUpManager 				{};
 			class CreateMarker 					{};
+			class DebugLog						{};
 			class FillCrate 					{};
 			class FindSafePos 					{};
 			class FindSuppressor 				{};

@@ -7,7 +7,7 @@
 	[
 		_group,					// Group the AI will belong to
 		_pos,					// Position of AI
-		_class,					// Classname: "random","assault","MG","sniper" or "unarmed"
+		_class,					// Classname: "random","assault","MG","sniper" or "unarmed". Use "custom" to use "_customGearSet"
 		_difficulty,			// Difficulty: "random","static","hardcore","difficult","moderate", or "easy"
 		_side, 					// "bandit","hero", etc.
 		_type,					// Type of AI: "soldier","static","vehicle","heli", etc.
@@ -18,10 +18,10 @@
 	[
 		_weapon,				// String | EG: "LMG_Zafir_F"
 		_weaponAttachments,		// Array of strings | EG: ["optic_dms","bipod_03_F_blk"]
-		_magazines,				// Array of arrays | EG: [["150Rnd_762x54_Box",2],["16Rnd_9x21_Mag",3]]
+		_magazines,				// Array of arrays | EG: [["150Rnd_762x54_Box",2],["16Rnd_9x21_Mag",3],["Exile_Item_InstaDoc",3]]
 		_pistol,				// String | EG: "hgun_Pistol_heavy_01_snds_F"
 		_pistolAttachments,		// Array of strings | EG: ["optic_MRD","muzzle_snds_acp"]
-		_items,					// Array of strings | EG: ["Rangefinder","ItemGPS","Exile_Item_InstaDoc"]
+		_assignedItems,			// Array of strings | EG: ["Rangefinder","ItemGPS","NVGoggles"]
 		_launcher,				// String | EG: "launch_RPG32_F"
 		_helmet,				// String | EG: "H_HelmetLeaderO_ocamo"
 		_uniform,				// String | EG: "U_O_GhillieSuit"
@@ -32,7 +32,7 @@
 	Returns AI Unit
 */
 
-private ["_OK", "_useCustomGear", "_unarmed", "_class", "_type", "_unit", "_side", "_nighttime", "_weapon", "_muzzle", "_suppressor", "_pistols", "_pistol", "_customGearSet", "_helmet", "_uniform", "_vest", "_backpack", "_launcher", "_magazines", "_weaponAttachments", "_pistolAttachments", "_items", "_difficulty", "_skillArray"];
+private ["_OK", "_useCustomGear", "_unarmed", "_class", "_type", "_unit", "_side", "_nighttime", "_weapon", "_muzzle", "_suppressor", "_pistols", "_pistol", "_customGearSet", "_helmet", "_uniform", "_vest", "_backpack", "_launcher", "_magazines", "_weaponAttachments", "_pistolAttachments", "_assignedItems", "_difficulty", "_skillArray"];
 
 _OK = params
 [
@@ -55,7 +55,7 @@ else
 {
 	if ((_class == "custom") && {((count _this)>6)}) then
 	{
-		_customGearSet = _this select 5;
+		_customGearSet = _this select 6;
 		_useCustomGear = true;
 	};
 };
@@ -71,14 +71,14 @@ _unit allowFleeing 0;
 [_unit] joinSilent _group;
 
 // Remove existing gear
-removeAllWeapons _unit;
-removeAllItems _unit;
-removeAllAssignedItems _unit;
-removeUniform _unit;
-removeVest _unit; 
-removeBackpack _unit;
-removeHeadgear _unit;
-removeGoggles _unit;
+{_unit removeWeaponGlobal _x;} forEach (weapons _unit);
+{_unit unlinkItem _x;} forEach (assignedItems _unit);
+{_unit removeItem _x;} forEach (items _unit);
+removeAllItemsWithMagazines 	_unit;
+removeHeadgear 					_unit;
+removeUniform 					_unit;
+removeVest 						_unit;
+removeBackpackGlobal 			_unit;
 
 // Give default items
 if !(DMS_ai_default_items isEqualTo []) then
@@ -111,6 +111,7 @@ if (!_useCustomGear) then
 	if !(_class in DMS_ai_SupportedClasses) exitWith
 	{
 		diag_log format ["DMS ERROR :: DMS_SpawnAISoldier called with unsupported _class: %1 | _this: %2",_class,_this];
+		deleteVehicle _unit;
 	};
 
 
@@ -207,7 +208,7 @@ else
 		["_magazines",[],[[]]],
 		["_pistol","",[""]],
 		["_pistolAttachments",[],[[]]],
-		["_items",[],[[]]],
+		["_assignedItems",[],[[]]],
 		["_launcher","",[""]],
 		["_helmet","",[""]],
 		["_uniform","",[""]],
@@ -220,10 +221,7 @@ else
 		diag_log format ["DMS ERROR :: Calling DMS_SpawnAISoldier with invalid _customGearSet: %1 | _this: %2",_customGearSet,_this];
 	};
 
-	if (DMS_DEBUG) then
-	{
-		diag_log format ["DMS_DEBUG SpawnAISoldier :: Equipping unit %1 with _customGearSet: %2",_unit,_customGearSet];
-	};
+	(format ["SpawnAISoldier :: Equipping unit %1 with _customGearSet: %2",_unit,_customGearSet]) call DMS_fnc_DebugLog;
 
 	// Clothes
 	if !(_helmet isEqualTo "") then
@@ -261,6 +259,29 @@ else
 		_unit addMagazines _x;
 	} forEach _magazines;
 
+	// Add items
+	{
+		if (_x in ["Binocular","Rangefinder","Laserdesignator","Laserdesignator_02","Laserdesignator_03"]) then
+		{
+			_unit addWeapon _x;
+		}
+		else
+		{
+			_unit linkItem _x;
+		};
+	} forEach _assignedItems;
+
+
+	// Add pistol and attachments
+	if !(_pistol isEqualTo "") then
+	{
+		[_unit, _pistol, 0] call BIS_fnc_addWeapon;
+
+		{
+			_unit addHandgunItem _x;
+		} forEach _pistolAttachments;
+	};
+
 
 	// Add gun and attachments
 	if !(_weapon isEqualTo "") then
@@ -273,22 +294,6 @@ else
 
 		_unit selectWeapon _weapon;
 	};
-
-
-	// Add pistol and attachments
-	if !(_pistol isEqualTo "") then
-	{
-		[_unit, _pistol, 0] call BIS_fnc_addWeapon;
-
-		{
-			_unit addPrimaryWeaponItem _x;
-		} forEach _pistolAttachments;
-	};
-
-	// Add items
-	{
-		_unit addItem _x;
-	} forEach _items;
 };
 
 {
@@ -325,9 +330,6 @@ if (_type=="Soldier") then
 	_unit setVariable ["DMS_LastAIDistanceCheck",time];
 };
 
-if (DMS_DEBUG) then
-{
-	diag_log format ["DMS_DEBUG SpawnAISoldier :: Spawned a %1 %2 %6 AI at %3 with %4 difficulty to group %5",_class,_side,_pos,_difficulty,_group,_type];
-};
+(format ["SpawnAISoldier :: Spawned a %1 %2 %6 AI at %3 with %4 difficulty to group %5",_class,_side,_pos,_difficulty,_group,_type]) call DMS_fnc_DebugLog;
 
 _unit

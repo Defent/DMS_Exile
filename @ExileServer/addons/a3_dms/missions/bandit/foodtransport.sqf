@@ -69,7 +69,7 @@ _missionObjs =
 ];
 
 // Define Mission Start message
-_msgStart = ['#FFFF00',"A food supply truck has been sized by ruthless bandits. Stop them!"];
+_msgStart = ['#FFFF00',"A food supply truck has been seized by ruthless bandits. Stop them!"];
 
 // Define Mission Win message
 _msgWIN = ['#0080ff',"Convicts have successfully claimed the food supplies!"];
@@ -152,7 +152,4 @@ if !(_added) exitWith
 
 
 
-if (DMS_DEBUG) then
-{
-	diag_log format ["DMS_DEBUG MISSION: (%1) :: Mission #%2 started at %3 with %4 AI units and %5 difficulty at time %6",_missionName,_num,_pos,_AICount,_difficulty,_time];
-};
+(format ["MISSION: (%1) :: Mission #%2 started at %3 with %4 AI units and %5 difficulty at time %6",_missionName,_num,_pos,_AICount,_difficulty,_time]) call DMS_fnc_DebugLog;

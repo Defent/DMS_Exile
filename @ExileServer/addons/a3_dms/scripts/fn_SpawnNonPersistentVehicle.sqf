@@ -95,10 +95,7 @@ _vehObj allowDamage false;
 _vehObj enableRopeAttach false;
 _vehObj enableSimulationGlobal false;
 
-if (DMS_DEBUG) then
-{
-	diag_log format ["DMS_DEBUG SpawnNonPersistentVehicle :: Created %1 at %2 with calling parameters: %3",_vehObj,_vehpos,_this];
-};
+(format ["SpawnNonPersistentVehicle :: Created %1 at %2 with calling parameters: %3",_vehObj,_vehpos,_this]) call DMS_fnc_DebugLog;
 
 
 _vehObj

@@ -75,7 +75,7 @@ _msgStart = ['#FFFF00',"We got a Blackhawk down, Super 6-1 is down, secure the p
 _msgWIN = ['#0080ff',"Convicts have secured the blackhawk and claimed the remaining loot!"];
 
 // Define Mission Lose message
-_msgLOSE = ['#FF0000',"The blackhawk has been sized by the enemy and the loot has been destroyed!"];
+_msgLOSE = ['#FF0000',"The blackhawk has been seized by the enemy and the loot has been destroyed!"];
 
 // Define mission name (for map marker and logging)
 _missionName = "Blackhawk Down";
@@ -152,7 +152,4 @@ if !(_added) exitWith
 
 
 
-if (DMS_DEBUG) then
-{
-	diag_log format ["DMS_DEBUG MISSION: (%1) :: Mission #%2 started at %3 with %4 AI units and %5 difficulty at time %6",_missionName,_num,_pos,_AICount,_difficulty,_time];
-};
+(format ["MISSION: (%1) :: Mission #%2 started at %3 with %4 AI units and %5 difficulty at time %6",_missionName,_num,_pos,_AICount,_difficulty,_time]) call DMS_fnc_DebugLog;

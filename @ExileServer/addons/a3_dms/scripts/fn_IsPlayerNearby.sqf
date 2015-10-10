@@ -40,10 +40,7 @@ try
 catch
 {
 	_isNear = true;
-	if (DMS_DEBUG) then
-	{
-		diag_log format ["DMS_DEBUG IsPlayerNearby :: %1 is within %2 meters of %3!",_exception,_dis,_pos];
-	};
+	(format ["IsPlayerNearby :: %1 is within %2 meters of %3!",_exception,_dis,_pos]) call DMS_fnc_DebugLog;
 };
 
 

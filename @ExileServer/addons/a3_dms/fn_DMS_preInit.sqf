@@ -6,8 +6,16 @@
 DMS_HC_Object = objNull;
 
 
-//Load config
+//Load main config
 call compileFinal preprocessFileLineNumbers "\x\addons\dms\config.sqf";
+
+
+//Load map-specific configs. Should make it easier for people with multiple servers/maps. One PBO to rule them all...
+if (DMS_Use_Map_Config) then
+{
+	call compileFinal preprocessFileLineNumbers (format ["\x\addons\dms\map_configs\%1_config.sqf",toLower worldName]);
+};
+
 
 
 /*

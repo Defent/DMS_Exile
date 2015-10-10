@@ -193,14 +193,11 @@ try
 		_markerDot setMarkerText (format ["%1 (%2 %3 remaining)",markerText _markerDot,count _units,DMS_MarkerText_AIName]);
 	};
 
-	if (DMS_DEBUG) then
-	{
-		diag_log format ["DMS_DEBUG AddMissionToMonitor :: Added |%1| to DMS_Mission_Arr!",_arr];
-	};
+	(format ["AddMissionToMonitor :: Added |%1| to DMS_Mission_Arr!",_arr]) call DMS_fnc_DebugLog;
 }
 catch
 {
-	diag_log format ["DMS_AddMissionToMonitor ERROR :: Invalid parameter: %1",_exception];
+	diag_log format ["DMS ERROR :: Calling DMS_AddMissionToMonitor with invalid parameter: %1",_exception];
 };
 
 _added

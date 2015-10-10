@@ -31,10 +31,6 @@ private ["_pos", "_success", "_timeStarted", "_timeUntilFail", "_units", "_build
 {
 	try
 	{
-		if (DMS_DEBUG) then
-		{
-			diag_log format ["DMS_DEBUG MissionStatusCheck :: Checking Mission Status (index %1): %2",_forEachIndex,_x];
-		};
 		_pos						= _x select 0;
 		_success					= (_x select 1) call DMS_fnc_MissionSuccessState;
 		_timeStarted				= _x select 2 select 0;
@@ -49,6 +45,8 @@ private ["_pos", "_success", "_timeStarted", "_timeUntilFail", "_units", "_build
 		_msgLose					= _x select 5 select 2;
 		_markers 					= _x select 6;
 		_missionSide				= _x select 7;
+
+		(format ["MissionStatusCheck :: Checking Mission Status (index %1): ""%2"" at %3",_forEachIndex,_missionName,_pos]) call DMS_fnc_DebugLog;
 
 		if (_success) then
 		{
@@ -163,9 +161,6 @@ private ["_pos", "_success", "_timeStarted", "_timeUntilFail", "_units", "_build
 	}
 	catch
 	{
-		if (DMS_DEBUG) then
-		{
-			diag_log format ["DMS_DEBUG MissionStatusCheck :: %1",_exception];
-		};
+		(format ["MissionStatusCheck :: %1",_exception]) call DMS_fnc_DebugLog;
 	};
 } forEach DMS_Mission_Arr;

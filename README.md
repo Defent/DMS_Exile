@@ -1,3 +1,15 @@
+# To the User:
+####Please read through the instructions carefully. Please read through the [DMS "config.sqf"](https://github.com/Defent/DMS_Exile/blob/master/%40ExileServer/addons/a3_dms/config.sqf) before leaving any questions regarding DMS; the majority of the questions we receive are answered (directly or indirectly) by the config.
+
+####Disclaimer:
+Defent's Mission System (DMS) is written from the ground up to be an efficient, easy to install, and vastly customizable mission system for the ArmA 3 [Exile Mod](http://www.exilemod.com/). You are perfectly welcome to port DMS or any of its functions for any other mod or (legal) purposes; and leaving credits is appreciated.
+
+However, creating such a mission system takes a lot of time and testing. We (the authors of DMS) are not perfect, and as a result, there may be bugs, glitches, and/or errors within DMS. We appreciate your co-operation in identifying and resolving such issues to improve DMS; however we are not liable for any issues resulting from the usage of DMS on/by your server. We are also not liable to help you in resolving any issues that may arise, although we will attempt to help you to some degree in most cases.
+
+
+___
+
+
 # Instructions
 See also: http://www.exilemod.com/topic/61-dms-defents-mission-system/?do=findComment&comment=242
 
@@ -13,15 +25,17 @@ If you are using infiSTAR and want to keep ```_CGM = true;```, then set ```_UMW 
 
 
 ### To modify the config:
-* Download the a3_dms folder
-* Edit the config.sqf to your preferences.
-* Pack the a3_dms folder with a PBO tool (**PBO Manager**, Eliteness, or Arma 3 Tools suite)
-* Follow the ["To install:" steps](https://github.com/Defent/DMS_Exile#to-install) using the PBO you just created instead of the pre-packed one.
+1. Download the a3_dms folder
+2. Edit the config.sqf to your preferences.
+3. Pack the a3_dms folder with a PBO tool (**PBO Manager**, Eliteness, or Arma 3 Tools suite)
+4. Follow the ["To install:" steps](https://github.com/Defent/DMS_Exile#to-install) using the PBO you just created instead of the pre-packed one.
 
 
 ### HEADLESS CLIENT:
 
-**People have reported Headless Client working properly in ArmA v1.52**
+**The way DMS utilizes HC is unfavorable for large maps. As a result, we are dropping HC support for DMS until it is completed, then we will create proper Headless Client support.**
+
+People have reported Headless Client working properly in ArmA v1.52
 
 Add this code to the TOP of your initPlayerLocal.sqf
 
@@ -37,7 +51,9 @@ if (!hasInterface && !isServer) then
 };
 ```
 
-## Credits:
+___
+
+# Credits:
 ### Authors:
 - [Defent](https://github.com/Defent) from [NumenaDayZ](http://numenadayz.com/).
 - [eraser1](https://github.com/eraser1) from [TrainwreckDayZ](http://www.trainwreckdayz.com/home).
@@ -49,11 +65,29 @@ if (!hasInterface && !isServer) then
 - [maca134](http://maca134.co.uk/portfolio/m3editor-arma-3-map-editor/) for M3Editor Stuff
 - Everbody's feedback on [the DMS thread on exile forums](http://www.exilemod.com/topic/61-dms-defents-mission-system/?do=findComment&comment=242)
 
+___
 
-## Changelog:
+# Changelog:
+#### October 9, 2015 (8:30 PM CST-America):
+* **NEW CONFIG VALUE: DMS_Use_Map_Config**
+* You can now overwrite "main config values" with map-specific config values located in the new "map_configs" folder. This should allow you to use one DMS PBO if you have multiple servers with different maps. Included examples for Altis, Bornholm, Esseker, and Tavi (Taviana).
+* Because of the above implementation, DMS by default will not include the salt flats blacklist for findSafePos. In addition, it is preconfigured to the hilly terrains in Esseker and Taviana, as well as reducing all of the blacklist distances due to the smaller map size in Esseker.
+* Created new function "DMS_fnc_DebugLog". All DMS files (that produced debug logs) have been changed, including mission files. However, updating them is not important (and completely pointless if you don't even use DMS_DEBUG).
+* Fixed a few locations where it said "sized" instead of "seized". Thanks to [icomrade](https://github.com/icomrade) for pointing them out.
+* DMS now utilizes the "ARMA_LOG" DLL (if it exists) by infiSTAR to produce debug logs (if enabled). All debug logs now also include server uptime (in seconds) and server FPS.
+* The FSM no longer produces debug logs.
+* AI Locality manager will now run every minute.
+* Debug logs for "DMS_fnc_MissionsMonitor" will only output the mission name and the position, instead of all of the parameters.
+* "DMS_fnc_IsNearWater" will now check the provided position itself for water.
+* "DMS_fnc_IsValidPosition" will now do a surfaceNormal check within a 5 meter radius of the provided position as well.
+* "_customGearSet" should now actually work for "DMS_fnc_SpawnAISoldier", and the function title comment has been updated for the slightly tweaked syntax.
+
+
 #### October 8, 2015 (7:15 PM CST-America):
 * **NEW CONFIG VALUES**:
 
+		|NEW|
+		|:---:|
 		|DMS_Show_Kill_Poptabs_Notification|
 		|DMS_Show_Kill_Respect_Notification|
 		|DMS_dynamicText_Duration|

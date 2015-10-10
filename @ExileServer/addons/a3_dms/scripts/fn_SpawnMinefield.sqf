@@ -92,10 +92,7 @@ if (DMS_SpawnMinesAroundMissions) then
 		};
 	};
 
-	if (DMS_DEBUG) then
-	{
-		diag_log format ["DMS_DEBUG SpawnMinefield :: Spawned %1 mines around %2 with _minesInfo: %3 | Warning signs spawned: %5 | _mines: %4",_mineCount,_centerPos,_minesInfo,_mines,_spawnWarningSign];
-	};
+	(format ["SpawnMinefield :: Spawned %1 mines around %2 with _minesInfo: %3 | Warning signs spawned: %5 | _mines: %4",_mineCount,_centerPos,_minesInfo,_mines,_spawnWarningSign]) call DMS_fnc_DebugLog;
 };
 
 

@@ -64,20 +64,14 @@ while{!_validspot} do
 		_missionNearLimit = (DMS_ThrottleCoefficient * _missionNearLimit) max DMS_MinThrottledDistance;
 		_playerNearLimit = (DMS_ThrottleCoefficient * _playerNearLimit) max DMS_MinThrottledDistance;
 
-		if (DMS_DEBUG) then
-		{
-			diag_log format ["DMS_DEBUG FindSafePos :: Throttling _missionNearLimit to %1 and _playerNearLimit to %2 after %3 failed attempts to find a safe position! FPS: %4",_missionNearLimit,_playerNearLimit,_attempts,diag_fps];
-		};
+		(format ["FindSafePos :: Throttling _missionNearLimit to %1 and _playerNearLimit to %2 after %3 failed attempts to find a safe position! FPS: %4",_missionNearLimit,_playerNearLimit,_attempts,diag_fps]) call DMS_fnc_DebugLog;
 	};
 
 	_validspot = [_pos, _waterNearLimit, _maxSurfaceNormal, _spawnZoneNearLimit, _traderZoneNearLimit, _missionNearLimit, _playerNearLimit] call DMS_fnc_IsValidPosition;
 };
 
 
-if(DMS_DEBUG) then
-{
-	diag_log format["DMS_DEBUG FindSafePos :: Found mission position %1 with %2 params in %3 attempts. _this: %4",_pos,_safePosParams,_attempts,_this];
-};
+(format["FindSafePos :: Found mission position %1 with %2 params in %3 attempts. _this: %4",_pos,_safePosParams,_attempts,_this]) call DMS_fnc_DebugLog;
 
 
 _pos set [2, 0];

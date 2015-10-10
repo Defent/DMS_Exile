@@ -53,10 +53,7 @@ _exit = false;
 		};
 
 
-		if (DMS_DEBUG) then
-		{
-			diag_log format ["DMS_DEBUG MissionSuccessState :: Checking completion type %1 with parameter %2. Absolute: %3",_completionType,_completionArgs,_absoluteWinCondition];
-		};
+		(format ["MissionSuccessState :: Checking completion type ""%1"" with argument |%2|. Absolute: %3",_completionType,_completionArgs,_absoluteWinCondition]) call DMS_fnc_DebugLog;
 
 		switch (toLower _completionType) do 
 		{
@@ -90,10 +87,7 @@ _exit = false;
 	}
 	catch
 	{
-		if (DMS_DEBUG) then
-		{
-			diag_log format ["DMS_DEBUG MissionSuccessState :: %1",_exception];
-		};
+		(format ["MissionSuccessState :: %1",_exception]) call DMS_fnc_DebugLog;
 	};
 } forEach _this;
 

@@ -17,7 +17,7 @@
 
 */
 
-private ["_pos", "_waterNearLimit", "_maxSurfaceNormal", "_spawnZoneNearLimit", "_traderZoneNearLimit", "_missionNearLimit", "_playerNearLimit"];
+private ["_pos", "_waterNearLimit", "_maxSurfaceNormal", "_spawnZoneNearLimit", "_traderZoneNearLimit", "_missionNearLimit", "_playerNearLimit", "_dir"];
 
 _OK = params
 [
@@ -51,6 +51,15 @@ else
 		if (((surfaceNormal _pos) select 2)<_maxSurfaceNormal) then
 		{
 			throw ("a steep location");
+
+			// Check the surrounding area (within 5 meters)
+			for "_dir" from 0 to 359 step 45 do
+			{
+				if (((surfaceNormal ([_position,5,_dir] call DMS_fnc_SelectOffsetPos)) select 2)<_maxSurfaceNormal) then
+				{
+					throw ("a nearby steep location");
+				};
+			};
 		};
 		
 		{
@@ -89,10 +98,7 @@ else
 	}
 	catch
 	{
-		if (DMS_DEBUG) then
-		{
-			diag_log format ["DMS_DEBUG IsValidPosition :: Exception in attempt %1 | Position %2 is too close to %3!",_attempts,_pos,_exception];
-		};
+		(format ["IsValidPosition :: Exception in attempt %1 | Position %2 is too close to %3!",_attempts,_pos,_exception]) call DMS_fnc_DebugLog;
 	};
 };
 
