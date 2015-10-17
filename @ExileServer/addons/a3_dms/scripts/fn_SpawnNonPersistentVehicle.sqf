@@ -85,9 +85,9 @@ if (_vehObj isKindOf "Helicopter") then
 	}];
 };
 
-if (!isNil "RS_VLS") then
+if (!isNil "AVS_Initialized") then
 {
-	[_vehObj] call RS_VLS_sanitizeVehicle;
+	_vehObj call AVS_fnc_sanitizeVehicle;
 };
 
 _vehObj lock 2;
