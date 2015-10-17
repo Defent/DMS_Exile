@@ -91,6 +91,11 @@ try
 	_vehObj setVariable ["ExileLastLockToggleAt", time];
 	_vehObj setVariable ["ExileAccessDenied", true];
 	_vehObj setVariable ["ExileAccessDeniedExpiresAt", 999999];
+	
+	if (!isNil "AVS_Version") then
+	{
+		_vehObj call AVS_fnc_sanitizeVehicle;
+	};
 }
 catch
 {

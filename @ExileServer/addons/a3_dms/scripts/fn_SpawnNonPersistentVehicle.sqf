@@ -85,7 +85,7 @@ if (_vehObj isKindOf "Helicopter") then
 	}];
 };
 
-if (!isNil "AVS_Initialized") then
+if (!isNil "AVS_Version") then
 {
 	_vehObj call AVS_fnc_sanitizeVehicle;
 };
