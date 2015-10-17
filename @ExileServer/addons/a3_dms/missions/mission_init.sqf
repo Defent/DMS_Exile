@@ -14,6 +14,7 @@ DMS_MissionCount 				= 0;
 DMS_RunningBMissionCount		= 0;
 DMS_BMissionLastStart			= diag_tickTime;
 DMS_BMissionDelay 				= DMS_TimeBetweenMissions call DMS_fnc_SelectRandomVal;
+DMS_InitStart = DMS_BMissionLastStart;
 
 
 if (DMS_DEBUG) then
