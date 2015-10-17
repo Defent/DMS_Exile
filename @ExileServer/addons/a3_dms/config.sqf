@@ -26,6 +26,7 @@ DMS_Use_Map_Config = true;	// Whether or not to use config overwrites specific t
 	DMS_MaxBanditMissions				= 3;						// Maximum number of Bandit Missions running at the same time
 	DMS_StaticMission					= false;					// Enable/disable static missions
 	DMS_TimeBetweenMissions				= [600,900];				// [Minimum,Maximum] time between missions (if mission limit is not reached) | DEFAULT: 10-15 mins
+	DMS_InitialDelay = 180; // Initial mission delay at server startup
 	DMS_MissionTimeOut					= [900,1800]; 				// [Minimum,Maximum] time it will take for a mission to timeout | Default: 15-30 mins
 	/*General settings for dynamic missions*/
 
