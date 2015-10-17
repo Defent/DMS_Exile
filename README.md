@@ -68,6 +68,27 @@ ___
 
 ___
 
+# Roadmap:
+#### Continuous Optimization + Improvements.
+#### Static Mission(s):
+* Create a sample static mission on the salt flats for Altis. Maybe other samples for other maps later on.
+* Implement a function that continues to spawn AI on a static mission.
+* Create a kick-ass static AI base :P
+* Implement the ability to "freeze" and "unfreeze" AI when there are no players nearby to improve performance.
+#### AI Heli Paratroopers/air support.
+#### Convoy Mission:
+* Regularly update marker position.
+* Implement function(s) for AI pathing.
+#### Underwater Missions
+#### Dynamic/Ambient AI Spawning
+* Spawn AI that are meant to "hunt" individual players.
+* Air/Land AI Vehicle Patrols
+#### Custom client notifications.
+#### (Maybe) Implement a form of stat-tracking system
+* It will store AI kills in the database (this would almost certainly require some extra work on the behalf of server owners).
+
+___
+
 # Changelog:
 #### October 17, 2015 (2:30 PM CST-America):
 * **NEW CONFIG VALUES**:
