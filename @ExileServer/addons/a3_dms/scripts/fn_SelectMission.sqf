@@ -22,6 +22,16 @@ if (diag_fps >= DMS_MinServerFPS && {(count allPlayers) >= DMS_MinPlayerCount}) 
 		private "_mission";
 		_mission = DMS_BanditMissionTypesArray call BIS_fnc_selectRandom;
 
+		if (DMS_DEBUG) then
+		{
+			(format ["SelectMission :: Selected bandit mission: %1"]) call DMS_fnc_DebugLog;
+		};
+
 		[_mission] call DMS_fnc_SpawnBanditMission;
+
+		if (DMS_DEBUG) then
+		{
+			(format ["SelectMission :: Spawning of bandit mission ""%1"" complete!"]) call DMS_fnc_DebugLog;
+		};
 	};
 };

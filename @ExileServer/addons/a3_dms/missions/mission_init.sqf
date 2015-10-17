@@ -13,7 +13,7 @@ DMS_CleanUpList					= [];
 DMS_MissionCount 				= 0;
 DMS_RunningBMissionCount		= 0;
 DMS_BMissionLastStart			= diag_tickTime;
-DMS_BMissionDelay 				= DMS_TimeBetweenMissions call DMS_fnc_SelectRandomVal;
+DMS_BMissionDelay 				= DMS_TimeToFirstMission call DMS_fnc_SelectRandomVal;
 
 
 if (DMS_DEBUG) then

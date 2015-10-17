@@ -90,7 +90,10 @@ if ((typeName _lootValues)=="ARRAY") then
 	};
 
 
-	(format["FillCrate :: Filling %4 with %1 guns, %2 items and %3 backpacks",_wepCount,_itemCount,_backpackCount,_crate]) call DMS_fnc_DebugLog;
+	if (DMS_DEBUG) then
+	{
+		(format["FillCrate :: Filling %4 with %1 guns, %2 items and %3 backpacks",_wepCount,_itemCount,_backpackCount,_crate]) call DMS_fnc_DebugLog;
+	};
 
 
 	if ((_wepCount>0) && {count _weps>0}) then

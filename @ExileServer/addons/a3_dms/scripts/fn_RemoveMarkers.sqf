@@ -20,7 +20,10 @@ _status 		= _this select 1;
 _text 			= missionNamespace getVariable [format ["%1_text",_markerDot],markerText _markerDot];
 
 
-(format ["RemoveMarkers :: Calling DMS_RemoveMarkers with parameters %1.",_this]) call DMS_fnc_DebugLog;
+if (DMS_DEBUG) then
+{
+	(format ["RemoveMarkers :: Calling DMS_RemoveMarkers with parameters %1.",_this]) call DMS_fnc_DebugLog;
+};
 
 
 deleteMarker _markerCircle;
@@ -37,7 +40,10 @@ if (_status == "win") then
 	_markerDot setMarkerColor DMS_MissionMarkerWinDotColor;
 	//_markerDot spawn {sleep DMS_MissionMarkerWinDotTime;deleteMarker _this;};
 	[DMS_MissionMarkerWinDotTime, {deleteMarker _this;}, _markerDot, false] call ExileServer_system_thread_addTask;
-	(format ["RemoveMarkers :: %1 Marker will be removed in %2 seconds!",_markerDot,DMS_MissionMarkerWinDotTime]) call DMS_fnc_DebugLog;
+	if (DMS_DEBUG) then
+	{
+		(format ["RemoveMarkers :: %1 Marker will be removed in %2 seconds!",_markerDot,DMS_MissionMarkerWinDotTime]) call DMS_fnc_DebugLog;
+	};
 }
 else
 {
@@ -49,5 +55,8 @@ else
 	_markerDot setMarkerColor DMS_MissionMarkerLoseDotColor;
 	//_markerDot spawn {sleep DMS_MissionMarkerLoseDotTime;deleteMarker _this;};
 	[DMS_MissionMarkerLoseDotTime, {deleteMarker _this;}, _markerDot, false] call ExileServer_system_thread_addTask;
-	(format ["RemoveMarkers :: %1 Marker will be removed in %2 seconds!",_markerDot,DMS_MissionMarkerLoseDotTime]) call DMS_fnc_DebugLog;
+	if (DMS_DEBUG) then
+	{
+		(format ["RemoveMarkers :: %1 Marker will be removed in %2 seconds!",_markerDot,DMS_MissionMarkerLoseDotTime]) call DMS_fnc_DebugLog;
+	};
 };

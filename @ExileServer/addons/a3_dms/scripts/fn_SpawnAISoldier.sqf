@@ -221,7 +221,10 @@ else
 		diag_log format ["DMS ERROR :: Calling DMS_SpawnAISoldier with invalid _customGearSet: %1 | _this: %2",_customGearSet,_this];
 	};
 
-	(format ["SpawnAISoldier :: Equipping unit %1 with _customGearSet: %2",_unit,_customGearSet]) call DMS_fnc_DebugLog;
+	if (DMS_DEBUG) then
+	{
+		(format ["SpawnAISoldier :: Equipping unit %1 with _customGearSet: %2",_unit,_customGearSet]) call DMS_fnc_DebugLog;
+	};
 
 	// Clothes
 	if !(_helmet isEqualTo "") then
@@ -304,16 +307,24 @@ else
 // Soldier killed event handler
 _unit addMPEventHandler ["MPKilled",'if (isServer) then {[_this, '+str _side+', '+str _type+'] call DMS_fnc_OnKilled;};'];
 
-// Remove ramming damage from players. Will not work if unit is not local (offloaded)
+// Remove ramming damage from players. Also remove any damage within 5 seconds of spawning.
+// Will not work if unit is not local (offloaded)
 if (DMS_ai_disable_ramming_damage) then
 {
 	_unit addEventHandler ["HandleDamage",
 	{
+		private ["_unit", "_dmg", "_source", "_projectile"];
+		_unit = _this select 0;
 		_dmg = _this select 2;
-		if (isPlayer (_this select 3) && {(_this select 4)==""}) then
+		_source = _this select 3;
+		_projectile = _this select 4;
+		_spawnTime = _unit getVariable ["DMS_AISpawnTime", time];
+
+		if (((_projectile=="") && {isPlayer _source}) || {((time - _spawnTime)<5) && {!(isPlayer _source)}}) then
 		{
 			_dmg = 0;
 		};
+
 		_dmg
 	}];
 };
@@ -324,12 +335,18 @@ _unit enableAI "MOVE";
 _unit enableAI "ANIM";
 _unit enableAI "FSM";
 
+_unit setVariable ["DMS_AISpawnTime", time];
+
 if (_type=="Soldier") then
 {
 	_unit setVariable ["DMS_AISpawnPos",_pos];
 	_unit setVariable ["DMS_LastAIDistanceCheck",time];
 };
 
-(format ["SpawnAISoldier :: Spawned a %1 %2 %6 AI at %3 with %4 difficulty to group %5",_class,_side,_pos,_difficulty,_group,_type]) call DMS_fnc_DebugLog;
+if (DMS_DEBUG) then
+{
+	(format ["SpawnAISoldier :: Spawned a %1 %2 %6 AI at %3 with %4 difficulty to group %5",_class,_side,_pos,_difficulty,_group,_type]) call DMS_fnc_DebugLog;
+};
+
 
 _unit

@@ -17,4 +17,6 @@ DMS_SpawnZoneNearBlacklist			= 2500;
 DMS_TraderZoneNearBlacklist			= 2500;
 DMS_MissionNearBlacklist			= 2500;
 DMS_WaterNearBlacklist				= 500;
-DMS_MaxSurfaceNormal				= 0.95;
+
+// Altis is pretty flat, so we can make the min surfaceNormal ... stricter? more strict? Who cares, you get the idea.
+DMS_MinSurfaceNormal				= 0.95;

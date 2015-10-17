@@ -80,7 +80,10 @@ try
 }
 catch
 {
-	(format ["TargetsKilled :: %1 is still alive! All of %2 are not yet killed!",_exception,_this]) call DMS_fnc_DebugLog;
+	if (DMS_DEBUG) then
+	{
+		(format ["TargetsKilled :: %1 is still alive! All of %2 are not yet killed!",_exception,_this]) call DMS_fnc_DebugLog;
+	};
 };
 
 _killed;

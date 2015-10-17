@@ -5,7 +5,7 @@
 	Called from DMS_selectMission
 */
 
-private ["_num", "_side", "_pos", "_difficulty", "_AICount", "_group", "_crate1", "_crate_loot_values1", "_crate2", "_crate_loot_values2", "_msgStart", "_msgWIN", "_msgLOSE", "_missionName", "_missionAIUnits", "_missionObjs", "_markers", "_time", "_added","_vehicle1","_vehicle2","_wreck"];
+private ["_num", "_group", "_pos", "_side", "_extraParams", "_OK", "_difficulty", "_AICount", "_type", "_launcher", "_crate1", "_rndDir", "_wreck", "_vehClass1", "_vehicle1", "_vehClass2", "_vehicle2", "_crate_loot_values1", "_missionAIUnits", "_missionObjs", "_msgStart", "_msgWIN", "_msgLOSE", "_missionName", "_markers", "_time", "_added", "_cleanup"];
 
 // For logging purposes
 _num = DMS_MissionCount;
@@ -15,11 +15,32 @@ _num = DMS_MissionCount;
 _side = "bandit";
 
 
-// find position
-_pos = 
+// This part is unnecessary, but exists just as an example to format the parameters for "DMS_fnc_MissionParams" if you want to explicitly define the calling parameters for DMS_fnc_FindSafePos.
+// It also allows anybody to modify the default calling parameters easily.
+if ((isNil "_this") || {_this isEqualTo [] || {(typeName _this)!="ARRAY"}}) then
+{
+	_this =
+	[
+		[10,DMS_WaterNearBlacklist,DMS_MinSurfaceNormal,DMS_SpawnZoneNearBlacklist,DMS_TraderZoneNearBlacklist,DMS_MissionNearBlacklist,DMS_PlayerNearBlacklist,DMS_TerritoryNearBlacklist,DMS_ThrottleBlacklists],
+		[
+			[]
+		],
+		_this
+	];
+};
+
+// Check calling parameters for manually defined mission position.
+// You can use _extraParams to define which vehicles to spawn. _vehClass1, [_vehClass1], or [_vehClass1,_vehClass2]
+_OK = (_this call DMS_fnc_MissionParams) params
 [
-	10,DMS_WaterNearBlacklist,DMS_MaxSurfaceNormal,DMS_SpawnZoneNearBlacklist,DMS_TraderZoneNearBlacklist,DMS_MissionNearBlacklist,DMS_PlayerNearBlacklist,DMS_ThrottleBlacklists
-]call DMS_fnc_findSafePos;
+	["_pos",[],[[]],[3]],
+	["_extraParams",[]]
+];
+
+if !(_OK) exitWith
+{
+	diag_log format ["DMS ERROR :: Called MISSION cardealer.sqf with invalid parameters: %1",_this];
+};
 
 
 // Set general mission difficulty
@@ -27,7 +48,6 @@ _difficulty = "easy";
 
 
 // Create AI
-// TODO: Spawn AI only when players are nearby
 _AICount = 3 + (round (random 2));
 
 _group =
@@ -48,10 +68,33 @@ _rndDir = random 180;
 _wreck = createVehicle ["Land_FuelStation_Build_F",[_pos,10+(random 5),_rndDir+90] call DMS_fnc_SelectOffsetPos,[], 0, "CAN_COLLIDE"];
 
 
-_vehicle1 = ["Exile_Car_SUV_Red", [_pos,5+(random 3),_rndDir] call DMS_fnc_SelectOffsetPos] call DMS_fnc_SpawnNonPersistentVehicle;
+_vehClass1 = "Exile_Car_SUV_Red";
+_vehClass2 = "Exile_Car_SUV_Grey";
+
+if !(_extraParams isEqualTo []) then
+{
+	if ((typeName _extraParams)=="STRING") then
+	{
+		_vehClass1 = _extraParams;
+	}
+	else
+	{
+		if (((typeName _extraParams)=="ARRAY") && {(typeName (_extraParams select 0))=="STRING"}) then
+		{
+			_vehClass1 = _extraParams select 0;
+
+			if (((count _extraParams)>1) && {(typeName (_extraParams select 1))=="STRING"}) then
+			{
+				_vehClass2 = _extraParams select 1;
+			};
+		};
+	};
+};
+_vehicle1 = [_vehClass1, [_pos,5+(random 3),_rndDir] call DMS_fnc_SelectOffsetPos] call DMS_fnc_SpawnNonPersistentVehicle;
 //_vehicle1 setPosATL ([_pos,5+(random 3),_rndDir] call DMS_fnc_SelectOffsetPos);
 
-_vehicle2 = ["Exile_Car_SUV_Grey", [_pos,5+(random 3),_rndDir+180] call DMS_fnc_SelectOffsetPos] call DMS_fnc_SpawnNonPersistentVehicle;
+
+_vehicle2 = [_vehClass2, [_pos,5+(random 3),_rndDir+180] call DMS_fnc_SelectOffsetPos] call DMS_fnc_SpawnNonPersistentVehicle;
 //_vehicle2 setPosATL ([_pos,5+(random 3),_rndDir+180] call DMS_fnc_SelectOffsetPos);
 
 
@@ -163,4 +206,7 @@ if !(_added) exitWith
 
 
 
-(format ["MISSION: (%1) :: Mission #%2 started at %3 with %4 AI units and %5 difficulty at time %6",_missionName,_num,_pos,_AICount,_difficulty,_time]) call DMS_fnc_DebugLog;
+if (DMS_DEBUG) then
+{
+	(format ["MISSION: (%1) :: Mission #%2 started at %3 with %4 AI units and %5 difficulty at time %6",_missionName,_num,_pos,_AICount,_difficulty,_time]) call DMS_fnc_DebugLog;
+};

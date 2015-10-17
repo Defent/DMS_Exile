@@ -17,4 +17,6 @@ DMS_SpawnZoneNearBlacklist			= 2500;
 DMS_TraderZoneNearBlacklist			= 2500;
 DMS_MissionNearBlacklist			= 2500;
 DMS_WaterNearBlacklist				= 500;
-DMS_MaxSurfaceNormal				= 0.95;
+
+// Bornholm seems to be fine with a greater minimum surfaceNormal.
+DMS_MinSurfaceNormal				= 0.95;

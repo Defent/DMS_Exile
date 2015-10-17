@@ -1,8 +1,8 @@
 /*
-	Sample mission (duplicate for testing purposes)
+	Sample mission
 */
 
-private ["_num", "_side", "_pos", "_difficulty", "_AICount", "_group", "_crate", "_crate_loot_values", "_msgStart", "_msgWIN", "_msgLOSE", "_missionName", "_missionAIUnits", "_missionObjs", "_markers", "_time", "_added","_wreck1","_wreck2","_wreck3","_vehicle"];
+private ["_num", "_group", "_pos", "_side", "_OK", "_difficulty", "_AICount", "_type", "_launcher", "_crate", "_wreck1", "_wreck2", "_wreck3", "_vehClass", "_vehicle", "_crate_loot_values", "_missionAIUnits", "_missionObjs", "_msgStart", "_msgWIN", "_msgLOSE", "_missionName", "_markers", "_time", "_added", "_cleanup"];
 
 // For logging purposes
 _num = DMS_MissionCount;
@@ -12,11 +12,32 @@ _num = DMS_MissionCount;
 _side = "bandit";
 
 
-// find position
-_pos = 
+// This part is unnecessary, but exists just as an example to format the parameters for "DMS_fnc_MissionParams" if you want to explicitly define the calling parameters for DMS_fnc_FindSafePos.
+// It also allows anybody to modify the default calling parameters easily.
+if ((isNil "_this") || {_this isEqualTo [] || {(typeName _this)!="ARRAY"}}) then
+{
+	_this =
+	[
+		[25,DMS_WaterNearBlacklist,DMS_MinSurfaceNormal,DMS_SpawnZoneNearBlacklist,DMS_TraderZoneNearBlacklist,DMS_MissionNearBlacklist,DMS_PlayerNearBlacklist,DMS_TerritoryNearBlacklist,DMS_ThrottleBlacklists],
+		[
+			[]
+		],
+		_this
+	];
+};
+
+// Check calling parameters for manually defined mission position.
+// You can define "_extraParams" to specify the vehicle classname to spawn, either as _classname or [_classname]
+_OK = (_this call DMS_fnc_MissionParams) params
 [
-	25,DMS_WaterNearBlacklist,DMS_MaxSurfaceNormal,DMS_SpawnZoneNearBlacklist,DMS_TraderZoneNearBlacklist,DMS_MissionNearBlacklist,DMS_PlayerNearBlacklist,DMS_ThrottleBlacklists
-]call DMS_fnc_findSafePos;
+	["_pos",[],[[]],[3]],
+	["_extraParams",[]]
+];
+
+if !(_OK) exitWith
+{
+	diag_log format ["DMS ERROR :: Called MISSION construction.sqf with invalid parameters: %1",_this];
+};
 
 
 // Set general mission difficulty
@@ -24,7 +45,6 @@ _difficulty = "hardcore";
 
 
 // Create AI
-// TODO: Spawn AI only when players are nearby
 _AICount = 5 + (round (random 2));
 
 _group =
@@ -44,7 +64,32 @@ _wreck1 = createVehicle ["Land_CinderBlocks_F",[(_pos select 0) - 10, (_pos sele
 _wreck2 = createVehicle ["Land_Bricks_V1_F",[(_pos select 0) - 5, (_pos select 1),-3.3],[], 0, "CAN_COLLIDE"];
 _wreck3 = createVehicle ["Land_Bricks_V1_F",[(_pos select 0) - 13, (_pos select 1),-1],[], 0, "CAN_COLLIDE"];
 
-_vehicle = ["Exile_Car_Zamak",_pos] call DMS_fnc_SpawnNonPersistentVehicle;
+// Check to see if a special vehicle class is defined in "_extraParams", and make sure it's valid, otherwise use the default (Offroad Armed)
+_vehClass =
+	if (_extraParams isEqualTo []) then
+	{
+		"Exile_Car_Zamak"
+	}
+	else
+	{
+		if ((typeName _extraParams)=="STRING") then
+		{
+			_extraParams
+		}
+		else
+		{
+			if (((typeName _extraParams)=="ARRAY") && {(typeName (_extraParams select 0))=="STRING"}) then
+			{
+				_extraParams select 0
+			}
+			else
+			{
+				"Exile_Car_Zamak"
+			};
+		};
+	};
+
+_vehicle = [_vehClass,_pos] call DMS_fnc_SpawnNonPersistentVehicle;
 
 
 // Set crate loot values
@@ -155,4 +200,7 @@ if !(_added) exitWith
 
 
 
-(format ["MISSION: (%1) :: Mission #%2 started at %3 with %4 AI units and %5 difficulty at time %6",_missionName,_num,_pos,_AICount,_difficulty,_time]) call DMS_fnc_DebugLog;
+if (DMS_DEBUG) then
+{
+	(format ["MISSION: (%1) :: Mission #%2 started at %3 with %4 AI units and %5 difficulty at time %6",_missionName,_num,_pos,_AICount,_difficulty,_time]) call DMS_fnc_DebugLog;
+};

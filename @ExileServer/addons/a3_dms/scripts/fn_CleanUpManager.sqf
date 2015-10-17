@@ -20,7 +20,10 @@
 if (DMS_CleanUpList isEqualTo []) exitWith {};		// Empty array, no objects to clean :)
 
 {
-	(format ["CleanUpManager :: Checking Cleaning Status for: %1",_x]) call DMS_fnc_DebugLog;
+	if (DMS_DEBUG) then
+	{
+		(format ["CleanUpManager :: Checking Cleaning Status for: %1",_x]) call DMS_fnc_DebugLog;
+	};
 
 	private ["_objs","_timeAddedToList","_timeUntilClean"];
 
@@ -42,6 +45,9 @@ if (DMS_CleanUpList isEqualTo []) exitWith {};		// Empty array, no objects to cl
 	}
 	else
 	{
-		(format ["CleanUpManager :: %1 is not yet ready to clean!",_x]) call DMS_fnc_DebugLog;
+		if (DMS_DEBUG) then
+		{
+			(format ["CleanUpManager :: %1 is not yet ready to clean!",_x]) call DMS_fnc_DebugLog;
+		};
 	};
 } forEach DMS_CleanUpList;

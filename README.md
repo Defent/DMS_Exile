@@ -1,8 +1,8 @@
 # To the User:
-####Read through the instructions carefully. Before leaving any questions regarding DMS, please read through the [DMS "config.sqf"](https://github.com/Defent/DMS_Exile/blob/master/%40ExileServer/addons/a3_dms/config.sqf) ; the majority of the questions we receive are answered (directly or indirectly) by the config.
+####Read the instructions carefully. Before leaving any questions regarding DMS, please read through the [DMS "config.sqf"](https://github.com/Defent/DMS_Exile/blob/master/%40ExileServer/addons/a3_dms/config.sqf) ; the majority of the questions we receive are answered (directly or indirectly) by the config.
 
 ####Disclaimer:
-Defent's Mission System (DMS) is written from the ground up to be an efficient, easy to install, and vastly customizable mission system for the ArmA 3 [Exile Mod](http://www.exilemod.com/). You are perfectly welcome to port DMS or any of its functions for any other mod or (legal) purposes; and leaving credits is appreciated.
+Defent's Mission System (DMS) is written from the ground up to be an efficient, easy to install, and vastly customizable mission system for the ArmA 3 [Exile Mod](http://www.exilemod.com/). You are perfectly welcome to port DMS or any of its functions for any other mod or (legal) purposes. Providing credit is appreciated.
 
 However, creating such a mission system takes a lot of time and testing. We (the authors of DMS) are not perfect, and as a result, there may be bugs, glitches, and/or errors within DMS. We appreciate your co-operation in identifying and resolving such issues to improve DMS; however we are not liable for any issues resulting from the usage of DMS on/by your server. We are also not liable to help you in resolving any issues that may arise, although we will attempt to help you to some degree in most cases.
 
@@ -58,6 +58,7 @@ ___
 - [Defent](https://github.com/Defent) from [NumenaDayZ](http://numenadayz.com/).
 - [eraser1](https://github.com/eraser1) from [TrainwreckDayZ](http://www.trainwreckdayz.com/home).
 
+
 ### Thanks:
 - [Zupa](https://github.com/Windmolders) for suggestions and coding help.
 - [Nawuko](https://github.com/Nawuko) for catching a silly mistake :P
@@ -68,6 +69,39 @@ ___
 ___
 
 # Changelog:
+#### October 17, 2015 (2:30 PM CST-America):
+* **NEW CONFIG VALUES**:
+
+		|DMS_TimeToFirstMission|
+		|DMS_ShowDifficultyColorLegend|
+		|DMS_TerritoryNearBlacklist|
+		|DMS_MinSurfaceNormal|	(Used to be DMS_MaxSurfaceNormal, simply renamed)
+		|DMS_ai_launchers_per_group|
+* **UPDATING ALL OF YOUR MISSION FILES IS HIGHLY RECOMMENDED UNLESS YOU KNOW WHAT YOU'RE DOING**
+* RENAMED "DMS_MaxSurfaceNormal" to "DMS_MinSurfaceNormal". I must have been very tired when I named it...
+* DMS_MinSurfaceNormal is now 0.9 by default, but will be 0.95 for Altis and Bornholm (since they're relatively large/flat maps). Esseker is still 0.85. If you want to convert DMS_MinSurfaceNormal to degrees, you would take the arc-cosine of the surfaceNormal, and that will give you the degrees from horizontal. For example, arccos(0.9) is about 25 degrees. Google: "arccos(0.9) in degrees"
+* Tweaked and rebalanced "DMS_BanditMissionTypes". Most of the spawn chances are the same, they're just reduced in order to prevent the creation of arrays that are far larger than they need to be.
+* You can now manually define how long it takes for the first mission to spawn after a restart.
+* DMS will now by default create markers on the bottom left of the map to show which colors correspond to which difficulty. It isn't very pretty, but it gets the point across.
+* DMS will now manually calculate the center of the map and its radius, if it isn't preconfigured by DMS.
+* You can now specify the vehicles to spawn for missions: "bandits", "cardealer", "construction", "donthasslethehoff", and "thieves".
+* You can now specify the spawning location of any mission (and whether or not to use an alternative location if the provided location is invalid). This will allow for easy integration of DMS into admin tools.
+* Added support for scripts to be executed on mission completion or mission failure (this will allow you to have "multi-part" missions, where you would simply spawn the next part of the mission if the previous is completed).
+* Restructured DMS_DEBUG from the previous patch in favor of a more "optimized" method.
+* DMS_fnc_findSafePos is completely overhauled; DMS no longer uses "BIS_fnc_findSafePos". It also now throttles minSurfaceNormal on repeated failure. You can now determine whether or not the mission should spawn on water (however, I don't suggest you use this function for water spawns yet).
+* You can also now define a minimum distance from other territories for missions.
+* DMS_fnc_IsValidPosition will now check for water depth if the provided position is meant to be checked as a "water spawn". It will now also check for nearby missions from A3XAI or VEMF (untested).
+* DMS_fnc_IsValidPosition now checks whether or not the position is outside of the map borders.
+* DMS_fnc_SelectOffsetPos will now return the 3rd element of the provided position as-is.
+* You can now have multiple AI within a group with a launcher.
+* AI now have a 5-second godmode after spawning.
+* You can now spawn a crate using ASL pos. DMS_fnc_SpawnCrate will also make sure that the provided classname is valid.
+* Just like SpawnCrate, "DMS_fnc_SpawnNonPersistentVehicle" and "DMS_fnc_SpawnPersistentVehicle" will now make sure that the provided classname is valid.
+* "DMS_fnc_SpawnPersistentVehicle" now supports ASL spawning.
+* Added support for [Rod Serling's](https://github.com/Rod-Serling) AVS.
+* General optimization.
+
+
 #### October 9, 2015 (8:30 PM CST-America):
 * **NEW CONFIG VALUE: DMS_Use_Map_Config**
 * You can now overwrite "main config values" with map-specific config values located in the new "map_configs" folder. This should allow you to use one DMS PBO if you have multiple servers with different maps. Included examples for Altis, Bornholm, Esseker, and Tavi (Taviana).

@@ -44,14 +44,18 @@
 		[_missionName,_markerDot,_markerCircle],
 		_side,
 		_difficulty,
-		_missionEvents
+		_missionEvents,
+		[
+			_onSuccessScripts,			// (OPTIONAL) Array of code or string to be executed on mission completion (in addition to regular code).
+			_onFailScripts				// (OPTIONAL) Array of code or stirng to be executed on mission failure (in addition to regular code).
+		]
 	] call DMS_fnc_AddMissionToMonitor;
 
 	Returns whether or not info was added successfully
 
 */
 
-private ["_added", "_pos", "_OK", "_completionInfo", "_timeOutInfo", "_inputUnits", "_missionObjs", "_mines", "_messages", "_markers", "_timeStarted", "_timeUntilFail", "_buildings", "_vehs", "_crate_info_array", "_msgWIN", "_msgLose", "_markerDot", "_markerCircle", "_side", "_difficulty", "_missionEvents", "_arr"];
+private ["_added", "_OK", "_pos", "_onEndingScripts", "_completionInfo", "_timeOutInfo", "_units", "_inputUnits", "_missionObjs", "_mines", "_difficulty", "_side", "_messages", "_markers", "_arr", "_timeStarted", "_timeUntilFail", "_buildings", "_vehs", "_crate_info_array", "_missionName", "_msgWIN", "_msgLose", "_markerDot", "_markerCircle", "_missionEvents", "_onSuccessScripts", "_onFailScripts"];
 
 
 _added = false;
@@ -75,6 +79,8 @@ if (!_OK) exitWith
 	diag_log format ["DMS ERROR :: Calling DMS_fnc_AddMissionToMonitor with invalid parameters: %1",_this];
 	false;
 };
+
+_onEndingScripts = if ((count _this)>10) then {_this select 10} else {[[],[]]};
 
 
 try
@@ -157,6 +163,17 @@ try
 		throw format["_markers |%1|",_markers];
 	};
 
+	_OK = _onEndingScripts params
+	[
+		["_onSuccessScripts", [], [[]]],
+		["_onFailScripts", [], [[]]]
+	];
+
+	if (!_OK) then
+	{
+		throw format["_onEndingScripts |%1|",_onEndingScripts];
+	};
+
 	_arr = 
 	[
 		_pos,
@@ -183,7 +200,11 @@ try
 		],
 		_side,
 		_difficulty,
-		_missionEvents
+		_missionEvents,
+		[
+			_onSuccessScripts,
+			_onFailScripts
+		]
 	];
 	DMS_Mission_Arr pushBack _arr;
 	_added = true;
@@ -193,7 +214,10 @@ try
 		_markerDot setMarkerText (format ["%1 (%2 %3 remaining)",markerText _markerDot,count _units,DMS_MarkerText_AIName]);
 	};
 
-	(format ["AddMissionToMonitor :: Added |%1| to DMS_Mission_Arr!",_arr]) call DMS_fnc_DebugLog;
+	if (DMS_DEBUG) then
+	{
+		(format ["AddMissionToMonitor :: Added |%1| to DMS_Mission_Arr!",_arr]) call DMS_fnc_DebugLog;
+	};
 }
 catch
 {

@@ -7,6 +7,7 @@
 		_vehicleClass,			// STRING: Vehicle classname to spawn.
 		_pos,					// ARRAY (positionATL or position2d): Where the vehicle will be spawned (strict)
 		_pinCode				// STRING or NUMBER: String has to be 4 digits. Number has to be between 0-9999, and will be automatically formatted.
+		_spawnATL				// (OPTIONAL) BOOLEAN: Whether or not to spawn the vehicle ATL (Above Terrain Level) or ASL (Above Sea Level). Default: true (ATL)
 	] call DMS_fnc_SpawnPersistentVehicle;
 
 	Returns the created vehicle object.
@@ -29,6 +30,11 @@ try
 	if (!_OK) then
 	{
 		throw (format ["invalid parameters: %1",_this]);
+	};
+
+	if !(isClass (configFile >> "CfgVehicles" >> _vehicleClass)) then
+	{
+		throw (format ["non-existent vehicle className: %1",_vehicleClass]);
 	};
 
 
@@ -74,9 +80,19 @@ try
 		throw (format ["invalid STRING _pinCode value (must be 4 digits): %1",_pinCode]);
 	};
 
+	_spawnATL = if ((count _this)>3) then {_this select 3} else {true};
+
 	// Create and set the vehicle
 	_vehObj = [_vehicleClass,_pos] call DMS_fnc_SpawnNonPersistentVehicle;
-	_vehObj setPosATL _pos;
+	
+	if (_spawnATL) then
+	{
+		_vehObj setPosATL _pos;
+	}
+	else
+	{
+		_vehObj setPosASL _pos;
+	};
 
 	// Save vehicle on exit.
 	_vehObj addEventHandler ["GetOut", { _this call ExileServer_object_vehicle_event_onGetOut}];

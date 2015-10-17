@@ -45,8 +45,15 @@ private ["_pos", "_success", "_timeStarted", "_timeUntilFail", "_units", "_build
 		_msgLose					= _x select 5 select 2;
 		_markers 					= _x select 6;
 		_missionSide				= _x select 7;
+		_missionDifficulty			= _x select 8;
+		_missionEvents 				= _x select 9;
+		_onSuccessScripts			= _x select 10 select 0;
+		_onFailScripts				= _x select 10 select 1;
 
-		(format ["MissionStatusCheck :: Checking Mission Status (index %1): ""%2"" at %3",_forEachIndex,_missionName,_pos]) call DMS_fnc_DebugLog;
+		if (DMS_DEBUG) then
+		{
+			(format ["MissionsMonitor :: Checking Mission Status (index %1): ""%2"" at %3",_forEachIndex,_missionName,_pos]) call DMS_fnc_DebugLog;
+		};
 
 		if (_success) then
 		{
@@ -100,6 +107,15 @@ private ["_pos", "_success", "_timeStarted", "_timeUntilFail", "_units", "_build
 				} forEach _mines;
 			};
 
+			{
+				_code = _x;
+				if ((typeName _code)=="STRING") then
+				{
+					_code = compile _code;
+				};
+				call _code;
+			} forEach _onSuccessScripts;
+
 			[_missionName,_msgWIN] call DMS_fnc_BroadcastMissionStatus;
 			[_markers,"win"] call DMS_fnc_RemoveMarkers;
 
@@ -138,6 +154,15 @@ private ["_pos", "_success", "_timeStarted", "_timeUntilFail", "_units", "_build
 			
 			_arr = DMS_Mission_Arr deleteAt _forEachIndex;
 
+			{
+				_code = _x;
+				if ((typeName _code)=="STRING") then
+				{
+					_code = compile _code;
+				};
+				call _code;
+			} forEach _onFailScripts;
+
 			[_missionName,_msgLose] call DMS_fnc_BroadcastMissionStatus;
 			[_markers,"lose"] call DMS_fnc_RemoveMarkers;
 
@@ -158,9 +183,18 @@ private ["_pos", "_success", "_timeStarted", "_timeUntilFail", "_units", "_build
 
 			_dot setMarkerText (format ["%1 (%2 %3 remaining)",_text,{alive _x} count _units,DMS_MarkerText_AIName]);
 		};
+
+		if !(_missionEvents isEqualTo []) then
+		{
+			// Coming soon...
+			//_x call DMS_fnc_HandleMissionEvents;
+		};
 	}
 	catch
 	{
-		(format ["MissionStatusCheck :: %1",_exception]) call DMS_fnc_DebugLog;
+		if (DMS_DEBUG) then
+		{
+			(format ["MissionsMonitor :: %1",_exception]) call DMS_fnc_DebugLog;
+		};
 	};
 } forEach DMS_Mission_Arr;

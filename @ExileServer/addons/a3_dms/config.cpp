@@ -46,6 +46,7 @@ class CfgFunctions
 			class IsPlayerNearby				{};
 			class IsNearWater 					{};
 			class IsValidPosition				{};
+			class MissionParams					{};
 			class MissionsMonitor 				{};
 			class MissionSuccessState 			{};
 			class OnKilled 						{};

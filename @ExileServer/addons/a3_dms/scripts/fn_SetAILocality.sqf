@@ -48,9 +48,15 @@ _client = objNull;
 if (!isNull _client) then
 {
 	ExileServerOwnershipSwapQueue pushBack [_AI,_client];
-	(format ["SetAILocality :: Ownership swap of %1 (%4) to %2 (%3) is added to ExileServerOwnershipSwapQueue.",_AI,name _client,getPlayerUID _client,typeName _AI]) call DMS_fnc_DebugLog;
+	if (DMS_DEBUG) then
+	{
+		(format ["SetAILocality :: Ownership swap of %1 (%4) to %2 (%3) is added to ExileServerOwnershipSwapQueue.",_AI,name _client,getPlayerUID _client,typeName _AI]) call DMS_fnc_DebugLog;
+	};
 }
 else
 {
-	(format ["SetAILocality :: No viable client found for the ownership of %1!",_AI]) call DMS_fnc_DebugLog;
+	if (DMS_DEBUG) then
+	{
+		(format ["SetAILocality :: No viable client found for the ownership of %1!",_AI]) call DMS_fnc_DebugLog;
+	};
 };

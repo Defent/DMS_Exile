@@ -17,7 +17,3 @@ DMS_SpawnZoneNearBlacklist			= 2500;
 DMS_TraderZoneNearBlacklist			= 2500;
 DMS_MissionNearBlacklist			= 2500;
 DMS_WaterNearBlacklist				= 500;
-
-
-// Taviana is a pretty hilly/mountainous map, so we should be a little more lenient for surfaceNormal on it
-DMS_MaxSurfaceNormal				= 0.9;

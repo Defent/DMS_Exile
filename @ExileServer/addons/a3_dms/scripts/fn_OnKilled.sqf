@@ -18,7 +18,10 @@
 private ["_unit", "_killer", "_side", "_type", "_launcher", "_launcherVar", "_playerObj", "_removeAll", "_rockets", "_grpUnits", "_av", "_memCount", "_gunner", "_driver", "_gunnerIsAlive", "_driverIsAlive", "_grp", "_owner", "_start", "_roadKilled", "_veh", "_boom", "_revealAmount", "_silencer", "_moneyChange", "_repChange", "_money", "_respect", "_msgType", "_msgParams"];
 
 
-(format ["OnKilled :: Logging AI death with parameters: %1",_this]) call DMS_fnc_DebugLog;
+if (DMS_DEBUG) then
+{
+	(format ["OnKilled :: Logging AI death with parameters: %1",_this]) call DMS_fnc_DebugLog;
+};
 	
 _unit 			= _this select 0 select 0;
 _killer 		= _this select 0 select 1;
@@ -109,7 +112,10 @@ if (!isNull _av) then
 		_av spawn {sleep 1;_this enableSimulationGlobal false;};
 
 
-		(format["OnKilled :: Destroying used AI vehicle %1, disabling simulation, and adding to cleanup.",typeOf _av]) call DMS_fnc_DebugLog;
+		if (DMS_DEBUG) then
+		{
+			(format["OnKilled :: Destroying used AI vehicle %1, disabling simulation, and adding to cleanup.",typeOf _av]) call DMS_fnc_DebugLog;
+		};
 	}
 	else
 	{
@@ -182,7 +188,10 @@ if (!isNull _av) then
 					
 					_driver enableCollisionWith _av;
 
-					(format["OnKilled :: Switched driver of AI Vehicle (%1) to gunner.",typeOf _av]) call DMS_fnc_DebugLog;
+					if (DMS_DEBUG) then
+					{
+						(format["OnKilled :: Switched driver of AI Vehicle (%1) to gunner.",typeOf _av]) call DMS_fnc_DebugLog;
+					};
 
 					if (_owner!=2) then
 					{
@@ -254,7 +263,10 @@ if (isPlayer _killer) then
 		{
 			_boom = createVehicle ["SLAMDirectionalMine_Wire_Ammo", ASLToAGL(getPosWorld _unit), [], 0, "CAN_COLLIDE"];
 			_boom setDamage 1;
-			(format ["OnKilled :: %1 roadkilled an AI! Creating mine at the roadkilled AI's position!",name _killer]) call DMS_fnc_DebugLog;
+			if (DMS_DEBUG) then
+			{
+				(format ["OnKilled :: %1 roadkilled an AI! Creating mine at the roadkilled AI's position!",name _killer]) call DMS_fnc_DebugLog;
+			};
 		};
 
 

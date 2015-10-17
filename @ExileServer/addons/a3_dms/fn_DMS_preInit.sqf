@@ -18,6 +18,42 @@ if (DMS_Use_Map_Config) then
 
 
 
+// Some custom maps don't have the proper safePos config entries.
+// If you are using one and you have an issue with mission spawns, please create an issue on GitHub or post a comment in the DMS thread.
+switch (toLower worldName) do
+{ 
+	case "altis":										// [16000,16000] w/ radius of 16000 works well for Altis
+	{
+		DMS_MapCenterPos 	= [16000,16000];
+		DMS_MapRadius 		= 16000;
+	};
+	case "bornholm":									// Thanks to thirdhero for testing this info
+	{
+		DMS_MapCenterPos 	= [11265,11265];
+		DMS_MapRadius 		= 12000;
+	};
+	case "esseker":										// Thanks to Flowrider for this info
+	{
+		DMS_MapCenterPos 	= [6275,6350];
+		DMS_MapRadius 		= 5000;
+	};
+	case "tavi":										// Thanks to JamieKG for this info
+	{
+		DMS_MapCenterPos 	= [12800,12800];
+		DMS_MapRadius 		= 12800;
+	};
+	default 											// Use "worldSize" to determine map center/radius (not always very nice).
+	{
+		private "_middle";
+		_middle = worldSize/2;
+		DMS_MapCenterPos 	= [_middle,_middle];
+		DMS_MapRadius 		= _middle;
+	};
+};
+
+// Since we use primarily ATL
+DMS_MapCenterPos set [2,0];
+
 /*
 	Original Functions from
 	http://maca134.co.uk/portfolio/m3editor-arma-3-map-editor/
@@ -95,3 +131,6 @@ DMS_fnc_setRelPositions =
 		//diag_log format ["Setting %1 at %2; %3 is the relpos from original center %4, reapplied to new center %5",typeOf _x,_objPos,_relpos,_center,_newCPos];
 	} foreach _objects;
 };
+
+// Because I fucked up the name on first implementation and don't want to mess anybody up who didn't realize to change every occurence of "DMS_MaxSurfaceNormal" to "DMS_MinSurfaceNormal".
+DMS_MaxSurfaceNormal = DMS_MinSurfaceNormal;

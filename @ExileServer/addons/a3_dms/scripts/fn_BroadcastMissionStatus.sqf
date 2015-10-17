@@ -34,7 +34,10 @@ _messageInfo params
 	["_message","",[""]]
 ];
 
-(format["BroadcastMissionStatus :: Notification types: |%1| for broadcasting mission status: %2",DMS_PlayerNotificationTypes,_message]) call DMS_fnc_DebugLog;
+if (DMS_DEBUG) then
+{
+	(format["BroadcastMissionStatus :: Notification types: |%1| for broadcasting mission status: %2",DMS_PlayerNotificationTypes,_message]) call DMS_fnc_DebugLog;
+};
 
 if ((typeName _message) != "STRING") then
 {

@@ -2,7 +2,7 @@
 	Sample mission (duplicate for testing purposes)
 */
 
-private ["_num", "_side", "_pos", "_difficulty", "_AICount", "_group", "_crate", "_crate_loot_values", "_msgStart", "_msgWIN", "_msgLOSE", "_missionName", "_missionAIUnits", "_missionObjs", "_markers", "_time", "_added","_vehicle"];
+private ["_num", "_side", "_OK", "_difficulty", "_AICount", "_type", "_launcher", "_dir", "_staticGuns", "_crate", "_vehicle", "_crate_loot_values", "_veh", "_baseObjs", "_mines", "_missionAIUnits", "_missionObjs", "_msgStart", "_msgWIN", "_msgLOSE", "_missionName", "_markers", "_time", "_added", "_cleanup"];
 
 // For logging purposes
 _num = DMS_MissionCount;
@@ -12,11 +12,32 @@ _num = DMS_MissionCount;
 _side = "bandit";
 
 
-// find position
-_pos = 
+// This part is unnecessary, but exists just as an example to format the parameters for "DMS_fnc_MissionParams" if you want to explicitly define the calling parameters for DMS_fnc_FindSafePos.
+// It also allows anybody to modify the default calling parameters easily.
+if ((isNil "_this") || {_this isEqualTo [] || {(typeName _this)!="ARRAY"}}) then
+{
+	_this =
+	[
+		[10,DMS_WaterNearBlacklist,DMS_MinSurfaceNormal,DMS_SpawnZoneNearBlacklist,DMS_TraderZoneNearBlacklist,DMS_MissionNearBlacklist,DMS_PlayerNearBlacklist,DMS_TerritoryNearBlacklist,DMS_ThrottleBlacklists],
+		[
+			[]
+		],
+		_this
+	];
+};
+
+// Check calling parameters for manually defined mission position.
+// This mission doesn't use "_extraParams" in any way currently.
+_OK = (_this call DMS_fnc_MissionParams) params
 [
-	10,DMS_WaterNearBlacklist,DMS_MaxSurfaceNormal,DMS_SpawnZoneNearBlacklist,DMS_TraderZoneNearBlacklist,DMS_MissionNearBlacklist,DMS_PlayerNearBlacklist,DMS_ThrottleBlacklists
-]call DMS_fnc_findSafePos;
+	["_pos",[],[[]],[3]],
+	["_extraParams",[]]
+];
+
+if !(_OK) exitWith
+{
+	diag_log format ["DMS ERROR :: Called MISSION testmission.sqf with invalid parameters: %1",_this];
+};
 
 
 // Set general mission difficulty
@@ -24,7 +45,6 @@ _difficulty = "moderate";
 
 
 // Create AI
-// TODO: Spawn AI only when players are nearby
 _AICount = 1;
 
 _group =
@@ -197,4 +217,7 @@ if !(_added) exitWith
 
 
 
-(format ["MISSION: (%1) :: Mission #%2 started at %3 with %4 AI units and %5 difficulty at time %6",_missionName,_num,_pos,_AICount,_difficulty,_time]) call DMS_fnc_DebugLog;
+if (DMS_DEBUG) then
+{
+	(format ["MISSION: (%1) :: Mission #%2 started at %3 with %4 AI units and %5 difficulty at time %6",_missionName,_num,_pos,_AICount,_difficulty,_time]) call DMS_fnc_DebugLog;
+};
