@@ -17,7 +17,7 @@ if (DMS_RunningBMissionCount >= DMS_MaxBanditMissions) then
 if (diag_fps >= DMS_MinServerFPS && {(count allPlayers) >= DMS_MinPlayerCount}) then
 {
 	// More Mission types coming soon
-	if (_time - DMS_BMissionLastStart > DMS_BMissionDelay) then
+	if (_time - DMS_BMissionLastStart > DMS_BMissionDelay || (DMS_InitStart == DMS_BMissionLastStart && _time - DMS_BMissionLastStart > DMS_InitialDelay)) then
 	{
 		private "_mission";
 		_mission = DMS_BanditMissionTypesArray call BIS_fnc_selectRandom;
