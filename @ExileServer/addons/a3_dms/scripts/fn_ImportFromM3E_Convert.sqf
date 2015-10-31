@@ -8,7 +8,7 @@
 	[
 		_file,							// String: The filename (or filepath under the objects folder) that contains the exported M3E objects
 		_missionPos 					// Object or Array: Center position
-	] call DMS_fnc_ImportFromM3E;
+	] call DMS_fnc_ImportFromM3E_Convert;
 
 	This function will take a file exported from M3Editor, convert it into relative position, then place the objects from the converted relative positions.
 	Use this function if you don't know how to get the relative position, and you only have the exported static positions.
@@ -26,7 +26,7 @@ _OK = params
 
 if (!_OK) exitWith
 {
-	diag_log format ["DMS ERROR :: Calling DMS_fnc_ImportFromM3E with invalid parameters: %1",_this];
+	diag_log format ["DMS ERROR :: Calling DMS_fnc_ImportFromM3E_Convert with invalid parameters: %1",_this];
 	[]
 };
 

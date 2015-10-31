@@ -12,7 +12,7 @@
 */
 
 
-private ["_OK", "_missionType", "_parameters"];
+private ["_missionType", "_parameters"];
 
 
 _missionType = param [0, DMS_BanditMissionTypesArray call BIS_fnc_selectRandom, [""]];
@@ -36,6 +36,6 @@ else
 
 	if (DMS_DEBUG) then
 	{
-		(format ["SelectMission :: Spawned mission %1 with parameters (%2) | DMS_BMissionDelay set to %3 seconds",str _missionType,_parameters,DMS_BMissionDelay]) call DMS_fnc_DebugLog;
+		(format ["SpawnBanditMission :: Spawned mission %1 with parameters (%2) | DMS_BMissionDelay set to %3 seconds", _missionType, _parameters, DMS_BMissionDelay]) call DMS_fnc_DebugLog;
 	};
 };

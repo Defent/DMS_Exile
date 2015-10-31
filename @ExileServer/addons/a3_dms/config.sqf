@@ -22,13 +22,23 @@ DMS_Use_Map_Config = true;	// Whether or not to use config overwrites specific t
 
 /* Mission System Settings */
 	/*General settings for dynamic missions*/
-	DMS_DynamicMission					= true;						// Enable/disable dynamic mission system
+	DMS_DynamicMission					= true;						// Enable/disable dynamic mission system.
 	DMS_MaxBanditMissions				= 3;						// Maximum number of Bandit Missions running at the same time
-	DMS_StaticMission					= false;					// Enable/disable static missions
-	DMS_TimeToFirstMission				= [180,420];				// [Minimum,Maximum] time between first mission spawn.
+	DMS_TimeToFirstMission				= [180,420];				// [Minimum,Maximum] time between first mission spawn. | DEFAULT: 3-7 minutes.
 	DMS_TimeBetweenMissions				= [600,900];				// [Minimum,Maximum] time between missions (if mission limit is not reached) | DEFAULT: 10-15 mins
-	DMS_MissionTimeOut					= [900,1800]; 				// [Minimum,Maximum] time it will take for a mission to timeout | Default: 15-30 mins
+	DMS_MissionTimeOut					= [900,1800]; 				// [Minimum,Maximum] time it will take for a mission to timeout | DEFAULT: 15-30 mins
+	DMS_MissionTimeoutResetRange		= 1000;						// If a player is this close to a mission then it won't time-out. Set to 0 to disable this check.
 	/*General settings for dynamic missions*/
+
+	/*General settings for static missions*/
+	DMS_StaticMission					= true;						// Enable/disable static mission system.
+	DMS_MaxStaticMissions				= 1;						// Maximum number of Static Missions running at the same time. It's recommended you set this to the same amount of static missions that you have in total.
+	DMS_TimeToFirstStaticMission		= [180,420];				// [Minimum,Maximum] time between first static mission spawn. | DEFAULT: 3-7 minutes.
+	DMS_TimeBetweenStaticMissions		= [900,1800];				// [Minimum,Maximum] time between static missions (if static mission limit is not reached) | DEFAULT: 15-30 mins
+	DMS_StaticMissionTimeOut			= [1800,3600]; 				// [Minimum,Maximum] time it will take for a static mission to timeout | DEFAULT: 30-60 mins
+	DMS_StaticMissionTimeoutResetRange	= 1500;						// If a player is this close to a mission then it won't time-out. Set to 0 to disable this check.
+	DMS_StaticMinPlayerDistance			= 1500;						// If a player is this close to a mission location, then it won't spawn the mission and will wait 60 seconds before attempting to spawn it.
+	/*General settings for static missions*/
 
 	DMS_playerNearRadius				= 100;						// How close a player has to be to a mission in order to satisfy the "playerNear" mission requirement (can be customized per mission).
 
@@ -41,7 +51,7 @@ DMS_Use_Map_Config = true;	// Whether or not to use config overwrites specific t
 	DMS_MarkerText_ShowAICount			= true;						// Whether or not to display the number of remaining AI in the marker name.
 	DMS_MarkerText_AIName				= "Units";					// What the AI will be called in the map marker. For example, the marker text can show: "Car Dealer (3 Units remaining)"
 	DMS_MarkerPosRandomization			= false;					// Randomize the position of the circle marker of a mission
-	DMS_MarkerPosRandomRadius			= [25,100];					// Minimum/Maximum distance that the circle marker position will be randomized | Default: 0 meters to 200 meters
+	DMS_MarkerPosRandomRadius			= [25,100];					// Minimum/Maximum distance that the circle marker position will be randomized | DEFAULT: 0 meters to 200 meters
 	DMS_RandomMarkerBrush				= "Cross";					// See: https://community.bistudio.com/wiki/setMarkerBrush
 	DMS_MissionMarkerWinDot				= true;						// Keep the mission marker dot with a "win" message after mission is over
 	DMS_MissionMarkerLoseDot			= true;						// Keep the mission marker dot with a "lose" message after mission is over
@@ -51,16 +61,18 @@ DMS_Use_Map_Config = true;	// Whether or not to use config overwrites specific t
 	DMS_MissionMarkerLoseDotColor		= "ColorRed";				// The color of the "lose" marker dot
 	/*Mission Marker settings*/
 
-	/*Mission Cleanup/Timeout settings*/
+	/*Mission Cleanup settings*/
 	DMS_CompletedMissionCleanup			= true;						// Cleanup mission-spawned buildings and AI bodies after some time
 	DMS_CompletedMissionCleanupTime		= 3600;						// Minimum time until mission-spawned buildings and AI are cleaned up
 	DMS_CleanUp_PlayerNearLimit			= 20;						// Cleanup of an object is aborted if a player is this many meters close to the object
 	DMS_AIVehCleanUpTime				= 900;						// Time until a destroyed AI vehicle is cleaned up.
-	DMS_MissionTimeoutReset				= true;						// Enable mission timeout timer reset if a player is close
-	DMS_MissionTimeoutResetRange		= 1000;						// If a player is this close to a mission then it won't time-out
-	/*Mission Cleanup/Timeout settings*/
+	/*Mission Cleanup settings*/
 
 	/*Mission spawn location settings*/
+	DMS_UsePredefinedMissionLocations	= false;					// Whether or not to use a list of pre-defined mission locations instead before attempting to find a random (valid) position. The positions will still be checked for validity. If none of the provided positions are valid, a random one will be generated.
+	DMS_PredefinedMissionLocations = 	[							// List of Preset/Predefined mission locations.
+
+										];
 	DMS_ThrottleBlacklists				= true;						// Whether or not to "throttle" the blacklist distance parameters in DMS_fnc_FindSafePos. This will reduce the values of the minimum
 																		//distances for some of the below parameters if several attempts have been made, but a suitable position was not yet found. This
 																		//should help with server performance drops when spawning a mission, as DMS_fnc_findSafePos is the most resource-intensive function.
@@ -74,6 +86,10 @@ DMS_Use_Map_Config = true;	// Whether or not to use config overwrites specific t
 	DMS_WaterNearBlacklist				= 500;						// Missions won't spawn in a position this many meters close to water
 	DMS_TerritoryNearBlacklist			= 100;						// Missions won't spawn in a position this many meters close to a territory flag
 	DMS_MinSurfaceNormal				= 0.9;						// Missions won't spawn in a position where its surfaceNormal is less than this amount. The lower the value, the steeper the location. Greater values means flatter locations. Values can range from 0-1, with 0 being sideways, and 1 being perfectly flat. For reference: SurfaceNormal of about 0.7 is when you are forced to walk up a surface. If you want to convert surfaceNormal to degrees, use the arc-cosine of the surfaceNormal. 0.9 is about 25 degrees. Google "(arccos 0.9) in degrees"
+	DMS_MinDistFromWestBorder			= 250;						// Missions won't spawn in a position this many meters close to the western map border.
+	DMS_MinDistFromEastBorder			= 250;						// Missions won't spawn in a position this many meters close to the easter map border.
+	DMS_MinDistFromSouthBorder			= 250;						// Missions won't spawn in a position this many meters close to the southern map border.
+	DMS_MinDistFromNorthBorder			= 250;						// Missions won't spawn in a position this many meters close to the northern map border.
 	/*Mission spawn location settings*/
 
 	DMS_MinWaterDepth					= 20;						// Minimum depth of water that an underwater mission can spawn at.
@@ -156,6 +172,13 @@ DMS_Use_Map_Config = true;	// Whether or not to use config overwrites specific t
 											["behindenemylines",2],
 											["mercbase",1]
 										];
+	
+
+	DMS_StaticMissionTypes =			[							// List of STATIC missions with spawn chances.
+											
+										];
+
+
 
 	DMS_findSafePosBlacklist =			[							// For BIS_fnc_findSafePos position blacklist info refer to: https://community.bistudio.com/wiki/BIS_fnc_findSafePos 
 											// An example is given in the altis_config.sqf (it blacklists the salt flats).

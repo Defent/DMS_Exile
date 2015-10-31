@@ -1,8 +1,8 @@
 # To the User:
-####Read the instructions carefully. Before leaving any questions regarding DMS, please read through the [DMS "config.sqf"](https://github.com/Defent/DMS_Exile/blob/master/%40ExileServer/addons/a3_dms/config.sqf) ; the majority of the questions we receive are answered (directly or indirectly) by the config.
+####Read the instructions carefully. Before leaving any questions regarding DMS, please read through the [DMS "config.sqf"](https://github.com/Defent/DMS_Exile/blob/master/%40ExileServer/addons/a3_dms/config.sqf); the majority of the questions we receive are answered (directly or indirectly) by the config.
 
 ####Disclaimer:
-Defent's Mission System (DMS) is written from the ground up to be an efficient, easy to install, and vastly customizable mission system for the ArmA 3 [Exile Mod](http://www.exilemod.com/). You are perfectly welcome to port DMS or any of its functions for any other mod or (legal) purposes. Providing credit is appreciated.
+Defent's Mission System (DMS) is written from the ground up to be an efficient, easy to install, and vastly customizable mission system for the ArmA 3 [Exile Mod](http://www.exilemod.com/). You are welcome to port DMS or any of its functions for any other mod or (legal) purposes. Providing credit is appreciated.
 
 However, creating such a mission system takes a lot of time and testing. We (the authors of DMS) are not perfect, and as a result, there may be bugs, glitches, and/or errors within DMS. We appreciate your co-operation in identifying and resolving such issues to improve DMS; however we are not liable for any issues resulting from the usage of DMS on/by your server. We are also not liable to help you in resolving any issues that may arise, although we will attempt to help you to some degree in most cases.
 
@@ -12,8 +12,9 @@ ___
 
 # Instructions
 See also: http://www.exilemod.com/topic/61-dms-defents-mission-system/?do=findComment&comment=242
+DMS will work "out-of-the-box" for almost any map. You have to keep in mind that if the map is too small (such as Stratis), then you will need to reduce the [Mission spawn location settings](https://github.com/Defent/DMS_Exile/blob/master/%40ExileServer/addons/a3_dms/config.sqf#L63-L77). Also, for especially hilly maps (such as Panthera), you will need to reduce the [Minimum surfaceNormal](https://github.com/Defent/DMS_Exile/blob/master/%40ExileServer/addons/a3_dms/config.sqf#L76) (the config value is automatically adjusted for some maps. You can check the [map configs](https://github.com/Defent/DMS_Exile/tree/master/%40ExileServer/addons/a3_dms/map_configs) to see the adjusted config value overwrites).
 
-## To install:
+## Installation:
 Put the pre-packed PBO in your ```@ExileServer\addons\``` directory. It should be alongside ```exile_server``` and ```exile_server_config```.
 
 If you are using Vilayer or some other GameServer hosting service, and/or the above step did not work, then create a new folder called @a3_dms in the root ArmA 3 folder, create a subfolder called "addons", and place the "a3_dms.pbo" in the "addons" subfolder. Then, edit your startup parameters/modline to include "@a3_dms". For example: ```-serverMod=@ExileServer;@a3_dms;```
@@ -28,28 +29,12 @@ If you are using infiSTAR and want to keep ```_CGM = true;```, then set ```_UMW 
 1. Download the a3_dms folder
 2. Edit the config.sqf to your preferences.
 3. Pack the a3_dms folder with a PBO tool (**PBO Manager**, Eliteness, or Arma 3 Tools suite)
-4. Follow the ["To install:" steps](https://github.com/Defent/DMS_Exile#to-install) using the PBO you just created instead of the pre-packed one.
+4. Follow the ["Installation:" steps](https://github.com/Defent/DMS_Exile#to-install) using the PBO you just created instead of the pre-packed one.
 
 
 ### HEADLESS CLIENT:
 
-**The way DMS utilizes HC is unfavorable for large maps. As a result, we are dropping HC support for DMS until it is completed, then we will create proper Headless Client support.**
-
-People have reported Headless Client working properly in ArmA v1.52
-
-Add this code to the TOP of your initPlayerLocal.sqf
-
-```
-if (!hasInterface && !isServer) then
-{
-	1 spawn
-	{
-		waitUntil {player==player};
-		DMS_HC_Object = player;
-		publicVariableServer "DMS_HC_Object";
-	};
-};
-```
+**We are dropping Headless Client support for DMS until it is completed, then we will create proper HC support.**
 
 ___
 
@@ -64,18 +49,14 @@ ___
 - [Nawuko](https://github.com/Nawuko) for catching a silly mistake :P
 - [shaworth](https://github.com/shaworth) and [KawaiiPotato](https://github.com/KawaiiPotato) for making the README all nice and pretty :)
 - [maca134](http://maca134.co.uk/portfolio/m3editor-arma-3-map-editor/) for M3Editor Stuff
+- [Darth Rogue from SOA](http://soldiersofanarchy.net/) for the awesome base for the first DMS static mission :D
 - Everbody's feedback on [the DMS thread on exile forums](http://www.exilemod.com/topic/61-dms-defents-mission-system/?do=findComment&comment=242)
 
 ___
 
 # Roadmap:
 #### Continuous Optimization + Improvements.
-
-#### Static Mission(s):
-* Create a sample static mission on the salt flats for Altis. Maybe other samples for other maps later on.
-* Implement a function that continues to spawn AI on a static mission.
-* Create a kick-ass static AI base :P
-* Implement the ability to "freeze" and "unfreeze" AI when there are no players nearby to improve performance.
+* Implement the ability to "freeze" and "unfreeze" AI when there are no players nearby to improve performance. This will be under testing with a few selected server owners/community members. If you would like to participate in testing, please send a PM to [eraser1 on Exile Forums](http://www.exilemod.com/profile/96-eraser1/).
 
 #### AI Heli Paratroopers/air support.
 
@@ -89,6 +70,8 @@ ___
 * Spawn AI that are meant to "hunt" individual players.
 * Air/Land AI Vehicle Patrols
 
+#### Full Headless Client Support.
+
 #### Custom client notifications.
 
 #### (Maybe) Implement a form of stat-tracking system
@@ -97,6 +80,44 @@ ___
 ___
 
 # Changelog:
+#### October 30, 2015 (9:30 PM CST-America):
+* ** NEW CONFIG VALUES:
+
+		|DMS_MaxStaticMissions|
+		|DMS_TimeToFirstStaticMission|
+		|DMS_TimeBetweenStaticMissions|
+		|DMS_StaticMissionTimeOut|
+		|DMS_StaticMissionTimeoutResetRange|
+		|DMS_StaticMinPlayerDistance|
+		|DMS_UsePredefinedMissionLocations|
+		|DMS_PredefinedMissionLocations|
+		|DMS_MinDistFromWestBorder|
+		|DMS_MinDistFromEastBorder|
+		|DMS_MinDistFromSouthBorder|
+		|DMS_MinDistFromNorthBorder|
+		|DMS_StaticMissionTypes|
+**
+* Added new value "DMS_Version".
+* ** "DMS_fnc_SpawnAIStatic" is now "DMS_fnc_SpawnAIStaticMG"; donthasslethehoff, mercbase, and testmission have been updated with the new names**
+* DMS will now check to make sure that marker colors passed to fn_CreateMarker are valid marker colors.
+* You can now control how far away from each border a mission will spawn (each border is separate: west, east, south, north). All "supported" maps have config values adjusted in "map_configs".
+* New salt flats base by [Darth Rogue from SOA](http://soldiersofanarchy.net/).
+* **IMPLEMENTED STATIC MISSIONS (initial version). "saltflats" is currently the only static mission for Altis ONLY. However, it shouldn't be too difficult to export it to other maps (once positions have been adjusted). **
+* Fixed a couple of outdated/inaccurate function documentation comments.
+* **FINALLY REMOVED THE Default Value "-1" PARAMS RPT SPAM. I FOUND IT. YESSSSS**
+* Fixed fn_CleanUp producing debug logs even with debug disabled.
+* Fixed the CleanUp list not Cleaning Up after itself (hah!).
+* Added diag_tickTime and DMS_Version to debug logs.
+* You can now define a custom function for DMS_FillCrate. It will be passed params from _lootValues select 0. ** I haven't tested this at all. Just keep that in mind ;) **
+* You can now manually define mission spawning locations into an array, and that array will be used to find a location. Each location will still be checked for validity, and if no valid positions are found from the list, a random one is then generated using the normal method. ** I didn't test this part at all either :P **
+* fn_FindSafePos should be even more efficient now, and even more controllable.
+* Quite a few new functions; most notably: fn_GroupReinforcementsManager
+* fn_GroupReinforcementsManager is used by static missions to provide reinforcements for AI once they fall below a certain threshold (and/or any other parameters you provide). Make sure to check out the function documentation and give any suggestions for new reinforcement types!
+* New function "DMS_fnc_ImportFromM3E_Static" will simply import a base from the provided file (under static). No conversion to relative position or anything. Simply spawning, positioning, and disabling simulation.
+* Removed the check for being outside map edges from fn_isValidPosition.
+* "hardcore" AI will now be even more difficult ;)
+
+
 #### October 17, 2015 (2:30 PM CST-America):
 * **NEW CONFIG VALUES**:
 

@@ -54,6 +54,12 @@ switch (_difficulty) do
 	default 			{_color = _difficulty;};
 };
 
+if !((toLower _color) in DMS_A3_AllMarkerColors) then
+{
+	diag_log format ["DMS ERROR :: Color ""%1"" is not a valid marker color! Switching to ""ColorRed""",_color];
+	_color = "ColorRed";
+};
+
 _circle = createMarker [format ["DMS_MissionMarkerCircle%1",_num], _pos];
 _circle setMarkerColor _color;
 _circle setMarkerShape "ELLIPSE";

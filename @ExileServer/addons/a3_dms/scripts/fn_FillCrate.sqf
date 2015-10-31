@@ -11,9 +11,9 @@
 		_rareLootChance				// (OPTIONAL) NUMBER: Manually define the percentage chance of spawning some rare items.
 	] call DMS_fnc_FillCrate;
 	
-	Loot values can be a number or a string with a corresponding "Crate Case" defined in the config. EG: DMS_CrateCase_Sniper. Or it can be an array.
+	If the "_lootValues" parameter is a number or a string, the function will look for a value defined as "DMS_CrateCase_*", where the "*" is replaced by the "_lootValues" parameter. EG: DMS_CrateCase_Sniper.
 	
-	In the array, the loot values are defined as:
+	Otherwise, the "_lootValues" parameter must be defined as:
 		[
 			_weapons,
 			_items,
@@ -24,6 +24,36 @@
 
 	For example, _weapons could simply be a number, in which case the given number of weapons are selected from "DMS_boxWeapons",
 	or an array as [_wepCount,_weps], where _wepCount is the number of weapons, and _weps is an array of weapons from which the guns are randomly selected.
+
+	OR:
+		[
+			_customLootFunctionParams,
+			_customLootFunction
+		]
+		In this case, "_customLootFunctionParams" is passed to "_customLootFunction", and the custom loot function must return the loot in the form:
+			[
+				[
+					weapon1,
+					weapon2,
+					[weapon_that_appears_twice,2],
+					...
+					weaponN
+				],
+				[
+					item1,
+					item2,
+					[item_that_appears_5_times,5],
+					...
+					itemN
+				],
+				[
+					backpack1,
+					backpack2,
+					[backpack_that_appears_3_times,3],
+					...
+					backpackN
+				]
+			]
 */
 
 private ["_crate","_lootValues","_wepCount","_weps","_itemCount","_items","_backpackCount","_backpacks","_weapon","_ammo","_item","_backpack","_crateValues","_rareLootChance","_marker"];
@@ -49,7 +79,7 @@ if !(DMS_GodmodeCrates) then
 _crate hideObjectGlobal false;
 
 
-if ((typeName _lootValues)=="ARRAY") then
+if (((typeName _lootValues)=="ARRAY") && {(typeName (_lootValues select 1))!="CODE"}) then
 {
 	// Weapons
 	if(typeName (_lootValues select 0) == "ARRAY") then
@@ -144,7 +174,26 @@ if ((typeName _lootValues)=="ARRAY") then
 }
 else
 {
-	_crateValues = missionNamespace getVariable [ format ["DMS_CrateCase_%1",_lootValues], [[], [], []] ];
+	_crateValues =
+		if ((typeName _lootValues)=="ARRAY") then
+		{
+			(_lootValues select 0) call (_lootValues select 1)
+		}
+		else
+		{
+			missionNamespace getVariable (format ["DMS_CrateCase_%1",_lootValues])
+		};
+
+	if !(_crateValues params
+	[
+		["_weps", [], [[]]],
+		["_items", [], [[]]],
+		["_backpacks", [], [[]]]
+	])
+	exitWith
+	{
+		diag_log format ["DMS ERROR :: Invalid ""_crateValues"" (%1) generated from _lootValues: %2",_crateValues,_lootValues];
+	};
 
 	// Weapons
 	{
@@ -153,7 +202,7 @@ else
 			_x = [_x,1];
 		};
 		_crate addWeaponCargoGlobal _x;
-	} forEach (_crateValues select 0);
+	} forEach _weps;
 
 	// Items/Mags
 	{
@@ -162,7 +211,7 @@ else
 			_x = [_x,1];
 		};
 		_crate addItemCargoGlobal _x;
-	} forEach (_crateValues select 1);
+	} forEach _items;
 
 	// Backpacks
 	{
@@ -171,17 +220,21 @@ else
 			_x = [_x,1];
 		};
 		_crate addBackpackCargoGlobal _x;
-	} forEach (_crateValues select 2);
+	} forEach _backpacks;
 };
 
 
 if(DMS_RareLoot && {count DMS_RareLootList>0}) then
 {
-	_rareLootChance = DMS_RareLootChance;
-	if ((count _this)>2) then
-	{
-		_rareLootChance = param [2,DMS_RareLootChance,[0]];
-	};
+	_rareLootChance =
+		if ((count _this)>2) then
+		{
+			_this param [2,DMS_RareLootChance,[0]]
+		}
+		else
+		{
+			DMS_RareLootChance
+		};
 
 	// (Maybe) Add rare loot
 	if(random 100 < _rareLootChance) then

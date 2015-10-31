@@ -1,5 +1,5 @@
 /*
-	DMS_fnc_AddMissionToMonitor
+	DMS_fnc_AddMissionToMonitor_Static
 	Created by eraser1
 
 	Parses and adds mission information to "DMS_Mission_Arr" for Mission Monitoring.
@@ -23,6 +23,12 @@
 			],
 		],
 		[
+			_groupReinforcementsInfo1,
+			_groupReinforcementsInfo2,
+			...,
+			_groupReinforcementsInfoN
+		],
+		[
 			_timeStarted,
 			_timeUntilFail
 		],
@@ -40,7 +46,11 @@
 				[_crate2,_crate_loot_values2]
 			]
 		],
-		[_missionName,_msgWIN,_msgLose],
+		[
+			_missionName,
+			_msgWIN,
+			_msgLose
+		],
 		[_markerDot,_markerCircle],
 		_side,
 		_difficulty,
@@ -49,7 +59,7 @@
 			_onSuccessScripts,			// (OPTIONAL) Array of code or string to be executed on mission completion (in addition to regular code).
 			_onFailScripts				// (OPTIONAL) Array of code or stirng to be executed on mission failure (in addition to regular code).
 		]
-	] call DMS_fnc_AddMissionToMonitor;
+	] call DMS_fnc_AddMissionToMonitor_Static;
 
 	Returns whether or not info was added successfully
 
@@ -64,6 +74,7 @@ _OK = params
 [
 	["_pos","",[[]],[2,3]],
 	["_completionInfo","",[[]]],
+	["_groupReinforcementsInfo","",[[]]],
 	["_timeOutInfo","",[[]],[1,2]],
 	["_inputUnits","",[[]]],
 	["_missionObjs","",[[]],[3,4]],
@@ -76,7 +87,7 @@ _OK = params
 
 if (!_OK) exitWith
 {
-	diag_log format ["DMS ERROR :: Calling DMS_fnc_AddMissionToMonitor with invalid parameters: %1",_this];
+	diag_log format ["DMS ERROR :: Calling DMS_fnc_AddMissionToMonitor_Static with invalid parameters: %1",_this];
 	false;
 };
 
@@ -100,8 +111,6 @@ try
 		["_timeStarted",diag_tickTime,[0]],
 		["_timeUntilFail",DMS_MissionTimeOut call DMS_fnc_SelectRandomVal,[0]]
 	];
-
-	_units = _inputUnits call DMS_fnc_GetAllUnits;
 
 	_OK = _missionObjs params
 	[
@@ -167,11 +176,12 @@ try
 	[
 		_pos,
 		_completionInfo,
+		_groupReinforcementsInfo,
 		[
 			_timeStarted,
 			_timeUntilFail
 		],
-		_units,
+		_inputUnits,
 		[
 			_buildings,
 			_vehs,
@@ -195,22 +205,22 @@ try
 			_onFailScripts
 		]
 	];
-	DMS_Mission_Arr pushBack _arr;
+	DMS_StaticMission_Arr pushBack _arr;
 	_added = true;
 
 	if (DMS_MarkerText_ShowAICount) then
 	{
-		_markerDot setMarkerText (format ["%1 (%2 %3 remaining)",markerText _markerDot,count _units,DMS_MarkerText_AIName]);
+		_markerDot setMarkerText (format ["%1 (%2 %3 remaining)",markerText _markerDot,count (_inputUnits call DMS_fnc_GetAllUnits),DMS_MarkerText_AIName]);
 	};
 
 	if (DMS_DEBUG) then
 	{
-		(format ["AddMissionToMonitor :: Added |%1| to DMS_Mission_Arr!",_arr]) call DMS_fnc_DebugLog;
+		(format ["AddMissionToMonitor_Static :: Added |%1| to DMS_StaticMission_Arr!",_arr]) call DMS_fnc_DebugLog;
 	};
 }
 catch
 {
-	diag_log format ["DMS ERROR :: Calling DMS_AddMissionToMonitor with invalid parameter: %1",_exception];
+	diag_log format ["DMS ERROR :: Calling DMS_AddMissionToMonitor_Static with invalid parameter: %1",_exception];
 };
 
 _added

@@ -86,7 +86,7 @@ _staticGuns =
 	"hardcore",
 	"bandit",
 	"O_HMG_01_high_F"
-] call DMS_fnc_SpawnAIStatic;
+] call DMS_fnc_SpawnAIStaticMG;
 
 (_staticGuns select 0) setDir 15;
 

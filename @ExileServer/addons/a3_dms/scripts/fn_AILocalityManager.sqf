@@ -18,7 +18,6 @@ if (!DMS_ai_offload_to_client && {isNull DMS_HC_Object}) exitWith {};
 		{
 			if (isNull DMS_HC_Object) then
 			{
-				
 				if (DMS_DEBUG) then
 				{
 					(format ["AILocalityManager :: DMS_HC_Object is null! Finding owner for group: %1",_group]) call DMS_fnc_DebugLog;

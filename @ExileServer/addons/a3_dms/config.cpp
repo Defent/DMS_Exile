@@ -29,6 +29,7 @@ class CfgFunctions
 		{
 			file = "\x\addons\dms\scripts";
 			class AddMissionToMonitor 			{};
+			class AddMissionToMonitor_Static	{};
 			class AILocalityManager 			{};
 			class BroadcastMissionStatus 		{};
 			class CalcPos						{};
@@ -39,15 +40,21 @@ class CfgFunctions
 			class FillCrate 					{};
 			class FindSafePos 					{};
 			class FindSuppressor 				{};
+			class GetAllUnits					{};
+			class GroupReinforcementsManager	{};
+			//class HandleMissionEvents			{};
 			//class HeliParatroopers			{};
 			//class HeliPatrol					{};
 			class ImportFromM3E					{};
 			class ImportFromM3E_Convert			{};
+			class ImportFromM3E_Static			{};
 			class IsPlayerNearby				{};
 			class IsNearWater 					{};
 			class IsValidPosition				{};
 			class MissionParams					{};
 			class MissionsMonitor 				{};
+			class MissionsMonitor_Dynamic		{};
+			class MissionsMonitor_Static		{};
 			class MissionSuccessState 			{};
 			class OnKilled 						{};
 			class RemoveMarkers 				{};
@@ -60,8 +67,9 @@ class CfgFunctions
 			class SpawnAIGroup 					{};
 			class SpawnAIVehicle				{};
 			class SpawnAISoldier 				{};
-			class SpawnAIStatic 				{};
+			class SpawnAIStaticMG 				{};
 			class SpawnBanditMission			{};
+			class SpawnStaticMission			{};
 			class SpawnCrate 					{};
 			class SpawnMinefield				{};
 			class SpawnPersistentVehicle 		{};

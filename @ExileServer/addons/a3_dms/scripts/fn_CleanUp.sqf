@@ -15,7 +15,10 @@
 */
 
 
-(format ["CleanUp :: CLEANING UP: %1",_this]) call DMS_fnc_DebugLog;
+if (DMS_DEBUG) then
+{
+    (format ["CleanUp :: CLEANING UP: %1",_this]) call DMS_fnc_DebugLog;
+};
 
 if !((typeName _this) == "ARRAY") then
 {
@@ -59,7 +62,10 @@ _clean =
         else
         {
             _skippedObjects pushBack _x;
-            (format ["CleanUp :: Skipping cleanup for |%1|, player within %2 meters!",_x,DMS_CleanUp_PlayerNearLimit]) call DMS_fnc_DebugLog;
+            if (DMS_DEBUG) then
+            {
+                (format ["CleanUp :: Skipping cleanup for |%1|, player within %2 meters!",_x,DMS_CleanUp_PlayerNearLimit]) call DMS_fnc_DebugLog;
+            };
         };
     }
     else
@@ -85,7 +91,10 @@ _clean =
         };
         if ((typeName _x) == "ARRAY") exitWith
         {
-            (format ["CleanUp :: Doing recursive call for ARRAY: %1",_x]) call DMS_fnc_DebugLog;
+            if (DMS_DEBUG) then
+            {
+                (format ["CleanUp :: Doing recursive call for ARRAY: %1",_x]) call DMS_fnc_DebugLog;
+            };
             _x call DMS_fnc_CleanUp;
         };
         diag_log format ["DMS ERROR :: Attempted to call DMS_fnc_CleanUp on non- group or object %1 from array %2",_x,_this];

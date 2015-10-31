@@ -16,3 +16,12 @@ DMS_WaterNearBlacklist				= 200;
 
 // Panthera is super hilly/mountain-y, so we allow a tolerance of up to a 30 degree slope.
 DMS_MinSurfaceNormal = 0.85;
+
+
+
+// Comment out the below configs if you want missions to be able to spawn on the islands surrounding the mainland.
+
+DMS_MinDistFromWestBorder			= 1500;
+DMS_MinDistFromEastBorder			= 1000;
+DMS_MinDistFromSouthBorder			= 1500;
+DMS_MinDistFromNorthBorder			= 2500;

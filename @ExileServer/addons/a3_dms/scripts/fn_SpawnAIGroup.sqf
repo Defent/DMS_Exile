@@ -49,6 +49,7 @@ _group = createGroup (missionNamespace getVariable [format ["DMS_%1Side",_side],
 
 _group setVariable ["DMS_LockLocality",nil];
 _group setVariable ["DMS_SpawnedGroup",true];
+_group setVariable ["DMS_Group_Side", _side];
 
 if (_count < 1) exitWith
 {

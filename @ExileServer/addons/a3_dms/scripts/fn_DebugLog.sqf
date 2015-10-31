@@ -9,6 +9,6 @@
 	If you have infiSTAR's DLLs, then it will also utilize the "ARMA_LOG" dll to write debug info.
 */
 
-_this = format ["%1 |::|::| (UpTime: %2 | %3 FPS)",_this,time,diag_fps];
+_this = format ['%1 |::|::| (DMS_Version: "%4" | time: %2 | diag_tickTime: %5 | %3 FPS)',_this,time,diag_fps,DMS_Version,diag_tickTime];
 "ARMA_LOG" callExtension format ["DMS_DEBUG:%1",_this];
 diag_log format ["DMS_DEBUG :: %1",_this];

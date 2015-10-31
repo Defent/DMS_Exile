@@ -23,7 +23,7 @@ private ["_OK", "_positions", "_veh", "_spawnPos", "_gotoPos", "_vehClass", "_dr
 
 _OK = params
 [
-	["_positions",[],[[]],[2]],
+	["_positions",[],[[]],[1,2]],
 	["_group",grpNull,[grpNull]],
 	["_class","random",[""]],
 	["_difficulty","static",[""]],
@@ -45,8 +45,7 @@ if (!_OK) exitWith
 	diag_log format ["DMS ERROR :: Calling DMS_fnc_SpawnAIVehicle with invalid _positions parameters: %1",_positions];
 };
 
-// Simply use _spawnPos if _gotoPos isn't defined. Yes, you might get "param"/"params" RPT spam. Deal with it ;)
-_gotoPos = _positions param [1,_spawnPos,[[]],[2,3]];
+_gotoPos = if ((count _positions)>1) then {_positions param [1,_spawnPos,[[]],[2,3]]} else {_spawnPos};
 
 _vehClass = "random";
 if ((count _this)>5) then
@@ -63,8 +62,10 @@ _tmpGroup = createGroup (missionNamespace getVariable [format ["DMS_%1Side",_sid
 
 _veh = createVehicle [_vehClass, _spawnPos, [], 0, "NONE"];
 _veh setDir (random 360);
-_veh setPosATL _spawnPos;
 _veh lock 2;
+
+_group addVehicle _veh;
+_tmpGroup addVehicle _veh;
 
 
 _driver = [_tmpGroup,_spawnPos,_class,_difficulty,_side,"Vehicle"] call DMS_fnc_SpawnAISoldier;

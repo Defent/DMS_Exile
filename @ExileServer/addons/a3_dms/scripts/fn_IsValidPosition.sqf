@@ -19,7 +19,7 @@
 	Returns whether or not the provided position matches the parameters.
 */
 
-private ["_pos", "_nearestObjectMinDistance", "_waterNearLimit", "_minSurfaceNormal", "_spawnZoneNearLimit", "_traderZoneNearLimit", "_missionNearLimit", "_playerNearLimit", "_territoryNearLimit", "_waterSpawn", "_isValidPos", "_xpos", "_ypos"];
+private ["_pos", "_nearestObjectMinDistance", "_waterNearLimit", "_minSurfaceNormal", "_spawnZoneNearLimit", "_traderZoneNearLimit", "_missionNearLimit", "_playerNearLimit", "_territoryNearLimit", "_waterSpawn", "_isValidPos"];
 
 _OK = params
 [
@@ -54,15 +54,6 @@ else
 		{
 			_pos set [2, 0];
 		};
-
-		_xpos = _pos select 0;
-		_ypos = _pos select 1;
-
-		if ((_xpos<0) || {_ypos<0} || {_xpos>worldSize} || {_ypos>worldSize}) then
-		{
-			throw ("or is outside of the map edge");
-		};
-
 
 
 		if (!(DMS_findSafePosBlacklist isEqualTo []) && {([_pos, DMS_findSafePosBlacklist] call BIS_fnc_isPosBlacklisted)}) then

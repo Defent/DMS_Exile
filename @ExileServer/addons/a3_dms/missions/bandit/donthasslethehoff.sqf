@@ -69,7 +69,7 @@ _staticGuns =
 	"assault",
 	"static",
 	"bandit"
-] call DMS_fnc_SpawnAIStatic;
+] call DMS_fnc_SpawnAIStaticMG;
 
 
 // Create Crates

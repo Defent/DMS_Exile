@@ -57,6 +57,6 @@ else
 {
 	if (DMS_DEBUG) then
 	{
-		(format ["SetAILocality :: No viable client found for the ownership of %1!",_AI]) call DMS_fnc_DebugLog;
+		(format ["SetAILocality :: No viable client found for the ownership of %1! _pos: %2",_AI,_pos]) call DMS_fnc_DebugLog;
 	};
 };

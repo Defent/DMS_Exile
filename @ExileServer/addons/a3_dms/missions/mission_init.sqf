@@ -1,15 +1,14 @@
 /*
-	DMS: mission_init.sqf
+	mission_init.sqf
 	Created by eraser1
 
-	Initializes variables for DMS
+	Initializes dynamic mission variables for DMS
 */
 
 diag_log "DMS :: Initializing Mission Variables";
 
 // Initialize Variables
 DMS_Mission_Arr					= [];
-DMS_CleanUpList					= [];
 DMS_MissionCount 				= 0;
 DMS_RunningBMissionCount		= 0;
 DMS_BMissionLastStart			= diag_tickTime;

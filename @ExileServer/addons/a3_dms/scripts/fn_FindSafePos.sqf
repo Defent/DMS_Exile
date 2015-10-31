@@ -21,7 +21,7 @@
 */
 
 
-private ["_nearestObjectMinDistance", "_waterNearLimit", "_minSurfaceNormal", "_spawnZoneNearLimit", "_traderZoneNearLimit", "_missionNearLimit", "_playerNearLimit", "_territoryNearLimit", "_throttleParams", "_waterSpawn", "_isValidSpot", "_attempts", "_pos"];
+private ["_nearestObjectMinDistance", "_waterNearLimit", "_minSurfaceNormal", "_spawnZoneNearLimit", "_traderZoneNearLimit", "_missionNearLimit", "_playerNearLimit", "_territoryNearLimit", "_throttleParams", "_waterSpawn", "_isValidSpot", "_attempts", "_pos", "_restriction", "_generatePos", "_presetLocs", "_presetLocsLength"];
 
 params
 [
@@ -43,16 +43,36 @@ _isValidSpot = false;
 _attempts = 0;
 _restriction = if (_waterSpawn) then {2} else {0};
 
+_presetLocsLength = 0;
+if (DMS_UsePredefinedMissionLocations) then
+{
+	// Shuffle the array so that the positions are selected in random order
+	_presetLocs = ([] + DMS_PredefinedMissionLocations) call ExileClient_util_array_shuffle;
+	_presetLocsLength = count _presetLocs;
+};
+
+_generatePos =
+{
+	if (DMS_UsePredefinedMissionLocations && {_attempts<=_presetLocsLength}) then
+	{
+		_presetLocs select (_attempts - 1)
+	}
+	else
+	{
+		[DMS_MinMax_X_Coords call DMS_fnc_SelectRandomVal,DMS_MinMax_Y_Coords call DMS_fnc_SelectRandomVal] isFlatEmpty [_nearestObjectMinDistance, 0, 9999, 1, _restriction, _waterSpawn, objNull]
+	};
+};
+
 while{!_isValidSpot} do
 {
 	_attempts = _attempts+1;
 
 
-	_pos = ([DMS_MapCenterPos,random DMS_MapRadius,random 360] call DMS_fnc_SelectOffsetPos) isFlatEmpty [_nearestObjectMinDistance, 0, 9999, 1, _restriction, _waterSpawn, objNull];
+	_pos = [];
 
 	while {_pos isEqualTo []} do
 	{
-		_pos = ([DMS_MapCenterPos,random DMS_MapRadius,random 360] call DMS_fnc_SelectOffsetPos) isFlatEmpty [_nearestObjectMinDistance, 0, 9999, 1, _restriction, _waterSpawn, objNull];
+		_pos = call _generatePos;
 	};
 
 

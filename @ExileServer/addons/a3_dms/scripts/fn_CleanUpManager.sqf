@@ -42,6 +42,7 @@ if (DMS_CleanUpList isEqualTo []) exitWith {};		// Empty array, no objects to cl
 	if ((diag_tickTime-_timeAddedToList)>=_timeUntilClean) then
 	{
 		_objs call DMS_fnc_CleanUp;
+		DMS_CleanUpList deleteAt _forEachIndex;
 	}
 	else
 	{

@@ -329,13 +329,21 @@ if (DMS_ai_disable_ramming_damage) then
 	}];
 };
 
-_unit enableAI "TARGET";
-_unit enableAI "AUTOTARGET";
-_unit enableAI "MOVE";
-_unit enableAI "ANIM";
-_unit enableAI "FSM";
+
+{
+	_unit enableAI _x;
+} forEach ["TARGET", "AUTOTARGET", "MOVE", "ANIM", "FSM"];
+
+if (_difficulty=="hardcore") then
+{
+	// Make him a little bit harder ;)
+	{
+		_unit disableAI _x;
+	} forEach ["SUPPRESSION", "AIMINGERROR"];
+};
 
 _unit setVariable ["DMS_AISpawnTime", time];
+_unit setVariable ["DMS_AI_Side", _side];
 
 if (_type=="Soldier") then
 {
