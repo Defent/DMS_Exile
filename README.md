@@ -81,7 +81,7 @@ ___
 
 # Changelog:
 #### October 30, 2015 (9:30 PM CST-America):
-* **NEW CONFIG VALUES:
+* **NEW CONFIG VALUES:**
 
 		|DMS_MaxStaticMissions|
 		|DMS_TimeToFirstStaticMission|
@@ -95,7 +95,7 @@ ___
 		|DMS_MinDistFromEastBorder|
 		|DMS_MinDistFromSouthBorder|
 		|DMS_MinDistFromNorthBorder|
-		|DMS_StaticMissionTypes|**
+		|DMS_StaticMissionTypes|
 * Added new value "DMS_Version".
 * **"DMS_fnc_SpawnAIStatic" is now "DMS_fnc_SpawnAIStaticMG"; donthasslethehoff, mercbase, and testmission have been updated with the new names**
 * DMS will now check to make sure that marker colors passed to fn_CreateMarker are valid marker colors.
