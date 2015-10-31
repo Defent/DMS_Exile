@@ -81,7 +81,7 @@ ___
 
 # Changelog:
 #### October 30, 2015 (9:30 PM CST-America):
-* ** NEW CONFIG VALUES:
+* **NEW CONFIG VALUES:
 
 		|DMS_MaxStaticMissions|
 		|DMS_TimeToFirstStaticMission|
@@ -95,21 +95,20 @@ ___
 		|DMS_MinDistFromEastBorder|
 		|DMS_MinDistFromSouthBorder|
 		|DMS_MinDistFromNorthBorder|
-		|DMS_StaticMissionTypes|
-**
+		|DMS_StaticMissionTypes|**
 * Added new value "DMS_Version".
-* ** "DMS_fnc_SpawnAIStatic" is now "DMS_fnc_SpawnAIStaticMG"; donthasslethehoff, mercbase, and testmission have been updated with the new names**
+* **"DMS_fnc_SpawnAIStatic" is now "DMS_fnc_SpawnAIStaticMG"; donthasslethehoff, mercbase, and testmission have been updated with the new names**
 * DMS will now check to make sure that marker colors passed to fn_CreateMarker are valid marker colors.
 * You can now control how far away from each border a mission will spawn (each border is separate: west, east, south, north). All "supported" maps have config values adjusted in "map_configs".
 * New salt flats base by [Darth Rogue from SOA](http://soldiersofanarchy.net/).
-* **IMPLEMENTED STATIC MISSIONS (initial version). "saltflats" is currently the only static mission for Altis ONLY. However, it shouldn't be too difficult to export it to other maps (once positions have been adjusted). **
+* **IMPLEMENTED STATIC MISSIONS (initial version). "saltflats" is currently the only static mission for Altis ONLY. However, it shouldn't be too difficult to export it to other maps (once positions have been adjusted).**
 * Fixed a couple of outdated/inaccurate function documentation comments.
 * **FINALLY REMOVED THE Default Value "-1" PARAMS RPT SPAM. I FOUND IT. YESSSSS**
 * Fixed fn_CleanUp producing debug logs even with debug disabled.
 * Fixed the CleanUp list not Cleaning Up after itself (hah!).
 * Added diag_tickTime and DMS_Version to debug logs.
-* You can now define a custom function for DMS_FillCrate. It will be passed params from _lootValues select 0. ** I haven't tested this at all. Just keep that in mind ;) **
-* You can now manually define mission spawning locations into an array, and that array will be used to find a location. Each location will still be checked for validity, and if no valid positions are found from the list, a random one is then generated using the normal method. ** I didn't test this part at all either :P **
+* You can now define a custom function for DMS_FillCrate. It will be passed params from _lootValues select 0. **I haven't tested this at all. Just keep that in mind ;)**
+* You can now manually define mission spawning locations into an array, and that array will be used to find a location. Each location will still be checked for validity, and if no valid positions are found from the list, a random one is then generated using the normal method. **I didn't test this part at all either :P**
 * fn_FindSafePos should be even more efficient now, and even more controllable.
 * Quite a few new functions; most notably: fn_GroupReinforcementsManager
 * fn_GroupReinforcementsManager is used by static missions to provide reinforcements for AI once they fall below a certain threshold (and/or any other parameters you provide). Make sure to check out the function documentation and give any suggestions for new reinforcement types!
