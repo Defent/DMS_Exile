@@ -1,0 +1,21 @@
+[
+    ["Land_HBarrierTower_F",[1688.42,5601.6,0],180.049,0,0,false],
+    ["Land_HBarrierTower_F",[1702.61,5582.49,0],270.462,0,0,false],
+    ["Land_HBarrierTower_F",[1688.42,5563.38,0],0,0,0,false],
+    ["Land_HBarrierTower_F",[1674.23,5582.49,0],90.6414,0,0,false],
+    ["Land_HBarrierWall_corridor_F",[1673.47,5576.89,0],0,0,0,false],
+    ["Land_CncWall4_F",[1682.45,5565.37,0],0,0,0,false],
+    ["Land_CncWall4_F",[1678.62,5567.57,0],53.1818,0,0,false],
+    ["Land_CncWall4_F",[1676.66,5572.1,0],82.6364,0,0,false],
+    ["Land_CncWall4_F",[1694.47,5565.37,0],0,0,0,false],
+    ["Land_CncWall4_F",[1698.32,5567.56,0],302.318,0,0,false],
+    ["Land_CncWall4_F",[1700.14,5572.25,0],280.636,0,0,false],
+    ["Land_HBarrierWall_corridor_F",[1703.4,5577.06,0],0,0,0,false],
+    ["Land_CncWall4_F",[1700.73,5588.52,0],262.221,0,0,false],
+    ["Land_CncWall4_F",[1699.35,5593.46,0],249.539,0,0,false],
+    ["Land_CncWall4_F",[1696.28,5597.31,0],215.994,0,0,false],
+    ["Land_CncWall1_F",[1693.6,5599.05,0],201.682,0,0,false],
+    ["Land_HBarrier_1_F",[1692.58,5600.12,0],290.455,0,0,false],
+    ["Land_HBarrier_Big_F",[1681.72,5597.13,0],309.682,0,0,false],
+    ["Land_HBarrier_Big_F",[1677,5589.9,0],298.636,0,0,false]
+]

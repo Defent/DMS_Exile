@@ -8,7 +8,7 @@ if !(isServer) exitWith
 {
 	for "_i" from 0 to 99 do
 	{
-		diag_log "The DMS PBO is SERVER ONLY. It will NOT work for any form of client! DMS launch cancelled.";
+		diag_log "The DMS PBO is for the SERVER ONLY. It will NOT work for any form of client! DMS launch cancelled.";
 	};
 };
 
