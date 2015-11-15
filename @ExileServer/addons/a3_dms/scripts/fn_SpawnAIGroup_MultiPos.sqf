@@ -1,24 +1,33 @@
 /*
-	DMS_fnc_SpawnAIGroup
+	DMS_fnc_SpawnAIGroup_MultiPos
 	Created by eraser1
-	Based off of WAI
+	
+
+	Spawns a group of AI with a given AI count at the provided list of location(s), with a given difficulty, class, and side.
 
 	Usage:
 	[
-		_pos,					// Position of AI
+		[
+			_position1,			// Potential location for AI to spawn #1
+			_position2,			// Potential location for AI to spawn #2
+			...
+			_positionN			// Potential location for AI to spawn #N
+		],
 		_count,					// Number of AI
 		_difficulty,			// AI Difficulty: "random","hardcore","difficult","moderate", or "easy"
 		_class,					// AI Class: "random","assault","MG","sniper" or "unarmed" OR [_class,_launcherType]
 		_side 					// Only "bandit" is supported atm
-	] call DMS_fnc_SpawnAIGroup;
+	] call DMS_fnc_SpawnAIGroup_MultiPos;
 
 	Returns AI Group
 */
-private ["_OK", "_pos", "_count", "_difficulty", "_class", "_group", "_side", "_launcherType", "_launcher", "_unit", "_rocket"];
+
+private ["_OK", "_positions", "_count", "_difficulty", "_class", "_side", "_positionsCount", "_launcherType", "_group", "_unit", "_units", "_i", "_launcher", "_rocket"];
+
 
 _OK = params
 [
-	["_pos","_pos ERROR",[[]],[3]],
+	["_positions","_positions ERROR",[[]]],
 	["_count","_count ERROR",[0]],
 	["_difficulty","_difficulty ERROR",[""]],
 	["_class","_class ERROR",[""]],
@@ -27,20 +36,28 @@ _OK = params
 
 if (!_OK) exitWith
 {
-	diag_log format ["DMS ERROR :: Calling DMS_SpawnAIGroup with invalid parameters: %1",_this];
+	diag_log format ["DMS ERROR :: Calling DMS_SpawnAIGroup_MultiPos with invalid parameters: %1",_this];
+	grpNull
+};
+
+_positionsCount = count _positions;
+
+if (_positionsCount<1) exitWith
+{
+	diag_log format ["DMS ERROR :: Calling DMS_SpawnAIGroup_MultiPos with an empty list of positions! _this: %1",_this];
 	grpNull
 };
 
 if (_count < 1) exitWith
 {
-	diag_log format ["DMS ERROR :: Calling DMS_SpawnAIGroup with less than 1 _count! _this: %1",_this];
+	diag_log format ["DMS ERROR :: Calling DMS_SpawnAIGroup_MultiPos with less than 1 _count! _this: %1",_this];
 	grpNull
 };
 
 
 if (DMS_DEBUG) then
 {
-	(format["SpawnAIGroup :: Spawning %1 %2 %3 AI at %4 with %5 difficulty.",_count,_class,_side,_pos,_difficulty]) call DMS_fnc_DebugLog;
+	(format["SpawnAIGroup_MultiPos :: Spawning %1 %2 %3 AI at positions %4 with %5 difficulty.",_count,_class,_side,_positions,_difficulty]) call DMS_fnc_DebugLog;
 };
 
 // if soldier have AT/AA weapons
@@ -59,7 +76,7 @@ _group setVariable ["DMS_Group_Side", _side];
 
 for "_i" from 1 to _count do
 {
-	_unit = [_group,_pos,_class,_difficulty,_side,"Soldier"] call DMS_fnc_SpawnAISoldier;
+	_unit = [_group,_positions select (_i % _positionsCount),_class,_difficulty,_side,"Soldier"] call DMS_fnc_SpawnAISoldier;
 };
 
 // An AI will definitely spawn with a launcher if you define type
@@ -90,7 +107,7 @@ if ((!isNil "_launcherType") || {DMS_ai_use_launchers && {DMS_ai_launchers_per_g
 			
 			if (DMS_DEBUG) then
 			{
-				(format["SpawnAIGroup :: Giving %1 a %2 launcher with %3 %4 rockets",_unit,_launcher,DMS_AI_launcher_ammo_count,_rocket]) call DMS_fnc_DebugLog;
+				(format["SpawnAIGroup_MultiPos :: Giving %1 a %2 launcher with %3 %4 rockets",_unit,_launcher,DMS_AI_launcher_ammo_count,_rocket]) call DMS_fnc_DebugLog;
 			};
 		};
 	};
@@ -102,9 +119,9 @@ _group setFormation "WEDGE";
 
 
 
-[_group,_pos,_difficulty,"COMBAT"] call DMS_fnc_SetGroupBehavior;
+[_group,_positions select 0,_difficulty,"COMBAT"] call DMS_fnc_SetGroupBehavior;
 
 
-diag_log format ["DMS_SpawnAIGroup :: Spawned %1 AI at %2.",_count,_pos];
+diag_log format ["DMS_SpawnAIGroup_MultiPos :: Spawned %1 AI using positions parameter: %2.",_count,_positions];
 
 _group

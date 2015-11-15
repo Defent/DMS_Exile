@@ -25,27 +25,33 @@ if ((typeName _this)!="ARRAY") then
 _units = [];
 
 {
-	private ["_parameter", "_tN"];
+	private ["_parameter"];
 	_parameter = _x;
-	_tN = typeName _parameter;
-	if (_tN == "ARRAY") then
-	{
-		_units append (_parameter call DMS_fnc_GetAllUnits);
-	}
-	else
-	{
-		if (_tN in ["OBJECT", "GROUP"]) then
+
+	_units append
+	(
+		switch (typeName _parameter) do
 		{
-			if (!isNull _parameter) then
+			case "ARRAY":
 			{
-				if (_tN == "OBJECT") then
+				_parameter call DMS_fnc_GetAllUnits
+			};
+
+			case "OBJECT":
+			{
+				if (!(isNull _parameter) && {alive _parameter}) then
 				{
-					if (alive _parameter) then
-					{
-						_units pushBack _parameter;
-					};
+					[_parameter]
 				}
 				else
+				{
+					[]
+				}
+			};
+
+			case "GROUP":
+			{
+				if (!isNull _parameter) then
 				{
 					{
 						if (alive _x) then
@@ -54,13 +60,16 @@ _units = [];
 						};
 					} forEach (units _parameter);
 				};
+				[]
+			};
+
+			default
+			{
+				diag_log format ["DMS ERROR :: Calling DMS_fnc_GetAllUnits with an invalid parameter: %1 | Type: %2", _parameter, typeName _parameter];
+				[]
 			};
 		}
-		else
-		{
-			diag_log format ["DMS ERROR :: Calling DMS_fnc_GetAllUnits with an invalid parameter: %1 | Type: %2", _x, _tN];
-		};
-	};
+	);
 } forEach _this;
 
 if (DMS_DEBUG) then

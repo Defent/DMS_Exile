@@ -61,13 +61,28 @@
 				_maxAICount				// (OPTIONAL) SCALAR: Maximum number of AI Units after reinforcements. Default value is equivalent to _AICount. Set to 0 for no limit.
 			]
 
+		"static_gunner":
+			_monitorParams =
+			[
+				_staticGun,				// OBJECT: If this object (static gun) loses its gunner and/or is deleted, then a new static gun and/or gunner will spawn to replace the previous one.
+				_gunPos,				// ARRAY (positionATL): The position of the static gun.
+				_staticGunClass			// (OPTIONAL) STRING: The classname of the static gun to spawn as reinforcement.
+			]
+
 		"armed_vehicle":
 			_monitorParams =
 			[
 				_AICount,				// SCALAR: If the AI Group has fewer than "_AICount" living units, then the group will receive reinforcements.
 				_vehClass				// (OPTIONAL) STRING: The classname of the vehicle to spawn. Use "random" to select a random vehicle from "DMS_ArmedVehicles". Default: "random"
 			]
-		NOTE: Every reinforcement vehicle as one unit given for monitor type "armed_vehicle"
+
+		"armed_vehicle_replace":
+			_monitorParams =
+			[
+				_vehicle,				// OBJECT: When this vehicle is null or dead, then this group will receive reinforcements. The spawned vehicle will then be the new _vehicle.
+				_vehClass				// (OPTIONAL) STRING: The classname of the vehicle to spawn. Use "random" to select a random vehicle from "DMS_ArmedVehicles". Default: "random"
+			]
+		NOTE: Every reinforcement vehicle counts as one unit given for monitor type "armed_vehicle" and "armed_vehicle_replace"
 
 	Returns whether or not reinforcement waves or units given exceeds/matches maximum wave or unit reinforcements. If true, then no more reinforcements will be spawned (so the passed info should be deleted from the available reinforcements list).
 */
@@ -335,6 +350,102 @@ if (!_reinforcementsDepleted && {(diag_tickTime-_lastUpdated)>_updateDelay}) the
 				};
 			};
 		};
+
+		case "armed_vehicle_replace":
+		{
+			private ["_vehicle", "_vehClass", "_leaderPos"];
+
+			if !(_monitorParams params
+			[
+				["_vehicle", objNull, [objNull]]
+			])
+			exitWith
+			{
+				_reinforcementsDepleted = true;
+				diag_log format ["DMS ERROR :: Calling DMS_fnc_GroupReinforcementsManager with invalid _monitorParams: %1 | _monitorType: %2 | Setting _reinforcementsDepleted to true.",_monitorParams,_monitorType];
+			};
+
+			if ((isNull _vehicle) || {!alive _vehicle} || {(count (crew _vehicle)) isEqualTo 0}) then
+			{
+				deleteVehicle _vehicle;
+
+				_vehClass = if ((count _monitorParams)>1) then {_monitorParams param [1, "", [""]]} else {"random"};
+
+				_leaderPos = getPosATL (leader _AIGroup);
+
+				_vehicle =
+				[
+					[
+						if (_spawnLocations isEqualTo []) then {[_leaderPos,100+(random 200),random 360] call DMS_fnc_SelectOffsetPos} else {_spawnLocations call BIS_fnc_selectRandom},
+						_leaderPos
+					],
+					_AIGroup,
+					_class,
+					_difficulty,
+					_side,
+					_vehClass
+				] call DMS_fnc_SpawnAIVehicle;
+
+				// Every vehicle counts as one unit given, so the number of units given is equivalent to number of waves given.
+				_reinforcementWavesGiven = _reinforcementWavesGiven + 1;
+				_reinforcementUnitsGiven = _reinforcementWavesGiven;
+
+				_monitorParams set [0, _vehicle];
+
+				if (DMS_DEBUG) then
+				{
+					(format["GroupReinforcementsManager :: Group %1 received a ""%2"" vehicle (%3) as reinforcements.",_AIGroup, _vehClass, _vehicle]) call DMS_fnc_DebugLog;
+				};
+			};
+		};
+
+		case "static_gunner":
+		{
+			private ["_staticGun", "_gunPos", "_staticGunClass"];
+
+			if !(_monitorParams params
+			[
+				["_staticGun", objNull, [objNull]],
+				["_gunPos",	[],	[[]], [2,3]]
+			])
+			exitWith
+			{
+				_reinforcementsDepleted = true;
+				diag_log format ["DMS ERROR :: Calling DMS_fnc_GroupReinforcementsManager with invalid _monitorParams: %1 | _monitorType: %2 | Setting _reinforcementsDepleted to true.",_monitorParams,_monitorType];
+			};
+
+			if ((isNull _staticGun) || {!alive _staticGun} || {(count (crew _staticGun)) isEqualTo 0}) then
+			{
+				deleteVehicle _staticGun;
+
+				_staticGunClass = if ((count _monitorParams)>1) then {_monitorParams param [1, "", [""]]} else {"random"};
+
+				_leaderPos = getPosATL (leader _AIGroup);
+
+				_staticGun =
+				[
+					[
+						_gunPos
+					],
+					_AIGroup,
+					_class,
+					_difficulty,
+					_side,
+					_staticGunClass
+				] call DMS_fnc_SpawnAIStaticMG;
+
+				// Every vehicle counts as one unit given, so the number of units given is equivalent to number of waves given.
+				_reinforcementWavesGiven = _reinforcementWavesGiven + 1;
+				_reinforcementUnitsGiven = _reinforcementWavesGiven;
+
+				_monitorParams set [0, _staticGun];
+
+				if (DMS_DEBUG) then
+				{
+					(format["GroupReinforcementsManager :: Group %1 received a ""%2"" static gun (%3) as reinforcement at %4.",_AIGroup, _staticGunClass, _staticGun, _gunPos]) call DMS_fnc_DebugLog;
+				};
+			};
+		};
 		
 		default
 		{
@@ -375,7 +486,7 @@ if (!_reinforcementsDepleted && {(diag_tickTime-_lastUpdated)>_updateDelay}) the
 				_spawnPos = _spawnLocations call BIS_fnc_selectRandom;
 			};
 
-			_units pushBack ([_AIGroup,[_spawnPos,1+(random 3),random 360] call DMS_fnc_SelectOffsetPos,_class,_difficulty,_side,"Soldier"] call DMS_fnc_SpawnAISoldier);
+			_units pushBack ([_AIGroup,_spawnPos,_class,_difficulty,_side,"Soldier"] call DMS_fnc_SpawnAISoldier);
 		};
 
 		_units joinSilent _AIGroup;	// Otherwise they don't like each other...

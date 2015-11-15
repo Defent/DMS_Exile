@@ -57,6 +57,7 @@ class CfgFunctions
 			class MissionsMonitor_Static		{};
 			class MissionSuccessState 			{};
 			class OnKilled 						{};
+			class PlayerAwardOnAIKill			{};
 			class RemoveMarkers 				{};
 			class SelectRandomVal				{};
 			class SelectMagazine 				{};
@@ -65,6 +66,7 @@ class CfgFunctions
 			class SetAILocality 				{};
 			class SetGroupBehavior 				{};
 			class SpawnAIGroup 					{};
+			class SpawnAIGroup_MultiPos			{};
 			class SpawnAIVehicle				{};
 			class SpawnAISoldier 				{};
 			class SpawnAIStaticMG 				{};

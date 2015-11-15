@@ -190,7 +190,7 @@ if (DMS_StaticMission_Arr isEqualTo []) exitWith {};				// Empty array, no stati
 			throw format ["Mission (%1) Fail at %2 with message %3.",_missionName,_missionPos,_msgLose];
 		};
 
-		if (DMS_MarkerText_ShowAICount) then
+		if (DMS_MarkerText_ShowAICount_Static) then
 		{
 			private ["_dot", "_text"];
 
@@ -219,12 +219,15 @@ if (DMS_StaticMission_Arr isEqualTo []) exitWith {};				// Empty array, no stati
 		};
 
 
+		if (DMS_AllowStaticReinforcements) then
 		{
-			if (_x call DMS_fnc_GroupReinforcementsManager) then
 			{
-				_groupReinforcementsInfo deleteAt _forEachIndex;
-			};
-		} forEach _groupReinforcementsInfo;
+				if (_x call DMS_fnc_GroupReinforcementsManager) then
+				{
+					_groupReinforcementsInfo deleteAt _forEachIndex;
+				};
+			} forEach _groupReinforcementsInfo;
+		};
 	}
 	catch
 	{

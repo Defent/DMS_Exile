@@ -11,30 +11,44 @@ ___
 
 
 # Instructions
-See also: http://www.exilemod.com/topic/61-dms-defents-mission-system/?do=findComment&comment=242
+[Please search the DMS thread before asking any questions](http://www.exilemod.com/topic/61-dms-defents-mission-system/?do=findComment&comment=242)
 DMS will work "out-of-the-box" for almost any map. You have to keep in mind that if the map is too small (such as Stratis), then you will need to reduce the [Mission spawn location settings](https://github.com/Defent/DMS_Exile/blob/master/%40ExileServer/addons/a3_dms/config.sqf#L63-L77). Also, for especially hilly maps (such as Panthera), you will need to reduce the [Minimum surfaceNormal](https://github.com/Defent/DMS_Exile/blob/master/%40ExileServer/addons/a3_dms/config.sqf#L76) (the config value is automatically adjusted for some maps. You can check the [map configs](https://github.com/Defent/DMS_Exile/tree/master/%40ExileServer/addons/a3_dms/map_configs) to see the adjusted config value overwrites).
 
-## Installation:
-Put the pre-packed PBO in your ```@ExileServer\addons\``` directory. It should be alongside ```exile_server``` and ```exile_server_config```.
+## BattlEye Filters:
+It is highly recommended that you add
 
-If you are using Vilayer or some other GameServer hosting service, and/or the above step did not work, then create a new folder called @a3_dms in the root ArmA 3 folder, create a subfolder called "addons", and place the "a3_dms.pbo" in the "addons" subfolder. Then, edit your startup parameters/modline to include "@a3_dms". For example: ```-serverMod=@ExileServer;@a3_dms;```
+```
+!="(_this select 0) execVM \"\A3\Structures_F\Wrecks\Scripts\Wreck_Heli_Attack_01.sqf\""
+```
+
+at ***the END of the line that starts with "7 execVM" in scripts.txt*** . [Here is the pastebin](http://pastebin.com/W8bH252U).
+
+## Installation:
+
+
+1. Download the [a3_dms](https://github.com/Defent/DMS_Exile/tree/master/%40ExileServer/addons/a3_dms) folder
+2. Edit the [config.sqf](https://github.com/Defent/DMS_Exile/blob/master/%40ExileServer/addons/a3_dms/config.sqf) to your preferences.
+3. Pack the a3_dms folder with a PBO tool ([PBO Manager](http://www.armaholic.com/page.php?id=16369), [Eliteness](https://dev.withsix.com/projects/mikero-pbodll/files), or [the Arma 3 Tools suite](http://store.steampowered.com/app/233800/))
+4. Put the generated PBO in your ```@ExileServer\addons\``` directory. It should be alongside ```exile_server.pbo``` and ```exile_server_config.pbo```.
+
 
 ## infiSTAR:
 If you are using infiSTAR and want to keep ```_CGM = true;```, then set ```_UMW = true;``` (the latest version of infiSTAR already has DMS markers whitelisted in ```_aLocalM```).
 
-## Optional:
 
+### Vilayer or other Game Server Providers Instructions:
 
-### To modify the config:
-1. Download the a3_dms folder
-2. Edit the config.sqf to your preferences.
-3. Pack the a3_dms folder with a PBO tool (**PBO Manager**, Eliteness, or Arma 3 Tools suite)
-4. Follow the ["Installation:" steps](https://github.com/Defent/DMS_Exile#to-install) using the PBO you just created instead of the pre-packed one.
+If you are using Vilayer or some other GameServer hosting service, and/or the above steps did not work, then follow these instructions:
+
+1. Create a new folder called @a3_dms in the root ArmA 3 folder.
+2. Create a subfolder called "addons".
+3. Place the "a3_dms.pbo" in the "addons" subfolder.
+4. Edit your startup parameters/modline to include "@a3_dms". For example: ```-serverMod=@ExileServer;@a3_dms;```
 
 
 ### HEADLESS CLIENT:
 
-**We are dropping Headless Client support for DMS until it is completed, then we will create proper HC support.**
+**DMS does not currently support headless client. Do not attempt to use HC with DMS unless you know what you are doing.**
 
 ___
 
@@ -80,6 +94,41 @@ ___
 ___
 
 # Changelog:
+#### November 14, 2015 (8:30 PM CST-America):
+* **NEW CONFIG VALUES:**
+		
+		DMS_AllowStaticReinforcements
+		DMS_MarkerText_ShowAICount_Static
+		DMS_PredefinedMissionLocations_WEIGHTED
+		DMS_AIKill_DistanceBonusMinDistance
+		DMS_AIKill_DistanceBonusCoefficient
+* You can now manually disable Static Mission AI reinforcements using "DMS_AllowStaticReinforcements"
+* You can now choose whether or not to show AI count for map markers for both Static and Dynamic missions separately.
+* DMS will now check to see if the config.sqf didn't load properly, and for the presence of RyanZombies.
+* You can now make predefined locations weighted.
+* Some optimization + code clarity.
+* Added ```taviana_config.sqf``` (identical to ```tavi_config.sqf```) for the latest version of Taviana.
+* **saltflats mission**:
+	* The AI will now initially spawn randomly across the compound. This should help with the issue of some AI spawning outside of the compound.
+	* Added more static guns: 4 around the flagpole (5 meters north, south, east, and west). One on top of the tower in each corner, and another on the top of the concrete water tower.
+* When an AI group is offloaded to a client and he gets out of range AND no other viable client is found, the AI locality should now revert to the server (it used to just stay with the original client).
+* Added extra measures to prevent the creation of 2 markers with the same name.
+* fn_FillCrate.sqf:
+	* Fixed the issue where DMS would complain about incorrect parameters when using custom code to generate loot.
+	* DMS now has debug logging to tell you exactly what it spawns in the crate when using a crate case or custom code.
+* "DMS_PredefinedMissionLocations" itself will now be shuffled when finding a position. This should make the generated positions even more random.
+* Added new Group Reinforcement Types: "armed_vehicle_replace" and "static_gunner"
+* Potentially resolved the issue with launchers not being deleted from AI bodies when they're killed sometimes.
+* **fn_PlayerAwardOnAIKill.sqf**: Created a separate function to handle poptabs/respect of a player when he/she kills an AI.
+	* Added a "distance bonus" for respect when killing AI.
+	* Added logging for player rewards on AI kills.
+* DMS now lets Exile's body cleanup handle dead AIs.
+* Fixed the issue where DMS would spawn static missions even when "DMS_StaticMission" is set to false.
+* fn_SetAILocality.sqf now returns true/false if it does/doesn't find an owner.
+* New function "fn_SpawnAIGroup_MultiPos.sqf". Almost identical to SpawnAIGroup, except it spawns each AI along a list of locations.
+* **Removed the pre-packed PBO. Too many people were having issues with their PBO tool removing the prefix and repacking it would result in DMS not working.**
+
+
 #### October 30, 2015 (9:30 PM CST-America):
 * **NEW CONFIG VALUES:**
 

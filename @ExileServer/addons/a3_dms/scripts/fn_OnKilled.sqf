@@ -15,7 +15,7 @@
 */
 
 
-private ["_unit", "_killer", "_side", "_type", "_launcher", "_launcherVar", "_playerObj", "_removeAll", "_rockets", "_grpUnits", "_av", "_memCount", "_gunner", "_driver", "_gunnerIsAlive", "_driverIsAlive", "_grp", "_owner", "_start", "_roadKilled", "_veh", "_boom", "_revealAmount", "_silencer", "_moneyChange", "_repChange", "_money", "_respect", "_msgType", "_msgParams"];
+private ["_unit", "_killer", "_side", "_type", "_launcher", "_launcherVar", "_playerObj", "_removeAll", "_rockets", "_grpUnits", "_av", "_memCount", "_gunner", "_driver", "_gunnerIsAlive", "_driverIsAlive", "_grp", "_owner", "_start", "_roadKilled", "_veh", "_boom", "_revealAmount", "_muzzle", "_silencer"];
 
 
 if (DMS_DEBUG) then
@@ -53,7 +53,7 @@ if (DMS_clear_AI_body && {(random 100) <= DMS_clear_AI_body_chance}) then
 	_unit call _removeAll;
 };
 
-if(DMS_ai_remove_launchers && {(_launcherVar != "") || {_launcher != ""}}) then
+if (DMS_ai_remove_launchers && {(_launcherVar != "") || {_launcher != ""}}) then
 {
 	// Because arma is stupid sometimes
 	if (_launcher=="") then
@@ -62,24 +62,31 @@ if(DMS_ai_remove_launchers && {(_launcherVar != "") || {_launcher != ""}}) then
 
 		diag_log "sneaky launchers...";
 
+		_unit spawn
 		{
-			if (_launcherVar in (weaponCargo _x)) exitWith
+			sleep 0.5;
+			
 			{
-				deleteVehicle _x;
-				diag_log "gotcha";
-			};
-		} forEach (nearestObjects [_unit, ["GroundWeaponHolder","WeaponHolderSimulated"], 5]);
+				_holder = _x;
+				{
+					if (_x isKindOf ["LauncherCore", configFile >> "CfgWeapons"]) exitWith
+					{
+						deleteVehicle _holder;
+						diag_log "gotcha";
+					};
+				} forEach (weaponCargo _holder);
+			} forEach (nearestObjects [_this, ["GroundWeaponHolder","WeaponHolderSimulated"], 5]);
+		};
 	};
 
-	_rockets = _launcher call DMS_fnc_selectMagazine;
 	_unit removeWeaponGlobal _launcher;
 	
 	{
-		if(_x == _rockets) then
+		if (_x isKindOf ["CA_LauncherMagazine", configFile >> "CfgMagazines"]) then
 		{
 			_unit removeMagazineGlobal _x;
 		};
-	} forEach magazines _unit;
+	} forEach (magazines _unit);
 };
 
 if(DMS_RemoveNVG) then
@@ -109,6 +116,7 @@ if (!isNull _av) then
 	{
 		_av setDamage 1;
 		DMS_CleanUpList pushBack [_av,diag_tickTime,DMS_AIVehCleanUpTime];
+		_av setVariable ["ExileDiedAt",time];
 		_av spawn {sleep 1;_this enableSimulationGlobal false;};
 
 
@@ -305,85 +313,8 @@ if (isPlayer _killer) then
 };
 
 
-if ((!isNull _playerObj) && {((getPlayerUID _playerObj) != "") && {_playerObj isKindOf "Exile_Unit_Player"}}) then
-{
-	_moneyChange = missionNamespace getVariable [format ["DMS_%1_%2_MoneyGain",_side,_type],0];
-	_repChange = missionNamespace getVariable [format ["DMS_%1_%2_RepGain",_side,_type],0];
-
-	if (_roadKilled && {DMS_Diff_RepOrTabs_on_roadkill}) then
-	{
-		_moneyChange = missionNamespace getVariable [format ["DMS_%1_%2_RoadkillMoney",_side,_type],0];
-		_repChange = missionNamespace getVariable [format ["DMS_%1_%2_RoadkillRep",_side,_type],0];
-	};
-
-	if ((_moneyChange!=0) || (_repChange!=0)) then
-	{
-		_money = _playerObj getVariable ["ExileMoney", 0];
-		_respect = _playerObj getVariable ["ExileScore", 0];
-		
-		if (_moneyChange!=0) then
-		{
-			private ["_msgType", "_msgParams"];
-
-			// Set client's money
-			// I also make sure that they don't get negative poptabs
-			_money = (_money + _moneyChange) max 0;
-			_playerObj setVariable ["ExileMoney",_money];
-
-			_msgType = "moneyReceivedRequest";
-			_msgParams = [str _money, format ["killing a %1 AI",_type]];
-
-			if (_moneyChange<0) then
-			{
-				// Change message for players when they're actually LOSING poptabs
-				_msgType = "notificationRequest";
-				_msgParams = ["Whoops",[format ["Lost %1 poptabs from running over a %2 AI!",abs _moneyChange,_type]]];
-
-				// With the error message the money value won't be updated on the client, so I just directly PVC the value.
-				ExileClientPlayerMoney = _money;
-				(owner _playerObj) publicVariableClient "ExileClientPlayerMoney";
-				ExileClientPlayerMoney = nil;
-			};
-
-			if (DMS_Show_Kill_Poptabs_Notification) then
-			{
-				// Send notification and update client's money stats
-				[_playerObj, _msgType, _msgParams] call ExileServer_system_network_send_to;
-			}
-			else
-			{
-				// Player's money will already be updated for negative values, so let's not create unnecessary network traffic by sending another PVC
-				if (_moneyChange>0) then
-				{
-					ExileClientPlayerMoney = _money;
-					(owner _playerObj) publicVariableClient "ExileClientPlayerMoney";
-					ExileClientPlayerMoney = nil;
-				};
-			};
-		};
-
-		if (_repChange!=0) then
-		{
-			// Set client's respect
-			_respect = _respect + _repChange;
-			_playerObj setVariable ["ExileScore",_respect];
-
-			if (DMS_Show_Kill_Respect_Notification) then
-			{
-				// Send frag message
-				[_playerObj, "showFragRequest", [ [[format ["%1 AI KILL",toUpper _type],_repChange]] ] ] call ExileServer_system_network_send_to;
-			};
-
-			// Send updated respect value to client
-			ExileClientPlayerScore = _respect;
-			(owner _playerObj) publicVariableClient "ExileClientPlayerScore";
-			ExileClientPlayerScore = nil;
-		};
-
-		// Update client database entry
-		format["setAccountMoneyAndRespect:%1:%2:%3", _money, _respect, (getPlayerUID _playerObj)] call ExileServer_system_database_query_fireAndForget;
-	};
-};
+[_playerObj, _unit, _side, _type, _roadKilled] call DMS_fnc_PlayerAwardOnAIKill;
 
 
-DMS_CleanUpList pushBack [_unit,diag_tickTime,DMS_CompletedMissionCleanupTime];
+// Let Exile handle the AI Body cleanup.
+_unit setVariable ["ExileDiedAt",time];

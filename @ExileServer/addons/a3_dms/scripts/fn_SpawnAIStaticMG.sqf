@@ -11,11 +11,11 @@
 			...
 			_pos3
 		],
-		_group,			// Group to which the AI unit(s) belongs to
-		_class,			// Class: "random","assault","MG","sniper" or "unarmed"
-		_difficulty,	// Difficulty: "random","static","hardcore","difficult","moderate", or "easy"
-		_side,			// "bandit","hero", etc.
-		_MGClass		// !OPTIONAL) String: classname of the MG. Use "random" to select a random one from DMS_static_weapons
+		_group,			// GROUP: Group to which the AI unit(s) belongs to
+		_class,			// STRING: "random","assault","MG","sniper" or "unarmed"
+		_difficulty,	// STRING: "random","static","hardcore","difficult","moderate", or "easy"
+		_side,			// STRING: "bandit","hero", etc.
+		_MGClass		// (OPTIONAL) STRING: classname of the MG. Use "random" to select a random one from DMS_static_weapons
 	] call DMS_fnc_SpawnAIStaticMG;
 
 	Returns an array of static gun objects.

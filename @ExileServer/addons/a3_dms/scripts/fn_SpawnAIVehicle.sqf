@@ -61,6 +61,8 @@ if (_vehClass == "random") then
 _tmpGroup = createGroup (missionNamespace getVariable [format ["DMS_%1Side",_side],EAST]);
 
 _veh = createVehicle [_vehClass, _spawnPos, [], 0, "NONE"];
+_veh setFuel 1;
+_veh engineOn true;
 _veh setDir (random 360);
 _veh lock 2;
 

@@ -50,54 +50,65 @@ _clean =
 };
 
 
-{
-    if ((typeName _x) == "OBJECT") then
-    {
-        if (isNull _x) exitWith {};
 
-        if !([_x,DMS_CleanUp_PlayerNearLimit] call DMS_fnc_IsPlayerNearby) then
+{
+    private ["_parameter"];
+    _parameter = _x;
+
+    switch (typeName _parameter) do
+    {
+        case "ARRAY":
         {
-            _x call _clean;
-        }
-        else
-        {
-            _skippedObjects pushBack _x;
             if (DMS_DEBUG) then
             {
-                (format ["CleanUp :: Skipping cleanup for |%1|, player within %2 meters!",_x,DMS_CleanUp_PlayerNearLimit]) call DMS_fnc_DebugLog;
+                (format ["CleanUp :: Doing recursive call for ARRAY: %1",_parameter]) call DMS_fnc_DebugLog;
             };
+            _parameter call DMS_fnc_CleanUp;
         };
-    }
-    else
-    {
-        if ((typeName _x) == "GROUP") exitWith
-        {
-            if (!isNull _x) then
-            {
-                // Group cleanup should only be called when it has to be deleted regardless, so no need to check for nearby players
-                {
-                    _x call _clean;
-                } forEach (units _x);
 
-                if(local _x)then
+        case "OBJECT":
+        {
+            if (isNull _parameter) exitWith {};
+
+            if !([_parameter,DMS_CleanUp_PlayerNearLimit] call DMS_fnc_IsPlayerNearby) then
+            {
+                _parameter call _clean;
+            }
+            else
+            {
+                _skippedObjects pushBack _parameter;
+                if (DMS_DEBUG) then
                 {
-                    deleteGroup _x;
-                }
-                else
-                {
-                    [groupOwner _x,"DeleteGroupPlz",[_x]] call ExileServer_system_network_send_to;
+                    (format ["CleanUp :: Skipping cleanup for |%1|, player within %2 meters!",_parameter,DMS_CleanUp_PlayerNearLimit]) call DMS_fnc_DebugLog;
                 };
             };
         };
-        if ((typeName _x) == "ARRAY") exitWith
+
+        case "GROUP":
         {
-            if (DMS_DEBUG) then
+            if (isNull _parameter) exitWith {};
+
+            // Group cleanup should only be called when it has to be deleted regardless of player presence, so no need to check for nearby players
+            // If you want to check player presence before deleting a group, then do {(units _group) call DMS_fnc_CleanUp} instead of {_group call DMS_fnc_CleanUp}
             {
-                (format ["CleanUp :: Doing recursive call for ARRAY: %1",_x]) call DMS_fnc_DebugLog;
+                _x call _clean;
+            } forEach (units _parameter);
+
+            if (local _parameter) then
+            {
+                deleteGroup _parameter;
+            }
+            else
+            {
+                [groupOwner _parameter, "DeleteGroupPlz", [_parameter]] call ExileServer_system_network_send_to;
             };
-            _x call DMS_fnc_CleanUp;
         };
-        diag_log format ["DMS ERROR :: Attempted to call DMS_fnc_CleanUp on non- group or object %1 from array %2",_x,_this];
+
+        default
+        {
+            diag_log format ["DMS ERROR :: Calling DMS_fnc_CleanUp with an invalid parameter: %1 | Type: %2", _parameter, typeName _parameter];
+            []
+        };
     };
 } forEach _this;
 

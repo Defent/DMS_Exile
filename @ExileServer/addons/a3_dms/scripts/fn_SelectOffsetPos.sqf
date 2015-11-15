@@ -28,7 +28,9 @@ if (!_OK) exitWith
 	[0,0,0]
 };
 
-_npos = [(_pos select 0)+(sin(_dir)*_dis),(_pos select 1)+(cos(_dir)*_dis),_pos select 2];
+if ((count _pos) isEqualTo 2) then
+{
+	_pos set [2,0];
+};
 
-
-_npos
+_pos vectorAdd [sin(_dir)*_dis,cos(_dir)*_dis,0]

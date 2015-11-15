@@ -60,13 +60,13 @@ if !((toLower _color) in DMS_A3_AllMarkerColors) then
 	_color = "ColorRed";
 };
 
-_circle = createMarker [format ["DMS_MissionMarkerCircle%1",_num], _pos];
+_circle = createMarker [format ["DMS_MissionMarkerCircle%1_%2",_num,round(time)], _pos];
 _circle setMarkerColor _color;
 _circle setMarkerShape "ELLIPSE";
 _circle setMarkerBrush "Solid";
 _circle setMarkerSize [150,150];
 
-_dot = createMarker [format ["DMS_MissionMarkerDot%1",_num], _pos];
+_dot = createMarker [format ["DMS_MissionMarkerDot%1_%2",_num,round(time)], _pos];
 _dot setMarkerColor "ColorBlack";
 _dot setMarkerType "mil_dot";
 _dot setMarkerText _text;

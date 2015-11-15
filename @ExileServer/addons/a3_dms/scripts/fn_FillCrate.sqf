@@ -31,29 +31,29 @@
 			_customLootFunction
 		]
 		In this case, "_customLootFunctionParams" is passed to "_customLootFunction", and the custom loot function must return the loot in the form:
+		[
 			[
-				[
-					weapon1,
-					weapon2,
-					[weapon_that_appears_twice,2],
-					...
-					weaponN
-				],
-				[
-					item1,
-					item2,
-					[item_that_appears_5_times,5],
-					...
-					itemN
-				],
-				[
-					backpack1,
-					backpack2,
-					[backpack_that_appears_3_times,3],
-					...
-					backpackN
-				]
+				weapon1,
+				weapon2,
+				[weapon_that_appears_twice,2],
+				...
+				weaponN
+			],
+			[
+				item1,
+				item2,
+				[item_that_appears_5_times,5],
+				...
+				itemN
+			],
+			[
+				backpack1,
+				backpack2,
+				[backpack_that_appears_3_times,3],
+				...
+				backpackN
 			]
+		]
 */
 
 private ["_crate","_lootValues","_wepCount","_weps","_itemCount","_items","_backpackCount","_backpacks","_weapon","_ammo","_item","_backpack","_crateValues","_rareLootChance","_marker"];
@@ -63,7 +63,7 @@ private ["_crate","_lootValues","_wepCount","_weps","_itemCount","_items","_back
 _OK = params
 [
 	["_crate",objNull,[objNull]],
-	["_lootValues","",[0,"",[]],[3]]
+	["_lootValues","",[0,"",[]],[2,3]]
 ];
 
 if (!_OK || {isNull _crate}) exitWith
@@ -221,6 +221,12 @@ else
 		};
 		_crate addBackpackCargoGlobal _x;
 	} forEach _backpacks;
+
+
+	if (DMS_DEBUG) then
+	{
+		(format["FillCrate :: Filled crate %1 (at %5) with weapons |%2|, items |%3|, and backpacks |%4|",_crate, _weps, _items, _backpacks, getPosATL _crate]) call DMS_fnc_DebugLog;
+	};
 };
 
 

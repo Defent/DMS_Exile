@@ -126,7 +126,7 @@ DMS_fnc_setRelPositions =
 	{
 		private ['_relpos','_objPos'];
 
-		_relpos = [getPosATL _x, _center] call M3E_fnc_subArr;
+		_relpos = (getPosATL _x) vectorDiff _center;
 		_objPos = [_newCPos,_relpos] call DMS_fnc_CalcPos;
 
 		_x setPosATL _objPos;

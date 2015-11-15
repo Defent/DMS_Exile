@@ -14,6 +14,7 @@ if (!DMS_ai_offload_to_client && {isNull DMS_HC_Object}) exitWith {};
 		private ["_leader", "_group", "_owner"];
 		_leader = leader _x;
 		_group = _x;
+		_groupOwner = groupOwner _group;
 		if ((!isNull _leader) && {(alive _leader) && {!isPlayer _leader}}) then
 		{
 			if (isNull DMS_HC_Object) then
@@ -22,23 +23,39 @@ if (!DMS_ai_offload_to_client && {isNull DMS_HC_Object}) exitWith {};
 				{
 					(format ["AILocalityManager :: DMS_HC_Object is null! Finding owner for group: %1",_group]) call DMS_fnc_DebugLog;
 				};
+
+
 				_owner = objNull;
 
+				if !(local _group) then								// Only check for the group owner in players if it doesn't belong to the server.
 				{
-					if ((groupOwner _group) isEqualTo (owner _x)) exitWith
 					{
-						_owner = _x;
-					};
-				} forEach allPlayers;
+						if (_groupOwner isEqualTo (owner _x)) exitWith
+						{
+							_owner = _x;
+						};
+					} forEach allPlayers;
+				};
 
 				if ((isNull _owner) || {(_owner distance2D _leader)>3500}) then
 				{
-					[_group,_leader] call DMS_fnc_SetAILocality;
+					if !([_group,_leader] call DMS_fnc_SetAILocality) then
+					{
+						if !(local _group) then
+						{
+							_group setGroupOwner 2;
+
+							if (DMS_DEBUG) then
+							{
+								(format ["AILocalityManager :: Current owner of group %1 is too far away and no other viable owner found; resetting ownership to the server.",_group]) call DMS_fnc_DebugLog;
+							};
+						};
+					};
 				};
 			}
 			else
 			{
-				if !((groupOwner _group) isEqualTo (owner DMS_HC_Object)) then
+				if !(_groupOwner isEqualTo (owner DMS_HC_Object)) then
 				{
 					_transferSuccess = _group setGroupOwner (owner DMS_HC_Object);
 					if (DMS_DEBUG) then

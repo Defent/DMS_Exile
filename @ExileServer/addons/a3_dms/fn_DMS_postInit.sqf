@@ -13,6 +13,17 @@ if !(isServer) exitWith
 };
 
 
+
+if (isNil "DMS_DynamicMission") exitWith
+{
+	for "_i" from 0 to 99 do
+	{
+		diag_log "DMS ERROR :: You have made an error in your DMS config.sqf! Cancelling DMS Launch.";
+	};
+};
+
+
+
 RESISTANCE setFriend[WEST,0];
 WEST setFriend[RESISTANCE,0];
 RESISTANCE setFriend[EAST,0];
@@ -20,11 +31,21 @@ EAST setFriend[RESISTANCE,0];
 EAST setFriend[WEST,0];
 WEST setFriend[EAST,0];
 
+
+
 if ((!isNil "A3XAI_isActive") && {!DMS_ai_offload_Only_DMS_AI}) then
 {
 	diag_log 'DMS DETECTED A3XAI. Enabling "DMS_ai_offload_Only_DMS_AI"!';
 	DMS_ai_offload_Only_DMS_AI = true;
 };
+
+if ((isClass (configFile >> "CfgPatches" >> "Ryanzombies")) && {!DMS_ai_offload_Only_DMS_AI}) then
+{
+	diag_log 'DMS DETECTED RyanZombies. Enabling "DMS_ai_offload_Only_DMS_AI"!';
+	DMS_ai_offload_Only_DMS_AI = true;
+};
+
+
 
 DMS_A3_AllMarkerColors = [];
 for "_i" from 0 to ((count(configfile >> "CfgMarkerColors"))-1) do
@@ -33,6 +54,21 @@ for "_i" from 0 to ((count(configfile >> "CfgMarkerColors"))-1) do
 };
 
 
+if !((toLower DMS_MissionMarkerWinDotColor) in DMS_A3_AllMarkerColors) then
+{
+	diag_log format ["DMS ERROR :: Unsupported color for DMS_MissionMarkerWinDotColor (""%1""). Switching color to ""ColorBlue"".",DMS_MissionMarkerWinDotColor];
+	DMS_MissionMarkerWinDotColor = "ColorBlue";
+};
+
+if !((toLower DMS_MissionMarkerLoseDotColor) in DMS_A3_AllMarkerColors) then
+{
+	diag_log format ["DMS ERROR :: Unsupported color for DMS_MissionMarkerLoseDotColor (""%1""). Switching color to ""ColorRed"".",DMS_MissionMarkerLoseDotColor];
+	DMS_MissionMarkerLoseDotColor = "ColorRed";
+};
+
+
+
+// Create and send Client Functions using compileFinal for security.
 DMS_CLIENT_fnc_spawnDynamicText = compileFinal
 ("
 [
@@ -65,9 +101,22 @@ DMS_CLIENT_fnc_spawnTextTiles = compileFinal
 ");
 publicVariable "DMS_CLIENT_fnc_spawnTextTiles";
 
+
+
+// Add the weighted predefined locations to the list of predefined locations
+{
+	for "_i" from 1 to (_x select 1) do
+	{
+		DMS_PredefinedMissionLocations pushBack (_x select 0);
+	};
+} forEach DMS_PredefinedMissionLocations_WEIGHTED;
+
+
+
 // Set up the minimum/maximum co-ordinate values for x and y...
 DMS_MinMax_X_Coords = [DMS_MinDistFromWestBorder, worldSize - DMS_MinDistFromEastBorder];
 DMS_MinMax_Y_Coords = [DMS_MinDistFromSouthBorder, worldSize - DMS_MinDistFromNorthBorder];
+
 
 
 if (DMS_DynamicMission || {DMS_StaticMission}) then
@@ -123,6 +172,6 @@ else
 };
 
 
-DMS_Version = "October 30 2015";
+DMS_Version = "November 14 2015";
 
 "DMS post-init complete." call DMS_fnc_DebugLog;
