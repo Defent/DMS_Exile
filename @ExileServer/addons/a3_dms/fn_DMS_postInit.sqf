@@ -172,6 +172,6 @@ else
 };
 
 
-DMS_Version = "November 14 2015";
+DMS_Version = "November 18 2015";
 
 "DMS post-init complete." call DMS_fnc_DebugLog;

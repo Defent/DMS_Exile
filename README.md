@@ -94,6 +94,12 @@ ___
 ___
 
 # Changelog:
+#### November 18, 2015 (7:45 PM CST-America):
+* **Tweaks to saltflats static mission:**
+	* AI Vehicle is spawned AFTER the base is spawned (hopefully limits/prevents it from spawning inside something).
+	* Before spawning a new crate, any crate (with the same classname) that potentially exists from a previous mission is deleted first.
+
+
 #### November 14, 2015 (8:30 PM CST-America):
 * **NEW CONFIG VALUES:**
 		

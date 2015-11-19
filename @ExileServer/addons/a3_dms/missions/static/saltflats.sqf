@@ -59,7 +59,7 @@ _AISoldierSpawnLocations =
 // Create AI
 _AICount = 20 + (round (random 5));
 
-// I add
+
 _group =
 [
 	_AISoldierSpawnLocations,
@@ -68,18 +68,6 @@ _group =
 	"random",
 	_side
 ] call DMS_fnc_SpawnAIGroup_MultiPos;
-
-_veh =
-[
-	[
-		[_pos,100,random 360] call DMS_fnc_SelectOffsetPos,
-		_pos
-	],
-	_group,
-	"assault",
-	_difficulty,
-	_side
-] call DMS_fnc_SpawnAIVehicle;
 
 
 _staticGuns =
@@ -100,11 +88,20 @@ _staticGuns =
 	"assault",
 	_difficulty,
 	"bandit",
-	"O_HMG_01_high_F"
+	"random"
 ] call DMS_fnc_SpawnAIStaticMG;
 
+
+
+// Create Crate
+_crateClassname = "I_CargoNet_01_ammo_F";
+deleteVehicle (nearestObject [_pos, _crateClassname]);		// Make sure to remove any previous crate.
+
+_crate = [_crateClassname, _pos] call DMS_fnc_SpawnCrate;
+
+
 _baseObjs = [];
-if (isNil "DMS_SaltFlatsBaseSpawned") then
+if (isNil "DMS_SaltFlatsBaseSpawned") then					// This is to prevent having to delete then respawn the base, which would create unnecessary load on the server. Best to just leave the base up (unless you don't want to respawn the mission).
 {
 	_baseObjs =
 	[
@@ -114,8 +111,18 @@ if (isNil "DMS_SaltFlatsBaseSpawned") then
 };
 
 
-// Create Crate
-_crate = ["I_CargoNet_01_ammo_F",_pos] call DMS_fnc_SpawnCrate;
+// Spawn the vehicle AFTER the base so that it spawns the vehicle in a (relatively) clear position.
+_veh =
+[
+	[
+		[_pos,100,random 360] call DMS_fnc_SelectOffsetPos,
+		_pos
+	],
+	_group,
+	"assault",
+	_difficulty,
+	_side
+] call DMS_fnc_SpawnAIVehicle;
 
 
 // Define mission-spawned AI Units
