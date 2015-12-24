@@ -19,7 +19,7 @@
 			]
 		],
 		[_missionName,_msgWIN,_msgLose],
-		[_markerDot,_markerCircle],
+		_markers,
 		_missionSide,
 		_missionDifficulty,
 		_missionEvents,

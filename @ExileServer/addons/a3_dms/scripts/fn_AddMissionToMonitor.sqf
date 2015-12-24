@@ -41,7 +41,7 @@
 			]
 		],
 		[_missionName,_msgWIN,_msgLose],
-		[_markerDot,_markerCircle],
+		_markers,
 		_side,
 		_difficulty,
 		_missionEvents,
@@ -71,7 +71,7 @@ if !(params
 	["_inputUnits","",[[]]],
 	["_missionObjs","",[[]],[3,4]],
 	["_messages","",[[]],[3]],
-	["_markers","",[[]],[2]],
+	["_markers","",[[]],[DMS_MissionMarkerCount]],
 	["_side","bandit",[""]],
 	["_difficulty","moderate",[""]],
 	["_missionEvents",[],[[]]]
@@ -144,17 +144,6 @@ try
 	};
 
 
-	if !(_markers params
-	[
-		["_markerDot","",[""]],
-		["_markerCircle","",[""]]
-	])
-	then
-	{
-		throw format["_markers |%1|",_markers];
-	};
-
-
 	if !(_onEndingScripts params
 	[
 		["_onSuccessScripts", [], [[]]],
@@ -187,10 +176,7 @@ try
 			_msgWIN,
 			_msgLose
 		],
-		[
-			_markerDot,
-			_markerCircle
-		],
+		_markers,
 		_side,
 		_difficulty,
 		_missionEvents,

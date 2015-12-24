@@ -37,11 +37,15 @@ if ((_pos isEqualTo "ERROR") || ("_text" isEqualTo "ERROR")) exitWith
 };
 
 
-_randomMarker = DMS_MarkerPosRandomization;
-if ((count _this)>3) then
-{
-	_randomMarker = param [3,DMS_MarkerPosRandomization,[false]];
-};
+_randomMarker =
+	if ((count _this)>3) then
+	{
+		_this select 3;
+	}
+	else
+	{
+		DMS_MarkerPosRandomization;
+	};
 
 _num = DMS_MissionCount;
 

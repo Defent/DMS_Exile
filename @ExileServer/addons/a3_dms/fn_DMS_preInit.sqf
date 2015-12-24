@@ -7,7 +7,7 @@ DMS_HC_Object = objNull;
 
 DMS_CleanUpList	= [];
 
-DMS_Version = "December 24 2015";
+DMS_Version = "December 24 2015 (Vish Version)";
 
 
 //Load main config

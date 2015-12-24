@@ -29,7 +29,7 @@ if (isNull _AI) exitWith
 _AIType = typeName _AI;
 
 
-_pos = if (_AIType=="OBJECT") then {_AI} else {param [1,"",[objNull,[]],[2,3]]};
+_pos = if (_AIType isEqualTo "OBJECT") then {_AI} else {param [1,"",[objNull,[]],[2,3]]};
 
 if (_pos isEqualTo "") exitWith
 {
@@ -50,7 +50,7 @@ _client = objNull;
 
 if (!isNull _client) then
 {
-	_swapped = if (_AIType=="OBJECT") then {_AI setOwner (owner _client)} else {_AI setGroupOwner (owner _client)};
+	_swapped = if (_AIType isEqualTo "OBJECT") then {_AI setOwner (owner _client)} else {_AI setGroupOwner (owner _client)};
 
 	if (!_swapped) then
 	{

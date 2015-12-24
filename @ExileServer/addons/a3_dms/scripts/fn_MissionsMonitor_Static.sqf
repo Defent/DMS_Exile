@@ -25,7 +25,7 @@
 			[_mine1,_mine2,...,_mineX]
 		],
 		[_missionName,_msgWIN,_msgLose],
-		[_markerDot,_markerCircle],
+		_markers,
 		_missionSide,
 		_missionDifficulty,
 		_missionEvents,
@@ -54,7 +54,7 @@ if (DMS_StaticMission_Arr isEqualTo []) exitWith {};				// Empty array, no stati
 		["_inputAIUnits",				[],		[[]]			],
 		["_missionObjs",				[],		[[]],	[4]		],
 		["_msgInfo",					[],		[[]],	[3]		],
-		["_markers",					[],		[[]],	[2]		],
+		["_markers",					[],		[[]],	[DMS_MissionMarkerCount]		],
 		["_missionSide",				"",		[""]			],
 		["_missionDifficulty",			"",		[""]			],
 		["_missionEvents",				[],		[[]]			],
