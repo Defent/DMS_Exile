@@ -14,13 +14,13 @@
 
 private ["_OK", "_min", "_max", "_return"];
 
-_OK = params
+
+if !(params
 [
 	["_min",0,[0]],
 	["_max",0,[0]]
-];
-
-if (!_OK) exitWith
+])
+exitWith
 {
 	diag_log format ["DMS ERROR :: Calling DMS_fnc_SelectRandomVal with invalid parameters: %1",_this];
 };

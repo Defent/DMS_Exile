@@ -67,20 +67,19 @@ if (isNil "_this") then
 }
 else
 {
-	if (((typeName _this)=="ARRAY") && {(count _this)>1}) then
+	if ((_this isEqualType []) && {(count _this)>1}) then
 	{
-		_OK = params
+		if (params
 		[
 			["_findSafePosParams",[25,DMS_WaterNearBlacklist,DMS_MaxSurfaceNormal,DMS_SpawnZoneNearBlacklist,DMS_TraderZoneNearBlacklist,DMS_MissionNearBlacklist,DMS_PlayerNearBlacklist,DMS_TerritoryNearBlacklist,DMS_ThrottleBlacklists],[[]]],
 			["_posInfo",[],[[]],[1,2]]
-		];
-
-		if (_OK) then
+		])
+		then
 		{
 			_missionPosition = _posInfo select 0;
 			_forceSpawn = if ((count _posInfo)>1) then {_posInfo select 1} else {false};
 
-			if (((typeName _missionPosition)!="ARRAY") || {(count _missionPosition)<2}) then
+			if (!(_missionPosition isEqualType []) || {(count _missionPosition)<2}) then
 			{
 				// Empty array means that you want to generate a mission position.
 				if !(_missionPosition isEqualTo []) then

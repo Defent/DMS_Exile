@@ -39,11 +39,6 @@ if ((!isNull _playerObj) && {(_playerUID != "") && {_playerObj isKindOf "Exile_U
 	_moneyChange = missionNamespace getVariable [format ["DMS_%1_%2_MoneyGain",_AISide,_AIType],0];
 	_repChange = missionNamespace getVariable [format ["DMS_%1_%2_RepGain",_AISide,_AIType],0];
 
-	if (_roadKilled && {DMS_Diff_RepOrTabs_on_roadkill}) then
-	{
-		_moneyChange = missionNamespace getVariable [format ["DMS_%1_%2_RoadkillMoney",_AISide,_AIType],0];
-		_repChange = missionNamespace getVariable [format ["DMS_%1_%2_RoadkillRep",_AISide,_AIType],0];
-	};
 
 	// Check for individually defined AI money/respect.
 	_unitMoney = _unit getVariable ["DMS_AI_Money",""];
@@ -57,6 +52,13 @@ if ((!isNull _playerObj) && {(_playerUID != "") && {_playerObj isKindOf "Exile_U
 	if !(_unitRespect isEqualTo "") then
 	{
 		_repChange = _unitRespect;
+	};
+
+
+	if (_roadKilled && {DMS_Diff_RepOrTabs_on_roadkill}) then
+	{
+		_moneyChange = missionNamespace getVariable [format ["DMS_%1_%2_RoadkillMoney",_AISide,_AIType],0];
+		_repChange = missionNamespace getVariable [format ["DMS_%1_%2_RoadkillRep",_AISide,_AIType],0];
 	};
 
 

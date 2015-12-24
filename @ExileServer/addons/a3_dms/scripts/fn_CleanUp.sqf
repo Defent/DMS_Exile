@@ -20,35 +20,14 @@ if (DMS_DEBUG) then
     (format ["CleanUp :: CLEANING UP: %1",_this]) call DMS_fnc_DebugLog;
 };
 
-if !((typeName _this) == "ARRAY") then
+if !(_this isEqualType []) then
 {
     _this = [_this];
 };
 
-private ["_skippedObjects","_clean"];
+private ["_skippedObjects"];
 
 _skippedObjects = [];
-
-_clean =
-{   
-    {
-        detach _x;
-        _x call _clean;
-    } forEach (attachedObjects _x);
-    _this enableSimulationGlobal false;
-    _this removeAllMPEventHandlers "mpkilled";
-    _this removeAllMPEventHandlers "mphit";
-    _this removeAllMPEventHandlers "mprespawn";
-    _this removeAllEventHandlers "FiredNear";
-    _this removeAllEventHandlers "HandleDamage";
-    _this removeAllEventHandlers "Killed";
-    _this removeAllEventHandlers "Fired";
-    _this removeAllEventHandlers "GetOut";
-    _this removeAllEventHandlers "GetIn";
-    _this removeAllEventHandlers "Local";
-    deleteVehicle _this;
-};
-
 
 
 {
@@ -72,7 +51,7 @@ _clean =
 
             if !([_parameter,DMS_CleanUp_PlayerNearLimit] call DMS_fnc_IsPlayerNearby) then
             {
-                _parameter call _clean;
+                _parameter call ExileServer_system_garbageCollector_deleteObject;
             }
             else
             {
@@ -91,7 +70,7 @@ _clean =
             // Group cleanup should only be called when it has to be deleted regardless of player presence, so no need to check for nearby players
             // If you want to check player presence before deleting a group, then do {(units _group) call DMS_fnc_CleanUp} instead of {_group call DMS_fnc_CleanUp}
             {
-                _x call _clean;
+                _x call ExileServer_system_garbageCollector_deleteObject;
             } forEach (units _parameter);
 
             if (local _parameter) then

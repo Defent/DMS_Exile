@@ -17,13 +17,13 @@
 
 private ["_missionName", "_messageInfo", "_titleColor", "_message"];
 
-_OK = params
+
+if !(params
 [
 	["_missionName","",[""]],
 	["_messageInfo",[],[[]],[2]]
-];
-
-if (!_OK) exitWith
+])
+exitWith
 {
 	diag_log format ["DMS ERROR :: Calling DMS_fnc_BroadcastMissionStatus with invalid parameters: %1",_this];
 };
@@ -39,7 +39,7 @@ if (DMS_DEBUG) then
 	(format["BroadcastMissionStatus :: Notification types: |%1| for broadcasting mission status: %2",DMS_PlayerNotificationTypes,_message]) call DMS_fnc_DebugLog;
 };
 
-if ((typeName _message) != "STRING") then
+if !(_message isEqualType "") then
 {
 	_message = str _message;
 };

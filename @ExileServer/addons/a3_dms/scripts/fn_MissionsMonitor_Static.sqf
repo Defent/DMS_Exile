@@ -31,7 +31,9 @@
 		_missionEvents,
 		[
 			_onSuccessScripts,
-			_onFailScripts
+			_onFailScripts,
+			_onMonitorStart,
+			_onMonitorEnd
 		]
 	]
 
@@ -41,58 +43,66 @@ if (DMS_StaticMission_Arr isEqualTo []) exitWith {};				// Empty array, no stati
 
 
 {
+	private ["_missionPos", "_completionInfo", "_groupReinforcementsInfo", "_timing", "_inputAIUnits", "_missionObjs", "_msgInfo", "_markers", "_missionSide", "_missionDifficulty", "_missionEvents", "_missionScripts", "_success", "_timeStarted", "_timeUntilFail", "_buildings", "_vehs", "_crate_info_array", "_mines", "_missionName", "_msgWIN", "_msgLose", "_onSuccessScripts", "_onFailScripts"];
+
+	if !(_x params
+	[
+		["_missionPos", 				[],		[[]],	[2,3]	],
+		["_completionInfo",				[],		[[]]			],
+		["_groupReinforcementsInfo",	[],		[[]]			],
+		["_timing",						[],		[[]],	[2]		],
+		["_inputAIUnits",				[],		[[]]			],
+		["_missionObjs",				[],		[[]],	[4]		],
+		["_msgInfo",					[],		[[]],	[3]		],
+		["_markers",					[],		[[]],	[2]		],
+		["_missionSide",				"",		[""]			],
+		["_missionDifficulty",			"",		[""]			],
+		["_missionEvents",				[],		[[]]			],
+		["_missionScripts",				[],		[[]],	[4]		]
+	])
+	then
+	{
+		DMS_StaticMission_Arr deleteAt _forEachIndex;
+		diag_log format ["DMS ERROR :: Invalid Index (%1) in DMS_StaticMission_Arr: %2",_forEachIndex,_x];
+	};
+
+	_success					= _completionInfo call DMS_fnc_MissionSuccessState;
+	_timeStarted				= _timing select 0;
+	_timeUntilFail				= _timing select 1;
+	_buildings					= _missionObjs select 0;
+	_vehs						= _missionObjs select 1;
+	_crate_info_array			= _missionObjs select 2;
+	_mines						= _missionObjs select 3;
+	_missionName				= _msgInfo select 0;
+	_msgWIN						= _msgInfo select 1;
+	_msgLose					= _msgInfo select 2;
+	_onSuccessScripts			= _missionScripts select 0;
+	_onFailScripts				= _missionScripts select 1;
+	_onMonitorStart				= _missionScripts select 2;
+	_onMonitorEnd				= _missionScripts select 3;
+	
 	try
 	{
-		private ["_missionPos", "_completionInfo", "_groupReinforcementsInfo", "_timing", "_inputAIUnits", "_missionObjs", "_msgInfo", "_markers", "_missionSide", "_missionDifficulty", "_missionEvents", "_endingScripts", "_success", "_timeStarted", "_timeUntilFail", "_buildings", "_vehs", "_crate_info_array", "_mines", "_missionName", "_msgWIN", "_msgLose", "_onSuccessScripts", "_onFailScripts"];
-
-		if !(_x params
-		[
-			["_missionPos", 				[],		[[]],	[2,3]	],
-			["_completionInfo",				[],		[[]]			],
-			["_groupReinforcementsInfo",	[],		[[]]			],
-			["_timing",						[],		[[]],	[2]		],
-			["_inputAIUnits",				[],		[[]]			],
-			["_missionObjs",				[],		[[]],	[4]		],
-			["_msgInfo",					[],		[[]],	[3]		],
-			["_markers",					[],		[[]],	[2]		],
-			["_missionSide",				"",		[""]			],
-			["_missionDifficulty",			"",		[""]			],
-			["_missionEvents",				[],		[[]]			],
-			["_endingScripts",				[],		[[]],	[2]		]
-		])
-		then
-		{
-			DMS_StaticMission_Arr deleteAt _forEachIndex;
-			diag_log format ["DMS ERROR :: Invalid Index (%1) in DMS_StaticMission_Arr: %2",_forEachIndex,_x];
-			throw "DMS ERROR";
-		};
-
-
-		_success					= _completionInfo call DMS_fnc_MissionSuccessState;
-		_timeStarted				= _timing select 0;
-		_timeUntilFail				= _timing select 1;
-		_buildings					= _missionObjs select 0;
-		_vehs						= _missionObjs select 1;
-		_crate_info_array			= _missionObjs select 2;
-		_mines						= _missionObjs select 3;
-		_missionName				= _msgInfo select 0;
-		_msgWIN						= _msgInfo select 1;
-		_msgLose					= _msgInfo select 2;
-		_onSuccessScripts			= _endingScripts select 0;
-		_onFailScripts				= _endingScripts select 1;
-
 		/*
 		if (DMS_DEBUG) then
 		{
-			(format ["MissionsMonitor_Dynamic :: Checking Mission Status (index %1): ""%2"" at %3",_forEachIndex,_missionName,_missionPos]) call DMS_fnc_DebugLog;
+			(format ["MissionsMonitor_Static :: Checking Mission Status (index %1): ""%2"" at %3",_forEachIndex,_missionName,_missionPos]) call DMS_fnc_DebugLog;
 		};
 		*/
 
+		if !(_onMonitorStart isEqualTo {}) then
+		{
+			if (DMS_DEBUG) then
+			{
+				(format ["MissionsMonitor_Static :: Calling _onMonitorStart (index %1): ""%2"". Code: %3",_forEachIndex,_missionName,_onMonitorStart]) call DMS_fnc_DebugLog;
+			};
+			_x call _onMonitorStart;
+		};
+
+
 		if (_success) then
 		{
-			_AIUnits = _inputAIUnits call DMS_fnc_GetAllUnits;
-
-			DMS_CleanUpList pushBack [_AIUnits+_buildings,diag_tickTime,DMS_CompletedMissionCleanupTime];
+			DMS_CleanUpList pushBack [_buildings,diag_tickTime,DMS_CompletedMissionCleanupTime];
 
 			{
 				_x allowDamage true;
@@ -133,7 +143,7 @@ if (DMS_StaticMission_Arr isEqualTo []) exitWith {};				// Empty array, no stati
 
 			{
 				_code = _x;
-				if ((typeName _code)=="STRING") then
+				if (_code isEqualType "") then
 				{
 					_code = compile _code;
 				};
@@ -159,22 +169,25 @@ if (DMS_StaticMission_Arr isEqualTo []) exitWith {};				// Empty array, no stati
 				throw format ["Mission Timeout Extended at %1 with timeout after %2 seconds. Position: %3",diag_tickTime,_timeUntilFail,_missionPos];
 			};
 
-
-			_AIUnits = _inputAIUnits call DMS_fnc_GetAllUnits;
-
 			//Nobody is nearby so just cleanup objects from here
-			_cleanupList = (_AIUnits+_buildings+_vehs);
+			_cleanupList = ((_inputAIUnits call DMS_fnc_GetAllUnits)+_buildings+_vehs+_mines);
 
 			{
 				_cleanupList pushBack (_x select 0);
 			} forEach _crate_info_array;
 
+			private["_prev"];
+			_prev = DMS_CleanUp_PlayerNearLimit;
+			DMS_CleanUp_PlayerNearLimit = 0;			// Temporarily set the limit to 0 since we want to delete all the stuff regardless of player presence.
+
 			_cleanupList call DMS_fnc_CleanUp;
+
+			DMS_CleanUp_PlayerNearLimit = _prev;
 
 
 			{
 				_code = _x;
-				if ((typeName _code)=="STRING") then
+				if (_code isEqualType "") then
 				{
 					_code = compile _code;
 				};
@@ -194,8 +207,6 @@ if (DMS_StaticMission_Arr isEqualTo []) exitWith {};				// Empty array, no stati
 		{
 			private ["_dot", "_text"];
 
-			_AIUnits = _inputAIUnits call DMS_fnc_GetAllUnits;
-
 			_dot = _markers select 0;
 			_text = missionNamespace getVariable [format ["%1_text",_dot],_missionName];
 
@@ -204,7 +215,7 @@ if (DMS_StaticMission_Arr isEqualTo []) exitWith {};				// Empty array, no stati
 				_text = format ["%1 %2",DMS_MarkerText_MissionPrefix,_text];
 			};
 
-			_dot setMarkerText (format ["%1 (%2 %3 remaining)",_text,{alive _x} count _AIUnits,DMS_MarkerText_AIName]);
+			_dot setMarkerText (format ["%1 (%2 %3 remaining)",_text,count (_inputAIUnits call DMS_fnc_GetAllUnits),DMS_MarkerText_AIName]);
 		};
 
 		if !(_missionEvents isEqualTo []) then
@@ -228,12 +239,32 @@ if (DMS_StaticMission_Arr isEqualTo []) exitWith {};				// Empty array, no stati
 				};
 			} forEach _groupReinforcementsInfo;
 		};
+
+
+		if !(_onMonitorEnd isEqualTo {}) then
+		{
+			if (DMS_DEBUG) then
+			{
+				(format ["MissionsMonitor_Static :: Calling _onMonitorEnd (index %1): ""%2"". Code: %3",_forEachIndex,_missionName,_onMonitorEnd]) call DMS_fnc_DebugLog;
+			};
+			_x call _onMonitorEnd;
+		};
 	}
 	catch
 	{
+		if !(_onMonitorEnd isEqualTo {}) then
+		{
+			if (DMS_DEBUG) then
+			{
+				(format ["MissionsMonitor_Static :: Calling _onMonitorEnd (index %1): ""%2"". Code: %3",_forEachIndex,_missionName,_onMonitorEnd]) call DMS_fnc_DebugLog;
+			};
+			_x call _onMonitorEnd;
+		};
+
+		
 		if (DMS_DEBUG) then
 		{
-			(format ["MissionsMonitor_Dynamic :: %1",_exception]) call DMS_fnc_DebugLog;
+			(format ["MissionsMonitor_Static :: %1",_exception]) call DMS_fnc_DebugLog;
 		};
 	};
 } forEach DMS_StaticMission_Arr;

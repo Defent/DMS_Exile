@@ -12,7 +12,7 @@
 	Will accept non-array argument of group, unit, or object.
 */
 
-if ((typeName _this) in ["GROUP","OBJECT"]) then
+if !(_this isEqualType []) then
 {
 	_this = [_this];
 };
@@ -29,27 +29,30 @@ _killed = false;
 try
 {
 	{
-		if (((typeName _x) == "OBJECT") && {!isNull _x && {alive _x}}) then
+		if (_x isEqualType objNull) then
 		{
-			private ["_lastDistanceCheckTime", "_spawnPos"];
-
-			_lastDistanceCheckTime = _x getVariable ["DMS_LastAIDistanceCheck",time];
-			_pos = getPosWorld _x;
-			_spawnPos = _x getVariable ["DMS_AISpawnPos",_pos];
-
-			if ((DMS_MaxAIDistance>0) && {((time - _lastDistanceCheckTime)>DMS_AIDistanceCheckFrequency) && {(_pos distance2D _spawnPos)>DMS_MaxAIDistance}}) then
+			if (!isNull _x && {alive _x}) then
 			{
-				_x setDamage 1;
-				diag_log format ["Killed a runaway unit! |%1| was more than %2m away from its spawn position %3!",_x,DMS_MaxAIDistance,_x getVariable "DMS_AISpawnPos"];
-			}
-			else
-			{
-				throw _x;
+				private ["_lastDistanceCheckTime", "_spawnPos"];
+
+				_lastDistanceCheckTime = _x getVariable ["DMS_LastAIDistanceCheck",time];
+				_pos = getPosWorld _x;
+				_spawnPos = _x getVariable ["DMS_AISpawnPos",_pos];
+
+				if ((DMS_MaxAIDistance>0) && {((time - _lastDistanceCheckTime)>DMS_AIDistanceCheckFrequency) && {(_pos distance2D _spawnPos)>DMS_MaxAIDistance}}) then
+				{
+					_x setDamage 1;
+					diag_log format ["Killed a runaway unit! |%1| was more than %2m away from its spawn position %3!",_x,DMS_MaxAIDistance,_x getVariable "DMS_AISpawnPos"];
+				}
+				else
+				{
+					throw _x;
+				};
 			};
 		}
 		else
 		{
-			if ((typeName _x) != "GROUP") exitWith
+			if !(_x isEqualType grpNull) exitWith
 			{
 				diag_log format ["DMS ERROR :: %1 is neither OBJECT nor GROUP!",_x];
 			};

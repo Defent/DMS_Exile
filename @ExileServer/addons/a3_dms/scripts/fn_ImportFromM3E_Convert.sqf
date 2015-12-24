@@ -18,13 +18,13 @@
 
 private ["_file", "_missionPos", "_objs", "_export", "_obj", "_objPos"];
 
-_OK = params
+
+if !(params
 [
 	["_file","",[""]],
 	["_missionPos","",[[],objNull],[2,3]]
-];
-
-if (!_OK) exitWith
+])
+exitWith
 {
 	diag_log format ["DMS ERROR :: Calling DMS_fnc_ImportFromM3E_Convert with invalid parameters: %1",_this];
 	[]
@@ -32,7 +32,7 @@ if (!_OK) exitWith
 
 
 // Get the position if an object was supplied instead of position
-if ((typeName _missionPos)=="OBJECT") then
+if (_missionPos isEqualType objNull) then
 {
 	_missionPos = getPosATL _missionPos;
 };

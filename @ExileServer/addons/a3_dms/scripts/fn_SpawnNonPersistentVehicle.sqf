@@ -28,13 +28,13 @@
 
 private ["_vehicleClass","_position","_vehpos","_maxDistance","_vehObj"];
 
-_OK = params
+
+if !(params
 [
 	["_vehicleClass","",[""]],
 	["_position","",[[]],[2,3]]
-];
-
-if (!_OK) exitWith
+])
+exitWith
 {
 	diag_log format ["DMS ERROR :: Calling DMS_fnc_SpawnNonPersistentVehicle with invalid parameters: %1",_this];
 	objNull
@@ -111,6 +111,8 @@ _vehObj lock 2;
 _vehObj allowDamage false;
 _vehObj enableRopeAttach false;
 _vehObj enableSimulationGlobal false;
+
+_vehObj setVariable ["ExileIsSimulationMonitored", false];
 
 if (DMS_DEBUG) then
 {

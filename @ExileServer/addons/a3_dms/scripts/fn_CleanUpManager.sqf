@@ -27,14 +27,14 @@ if (DMS_CleanUpList isEqualTo []) exitWith {};		// Empty array, no objects to cl
 
 	private ["_objs","_timeAddedToList","_timeUntilClean"];
 
-	_OK = _x params
+	
+	if !(_x params
 	[
 		["_objs",[objNull],[objNull,[],grpNull]],
 		["_timeAddedToList",diag_tickTime,[0]],
 		["_timeUntilClean",DMS_CompletedMissionCleanupTime,[0]]
-	];
-	
-	if (!_OK) then
+	])
+	then
 	{
 		diag_log format ["DMS ERROR :: Invalid parameters for DMS_fnc_CleanUpManager: %1 replaced with %2",_x,[_objs,_timeAddedToList,_timeUntilClean]];
 	};

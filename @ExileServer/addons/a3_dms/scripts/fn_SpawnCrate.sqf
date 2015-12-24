@@ -14,13 +14,13 @@
 
 private ["_crateClassName", "_pos", "_crate"];
 
-_OK = params
+
+if !(params
 [
 	["_crateClassName","_crateClassName ERROR",[""]],
 	["_pos","_pos ERROR",[[]],[3]]
-];
-
-if (!_OK) exitWith
+])
+exitWith
 {
 	diag_log format ["DMS ERROR :: Calling DMS_SpawnCrate with invalid parameters: %1",_this];
 	objNull
@@ -48,6 +48,8 @@ else
 };
 
 _crate allowDamage false;
+_crate enableSimulationGlobal false;
+_crate enableRopeAttach false;
 
 clearWeaponCargoGlobal 		_crate;
 clearItemCargoGlobal 		_crate;

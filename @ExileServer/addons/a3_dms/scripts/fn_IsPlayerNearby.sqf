@@ -13,16 +13,19 @@
  
 private ["_pos", "_dis", "_isNear"];
 
-_OK = params
+
+if !(params
 [
 	["_pos", "", [objNull,[]], [2,3]],
 	["_dis", 0, [0]]
-];
-
-if (!_OK) exitWith
+])
+exitWith
 {
 	diag_log format ["DMS ERROR :: Calling DMS_fnc_IsPlayerNearby with invalid parameters: %1",_this];
+	false;
 };
+
+if (_dis isEqualTo 0) exitWith {false};
 
 _isNear = false;
 

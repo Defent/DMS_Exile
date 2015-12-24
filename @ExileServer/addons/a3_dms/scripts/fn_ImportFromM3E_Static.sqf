@@ -11,18 +11,18 @@
 
 	_file call DMS_fnc_ImportFromM3E_Static; // This also works
 
-	This function will simply create the objects from a file that was exported from M3Editor.
+	This function will simply create the objects from a file that was exported from M3Editor, and return a list of those objects.
 */
 
 private ["_OK", "_varname", "_file", "_export"];
 
 
-_OK = params
+
+if !(params
 [
 	["_file","",[""]]
-];
-
-if (!_OK) exitWith
+])
+exitWith
 {
 	diag_log format ["DMS ERROR :: Calling DMS_fnc_ImportFromM3E_Static with invalid parameters: %1",_this];
 	[]
@@ -41,7 +41,7 @@ missionNamespace setVariable [_varname,true];
 
 _export = call compile preprocessFileLineNumbers (format ["\x\addons\DMS\objects\static\%1.sqf",_file]);
 
-if ((isNil "_export") || {(typeName _export)!="ARRAY"}) exitWith
+if ((isNil "_export") || {!(_export isEqualType [])}) exitWith
 {
 	diag_log format ["DMS ERROR :: Calling DMS_fnc_ImportFromM3E_Static with invalid file/filepath: %1 | _export: %2",_file,_export];
 	[]
@@ -52,9 +52,11 @@ _objs = [];
 
 {
 	private ["_obj","_pos"];
+
 	_obj = createVehicle [_x select 0, [0,0,0], [], 0, "CAN_COLLIDE"];
 	_pos = _x select 1;
 	_obj enableSimulationGlobal false;
+	
 	if (_x select 4) then
 	{
 		_obj setDir (_x select 2);
@@ -65,6 +67,7 @@ _objs = [];
 		_obj setPosATL _pos;
 		_obj setVectorDirAndUp (_x select 3);
 	};
+
 	_objs pushBack _obj;
 } foreach _export;
 

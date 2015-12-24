@@ -7,6 +7,8 @@ DMS_HC_Object = objNull;
 
 DMS_CleanUpList	= [];
 
+DMS_Version = "December 24 2015";
+
 
 //Load main config
 call compileFinal preprocessFileLineNumbers "\x\addons\dms\config.sqf";
@@ -17,44 +19,6 @@ if (DMS_Use_Map_Config) then
 {
 	call compileFinal preprocessFileLineNumbers (format ["\x\addons\dms\map_configs\%1_config.sqf",toLower worldName]);
 };
-
-
-
-// Some custom maps don't have the proper safePos config entries.
-// If you are using one and you have an issue with mission spawns, please create an issue on GitHub or post a comment in the DMS thread.
-switch (toLower worldName) do
-{ 
-	case "altis":										// [16000,16000] w/ radius of 16000 works well for Altis
-	{
-		DMS_MapCenterPos 	= [16000,16000];
-		DMS_MapRadius 		= 16000;
-	};
-	case "bornholm":									// Thanks to thirdhero for testing this info
-	{
-		DMS_MapCenterPos 	= [11265,11265];
-		DMS_MapRadius 		= 12000;
-	};
-	case "esseker":										// Thanks to Flowrider for this info
-	{
-		DMS_MapCenterPos 	= [6275,6350];
-		DMS_MapRadius 		= 5000;
-	};
-	case "tavi":										// Thanks to JamieKG for this info
-	{
-		DMS_MapCenterPos 	= [12800,12800];
-		DMS_MapRadius 		= 12800;
-	};
-	default 											// Use "worldSize" to determine map center/radius (not always very nice).
-	{
-		private "_middle";
-		_middle = worldSize/2;
-		DMS_MapCenterPos 	= [_middle,_middle];
-		DMS_MapRadius 		= _middle;
-	};
-};
-
-// Since we use primarily ATL
-DMS_MapCenterPos set [2,0];
 
 /*
 	Original Functions from

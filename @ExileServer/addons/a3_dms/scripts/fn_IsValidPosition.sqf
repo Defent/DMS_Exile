@@ -21,7 +21,11 @@
 
 private ["_pos", "_nearestObjectMinDistance", "_waterNearLimit", "_minSurfaceNormal", "_spawnZoneNearLimit", "_traderZoneNearLimit", "_missionNearLimit", "_playerNearLimit", "_territoryNearLimit", "_waterSpawn", "_isValidPos"];
 
-_OK = params
+
+
+_isValidPos = false;
+
+if !(params
 [
 	["_pos", 						[],				[[]],		[0,2,3]],
 	["_waterNearLimit",				DMS_WaterNearBlacklist,		[0] ],
@@ -32,12 +36,8 @@ _OK = params
 	["_playerNearLimit",			DMS_PlayerNearBlacklist,	[0] ],
 	["_territoryNearLimit",			DMS_TerritoryNearBlacklist,	[0]	],
 	["_waterSpawn",					false,						[false]	]
-];
-
-
-_isValidPos = false;
-
-if (!_OK) then
+])
+then
 {
 	diag_log format ["DMS ERROR :: Calling DMS_fnc_isValidPosition with invalid parameters: %1",_this];
 }
@@ -164,6 +164,13 @@ else
 	}
 	catch
 	{
+		/*
+		_dot = createMarker [format ["DMS_DebugMarker_attempt%1", _pos], _pos];
+		_dot setMarkerColor "ColorWEST";
+		_dot setMarkerType "mil_dot";
+		_dot setMarkerText (format["close to: %1",_exception]);
+		DMS_DebugMarkers pushBack _dot;
+		*/
 		if (DMS_DEBUG) then
 		{
 			(format ["IsValidPosition :: Position %1 is too close to %2!",_pos,_exception]) call DMS_fnc_DebugLog;

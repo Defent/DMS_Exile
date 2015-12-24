@@ -14,7 +14,7 @@ _side = "bandit";
 
 // This part is unnecessary, but exists just as an example to format the parameters for "DMS_fnc_MissionParams" if you want to explicitly define the calling parameters for DMS_fnc_FindSafePos.
 // It also allows anybody to modify the default calling parameters easily.
-if ((isNil "_this") || {_this isEqualTo [] || {(typeName _this)!="ARRAY"}}) then
+if ((isNil "_this") || {_this isEqualTo [] || {!(_this isEqualType [])}}) then
 {
 	_this =
 	[
@@ -64,13 +64,13 @@ _class =
 	}
 	else
 	{
-		if ((typeName _extraParams)=="STRING") then
+		if (_extraParams isEqualType "") then
 		{
 			_extraParams
 		}
 		else
 		{
-			if (((typeName _extraParams)=="ARRAY") && {(typeName (_extraParams select 0))=="STRING"}) then
+			if ((_extraParams isEqualType []) && {(_extraParams select 0) isEqualType ""}) then
 			{
 				_extraParams select 0
 			}

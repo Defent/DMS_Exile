@@ -38,6 +38,7 @@ if (_status == "win") then
 	};
 	_markerDot setMarkerText ("COMPLETED: "+_text);
 	_markerDot setMarkerColor DMS_MissionMarkerWinDotColor;
+	_markerDot setMarkerType DMS_MissionMarkerWinDot_Type;
 	//_markerDot spawn {sleep DMS_MissionMarkerWinDotTime;deleteMarker _this;};
 	[DMS_MissionMarkerWinDotTime, {deleteMarker _this;}, _markerDot, false] call ExileServer_system_thread_addTask;
 	if (DMS_DEBUG) then
@@ -53,6 +54,7 @@ else
 	};
 	_markerDot setMarkerText ("FAILED: "+_text);
 	_markerDot setMarkerColor DMS_MissionMarkerLoseDotColor;
+	_markerDot setMarkerType DMS_MissionMarkerLoseDot_Type;
 	//_markerDot spawn {sleep DMS_MissionMarkerLoseDotTime;deleteMarker _this;};
 	[DMS_MissionMarkerLoseDotTime, {deleteMarker _this;}, _markerDot, false] call ExileServer_system_thread_addTask;
 	if (DMS_DEBUG) then

@@ -16,7 +16,7 @@
 
 private ["_units"];
 
-if ((typeName _this)!="ARRAY") then
+if !(_this isEqualType []) then
 {
 	_this = [_this];
 };

@@ -47,7 +47,9 @@
 		_missionEvents,
 		[
 			_onSuccessScripts,			// (OPTIONAL) Array of code or string to be executed on mission completion (in addition to regular code).
-			_onFailScripts				// (OPTIONAL) Array of code or stirng to be executed on mission failure (in addition to regular code).
+			_onFailScripts,				// (OPTIONAL) Array of code or stirng to be executed on mission failure (in addition to regular code).
+			_onMonitorStart,			// (OPTIONAL) Code to run when the monitor starts to check the mission status, however it is checked AFTER "MissionSuccessState" is checked, so you can use/set the variable "_success" manually. The passed parameter (_this) is the mission data array itself.
+			_onMonitorEnd				// (OPTIONAL) Code to run when the monitor is done with checking the mission status. The passed parameter (_this) is the mission data array itself.
 		]
 	] call DMS_fnc_AddMissionToMonitor;
 
@@ -55,12 +57,13 @@
 
 */
 
-private ["_added", "_OK", "_pos", "_onEndingScripts", "_completionInfo", "_timeOutInfo", "_units", "_inputUnits", "_missionObjs", "_mines", "_difficulty", "_side", "_messages", "_markers", "_arr", "_timeStarted", "_timeUntilFail", "_buildings", "_vehs", "_crate_info_array", "_missionName", "_msgWIN", "_msgLose", "_markerDot", "_markerCircle", "_missionEvents", "_onSuccessScripts", "_onFailScripts"];
+private ["_added", "_pos", "_onEndingScripts", "_completionInfo", "_timeOutInfo", "_units", "_inputUnits", "_missionObjs", "_mines", "_difficulty", "_side", "_messages", "_markers", "_arr", "_timeStarted", "_timeUntilFail", "_buildings", "_vehs", "_crate_info_array", "_missionName", "_msgWIN", "_msgLose", "_markerDot", "_markerCircle", "_missionEvents", "_onSuccessScripts", "_onFailScripts"];
 
 
 _added = false;
 
-_OK = params
+
+if !(params
 [
 	["_pos","",[[]],[2,3]],
 	["_completionInfo","",[[]]],
@@ -72,15 +75,14 @@ _OK = params
 	["_side","bandit",[""]],
 	["_difficulty","moderate",[""]],
 	["_missionEvents",[],[[]]]
-];
-
-if (!_OK) exitWith
+])
+exitWith
 {
 	diag_log format ["DMS ERROR :: Calling DMS_fnc_AddMissionToMonitor with invalid parameters: %1",_this];
 	false;
 };
 
-_onEndingScripts = if ((count _this)>10) then {_this select 10} else {[[],[]]};
+_onEndingScripts = if ((count _this)>10) then {_this select 10} else {[[],[],{},{}]};
 
 
 try
@@ -103,14 +105,14 @@ try
 
 	_units = _inputUnits call DMS_fnc_GetAllUnits;
 
-	_OK = _missionObjs params
+
+	if !(_missionObjs params
 	[
 		["_buildings","",[[]]],
 		["_vehs","",[[]]],
 		["_crate_info_array","",[[]]]
-	];
-
-	if (!_OK) then
+	])
+	then
 	{
 		throw format["_missionObjs |%1|",_missionObjs];
 	};
@@ -129,36 +131,38 @@ try
 	};
 
 
-	_OK = _messages params
+
+	if !(_messages params
 	[
 		["_missionName","",[""]],
 		["_msgWIN",[],[[]],[2]],
 		["_msgLose",[],[[]],[2]]
-	];
-
-	if (!_OK) then
+	])
+	then
 	{
 		throw format["_messages |%1|",_messages];
 	};
 
-	_OK = _markers params
+
+	if !(_markers params
 	[
 		["_markerDot","",[""]],
 		["_markerCircle","",[""]]
-	];
-
-	if (!_OK) then
+	])
+	then
 	{
 		throw format["_markers |%1|",_markers];
 	};
 
-	_OK = _onEndingScripts params
+
+	if !(_onEndingScripts params
 	[
 		["_onSuccessScripts", [], [[]]],
-		["_onFailScripts", [], [[]]]
-	];
-
-	if (!_OK) then
+		["_onFailScripts", [], [[]]],
+		["_onMonitorStart", {}, [{}]],
+		["_onMonitorEnd", {}, [{}]]
+	])
+	then
 	{
 		throw format["_onEndingScripts |%1|",_onEndingScripts];
 	};
@@ -192,7 +196,9 @@ try
 		_missionEvents,
 		[
 			_onSuccessScripts,
-			_onFailScripts
+			_onFailScripts,
+			_onMonitorStart,
+			_onMonitorEnd
 		]
 	];
 	DMS_Mission_Arr pushBack _arr;

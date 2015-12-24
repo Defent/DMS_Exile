@@ -24,16 +24,15 @@
 private ["_OK", "_guns", "_pos", "_MGClassInput", "_MGClass", "_gun", "_unit", "_group", "_class", "_difficulty", "_side", "_positions"];
 
 
-_OK = params
+if !(params
 [
 	["_positions",[],[[]]],
 	["_group",grpNull,[grpNull]],
 	["_class","random",[""]],
 	["_difficulty","static",[""]],
 	["_side","bandit",[""]]
-];
-
-if (!_OK) exitWith
+])
+exitWith
 {
 	diag_log format ["DMS ERROR :: Calling DMS_fnc_SpawnAIStaticMG with invalid parameters: %1",_this];
 };

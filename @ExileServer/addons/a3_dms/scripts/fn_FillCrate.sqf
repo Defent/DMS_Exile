@@ -21,6 +21,36 @@
 		]
 
 	Each loot argument can be an explicitly defined array of weapons with a number to spawn, or simply a number and weapons defined in the config.sqf are used.
+	For example, if you want to configure the list from which weapons, items, and backpacks are selected, it should be of the form:
+	[
+		[
+			_number_of_weapons,
+			[
+				"wepClassname1",
+				"wepClassname2",
+				...
+				"wepClassnameN"
+			]
+		],
+		[
+			_number_of_items,
+			[
+				"itemClassname1",
+				"itemClassname2",
+				...
+				"itemClassnameN"
+			]
+		],
+		[
+			_number_of_backpacks,
+			[
+				"backpackClassname1",
+				"backpackClassname2",
+				...
+				"backpackClassnameN"
+			]
+		]
+	]
 
 	For example, _weapons could simply be a number, in which case the given number of weapons are selected from "DMS_boxWeapons",
 	or an array as [_wepCount,_weps], where _wepCount is the number of weapons, and _weps is an array of weapons from which the guns are randomly selected.
@@ -60,29 +90,36 @@ private ["_crate","_lootValues","_wepCount","_weps","_itemCount","_items","_back
 
 
 
-_OK = params
+if (!(params
 [
 	["_crate",objNull,[objNull]],
 	["_lootValues","",[0,"",[]],[2,3]]
-];
-
-if (!_OK || {isNull _crate}) exitWith
+])
+||
+{isNull _crate})
+exitWith
 {
 	diag_log format ["DMS ERROR :: Calling DMS_FillCrate with invalid parameters: %1",_this];
 };
+
+_crate hideObjectGlobal false;
 
 if !(DMS_GodmodeCrates) then
 {
 	_crate allowDamage true;
 };
 
-_crate hideObjectGlobal false;
+if (DMS_EnableBoxMoving) then
+{
+	_crate enableSimulationGlobal true;
+	_crate enableRopeAttach true;
+};
 
 
-if (((typeName _lootValues)=="ARRAY") && {(typeName (_lootValues select 1))!="CODE"}) then
+if ((_lootValues isEqualType []) && {!((_lootValues select 1) isEqualType {})}) then
 {
 	// Weapons
-	if(typeName (_lootValues select 0) == "ARRAY") then
+	if ((_lootValues select 0) isEqualType []) then
 	{
 		_wepCount	= (_lootValues select 0) select 0;
 		_weps	= (_lootValues select 0) select 1;
@@ -95,7 +132,7 @@ if (((typeName _lootValues)=="ARRAY") && {(typeName (_lootValues select 1))!="CO
 
 
 	// Items
-	if(typeName (_lootValues select 1) == "ARRAY") then
+	if ((_lootValues select 1) isEqualType []) then
 	{
 		_itemCount	= (_lootValues select 1) select 0;
 		_items	= (_lootValues select 1) select 1;
@@ -108,7 +145,7 @@ if (((typeName _lootValues)=="ARRAY") && {(typeName (_lootValues select 1))!="CO
 
 
 	// Backpacks
-	if(typeName (_lootValues select 2) == "ARRAY") then
+	if ((_lootValues select 2) isEqualType []) then
 	{
 		_backpackCount	= (_lootValues select 2) select 0;
 		_backpacks = (_lootValues select 2) select 1;
@@ -133,7 +170,7 @@ if (((typeName _lootValues)=="ARRAY") && {(typeName (_lootValues select 1))!="CO
 		{
 			_weapon = _weps call BIS_fnc_selectRandom;
 			_ammo = _weapon call DMS_fnc_selectMagazine;
-			if ((typeName _weapon)=="STRING") then
+			if (_weapon isEqualType "") then
 			{
 				_weapon = [_weapon,1];
 			};
@@ -149,7 +186,7 @@ if (((typeName _lootValues)=="ARRAY") && {(typeName (_lootValues select 1))!="CO
 		for "_i" from 1 to _itemCount do
 		{
 			_item = _items call BIS_fnc_selectRandom;
-			if ((typeName _item)=="STRING") then
+			if (_item isEqualType "") then
 			{
 				_item = [_item,1];
 			};
@@ -164,7 +201,7 @@ if (((typeName _lootValues)=="ARRAY") && {(typeName (_lootValues select 1))!="CO
 		for "_i" from 1 to _backpackCount do
 		{
 			_backpack = _backpacks call BIS_fnc_selectRandom;
-			if ((typeName _backpack)=="STRING") then
+			if (_backpack isEqualType "") then
 			{
 				_backpack = [_backpack,1];
 			};
@@ -175,7 +212,7 @@ if (((typeName _lootValues)=="ARRAY") && {(typeName (_lootValues select 1))!="CO
 else
 {
 	_crateValues =
-		if ((typeName _lootValues)=="ARRAY") then
+		if (_lootValues isEqualType []) then
 		{
 			(_lootValues select 0) call (_lootValues select 1)
 		}
@@ -184,12 +221,12 @@ else
 			missionNamespace getVariable (format ["DMS_CrateCase_%1",_lootValues])
 		};
 
-	if !(_crateValues params
-	[
-		["_weps", [], [[]]],
-		["_items", [], [[]]],
-		["_backpacks", [], [[]]]
-	])
+	if !((_crateValues params
+		[
+			["_weps", [], [[]]],
+			["_items", [], [[]]],
+			["_backpacks", [], [[]]]
+		]))
 	exitWith
 	{
 		diag_log format ["DMS ERROR :: Invalid ""_crateValues"" (%1) generated from _lootValues: %2",_crateValues,_lootValues];
@@ -197,7 +234,7 @@ else
 
 	// Weapons
 	{
-		if ((typeName _x)=="STRING") then
+		if (_x isEqualType "") then
 		{
 			_x = [_x,1];
 		};
@@ -206,7 +243,7 @@ else
 
 	// Items/Mags
 	{
-		if ((typeName _x)=="STRING") then
+		if (_x isEqualType "") then
 		{
 			_x = [_x,1];
 		};
@@ -215,7 +252,7 @@ else
 
 	// Backpacks
 	{
-		if ((typeName _x)=="STRING") then
+		if (_x isEqualType "") then
 		{
 			_x = [_x,1];
 		};
@@ -246,7 +283,7 @@ if(DMS_RareLoot && {count DMS_RareLootList>0}) then
 	if(random 100 < _rareLootChance) then
 	{
 		_item = DMS_RareLootList call BIS_fnc_selectRandom;
-		if ((typeName _item)=="STRING") then
+		if (_item isEqualType "") then
 		{
 			_item = [_item,1];
 		};
@@ -254,8 +291,8 @@ if(DMS_RareLoot && {count DMS_RareLootList>0}) then
 	};
 };
 
-// In case somebody wants to use fillCrate on a vehicle but also wants to use smoke, don't create smoke/IR strobe unless it's a crate
-if (_crate isKindOf "ReammoBox_F") then
+// You can choose if you want to enable/disable smoke individually using setVariable.
+if (_crate getVariable ["DMS_AllowSmoke", true]) then
 {
 	if(DMS_SpawnBoxSmoke && {sunOrMoon == 1}) then
 	{

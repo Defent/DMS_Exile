@@ -16,18 +16,18 @@
 
 private ["_vehicleClass", "_pos", "_pinCode", "_vehObj"];
 
-_OK = params
-[
-	["_vehicleClass","",[""]],
-	["_pos",[],[[]],[2,3]],
-	["_pinCode","",[0,""]]
-];
 
 _vehObj = objNull;
 
 try
 {
-	if (!_OK) then
+	if !(params
+	[
+		["_vehicleClass","",[""]],
+		["_pos",[],[[]],[2,3]],
+		["_pinCode","",[0,""]]
+	])
+	then
 	{
 		throw (format ["invalid parameters: %1",_this]);
 	};
@@ -44,7 +44,7 @@ try
 	};
 
 
-	if ((typeName _pinCode)=="SCALAR") then
+	if (_pinCode isEqualType 0) then
 	{
 		if (_pinCode<0 || {_pinCode>9999}) then
 		{

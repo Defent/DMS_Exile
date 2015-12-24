@@ -11,7 +11,7 @@
 	] call DMS_fnc_MissionSuccessState;
 */
 
-if ((typeName _this) != "ARRAY") exitWith
+if !(_this isEqualType []) exitWith
 {
 	diag_log format ["DMS ERROR :: DMS_fnc_MissionSuccessState called with invalid parameter: %1",_this];
 };
@@ -28,13 +28,13 @@ _exit = false;
 	{
 		private ["_OK","_completionType","_completionArgs","_absoluteWinCondition"];
 
-		_OK = _x params
+
+		if !(_x params
 		[
 			["_completionType", "", [""] ],
 			["_completionArgs", [], [[],grpNull] ]
-		];
-
-		if (!_OK) then
+		])
+		then
 		{
 			diag_log format ["DMS ERROR :: DMS_fnc_MissionSuccessState has invalid parameters in: %1",_x];
 			throw "ERROR";

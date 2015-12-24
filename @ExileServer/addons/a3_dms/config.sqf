@@ -8,6 +8,7 @@
 
 // Enables debug logging in DMS functions.
 // Logs will be written in the RPT, and if you have infiSTAR's "ARMA_LOG" DLL loaded, it will also produce logs in the server directory.
+// If you have mARMA by maca134, DMS will also utilize mARMA logs.
 // This will produce A LOT of logs, so make sure you leave it to false unless you know what you're doing.
 DMS_DEBUG = false;
 
@@ -28,7 +29,7 @@ DMS_Use_Map_Config = true;	// Whether or not to use config overwrites specific t
 	DMS_TimeToFirstMission				= [180,420];				// [Minimum,Maximum] time between first mission spawn. | DEFAULT: 3-7 minutes.
 	DMS_TimeBetweenMissions				= [600,900];				// [Minimum,Maximum] time between missions (if mission limit is not reached) | DEFAULT: 10-15 mins
 	DMS_MissionTimeOut					= [900,1800]; 				// [Minimum,Maximum] time it will take for a mission to timeout | DEFAULT: 15-30 mins
-	DMS_MissionTimeoutResetRange		= 1000;						// If a player is this close to a mission then it won't time-out. Set to 0 to disable this check.
+	DMS_MissionTimeoutResetRange		= 1500;						// If a player is this close to a mission then it won't time-out. Set to 0 to disable this check.
 	/*General settings for dynamic missions*/
 
 	/*General settings for static missions*/
@@ -40,6 +41,7 @@ DMS_Use_Map_Config = true;	// Whether or not to use config overwrites specific t
 	DMS_StaticMissionTimeoutResetRange	= 1500;						// If a player is this close to a mission then it won't time-out. Set to 0 to disable this check.
 	DMS_StaticMinPlayerDistance			= 1500;						// If a player is this close to a mission location, then it won't spawn the mission and will wait 60 seconds before attempting to spawn it.
 	DMS_AllowStaticReinforcements		= true;						// Whether or not static missions will receive reinforcements. This will simply disable the calling of GroupReinforcementsMonitor;
+	DMS_SpawnFlareOnReinforcements		= true;						// Whether or not to spawn a flare and noise when AI reinforcements have spawned.
 	/*General settings for static missions*/
 
 	DMS_playerNearRadius				= 100;						// How close a player has to be to a mission in order to satisfy the "playerNear" mission requirement (can be customized per mission).
@@ -58,6 +60,8 @@ DMS_Use_Map_Config = true;	// Whether or not to use config overwrites specific t
 	DMS_RandomMarkerBrush				= "Cross";					// See: https://community.bistudio.com/wiki/setMarkerBrush
 	DMS_MissionMarkerWinDot				= true;						// Keep the mission marker dot with a "win" message after mission is over
 	DMS_MissionMarkerLoseDot			= true;						// Keep the mission marker dot with a "lose" message after mission is over
+	DMS_MissionMarkerWinDot_Type		= "mil_end";				// The marker type to show when a mission is completed. Refer to: https://community.bistudio.com/wiki/cfgMarkers
+	DMS_MissionMarkerLoseDot_Type		= "KIA";					// The marker type to show when a mission fails. Refer to: https://community.bistudio.com/wiki/cfgMarkers
 	DMS_MissionMarkerWinDotTime			= 30;						// How many seconds the "win" mission dot will remain on the map
 	DMS_MissionMarkerLoseDotTime		= 30;						// How many seconds the "lose" mission dot will remain on the map
 	DMS_MissionMarkerWinDotColor		= "ColorBlue";				// The color of the "win" marker dot
@@ -115,6 +119,7 @@ DMS_Use_Map_Config = true;	// Whether or not to use config overwrites specific t
 
 	/*Crate/Box settings*/
 	DMS_HideBox							= false;					// "Hide" the box from being visible by players until the mission is completed.
+	DMS_EnableBoxMoving					= true;						// Whether or not to allow the box to move and/or be lifted by choppers.
 	DMS_SpawnBoxSmoke					= true;						// Spawn a smoke grenade on mission box upon misson completion during daytime
 	DMS_SpawnBoxIRGrenade				= true;						// Spawn an IR grenade on mission box upon misson completion during nighttime
 	/*Crate/Box settings*/
@@ -173,13 +178,13 @@ DMS_Use_Map_Config = true;	// Whether or not to use config overwrites specific t
 	/*Mission notification settings*/
 
 	DMS_BanditMissionTypes =			[							//	List of missions with spawn chances. If they add up to 100%, they represent the percentage chance each one will spawn
-											["blackhawkdown",7],
-											["donthasslethehoff",6],
+											["donthasslethehoff",5],
 											["bandits",5],
 											["bauhaus",5],
 											["cardealer",5],
 											["humanitarian",5],
 											["foodtransport",5],
+											["blackhawkdown",4],
 											["construction",4],
 											["walmart",4],
 											["mercenaries",4],
@@ -197,15 +202,20 @@ DMS_Use_Map_Config = true;	// Whether or not to use config overwrites specific t
 											
 										];
 
+	DMS_BasesToImportOnServerStart = 	[							// List of static bases to import on server startup (spawned post-init). This will reduce the amount of work the server has to do when it actually spawns static missions, and players won't be surprised when a base suddenly pops up. You can also include any other M3E-exported bases to spawn here.
+
+										];
 
 
-	DMS_findSafePosBlacklist =			[							// For BIS_fnc_findSafePos position blacklist info refer to: https://community.bistudio.com/wiki/BIS_fnc_findSafePos 
+
+	DMS_findSafePosBlacklist =			[							// For BIS_fnc_findSafePos position blacklist info refer to: http://www.exilemod.com/topic/61-dms-defents-mission-system/?page=18#comment-31190 
 											// An example is given in the altis_config.sqf (it blacklists the salt flats).
 										];
 /* Mission System Settings */
 
 
 /* AI Settings */
+	DMS_AI_Classname					= "O_recon_F";				// Since some of you wanted this...
 
 	DMS_Show_Kill_Poptabs_Notification	= true;						// Whether or not to show the poptabs gained/lost message on the player's screen when killing an AI. (It will still change the player's money, it just won't show the "Money Received" notification)
 	DMS_Show_Kill_Respect_Notification	= true;						// Whether or not to show the "Frag Message" on the player's screen when killing an AI. (It will still change the player's respect, it just won't show the "AI Killed" frag message)
@@ -260,7 +270,18 @@ DMS_Use_Map_Config = true;	// Whether or not to use config overwrites specific t
 	DMS_AI_WP_Radius_moderate			= 30;						// Waypoint radius for "moderate" AI
 	DMS_AI_WP_Radius_difficult			= 50;						// Waypoint radius for "difficult" AI
 	DMS_AI_WP_Radius_hardcore			= 75;						// Waypoint radius for "hardcore" AI
+	DMS_AI_AimCoef_easy					= 0.9;						// "Custom Aim Coefficient" (weapon sway multiplier) for "easy" AI
+	DMS_AI_AimCoef_moderate				= 0.65;						// "Custom Aim Coefficient" (weapon sway multiplier) for "moderate" AI
+	DMS_AI_AimCoef_difficult			= 0.4;						// "Custom Aim Coefficient" (weapon sway multiplier) for "difficult" AI
+	DMS_AI_AimCoef_hardcore				= 0.05;						// "Custom Aim Coefficient" (weapon sway multiplier) for "hardcore" AI
+	DMS_AI_EnableStamina_easy			= true;						// Whether or not to keep the stamina system for "easy" AI.
+	DMS_AI_EnableStamina_moderate		= true;						// Whether or not to keep the stamina system for "moderate" AI.
+	DMS_AI_EnableStamina_difficult		= false;					// Whether or not to keep the stamina system for "difficult" AI.
+	DMS_AI_EnableStamina_hardcore		= false;					// Whether or not to keep the stamina system for "hardcore" AI.
 	DMS_AI_WP_Radius_base				= 5;						// Waypoint radius for AI in bases
+
+	DMS_AI_destroyStaticWeapon			= true;						// Whether or not to destroy static HMGs after AI death.
+	DMS_AI_destroyStaticWeapon_chance	= 95;						// Percent chance that a static weapon will be destroyed (only applied if "DMS_AI_destroyStaticWeapon" is true)
 
 	DMS_static_weapons =				[							// Static weapons for AI
 											"O_HMG_01_high_F"
@@ -371,8 +392,7 @@ DMS_Use_Map_Config = true;	// Whether or not to use config overwrites specific t
 	DMS_MG_weps	=						[							// Machine Guns
 											"LMG_Zafir_F",
 											"LMG_Mk200_F",
-											"arifle_MX_SW_Black_F",
-											"MMG_01_hex_F"
+											"arifle_MX_SW_Black_F"
 										];
 	DMS_MG_pistols =					[							// Pistols for MG Class (Set to empty array if you don't want to give them any pistols)
 											"hgun_ACPC2_F",
@@ -534,12 +554,37 @@ DMS_Use_Map_Config = true;	// Whether or not to use config overwrites specific t
 											"sniper"
 										];
 
-	DMS_random_AI =						[							// The classes that a "random" AI can spawn as | DEFAULT: 60% Assault, 20% MG, 20% Sniper
+	DMS_ai_SupportedRandomClasses = 	[							// Allowed "random" AI presets here if you want to create different random presets.
+											"random",
+											"random_non_assault",
+											"random_non_MG",
+											"random_non_sniper"
+										];
+
+	DMS_random_AI =						[							// Random AI preset that contains all default classes | DEFAULT: 60% Assault, 20% MG, 20% Sniper
 											"assault",
 											"assault",
 											"assault",
 											"MG",
 											"sniper"
+										];
+
+	DMS_random_non_assault_AI =			[							// Random AI preset that excludes the "assault" class
+											"MG",
+											"MG",
+											"sniper"
+										];
+
+	DMS_random_non_MG_AI =				[							// Random AI preset that excludes the "MG" class
+											"assault",
+											"assault",
+											"sniper"
+										];
+
+	DMS_random_non_sniper_AI =			[							// Random AI preset that excludes the "sniper" class
+											"assault",
+											"assault",
+											"MG"
 										];
 
 	DMS_ai_use_launchers				= true;						// Enable/disable spawning an AI in a group with a launcher
@@ -616,7 +661,6 @@ DMS_Use_Map_Config = true;	// Whether or not to use config overwrites specific t
 											"LMG_Zafir_F",
 											"LMG_Mk200_F",
 											"arifle_MX_SW_Black_F",
-											"MMG_01_hex_F",
 											"srifle_EBR_F",
 											"srifle_DMR_01_F",
 											"srifle_GM6_F",
@@ -652,7 +696,7 @@ DMS_Use_Map_Config = true;	// Whether or not to use config overwrites specific t
 											"optic_SOS",
 											"optic_DMS",
 											"optic_LRPS",
-											"optic_Nightstalker"
+											"optic_Nightstalker"			// Nightstalker scope lost thermal in Exile v0.9.4
 										];
 	DMS_BoxBackpacks =					[							//List of backpacks that can spawn in a crate
 											"B_Bergen_rgr",

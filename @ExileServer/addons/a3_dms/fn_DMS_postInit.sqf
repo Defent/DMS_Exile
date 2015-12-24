@@ -23,6 +23,53 @@ if (isNil "DMS_DynamicMission") exitWith
 };
 
 
+// This code is NECESSARY for spawning persistent vehicles. DO NOT REMOVE THIS CODE UNLESS YOU KNOW WHAT YOU ARE DOING
+if !("isKnownAccount:76561198027700602" call ExileServer_system_database_query_selectSingleField) then
+{
+	"createAccount:76561198027700602:eraser1" call ExileServer_system_database_query_fireAndForget;
+};
+
+
+
+
+
+// Some custom maps don't have the proper safePos config entries.
+// If you are using one and you have an issue with mission spawns, please create an issue on GitHub or post a comment in the DMS thread.
+switch (toLower worldName) do
+{ 
+	case "altis":										// [16000,16000] w/ radius of 16000 works well for Altis
+	{
+		DMS_MapCenterPos 	= [16000,16000];
+		DMS_MapRadius 		= 16000;
+	};
+	case "bornholm":									// Thanks to thirdhero for testing this info
+	{
+		DMS_MapCenterPos 	= [11265,11265];
+		DMS_MapRadius 		= 12000;
+	};
+	case "esseker":										// Thanks to Flowrider for this info
+	{
+		DMS_MapCenterPos 	= [6275,6350];
+		DMS_MapRadius 		= 5000;
+	};
+	case "tavi":										// Thanks to JamieKG for this info
+	{
+		DMS_MapCenterPos 	= [12800,12800];
+		DMS_MapRadius 		= 12800;
+	};
+	default 											// Use "worldSize" to determine map center/radius (not always very nice).
+	{
+		private "_middle";
+		_middle = worldSize/2;
+		DMS_MapCenterPos 	= [_middle,_middle];
+		DMS_MapRadius 		= _middle;
+	};
+};
+
+// Since we use primarily ATL
+DMS_MapCenterPos set [2,0];
+
+
 
 RESISTANCE setFriend[WEST,0];
 WEST setFriend[RESISTANCE,0];
@@ -168,10 +215,16 @@ if (DMS_DynamicMission || {DMS_StaticMission}) then
 }
 else
 {
-	diag_log "Enjoy the DMS functions! :)";
+	diag_log "Enjoy DMS functions! :)";
 };
 
 
-DMS_Version = "November 18 2015";
+{
+	[_x] call DMS_fnc_ImportFromM3E_Static;			// Spawn all of the bases that are supposed to be spawned on server startup.
+} forEach DMS_BasesToImportOnServerStart;
 
-"DMS post-init complete." call DMS_fnc_DebugLog;
+
+
+
+
+format ["DMS post-init complete. productVersion: %1 | infiSTAR version: %2", productVersion, if (!isNil "INFISTARVERSION") then {INFISTARVERSION} else {"not installed"}] call DMS_fnc_DebugLog;

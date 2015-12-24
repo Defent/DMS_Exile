@@ -15,14 +15,14 @@
 
 private ["_pos","_dis","_dir","_npos"];
 
-_OK = params
+
+if !(params
 [
 	["_pos","",[[]],[2,3]],
 	["_dis",0,[0]],
 	["_dir",0,[0]]
-];
-
-if (!_OK) exitWith
+])
+exitWith
 {
 	diag_log format ["DMS ERROR :: Calling DMS_fnc_SelectOffsetPos with invalid parameters: %1",_this];
 	[0,0,0]

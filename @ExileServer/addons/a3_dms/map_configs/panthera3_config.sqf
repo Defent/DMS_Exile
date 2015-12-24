@@ -18,6 +18,10 @@ DMS_WaterNearBlacklist				= 200;
 DMS_MinSurfaceNormal = 0.85;
 
 
+// Thanks to JamieKG from Eternal Gamer for telling me about these optimized values :)
+DMS_SpawnZoneNearBlacklist			= 1500;
+DMS_TraderZoneNearBlacklist			= 1500;
+
 
 // Comment out the below configs if you want missions to be able to spawn on the islands surrounding the mainland.
 

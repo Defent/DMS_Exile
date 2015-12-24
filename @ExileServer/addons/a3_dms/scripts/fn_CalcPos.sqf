@@ -15,20 +15,20 @@
 private ["_pos", "_relPos", "_npos"];
 
 
-_OK = params
+
+if !(params
 [
 	["_pos","",[[],objNull],[2,3]],
 	["_relPos","",[[]],[2,3]]
-];
-
-if (!_OK) exitWith
+])
+exitWith
 {
 	diag_log format ["DMS ERROR :: Calling DMS_fnc_CalcPos with invalid parameters: %1",_this];
 };
 
 
 // Get the position if an object was supplied instead of position
-if ((typeName _pos)=="OBJECT") then
+if (_pos isEqualType objNull) then
 {
 	_pos = getPosATL _pos;
 };

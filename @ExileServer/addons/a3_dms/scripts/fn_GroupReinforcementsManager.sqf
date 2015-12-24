@@ -61,6 +61,14 @@
 				_maxAICount				// (OPTIONAL) SCALAR: Maximum number of AI Units after reinforcements. Default value is equivalent to _AICount. Set to 0 for no limit.
 			]
 
+		"increasing_difficulty":
+			_monitorParams =
+			[
+				_AICount,				// SCALAR: If the AI Group has fewer than "_AICount" living units, then the group will receive reinforcements.
+				_reinforcementCount,	// SCALAR: The (maximum) number of units to spawn as reinforcements.
+				_maxAICount				// (OPTIONAL) SCALAR: Maximum number of AI Units after reinforcements. Default value is equivalent to _AICount. Set to 0 for no limit.
+			]
+
 		"static_gunner":
 			_monitorParams =
 			[
@@ -307,6 +315,39 @@ if (!_reinforcementsDepleted && {(diag_tickTime-_lastUpdated)>_updateDelay}) the
 			};
 		};
 
+		case "increasing_difficulty":
+		{
+			private ["_AICount", "_reinforcementCount", "_maxAICount"];
+
+			if !(_monitorParams params
+			[
+				["_AICount", 0, [0]],
+				["_reinforcementCount", 0, [0]]
+			])
+			exitWith
+			{
+				_reinforcementsDepleted = true;
+				diag_log format ["DMS ERROR :: Calling DMS_fnc_GroupReinforcementsManager with invalid _monitorParams: %1 | _monitorType: %2 | Setting _reinforcementsDepleted to true.",_monitorParams,_monitorType];
+			};
+
+
+			if (_remainingUnits<_AICount) then
+			{
+				_difficulty =
+					switch (toLower _difficulty) do
+					{
+						case "easy": {"moderate"};
+						case "moderate": {"difficult"};
+						case "difficult";
+						case "hardcore": {"hardcore"};
+					};
+
+				_maxAICount = if ((count _monitorParams)>3) then {_monitorParams param [3, 0, [0]]} else {_AICount};
+
+				_unitsToSpawn = _reinforcementCount min ((_maxAICount-_remainingUnits) max 0);
+			};
+		};
+
 		case "armed_vehicle":
 		{
 			private ["_AICount", "_vehClass", "_leaderPos", "_veh"];
@@ -494,6 +535,12 @@ if (!_reinforcementsDepleted && {(diag_tickTime-_lastUpdated)>_updateDelay}) the
 		// Update the given reinforcements count.
 		_reinforcementWavesGiven = _reinforcementWavesGiven + 1;
 		_reinforcementUnitsGiven = _reinforcementUnitsGiven + _unitsToSpawn;
+
+		if (DMS_SpawnFlareOnReinforcements) then
+		{
+			playSound3D ["a3\missions_f_beta\data\sounds\Showcase_Night\flaregun_4.wss", objNull, false, (ATLToASL _spawnPos) vectorAdd [0,0,250],2];
+			("F_20mm_Red" createVehicle (_spawnPos vectorAdd [0,0,250])) setVelocity [0,0,-1];
+		};
 
 		if (DMS_DEBUG) then
 		{

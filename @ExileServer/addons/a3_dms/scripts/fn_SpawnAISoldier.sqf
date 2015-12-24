@@ -5,13 +5,13 @@
 
 	Usage:
 	[
-		_group,					// Group the AI will belong to
-		_pos,					// Position of AI
-		_class,					// Classname: "random","assault","MG","sniper" or "unarmed". Use "custom" to use "_customGearSet"
-		_difficulty,			// Difficulty: "random","static","hardcore","difficult","moderate", or "easy"
-		_side, 					// "bandit","hero", etc.
-		_type,					// Type of AI: "soldier","static","vehicle","heli", etc.
-		_customGearSet			// OPTIONAL: Manually defined AI gear.
+		_group,					// GROUP: Group the AI will belong to
+		_pos,					// ARRAY (positionATL): Position of AI
+		_class,					// STRING: Classname: "random","assault","MG","sniper" or "unarmed". Use "custom" to use "_customGearSet"
+		_difficulty,			// STRING: Difficulty: "random","static","hardcore","difficult","moderate", or "easy"
+		_side, 					// STRING: "bandit" only by default
+		_type,					// STRING: Type of AI: "soldier","static","vehicle","heli", etc.
+		_customGearSet			// (OPTIONAL) ARRAY: Manually defined AI gear.
 	] call DMS_fnc_SpawnAISoldier;
 
 	Usage for _customGearSet:
@@ -34,7 +34,11 @@
 
 private ["_OK", "_useCustomGear", "_unarmed", "_class", "_type", "_unit", "_side", "_nighttime", "_weapon", "_muzzle", "_suppressor", "_pistols", "_pistol", "_customGearSet", "_helmet", "_uniform", "_vest", "_backpack", "_launcher", "_magazines", "_weaponAttachments", "_pistolAttachments", "_assignedItems", "_difficulty", "_skillArray"];
 
-_OK = params
+
+_useCustomGear = false;
+_unarmed = false;
+
+if !(params
 [
 	["_group",grpNull,[grpNull]],
 	["_pos",[0,0,0],[[]],[3]],
@@ -42,18 +46,14 @@ _OK = params
 	["_difficulty","random",[""]],
 	["_side","bandit",[""]],
 	["_type","soldier",[""]]
-];
-
-_useCustomGear = false;
-_unarmed = false;
-
-if (!_OK) then
+])
+then
 {
 	diag_log format ["DMS ERROR :: DMS_SpawnAISoldier called with invalid parameters: %1",_this];
 }
 else
 {
-	if ((_class == "custom") && {((count _this)>6)}) then
+	if ((_class == "custom") && {(count _this)>6}) then
 	{
 		_customGearSet = _this select 6;
 		_useCustomGear = true;
@@ -66,14 +66,14 @@ if(_difficulty == "random") then
 };
 
 //Create unit
-_unit = _group createUnit ["O_recon_F", _pos, [], 0,"FORM"];
+_unit = _group createUnit [DMS_AI_Classname, _pos, [], 0,"FORM"];
 _unit allowFleeing 0;
 [_unit] joinSilent _group;
 
 // Remove existing gear
-{_unit removeWeaponGlobal _x;} forEach (weapons _unit);
-{_unit unlinkItem _x;} forEach (assignedItems _unit);
-{_unit removeItem _x;} forEach (items _unit);
+{_unit removeWeaponGlobal _x;} 	forEach (weapons _unit);
+{_unit unlinkItem _x;} 			forEach (assignedItems _unit);
+{_unit removeItem _x;} 			forEach (items _unit);
 removeAllItemsWithMagazines 	_unit;
 removeHeadgear 					_unit;
 removeUniform 					_unit;
@@ -97,10 +97,17 @@ if !(DMS_ai_default_items isEqualTo []) then
 };
 
 
-switch (toLower _class) do
+if (_class == "unarmed") then
 {
-	case "random" :  {_class = DMS_random_AI call BIS_fnc_selectRandom;};
-	case "unarmed" : {_class = "assault";_unarmed = true;};
+	_class = "assault";
+	_unarmed = true;
+}
+else
+{
+	if (_class in DMS_ai_SupportedRandomClasses) then
+	{
+		_class = (missionNamespace getVariable [format["DMS_%1_AI",_class], DMS_random_AI]) call BIS_fnc_selectRandom;
+	};
 };
 
 // Unit name
@@ -133,10 +140,10 @@ if (!_useCustomGear) then
 
 
 	// Clothes
-	_unit addHeadgear 		((missionNamespace getVariable [format ["DMS_%1_helmets",_class],[]]) call BIS_fnc_selectRandom);
-	_unit forceAddUniform 	((missionNamespace getVariable [format ["DMS_%1_clothes",_class],[]]) call BIS_fnc_selectRandom);
-	_unit addVest 			((missionNamespace getVariable [format ["DMS_%1_vests",_class],[]]) call BIS_fnc_selectRandom);
-	_unit addBackpack 		((missionNamespace getVariable [format ["DMS_%1_backpacks",_class],[]]) call BIS_fnc_selectRandom);
+	_unit addHeadgear 		((missionNamespace getVariable [format ["DMS_%1_helmets",_class],DMS_assault_helmets]) call BIS_fnc_selectRandom);
+	_unit forceAddUniform 	((missionNamespace getVariable [format ["DMS_%1_clothes",_class],DMS_assault_clothes]) call BIS_fnc_selectRandom);
+	_unit addVest 			((missionNamespace getVariable [format ["DMS_%1_vests",_class],DMS_assault_vests]) call BIS_fnc_selectRandom);
+	_unit addBackpack 		((missionNamespace getVariable [format ["DMS_%1_backpacks",_class],DMS_assault_backpacks]) call BIS_fnc_selectRandom);
 
 	// Make AI effective at night
 	_nighttime = (sunOrMoon != 1);
@@ -147,14 +154,14 @@ if (!_useCustomGear) then
 
 	if (!_unarmed) then
 	{
-		_weapon = (missionNamespace getVariable [format ["DMS_%1_weps",_class],[]]) call BIS_fnc_selectRandom;
+		_weapon = (missionNamespace getVariable [format ["DMS_%1_weps",_class],DMS_assault_weps]) call BIS_fnc_selectRandom;
 		[_unit, _weapon, 6 + floor(random 3)] call BIS_fnc_addWeapon;
 		_unit selectWeapon _weapon;
 		
 		
 		if((random 100) <= (missionNamespace getVariable [format["DMS_%1_optic_chance",_class],0])) then
 		{
-			_unit addPrimaryWeaponItem ((missionNamespace getVariable [format ["DMS_%1_optics",_class],[]]) call BIS_fnc_selectRandom);
+			_unit addPrimaryWeaponItem ((missionNamespace getVariable [format ["DMS_%1_optics",_class],DMS_assault_optics]) call BIS_fnc_selectRandom);
 		};
 		
 		if (_nighttime && {(random 100) <= DMS_ai_nighttime_accessory_chance}) then
@@ -201,7 +208,7 @@ if (!_useCustomGear) then
 }
 else
 {
-	_OK = _customGearSet params
+	if !(_customGearSet params
 	[
 		["_weapon","",[""]],
 		["_weaponAttachments",[],[[]]],
@@ -214,9 +221,8 @@ else
 		["_uniform","",[""]],
 		["_vest","",[""]],
 		["_backpack","",[""]]
-	];
-
-	if (!_OK) then
+	])
+	then
 	{
 		diag_log format ["DMS ERROR :: Calling DMS_SpawnAISoldier with invalid _customGearSet: %1 | _this: %2",_customGearSet,_this];
 	};
@@ -255,7 +261,7 @@ else
 
 	// Add Magazines before weapon so that gun will be loaded
 	{
-		if ((typeName _x) == "STRING") then
+		if (_x isEqualType "") then
 		{
 			_x = [_x,1];
 		};
@@ -300,7 +306,7 @@ else
 };
 
 {
-	_unit setSkill [(_x select 0),(_x select 1)];
+	_unit setSkill _x;
 } forEach (missionNamespace getVariable [format["DMS_ai_skill_%1",_difficulty],[]]);
 
 
@@ -313,14 +319,11 @@ if (DMS_ai_disable_ramming_damage) then
 {
 	_unit addEventHandler ["HandleDamage",
 	{
-		private ["_unit", "_dmg", "_source", "_projectile"];
-		_unit = _this select 0;
 		_dmg = _this select 2;
 		_source = _this select 3;
 		_projectile = _this select 4;
-		_spawnTime = _unit getVariable ["DMS_AISpawnTime", time];
 
-		if (((_projectile=="") && {isPlayer _source}) || {((time - _spawnTime)<5) && {!(isPlayer _source)}}) then
+		if ((_projectile isEqualTo "") && {isPlayer _source}) then
 		{
 			_dmg = 0;
 		};
@@ -342,8 +345,13 @@ if (_difficulty=="hardcore") then
 	} forEach ["SUPPRESSION", "AIMINGERROR"];
 };
 
+_unit setCustomAimCoef (missionNamespace getVariable [format["DMS_AI_AimCoef_%1",_difficulty], 0.7]);
+_unit enableStamina (missionNamespace getVariable [format["DMS_AI_EnableStamina_%1",_difficulty], true]);
+
+
 _unit setVariable ["DMS_AISpawnTime", time];
 _unit setVariable ["DMS_AI_Side", _side];
+_unit setVariable ["DMS_AI_Type", _type];
 
 if (_type=="Soldier") then
 {
@@ -355,6 +363,7 @@ if (DMS_DEBUG) then
 {
 	(format ["SpawnAISoldier :: Spawned a %1 %2 %6 AI at %3 with %4 difficulty to group %5",_class,_side,_pos,_difficulty,_group,_type]) call DMS_fnc_DebugLog;
 };
+
 
 
 _unit

@@ -21,7 +21,15 @@ It is highly recommended that you add
 !="(_this select 0) execVM \"\A3\Structures_F\Wrecks\Scripts\Wreck_Heli_Attack_01.sqf\""
 ```
 
-at ***the END of the line that starts with "7 execVM" in scripts.txt*** . [Here is the pastebin](http://pastebin.com/W8bH252U).
+at ***the END of the line that starts with "7 exec" in scripts.txt*** . [Here is the pastebin](http://pastebin.com/W8bH252U).
+
+***AND:***
+
+```
+!="_v)} do {\n_posV = getPos _v;\n_smoke1 = \"#particlesource\" createVehicleLocal getpos _v;\n_smoke1 attachTo [_v,[0,0,0],\"engine_effe"
+```
+after "7 createVehicle"
+
 
 ## Installation:
 
@@ -33,7 +41,8 @@ at ***the END of the line that starts with "7 execVM" in scripts.txt*** . [Here 
 
 
 ## infiSTAR:
-If you are using infiSTAR and want to keep ```_CGM = true;```, then set ```_UMW = true;``` (the latest version of infiSTAR already has DMS markers whitelisted in ```_aLocalM```).
+* If you are using infiSTAR and want to keep ```_CGM = true;```, then set ```_UMW = true;```.
+* Add ```'O_HMG_01_high_F'``` to "_VehicleWhiteList", as well as any other vehicles you add to DMS that are not whitelisted.
 
 
 ### Vilayer or other Game Server Providers Instructions:
@@ -50,6 +59,11 @@ If you are using Vilayer or some other GameServer hosting service, and/or the ab
 
 **DMS does not currently support headless client. Do not attempt to use HC with DMS unless you know what you are doing.**
 
+## Troubleshooting:
+DMS won't spawn missions? Check RPT for config errors or make sure PBO is packed correctly by unpacking it and ensuring the folder structure is "\x\addons\a3_DMS\...".
+
+If you can't figure it out, leave a post on [the DMS thread on exile forums](http://www.exilemod.com/topic/61-dms-defents-mission-system/?do=findComment&comment=242). **Make sure to include your RPT, config.sqf, as well as any changed files.**
+
 ___
 
 # Credits:
@@ -64,13 +78,16 @@ ___
 - [shaworth](https://github.com/shaworth) and [KawaiiPotato](https://github.com/KawaiiPotato) for making the README all nice and pretty :)
 - [maca134](http://maca134.co.uk/portfolio/m3editor-arma-3-map-editor/) for M3Editor Stuff
 - [Darth Rogue from SOA](http://soldiersofanarchy.net/) for the awesome base for the first DMS static mission :D
+- [William from Refugees of the Fallen](http://refugeesofthefallen.enjin.com/) for the amazing slums static mission base and ideas :)
+- [JamieKG from Eternal Gamer](http://eternal-gamer.com/) for testing and reporting issues.
+- [Valthos from The Altis Project](https://www.thealtisproject.co.uk/) for testing and reporting issues.
 - Everbody's feedback on [the DMS thread on exile forums](http://www.exilemod.com/topic/61-dms-defents-mission-system/?do=findComment&comment=242)
 
 ___
 
 # Roadmap:
 #### Continuous Optimization + Improvements.
-* Implement the ability to "freeze" and "unfreeze" AI when there are no players nearby to improve performance. This will be under testing with a few selected server owners/community members. If you would like to participate in testing, please send a PM to [eraser1 on Exile Forums](http://www.exilemod.com/profile/96-eraser1/).
+* ~~Implement the ability to "freeze" and "unfreeze" AI when there are no players nearby to improve performance. This will be under testing with a few selected server owners/community members. If you would like to participate in testing, please send a PM to [eraser1 on Exile Forums](http://www.exilemod.com/profile/96-eraser1/).~~ _This feature is slated for a future date_
 
 #### AI Heli Paratroopers/air support.
 
@@ -84,9 +101,14 @@ ___
 * Spawn AI that are meant to "hunt" individual players.
 * Air/Land AI Vehicle Patrols
 
+#### Random community ideas:
+* Spawning in a trader on mission completion ([Trillseeker82](http://www.exilemod.com/topic/61-dms-defents-mission-system/?do=findComment&comment=43932)).
+
 #### Full Headless Client Support.
 
-#### Custom client notifications.
+#### Client Features.
+* Kill messages when a group member kills an AI.
+* Custom mission announcement messages.
 
 #### (Maybe) Implement a form of stat-tracking system
 * It will store AI kills in the database (this would almost certainly require some extra work on the behalf of server owners).
@@ -94,6 +116,65 @@ ___
 ___
 
 # Changelog:
+#### December 24, 2015 (1:45 PM CST-America):
+* **NEW CONFIG VALUES:**
+
+		DMS_SpawnFlareOnReinforcements
+		DMS_MissionMarkerWinDot_Type
+		DMS_MissionMarkerLoseDot_Type
+		DMS_EnableBoxMoving
+		DMS_BasesToImportOnServerStart
+		DMS_AI_Classname
+		DMS_AI_AimCoef_easy
+		DMS_AI_AimCoef_moderate
+		DMS_AI_AimCoef_difficult
+		DMS_AI_AimCoef_hardcore
+		DMS_AI_EnableStamina_easy
+		DMS_AI_EnableStamina_moderate
+		DMS_AI_EnableStamina_difficult
+		DMS_AI_EnableStamina_hardcore
+		DMS_AI_destroyStaticWeapon
+		DMS_AI_destroyStaticWeapon_chance
+		DMS_ai_SupportedRandomClasses
+		DMS_random_non_assault_AI
+		DMS_random_non_MG_AI
+		DMS_random_non_sniper_AI
+* Please check out the new config values in config.sqf to see what they do :)
+* Fixed issue with "thieves" mission (and DMS-spawned persistent vehicles in general). Big thank you to [JamieKG from Eternal Gamer](http://eternal-gamer.com/) and Torndeco.
+* **New static mission: "slums"**
+	* Credit for the base goes to [William from Refugees of the Fallen](http://refugeesofthefallen.enjin.com/)
+	* Spawns 2 crates at 2 different locations from a list of 5 locations.
+	* No AI vehicles, only infantry (introduces Close Quarters Combat)
+	* Added to Altis by default.
+* Static bases can now be imported on server startup instead of mission spawns. Enabled by default for saltflats and slums.
+* Increased "DMS_MissionTimeoutResetRange" from 1000 to 1500.
+* Removed the Navid from config (MG AI and box weapons).
+* Edited panthera3_config to reduce SpawnZoneNear and TraderZoneNear blacklists.
+* Edited "blackhawkdown" and "donthasslethehoff" missions to use a slightly different heli wreck classname.
+* Increased marker circle diameter for saltflats mission to 750 meters.
+* Moved "DMS_Version" variable assignment to pre-init.
+* Moved Map Center and Map Radius assignments to post-init.
+* Added support for 2 new optional parameters: _onMonitorStart and _onMonitorEnd, run before and after the Mission Monitor checks the mission, respectively, but AFTER "Mission Success State" is checked.
+* Mines should now be deleted when a mission fails.
+* Script optimizations for almost all functions using new command(s) introduced in ArmA v1.54, as well as improved technique(s).
+* "ExileServer_system_garbageCollector_deleteObject" is now used to actually delete items by DMS_fnc_CleanUp.
+* AI and vehicle cleanup should now be completely handled by Exile.
+* Added support for mARMA logging.
+* **You can now disable the movement/lifting of loot crates after the mission is complete using "DMS_EnableBoxMoving".**
+* Added some debug code to DMS_fnc_FindSafePos and DMS_fnc_IsValidPosition (commented out by default)
+* New group reinforcement type "increasing_difficulty".
+* DMS_fnc_IsNearWater now checks for invalid parameter(s).
+* DMS_fnc_PlayerAwardOnAIKill now checks for roadkill values AFTER unit-defined respect/tabs.
+* You can now define different marker types for mission completion/failure using "DMS_MissionMarkerWinDot_Type" and "DMS_MissionMarkerLoseDot_Type" respectively.
+* "DMS_fnc_SetGroupBehavior" can now take a unit as parameter as well. It will also now return true if behavior was changed, false otherwise.
+* "DMS_fnc_SpawnAIGroup" and "DMS_fnc_SpawnAIGroup_MultiPos" now supports the definition of custom gear sets.
+* Improved function documentation for "DMS_fnc_SpawnAIGroup", "DMS_fnc_SpawnAIGroup_MultiPos", and "DMS_fnc_SpawnAISoldier".
+* "DMS_fnc_SpawnAISoldier" now supports multiple different random AI class presets. This means that you can define a certain "random" class preset, but have it select from a specially defined list that excludes classes that you don't want.
+* Added default values to certain "missionNameSpace getVariable"s in DMS_fnc_SpawnAISoldier to prevent script errors in the event of invalid definitions.
+* Slight logic tweak/fix to DMS_fnc_TargetsKilled (it shouldn't throw errors when there aren't any).
+
+
+
 #### November 18, 2015 (7:45 PM CST-America):
 * **Tweaks to saltflats static mission:**
 	* AI Vehicle is spawned AFTER the base is spawned (hopefully limits/prevents it from spawning inside something).

@@ -15,7 +15,7 @@
 */
 
 
-private ["_unit", "_killer", "_side", "_type", "_launcher", "_launcherVar", "_playerObj", "_removeAll", "_rockets", "_grpUnits", "_av", "_memCount", "_gunner", "_driver", "_gunnerIsAlive", "_driverIsAlive", "_grp", "_owner", "_start", "_roadKilled", "_veh", "_boom", "_revealAmount", "_muzzle", "_silencer"];
+private ["_unit", "_killer", "_side", "_type", "_launcher", "_launcherVar", "_playerObj", "_removeAll", "_rockets", "_grp", "_grpUnits", "_av", "_memCount", "_gunner", "_driver", "_gunnerIsAlive", "_driverIsAlive", "_grp", "_owner", "_start", "_roadKilled", "_veh", "_boom", "_revealAmount", "_muzzle", "_silencer"];
 
 
 if (DMS_DEBUG) then
@@ -46,6 +46,8 @@ _removeAll =
 };
 
 moveOut _unit;
+
+_unit removeAllEventHandlers "HandleDamage";
 
 // Remove gear according to configs
 if (DMS_clear_AI_body && {(random 100) <= DMS_clear_AI_body_chance}) then
@@ -94,14 +96,12 @@ if(DMS_RemoveNVG) then
 	_unit unlinkItem "NVGoggles";
 };
 
-
+_grp = group _unit;
+_grpUnits = (units _grp) - [_unit];
 // Give the AI a new leader if the killed unit was the leader
-// credit: https://github.com/SMVampire/VEMF/
-if (((count (units group _unit)) > 1) && {(leader group _unit) == _unit}) then
+if (!(_grpUnits isEqualTo []) && {(leader _grp) isEqualTo _unit}) then
 {
-	_grpUnits = units group _unit;
-	_grpUnits = _grpUnits - [_unit];
-	(group _unit) selectLeader (_grpUnits call BIS_fnc_selectRandom);
+	_grp selectLeader (_grpUnits call BIS_fnc_selectRandom);
 };
 
 _av = _unit getVariable ["DMS_AssignedVeh",objNull];
@@ -114,15 +114,17 @@ if (!isNull _av) then
 	// Destroy the vehicle and add it to cleanup if there are no active crew members of the vehicle.
 	if (_memCount<1) then
 	{
-		_av setDamage 1;
-		DMS_CleanUpList pushBack [_av,diag_tickTime,DMS_AIVehCleanUpTime];
-		_av setVariable ["ExileDiedAt",time];
-		_av spawn {sleep 1;_this enableSimulationGlobal false;};
-
-
-		if (DMS_DEBUG) then
+		if ((DMS_AI_destroyStaticWeapon && {(random 100)<DMS_AI_destroyStaticWeapon_chance}) || {!(_av isKindOf "StaticWeapon")}) then
 		{
-			(format["OnKilled :: Destroying used AI vehicle %1, disabling simulation, and adding to cleanup.",typeOf _av]) call DMS_fnc_DebugLog;
+			_av setDamage 1;
+			_av setVariable ["ExileDiedAt",time];
+			_av spawn {sleep 1;_this enableSimulationGlobal false;};
+
+
+			if (DMS_DEBUG) then
+			{
+				(format["OnKilled :: Destroying used AI vehicle %1, disabling simulation, and adding to cleanup.",typeOf _av]) call DMS_fnc_DebugLog;
+			};
 		};
 	}
 	else
@@ -293,7 +295,7 @@ if (isPlayer _killer) then
 
 		_muzzle = currentMuzzle _playerObj;
 
-		if ((typeName _muzzle)=="STRING") then
+		if (_muzzle isEqualType "") then
 		{
 			_silencer = _playerObj weaponAccessories _muzzle select 0;
 			if (!isNil "_silencer" && {_silencer != ""}) then
@@ -308,7 +310,7 @@ if (isPlayer _killer) then
 			{
 				_x reveal [_killer, _revealAmount max (_x knowsAbout _playerObj)];
 			};
-		} forEach allUnits;
+		} forEach _grpUnits;
 	};
 };
 

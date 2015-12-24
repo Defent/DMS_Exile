@@ -8,15 +8,16 @@
 	Usage:
 	[
 		[
-			_position1,			// Potential location for AI to spawn #1
-			_position2,			// Potential location for AI to spawn #2
+			_position1,			// ARRAY (positionATL): Potential location for AI to spawn #1
+			_position2,			// ARRAY (positionATL): Potential location for AI to spawn #2
 			...
-			_positionN			// Potential location for AI to spawn #N
+			_positionN			// ARRAY (positionATL): Potential location for AI to spawn #N
 		],
-		_count,					// Number of AI
-		_difficulty,			// AI Difficulty: "random","hardcore","difficult","moderate", or "easy"
-		_class,					// AI Class: "random","assault","MG","sniper" or "unarmed" OR [_class,_launcherType]
-		_side 					// Only "bandit" is supported atm
+		_count,					// SCALAR (Integer > 0): Number of AI
+		_difficulty,			// STRING: AI Difficulty: "random","hardcore","difficult","moderate", or "easy"
+		_class,					// STRING: AI Class: "random","assault","MG","sniper" or "unarmed" OR [_class,_launcherType]
+		_side 					// STRING: Only "bandit" is supported atm
+		_customGearSet			// (OPTIONAL) ARRAY: Manually defined AI gear. Refer to functional documentation of fn_SpawnAISoldier.sqf for more info: https://github.com/Defent/DMS_Exile/blob/master/%40ExileServer/addons/a3_dms/scripts/fn_SpawnAISoldier.sqf
 	] call DMS_fnc_SpawnAIGroup_MultiPos;
 
 	Returns AI Group
@@ -25,16 +26,15 @@
 private ["_OK", "_positions", "_count", "_difficulty", "_class", "_side", "_positionsCount", "_launcherType", "_group", "_unit", "_units", "_i", "_launcher", "_rocket"];
 
 
-_OK = params
+if !(params
 [
 	["_positions","_positions ERROR",[[]]],
 	["_count","_count ERROR",[0]],
 	["_difficulty","_difficulty ERROR",[""]],
 	["_class","_class ERROR",[""]],
 	["_side","_side ERROR",[""]]
-];
-
-if (!_OK) exitWith
+])
+exitWith
 {
 	diag_log format ["DMS ERROR :: Calling DMS_SpawnAIGroup_MultiPos with invalid parameters: %1",_this];
 	grpNull
@@ -61,11 +61,28 @@ if (DMS_DEBUG) then
 };
 
 // if soldier have AT/AA weapons
-if (typeName _class == "ARRAY") then
+if (_class isEqualType []) then
 {
 	_launcherType	= _class select 1;
 	_class			= _class select 0;
 };
+
+
+_customGearSet = [];
+
+if (_class == "custom") then
+{
+	if ((count _this)>5) then
+	{
+		_customGearSet = _this select 5;
+	}
+	else
+	{
+		diag_log format["DMS ERROR :: Calling DMS_fnc_SpawnAIGroup with custom class without defining _customGearSet! Setting _class to ""random"" _this: %1",_this];
+		_class = "random";
+	};
+};
+
 
 
 _group = createGroup (missionNamespace getVariable [format ["DMS_%1Side",_side],EAST]);
@@ -76,7 +93,7 @@ _group setVariable ["DMS_Group_Side", _side];
 
 for "_i" from 1 to _count do
 {
-	_unit = [_group,_positions select (_i % _positionsCount),_class,_difficulty,_side,"Soldier"] call DMS_fnc_SpawnAISoldier;
+	_unit = [_group,_positions select (_i % _positionsCount),_class,_difficulty,_side,"Soldier",_customGearSet] call DMS_fnc_SpawnAISoldier;
 };
 
 // An AI will definitely spawn with a launcher if you define type

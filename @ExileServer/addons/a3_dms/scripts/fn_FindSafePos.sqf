@@ -36,6 +36,14 @@ params
 	["_throttleParams",				DMS_ThrottleBlacklists,		[true]]
 ];
 
+/*
+if (!isNil "DMS_DebugMarkers") then
+{
+	{deleteMarker _x} forEach DMS_DebugMarkers;
+};
+DMS_DebugMarkers = [];
+*/
+
 
 _waterSpawn = if ((count _this)>9) then {_this select 9} else {false};
 
@@ -74,6 +82,14 @@ while{!_isValidSpot} do
 	{
 		_pos = call _generatePos;
 	};
+
+	/*
+	_dot = createMarker [format ["DMS_DebugMarker_attempt%1", _attempts], _pos];
+	_dot setMarkerColor "ColorWEST";
+	_dot setMarkerType "mil_dot";
+	_dot setMarkerText format["Attempt #%1",_attempts];
+	DMS_DebugMarkers pushBack _dot;
+	*/
 
 
 	// It will only throttle the missionNear blacklist and playerNear limits because those are the most likely to throw an exception.

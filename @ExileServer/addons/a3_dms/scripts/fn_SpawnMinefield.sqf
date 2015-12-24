@@ -19,14 +19,13 @@ _mines = [];
 
 if (DMS_SpawnMinesAroundMissions) then
 {
-	_OK = params
+	if !(params
 	[
 		["_centerPos","",[[]],[2,3]],
 		["_difficulty","",["",[]],[2]],
 		["_side","",[""]]
-	];
-
-	if (!_OK) exitWith
+	])
+	exitWith
 	{
 		diag_log format ["DMS ERROR :: Calling DMS_fnc_SpawnMinefield with invalid parameters: %1",_this];
 	};
@@ -51,7 +50,7 @@ if (DMS_SpawnMinesAroundMissions) then
 
 
 	_minesInfo = _difficulty;
-	if ((typeName _difficulty)=="STRING") then
+	if (_difficulty isEqualType "") then
 	{
 		_minesInfo	= missionNamespace getVariable [format ["DMS_MineInfo_%1", _difficulty], [10,50]];
 	};

@@ -5,7 +5,7 @@
 	Initializes static mission variables for DMS
 */
 
-diag_log "DMS :: Initializing Mission Variables";
+diag_log "DMS :: Initializing Static Mission Variables";
 
 // Initialize Variables
 DMS_StaticMission_Arr			= [];
