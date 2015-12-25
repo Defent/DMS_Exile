@@ -192,6 +192,7 @@ try
 
 	if (DMS_MarkerText_ShowAICount) then
 	{
+		_markerDot = _markers select 0;
 		_markerDot setMarkerText (format ["%1 (%2 %3 remaining)",markerText _markerDot,count _units,DMS_MarkerText_AIName]);
 	};
 

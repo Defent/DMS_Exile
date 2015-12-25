@@ -109,9 +109,9 @@ if !(DMS_GodmodeCrates) then
 	_crate allowDamage true;
 };
 
+_crate enableSimulationGlobal true;
 if (DMS_EnableBoxMoving) then
 {
-	_crate enableSimulationGlobal true;
 	_crate enableRopeAttach true;
 };
 

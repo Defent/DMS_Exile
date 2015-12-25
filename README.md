@@ -117,6 +117,19 @@ ___
 
 # Changelog:
 #### December 24, 2015 (1:45 PM CST-America):
+* Fixed an issue where you couldn't take stuff out of a crate if you had "DMS_EnableBoxMoving" set to "false". Thanks to [Flowrider](http://www.exilemod.com/profile/31-flowrider85/) for the report.
+* Fixed a couple script errors caused by a hasty adjustment in the last update.
+
+
+
+#### December 24, 2015 (4:30 PM CST-America | Special Vishpala edition ;D ):
+* **NEW CONFIG VALUE: DMS_MissionMarkerCount**
+* "dynamicTextRequest" is now enabled by default instead of "textTilesRequest" because of performance issues.
+* DMS should now be compatible with more/less than two markers as long as you change "DMS_MissionMarkerCount", without having to change multiple files :P
+
+
+
+#### December 24, 2015 (1:45 PM CST-America):
 * **NEW CONFIG VALUES:**
 
 		DMS_SpawnFlareOnReinforcements
