@@ -55,7 +55,7 @@ if ((!isNull _playerObj) && {(_playerUID != "") && {_playerObj isKindOf "Exile_U
 	};
 
 
-	if (_roadKilled && {DMS_Diff_RepOrTabs_on_roadkill}) then
+	if (_roadKilled && {_unit getVariable ["DMS_Diff_RepOrTabs_on_roadkill",DMS_Diff_RepOrTabs_on_roadkill]}) then
 	{
 		_moneyChange = missionNamespace getVariable [format ["DMS_%1_%2_RoadkillMoney",_AISide,_AIType],0];
 		_repChange = missionNamespace getVariable [format ["DMS_%1_%2_RoadkillRep",_AISide,_AIType],0];
@@ -67,11 +67,13 @@ if ((!isNull _playerObj) && {(_playerUID != "") && {_playerObj isKindOf "Exile_U
 		_playerMoney = _playerObj getVariable ["ExileMoney", 0];
 		_playerRespect = _playerObj getVariable ["ExileScore", 0];
 
+		/*
 		if (DMS_DEBUG) then
 		{
 			format ["PlayerAwardOnAIKill :: Attempting to give %1 (%2) %3 poptabs and %4 respect. Player currently has %5 tabs and %6 respect.", name _playerObj, _playerUID, _moneyChange, _repChange, _playerMoney, _playerRespect] call DMS_fnc_DebugLog;
 		};
-		
+		*/
+
 		if (_moneyChange!=0) then
 		{
 			private ["_msgType", "_msgParams"];
@@ -153,6 +155,21 @@ if ((!isNull _playerObj) && {(_playerUID != "") && {_playerObj isKindOf "Exile_U
 
 		// Update client database entry
 		format["setAccountMoneyAndRespect:%1:%2:%3", _playerMoney, _playerRespect, _playerUID] call ExileServer_system_database_query_fireAndForget;
+
+		if (DMS_Show_Party_Kill_Notification) then
+		{
+			private ["_group", "_members", "_msg"];
+
+			_group = group _playerObj;
+			_members = units _group;
+			if (!(_group isEqualTo ExileGraveyardGroup) && {(count _members)>1}) then
+			{
+				_msg = format["%1 killed %2 and received %3 poptabs and %4 respect.",name _playerObj,name _unit,_moneyChange,_repChange];
+				{
+					_msg remoteExecCall ["systemChat", _x];
+				} forEach _members;
+			};
+		};
 	}
 	else
 	{

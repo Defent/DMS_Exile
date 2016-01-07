@@ -28,7 +28,7 @@
 	] call DMS_fnc_GroupReinforcementsManager;
 
 	About "_monitorType" types:
-		
+
 		"playernear":
 			_monitorParams =
 			[
@@ -279,7 +279,7 @@ if (!_reinforcementsDepleted && {(diag_tickTime-_lastUpdated)>_updateDelay}) the
 				diag_log format ["DMS ERROR :: Calling DMS_fnc_GroupReinforcementsManager with invalid _monitorParams: %1 | _monitorType: %2 | Setting _reinforcementsDepleted to true.",_monitorParams,_monitorType];
 			};
 
-			
+
 			if (_remainingUnits<_AICount) then
 			{
 				_maxAICount = if ((count _monitorParams)>2) then {_monitorParams param [2, 0, [0]]} else {_AICount};
@@ -487,7 +487,7 @@ if (!_reinforcementsDepleted && {(diag_tickTime-_lastUpdated)>_updateDelay}) the
 				};
 			};
 		};
-		
+
 		default
 		{
 			_reinforcementsDepleted = true;
@@ -497,12 +497,7 @@ if (!_reinforcementsDepleted && {(diag_tickTime-_lastUpdated)>_updateDelay}) the
 
 	if ((!isNil "_unitsToSpawn") && {_unitsToSpawn>0}) then
 	{
-		private ["_spawnPos", "_units"];
-
-		if (_spawnLocations isEqualTo []) then
-		{
-			_spawnPos = getPosATL (leader _AIGroup);
-		};
+		private ["_spawnPos", "_units", "_spawningLocations"];
 
 		if (_maxReinforcementUnits>0) then
 		{
@@ -520,17 +515,36 @@ if (!_reinforcementsDepleted && {(diag_tickTime-_lastUpdated)>_updateDelay}) the
 
 		_units = [];
 
-		for "_i" from 1 to _unitsToSpawn do
+		if (_spawnLocations isEqualTo []) then
 		{
-			if (isNil "_spawnPos") then
+			// No spawn locations were provided, so we just use the leader of the group as the spawn location.
+			_spawnPos = getPosATL (leader _AIGroup);
+
+			for "_i" from 0 to (_unitsToSpawn-1) do
 			{
-				_spawnPos = _spawnLocations call BIS_fnc_selectRandom;
+				_units pushBack ([_AIGroup,_spawnPos,_class,_difficulty,_side,"Soldier"] call DMS_fnc_SpawnAISoldier);
+			};
+		}
+		else
+		{
+			// Shuffle the original list and make a copy.
+			_spawningLocations = (_spawnLocations call ExileClient_util_array_shuffle) + [];
+			_spawningLocations_count = count _spawningLocations;
+
+			// Add extra spawning locations if there are not enough.
+			for "_i" from 0 to (_unitsToSpawn-_spawningLocations_count-1) do
+			{
+				_spawningLocations pushBack (_spawningLocations select floor(random(_spawningLocations_count+_i)));
 			};
 
-			_units pushBack ([_AIGroup,_spawnPos,_class,_difficulty,_side,"Soldier"] call DMS_fnc_SpawnAISoldier);
+			// Now to spawn the AI...
+			for "_i" from 0 to (_unitsToSpawn-1) do
+			{
+				_units pushBack ([_AIGroup,_spawningLocations select _i,_class,_difficulty,_side,"Soldier"] call DMS_fnc_SpawnAISoldier);
+			};
 		};
 
-		_units joinSilent _AIGroup;	// Otherwise they don't like each other...
+		_units joinSilent _AIGroup;		// Otherwise they don't like each other...
 
 		// Update the given reinforcements count.
 		_reinforcementWavesGiven = _reinforcementWavesGiven + 1;

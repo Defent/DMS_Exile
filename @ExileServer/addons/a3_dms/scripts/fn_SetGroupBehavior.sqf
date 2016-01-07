@@ -4,7 +4,7 @@
 
 	Usage:
 	[
-		_group,							// GROUP or OBJECT: Group or unit to change the behavior of
+		_group,							// GROUP or OBJECT: Group or unit whose behavior is to be changed.
 		_pos,							// ARRAY (positionATL): Location for the AI to guard
 		_difficulty,					// STRING: Difficulty of the AI
 		_behavior						// (OPTIONAL) STRING: AI Behavior. Refer to: https://community.bistudio.com/wiki/setBehaviour
@@ -36,7 +36,7 @@ try
 	if (_group isEqualType objNull) then
 	{
 		if !(alive _group) throw "_group is a dead object!";
-		
+
 		_group = group _group;
 	};
 }
@@ -52,7 +52,6 @@ catch
 if (_exit) exitWith {false};
 
 
-// Mostly for DMS_fnc_SpawnAIVehicle, since setting behavior to COMBAT makes the driving suck...
 _behavior = if ((count _this)>3) then {_this select 3;} else {"COMBAT"};
 
 
@@ -60,10 +59,34 @@ _group setCombatMode "RED";
 _group setBehaviour _behavior;
 
 
-if (_difficulty == "random") then
-{
-	_difficulty = DMS_ai_skill_random call BIS_fnc_selectRandom;
-};
+_difficulty =
+	switch (toLower _difficulty) do
+	{
+		case "random":
+		{
+			DMS_ai_skill_random call BIS_fnc_selectRandom;
+		};
+
+		case "randomdifficult":
+		{
+			DMS_ai_skill_randomDifficult call BIS_fnc_selectRandom;
+		};
+
+		case "randomeasy":
+		{
+			DMS_ai_skill_randomEasy call BIS_fnc_selectRandom;
+		};
+
+		case "randomintermediate":
+		{
+			DMS_ai_skill_randomIntermediate call BIS_fnc_selectRandom;
+		};
+
+		default
+		{
+		    _difficulty;
+		};
+	};
 
 _radius = missionNamespace getVariable [format["DMS_AI_WP_Radius_%1",_difficulty],40];
 

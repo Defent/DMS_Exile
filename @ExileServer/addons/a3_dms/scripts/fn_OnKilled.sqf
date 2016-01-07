@@ -22,11 +22,11 @@ if (DMS_DEBUG) then
 {
 	(format ["OnKilled :: Logging AI death with parameters: %1",_this]) call DMS_fnc_DebugLog;
 };
-	
-_unit 			= _this select 0 select 0;
-_killer 		= _this select 0 select 1;
-_side 			= _this select 1;
-_type 			= _this select 2;
+
+_unit 			= _this select 0;
+_killer 		= _this select 1;
+_side 			= _unit getVariable ["DMS_AI_Side", "bandit"];
+_type 			= _unit getVariable ["DMS_AI_Type", "soldier"];
 _launcher 		= secondaryWeapon _unit;
 _launcherVar	= _unit getVariable ["DMS_AI_Launcher",""];
 _playerObj		= objNull;
@@ -67,7 +67,7 @@ if (DMS_ai_remove_launchers && {(_launcherVar != "") || {_launcher != ""}}) then
 		_unit spawn
 		{
 			sleep 0.5;
-			
+
 			{
 				_holder = _x;
 				{
@@ -82,7 +82,7 @@ if (DMS_ai_remove_launchers && {(_launcherVar != "") || {_launcher != ""}}) then
 	};
 
 	_unit removeWeaponGlobal _launcher;
-	
+
 	{
 		if (_x isKindOf ["CA_LauncherMagazine", configFile >> "CfgMagazines"]) then
 		{
@@ -123,7 +123,7 @@ if (!isNull _av) then
 
 			if (DMS_DEBUG) then
 			{
-				(format["OnKilled :: Destroying used AI vehicle %1, disabling simulation, and adding to cleanup.",typeOf _av]) call DMS_fnc_DebugLog;
+				(format["OnKilled :: Destroying used AI vehicle %1, and disabling simulation.",typeOf _av]) call DMS_fnc_DebugLog;
 			};
 		};
 	}
@@ -175,7 +175,7 @@ if (!isNull _av) then
 
 					unassignVehicle _driver;
 					moveOut _driver;
-					
+
 					_driver disableCollisionWith _av;
 
 					_av setVehicleAmmoDef 1;
@@ -195,7 +195,7 @@ if (!isNull _av) then
 					if !(alive _driver) exitWith {};
 
 					_driver moveInGunner _av;
-					
+
 					_driver enableCollisionWith _av;
 
 					if (DMS_DEBUG) then
@@ -206,7 +206,7 @@ if (!isNull _av) then
 					if (_owner!=2) then
 					{
 						_start = time;
-						
+
 						// Controlling AI... yes. I have to do this
 						waitUntil
 						{
@@ -214,7 +214,7 @@ if (!isNull _av) then
 							[_driver] orderGetIn true;
 
 							_driver moveInGunner _av;
-						
+
 							(((gunner _av) isEqualTo _driver) || {(time-_start)>30})
 						};
 
@@ -228,7 +228,7 @@ if (!isNull _av) then
 							[_driver] orderGetIn true;
 
 							_driver moveInGunner _av;
-						
+
 							(((gunner _av) isEqualTo _driver) || {(time-_start)>30})
 						};
 

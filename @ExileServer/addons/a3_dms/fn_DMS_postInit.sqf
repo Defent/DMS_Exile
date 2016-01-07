@@ -24,9 +24,9 @@ if (isNil "DMS_DynamicMission") exitWith
 
 
 // This code is NECESSARY for spawning persistent vehicles. DO NOT REMOVE THIS CODE UNLESS YOU KNOW WHAT YOU ARE DOING
-if !("isKnownAccount:76561198027700602" call ExileServer_system_database_query_selectSingleField) then
+if !("isKnownAccount:DMS_PersistentVehicle" call ExileServer_system_database_query_selectSingleField) then
 {
-	"createAccount:76561198027700602:eraser1" call ExileServer_system_database_query_fireAndForget;
+	"createAccount:DMS_PersistentVehicle:DMS_PersistentVehicle" call ExileServer_system_database_query_fireAndForget;
 };
 
 
@@ -36,7 +36,7 @@ if !("isKnownAccount:76561198027700602" call ExileServer_system_database_query_s
 // Some custom maps don't have the proper safePos config entries.
 // If you are using one and you have an issue with mission spawns, please create an issue on GitHub or post a comment in the DMS thread.
 switch (toLower worldName) do
-{ 
+{
 	case "altis":										// [16000,16000] w/ radius of 16000 works well for Altis
 	{
 		DMS_MapCenterPos 	= [16000,16000];
@@ -52,7 +52,8 @@ switch (toLower worldName) do
 		DMS_MapCenterPos 	= [6275,6350];
 		DMS_MapRadius 		= 5000;
 	};
-	case "tavi":										// Thanks to JamieKG for this info
+	case "taviana";										// Thanks to JamieKG for this info
+	case "tavi":
 	{
 		DMS_MapCenterPos 	= [12800,12800];
 		DMS_MapRadius 		= 12800;
@@ -125,7 +126,7 @@ DMS_CLIENT_fnc_spawnDynamicText = compileFinal
 	"+str DMS_dynamicText_Duration+",
 	"+str DMS_dynamicText_FadeTime+",
 	0,
-	24358
+	24358+round(random 5)
 ] spawn BIS_fnc_dynamicText;
 ");
 publicVariable "DMS_CLIENT_fnc_spawnDynamicText";
@@ -147,6 +148,11 @@ DMS_CLIENT_fnc_spawnTextTiles = compileFinal
 ] spawn BIS_fnc_textTiles;
 ");
 publicVariable "DMS_CLIENT_fnc_spawnTextTiles";
+
+DMS_CLIENT_fnc_hintSilent = compileFinal "hintSilent parsetext format['%1',_this];";
+publicVariable "DMS_CLIENT_fnc_hintSilent";
+
+publicVariable "DMS_Version";
 
 
 
@@ -222,6 +228,15 @@ else
 {
 	[_x] call DMS_fnc_ImportFromM3E_Static;			// Spawn all of the bases that are supposed to be spawned on server startup.
 } forEach DMS_BasesToImportOnServerStart;
+
+
+{
+	[_x] call DMS_fnc_SpawnBanditMission;
+} forEach DMS_BanditMissionsOnServerStart;
+
+{
+	[_x] call DMS_fnc_SpawnStaticMission;
+} forEach DMS_StaticMissionsOnServerStart;
 
 
 

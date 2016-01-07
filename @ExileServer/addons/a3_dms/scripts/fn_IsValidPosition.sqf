@@ -66,7 +66,7 @@ else
 		if (!_waterSpawn) then
 		{
 			// Check for nearby water
-			if ((_waterNearLimit>0) && {[_pos,_waterNearLimit] call DMS_fnc_isNearWater}) then 
+			if ((_waterNearLimit>0) && {[_pos,_waterNearLimit] call DMS_fnc_isNearWater}) then
 			{
 				throw ("water");
 			};
@@ -114,16 +114,16 @@ else
 				throw ("an A3XAI mission");
 			};
 		} forEach (missionNamespace getVariable ["A3XAI_mapMarkerArray",[]]);
-		
+
 		{
 			// Check for nearby spawn points
-			if ((_spawnZoneNearLimit>0) && {((markertype _x) == "ExileSpawnZone") && {((getMarkerPos _x) distance2D _pos)<=_spawnZoneNearLimit}}) then
+			if ((_spawnZoneNearLimit>0) && {((markertype _x) in DMS_SpawnZoneMarkerTypes) && {((getMarkerPos _x) distance2D _pos)<=_spawnZoneNearLimit}}) then
 			{
 				throw ("a spawn zone");
 			};
 
 			// Check for nearby trader zones
-			if ((_traderZoneNearLimit>0) && {((markertype _x) == "ExileTraderZone") && {((getMarkerPos _x) distance2D _pos)<=_traderZoneNearLimit}}) then
+			if ((_traderZoneNearLimit>0) && {((markertype _x) in DMS_TraderZoneMarkerTypes) && {((getMarkerPos _x) distance2D _pos)<=_traderZoneNearLimit}}) then
 			{
 				throw ("a trader zone");
 			};
@@ -144,7 +144,7 @@ else
 			};
 		} forEach allMapMarkers;
 
-		
+
 		// Check for nearby players
 		// This is done last because it is likely to be the most resource intensive.
 		if ((_playerNearLimit>0) && {[_pos,_playerNearLimit] call DMS_fnc_IsPlayerNearby}) then
@@ -157,7 +157,7 @@ else
 			throw ("a territory");
 		};
 
-		
+
 
 		// No exceptions found
 		_isValidPos	= true;

@@ -10,9 +10,9 @@
 		_lootValues,				// ARRAY, STRING, or NUMBER: String or number refers to a crate case in config.cfg; array determines random crate weapons/items/backpacks
 		_rareLootChance				// (OPTIONAL) NUMBER: Manually define the percentage chance of spawning some rare items.
 	] call DMS_fnc_FillCrate;
-	
+
 	If the "_lootValues" parameter is a number or a string, the function will look for a value defined as "DMS_CrateCase_*", where the "*" is replaced by the "_lootValues" parameter. EG: DMS_CrateCase_Sniper.
-	
+
 	Otherwise, the "_lootValues" parameter must be defined as:
 		[
 			_weapons,
@@ -175,7 +175,10 @@ if ((_lootValues isEqualType []) && {!((_lootValues select 1) isEqualType {})}) 
 				_weapon = [_weapon,1];
 			};
 			_crate addWeaponCargoGlobal _weapon;
-			_crate addItemCargoGlobal [_ammo, (4 + floor(random 3))];
+			if !(_ammo isEqualTo "Exile_Magazine_Swing") then
+			{
+				_crate addItemCargoGlobal [_ammo, (DMS_MinimumMagCount + floor(random DMS_MagRange))];
+			};
 		};
 	};
 
