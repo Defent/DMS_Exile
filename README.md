@@ -121,7 +121,7 @@ ___
 ___
 
 # Changelog:
-#### **BETA CHANGELOG** Last Updated January 6, 2015 (6:30 PM CST-America):
+#### **BETA CHANGELOG** Last Updated January 9, 2016 (11:05 AM CST-America):
 * **NEW CONFIG VALUES:**
 
 		DMS_MissionTimeoutResetFrequency
@@ -150,13 +150,14 @@ ___
 * ```_onMonitorStart``` will now run BEFORE success state is checked. As a result, I added a new "completion type" in "fn_MissionSuccessState" so that you can force mission completion via array manipulations.
 * "fn_OnKilled" now gets AI side and type using "getVariable" instead of having to include them in the "addMPEventHandler". If you are using the function for custom purposes, you will need to edit your usage.
 * You can now choose whether or not an AI produces different respect or tabs when roadkilled individually.
-* You can now allow party members to be notified in chat when a party member kills an AI.
+* You can now allow party members to be notified in chat when a party member kills an AI. It includes AI type+side, distance, and the amount of poptabs/respect received.
 * You can now notify clients when AI have been offloaded to them.
 * You now have greater control over AI difficulty; you can now manually define "random" presets to include/exclude special difficulty types.
 * New function: "DMS_fnc_SetGroupBehavior_Separate" - You can pass an array of units and define their behavior without affecting the rest of the group.
 * "DMS_fnc_SpawnAIVehicle" is overhauled: instead of only spawning a driver and a gunner, the function uses "allTurrets" to completely fill the crew of a vehicle.
 * "DMS_fnc_SpawnAIVehicle" no longer sets the crew's behavior to "aware".
 * Optimized "DMS_fnc_TargetsKilled".
+* "DMS_explode_onRoadkill" now spawns the mine ON the player that ran the AI over, so damage to the vehicle is guaranteed no matter how fast the vehicle was going.
 
 
 

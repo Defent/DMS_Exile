@@ -225,11 +225,11 @@ else
 		};
 
 	if !((_crateValues params
-		[
-			["_weps", [], [[]]],
-			["_items", [], [[]]],
-			["_backpacks", [], [[]]]
-		]))
+	[
+		["_weps", [], [[]]],
+		["_items", [], [[]]],
+		["_backpacks", [], [[]]]
+	]))
 	exitWith
 	{
 		diag_log format ["DMS ERROR :: Invalid ""_crateValues"" (%1) generated from _lootValues: %2",_crateValues,_lootValues];

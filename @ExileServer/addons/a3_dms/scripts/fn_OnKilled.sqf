@@ -271,7 +271,8 @@ if (isPlayer _killer) then
 
 		if (DMS_explode_onRoadkill) then
 		{
-			_boom = createVehicle ["SLAMDirectionalMine_Wire_Ammo", ASLToAGL(getPosWorld _unit), [], 0, "CAN_COLLIDE"];
+			_boom = createVehicle ["SLAMDirectionalMine_Wire_Ammo", [0,0,100], [], 0, "CAN_COLLIDE"];
+			_boom setPosATL (getPosATL _playerObj);
 			_boom setDamage 1;
 			if (DMS_DEBUG) then
 			{
