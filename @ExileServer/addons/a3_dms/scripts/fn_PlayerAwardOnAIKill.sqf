@@ -164,7 +164,15 @@ if ((!isNull _playerObj) && {(_playerUID != "") && {_playerObj isKindOf "Exile_U
 			_members = units _group;
 			if (!(_group isEqualTo ExileGraveyardGroup) && {(count _members)>1}) then
 			{
-				_msg = format["%1 killed %2 from %3 meters away and received %4 poptabs and %5 respect.",name _playerObj,name _unit,if !(isNil "_distance") then {_distance} else {floor (_unit distance _playerObj)},_moneyChange,_repChange];
+				_msg = format
+				[
+					"%1 killed %2 from %3 meters away and received %4 poptabs and %5 respect.",
+					name _playerObj,
+					name _unit,
+					if !(isNil "_distance") then {_distance} else {floor(_unit distance _playerObj)},
+					_moneyChange,
+					_repChange
+				];
 				{
 					_msg remoteExecCall ["systemChat", _x];
 				} forEach _members;
