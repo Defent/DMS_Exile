@@ -121,7 +121,7 @@ ___
 ___
 
 # Changelog:
-#### **BETA CHANGELOG** Last Updated January 9, 2016 (11:05 AM CST-America):
+#### **BETA CHANGELOG** Last Updated January 11, 2016 (1:00 PM CST-America):
 * **NEW CONFIG VALUES:**
 
 		DMS_MissionTimeoutResetFrequency
@@ -137,6 +137,13 @@ ___
 		DMS_ai_skill_randomIntermediate
 		DMS_MinimumMagCount
 		DMS_MaximumMagCount
+		DMS_BoxFood
+		DMS_BoxDrinks
+		DMS_BoxMeds
+		DMS_BoxBaseParts
+		DMS_BoxCraftingMaterials
+		DMS_BoxTools
+* **UPDATING THE MISSIONS "bauhaus" AND "construction" ARE HIGHLY RECOMMENDED.**
 * Created a couple new config examples.
 * DMS will now use its own "PUID" for spawning persistent vehicles (instead of mine).
 * Added "Taviana" to default map configs.
@@ -158,6 +165,10 @@ ___
 * "DMS_fnc_SpawnAIVehicle" no longer sets the crew's behavior to "aware".
 * Optimized "DMS_fnc_TargetsKilled".
 * "DMS_explode_onRoadkill" now spawns the mine ON the player that ran the AI over, so damage to the vehicle is guaranteed no matter how fast the vehicle was going.
+* Added some of the latest Exile items and tools.
+* Loot configs for Survival Supplies and Construction Supplies have been split up and made more modular so they're easier to configure.
+* The "bauhaus" mission is now actually guaranteed to spawn construction supplies.
+* The "construction" mission spawns a greater variety and quantity of building supplies (and the supplies aren't hardcoded).
 
 
 

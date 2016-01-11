@@ -701,24 +701,58 @@ DMS_Use_Map_Config = true;	// Whether or not to use config overwrites specific t
 											"arifle_MXM_Black_F",
 											"srifle_DMR_02_F"
 										];
-	DMS_BoxSurvivalSupplies	=			[							//List of survival supplies (food/drink/meds) that can spawn in a crate
-											"Exile_Item_Catfood_Cooked",
+	DMS_BoxFood =						[							// List of food that can spawn in a crate.
+											"Exile_Item_GloriousKnakworst_Cooked",
+											"Exile_Item_Surstromming_Cooked",
 											"Exile_Item_SausageGravy_Cooked",
+											"Exile_Item_ChristmasTinner_Cooked",
 											"Exile_Item_BBQSandwich_Cooked",
-											"Exile_Item_PlasticBottleFreshWater",
-											"Exile_Item_PlasticBottleFreshWater",
-											"Exile_Item_Matches",
-											"Exile_Item_CookingPot"
+											"Exile_Item_Catfood_Cooked",
+											"Exile_Item_DogFood_Cooked"
 										];
-	DMS_BoxBuildingSupplies	=			[							// List of building supplies that can spawn in a crate
+	DMS_BoxDrinks =						[
+											"Exile_Item_PlasticBottleCoffee",
+											"Exile_Item_PowerDrink",
+											"Exile_Item_PlasticBottleFreshWater",
+											"Exile_Item_EnergyDrink",
+											"Exile_Item_MountainDupe"
+										];
+	DMS_BoxMeds =						[
+											"Exile_Item_InstaDoc",
+											"Exile_Item_Vishpirin",
+											"Exile_Item_Bandage"
+										];
+	DMS_BoxSurvivalSupplies	=			[							//List of survival supplies (food/drink/meds) that can spawn in a crate. "DMS_BoxFood", "DMS_BoxDrinks", and "DMS_BoxMeds" is automatically added to this list.
+											"Exile_Item_Matches",
+											"Exile_Item_CookingPot",
+											"Exile_Melee_Axe",
+											"Exile_Item_CanOpener"
+										] + DMS_BoxFood + DMS_BoxDrinks + DMS_BoxMeds;
+	DMS_BoxBaseParts =					[
 											"Exile_Item_CamoTentKit",
+											"Exile_Item_WoodWallKit",
+											"Exile_Item_WoodWallHalfKit",
+											"Exile_Item_WoodDoorwayKit",
+											"Exile_Item_WoodDoorKit",
+											"Exile_Item_WoodFloorKit",
+											"Exile_Item_WoodFloorPortKit",
+											"Exile_Item_WoodStairsKit",
+											"Exile_Item_WoodSupportKit",
+											"Exile_Item_FortificationUpgrade"
+										];
+	DMS_BoxCraftingMaterials =			[
 											"Exile_Item_MetalPole",
 											"Exile_Item_MetalBoard",
-											"Exile_Item_LightBulb",
-											"Exile_Item_JunkMetal",
-											"Exile_Item_ExtensionCord",
-											"Exile_Item_DuctTape"
+											"Exile_Item_JunkMetal"
 										];
+	DMS_BoxTools =						[
+											"Exile_Item_Grinder",
+											"Exile_Item_Handsaw"
+										];
+	DMS_BoxBuildingSupplies	=			[							// List of building supplies that can spawn in a crate ("DMS_BoxBaseParts", "DMS_BoxCraftingMaterials", and "DMS_BoxTools" are automatically added to this list. "DMS_BoxCraftingMaterials" is added twice for weight.)
+											"Exile_Item_DuctTape",
+											"Exile_Item_PortableGeneratorKit"
+										] + DMS_BoxBaseParts + DMS_BoxCraftingMaterials + DMS_BoxCraftingMaterials + DMS_BoxTools;
 	DMS_BoxOptics =						[							// List of optics that can spawn in a crate
 											"optic_Arco",
 											"optic_Hamr",
