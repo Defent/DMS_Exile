@@ -212,7 +212,7 @@ if (DMS_StaticMission_Arr isEqualTo []) exitWith {};				// Empty array, no stati
 
 				if (DMS_DEBUG) then
 				{
-					format["Static Mission Timeout Extended at %1 with timeout after %2 seconds. Position: %3",diag_tickTime,_failTime,_pos] call DMS_fnc_DebugLog;
+					format["Static Mission Timeout Extended at %1 with timeout after %2 seconds. Position: %3",diag_tickTime,_failTime,_missionPos] call DMS_fnc_DebugLog;
 				};
 			};
 		};

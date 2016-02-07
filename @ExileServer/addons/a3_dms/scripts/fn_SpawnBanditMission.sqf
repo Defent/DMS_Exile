@@ -44,6 +44,6 @@ else
 
 	if (DMS_DEBUG) then
 	{
-		(format ["SpawnBanditMission :: Spawned mission %1 with parameters (%2) | DMS_BMissionDelay set to %3 seconds", _missionType, _parameters, DMS_BMissionDelay]) call DMS_fnc_DebugLog;
+		(format ["SpawnBanditMission :: Spawned mission %1 with parameters (%2) | DMS_BMissionDelay set to %3 seconds", _mission, _parameters, DMS_BMissionDelay]) call DMS_fnc_DebugLog;
 	};
 };

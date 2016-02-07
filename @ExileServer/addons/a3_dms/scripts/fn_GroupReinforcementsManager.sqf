@@ -529,7 +529,7 @@ if (!_reinforcementsDepleted && {(diag_tickTime-_lastUpdated)>_updateDelay}) the
 		{
 			// Shuffle the original list and make a copy.
 			_spawningLocations = (_spawnLocations call ExileClient_util_array_shuffle) + [];
-			_spawnPos = _spawningLocations select 0;
+			_spawnPos = _spawningLocations select 0;				// Define it for spawning flares
 			_spawningLocations_count = count _spawningLocations;
 
 			// Add extra spawning locations if there are not enough.
