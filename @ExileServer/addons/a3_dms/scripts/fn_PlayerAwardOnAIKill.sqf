@@ -16,7 +16,7 @@
 	Returns nothing
 */
 
-private ["_playerUID", "_playerObj", "_moneyChange", "_AISide", "_AIType", "_repChange", "_roadKilled", "_unitMoney", "_unit", "_unitRespect", "_playerMoney", "_playerRespect", "_msgType", "_msgParams"];
+private ["_playerUID", "_playerObj", "_moneyChange", "_AISide", "_AIType", "_repChange", "_roadKilled", "_unitMoney", "_unit", "_unitRespect", "_playerMoney", "_playerRespect", "_unitName", "_msgType", "_msgParams"];
 
 if !(params
 [
@@ -62,10 +62,11 @@ if ((!isNull _playerObj) && {(_playerUID != "") && {_playerObj isKindOf "Exile_U
 	};
 
 
-	if ((_moneyChange!=0) || (_repChange!=0)) then
+	if ((_moneyChange!=0) || {_repChange!=0}) then
 	{
 		_playerMoney = _playerObj getVariable ["ExileMoney", 0];
 		_playerRespect = _playerObj getVariable ["ExileScore", 0];
+		_unitName = name _unit;
 
 		/*
 		if (DMS_DEBUG) then
@@ -84,7 +85,7 @@ if ((!isNull _playerObj) && {(_playerUID != "") && {_playerObj isKindOf "Exile_U
 			_playerObj setVariable ["ExileMoney",_playerMoney];
 
 			_msgType = "moneyReceivedRequest";
-			_msgParams = [str _playerMoney, format ["killing a %1 AI",_AIType]];
+			_msgParams = [str _playerMoney, format ["killed %1",_unitName]];
 
 			if (_moneyChange<0) then
 			{
@@ -117,7 +118,7 @@ if ((!isNull _playerObj) && {(_playerUID != "") && {_playerObj isKindOf "Exile_U
 
 		if (_repChange!=0) then
 		{
-			_attributes = [[format ["%1 AI KILL",toUpper _AIType],_repChange]];
+			_attributes = [[format ["KILLED %1",toUpper(_unitName)],_repChange]];
 
 			if (DMS_AIKill_DistanceBonusCoefficient>0) then
 			{
@@ -168,7 +169,7 @@ if ((!isNull _playerObj) && {(_playerUID != "") && {_playerObj isKindOf "Exile_U
 				[
 					"%1 killed %2 from %3 meters away and received %4 poptabs and %5 respect.",
 					name _playerObj,
-					name _unit,
+					_unitName,
 					if !(isNil "_distance") then {_distance} else {floor(_unit distance _playerObj)},
 					_moneyChange,
 					_repChange

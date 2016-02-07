@@ -31,6 +31,8 @@ _launcher 		= secondaryWeapon _unit;
 _launcherVar	= _unit getVariable ["DMS_AI_Launcher",""];
 _playerObj		= objNull;
 
+_unit call ([missionNamespace getVariable [_unit getVariable ["DMS_AI_CustomOnKilledFnc",""],{}]] param [0,{},[{}]]);
+
 // Some of the previously used functions work with non-local argument. Some don't. BIS is annoying
 _removeAll =
 {
@@ -288,6 +290,8 @@ if (isPlayer _killer) then
 		};
 	};
 
+	_unit setVariable ["DMS_KillerID",owner _playerObj];
+
 
 	// Reveal the killer to the AI units
 	if (DMS_ai_share_info) then
@@ -321,3 +325,4 @@ if (isPlayer _killer) then
 
 // Let Exile handle the AI Body cleanup.
 _unit setVariable ["ExileDiedAt",time];
+_unit setVariable ["DMS_KillerObj",[_playerObj,_killer] select (isNull _playerObj)];

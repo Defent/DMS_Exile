@@ -23,8 +23,18 @@ if (DMS_DEBUG) then
 // Set mission frequencies from config
 DMS_BanditMissionTypesArray = [];
 {
+	private "_missionName";
+
+	_missionName = _x select 0;
+
 	for "_i" from 1 to (_x select 1) do
 	{
-		DMS_BanditMissionTypesArray pushBack (_x select 0);
+		DMS_BanditMissionTypesArray pushBack _missionName;
 	};
+
+	missionNamespace setVariable
+	[
+		format["DMS_Mission_%1",_missionName],
+		compileFinal preprocessFileLineNumbers (format ["\x\addons\DMS\missions\bandit\%1.sqf",_missionName])
+	];
 } forEach DMS_BanditMissionTypes;

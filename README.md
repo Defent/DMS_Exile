@@ -143,6 +143,7 @@ ___
 		DMS_BoxBaseParts
 		DMS_BoxCraftingMaterials
 		DMS_BoxTools
+		DMS_CarThievesVehicles
 * **UPDATING THE MISSIONS "bauhaus" AND "construction" ARE HIGHLY RECOMMENDED.**
 * Created a couple new config examples.
 * DMS will now use its own "PUID" for spawning persistent vehicles (instead of mine).
@@ -169,6 +170,11 @@ ___
 * Loot configs for Survival Supplies and Construction Supplies have been split up and made more modular so they're easier to configure.
 * The "bauhaus" mission is now actually guaranteed to spawn construction supplies.
 * The "construction" mission spawns a greater variety and quantity of building supplies (and the supplies aren't hardcoded).
+* Moved static and dynamic mission variable initialization to pre-init.
+* Missions are now compiled in pre-init to limit overhead in runtime.
+* You can now ```setVariable "DMS_CrateGodMode"``` and ```"DMS_CrateEnableRope"``` on a crate to control the respective settings.
+* Fixed a typo that caused a script error in static mission monitor and prevented group reinforcements from spawning.
+* You can now ```setVariable "DMS_AI_CustomOnKilledFnc"``` (a string) to execute a function on death. The dead unit is passed.
 
 
 

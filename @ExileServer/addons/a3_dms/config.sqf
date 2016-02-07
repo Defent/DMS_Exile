@@ -35,7 +35,7 @@ DMS_Use_Map_Config = true;	// Whether or not to use config overwrites specific t
 
 	/*General settings for static missions*/
 	DMS_StaticMission					= true;						// Enable/disable static mission system.
-	DMS_MaxStaticMissions				= 1;						// Maximum number of Static Missions running at the same time. It's recommended you set this to the same amount of static missions that you have in total.
+	DMS_MaxStaticMissions				= 1;						// Maximum number of Static Missions running at the same time. It's recommended you set this to the same amount of static missions that you have in total. This config will be ignored by "DMS_StaticMissionsOnServerStart".
 	DMS_TimeToFirstStaticMission		= [30,30];					// [Minimum,Maximum] time between first static mission spawn. | DEFAULT: 3-7 minutes.
 	DMS_TimeBetweenStaticMissions		= [900,1800];				// [Minimum,Maximum] time between static missions (if static mission limit is not reached) | DEFAULT: 15-30 mins
 	DMS_StaticMissionTimeOut			= [1800,3600]; 				// [Minimum,Maximum] time it will take for a static mission to timeout | DEFAULT: 30-60 mins
@@ -116,8 +116,12 @@ DMS_Use_Map_Config = true;	// Whether or not to use config overwrites specific t
 	DMS_MinDistFromEastBorder			= 250;						// Missions won't spawn in a position this many meters close to the easter map border.
 	DMS_MinDistFromSouthBorder			= 250;						// Missions won't spawn in a position this many meters close to the southern map border.
 	DMS_MinDistFromNorthBorder			= 250;						// Missions won't spawn in a position this many meters close to the northern map border.
-	DMS_SpawnZoneMarkerTypes			= ["ExileSpawnZone"];		// If you're using custom spawn zone markers, make sure you define them here. CASE SENSITIVE!!!
-	DMS_TraderZoneMarkerTypes			= ["ExileTraderZone"];		// If you're using custom trader markers, make sure you define them here. CASE SENSITIVE!!!
+	DMS_SpawnZoneMarkerTypes =			[							// If you're using custom spawn zone markers, make sure you define them here. CASE SENSITIVE!!!
+											"ExileSpawnZone"
+										];
+	DMS_TraderZoneMarkerTypes =			[							// If you're using custom trader markers, make sure you define them here. CASE SENSITIVE!!!
+											"ExileTraderZone"
+										];
 	/*Mission spawn location settings*/
 
 	DMS_MinWaterDepth					= 20;						// Minimum depth of water that an underwater mission can spawn at.
@@ -797,7 +801,9 @@ DMS_Use_Map_Config = true;	// Whether or not to use config overwrites specific t
 											"Exile_Car_Van_Guerilla01",
 											"Exile_Car_Zamak",
 											"Exile_Car_Tempest",
-											"Exile_Car_HEMMT"
+											"Exile_Car_HEMMT",
+											"Exile_Car_Ural_Open_Military",
+											"Exile_Car_Ural_Covered_Military"
 										];
 
 	DMS_RefuelTrucks =					[							// List of refuel trucks that can spawn
@@ -827,4 +833,8 @@ DMS_Use_Map_Config = true;	// Whether or not to use config overwrites specific t
 											"Exile_Chopper_Hellcat_Green",
 											"Exile_Chopper_Taru_Transport_Black"
 										];
+
+	DMS_CarThievesVehicles =			[							// List of vehicles that can spawn in the "car thieves" mission. By default, it's just "DMS_MilitaryVehicles" and "DMS_TransportTrucks".
+											//"Exile_Car_Offroad_Armed_Guerilla01"
+										] + DMS_MilitaryVehicles + DMS_TransportTrucks;
 /* Loot Settings */

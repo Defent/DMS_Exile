@@ -171,57 +171,44 @@ DMS_MinMax_X_Coords = [DMS_MinDistFromWestBorder, worldSize - DMS_MinDistFromEas
 DMS_MinMax_Y_Coords = [DMS_MinDistFromSouthBorder, worldSize - DMS_MinDistFromNorthBorder];
 
 
+execFSM "\x\addons\dms\FSM\missions.fsm";
 
-if (DMS_DynamicMission || {DMS_StaticMission}) then
+
+if (DMS_ShowDifficultyColorLegend) then
 {
-	call compileFinal preprocessFileLineNumbers "\x\addons\dms\missions\static_init.sqf";
-
-	call compileFinal preprocessFileLineNumbers "\x\addons\dms\missions\mission_init.sqf";
-
-
-	if (DMS_ShowDifficultyColorLegend) then
+	private "_title";
+	_title = createmarker ["DMS_MissionMarker_DifficultyColorLegend",[-500,-200]];
+	_title setMarkerColor "ColorRed";
+	_title setmarkertext "DMS Mission Difficulties Color Legend";
+	_title setMarkerType "mil_dot";
+	_title setMarkerAlpha 0.5;
 	{
-		private "_title";
-		_title = createmarker ["DMS_MissionMarker_DifficultyColorLegend",[-500,-200]];
-		_title setMarkerColor "ColorRed";
-		_title setmarkertext "DMS Mission Difficulties Color Legend";
-		_title setMarkerType "mil_dot";
-		_title setMarkerAlpha 0.5;
+		private ["_difficulty", "_color", "_num", "_pos", "_circle", "_dot"];
+
+		_difficulty = _x;
+		switch (_difficulty) do
 		{
-			private ["_difficulty", "_color", "_num", "_pos", "_circle", "_dot"];
+			case "easy": 		{_color = "ColorGreen";};
+			case "moderate": 	{_color = "ColorYellow";};
+			case "difficult": 	{_color = "ColorRed";};
+			case "hardcore" : 	{_color = "ColorBlack";};
+		};
 
-			_difficulty = _x;
-			switch (_difficulty) do
-			{
-				case "easy": 		{_color = "ColorGreen";};
-				case "moderate": 	{_color = "ColorYellow";};
-				case "difficult": 	{_color = "ColorRed";};
-				case "hardcore" : 	{_color = "ColorBlack";};
-			};
+		_num = -200 * (_forEachIndex - 0.5);
+		_pos = [100,_num];
 
-			_num = -200 * (_forEachIndex - 0.5);
-			_pos = [100,_num];
+		_circle = createMarker [format ["DMS_MissionMarker_DifficultyColor_%1",_color], _pos];
+		_circle setMarkerColor _color;
+		_circle setMarkerShape "ELLIPSE";
+		_circle setMarkerBrush "Solid";
+		_circle setMarkerSize [100,100];
 
-			_circle = createMarker [format ["DMS_MissionMarker_DifficultyColor_%1",_color], _pos];
-			_circle setMarkerColor _color;
-			_circle setMarkerShape "ELLIPSE";
-			_circle setMarkerBrush "Solid";
-			_circle setMarkerSize [100,100];
-
-			_dot = createMarker [format ["DMS_MissionMarker_Difficulty_%1",_difficulty],_pos];
-			_dot setMarkerColor "ColorWhite";
-			_dot setMarkerType "mil_dot";
-			_dot setMarkerAlpha 0.5;
-			_dot setMarkerText _difficulty;
-		} forEach ["hardcore","difficult","moderate","easy"];
-	};
-
-
-	execFSM "\x\addons\dms\FSM\missions.fsm";
-}
-else
-{
-	diag_log "Enjoy DMS functions! :)";
+		_dot = createMarker [format ["DMS_MissionMarker_Difficulty_%1",_difficulty],_pos];
+		_dot setMarkerColor "ColorWhite";
+		_dot setMarkerType "mil_dot";
+		_dot setMarkerAlpha 0.5;
+		_dot setMarkerText _difficulty;
+	} forEach ["hardcore","difficult","moderate","easy"];
 };
 
 

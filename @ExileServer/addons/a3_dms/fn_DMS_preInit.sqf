@@ -104,3 +104,8 @@ DMS_fnc_setRelPositions =
 DMS_MaxSurfaceNormal = DMS_MinSurfaceNormal;
 
 DMS_AttemptsUntilThrottle = DMS_AttemptsUntilThrottle + 1;
+
+
+// Initialize mission variables...
+call compileFinal preprocessFileLineNumbers "\x\addons\dms\missions\static_init.sqf";
+call compileFinal preprocessFileLineNumbers "\x\addons\dms\missions\mission_init.sqf";

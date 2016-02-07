@@ -164,7 +164,7 @@ if (DMS_StaticMission_Arr isEqualTo []) exitWith {};				// Empty array, no stati
 			// Check to see if the timeout should be extended before ending the mission.
 			if ((DMS_StaticMissionTimeoutResetRange>0) && {[_missionPos,DMS_StaticMissionTimeoutResetRange] call DMS_fnc_IsPlayerNearby}) then
 			{
-				_x set [2,[diag_tickTime,_failTime]];
+				_x set [3,[diag_tickTime,_failTime]];
 
 				throw format ["Mission Timeout Extended at %1 with timeout after %2 seconds. Position: %3",diag_tickTime,_failTime,_missionPos];
 			};
@@ -208,7 +208,7 @@ if (DMS_StaticMission_Arr isEqualTo []) exitWith {};				// Empty array, no stati
 		{
 			if ((DMS_StaticMissionTimeoutResetRange>0) && {[_missionPos,DMS_StaticMissionTimeoutResetRange] call DMS_fnc_IsPlayerNearby}) then
 			{
-				_x set [2,[diag_tickTime,_failTime]];
+				_x set [3,[diag_tickTime,_failTime]];
 
 				if (DMS_DEBUG) then
 				{
