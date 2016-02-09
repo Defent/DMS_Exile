@@ -127,7 +127,7 @@ _groupReinforcementsInfo =
 		_group,			// pass the group
 		[
 			[
-				0,		// Let's limit number of units instead...
+				-1,		// Let's limit number of units instead...
 				0
 			],
 			[
@@ -211,7 +211,7 @@ _added =
 	_markers,
 	_side,
 	_difficulty,
-	[[],[]]
+	[]
 ] call DMS_fnc_AddMissionToMonitor_Static;
 
 // Check to see if it was added correctly, otherwise delete the stuff
@@ -225,7 +225,7 @@ if !(_added) exitWith
 	} forEach _missionAIUnits;
 
 	_cleanup pushBack ((_missionObjs select 0)+(_missionObjs select 1));
-	
+
 	{
 		_cleanup pushBack (_x select 0);
 	} foreach (_missionObjs select 2);

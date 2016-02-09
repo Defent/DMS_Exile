@@ -65,6 +65,7 @@ class CfgFunctions
 			class SelectOffsetPos				{};
 			class SetAILocality 				{};
 			class SetGroupBehavior 				{};
+			class SetGroupBehavior_Separate		{};
 			class SpawnAIGroup 					{};
 			class SpawnAIGroup_MultiPos			{};
 			class SpawnAIVehicle				{};

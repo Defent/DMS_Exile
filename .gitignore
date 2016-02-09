@@ -41,3 +41,7 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+
+
+# Private files/missions
+@ExileServer/addons/a3_dms/missions/static/sectorB.sqf

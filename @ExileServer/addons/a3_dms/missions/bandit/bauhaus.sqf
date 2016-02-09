@@ -69,7 +69,7 @@ _wreck = createVehicle ["Land_Wreck_Ural_F",[(_pos select 0) - 10, (_pos select 
 _crate_loot_values1 =
 [
 	2,		// Weapons
-	15,		// Items
+	[15,DMS_BoxBuildingSupplies],		// Items
 	2 		// Backpacks
 ];
 _crate_loot_values2 =
@@ -156,7 +156,7 @@ if !(_added) exitWith
 	} forEach _missionAIUnits;
 
 	_cleanup pushBack ((_missionObjs select 0)+(_missionObjs select 1));
-	
+
 	{
 		_cleanup pushBack (_x select 0);
 	} foreach (_missionObjs select 2);

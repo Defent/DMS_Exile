@@ -7,7 +7,7 @@ DMS_HC_Object = objNull;
 
 DMS_CleanUpList	= [];
 
-DMS_Version = "December 24 2015 (Vish Version + Derp fix)";
+DMS_Version = "January 11 2015 (RC1)";
 
 
 //Load main config
@@ -19,6 +19,8 @@ if (DMS_Use_Map_Config) then
 {
 	call compileFinal preprocessFileLineNumbers (format ["\x\addons\dms\map_configs\%1_config.sqf",toLower worldName]);
 };
+
+DMS_MagRange = DMS_MaximumMagCount - DMS_MinimumMagCount;
 
 /*
 	Original Functions from
@@ -44,15 +46,15 @@ M3E_fnc_getCenter =
 	_xs = 0;
 	_xc = {_xs = _xs + _x; true} count _ax;
 	_xz = _xs / _xc;
-	 
+
 	_ys = 0;
 	_yc = {_ys = _ys + _x; true} count _ay;
 	_yz = _ys / _yc;
-	 
+
 	_zs = 0;
 	_zc = {_zs = _zs + _x; true} count _az;
 	_zz = _zs / _zc;
-	 
+
 	[_xz, _yz, _zz]
 };
 
@@ -69,7 +71,7 @@ M3E_fnc_subArr =
 	} foreach _a1;
 	_a3
 };
- 
+
 DMS_fnc_setRelPositions =
 {
 	private ['_OK','_objects','_newCPos','_center'];
@@ -102,3 +104,8 @@ DMS_fnc_setRelPositions =
 DMS_MaxSurfaceNormal = DMS_MinSurfaceNormal;
 
 DMS_AttemptsUntilThrottle = DMS_AttemptsUntilThrottle + 1;
+
+
+// Initialize mission variables...
+call compileFinal preprocessFileLineNumbers "\x\addons\dms\missions\static_init.sqf";
+call compileFinal preprocessFileLineNumbers "\x\addons\dms\missions\mission_init.sqf";

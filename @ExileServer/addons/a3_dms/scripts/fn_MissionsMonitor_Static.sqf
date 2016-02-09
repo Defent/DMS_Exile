@@ -11,7 +11,7 @@
 		_missionPos,
 		_completionInfo,					//<--- More info in "DMS_fnc_MissionSuccessState"
 		_groupReinforcementsInfo,			//<--- More info in "DMS_fnc_GroupReinforcementsManager"
-		[_timeStarted,_timeUntilFail],
+		[_timeStarted,_failTime],
 		[_AIGroup1,_AIGroup2,...,_AIGroupX],
 		[
 			[_cleanupObj1,_cleanupObj2,...,_cleanupObjX],
@@ -43,7 +43,7 @@ if (DMS_StaticMission_Arr isEqualTo []) exitWith {};				// Empty array, no stati
 
 
 {
-	private ["_missionPos", "_completionInfo", "_groupReinforcementsInfo", "_timing", "_inputAIUnits", "_missionObjs", "_msgInfo", "_markers", "_missionSide", "_missionDifficulty", "_missionEvents", "_missionScripts", "_success", "_timeStarted", "_timeUntilFail", "_buildings", "_vehs", "_crate_info_array", "_mines", "_missionName", "_msgWIN", "_msgLose", "_onSuccessScripts", "_onFailScripts"];
+	private ["_missionPos", "_completionInfo", "_groupReinforcementsInfo", "_timing", "_inputAIUnits", "_missionObjs", "_msgInfo", "_markers", "_missionSide", "_missionDifficulty", "_missionEvents", "_missionScripts", "_timeStarted", "_failTime", "_buildings", "_vehs", "_crate_info_array", "_mines", "_missionName", "_msgWIN", "_msgLose", "_onSuccessScripts", "_onFailScripts"];
 
 	if !(_x params
 	[
@@ -66,9 +66,8 @@ if (DMS_StaticMission_Arr isEqualTo []) exitWith {};				// Empty array, no stati
 		diag_log format ["DMS ERROR :: Invalid Index (%1) in DMS_StaticMission_Arr: %2",_forEachIndex,_x];
 	};
 
-	_success					= _completionInfo call DMS_fnc_MissionSuccessState;
 	_timeStarted				= _timing select 0;
-	_timeUntilFail				= _timing select 1;
+	_failTime					= _timing select 1;
 	_buildings					= _missionObjs select 0;
 	_vehs						= _missionObjs select 1;
 	_crate_info_array			= _missionObjs select 2;
@@ -80,7 +79,7 @@ if (DMS_StaticMission_Arr isEqualTo []) exitWith {};				// Empty array, no stati
 	_onFailScripts				= _missionScripts select 1;
 	_onMonitorStart				= _missionScripts select 2;
 	_onMonitorEnd				= _missionScripts select 3;
-	
+
 	try
 	{
 		/*
@@ -100,7 +99,7 @@ if (DMS_StaticMission_Arr isEqualTo []) exitWith {};				// Empty array, no stati
 		};
 
 
-		if (_success) then
+		if (_completionInfo call DMS_fnc_MissionSuccessState) then
 		{
 			DMS_CleanUpList pushBack [_buildings,diag_tickTime,DMS_CompletedMissionCleanupTime];
 
@@ -142,12 +141,13 @@ if (DMS_StaticMission_Arr isEqualTo []) exitWith {};				// Empty array, no stati
 			};
 
 			{
-				_code = _x;
+				_params = _x select 0;
+				_code = _x select 1;
 				if (_code isEqualType "") then
 				{
 					_code = compile _code;
 				};
-				call _code;
+				_params call _code;
 			} forEach _onSuccessScripts;
 
 			[_missionName,_msgWIN] call DMS_fnc_BroadcastMissionStatus;
@@ -159,14 +159,14 @@ if (DMS_StaticMission_Arr isEqualTo []) exitWith {};				// Empty array, no stati
 			throw format ["Mission (%1) Success at %2 with message %3.",_missionName,_missionPos,_msgWIN];
 		};
 
-		if ((diag_tickTime-_timeStarted)>_timeUntilFail) then
+		if ((diag_tickTime-_timeStarted)>_failTime) then
 		{
 			// Check to see if the timeout should be extended before ending the mission.
 			if ((DMS_StaticMissionTimeoutResetRange>0) && {[_missionPos,DMS_StaticMissionTimeoutResetRange] call DMS_fnc_IsPlayerNearby}) then
 			{
-				_x set [2,[diag_tickTime,_timeUntilFail]];
+				_x set [3,[diag_tickTime,_failTime]];
 
-				throw format ["Mission Timeout Extended at %1 with timeout after %2 seconds. Position: %3",diag_tickTime,_timeUntilFail,_missionPos];
+				throw format ["Mission Timeout Extended at %1 with timeout after %2 seconds. Position: %3",diag_tickTime,_failTime,_missionPos];
 			};
 
 			//Nobody is nearby so just cleanup objects from here
@@ -186,21 +186,35 @@ if (DMS_StaticMission_Arr isEqualTo []) exitWith {};				// Empty array, no stati
 
 
 			{
-				_code = _x;
+				_params = _x select 0;
+				_code = _x select 1;
 				if (_code isEqualType "") then
 				{
 					_code = compile _code;
 				};
-				call _code;
+				_params call _code;
 			} forEach _onFailScripts;
 
 			[_missionName,_msgLose] call DMS_fnc_BroadcastMissionStatus;
 			[_markers,"lose"] call DMS_fnc_RemoveMarkers;
-			
+
 			DMS_StaticMission_Arr deleteAt _forEachIndex;
 			DMS_RunningStaticMissions deleteAt _forEachIndex;
 
 			throw format ["Mission (%1) Fail at %2 with message %3.",_missionName,_missionPos,_msgLose];
+		};
+
+		if ((diag_tickTime-_timeStarted)>DMS_SMissionTimeoutResetFrequency) then
+		{
+			if ((DMS_StaticMissionTimeoutResetRange>0) && {[_missionPos,DMS_StaticMissionTimeoutResetRange] call DMS_fnc_IsPlayerNearby}) then
+			{
+				_x set [3,[diag_tickTime,_failTime]];
+
+				if (DMS_DEBUG) then
+				{
+					format["Static Mission Timeout Extended at %1 with timeout after %2 seconds. Position: %3",diag_tickTime,_failTime,_missionPos] call DMS_fnc_DebugLog;
+				};
+			};
 		};
 
 		if (DMS_MarkerText_ShowAICount_Static) then
@@ -261,7 +275,7 @@ if (DMS_StaticMission_Arr isEqualTo []) exitWith {};				// Empty array, no stati
 			_x call _onMonitorEnd;
 		};
 
-		
+
 		if (DMS_DEBUG) then
 		{
 			(format ["MissionsMonitor_Static :: %1",_exception]) call DMS_fnc_DebugLog;
