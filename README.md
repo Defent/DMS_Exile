@@ -121,7 +121,7 @@ ___
 ___
 
 # Changelog:
-#### **BETA CHANGELOG** Last Updated January 11, 2016 (1:00 PM CST-America):
+#### February 14, 2016 (1:45 PM CST-America):
 * **NEW CONFIG VALUES:**
 
 		DMS_MissionTimeoutResetFrequency
