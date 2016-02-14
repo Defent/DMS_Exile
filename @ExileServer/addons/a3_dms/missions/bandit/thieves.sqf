@@ -60,7 +60,7 @@ _group =
 _class =
 	if (_extraParams isEqualTo []) then
 	{
-		(DMS_MilitaryVehicles+DMS_TransportTrucks) call BIS_fnc_SelectRandom
+		DMS_CarThievesVehicles call BIS_fnc_SelectRandom
 	}
 	else
 	{
@@ -76,7 +76,7 @@ _class =
 			}
 			else
 			{
-				(DMS_MilitaryVehicles+DMS_TransportTrucks) call BIS_fnc_SelectRandom
+				DMS_CarThievesVehicles call BIS_fnc_SelectRandom
 			};
 		};
 	};
@@ -165,7 +165,7 @@ if !(_added) exitWith
 	} forEach _missionAIUnits;
 
 	_cleanup pushBack ((_missionObjs select 0)+(_missionObjs select 1));
-	
+
 	{
 		_cleanup pushBack (_x select 0);
 	} foreach (_missionObjs select 2);

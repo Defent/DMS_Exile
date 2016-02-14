@@ -20,9 +20,10 @@ if ((count DMS_RunningStaticMissions) >= DMS_MaxStaticMissions) then
 };
 
 
+
 if (diag_fps >= DMS_MinServerFPS && {(count allPlayers) >= DMS_MinPlayerCount}) then
 {
-	if (_time - DMS_BMissionLastStart > DMS_BMissionDelay) then
+	if (DMS_DynamicMission && {_time - DMS_BMissionLastStart > DMS_BMissionDelay}) then
 	{
 		private "_mission";
 		_mission = DMS_BanditMissionTypesArray call BIS_fnc_selectRandom;
@@ -41,7 +42,7 @@ if (diag_fps >= DMS_MinServerFPS && {(count allPlayers) >= DMS_MinPlayerCount}) 
 	};
 
 
-	if ((DMS_StaticMission) && {_time - DMS_StaticMissionLastStart > DMS_StaticMissionDelay}) then
+	if (DMS_StaticMission && {_time - DMS_StaticMissionLastStart > DMS_StaticMissionDelay}) then
 	{
 		private ["_mission", "_availableMissions"];
 

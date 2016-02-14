@@ -1,7 +1,7 @@
 /*
 	DMS_fnc_MissionSuccessState
 	Created by eraser1
-	
+
 	Usage:
 	[
 		[_completionType1,_completionArgs1,_isAbsoluteCondition],
@@ -54,7 +54,7 @@ _exit = false;
 			(format ["MissionSuccessState :: Checking completion type ""%1"" with argument |%2|. Absolute: %3",_completionType,_completionArgs,_absoluteWinCondition]) call DMS_fnc_DebugLog;
 		};
 
-		switch (toLower _completionType) do 
+		switch (toLower _completionType) do
 		{
 			case "kill":
 			{
@@ -69,6 +69,10 @@ _exit = false;
 			case "playernear":
 			{
 				_success = _completionArgs call DMS_fnc_IsPlayerNearby;
+			};
+			case "external":			// This is a special completion type. It is intended to be a flag for people who want to control mission completion using _onMonitorStart and _onMonitorEnd through array manipulation. You probably don't want to use this unless you know what you're doing.
+			{
+				_success = _completionArgs;
 			};
 			default
 			{

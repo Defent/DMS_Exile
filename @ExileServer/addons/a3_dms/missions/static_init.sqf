@@ -22,8 +22,18 @@ if (DMS_DEBUG) then
 // Set mission frequencies from config
 DMS_StaticMissionTypesArray = [];
 {
+	private "_missionName";
+
+	_missionName = _x select 0;
+
 	for "_i" from 1 to (_x select 1) do
 	{
-		DMS_StaticMissionTypesArray pushBack (_x select 0);
+		DMS_StaticMissionTypesArray pushBack _missionName;
 	};
+
+	missionNamespace setVariable
+	[
+		format["DMS_StaticMission_%1",_missionName],
+		compileFinal preprocessFileLineNumbers (format ["\x\addons\DMS\missions\static\%1.sqf",_missionName])
+	];
 } forEach DMS_StaticMissionTypes;

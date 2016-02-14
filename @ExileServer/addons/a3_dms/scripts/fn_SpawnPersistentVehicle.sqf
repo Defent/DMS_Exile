@@ -84,7 +84,7 @@ try
 
 	// Create and set the vehicle
 	_vehObj = [_vehicleClass,_pos] call DMS_fnc_SpawnNonPersistentVehicle;
-	
+
 	if (_spawnATL) then
 	{
 		_vehObj setPosATL _pos;
@@ -100,7 +100,7 @@ try
 	// Set up vars
 	_vehObj setVariable ["ExileIsPersistent", true];
 	_vehObj setVariable ["ExileAccessCode", _pinCode];
-	_vehObj setVariable ["ExileOwnerUID", "76561198027700602"];		// That is my (eraser1's) PUID. Just so you don't think I'm trying to be sneaky...
+	_vehObj setVariable ["ExileOwnerUID", "DMS_PersistentVehicle"];		// Don't change this unless you know what you're doing.
 
 	// Deny access until specified to do so.
 	_vehObj setVariable ["ExileIsLocked",-1];

@@ -2,7 +2,7 @@
 	DMS_fnc_BroadcastMissionStatus
 	Created by eraser1
 
-	Usage:	
+	Usage:
 	[
 		_messageTitle,
 		[
@@ -44,36 +44,32 @@ if !(_message isEqualType "") then
 	_message = str _message;
 };
 
+if (_message isEqualTo "") exitWith {};
+
 {
 	private "_args";
 
 	switch (toLower _x) do
-	{ 
+	{
 		case "systemchatrequest":
 		{
-			[_x, [format ["%1: %2",toUpper _missionName,_message]], "-1"] call ExileServer_system_network_send_broadcast;
+			format["%1: %2",toUpper _missionName,_message] remoteExecCall ["systemChat",-2];
 		};
 
 		case "standardhintrequest":
 		{
+			format
 			[
-				_x,
-				[
-					format
-					[
-						"<t color='%1' size='%2' font='%3'>%4</t><br/><t color='%5' size='%6' font='%7'>%8</t>",
-						_titleColor,
-						DMS_standardHint_Title_Size,
-						DMS_standardHint_Title_Font,
-						_missionName,
-						DMS_standardHint_Message_Color,
-						DMS_standardHint_Message_Size,
-						DMS_standardHint_Message_Font,
-						_message
-					]
-				],
-				"-1"
-			] call ExileServer_system_network_send_broadcast;
+				"<t color='%1' size='%2' font='%3'>%4</t><br/><t color='%5' size='%6' font='%7'>%8</t>",
+				_titleColor,
+				DMS_standardHint_Title_Size,
+				DMS_standardHint_Title_Font,
+				_missionName,
+				DMS_standardHint_Message_Color,
+				DMS_standardHint_Message_Size,
+				DMS_standardHint_Message_Font,
+				_message
+			] remoteExecCall ["DMS_CLIENT_fnc_hintSilent",-2];
 		};
 
 		case "dynamictextrequest":

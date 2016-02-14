@@ -60,10 +60,35 @@ else
 	};
 };
 
-if(_difficulty == "random") then
-{
-	_difficulty = DMS_ai_skill_random call BIS_fnc_selectRandom;
-};
+_difficulty =
+	switch (toLower _difficulty) do
+	{
+		case "random":
+		{
+			DMS_ai_skill_random call BIS_fnc_selectRandom;
+		};
+
+		case "randomdifficult":
+		{
+			DMS_ai_skill_randomDifficult call BIS_fnc_selectRandom;
+		};
+
+		case "randomeasy":
+		{
+			DMS_ai_skill_randomEasy call BIS_fnc_selectRandom;
+		};
+
+		case "randomintermediate":
+		{
+			DMS_ai_skill_randomIntermediate call BIS_fnc_selectRandom;
+		};
+
+		default
+		{
+		    _difficulty;
+		};
+	};
+
 
 //Create unit
 _unit = _group createUnit [DMS_AI_Classname, _pos, [], 0,"FORM"];
@@ -111,7 +136,7 @@ else
 };
 
 // Unit name
-_unit setName format["[DMS_%3Unit_%1%2]",_class,floor(random 1000),toUpper _side];
+_unit setName format["[DMS %1 %2 Unit %3]",toUpper _side,_class,floor(random 1000)];
 
 if (!_useCustomGear) then
 {
@@ -157,13 +182,13 @@ if (!_useCustomGear) then
 		_weapon = (missionNamespace getVariable [format ["DMS_%1_weps",_class],DMS_assault_weps]) call BIS_fnc_selectRandom;
 		[_unit, _weapon, 6 + floor(random 3)] call BIS_fnc_addWeapon;
 		_unit selectWeapon _weapon;
-		
-		
+
+
 		if((random 100) <= (missionNamespace getVariable [format["DMS_%1_optic_chance",_class],0])) then
 		{
 			_unit addPrimaryWeaponItem ((missionNamespace getVariable [format ["DMS_%1_optics",_class],DMS_assault_optics]) call BIS_fnc_selectRandom);
 		};
-		
+
 		if (_nighttime && {(random 100) <= DMS_ai_nighttime_accessory_chance}) then
 		{
 			_unit addPrimaryWeaponItem (["acc_pointer_IR","acc_flashlight"] call BIS_fnc_selectRandom);
@@ -180,7 +205,7 @@ if (!_useCustomGear) then
 			if(_suppressor != "") then
 			{
 				_unit addPrimaryWeaponItem _suppressor;
-			};	
+			};
 		};
 
 		// In case spawn position is water
@@ -311,7 +336,7 @@ else
 
 
 // Soldier killed event handler
-_unit addMPEventHandler ["MPKilled",'if (isServer) then {[_this, '+str _side+', '+str _type+'] call DMS_fnc_OnKilled;};'];
+_unit addMPEventHandler ["MPKilled",'if (isServer) then {_this call DMS_fnc_OnKilled;};'];
 
 // Remove ramming damage from players. Also remove any damage within 5 seconds of spawning.
 // Will not work if unit is not local (offloaded)

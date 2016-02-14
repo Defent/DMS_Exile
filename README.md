@@ -1,10 +1,10 @@
 # To the User:
-####Read the instructions carefully. Before leaving any questions regarding DMS, please read through the [DMS "config.sqf"](https://github.com/Defent/DMS_Exile/blob/master/%40ExileServer/addons/a3_dms/config.sqf); the majority of the questions we receive are answered (directly or indirectly) by the config.
+####Read the instructions carefully. Before leaving any questions regarding DMS, please read through the [DMS "config.sqf"](https://github.com/Defent/DMS_Exile/blob/master/%40ExileServer/addons/a3_dms/config.sqf?ts=4); the majority of the questions we receive are answered (directly or indirectly) by the config.
 
 ####Disclaimer:
 Defent's Mission System (DMS) is written from the ground up to be an efficient, easy to install, and vastly customizable mission system for the ArmA 3 [Exile Mod](http://www.exilemod.com/). You are welcome to port DMS or any of its functions for any other mod or (legal) purposes. Providing credit is appreciated.
 
-However, creating such a mission system takes a lot of time and testing. We (the authors of DMS) are not perfect, and as a result, there may be bugs, glitches, and/or errors within DMS. We appreciate your co-operation in identifying and resolving such issues to improve DMS; however we are not liable for any issues resulting from the usage of DMS on/by your server. We are also not liable to help you in resolving any issues that may arise, although we will attempt to help you to some degree in most cases.
+However, creating such a mission system takes a lot of time and testing. We (the authors of DMS) are not perfect, and as a result, there may be bugs, glitches, and/or errors within DMS. We appreciate your co-operation in identifying and resolving such issues to improve DMS; however we are not liable for any issues resulting from the usage of DMS on/by your server. We are also not liable to help you in resolving any issues that may arise, although we may attempt to help you to some degree in most cases.
 
 
 ___
@@ -12,7 +12,7 @@ ___
 
 # Instructions
 [Please search the DMS thread before asking any questions](http://www.exilemod.com/topic/61-dms-defents-mission-system/?do=findComment&comment=242)
-DMS will work "out-of-the-box" for almost any map. You have to keep in mind that if the map is too small (such as Stratis), then you will need to reduce the [Mission spawn location settings](https://github.com/Defent/DMS_Exile/blob/master/%40ExileServer/addons/a3_dms/config.sqf#L63-L77). Also, for especially hilly maps (such as Panthera), you will need to reduce the [Minimum surfaceNormal](https://github.com/Defent/DMS_Exile/blob/master/%40ExileServer/addons/a3_dms/config.sqf#L76) (the config value is automatically adjusted for some maps. You can check the [map configs](https://github.com/Defent/DMS_Exile/tree/master/%40ExileServer/addons/a3_dms/map_configs) to see the adjusted config value overwrites).
+DMS will work "out-of-the-box" for almost any map. You have to keep in mind that if the map is too small (such as Stratis), then you will need to reduce the [Mission spawn location settings](https://github.com/Defent/DMS_Exile/blob/master/%40ExileServer/addons/a3_dms/config.sqf?ts=4). Also, for especially hilly maps (such as Panthera), you will need to reduce the [Minimum surfaceNormal](https://github.com/Defent/DMS_Exile/blob/master/%40ExileServer/addons/a3_dms/config.sqf?ts=4) (the config value is automatically adjusted for some maps. You can check the [map configs](https://github.com/Defent/DMS_Exile/tree/master/%40ExileServer/addons/a3_dms/map_configs) to see the adjusted config value overwrites).
 
 ## BattlEye Filters:
 It is highly recommended that you add
@@ -35,7 +35,7 @@ after "7 createVehicle"
 
 
 1. Download the [a3_dms](https://github.com/Defent/DMS_Exile/tree/master/%40ExileServer/addons/a3_dms) folder
-2. Edit the [config.sqf](https://github.com/Defent/DMS_Exile/blob/master/%40ExileServer/addons/a3_dms/config.sqf) to your preferences.
+2. Edit the [config.sqf](https://github.com/Defent/DMS_Exile/blob/master/%40ExileServer/addons/a3_dms/config.sqf?ts=4) to your preferences.
 3. Pack the a3_dms folder with a PBO tool ([PBO Manager](http://www.armaholic.com/page.php?id=16369), [Eliteness](https://dev.withsix.com/projects/mikero-pbodll/files), or [the Arma 3 Tools suite](http://store.steampowered.com/app/233800/))
 4. Put the generated PBO in your ```@ExileServer\addons\``` directory. It should be alongside ```exile_server.pbo``` and ```exile_server_config.pbo```.
 
@@ -79,9 +79,14 @@ ___
 - [maca134](http://maca134.co.uk/portfolio/m3editor-arma-3-map-editor/) for M3Editor Stuff
 - [Darth Rogue from SOA](http://soldiersofanarchy.net/) for the awesome base for the first DMS static mission :D
 - [William from Refugees of the Fallen](http://refugeesofthefallen.enjin.com/) for the amazing slums static mission base and ideas :)
-- [JamieKG from Eternal Gamer](http://eternal-gamer.com/) for testing and reporting issues.
-- [Valthos from The Altis Project](https://www.thealtisproject.co.uk/) for testing and reporting issues.
 - Everbody's feedback on [the DMS thread on exile forums](http://www.exilemod.com/topic/61-dms-defents-mission-system/?do=findComment&comment=242)
+
+#### Testers/Reporters:
+- [William from Refugees of the Fallen](http://refugeesofthefallen.enjin.com/)
+- [JamieKG from Eternal Gamer](http://eternal-gamer.com/)
+- [Valthos from The Altis Project](https://www.thealtisproject.co.uk/)
+- [Flowrider from Optimum Gaming](http://www.optimum-multigaming.com/)
+- [CEN from ATD Gaming](http://atdgaming.com/)
 
 ___
 
@@ -116,8 +121,67 @@ ___
 ___
 
 # Changelog:
+#### **BETA CHANGELOG** Last Updated January 11, 2016 (1:00 PM CST-America):
+* **NEW CONFIG VALUES:**
+
+		DMS_MissionTimeoutResetFrequency
+		DMS_SMissionTimeoutResetFrequency
+		DMS_SpawnZoneMarkerTypes
+		DMS_TraderZoneMarkerTypes
+		DMS_BanditMissionsOnServerStart
+		DMS_StaticMissionsOnServerStart
+		DMS_Show_Party_Kill_Notification
+		DMS_ai_offload_notifyClient
+		DMS_ai_skill_randomDifficult
+		DMS_ai_skill_randomEasy
+		DMS_ai_skill_randomIntermediate
+		DMS_MinimumMagCount
+		DMS_MaximumMagCount
+		DMS_BoxFood
+		DMS_BoxDrinks
+		DMS_BoxMeds
+		DMS_BoxBaseParts
+		DMS_BoxCraftingMaterials
+		DMS_BoxTools
+		DMS_CarThievesVehicles
+* **UPDATING THE MISSIONS "bauhaus" AND "construction" ARE HIGHLY RECOMMENDED.**
+* Created a couple new config examples.
+* DMS will now use its own "PUID" for spawning persistent vehicles (instead of mine).
+* Added "Taviana" to default map configs.
+* You can now spawn missions on server start. Make sure to add them to the mission types beforehand.
+* Fixed default values for reinforcements on saltflats and slums static Altis missions.
+* ```_onSuccessScripts``` and ```_onFailScripts``` now use a new structure: it should be ```[[param,code],[param,code]]``` instead of ```[code,code]```.
+* DMS now uses ```remoteExecCall``` instead of Exile client broadcast functions for "systemChatRequest" and "standardHintRequest".
+* You can now customize the magazine range for guns in a crate. The "fillCrate" function is far from perfect, and I am working on improving it. Ideas are appreciated.
+* Adjusted the logic to spawning AI reinforcements; the locations will be shuffled before the AI are spawned, and every location will be used at least once if there are more AI than reinforcement locations.
+* You can now define custom markers for Trader/Spawn zones. Keep in mind that they are case-sensitive.
+* ```_onMonitorStart``` will now run BEFORE success state is checked. As a result, I added a new "completion type" in "fn_MissionSuccessState" so that you can force mission completion via array manipulations.
+* "fn_OnKilled" now gets AI side and type using "getVariable" instead of having to include them in the "addMPEventHandler". If you are using the function for custom purposes, you will need to edit your usage.
+* You can now choose whether or not an AI produces different respect or tabs when roadkilled individually.
+* You can now allow party members to be notified in chat when a party member kills an AI. It includes AI type+side, distance, and the amount of poptabs/respect received.
+* You can now notify clients when AI have been offloaded to them.
+* You now have greater control over AI difficulty; you can now manually define "random" presets to include/exclude special difficulty types.
+* New function: "DMS_fnc_SetGroupBehavior_Separate" - You can pass an array of units and define their behavior without affecting the rest of the group.
+* "DMS_fnc_SpawnAIVehicle" is overhauled: instead of only spawning a driver and a gunner, the function uses "allTurrets" to completely fill the crew of a vehicle.
+* "DMS_fnc_SpawnAIVehicle" no longer sets the crew's behavior to "aware".
+* Optimized "DMS_fnc_TargetsKilled".
+* "DMS_explode_onRoadkill" now spawns the mine ON the player that ran the AI over, so damage to the vehicle is guaranteed no matter how fast the vehicle was going.
+* Added some of the latest Exile items and tools.
+* Loot configs for Survival Supplies and Construction Supplies have been split up and made more modular so they're easier to configure.
+* The "bauhaus" mission is now actually guaranteed to spawn construction supplies.
+* The "construction" mission spawns a greater variety and quantity of building supplies (and the supplies aren't hardcoded).
+* Moved static and dynamic mission variable initialization to pre-init.
+* Missions are now compiled in pre-init to limit overhead in runtime.
+* You can now ```setVariable "DMS_CrateGodMode"``` and ```"DMS_CrateEnableRope"``` on a crate to control the respective settings.
+* Fixed a typo that caused a script error in static mission monitor and prevented group reinforcements from spawning.
+* You can now ```setVariable "DMS_AI_CustomOnKilledFnc"``` (a string) to execute a function on death. The dead unit is passed.
+
+
+
+
+
 #### December 24, 2015 (1:45 PM CST-America):
-* Fixed an issue where you couldn't take stuff out of a crate if you had "DMS_EnableBoxMoving" set to "false". Thanks to [Flowrider](http://www.exilemod.com/profile/31-flowrider85/) for the report.
+* Fixed an issue where you couldn't take stuff out of a crate if you had "DMS_EnableBoxMoving" set to "false". Thanks to [Flowrider from Optimum Gaming](http://www.optimum-multigaming.com/) for the report.
 * Fixed a couple script errors caused by a hasty adjustment in the last update.
 
 
@@ -167,7 +231,7 @@ ___
 * Increased marker circle diameter for saltflats mission to 750 meters.
 * Moved "DMS_Version" variable assignment to pre-init.
 * Moved Map Center and Map Radius assignments to post-init.
-* Added support for 2 new optional parameters: _onMonitorStart and _onMonitorEnd, run before and after the Mission Monitor checks the mission, respectively, but AFTER "Mission Success State" is checked.
+* Added support for 2 new optional parameters: ```_onMonitorStart``` and ```_onMonitorEnd```, run before and after the Mission Monitor checks the mission, respectively, but AFTER "Mission Success State" is checked.
 * Mines should now be deleted when a mission fails.
 * Script optimizations for almost all functions using new command(s) introduced in ArmA v1.54, as well as improved technique(s).
 * "ExileServer_system_garbageCollector_deleteObject" is now used to actually delete items by DMS_fnc_CleanUp.
@@ -196,7 +260,7 @@ ___
 
 #### November 14, 2015 (8:30 PM CST-America):
 * **NEW CONFIG VALUES:**
-		
+
 		DMS_AllowStaticReinforcements
 		DMS_MarkerText_ShowAICount_Static
 		DMS_PredefinedMissionLocations_WEIGHTED
@@ -256,7 +320,7 @@ ___
 * Fixed fn_CleanUp producing debug logs even with debug disabled.
 * Fixed the CleanUp list not Cleaning Up after itself (hah!).
 * Added diag_tickTime and DMS_Version to debug logs.
-* You can now define a custom function for DMS_FillCrate. It will be passed params from _lootValues select 0. **I haven't tested this at all. Just keep that in mind ;)**
+* You can now define a custom function for DMS_FillCrate. It will be passed params from ```_lootValues select 0```. **I haven't tested this at all. Just keep that in mind ;)**
 * You can now manually define mission spawning locations into an array, and that array will be used to find a location. Each location will still be checked for validity, and if no valid positions are found from the list, a random one is then generated using the normal method. **I didn't test this part at all either :P**
 * fn_FindSafePos should be even more efficient now, and even more controllable.
 * Quite a few new functions; most notably: fn_GroupReinforcementsManager

@@ -14,14 +14,23 @@
 */
 
 
-private ["_missionType", "_parameters", "_return"];
+private ["_missionType", "_mission", "_parameters", "_return"];
 
 
 _missionType = param [0, DMS_StaticMissionTypesArray call BIS_fnc_selectRandom, [""]];
 
+_mission =
+[
+	missionNamespace getVariable format
+	[
+		"DMS_StaticMission_%1",
+		_missionType
+	]
+] param [0, "no", [{}]];
+
 try
 {
-	if !(_missionType in DMS_StaticMissionTypesArray) then
+	if (_mission isEqualTo "no") then
 	{
 		throw format ["for a mission that isn't in DMS_StaticMissionTypesArray! Parameters: %1",_this];
 	};
@@ -36,7 +45,7 @@ try
 
 	DMS_MissionCount = DMS_MissionCount + 1;
 
-	_return = _parameters call compile preprocessFileLineNumbers (format ["\x\addons\DMS\missions\static\%1.sqf",_missionType]);
+	_return = _parameters call _mission;
 
 	if ((!isNil "_return") && {_return isEqualTo "delay"}) exitWith
 	{

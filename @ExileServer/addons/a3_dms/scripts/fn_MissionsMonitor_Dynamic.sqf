@@ -8,7 +8,7 @@
 	[
 		_pos,
 		_completionInfo,	//<--- More info in "DMS_fnc_MissionSuccessState"
-		[_timeStarted,_timeUntilFail],
+		[_timeStarted,_failTime],
 		[_AIUnit1,_AIUnit2,...,_AIUnitX],
 		[
 			[_cleanupObj1,_cleanupObj2,...,_cleanupObjX],
@@ -35,14 +35,14 @@
 */
 if (DMS_Mission_Arr isEqualTo []) exitWith {};				// Empty array, no missions running
 
-private ["_pos", "_success", "_timeStarted", "_timeUntilFail", "_units", "_buildings", "_vehs", "_crate_info_array", "_mines", "_missionName", "_msgWIN", "_msgLose", "_markers", "_missionSide", "_arr", "_cleanupList"];
+private ["_pos", "_completionInfo", "_timeStarted", "_failTime", "_units", "_buildings", "_vehs", "_crate_info_array", "_mines", "_missionName", "_msgWIN", "_msgLose", "_markers", "_missionSide", "_arr", "_cleanupList"];
 
 
 {
 	_pos						= _x select 0;
-	_success					= (_x select 1) call DMS_fnc_MissionSuccessState;
+	_completionInfo				= _x select 1;
 	_timeStarted				= _x select 2 select 0;
-	_timeUntilFail				= _x select 2 select 1;
+	_failTime					= _x select 2 select 1;
 	_units						= _x select 3;
 	_buildings					= _x select 4 select 0;
 	_vehs						= _x select 4 select 1;
@@ -62,6 +62,13 @@ private ["_pos", "_success", "_timeStarted", "_timeUntilFail", "_units", "_build
 
 	try
 	{
+		/*
+		if (DMS_DEBUG) then
+		{
+			(format ["MissionsMonitor_Dynamic :: Checking Mission Status (index %1): ""%2"" at %3",_forEachIndex,_missionName,_pos]) call DMS_fnc_DebugLog;
+		};
+		*/
+
 		if !(_onMonitorStart isEqualTo {}) then
 		{
 			if (DMS_DEBUG) then
@@ -71,15 +78,8 @@ private ["_pos", "_success", "_timeStarted", "_timeUntilFail", "_units", "_build
 			_x call _onMonitorStart;
 		};
 
-		/*
-		if (DMS_DEBUG) then
-		{
-			(format ["MissionsMonitor_Dynamic :: Checking Mission Status (index %1): ""%2"" at %3",_forEachIndex,_missionName,_pos]) call DMS_fnc_DebugLog;
-		};
-		*/
 
-
-		if (_success) then
+		if (_completionInfo call DMS_fnc_MissionSuccessState) then
 		{
 			DMS_CleanUpList pushBack [_buildings,diag_tickTime,DMS_CompletedMissionCleanupTime];
 
@@ -130,12 +130,13 @@ private ["_pos", "_success", "_timeStarted", "_timeUntilFail", "_units", "_build
 			};
 
 			{
-				_code = _x;
+				_params = _x select 0;
+				_code = _x select 1;
 				if (_code isEqualType "") then
 				{
 					_code = compile _code;
 				};
-				call _code;
+				_params call _code;
 			} forEach _onSuccessScripts;
 
 			[_missionName,_msgWIN] call DMS_fnc_BroadcastMissionStatus;
@@ -146,14 +147,14 @@ private ["_pos", "_success", "_timeStarted", "_timeUntilFail", "_units", "_build
 			throw format ["Mission (%1) Success at %2 with message %3.",_missionName,_pos,_msgWIN];
 		};
 
-		if ((diag_tickTime-_timeStarted)>_timeUntilFail) then
+		if ((diag_tickTime-_timeStarted)>_failTime) then
 		{
 			// Check to see if the timeout should be extended before ending the mission.
 			if ((DMS_MissionTimeoutResetRange>0) && {[_pos,DMS_MissionTimeoutResetRange] call DMS_fnc_IsPlayerNearby}) then
 			{
-				_x set [2,[diag_tickTime,_timeUntilFail]];
+				_x set [2,[diag_tickTime,_failTime]];
 
-				throw format ["Mission Timeout Extended at %1 with timeout after %2 seconds. Position: %3",diag_tickTime,_timeUntilFail,_pos];
+				throw format ["Mission Timeout Extended at %1 with timeout after %2 seconds. Position: %3",diag_tickTime,_failTime,_pos];
 			};
 
 			//Nobody is nearby so just cleanup objects from here
@@ -182,20 +183,34 @@ private ["_pos", "_success", "_timeStarted", "_timeUntilFail", "_units", "_build
 			};
 
 			{
-				_code = _x;
+				_params = _x select 0;
+				_code = _x select 1;
 				if (_code isEqualType "") then
 				{
 					_code = compile _code;
 				};
-				call _code;
+				_params call _code;
 			} forEach _onFailScripts;
 
 			[_missionName,_msgLose] call DMS_fnc_BroadcastMissionStatus;
 			[_markers,"lose"] call DMS_fnc_RemoveMarkers;
-			
+
 			DMS_Mission_Arr deleteAt _forEachIndex;
 
 			throw format ["Mission (%1) Fail at %2 with message %3.",_missionName,_pos,_msgLose];
+		};
+
+		if ((diag_tickTime-_timeStarted)>DMS_MissionTimeoutResetFrequency) then
+		{
+			if ((DMS_MissionTimeoutResetRange>0) && {[_pos,DMS_MissionTimeoutResetRange] call DMS_fnc_IsPlayerNearby}) then
+			{
+				_x set [2,[diag_tickTime,_failTime]];
+
+				if (DMS_DEBUG) then
+				{
+					format["Mission Timeout Extended at %1 with timeout after %2 seconds. Position: %3",diag_tickTime,_failTime,_pos] call DMS_fnc_DebugLog;
+				};
+			};
 		};
 
 		if (DMS_MarkerText_ShowAICount) then

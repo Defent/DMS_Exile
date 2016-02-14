@@ -12,12 +12,20 @@
 */
 
 
-private ["_missionType", "_parameters"];
+private ["_mission", "_parameters"];
 
 
-_missionType = param [0, DMS_BanditMissionTypesArray call BIS_fnc_selectRandom, [""]];
 
-if !(_missionType in DMS_BanditMissionTypesArray) then
+_mission =
+[
+	missionNamespace getVariable format
+	[
+		"DMS_Mission_%1",
+		_this param [0, DMS_BanditMissionTypesArray call BIS_fnc_selectRandom, [""]]
+	]
+] param [0, "no",[{}]];
+
+if (_mission isEqualTo "no") then
 {
 	diag_log format ["DMS ERROR :: Calling DMS_fnc_SpawnBanditMission for a mission that isn't in DMS_BanditMissionTypesArray! Parameters: %1",_this];
 }
@@ -29,13 +37,13 @@ else
 	DMS_RunningBMissionCount 	= DMS_RunningBMissionCount + 1;
 	DMS_BMissionDelay 			= DMS_TimeBetweenMissions call DMS_fnc_SelectRandomVal;
 
-	_parameters call compile preprocessFileLineNumbers (format ["\x\addons\DMS\missions\bandit\%1.sqf",_missionType]);
+	_parameters call _mission;
 
 	DMS_BMissionLastStart 		= diag_tickTime;
 
 
 	if (DMS_DEBUG) then
 	{
-		(format ["SpawnBanditMission :: Spawned mission %1 with parameters (%2) | DMS_BMissionDelay set to %3 seconds", _missionType, _parameters, DMS_BMissionDelay]) call DMS_fnc_DebugLog;
+		(format ["SpawnBanditMission :: Spawned mission %1 with parameters (%2) | DMS_BMissionDelay set to %3 seconds", _mission, _parameters, DMS_BMissionDelay]) call DMS_fnc_DebugLog;
 	};
 };

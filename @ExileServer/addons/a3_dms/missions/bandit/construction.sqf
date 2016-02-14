@@ -96,7 +96,7 @@ _vehicle = [_vehClass,_pos] call DMS_fnc_SpawnNonPersistentVehicle;
 _crate_loot_values =
 [
 	3,		// Weapons
-	[15,["Exile_Item_WoodWallKit","Exile_Item_WoodWallHalfKit","Exile_Item_WoodDoorwayKit","Exile_Item_WoodDoorKit","Exile_Item_Codelock","Exile_Item_PortableGeneratorKit","Exile_Item_WoodFloorKit","Exile_Item_WoodFloorPortKit"]],		// Items
+	[25,DMS_BoxBuildingSupplies],		// Items
 	2 		// Backpacks
 ];
 
@@ -178,7 +178,7 @@ if !(_added) exitWith
 	} forEach _missionAIUnits;
 
 	_cleanup pushBack ((_missionObjs select 0)+(_missionObjs select 1));
-	
+
 	{
 		_cleanup pushBack (_x select 0);
 	} foreach (_missionObjs select 2);
