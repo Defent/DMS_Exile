@@ -38,12 +38,13 @@ if ((!isNull _playerObj) && {(_playerUID != "") && {_playerObj isKindOf "Exile_U
 {
 	_moneyChange = missionNamespace getVariable [format ["DMS_%1_%2_MoneyGain",_AISide,_AIType],0];
 	_repChange = missionNamespace getVariable [format ["DMS_%1_%2_RepGain",_AISide,_AIType],0];
-
-
-	// Check for individually defined AI money/respect.
+	_rankChange = missionNamespace getVariable [format ["DMS_%1_%2_RankGain",_AISide,_AIType],0];
+	
+	// Check for individually defined AI money/respect/rank.
 	_unitMoney = _unit getVariable ["DMS_AI_Money",""];
 	_unitRespect = _unit getVariable ["DMS_AI_Respect",""];
-
+	_unitRank = _unit getVariable ["DMS_AI_Rank",""];
+	
 	if !(_unitMoney isEqualTo "") then
 	{
 		_moneyChange = _unitMoney;
@@ -53,25 +54,32 @@ if ((!isNull _playerObj) && {(_playerUID != "") && {_playerObj isKindOf "Exile_U
 	{
 		_repChange = _unitRespect;
 	};
+	
+	if !(_unitRank isEqualTo "") then
+	{
+		_rankChange = _unitRank;
+	};
 
 
 	if (_roadKilled && {_unit getVariable ["DMS_Diff_RepOrTabs_on_roadkill",DMS_Diff_RepOrTabs_on_roadkill]}) then
 	{
 		_moneyChange = missionNamespace getVariable [format ["DMS_%1_%2_RoadkillMoney",_AISide,_AIType],0];
 		_repChange = missionNamespace getVariable [format ["DMS_%1_%2_RoadkillRep",_AISide,_AIType],0];
+		_rankChange = missionNamespace getVariable [format ["DMS_%1_%2_RoadkillRank",_AISide,_AIType],0];
 	};
 
 
-	if ((_moneyChange!=0) || {_repChange!=0}) then
+	if ((_moneyChange!=0) || (_repChange!=0) || (_rankChange!=0)) then
 	{
 		_playerMoney = _playerObj getVariable ["ExileMoney", 0];
 		_playerRespect = _playerObj getVariable ["ExileScore", 0];
+		_playerRank = _playerObj getVariable ["ExileHumanity", 0];
 		_unitName = name _unit;
 
 		/*
 		if (DMS_DEBUG) then
 		{
-			format ["PlayerAwardOnAIKill :: Attempting to give %1 (%2) %3 poptabs and %4 respect. Player currently has %5 tabs and %6 respect.", name _playerObj, _playerUID, _moneyChange, _repChange, _playerMoney, _playerRespect] call DMS_fnc_DebugLog;
+			format ["PlayerAwardOnAIKill :: Attempting to give %1 (%2) %3 poptabs and %4 respect and %5 rank. Player currently has %6 tabs and %7 respect and &8 rank.", name _playerObj, _playerUID, _moneyChange, _repChange, _rankChange,_playerMoney, _playerRespect,_playerRank] call DMS_fnc_DebugLog;
 		};
 		*/
 
@@ -148,7 +156,30 @@ if ((!isNull _playerObj) && {(_playerUID != "") && {_playerObj isKindOf "Exile_U
 			(owner _playerObj) publicVariableClient "ExileClientPlayerScore";
 			ExileClientPlayerScore = nil;
 		};
-
+		//DONKEYPUNCH CUSTOM KILL STAT ADD FOR AI KILL			
+		if (DMS_Add_AIKill2DB) then
+		{
+			_newKillerFrags = _killer getVariable ["ExileKills", 0];
+			_newKillerFrags = _newKillerFrags + 1;
+			_killer setVariable ["ExileKills", _newKillerFrags];
+			format["addAccountKill:%1", getPlayerUID _killer] call ExileServer_system_database_query_fireAndForget;
+			ExileClientPlayerKills = _newKillerFrags;
+			(owner _playerObj) publicVariableClient "ExileClientPlayerKills";
+			ExileClientPlayerKills = nil;
+		};
+		//DONKEYPUNCH CUSTOM KILL RANK CHANGE FOR AI KILL
+		if (DMS_Enable_RankChange) then
+		{
+			if (_rankChange!=0) then
+			{
+				_playerRank = (_playerRank+_rankChange);
+				_killer setVariable ["ExileRank",_playerRank];
+				format["modifyAccountHumanity:%1:%2",_rankChange,getPlayerUID _killer] call ExileServer_system_database_query_fireAndForget;
+				ExileClientPlayerHumanity = _playerRank;
+				(owner _playerObj) publicVariableClient "ExileClientPlayerHumanity";
+				ExileClientPlayerHumanity = nil;
+			};
+		};
 		if (DMS_DEBUG) then
 		{
 			format ["PlayerAwardOnAIKill :: %1 (%2) awarded %3 poptabs and %4 respect for killing %5. Player's money is now %6, and respect is now %7. Roadkill: %8", name _playerObj, _playerUID, _moneyChange, _repChange, _unit, _playerMoney, _playerRespect, _roadKilled] call DMS_fnc_DebugLog;
@@ -167,12 +198,13 @@ if ((!isNull _playerObj) && {(_playerUID != "") && {_playerObj isKindOf "Exile_U
 			{
 				_msg = format
 				[
-					"%1 killed %2 from %3 meters away and received %4 poptabs and %5 respect.",
+					"%1 killed %2 from %3 meters away and received %4 poptabs, %5 respect and %6 rank.",
 					name _playerObj,
 					_unitName,
 					if !(isNil "_distance") then {_distance} else {floor(_unit distance _playerObj)},
 					_moneyChange,
-					_repChange
+					_repChange,
+					_rankChange
 				];
 				{
 					_msg remoteExecCall ["systemChat", _x];
