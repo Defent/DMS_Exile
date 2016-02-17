@@ -21,6 +21,12 @@ DMS_Use_Map_Config = true;	// Whether or not to use config overwrites specific t
 	For any questions regarding map-specific configs, please leave a reply in the DMS thread on the Exile forums.
 */
 
+DMS_Enable_RankChange = false; // Whether or not to use Rank Changes.
+/*
+	I am sharing this upgrade to all. If you utilize GR8 Humanity(fully compatible) or a custom version of a ranking system(simple variable changes), this will allow your players to score +/- for Bandit and Hero kills as well as a custom Survivor Faction added to DMS as well. You can still utilize the HERO / BANDIT / SURVIVOR respect and poptab settings for gameplay :) ENJOY! DONKEYPUNCH.INFO!
+*/
+
+DMS_Add_AIKill2DB = false;  // Adds killstat for player in the database ;)
 
 /* Mission System Settings */
 	/*General settings for dynamic missions*/
@@ -248,27 +254,78 @@ DMS_Use_Map_Config = true;	// Whether or not to use config overwrites specific t
 
 	DMS_Show_Kill_Poptabs_Notification	= true;						// Whether or not to show the poptabs gained/lost message on the player's screen when killing an AI. (It will still change the player's money, it just won't show the "Money Received" notification)
 	DMS_Show_Kill_Respect_Notification	= true;						// Whether or not to show the "Frag Message" on the player's screen when killing an AI. (It will still change the player's respect, it just won't show the "AI Killed" frag message)
+	DMS_Show_Kill_Rank_Notification		= true;
 	DMS_Show_Party_Kill_Notification	= true;						// Whether or not to show in chat when a party member kills an AI.
 
 	DMS_Bandit_Soldier_MoneyGain		= 50;						// The amount of Poptabs gained for killing a bandit soldier
 	DMS_Bandit_Soldier_RepGain			= 10;						// The amount of Respect gained for killing a bandit soldier
+	DMS_Bandit_Soldier_RankGain			= 15;
 	DMS_Bandit_Static_MoneyGain			= 75;						// The amount of Poptabs gained for killing a bandit static gunner
 	DMS_Bandit_Static_RepGain			= 15;						// The amount of Respect gained for killing a bandit static gunner
+	DMS_Bandit_Static_RankGain			= 30;
 	DMS_Bandit_Vehicle_MoneyGain		= 100;						// The amount of Poptabs gained for killing a bandit vehicle crew member
 	DMS_Bandit_Vehicle_RepGain			= 25;						// The amount of Respect gained for killing a bandit vehicle crew member
-
+	DMS_Bandit_Vehicle_RankGain			= 50;
+/* DonkeyPunchDMS Custom Settings for Hero AI*/	
+	DMS_Hero_Soldier_MoneyGain			= 100;						// The amount of Poptabs gained for killing a hero soldier
+	DMS_Hero_Soldier_RepGain			= 20;						// The amount of Respect gained for killing a hero soldier
+	DMS_Hero_Soldier_RankGain			= -30;	
+	DMS_Hero_Static_MoneyGain			= 120;						// The amount of Poptabs gained for killing a hero static gunner
+	DMS_Hero_Static_RepGain			= 30;						// The amount of Respect gained for killing a hero static gunner
+	DMS_Hero_Static_RankGain			= -60;
+	DMS_Hero_Vehicle_MoneyGain			= 200;						// The amount of Poptabs gained for killing a hero vehicle crew member
+	DMS_Hero_Vehicle_RepGain			= 50;						// The amount of Respect gained for killing a hero vehicle crew member
+	DMS_Hero_Vehicle_RankGain			= -100;
+/* DonkeyPunchDMS Custom Settings for Survivor AI*/	
+	DMS_Survivor_Soldier_MoneyGain		= -100;						// The amount of Poptabs gained for killing a Survivor soldier
+	DMS_Survivor_Soldier_RepGain		= -100;						// The amount of Respect gained for killing a Survivor soldier
+	DMS_Survivor_Soldier_RankGain		= -250;
+	DMS_Survivor_Static_MoneyGain			= -100;						// The amount of Poptabs gained for killing a Survivor static gunner
+	DMS_Survivor_Static_RepGain			= -100;						// The amount of Respect gained for killing a Survivor static gunner
+	DMS_Survivor_Static_RankGain		= -400;
+	DMS_Survivor_Vehicle_MoneyGain		= -500;						// The amount of Poptabs gained for killing a Survivor vehicle crew member
+	DMS_Survivor_Vehicle_RepGain			= -100;						// The amount of Respect gained for killing a Survivor vehicle crew member
+	DMS_Survivor_Vehicle_RankGain		= -600;
+	
 	DMS_AIKill_DistanceBonusMinDistance	= 100;						// Minimum distance from the player to the AI to apply the distance bonus.
 	DMS_AIKill_DistanceBonusCoefficient	= 0.05;						// If the distance from the player to the killed unit is more than "DMS_AIKill_DistanceBonusMinDistance" meters then the player gets a respect bonus equivalent to the distance multiplied by this coefficient. For example, killing an AI from 400 meters will give 100 extra respect (when the coefficient is 0.25). Set to 0 to disable the bonus. This bonus will not be applied if there isn't a regular AI kill bonus.
 
 	DMS_Diff_RepOrTabs_on_roadkill 		= true;						// Whether or not you want to use different values for giving respect/poptabs when you run an AI over. Default values are NEGATIVE. This means player will LOSE respect or poptabs.
 	DMS_Bandit_Soldier_RoadkillMoney	= -10;						// The amount of Poptabs gained/lost for running over a bandit soldier
 	DMS_Bandit_Soldier_RoadkillRep		= -5;						// The amount of Respect gained/lost for running over a bandit soldier
+	DMS_Bandit_Soldier_RoadkillRank		= 20;
 	DMS_Bandit_Static_RoadkillMoney		= -10;						// The amount of Poptabs gained/lost for running over a bandit static gunner
 	DMS_Bandit_Static_RoadkillRep		= -5;						// The amount of Respect gained/lost for running over a bandit static gunner
+	DMS_Bandit_Static_RoadkillRank		= 30;
 	DMS_Bandit_Vehicle_RoadkillMoney	= -10;						// The amount of Poptabs gained/lost for running over a bandit vehicle crew member
 	DMS_Bandit_Vehicle_RoadkillRep		= -5;						// The amount of Respect gained/lost for running over a bandit vehicle crew member
+	DMS_Bandit_Vehicle_RoadkillRank		= 50;
+/* DonkeyPunchDMS Custom RoadKill Settings for Hero AI*/	
+	DMS_Hero_Soldier_RoadkillMoney		= 20;						// The amount of Poptabs gained/lost for running over a hero soldier
+	DMS_Hero_Soldier_RoadkillRep		= 10;						// The amount of Respect gained/lost for running over a hero soldier
+	DMS_Hero_Soldier_RoadkillRank		= -40;
+	DMS_Hero_Static_RoadkillMoney		= 20;						// The amount of Poptabs gained/lost for running over a hero static gunner
+	DMS_Hero_Static_RoadkillRep			= 10;						// The amount of Respect gained/lost for running over a hero static gunner
+	DMS_Hero_Static_RoadkillRank		= -60;
+	DMS_Hero_Vehicle_RoadkillMoney		= 20;						// The amount of Poptabs gained/lost for running over a hero vehicle crew member
+	DMS_Hero_Vehicle_RoadkillRep		= 10;						// The amount of Respect gained/lost for running over a hero vehicle crew member
+	DMS_Hero_Vehicle_RoadkillRank		= -100;
+/* DonkeyPunchDMS Custom Roadkill Settings for Survivor AI*/	
+	DMS_Survivor_Soldier_RoadkillMoney	= -200;						// The amount of Poptabs gained/lost for running over a Survivor soldier
+	DMS_Survivor_Soldier_RoadkillRep		= -200;						// The amount of Respect gained/lost for running over a Survivor soldier
+	DMS_Survivor_Soldier_RoadkillRank		= -200;	
+	DMS_Survivor_Static_RoadkillMoney		= -200;						// The amount of Poptabs gained/lost for running over a Survivor static gunner
+	DMS_Survivor_Static_RoadkillRep		= -200;						// The amount of Respect gained/lost for running over a Survivor static gunner
+	DMS_Survivor_Static_RoadkillRank		= -200;	
+	DMS_Survivor_Vehicle_RoadkillMoney	= -500;						// The amount of Poptabs gained/lost for running over a Survivor vehicle crew member
+	DMS_Survivor_Vehicle_RoadkillRep		= -100;						// The amount of Respect gained/lost for running over a Survivor vehicle crew member
+	DMS_Survivor_Vehicle_RoadkillRank		= -100;
 
 	DMS_banditSide						= EAST;						// The side (team) that AI Bandits will spawn on
+/* DonkeyPunchDMS Custom Side Factions */
+	DMS_heroSide						= WEST;						// The side (team) that AI Heros will spawn on
+	DMS_survivorSide						= CIV;						// The side (team) that AI Survivor will spawn on
+	
 	DMS_clear_AI_body					= false;					// Clear AI body as soon as they die
 	DMS_clear_AI_body_chance			= 50;						// Percentage chance that AI bodies will be cleared when they die
 	DMS_ai_disable_ramming_damage 		= true;						// Disables damage due to ramming into AI. !!!NOTE: THIS WILL NOT BE RELIABLE WITH "DMS_ai_offload_to_client"!!!
