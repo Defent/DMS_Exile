@@ -79,6 +79,7 @@ ___
 - [maca134](http://maca134.co.uk/portfolio/m3editor-arma-3-map-editor/) for M3Editor Stuff
 - [Darth Rogue from SOA](http://soldiersofanarchy.net/) for the awesome base for the first DMS static mission :D
 - [William from Refugees of the Fallen](http://refugeesofthefallen.enjin.com/) for the amazing slums static mission base and ideas :)
+- [DONKEYPUNCH](https://github.com/donkeypunchepoch) for everything on the [February 17th 2016 commit](https://github.com/Defent/DMS_Exile#february-17-2016-600-pm-cst-america) ;)
 - Everbody's feedback on [the DMS thread on exile forums](http://www.exilemod.com/topic/61-dms-defents-mission-system/?do=findComment&comment=242)
 
 #### Testers/Reporters:
@@ -107,20 +108,72 @@ ___
 * Air/Land AI Vehicle Patrols
 
 #### Random community ideas:
-* Spawning in a trader on mission completion ([Trillseeker82](http://www.exilemod.com/topic/61-dms-defents-mission-system/?do=findComment&comment=43932)).
+* Spawning in a trader on mission completion ([Trillseeker82](http://www.exilemod.com/topic/61-dms-defents-mission-system/?do=findComment&comment=43932)). This might be done after the next Exile update due to the trader system overhaul :)
 
 #### Full Headless Client Support.
 
-#### Client Features.
-* Kill messages when a group member kills an AI.
-* Custom mission announcement messages.
 
-#### (Maybe) Implement a form of stat-tracking system
-* It will store AI kills in the database (this would almost certainly require some extra work on the behalf of server owners).
 
 ___
 
 # Changelog:
+#### February 17, 2016 (6:00 PM CST-America):
+* **NEW CONFIG VALUES:**
+
+		DMS_Enable_RankChange
+		DMS_Add_AIKill2DB
+		DMS_Show_Kill_Rank_Notification
+		DMS_Bandit_Soldier_RankGain
+		DMS_Bandit_Static_RankGain
+		DMS_Bandit_Vehicle_RankGain
+		DMS_Hero_Soldier_MoneyGain
+		DMS_Hero_Soldier_RepGain
+		DMS_Hero_Soldier_RankGain
+		DMS_Hero_Static_MoneyGain
+		DMS_Hero_Static_RepGain
+		DMS_Hero_Static_RankGain
+		DMS_Hero_Vehicle_MoneyGain
+		DMS_Hero_Vehicle_RepGain
+		DMS_Hero_Vehicle_RankGain
+		DMS_Survivor_Soldier_MoneyGain
+		DMS_Survivor_Soldier_RepGain
+		DMS_Survivor_Soldier_RankGain
+		DMS_Survivor_Static_MoneyGain
+		DMS_Survivor_Static_RepGain
+		DMS_Survivor_Static_RankGain
+		DMS_Survivor_Vehicle_MoneyGain
+		DMS_Survivor_Vehicle_RepGain
+		DMS_Survivor_Vehicle_RankGain
+		DMS_Bandit_Soldier_RoadkillRank
+		DMS_Bandit_Static_RoadkillRank
+		DMS_Bandit_Vehicle_RoadkillRank
+		DMS_Hero_Soldier_RoadkillMoney
+		DMS_Hero_Soldier_RoadkillRep
+		DMS_Hero_Soldier_RoadkillRank
+		DMS_Hero_Static_RoadkillMoney
+		DMS_Hero_Static_RoadkillRep
+		DMS_Hero_Static_RoadkillRank
+		DMS_Hero_Vehicle_RoadkillMoney
+		DMS_Hero_Vehicle_RoadkillRep
+		DMS_Hero_Vehicle_RoadkillRank
+		DMS_Survivor_Soldier_RoadkillMoney
+		DMS_Survivor_Soldier_RoadkillRep
+		DMS_Survivor_Soldier_RoadkillRank
+		DMS_Survivor_Static_RoadkillMoney
+		DMS_Survivor_Static_RoadkillRep
+		DMS_Survivor_Static_RoadkillRank
+		DMS_Survivor_Vehicle_RoadkillMoney
+		DMS_Survivor_Vehicle_RoadkillRep
+		DMS_Survivor_Vehicle_RoadkillRank
+		DMS_heroSide
+		DMS_survivorSide
+* **There's a lot of new config values in this update, I know it would be a pain to merge them. Check [this pastebin](http://pastebin.com/5s9erDA6) that you can simply paste into your config.sqf to keep yourself up to date.**
+* As you can see by the influx of new config values, DMS now supports AI sides other than "bandit".
+* All AI types/sides can also take advantage of a humanity/scoring system.
+* You can also save kills in the database.
+* This update courtesy of [DONKEYPUNCH](https://github.com/donkeypunchepoch) :)
+
+
 #### February 14, 2016 (1:45 PM CST-America):
 * **NEW CONFIG VALUES:**
 

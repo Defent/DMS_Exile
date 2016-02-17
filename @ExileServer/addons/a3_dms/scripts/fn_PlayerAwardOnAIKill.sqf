@@ -39,12 +39,12 @@ if ((!isNull _playerObj) && {(_playerUID != "") && {_playerObj isKindOf "Exile_U
 	_moneyChange = missionNamespace getVariable [format ["DMS_%1_%2_MoneyGain",_AISide,_AIType],0];
 	_repChange = missionNamespace getVariable [format ["DMS_%1_%2_RepGain",_AISide,_AIType],0];
 	_rankChange = missionNamespace getVariable [format ["DMS_%1_%2_RankGain",_AISide,_AIType],0];
-	
+
 	// Check for individually defined AI money/respect/rank.
 	_unitMoney = _unit getVariable ["DMS_AI_Money",""];
 	_unitRespect = _unit getVariable ["DMS_AI_Respect",""];
 	_unitRank = _unit getVariable ["DMS_AI_Rank",""];
-	
+
 	if !(_unitMoney isEqualTo "") then
 	{
 		_moneyChange = _unitMoney;
@@ -54,7 +54,7 @@ if ((!isNull _playerObj) && {(_playerUID != "") && {_playerObj isKindOf "Exile_U
 	{
 		_repChange = _unitRespect;
 	};
-	
+
 	if !(_unitRank isEqualTo "") then
 	{
 		_rankChange = _unitRank;
@@ -69,7 +69,7 @@ if ((!isNull _playerObj) && {(_playerUID != "") && {_playerObj isKindOf "Exile_U
 	};
 
 
-	if ((_moneyChange!=0) || (_repChange!=0) || (_rankChange!=0)) then
+	if ((_moneyChange!=0) || {_repChange!=0} || {_rankChange!=0}) then
 	{
 		_playerMoney = _playerObj getVariable ["ExileMoney", 0];
 		_playerRespect = _playerObj getVariable ["ExileScore", 0];
@@ -156,7 +156,7 @@ if ((!isNull _playerObj) && {(_playerUID != "") && {_playerObj isKindOf "Exile_U
 			(owner _playerObj) publicVariableClient "ExileClientPlayerScore";
 			ExileClientPlayerScore = nil;
 		};
-		//DONKEYPUNCH CUSTOM KILL STAT ADD FOR AI KILL			
+		//DONKEYPUNCH CUSTOM KILL STAT ADD FOR AI KILL
 		if (DMS_Add_AIKill2DB) then
 		{
 			_newKillerFrags = _killer getVariable ["ExileKills", 0];

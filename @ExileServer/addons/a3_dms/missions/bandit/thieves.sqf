@@ -8,7 +8,7 @@ private ["_num", "_side", "_OK", "_group", "_pos", "_difficulty", "_AICount", "_
 _num = DMS_MissionCount;
 
 
-// Set mission side (only "bandit" is supported for now)
+// Set mission side
 _side = "bandit";
 
 
