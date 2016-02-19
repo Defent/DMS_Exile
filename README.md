@@ -117,6 +117,10 @@ ___
 ___
 
 # Changelog:
+#### February 19, 2016 (5:45 PM CST-America):
+* Fixed a minor typo with a variable (part of the new Humanity support by DonkeyPunch).
+
+
 #### February 17, 2016 (6:00 PM CST-America):
 * **NEW CONFIG VALUES:**
 
