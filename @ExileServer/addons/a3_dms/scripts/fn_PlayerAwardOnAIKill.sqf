@@ -173,7 +173,7 @@ if ((!isNull _playerObj) && {(_playerUID != "") && {_playerObj isKindOf "Exile_U
 			if (_rankChange!=0) then
 			{
 				_playerRank = (_playerRank+_rankChange);
-				_killer setVariable ["ExileRank",_playerRank];
+				_killer setVariable ["ExileHumanity",_playerRank];
 				format["modifyAccountHumanity:%1:%2",_rankChange,getPlayerUID _killer] call ExileServer_system_database_query_fireAndForget;
 				ExileClientPlayerHumanity = _playerRank;
 				(owner _playerObj) publicVariableClient "ExileClientPlayerHumanity";
