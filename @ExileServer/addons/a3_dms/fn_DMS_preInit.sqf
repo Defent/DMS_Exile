@@ -7,7 +7,7 @@ DMS_HC_Object = objNull;
 
 DMS_CleanUpList	= [];
 
-DMS_Version = "February 19 2016";
+DMS_Version = "March 1 2016 (T)";
 
 
 //Load main config

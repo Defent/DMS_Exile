@@ -28,6 +28,8 @@ DMS_Enable_RankChange = false; // Whether or not to use Rank Changes.
 
 DMS_Add_AIKill2DB = false;  // Adds killstat for player in the database ;)
 
+DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a scheduled environment. Setting to true may help with lag when certain missions spawn.
+
 /* Mission System Settings */
 	/*General settings for dynamic missions*/
 	DMS_DynamicMission					= true;						// Enable/disable dynamic mission system.
@@ -266,17 +268,17 @@ DMS_Add_AIKill2DB = false;  // Adds killstat for player in the database ;)
 	DMS_Bandit_Vehicle_MoneyGain		= 100;						// The amount of Poptabs gained for killing a bandit vehicle crew member
 	DMS_Bandit_Vehicle_RepGain			= 25;						// The amount of Respect gained for killing a bandit vehicle crew member
 	DMS_Bandit_Vehicle_RankGain			= 50;
-/* DonkeyPunchDMS Custom Settings for Hero AI*/	
+/* DonkeyPunchDMS Custom Settings for Hero AI*/
 	DMS_Hero_Soldier_MoneyGain			= 100;						// The amount of Poptabs gained for killing a hero soldier
 	DMS_Hero_Soldier_RepGain			= 20;						// The amount of Respect gained for killing a hero soldier
-	DMS_Hero_Soldier_RankGain			= -30;	
+	DMS_Hero_Soldier_RankGain			= -30;
 	DMS_Hero_Static_MoneyGain			= 120;						// The amount of Poptabs gained for killing a hero static gunner
 	DMS_Hero_Static_RepGain			= 30;						// The amount of Respect gained for killing a hero static gunner
 	DMS_Hero_Static_RankGain			= -60;
 	DMS_Hero_Vehicle_MoneyGain			= 200;						// The amount of Poptabs gained for killing a hero vehicle crew member
 	DMS_Hero_Vehicle_RepGain			= 50;						// The amount of Respect gained for killing a hero vehicle crew member
 	DMS_Hero_Vehicle_RankGain			= -100;
-/* DonkeyPunchDMS Custom Settings for Survivor AI*/	
+/* DonkeyPunchDMS Custom Settings for Survivor AI*/
 	DMS_Survivor_Soldier_MoneyGain		= -100;						// The amount of Poptabs gained for killing a Survivor soldier
 	DMS_Survivor_Soldier_RepGain		= -100;						// The amount of Respect gained for killing a Survivor soldier
 	DMS_Survivor_Soldier_RankGain		= -250;
@@ -286,7 +288,7 @@ DMS_Add_AIKill2DB = false;  // Adds killstat for player in the database ;)
 	DMS_Survivor_Vehicle_MoneyGain		= -500;						// The amount of Poptabs gained for killing a Survivor vehicle crew member
 	DMS_Survivor_Vehicle_RepGain			= -100;						// The amount of Respect gained for killing a Survivor vehicle crew member
 	DMS_Survivor_Vehicle_RankGain		= -600;
-	
+
 	DMS_AIKill_DistanceBonusMinDistance	= 100;						// Minimum distance from the player to the AI to apply the distance bonus.
 	DMS_AIKill_DistanceBonusCoefficient	= 0.05;						// If the distance from the player to the killed unit is more than "DMS_AIKill_DistanceBonusMinDistance" meters then the player gets a respect bonus equivalent to the distance multiplied by this coefficient. For example, killing an AI from 400 meters will give 100 extra respect (when the coefficient is 0.25). Set to 0 to disable the bonus. This bonus will not be applied if there isn't a regular AI kill bonus.
 
@@ -300,7 +302,7 @@ DMS_Add_AIKill2DB = false;  // Adds killstat for player in the database ;)
 	DMS_Bandit_Vehicle_RoadkillMoney	= -10;						// The amount of Poptabs gained/lost for running over a bandit vehicle crew member
 	DMS_Bandit_Vehicle_RoadkillRep		= -5;						// The amount of Respect gained/lost for running over a bandit vehicle crew member
 	DMS_Bandit_Vehicle_RoadkillRank		= 50;
-/* DonkeyPunchDMS Custom RoadKill Settings for Hero AI*/	
+/* DonkeyPunchDMS Custom RoadKill Settings for Hero AI*/
 	DMS_Hero_Soldier_RoadkillMoney		= 20;						// The amount of Poptabs gained/lost for running over a hero soldier
 	DMS_Hero_Soldier_RoadkillRep		= 10;						// The amount of Respect gained/lost for running over a hero soldier
 	DMS_Hero_Soldier_RoadkillRank		= -40;
@@ -310,13 +312,13 @@ DMS_Add_AIKill2DB = false;  // Adds killstat for player in the database ;)
 	DMS_Hero_Vehicle_RoadkillMoney		= 20;						// The amount of Poptabs gained/lost for running over a hero vehicle crew member
 	DMS_Hero_Vehicle_RoadkillRep		= 10;						// The amount of Respect gained/lost for running over a hero vehicle crew member
 	DMS_Hero_Vehicle_RoadkillRank		= -100;
-/* DonkeyPunchDMS Custom Roadkill Settings for Survivor AI*/	
+/* DonkeyPunchDMS Custom Roadkill Settings for Survivor AI*/
 	DMS_Survivor_Soldier_RoadkillMoney	= -200;						// The amount of Poptabs gained/lost for running over a Survivor soldier
 	DMS_Survivor_Soldier_RoadkillRep		= -200;						// The amount of Respect gained/lost for running over a Survivor soldier
-	DMS_Survivor_Soldier_RoadkillRank		= -200;	
+	DMS_Survivor_Soldier_RoadkillRank		= -200;
 	DMS_Survivor_Static_RoadkillMoney		= -200;						// The amount of Poptabs gained/lost for running over a Survivor static gunner
 	DMS_Survivor_Static_RoadkillRep		= -200;						// The amount of Respect gained/lost for running over a Survivor static gunner
-	DMS_Survivor_Static_RoadkillRank		= -200;	
+	DMS_Survivor_Static_RoadkillRank		= -200;
 	DMS_Survivor_Vehicle_RoadkillMoney	= -500;						// The amount of Poptabs gained/lost for running over a Survivor vehicle crew member
 	DMS_Survivor_Vehicle_RoadkillRep		= -100;						// The amount of Respect gained/lost for running over a Survivor vehicle crew member
 	DMS_Survivor_Vehicle_RoadkillRank		= -100;
@@ -325,7 +327,7 @@ DMS_Add_AIKill2DB = false;  // Adds killstat for player in the database ;)
 /* DonkeyPunchDMS Custom Side Factions */
 	DMS_heroSide						= WEST;						// The side (team) that AI Heros will spawn on
 	DMS_survivorSide						= CIV;						// The side (team) that AI Survivor will spawn on
-	
+
 	DMS_clear_AI_body					= false;					// Clear AI body as soon as they die
 	DMS_clear_AI_body_chance			= 50;						// Percentage chance that AI bodies will be cleared when they die
 	DMS_ai_disable_ramming_damage 		= true;						// Disables damage due to ramming into AI. !!!NOTE: THIS WILL NOT BE RELIABLE WITH "DMS_ai_offload_to_client"!!!

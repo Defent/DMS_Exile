@@ -21,7 +21,7 @@ _mission =
 	missionNamespace getVariable format
 	[
 		"DMS_Mission_%1",
-		_this param [0, DMS_BanditMissionTypesArray call BIS_fnc_selectRandom, [""]]
+		_this param [0,selectRandom DMS_BanditMissionTypesArray, [""]]
 	]
 ] param [0, "no",[{}]];
 

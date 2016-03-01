@@ -103,7 +103,7 @@ _grpUnits = (units _grp) - [_unit];
 // Give the AI a new leader if the killed unit was the leader
 if (!(_grpUnits isEqualTo []) && {(leader _grp) isEqualTo _unit}) then
 {
-	_grp selectLeader (_grpUnits call BIS_fnc_selectRandom);
+	_grp selectLeader (selectRandom _grpUnits);
 };
 
 _av = _unit getVariable ["DMS_AssignedVeh",objNull];

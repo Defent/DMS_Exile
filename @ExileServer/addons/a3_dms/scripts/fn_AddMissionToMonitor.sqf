@@ -117,12 +117,15 @@ try
 		throw format["_missionObjs |%1|",_missionObjs];
 	};
 
-	_mines = [];
-
-	if ((count _missionObjs)>3) then
-	{
-		_mines = _missionObjs param [3,[],[[]]];
-	};
+	_mines =
+		if ((count _missionObjs)>3) then
+		{
+			_missionObjs param [3,[],[[]]]
+		}
+		else
+		{
+			[]
+		};
 
 	// Don't spawn a minefield if there is one already defined in _missionObjs.
 	if (DMS_SpawnMinefieldForEveryMission && {_mines isEqualTo []}) then

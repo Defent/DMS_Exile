@@ -371,7 +371,7 @@ if (!_reinforcementsDepleted && {(diag_tickTime-_lastUpdated)>_updateDelay}) the
 				_veh =
 				[
 					[
-						if (_spawnLocations isEqualTo []) then {[_leaderPos,100+(random 200),random 360] call DMS_fnc_SelectOffsetPos} else {_spawnLocations call BIS_fnc_selectRandom},
+						if (_spawnLocations isEqualTo []) then {_leaderPos getPos [100+(random 200),random 360]} else {selectRandom _spawnLocations},
 						_leaderPos
 					],
 					_AIGroup,
@@ -417,7 +417,7 @@ if (!_reinforcementsDepleted && {(diag_tickTime-_lastUpdated)>_updateDelay}) the
 				_vehicle =
 				[
 					[
-						if (_spawnLocations isEqualTo []) then {[_leaderPos,100+(random 200),random 360] call DMS_fnc_SelectOffsetPos} else {_spawnLocations call BIS_fnc_selectRandom},
+						if (_spawnLocations isEqualTo []) then {[_leaderPos,100+(random 200),random 360] call DMS_fnc_SelectOffsetPos} else {selectRandom _spawnLocations},
 						_leaderPos
 					],
 					_AIGroup,

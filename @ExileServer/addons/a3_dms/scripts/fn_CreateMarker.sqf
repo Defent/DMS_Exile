@@ -15,7 +15,7 @@
 		_markerDot,
 		_markerCircle
 	]
-	
+
 */
 
 
@@ -87,7 +87,7 @@ if (_randomMarker) then
 {
 	_dir = random 360;
 	_dis = DMS_MarkerPosRandomRadius call DMS_fnc_SelectRandomVal;
-	_npos = [_pos,_dis,_dir] call DMS_fnc_SelectOffsetPos;
+	_npos = _pos getPos [_dis,_dir];
 
 	_circle setMarkerPos _npos;
 	_dot setMarkerPos _npos;

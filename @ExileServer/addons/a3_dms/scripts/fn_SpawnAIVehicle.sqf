@@ -55,7 +55,7 @@ if ((count _this)>5) then
 
 if (_vehClass == "random") then
 {
-	_vehClass = DMS_ArmedVehicles call BIS_fnc_selectRandom;
+	_vehClass = selectRandom DMS_ArmedVehicles;
 };
 
 

@@ -117,6 +117,14 @@ ___
 ___
 
 # Changelog:
+### Test Branch:
+#### March 1, 2016 (12:30 AM CST-America):
+* Initial Test Branch commit
+* **NEW CONFIG VALUE:** DMS_SpawnMissions_Scheduled
+* Several optimizations (mostly due to the new scripting commands introduced in 1.56)
+* You can now spawn missions in scheduled environment.
+
+
 #### February 19, 2016 (5:45 PM CST-America):
 * Fixed a minor typo with a variable (part of the new Humanity support by DonkeyPunch).
 
