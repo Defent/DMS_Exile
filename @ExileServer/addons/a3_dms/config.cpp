@@ -1,10 +1,10 @@
 class CfgPatches
 {
-	class A3_dms
+	class a3_dms
 	{
 		units[] = {};
 		weapons[] = {};
-		a3_DMS_version = 3.0;
+		a3_DMS_version = "March 25 2016 (TEST)";
 		requiredVersion = 1.36;
 		requiredAddons[] = {"exile_client","exile_server_config"};
 	};
@@ -39,11 +39,13 @@ class CfgFunctions
 			class DebugLog						{};
 			class FillCrate 					{};
 			class FindSafePos 					{};
+			class FindSafePos_InRange			{};
 			class FindSuppressor 				{};
 			class GetAllUnits					{};
+			class GetEmptySeats					{};
 			class GroupReinforcementsManager	{};
 			//class HandleMissionEvents			{};
-			//class HeliParatroopers			{};
+			class HeliParatroopers_Monitor		{};
 			//class HeliPatrol					{};
 			class ImportFromM3E					{};
 			class ImportFromM3E_Convert			{};
@@ -72,11 +74,12 @@ class CfgFunctions
 			class SpawnAISoldier 				{};
 			class SpawnAIStaticMG 				{};
 			class SpawnBanditMission			{};
-			class SpawnStaticMission			{};
 			class SpawnCrate 					{};
+			class SpawnHeliReinforcement		{};
 			class SpawnMinefield				{};
-			class SpawnPersistentVehicle 		{};
 			class SpawnNonPersistentVehicle 	{};
+			class SpawnPersistentVehicle 		{};
+			class SpawnStaticMission			{};
 			class TargetsKilled 				{};
 		};
 	};

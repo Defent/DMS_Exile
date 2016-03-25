@@ -270,7 +270,7 @@ else
 };
 
 
-if(DMS_RareLoot && {count DMS_RareLootList>0}) then
+if (DMS_RareLoot) then
 {
 	_rareLootChance =
 		if ((count _this)>2) then
@@ -285,12 +285,15 @@ if(DMS_RareLoot && {count DMS_RareLootList>0}) then
 	// (Maybe) Add rare loot
 	if(random 100 < _rareLootChance) then
 	{
-		_item = selectRandom DMS_RareLootList;
-		if (_item isEqualType "") then
+		for "_i" from 1 to DMS_RareLootAmount do
 		{
-			_item = [_item,1];
+			_item = selectRandom DMS_RareLootList;
+			if (_item isEqualType "") then
+			{
+				_item = [_item,1];
+			};
+			_crate addItemCargoGlobal _item;
 		};
-		_crate addItemCargoGlobal _item;
 	};
 };
 

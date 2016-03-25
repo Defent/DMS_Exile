@@ -28,9 +28,9 @@ try
 
 		_lastDistanceCheckTime = _x getVariable ["DMS_LastAIDistanceCheck",time];
 		_pos = getPosWorld _x;
-		_spawnPos = _x getVariable ["DMS_AISpawnPos",_pos];
+		_spawnPos = _x getVariable ["DMS_AISpawnPos",0];
 
-		if ((DMS_MaxAIDistance>0) && {((time - _lastDistanceCheckTime)>DMS_AIDistanceCheckFrequency) && {(_pos distance2D _spawnPos)>DMS_MaxAIDistance}}) then
+		if ((DMS_MaxAIDistance>0) && {!(_spawnPos isEqualTo 0)} && {((time - _lastDistanceCheckTime)>DMS_AIDistanceCheckFrequency) && {(_pos distance2D _spawnPos)>DMS_MaxAIDistance}}) then
 		{
 			_x setDamage 1;
 			diag_log format ["Killed a runaway unit! |%1| was more than %2m away from its spawn position %3!",_x,DMS_MaxAIDistance,_spawnPos];

@@ -7,7 +7,7 @@ DMS_HC_Object = objNull;
 
 DMS_CleanUpList	= [];
 
-DMS_Version = "March 1 2016 (T)";
+DMS_Version = getText (configFile >> "CfgPatches" >> "a3_dms" >> "a3_DMS_version");
 
 
 //Load main config
@@ -104,6 +104,9 @@ DMS_fnc_setRelPositions =
 DMS_MaxSurfaceNormal = DMS_MinSurfaceNormal;
 
 DMS_AttemptsUntilThrottle = DMS_AttemptsUntilThrottle + 1;
+
+DMS_HelisToClean = [];
+DMS_HeliParatrooper_Arr = [];
 
 
 // Initialize mission variables...

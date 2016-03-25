@@ -168,7 +168,7 @@ if (!_useCustomGear) then
 	_unit addHeadgear 		(selectRandom (missionNamespace getVariable [format ["DMS_%1_helmets",_class],DMS_assault_helmets]));
 	_unit forceAddUniform 	(selectRandom (missionNamespace getVariable [format ["DMS_%1_clothes",_class],DMS_assault_clothes]));
 	_unit addVest 			(selectRandom (missionNamespace getVariable [format ["DMS_%1_vests",_class],DMS_assault_vests]));
-	_unit addBackpack 		(selectRandom (missionNamespace getVariable [format ["DMS_%1_backpacks",_class],DMS_assault_backpacks]));
+	_unit addBackpackGlobal	(selectRandom (missionNamespace getVariable [format ["DMS_%1_backpacks",_class],DMS_assault_backpacks]));
 
 	// Make AI effective at night
 	_nighttime = (sunOrMoon != 1);
@@ -275,7 +275,7 @@ else
 
 	if !(_backpack isEqualTo "") then
 	{
-		_unit addBackpack _backpack;
+		_unit addBackpackGlobal _backpack;
 	};
 
 	if !(_launcher isEqualTo "") then
@@ -374,15 +374,23 @@ _unit setCustomAimCoef (missionNamespace getVariable [format["DMS_AI_AimCoef_%1"
 _unit enableStamina (missionNamespace getVariable [format["DMS_AI_EnableStamina_%1",_difficulty], true]);
 
 
-_unit setVariable ["DMS_AISpawnTime", time];
-_unit setVariable ["DMS_AI_Side", _side];
-_unit setVariable ["DMS_AI_Type", _type];
-
 if (_type=="Soldier") then
 {
 	_unit setVariable ["DMS_AISpawnPos",_pos];
 	_unit setVariable ["DMS_LastAIDistanceCheck",time];
 };
+
+// Just use "Soldier" type for everything else.
+if (_type == "Paratroopers") then
+{
+	_type = "Soldier";
+	_unit addBackpackGlobal "B_Parachute";
+};
+
+_unit setVariable ["DMS_AISpawnTime", time];
+_unit setVariable ["DMS_AI_Side", _side];
+_unit setVariable ["DMS_AI_Type", _type];
+
 
 if (DMS_DEBUG) then
 {
