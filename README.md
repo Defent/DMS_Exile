@@ -6,8 +6,7 @@ Defent's Mission System (DMS) is written from the ground up to be an efficient, 
 
 However, creating such a mission system takes a lot of time and testing. We (the authors of DMS) are not perfect, and as a result, there may be bugs, glitches, and/or errors within DMS. We appreciate your co-operation in identifying and resolving such issues to improve DMS; however we are not liable for any issues resulting from the usage of DMS on/by your server. We are also not liable to help you in resolving any issues that may arise.
 
-You are welcome to port DMS or any of its functions for any other mod or (legal) purposes.
-
+You are welcome to port DMS or any of its functions for any other mod or (legal) purposes. For more information read the License Overview below:
 
 ###License Overview:
 This work is protected by [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)](http://creativecommons.org/licenses/by-nc-sa/4.0/). By using, downloading, or copying any of the work contained, you agree to the license included.
