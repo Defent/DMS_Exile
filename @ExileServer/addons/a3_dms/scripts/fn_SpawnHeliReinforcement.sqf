@@ -22,7 +22,7 @@
     Returns the index of the paratrooper info in "DMS_HeliParatrooper_Arr", -1 on error.
 */
 
-private ["_heliClass", "_groupOwner", "_spawnPos", "_heli", "_pilot", "_units", "_crewCount", "_unit", "_cargoIndex"];
+private ["_heliClass", "_groupOwner", "_spawnPos", "_heli", "_pilot", "_units", "_crewCount", "_paratrooperCount", "_unit", "_cargoIndex"];
 
 
 if !(params
@@ -93,29 +93,11 @@ _heli lock 2;
 
 _AIGroup addVehicle _heli;
 
-// Spawn the heli crew
-_pilot = [_AIGroup,_spawnPos,_class,_difficulty,_side,"Vehicle"] call DMS_fnc_SpawnAISoldier;
-_pilot moveInDriver _heli;
-_pilot setVariable ["DMS_AssignedVeh",_heli];
-
-_units = [_pilot];
-
-_crewCount =
-{
-	_unit = [_AIGroup,_spawnPos,_class,_difficulty,_side,"Vehicle"] call DMS_fnc_SpawnAISoldier;
-	_unit moveInTurret [_heli, _x];
-	_unit setVariable ["DMS_AssignedVeh",_heli];
-    _units pushBack _unit;
-	true
-} count (allTurrets [_heli, true]);
-
-
-// Set the heli pilot's behavior.
-_pilot setDestination [_dropPoint, "VEHICLE PLANNED", true];
-_heli flyInHeight DMS_RHeli_Height;
-
 
 // Spawn the AI paratroopers
+_units = [];
+_paratrooperCount = 0;
+_crewCount =
 {
     _x params
     [
@@ -126,12 +108,50 @@ _heli flyInHeight DMS_RHeli_Height;
         "_personTurret"
     ];
 
-    if (isNull _unit) then
+    switch (_role) do
     {
-        _unit = [_AIGroup,_spawnPos,_class,_difficulty,_side,"Paratroopers"] call DMS_fnc_SpawnAISoldier;
-        _unit moveInCargo [_heli, _cargoIndex];
+        case "driver":
+        {
+            _unit = [_AIGroup,_spawnPos,_class,_difficulty,_side,"Vehicle"] call DMS_fnc_SpawnAISoldier;
+            _unit moveInDriver _heli;
+            _unit setVariable ["DMS_AssignedVeh",_heli];
+            _pilot = _unit;
+        };
+
+        case "commander";
+        case "gunner";
+        case "turret":
+        {
+            if (_ejectFFVGunners && {_personTurret}) then
+            {
+                _unit = [_AIGroup,_spawnPos,_class,_difficulty,_side,"Paratroopers"] call DMS_fnc_SpawnAISoldier;
+                _paratrooperCount = _paratrooperCount + 1;
+            }
+            else
+            {
+            	_unit = [_AIGroup,_spawnPos,_class,_difficulty,_side,"Vehicle"] call DMS_fnc_SpawnAISoldier;
+            	_unit setVariable ["DMS_AssignedVeh",_heli];
+            };
+        	_unit moveInTurret [_heli, _x];
+        };
+
+        case "cargo":
+        {
+            _unit = [_AIGroup,_spawnPos,_class,_difficulty,_side,"Paratroopers"] call DMS_fnc_SpawnAISoldier;
+            _unit moveInCargo [_heli, _cargoIndex];
+            _paratrooperCount = _paratrooperCount + 1;
+        };
     };
-} forEach (fullCrew [_heli, "", true]);
+    _units pushBack _unit;
+
+    true
+} count (fullCrew [_heli, "", true]);
+
+
+// Set the heli pilot's behavior.
+_pilot setDestination [_dropPoint, "VEHICLE PLANNED", true];
+_heli flyInHeight DMS_RHeli_Height;
+
 
 _units joinSilent _AIGroup;
 

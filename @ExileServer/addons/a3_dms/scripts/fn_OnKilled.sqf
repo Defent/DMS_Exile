@@ -127,11 +127,11 @@ if (!isNull _av) then
 		(
 			if (_av isKindOf "StaticWeapon") then
 			{
-				DMS_AI_destroyStaticWeapon && {(random 100)<DMS_AI_destroyStaticWeapon_chance}
+				DMS_AI_destroyStaticWeapon && {(random 100)<(_av getVariable ["DMS_DestructionChance",DMS_AI_destroyStaticWeapon_chance])}
 			}
 			else
 			{
-				(random 100)<DMS_AI_destroyVehicleChance
+				(random 100)<(_av getVariable ["DMS_DestructionChance",DMS_AI_destroyVehicleChance])
 			}
 		) then
 		{

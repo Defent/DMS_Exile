@@ -131,6 +131,11 @@ ___
 		DMS_ReinforcementHelis
 
 
+#### March 31, 2016 (6:00 PM CST-America):
+* You can now use "setVariable" to define individually on an AI vehicle its "DMS_DestructionChance". EG: ```_vehicle setVariable ["DMS_DestructionChance",100];``` to always destroy a vehicle when its crew is dead.
+* "DMS_DestructionChance" values are defaulted to "DMS_AI_destroyStaticWeapon_chance" or "DMS_AI_destroyVehicleChance" for static or regular vehicles, respectively.
+* Optimization + code cleanup for "DMS_fnc_SpawnHeliReinforcement".
+
 #### March 25, 2016 (6:00 PM CST-America):
 * **NEW CONFIG VALUES:**
 
