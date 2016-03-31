@@ -12,6 +12,8 @@ You are welcome to port DMS or any of its functions for any other mod or (legal)
 ###License Overview:
 This work is protected by [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)](http://creativecommons.org/licenses/by-nc-sa/4.0/). By using, downloading, or copying any of the work contained, you agree to the license included.
 
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">DMS</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/Defent/DMS_Exile" property="cc:attributionName" rel="cc:attributionURL">Defent and eraser1</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.<br />Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="https://github.com/Defent/DMS_Exile" rel="dct:source">https://github.com/Defent/DMS_Exile</a>.
+
 The following overview is a human-readable summary of (and not a substitute for) [the full license](http://creativecommons.org/licenses/by-nc-sa/4.0/legalcode).
 
 ####You are free to:
