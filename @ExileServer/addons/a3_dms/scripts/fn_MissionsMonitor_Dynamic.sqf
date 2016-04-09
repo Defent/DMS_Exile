@@ -82,8 +82,8 @@ private ["_pos", "_completionInfo", "_timeStarted", "_failTime", "_units", "_bui
 		if (_completionInfo call DMS_fnc_MissionSuccessState) then
 		{
 			DMS_CleanUpList pushBack [_buildings,diag_tickTime,DMS_CompletedMissionCleanupTime];
-
-			if (_missionSide == "bandit") then
+			_missionTypes = ["bandit","hero","survivor"];
+            if (_missionSide in _missionTypes) then
 			{
 				DMS_RunningBMissionCount = DMS_RunningBMissionCount - 1;
 			}
