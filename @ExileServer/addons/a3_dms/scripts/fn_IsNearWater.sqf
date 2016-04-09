@@ -38,7 +38,7 @@ try
 
 	for "_i" from 0 to 359 step 45 do
 	{
-		if (surfaceIsWater ([_position,_radius,_i] call DMS_fnc_SelectOffsetPos)) then
+		if (surfaceIsWater (_position getPos [_radius,_i])) then
 		{
 			throw true;
 		};

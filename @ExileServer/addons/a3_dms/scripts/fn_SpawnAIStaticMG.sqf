@@ -52,9 +52,9 @@ _guns = [];
 	_MGClass = _MGClassInput;
 	if (_MGClass == "random") then
 	{
-		_MGClass = DMS_static_weapons call BIS_fnc_selectRandom;
+		_MGClass = selectRandom DMS_static_weapons;
 	};
-	
+
 	_gun = createVehicle [_MGClass, [0,0,0], [], 0, "CAN_COLLIDE"];
 	_gun setDir (random 360);
 	_gun setPosATL _pos;
@@ -66,7 +66,7 @@ _guns = [];
 	_guns pushBack _gun;
 
 	_unit = [_group,_pos,_class,_difficulty,_side,"Static"] call DMS_fnc_SpawnAISoldier;
-	
+
 	_unit moveInGunner _gun;
 	reload _unit;
 	_unit setVariable ["DMS_AssignedVeh",_gun];

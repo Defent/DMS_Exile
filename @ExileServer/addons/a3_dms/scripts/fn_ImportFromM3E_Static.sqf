@@ -48,15 +48,14 @@ if ((isNil "_export") || {!(_export isEqualType [])}) exitWith
 };
 
 
-_objs = [];
-
+_objs = _export apply
 {
 	private ["_obj","_pos"];
 
 	_obj = createVehicle [_x select 0, [0,0,0], [], 0, "CAN_COLLIDE"];
 	_pos = _x select 1;
 	_obj enableSimulationGlobal false;
-	
+
 	if (_x select 4) then
 	{
 		_obj setDir (_x select 2);
@@ -68,8 +67,8 @@ _objs = [];
 		_obj setVectorDirAndUp (_x select 3);
 	};
 
-	_objs pushBack _obj;
-} foreach _export;
+	_obj;
+};
 
 
 _objs

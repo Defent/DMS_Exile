@@ -60,7 +60,7 @@ if (DMS_clear_AI_body && {(random 100) <= DMS_clear_AI_body_chance}) then
 if (DMS_ai_remove_launchers && {(_launcherVar != "") || {_launcher != ""}}) then
 {
 	// Because arma is stupid sometimes
-	if (_launcher=="") then
+	if (_launcher isEqualTo "") then
 	{
 		_launcher = _launcherVar;
 
@@ -103,7 +103,7 @@ _grpUnits = (units _grp) - [_unit];
 // Give the AI a new leader if the killed unit was the leader
 if (!(_grpUnits isEqualTo []) && {(leader _grp) isEqualTo _unit}) then
 {
-	_grp selectLeader (_grpUnits call BIS_fnc_selectRandom);
+	_grp selectLeader (selectRandom _grpUnits);
 };
 
 _av = _unit getVariable ["DMS_AssignedVeh",objNull];
@@ -114,9 +114,26 @@ if (!isNull _av) then
 
 
 	// Destroy the vehicle and add it to cleanup if there are no active crew members of the vehicle.
-	if (_memCount<1) then
+	if (_memCount isEqualTo 0) then
 	{
-		if ((DMS_AI_destroyStaticWeapon && {(random 100)<DMS_AI_destroyStaticWeapon_chance}) || {!(_av isKindOf "StaticWeapon")}) then
+		/*
+		I know what you're probably thinking:
+		What the hell is this? An "if-statement" evaluated for an "if-statement"?! What madness is this?! Does this guy know what he's doing? There has to be a better way!
+
+		To which I (eraser1) reply...
+		I know it looks funky, and there are prettier and slicker ways to do this (such as using "select") BUT I tested extensively and found out that this way is the fastest way, so... yeah...
+		*/
+		if
+		(
+			if (_av isKindOf "StaticWeapon") then
+			{
+				DMS_AI_destroyStaticWeapon && {(random 100)<(_av getVariable ["DMS_DestructionChance",DMS_AI_destroyStaticWeapon_chance])}
+			}
+			else
+			{
+				(random 100)<(_av getVariable ["DMS_DestructionChance",DMS_AI_destroyVehicleChance])
+			}
+		) then
 		{
 			_av setDamage 1;
 			_av setVariable ["ExileDiedAt",time];
@@ -126,6 +143,15 @@ if (!isNull _av) then
 			if (DMS_DEBUG) then
 			{
 				(format["OnKilled :: Destroying used AI vehicle %1, and disabling simulation.",typeOf _av]) call DMS_fnc_DebugLog;
+			};
+		}
+		else
+		{
+			_av lock 1;
+
+			if (DMS_DEBUG) then
+			{
+				(format["OnKilled :: Unlocking used AI vehicle (%1).",typeOf _av]) call DMS_fnc_DebugLog;
 			};
 		};
 	}
