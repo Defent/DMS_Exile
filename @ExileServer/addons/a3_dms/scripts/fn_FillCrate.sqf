@@ -168,7 +168,7 @@ if ((_lootValues isEqualType []) && {!((_lootValues select 1) isEqualType {})}) 
 		// Add weapons + mags
 		for "_i" from 1 to _wepCount do
 		{
-			_weapon = selectRandom _weps;
+			_weapon = _weps call BIS_fnc_selectRandom;
 			_ammo = _weapon call DMS_fnc_selectMagazine;
 			if (_weapon isEqualType "") then
 			{
@@ -188,7 +188,7 @@ if ((_lootValues isEqualType []) && {!((_lootValues select 1) isEqualType {})}) 
 		// Add items
 		for "_i" from 1 to _itemCount do
 		{
-			_item = selectRandom _items;
+			_item = _items call BIS_fnc_selectRandom;
 			if (_item isEqualType "") then
 			{
 				_item = [_item,1];
@@ -203,7 +203,7 @@ if ((_lootValues isEqualType []) && {!((_lootValues select 1) isEqualType {})}) 
 		// Add backpacks
 		for "_i" from 1 to _backpackCount do
 		{
-			_backpack = selectRandom _backpacks;
+			_backpack = _backpacks call BIS_fnc_selectRandom;
 			if (_backpack isEqualType "") then
 			{
 				_backpack = [_backpack,1];
@@ -270,7 +270,7 @@ else
 };
 
 
-if (DMS_RareLoot) then
+if(DMS_RareLoot && {count DMS_RareLootList>0}) then
 {
 	_rareLootChance =
 		if ((count _this)>2) then
@@ -285,15 +285,12 @@ if (DMS_RareLoot) then
 	// (Maybe) Add rare loot
 	if(random 100 < _rareLootChance) then
 	{
-		for "_i" from 1 to DMS_RareLootAmount do
+		_item = DMS_RareLootList call BIS_fnc_selectRandom;
+		if (_item isEqualType "") then
 		{
-			_item = selectRandom DMS_RareLootList;
-			if (_item isEqualType "") then
-			{
-				_item = [_item,1];
-			};
-			_crate addItemCargoGlobal _item;
+			_item = [_item,1];
 		};
+		_crate addItemCargoGlobal _item;
 	};
 };
 

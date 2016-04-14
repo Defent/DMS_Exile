@@ -1,7 +1,7 @@
 /*
 	DMS_fnc_FindSafePos
 	Created by eraser1
-
+	
 
 	ALL PARAMETERS ARE OPTIONAL (as long as configs are properly defined).
 	Excluding parameters will create some RPT spam, but it's not too much of an issue.
@@ -109,11 +109,6 @@ while{!_isValidSpot} do
 	};
 
 	_isValidSpot = [_pos, _waterNearLimit, _minSurfaceNormal, _spawnZoneNearLimit, _traderZoneNearLimit, _missionNearLimit, _playerNearLimit, _territoryNearLimit, _waterSpawn] call DMS_fnc_IsValidPosition;
-
-	if (_attempts>5000) exitWith
-	{
-		diag_log format["DMS ERROR :: Number of attempts in DMS_fnc_findSafePos (%1) exceeded maximum number of attempts!",_attempts];
-	};
 };
 
 _pos set [2,0];

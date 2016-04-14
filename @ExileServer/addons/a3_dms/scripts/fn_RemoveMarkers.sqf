@@ -40,7 +40,7 @@ if (_status == "win") then
 	_markerDot setMarkerColor DMS_MissionMarkerWinDotColor;
 	_markerDot setMarkerType DMS_MissionMarkerWinDot_Type;
 	//_markerDot spawn {sleep DMS_MissionMarkerWinDotTime;deleteMarker _this;};
-	[DMS_MissionMarkerWinDotTime, {deleteMarker (_this select 0);}, [_markerDot], false] call ExileServer_system_thread_addTask;
+	[DMS_MissionMarkerWinDotTime, {deleteMarker _this;}, _markerDot, false] call ExileServer_system_thread_addTask;
 	if (DMS_DEBUG) then
 	{
 		(format ["RemoveMarkers :: %1 Marker will be removed in %2 seconds!",_markerDot,DMS_MissionMarkerWinDotTime]) call DMS_fnc_DebugLog;
@@ -56,7 +56,7 @@ else
 	_markerDot setMarkerColor DMS_MissionMarkerLoseDotColor;
 	_markerDot setMarkerType DMS_MissionMarkerLoseDot_Type;
 	//_markerDot spawn {sleep DMS_MissionMarkerLoseDotTime;deleteMarker _this;};
-	[DMS_MissionMarkerLoseDotTime, {deleteMarker (_this select 0);}, [_markerDot], false] call ExileServer_system_thread_addTask;
+	[DMS_MissionMarkerLoseDotTime, {deleteMarker _this;}, _markerDot, false] call ExileServer_system_thread_addTask;
 	if (DMS_DEBUG) then
 	{
 		(format ["RemoveMarkers :: %1 Marker will be removed in %2 seconds!",_markerDot,DMS_MissionMarkerLoseDotTime]) call DMS_fnc_DebugLog;

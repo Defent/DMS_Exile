@@ -38,9 +38,9 @@ switch (true) do
 
 	case ((_weaponName find "9 mm") > -1) : {_result = "muzzle_snds_L";};
 
-	case ((_weaponName find ".338") > -1) : {_result = selectRandom ["muzzle_snds_338_black","muzzle_snds_338_green","muzzle_snds_338_sand"];};
+	case ((_weaponName find ".338") > -1) : {_result = ["muzzle_snds_338_black","muzzle_snds_338_green","muzzle_snds_338_sand"] call BIS_fnc_selectRandom;};
 
-	case ((_weaponName find "9.3 mm") > -1) : {_result = selectRandom ["muzzle_snds_93mmg","muzzle_snds_93mmg_tan"];};
+	case ((_weaponName find "9.3 mm") > -1) : {_result = ["muzzle_snds_93mmg","muzzle_snds_93mmg_tan"] call BIS_fnc_selectRandom;};
 };
 
 // Zafir accepts no suppressors :(
