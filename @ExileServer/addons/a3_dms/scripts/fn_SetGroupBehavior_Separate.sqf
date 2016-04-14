@@ -40,8 +40,7 @@ _tmpGroup = createGroup (side _finalGroup);
 
 _units joinSilent _tmpGroup;
 
-_return =
-[
+_return = [
     _tmpGroup,
     _pos,
     _difficulty,

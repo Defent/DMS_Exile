@@ -65,22 +65,22 @@ _difficulty =
 	{
 		case "random":
 		{
-			selectRandom DMS_ai_skill_random;
+			DMS_ai_skill_random call BIS_fnc_selectRandom;
 		};
 
 		case "randomdifficult":
 		{
-			selectRandom DMS_ai_skill_randomDifficult;
+			DMS_ai_skill_randomDifficult call BIS_fnc_selectRandom;
 		};
 
 		case "randomeasy":
 		{
-			selectRandom DMS_ai_skill_randomEasy;
+			DMS_ai_skill_randomEasy call BIS_fnc_selectRandom;
 		};
 
 		case "randomintermediate":
 		{
-			selectRandom DMS_ai_skill_randomIntermediate;
+			DMS_ai_skill_randomIntermediate call BIS_fnc_selectRandom;
 		};
 
 		default
@@ -131,7 +131,7 @@ else
 {
 	if (_class in DMS_ai_SupportedRandomClasses) then
 	{
-		_class = selectRandom (missionNamespace getVariable [format["DMS_%1_AI",_class], DMS_random_AI]);
+		_class = (missionNamespace getVariable [format["DMS_%1_AI",_class], DMS_random_AI]) call BIS_fnc_selectRandom;
 	};
 };
 
@@ -165,10 +165,10 @@ if (!_useCustomGear) then
 
 
 	// Clothes
-	_unit addHeadgear 		(selectRandom (missionNamespace getVariable [format ["DMS_%1_helmets",_class],DMS_assault_helmets]));
-	_unit forceAddUniform 	(selectRandom (missionNamespace getVariable [format ["DMS_%1_clothes",_class],DMS_assault_clothes]));
-	_unit addVest 			(selectRandom (missionNamespace getVariable [format ["DMS_%1_vests",_class],DMS_assault_vests]));
-	_unit addBackpackGlobal	(selectRandom (missionNamespace getVariable [format ["DMS_%1_backpacks",_class],DMS_assault_backpacks]));
+	_unit addHeadgear 		((missionNamespace getVariable [format ["DMS_%1_helmets",_class],DMS_assault_helmets]) call BIS_fnc_selectRandom);
+	_unit forceAddUniform 	((missionNamespace getVariable [format ["DMS_%1_clothes",_class],DMS_assault_clothes]) call BIS_fnc_selectRandom);
+	_unit addVest 			((missionNamespace getVariable [format ["DMS_%1_vests",_class],DMS_assault_vests]) call BIS_fnc_selectRandom);
+	_unit addBackpack 		((missionNamespace getVariable [format ["DMS_%1_backpacks",_class],DMS_assault_backpacks]) call BIS_fnc_selectRandom);
 
 	// Make AI effective at night
 	_nighttime = (sunOrMoon != 1);
@@ -179,24 +179,24 @@ if (!_useCustomGear) then
 
 	if (!_unarmed) then
 	{
-		_weapon = selectRandom (missionNamespace getVariable [format ["DMS_%1_weps",_class],DMS_assault_weps]);
+		_weapon = (missionNamespace getVariable [format ["DMS_%1_weps",_class],DMS_assault_weps]) call BIS_fnc_selectRandom;
 		[_unit, _weapon, 6 + floor(random 3)] call BIS_fnc_addWeapon;
 		_unit selectWeapon _weapon;
 
 
 		if((random 100) <= (missionNamespace getVariable [format["DMS_%1_optic_chance",_class],0])) then
 		{
-			_unit addPrimaryWeaponItem (selectRandom (missionNamespace getVariable [format ["DMS_%1_optics",_class],DMS_assault_optics]));
+			_unit addPrimaryWeaponItem ((missionNamespace getVariable [format ["DMS_%1_optics",_class],DMS_assault_optics]) call BIS_fnc_selectRandom);
 		};
 
 		if (_nighttime && {(random 100) <= DMS_ai_nighttime_accessory_chance}) then
 		{
-			_unit addPrimaryWeaponItem (selectRandom ["acc_pointer_IR","acc_flashlight"]);
+			_unit addPrimaryWeaponItem (["acc_pointer_IR","acc_flashlight"] call BIS_fnc_selectRandom);
 		};
 
 		if((random 100) <= (missionNamespace getVariable [format["DMS_%1_bipod_chance",_class],0])) then
 		{
-			_unit addPrimaryWeaponItem (selectRandom DMS_ai_BipodList);
+			_unit addPrimaryWeaponItem (DMS_ai_BipodList call BIS_fnc_selectRandom);
 		};
 
 		if((random 100) <= (missionNamespace getVariable [format["DMS_%1_suppressor_chance",_class],0])) then
@@ -222,7 +222,7 @@ if (!_useCustomGear) then
 		_pistols = missionNamespace getVariable [format ["DMS_%1_pistols",_class],[]];
 		if !(_pistols isEqualTo []) then
 		{
-			_pistol = selectRandom _pistols;
+			_pistol = _pistols call BIS_fnc_selectRandom;
 			[_unit, _pistol, 2 + floor(random 2)] call BIS_fnc_addWeapon;
 		};
 
@@ -275,7 +275,7 @@ else
 
 	if !(_backpack isEqualTo "") then
 	{
-		_unit addBackpackGlobal _backpack;
+		_unit addBackpack _backpack;
 	};
 
 	if !(_launcher isEqualTo "") then
@@ -374,23 +374,15 @@ _unit setCustomAimCoef (missionNamespace getVariable [format["DMS_AI_AimCoef_%1"
 _unit enableStamina (missionNamespace getVariable [format["DMS_AI_EnableStamina_%1",_difficulty], true]);
 
 
+_unit setVariable ["DMS_AISpawnTime", time];
+_unit setVariable ["DMS_AI_Side", _side];
+_unit setVariable ["DMS_AI_Type", _type];
+
 if (_type=="Soldier") then
 {
 	_unit setVariable ["DMS_AISpawnPos",_pos];
 	_unit setVariable ["DMS_LastAIDistanceCheck",time];
 };
-
-// Just use "Soldier" type for everything else.
-if (_type == "Paratroopers") then
-{
-	_type = "Soldier";
-	_unit addBackpackGlobal "B_Parachute";
-};
-
-_unit setVariable ["DMS_AISpawnTime", time];
-_unit setVariable ["DMS_AI_Side", _side];
-_unit setVariable ["DMS_AI_Type", _type];
-
 
 if (DMS_DEBUG) then
 {

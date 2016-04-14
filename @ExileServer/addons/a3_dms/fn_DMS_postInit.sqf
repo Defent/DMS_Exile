@@ -18,7 +18,7 @@ if (isNil "DMS_DynamicMission") exitWith
 {
 	for "_i" from 0 to 99 do
 	{
-		diag_log "DMS ERROR :: You have made an error in your DMS config.sqf! Please look for any script errors. Cancelling DMS Launch.";
+		diag_log "DMS ERROR :: You have made an error in your DMS config.sqf! Cancelling DMS Launch.";
 	};
 };
 
@@ -224,10 +224,6 @@ if (DMS_ShowDifficultyColorLegend) then
 {
 	[_x] call DMS_fnc_SpawnStaticMission;
 } forEach DMS_StaticMissionsOnServerStart;
-
-
-// Add heli paratroopers monitor to the thread system.
-[5, DMS_fnc_HeliParatroopers_Monitor, [], true] call ExileServer_system_thread_addTask;
 
 
 

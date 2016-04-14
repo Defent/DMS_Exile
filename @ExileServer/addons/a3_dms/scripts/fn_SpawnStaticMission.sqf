@@ -17,7 +17,7 @@
 private ["_missionType", "_mission", "_parameters", "_return"];
 
 
-_missionType = param [0, selectRandom DMS_StaticMissionTypesArray, [""]];
+_missionType = param [0, DMS_StaticMissionTypesArray call BIS_fnc_selectRandom, [""]];
 
 _mission =
 [

@@ -39,15 +39,28 @@ _units = [];
 
 			case "OBJECT":
 			{
-				[
-					[_parameter],
+				if (!(isNull _parameter) && {alive _parameter}) then
+				{
+					[_parameter]
+				}
+				else
+				{
 					[]
-				] select (alive _parameter);
+				}
 			};
 
 			case "GROUP":
 			{
-				(units _parameter) select {alive _x};
+				if (!isNull _parameter) then
+				{
+					{
+						if (alive _x) then
+						{
+							_units pushBack _x;
+						};
+					} forEach (units _parameter);
+				};
+				[]
 			};
 
 			default

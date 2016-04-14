@@ -1,7 +1,7 @@
 /*
 	DMS_fnc_SpawnMinefield
 	Created by eraser1
-
+	
 	Usage:
 	[
 		_centerPos,						// ARRAY: Position to spawn the minefield around
@@ -66,7 +66,7 @@ if (DMS_SpawnMinesAroundMissions) then
 	{
 		private ["_minePos", "_mine"];
 
-		_minePos = _centerPos getPos [random _radius,random 360];
+		_minePos = [_centerPos,random _radius,random 360] call DMS_fnc_SelectOffsetPos;
 		_mine = createMine ["ATMine", [0,0,0], [], 0];
 
 		// Fixes players shooting the mine and causing premature 'splosions
@@ -92,7 +92,7 @@ if (DMS_SpawnMinesAroundMissions) then
 		{
 			_sign = createVehicle ["Land_Sign_Mines_F", [0,0,0], [], 0, "CAN_COLLIDE"];
 			_sign setDir (180+_i);
-			_sign setPosATL (_centerPos getPos [_radius+2, _randDirOffset+_i]);
+			_sign setPosATL ([_centerPos, _radius+2, _randDirOffset+_i] call DMS_fnc_SelectOffsetPos);
 			_sign setVectorUp [0,0,1];
 
 			// _mines array is for only cleanup atm, so just add them to the list

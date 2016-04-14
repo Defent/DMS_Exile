@@ -4,23 +4,21 @@
 
 	Usage:
 	[
-		_origin,					// OBJECT, or POSITION (2D or 3D): Center from which the offset position will be calculated.
-		_distance,					// SCALAR: Distance from the origin (meters)
-		_direction					// SCALAR: Direction from the origin (degrees)
+		_pos,
+		_distance,
+		_direction
 	] call DMS_fnc_SelectOffsetPos;
 
-	Returns a new position offset from the provided position with the provided distance and direction. Position provided is at ground level in AGL
-
-	This function has been deprecated by the new functionality of the "getPos" command (https://community.bistudio.com/wiki/getPos). This function has been updated for efficiency and compatibility.
+	Returns a new position offset from the provided position with the provided distance and direction. Position provided is at ground level in ATL
 
 */
 
-private ["_origin","_dis","_dir","_npos"];
+private ["_pos","_dis","_dir","_npos"];
 
 
 if !(params
 [
-	["_origin","",[objNull,[]],[2,3]],
+	["_pos","",[[]],[2,3]],
 	["_dis",0,[0]],
 	["_dir",0,[0]]
 ])
@@ -30,12 +28,9 @@ exitWith
 	[0,0,0]
 };
 
-/*
-if ((count _origin) isEqualTo 2) then
+if ((count _pos) isEqualTo 2) then
 {
-	_origin set [2,0];
+	_pos set [2,0];
 };
-*/
 
-//_origin vectorAdd [sin(_dir)*_dis,cos(_dir)*_dis,0] <-- Old code
-_origin getPos [_dis,_dir]
+_pos vectorAdd [sin(_dir)*_dis,cos(_dir)*_dis,0]

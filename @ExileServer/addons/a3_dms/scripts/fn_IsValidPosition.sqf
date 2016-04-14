@@ -85,7 +85,7 @@ else
 				private "_dir";
 				for "_dir" from 0 to 359 step 45 do
 				{
-					if (((surfaceNormal (_pos getPos [5,_dir])) select 2)<_minSurfaceNormal) then
+					if (((surfaceNormal ([_pos,5,_dir] call DMS_fnc_SelectOffsetPos)) select 2)<_minSurfaceNormal) then
 					{
 						throw ("a nearby steep location");
 					};
