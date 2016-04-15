@@ -123,10 +123,10 @@ if (!isNull _av) then
 		if
 		(
 			call
-			[
+			([
 				{	(random 100)<(_av getVariable ["DMS_DestructionChance",DMS_AI_destroyVehicleChance])	},
 				{	DMS_AI_destroyStaticWeapon && {(random 100)<(_av getVariable ["DMS_DestructionChance",DMS_AI_destroyStaticWeapon_chance])}	}
-			] select (_av isKindOf "StaticWeapon")
+			] select (_av isKindOf "StaticWeapon"))
 		) then
 		{
 			_av setDamage 1;

@@ -130,6 +130,9 @@ ___
 		DMS_RareLootAmount
 		DMS_ReinforcementHelis
 
+#### April 15, 2016 (9:30 PM CST-America, RC):
+* Fixed script error in OnKilled EH when handling a used AI vehicle.
+
 #### April 14, 2016 (9:20 PM CST-America, RC):
 * Fix script error with saltflats.
 * "DMS_fnc_AddMissionToMonitor" will no longer convert given AI parameters to a list of objects, so you can now add other units to the mission (within the same group) without much issue.
