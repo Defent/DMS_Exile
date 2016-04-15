@@ -96,9 +96,12 @@
 			_monitorParams =
 			[
 				_AICount,				// SCALAR: If the AI Group has fewer than "_AICount" living units, then the group will receive reinforcements.
-				_ejectFFVGunners,		// BOOLEAN: Whether or not to eject the gunners that are FFV (firing from vehicle).
-				_remainAsGunship,		// BOOLEAN: Whether or not the heli should remain in the area and function as a gunship or simply fly away and despawn.
-				_vehClass				// (OPTIONAL) STRING: The classname of the vehicle to spawn. Use "random" to select a random vehicle from "DMS_ArmedVehicles". Default: "random"
+		        _ejectFFVGunners,               // BOOLEAN: Whether or not to eject Fire-From-Vehicle (FFV) gunners.
+		        _maxJumpers,                    // SCALAR: Maximum number of AI to eject from the aircraft. Set to a really high # to ignore (like 999).
+		        _remainAsGunship,               // BOOLEAN: Whether or not to keep the heli flying around as a gunship.
+		        _dropPoint,                     // OBJECT or ARRAY (OPTIONAL - Position2D or 3D): The location to drop the reinforcements at. The drop point will default to the group leader.
+		        _heliClass,                     // STRING (OPTIONAL): The classname of the heli to spawn.
+		        _spawnPos                       // ARRAY (OPTIONAL - Position2D or 3D): The position for the heli to spawn at.
 			]
 			This reinforcement type will attempt to drop the AI off at the group leader's position. The heli will spawn in the air 500-5000 meters away from the leader's position and 1000 meters away from a player (default).
 
@@ -504,7 +507,8 @@ if (!_reinforcementsDepleted && {(diag_tickTime-_lastUpdated)>_updateDelay}) the
 			[
 				["_AICount",0,[0]],
 				["_ejectFFVGunners",false,[false]],
-				["_remainAsGunship",false,[false]]
+			    ["_maxJumpers",0,[0]],
+			    ["_remainAsGunship", 0, [false]]
 			])
 			exitWith
 			{
@@ -514,18 +518,28 @@ if (!_reinforcementsDepleted && {(diag_tickTime-_lastUpdated)>_updateDelay}) the
 
 			if (_remainingUnits<_AICount) then
 			{
-				private["_heli"];
+				private _dropPoint = if ((count _monitorParams)>4) then {_monitorParams param [4, getPosATL (leader _AIGroup), [objNull,[]], [2,3]]} else {getPosATL (leader _AIGroup)};
+				private _heliClass = if ((count _monitorParams)>5) then {_monitorParams param [5, "", [""]]} else {selectRandom DMS_ReinforcementHelis};
 
-				_heli =
-			    [
+				private _params =
+				[
 			        _AIGroup,
 			        _class,
 			        _difficulty,
 			        _side,
-			        getPosATL (leader _AIGroup),
+			        _dropPoint,
 			        _ejectFFVGunners,
-			        _remainAsGunship
-			    ] call DMS_fnc_SpawnHeliReinforcement;
+					_maxJumpers,
+			        _remainAsGunship,
+					_heliClass
+			    ];
+
+				if ((count _monitorParams)>6) then
+				{
+					_params pushBack (_monitorParams select 6);
+				};
+
+				private _heli = _params call DMS_fnc_SpawnHeliReinforcement;
 
 				// Every vehicle counts as one unit given, so the number of units given is equivalent to number of waves given.
 				_reinforcementWavesGiven = _reinforcementWavesGiven + 1;

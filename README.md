@@ -117,7 +117,7 @@ ___
 ___
 
 # Changelog:
-### Test Branch:
+### Test Branch **!!RC Now Available!!**:
 #### List Of new Config values:
 
 		DMS_SpawnMissions_Scheduled
@@ -129,6 +129,15 @@ ___
 		DMS_RHeli_MinDistFromPlayers
 		DMS_RareLootAmount
 		DMS_ReinforcementHelis
+
+#### April 14, 2016 (9:20 PM CST-America, RC):
+* Fix script error with saltflats.
+* "DMS_fnc_AddMissionToMonitor" will no longer convert given AI parameters to a list of objects, so you can now add other units to the mission (within the same group) without much issue.
+* Micro-optimizations here and there.
+* Fixed an issue with DMS_fnc_GetAllUnits such that it would return an empty list if given a list of AI objects.
+* You can now set the maximum limit of paratrooper reinforcements.
+* The pilot of the reinforcement heli should now fly away properly if configured to do so.
+* Updated group reinforcement manager for compatibility with latest syntax for paratrooper reinforcements (NOTE: UNTESTED).
 
 
 #### March 31, 2016 (6:00 PM CST-America):

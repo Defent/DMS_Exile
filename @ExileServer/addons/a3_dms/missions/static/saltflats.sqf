@@ -105,7 +105,7 @@ _crate = [_crateClassname, _pos] call DMS_fnc_SpawnCrate;
 _veh =
 [
 	[
-		_pos getPos [_pos,100,random 360],
+		_pos getPos [100,random 360],
 		_pos
 	],
 	_group,

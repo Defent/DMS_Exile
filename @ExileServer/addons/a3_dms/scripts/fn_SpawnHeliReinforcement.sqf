@@ -2,8 +2,6 @@
     DMS_fnc_SpawnHeliReinforcement
     Created by eraser1
 
-    **********!!!!NOTE!!!!**********: THIS FUNCTION IS NOT FINAL, IT IS FOR TESTING PURPOSES ONLY! Changes are planned, and the function parameters will likely change.
-
     This function will create a heli/aircraft within "DMS_RHeli_MinDistFromDrop" to "DMS_RHeli_MaxDistFromDrop" meters and drop units at "_dropPoint".
 
     Usage:
@@ -14,6 +12,7 @@
         _side,                          // STRING: The "side" that the AI are on.
         _dropPoint,                     // OBJECT or ARRAY (Position2D or 3D): The location to drop the reinforcements at.
         _ejectFFVGunners,               // BOOLEAN: Whether or not to eject Fire-From-Vehicle (FFV) gunners.
+        _maxJumpers,                    // SCALAR: Maximum number of AI to eject from the aircraft. Set to a really high # to ignore (like 999).
         _remainAsGunship,               // BOOLEAN: Whether or not to keep the heli flying around as a gunship.
         _heliClass,                     // STRING (OPTIONAL): The classname of the heli to spawn.
         _spawnPos                       // ARRAY (OPTIONAL - Position2D or 3D): The position for the heli to spawn at.
@@ -33,6 +32,7 @@ if !(params
     ["_side", 0, [""]],
     ["_dropPoint", 0, [[],objNull], [2,3]],
     ["_ejectFFVGunners", 0, [false]],
+    ["_maxJumpers",0,[0]],
     ["_remainAsGunship", 0, [false]]
 ])
 exitWith
@@ -47,7 +47,7 @@ if (isNull _AIGroup) exitWith
     -1
 };
 
-_heliClass = if ((count _this)>7) then {_this param [7, "", [""]]} else {selectRandom DMS_ReinforcementHelis};
+_heliClass = if ((count _this)>8) then {_this param [8, "", [""]]} else {selectRandom DMS_ReinforcementHelis};
 
 // Make the AI group local to add passengers.
 if !(local _AIGroup) then
@@ -58,9 +58,9 @@ if !(local _AIGroup) then
 
 // Get the spawn position for the heli
 _spawnPos =
-    if ((count _this)>8) then
+    if ((count _this)>9) then
     {
-        _this param [8, "", [[]], [2,3]]
+        _this param [9, [0,0,0], [[]], [2,3]]
     }
     else
     {
@@ -122,9 +122,11 @@ _crewCount =
         case "gunner";
         case "turret":
         {
-            if (_ejectFFVGunners && {_personTurret}) then
+            if (_ejectFFVGunners && {_personTurret} && {_paratrooperCount < _maxJumpers}) then
             {
                 _unit = [_AIGroup,_spawnPos,_class,_difficulty,_side,"Paratroopers"] call DMS_fnc_SpawnAISoldier;
+
+                _unit setVariable ["DMS_Paratrooper", true];
                 _paratrooperCount = _paratrooperCount + 1;
             }
             else
@@ -132,14 +134,20 @@ _crewCount =
             	_unit = [_AIGroup,_spawnPos,_class,_difficulty,_side,"Vehicle"] call DMS_fnc_SpawnAISoldier;
             	_unit setVariable ["DMS_AssignedVeh",_heli];
             };
+
         	_unit moveInTurret [_heli, _x];
         };
 
         case "cargo":
         {
-            _unit = [_AIGroup,_spawnPos,_class,_difficulty,_side,"Paratroopers"] call DMS_fnc_SpawnAISoldier;
-            _unit moveInCargo [_heli, _cargoIndex];
-            _paratrooperCount = _paratrooperCount + 1;
+            if (_paratrooperCount < _maxJumpers) then
+            {
+                _unit = [_AIGroup,_spawnPos,_class,_difficulty,_side,"Paratroopers"] call DMS_fnc_SpawnAISoldier;
+                _unit moveInCargo [_heli, _cargoIndex];
+
+                _unit setVariable ["DMS_Paratrooper", true];
+                _paratrooperCount = _paratrooperCount + 1;
+            };
         };
     };
     _units pushBack _unit;
@@ -167,4 +175,4 @@ if (DMS_DEBUG) then
 };
 
 // Add the necessary information to the monitor.
-DMS_HeliParatrooper_Arr pushBack [_heli, _dropPoint, _ejectFFVGunners, _remainAsGunship];
+DMS_HeliParatrooper_Arr pushBack [_heli, _dropPoint, _remainAsGunship];

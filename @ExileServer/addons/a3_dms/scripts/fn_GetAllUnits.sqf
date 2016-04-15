@@ -40,8 +40,8 @@ _units = [];
 			case "OBJECT":
 			{
 				[
-					[_parameter],
-					[]
+					[],
+					[_parameter]
 				] select (alive _parameter);
 			};
 

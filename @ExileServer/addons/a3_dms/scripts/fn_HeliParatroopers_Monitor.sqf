@@ -2,16 +2,12 @@
     DMS_fnc_HeliParatroopers_Monitor
     Created by eraser1
 
-    **********!!!!NOTE!!!!**********: THIS FUNCTION IS NOT FINAL, IT IS FOR TESTING PURPOSES ONLY! Changes are planned, and the function parameters will likely change.
-    In addition, this function is not behaving as expected.
-
     Used in Exile's thread system.
     Every heli to be used as paratroopers has an index in "DMS_HeliParatrooper_Arr".
     Every index has the values:
     [
         _heli,                      // OBJECT: The heli that holds the units.
         _dropPoint,                 // ARRAY (POSITION2D or 3D): The position (or object) to which the troopers need to be dropped near.
-        _ejectFFVGunners,           // BOOLEAN: Whether or not to eject Fire-From-Vehicle (FFV) gunners.
         _remainAsGunship            // BOOLEAN: Whether or not to keep the heli flying around as a gunship.
     ]
 
@@ -46,14 +42,12 @@
 } forEach DMS_HelisToClean;
 
 
-if (DMS_HeliParatrooper_Arr isEqualTo []) exitWith {};
 
 {
     if !(_x params
     [
         ["_heli", objNull, [objNull]],
         ["_dropPoint", 0, [[], objNull], [2,3]],
-        ["_ejectFFVGunners", false, [false]],
         ["_remainAsGunship", false, [false]]
     ])
     exitWith
@@ -89,18 +83,11 @@ if (DMS_HeliParatrooper_Arr isEqualTo []) exitWith {};
         };
 
         {
-            _x params
-            [
-                "_unit",
-                "_role",
-                "_cargoIndex",
-                "_turretPath",
-                "_personTurret"
-            ];
+            private _unit = _x;
 
-            if ((alive _unit) && {(_role isEqualTo "cargo") || {_ejectFFVGunners && {_personTurret}}}) then
+            if ((alive _unit) && {_unit getVariable ["DMS_Paratrooper", false]}) then
             {
-/*
+                /*
                 moveOut _unit;
                 private ["_parachute", "_dir"];
                 _parachute = createVehicle ["Steerable_Parachute_F", (getPosATL _unit), [], 0, "CAN_COLLIDE"];
@@ -108,13 +95,13 @@ if (DMS_HeliParatrooper_Arr isEqualTo []) exitWith {};
                 _parachute enableSimulationGlobal true;
 
                 _unit moveInDriver _parachute;
-*/
+                */
                 _unit action ["Eject", _heli];
                 _unit setDestination [_dropPoint, "LEADER DIRECT", true];
 
                 _unit setVariable ["DMS_AISpawnPos", _dropPoint];
             };
-        } forEach (fullCrew _heli);
+        } forEach (crew _heli);
 
         if (_remainAsGunship) then
         {
@@ -134,11 +121,21 @@ if (DMS_HeliParatrooper_Arr isEqualTo []) exitWith {};
         else
         {
             private _pilot = driver _heli;
+            private _pilotGrp = createGroup (side _pilot);
+            private _newPos = _dropPoint getPos [2 * worldSize, random 360];
 
-            [_pilot] joinSilent (createGroup (side _pilot));
+            [_pilot] joinSilent _pilotGrp;
 
-            _pilot setDestination [_dropPoint getPos [2 * worldSize, random 360], "VEHICLE PLANNED", true];
-            {_pilot disableAI _x} forEach ["FSM", "AUTOCOMBAT", "CHECKVISIBLE", "TARGET", "AUTOTARGET"];
+            _pilot setDestination [_newPos, "VEHICLE PLANNED", true];
+
+            for "_i" from count (waypoints _pilotGrp) to 1 step -1 do
+            {
+            	deleteWaypoint ((waypoints _pilotGrp) select _i);
+            };
+
+            private _wp = _pilotGrp addWaypoint [_newPos,5];
+            _wp setWaypointType "MOVE";
+            //{_pilot disableAI _x} forEach ["FSM", "AUTOCOMBAT", "CHECKVISIBLE", "TARGET", "AUTOTARGET"];
 
             DMS_HelisToClean pushBack _heli;
 

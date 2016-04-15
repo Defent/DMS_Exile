@@ -39,7 +39,6 @@
 
 	A semi-full breakdown can be found in fn_AddStaticMissionToMonitor.sqf
 */
-if (DMS_StaticMission_Arr isEqualTo []) exitWith {};				// Empty array, no static missions running
 
 
 {
@@ -232,16 +231,13 @@ if (DMS_StaticMission_Arr isEqualTo []) exitWith {};				// Empty array, no stati
 			_dot setMarkerText (format ["%1 (%2 %3 remaining)",_text,count (_inputAIUnits call DMS_fnc_GetAllUnits),DMS_MarkerText_AIName]);
 		};
 
-		if !(_missionEvents isEqualTo []) then
-		{
-			/*
-			Coming soon...
+		/*
+		Coming soon...
 
-			{
-				_x call DMS_fnc_HandleMissionEvents;
-			} forEach _missionEvents;
-			*/
-		};
+		{
+			_x call DMS_fnc_HandleMissionEvents;
+		} forEach _missionEvents;
+		*/
 
 
 		if (DMS_AllowStaticReinforcements) then

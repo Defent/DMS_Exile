@@ -117,22 +117,16 @@ if (!isNull _av) then
 	if (_memCount isEqualTo 0) then
 	{
 		/*
-		I know what you're probably thinking:
-		What the hell is this? An "if-statement" evaluated for an "if-statement"?! What madness is this?! Does this guy know what he's doing? There has to be a better way!
-
-		To which I (eraser1) reply...
-		I know it looks funky, and there are prettier and slicker ways to do this (such as using "select") BUT I tested extensively and found out that this way is the fastest way, so... yeah...
+		This is some pretty funky code because this is about the fastest way to do the task.
+		An "if-statement" inside another "if-statement" is almost as fast, but it isn't as slick ;)
 		*/
 		if
 		(
-			if (_av isKindOf "StaticWeapon") then
-			{
-				DMS_AI_destroyStaticWeapon && {(random 100)<(_av getVariable ["DMS_DestructionChance",DMS_AI_destroyStaticWeapon_chance])}
-			}
-			else
-			{
-				(random 100)<(_av getVariable ["DMS_DestructionChance",DMS_AI_destroyVehicleChance])
-			}
+			call
+			[
+				{	(random 100)<(_av getVariable ["DMS_DestructionChance",DMS_AI_destroyVehicleChance])	},
+				{	DMS_AI_destroyStaticWeapon && {(random 100)<(_av getVariable ["DMS_DestructionChance",DMS_AI_destroyStaticWeapon_chance])}	}
+			] select (_av isKindOf "StaticWeapon")
 		) then
 		{
 			_av setDamage 1;

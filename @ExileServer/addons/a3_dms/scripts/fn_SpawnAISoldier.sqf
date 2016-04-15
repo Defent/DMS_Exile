@@ -106,20 +106,17 @@ removeVest 						_unit;
 removeBackpackGlobal 			_unit;
 
 // Give default items
-if !(DMS_ai_default_items isEqualTo []) then
 {
+	// "Why doesn't linkItem work with any of these? Because fuck you, that's why" - BIS
+	if (_x in ["Binocular","Rangefinder","Laserdesignator","Laserdesignator_02","Laserdesignator_03"]) then
 	{
-		// "Why doesn't linkItem work with any of these? Because fuck you, that's why" - BIS
-		if (_x in ["Binocular","Rangefinder","Laserdesignator","Laserdesignator_02","Laserdesignator_03"]) then
-		{
-			_unit addWeapon _x;
-		}
-		else
-		{
-			_unit linkItem _x;
-		};
-	} forEach DMS_ai_default_items;
-};
+		_unit addWeapon _x;
+	}
+	else
+	{
+		_unit linkItem _x;
+	};
+} forEach DMS_ai_default_items;
 
 
 if (_class == "unarmed") then
