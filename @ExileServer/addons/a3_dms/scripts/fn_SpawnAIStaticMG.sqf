@@ -58,7 +58,6 @@ _guns = [];
 	_gun = createVehicle [_MGClass, [0,0,0], [], 0, "CAN_COLLIDE"];
 	_gun setDir (random 360);
 	_gun setPosATL _pos;
-	_gun addEventHandler ["GetOut",{(_this select 0) setDamage 1;}];
 	_gun lock 2;
 
 	_group addVehicle _gun;

@@ -130,7 +130,10 @@ ___
 		DMS_RareLootAmount
 		DMS_ReinforcementHelis
 
-#### April 15, 2016 (9:30 PM CST-America, RC):
+#### April 15, 2016 (8:45 PM CST-America, RC):
+* Fixed an issue where static weapons would always be destroyed, ignoring other configs. Thanks to [second_coming](http://www.exilemod.com/profile/60-second_coming/)!
+
+#### April 15, 2016 (9:30 AM CST-America, RC):
 * Fixed script error in OnKilled EH when handling a used AI vehicle.
 
 #### April 14, 2016 (9:20 PM CST-America, RC):
