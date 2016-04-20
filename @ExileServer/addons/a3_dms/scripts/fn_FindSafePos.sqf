@@ -71,7 +71,7 @@ _generatePos =
 	};
 };
 
-while{!_isValidSpot} do
+while {!_isValidSpot} do
 {
 	_attempts = _attempts+1;
 

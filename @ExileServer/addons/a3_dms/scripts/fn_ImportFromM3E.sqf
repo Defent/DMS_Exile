@@ -69,6 +69,8 @@ _objs = _export apply
 		_obj setPos _objPos;
 	};
 
+	_obj enableSimulationGlobal false;
+
 	_obj;
 };
 

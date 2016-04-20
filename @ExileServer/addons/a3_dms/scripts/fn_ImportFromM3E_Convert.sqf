@@ -65,6 +65,9 @@ _objs = _export apply
 		_obj setPosATL _pos;
 		_obj setVectorDirAndUp (_x select 3);
 	};
+
+	_obj enableSimulationGlobal false;
+	
 	_obj;
 };
 

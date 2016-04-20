@@ -130,6 +130,10 @@ ___
 		DMS_RareLootAmount
 		DMS_ReinforcementHelis
 
+#### April 20, 2016 (5:45 PM CST-America, RC):
+* The new "DMS_fnc_FindSafePos_InRange" function will ignore the config "DMS_UsePredefinedMissionLocations".
+* Disable simulation on objects imported from M3Editor. (Thanks to [second_coming](http://www.exilemod.com/profile/60-second_coming/) for the tip)
+
 #### April 15, 2016 (8:45 PM CST-America, RC):
 * Fixed an issue where static weapons would always be destroyed, ignoring other configs. Thanks to [second_coming](http://www.exilemod.com/profile/60-second_coming/)!
 

@@ -19,7 +19,7 @@
     Returns a position.
 */
 
-private ["_centerPos", "_distance", "_posParameters", "_original_x", "_original_y", "_original_Blacklist", "_center_x", "_center_y", "_pos"];
+private ["_centerPos", "_distance", "_posParameters", "_original_x", "_original_y", "_original_Blacklist", "_center_x", "_center_y", "_usePresetOriginal", "_pos"];
 
 if !(params
 [
@@ -62,6 +62,8 @@ DMS_findSafePosBlacklist =
         []
     };
 
+_usePresetOriginal = DMS_UsePredefinedMissionLocations;
+DMS_UsePredefinedMissionLocations = false;
 
 // NOW we get the position (hopefully)
 _pos = _posParameters call DMS_fnc_findSafePos;
@@ -70,5 +72,6 @@ _pos = _posParameters call DMS_fnc_findSafePos;
 DMS_MinMax_X_Coords = _original_x;
 DMS_MinMax_Y_Coords = _original_y;
 DMS_findSafePosBlacklist = _original_Blacklist;
+DMS_UsePredefinedMissionLocations = _usePresetOriginal;
 
 _pos

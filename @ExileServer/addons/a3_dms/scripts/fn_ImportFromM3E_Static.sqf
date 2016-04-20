@@ -67,6 +67,8 @@ _objs = _export apply
 		_obj setVectorDirAndUp (_x select 3);
 	};
 
+	_obj enableSimulationGlobal false;
+
 	_obj;
 };
 
