@@ -117,7 +117,36 @@ ___
 ___
 
 # Changelog:
-### Test Branch **!!RC Now Available!!**:
+#### April 27, 2016 (6:45 PM CST-America, RC):
+* **NEW CONFIG VALUES**
+
+		DMS_SpawnMissions_Scheduled
+		DMS_AI_WP_Radius_heli
+		DMS_AI_WP_Radius_heli
+		DMS_RHeli_Height
+		DMS_RHeli_MinDistFromDrop
+		DMS_RHeli_MaxDistFromDrop
+		DMS_RHeli_MinDistFromPlayers
+		DMS_RareLootAmount
+		DMS_ReinforcementHelis
+* Several optimizations (mostly due to the new scripting commands introduced in 1.56)
+* You can now spawn missions in scheduled environment.
+* DMS Version is set in the "config.cpp", and grabbed in pre-init.
+* You can now define how much rare loot to spawn.
+* Limit # of attempts in "DMS_fnc_FindSafePos" to 5000.
+* New function: DMS_fnc_FindSafePos_InRange; Uses "DMS_fnc_FindSafePos" and edits some variables to return a "safe" position within a certain area.
+* New function: DMS_fnc_GetEmptySeats; Returns all empty seats in a vehicle. Not used by DMS, I thought I needed it and I realized I didn't afterwards.
+* New function: DMS_fnc_HeliParatroopers_Monitor; Monitors helis/aircraft spawned for paratroopers.
+* New function: DMS_fnc_SpawnHeliReinforcement; Spawns a heli/aircraft with paratroopers for reinforcement.
+* New group reinforcement type: "heli_troopers".
+* You can now choose whether or not to destroy or simply unlock a used AI vehicle (with a random percentage chance).
+* You can now use "setVariable" to define individually on an AI vehicle its "DMS_DestructionChance". EG: ```_vehicle setVariable ["DMS_DestructionChance",100];``` to always destroy a vehicle when its crew is dead.
+* "DMS_DestructionChance" values are defaulted to "DMS_AI_destroyStaticWeapon_chance" or "DMS_AI_destroyVehicleChance" for static or regular vehicles, respectively.
+* Fixed an issue where static weapons would always be destroyed, ignoring other configs. Thanks to [second_coming](http://www.exilemod.com/profile/60-second_coming/)!
+* Disable simulation on objects imported from M3Editor. (Thanks to [second_coming](http://www.exilemod.com/profile/60-second_coming/) for the tip).
+* Fixed an issue where AI units would be shown in static missions if configured to do so for dynamic missions (at least at first).
+
+### Test Branch (Now Integrated Live):
 #### List Of new Config values:
 
 		DMS_SpawnMissions_Scheduled
@@ -182,6 +211,9 @@ ___
 * **NEW CONFIG VALUE:** DMS_SpawnMissions_Scheduled
 * Several optimizations (mostly due to the new scripting commands introduced in 1.56)
 * You can now spawn missions in scheduled environment.
+
+### End "March 1, 2016" Test Branch
+
 
 
 #### February 19, 2016 (5:45 PM CST-America):
