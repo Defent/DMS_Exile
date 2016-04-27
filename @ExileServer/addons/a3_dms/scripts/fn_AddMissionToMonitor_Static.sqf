@@ -192,7 +192,7 @@ try
 	DMS_StaticMission_Arr pushBack _arr;
 	_added = true;
 
-	if (DMS_MarkerText_ShowAICount) then
+	if (DMS_MarkerText_ShowAICount_Static) then
 	{
 		_markerDot = _markers select 0;
 		_markerDot setMarkerText (format ["%1 (%2 %3 remaining)",markerText _markerDot,count (_units call DMS_fnc_GetAllUnits),DMS_MarkerText_AIName]);
