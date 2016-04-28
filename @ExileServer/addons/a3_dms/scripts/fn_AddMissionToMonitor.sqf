@@ -57,7 +57,7 @@
 
 */
 
-private ["_added", "_pos", "_onEndingScripts", "_completionInfo", "_timeOutInfo", "_units", "_inputUnits", "_missionObjs", "_mines", "_difficulty", "_side", "_messages", "_markers", "_arr", "_timeStarted", "_timeUntilFail", "_buildings", "_vehs", "_crate_info_array", "_missionName", "_msgWIN", "_msgLose", "_markerDot", "_markerCircle", "_missionEvents", "_onSuccessScripts", "_onFailScripts"];
+private ["_added", "_pos", "_onEndingScripts", "_completionInfo", "_timeOutInfo", "_units", "_missionObjs", "_mines", "_difficulty", "_side", "_messages", "_markers", "_arr", "_timeStarted", "_timeUntilFail", "_buildings", "_vehs", "_crate_info_array", "_missionName", "_msgWIN", "_msgLose", "_markerDot", "_markerCircle", "_missionEvents", "_onSuccessScripts", "_onFailScripts"];
 
 
 _added = false;
@@ -68,7 +68,7 @@ if !(params
 	["_pos","",[[]],[2,3]],
 	["_completionInfo","",[[]]],
 	["_timeOutInfo","",[[]],[1,2]],
-	["_inputUnits","",[[]]],
+	["_units","",[[]]],
 	["_missionObjs","",[[]],[3,4]],
 	["_messages","",[[]],[3]],
 	["_markers","",[[]],[DMS_MissionMarkerCount]],
@@ -103,9 +103,6 @@ try
 		["_timeUntilFail",DMS_MissionTimeOut call DMS_fnc_SelectRandomVal,[0]]
 	];
 
-	_units = _inputUnits call DMS_fnc_GetAllUnits;
-
-
 	if !(_missionObjs params
 	[
 		["_buildings","",[[]]],
@@ -117,12 +114,15 @@ try
 		throw format["_missionObjs |%1|",_missionObjs];
 	};
 
-	_mines = [];
-
-	if ((count _missionObjs)>3) then
-	{
-		_mines = _missionObjs param [3,[],[[]]];
-	};
+	_mines =
+		if ((count _missionObjs)>3) then
+		{
+			_missionObjs param [3,[],[[]]]
+		}
+		else
+		{
+			[]
+		};
 
 	// Don't spawn a minefield if there is one already defined in _missionObjs.
 	if (DMS_SpawnMinefieldForEveryMission && {_mines isEqualTo []}) then

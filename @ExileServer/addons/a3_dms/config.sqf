@@ -16,17 +16,19 @@ DMS_DEBUG = false;
 
 DMS_Use_Map_Config = true;	// Whether or not to use config overwrites specific to the map.
 /*
-	If you are using a map other than Altis, Bornholm, Esseker, or Tavi (Taviana) you should set this to false OR create a new file within the map_configs folder for the map so that you don't get a missing file error.
+	If you are using a map other than a map listed in the "map_configs" folder, you should set this to false OR create a new file within the map_configs folder for the map so that you don't get a missing file error.
 	To share your map-specific config, please create a merge request on GitHub and/or leave a message on the DMS thread in the Exile forums.
 	For any questions regarding map-specific configs, please leave a reply in the DMS thread on the Exile forums.
 */
 
 DMS_Enable_RankChange = false; // Whether or not to use Rank Changes.
 /*
-	I am sharing this upgrade to all. If you utilize GR8 Humanity(fully compatible) or a custom version of a ranking system(simple variable changes), this will allow your players to score +/- for Bandit and Hero kills as well as a custom Survivor Faction added to DMS as well. You can still utilize the HERO / BANDIT / SURVIVOR respect and poptab settings for gameplay :) ENJOY! DONKEYPUNCH.INFO!
+	I am sharing this upgrade to all. If you utilize GR8 Humanity (fully compatible) or a custom version of a ranking system(simple variable changes), this will allow your players to score +/- for Bandit and Hero kills as well as a custom Survivor Faction added to DMS as well. You can still utilize the HERO / BANDIT / SURVIVOR respect and poptab settings for gameplay :) ENJOY! DONKEYPUNCH.INFO!
 */
 
 DMS_Add_AIKill2DB = false;  // Adds killstat for player in the database ;)
+
+DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a scheduled environment. Setting to true may help with lag when certain missions spawn.
 
 /* Mission System Settings */
 	/*General settings for dynamic missions*/
@@ -266,27 +268,27 @@ DMS_Add_AIKill2DB = false;  // Adds killstat for player in the database ;)
 	DMS_Bandit_Vehicle_MoneyGain		= 100;						// The amount of Poptabs gained for killing a bandit vehicle crew member
 	DMS_Bandit_Vehicle_RepGain			= 25;						// The amount of Respect gained for killing a bandit vehicle crew member
 	DMS_Bandit_Vehicle_RankGain			= 50;
-/* DonkeyPunchDMS Custom Settings for Hero AI*/	
+/* DonkeyPunchDMS Custom Settings for Hero AI*/
 	DMS_Hero_Soldier_MoneyGain			= 100;						// The amount of Poptabs gained for killing a hero soldier
 	DMS_Hero_Soldier_RepGain			= 20;						// The amount of Respect gained for killing a hero soldier
-	DMS_Hero_Soldier_RankGain			= -30;	
+	DMS_Hero_Soldier_RankGain			= -30;
 	DMS_Hero_Static_MoneyGain			= 120;						// The amount of Poptabs gained for killing a hero static gunner
-	DMS_Hero_Static_RepGain			= 30;						// The amount of Respect gained for killing a hero static gunner
+	DMS_Hero_Static_RepGain				= 30;						// The amount of Respect gained for killing a hero static gunner
 	DMS_Hero_Static_RankGain			= -60;
 	DMS_Hero_Vehicle_MoneyGain			= 200;						// The amount of Poptabs gained for killing a hero vehicle crew member
 	DMS_Hero_Vehicle_RepGain			= 50;						// The amount of Respect gained for killing a hero vehicle crew member
 	DMS_Hero_Vehicle_RankGain			= -100;
-/* DonkeyPunchDMS Custom Settings for Survivor AI*/	
+/* DonkeyPunchDMS Custom Settings for Survivor AI*/
 	DMS_Survivor_Soldier_MoneyGain		= -100;						// The amount of Poptabs gained for killing a Survivor soldier
 	DMS_Survivor_Soldier_RepGain		= -100;						// The amount of Respect gained for killing a Survivor soldier
 	DMS_Survivor_Soldier_RankGain		= -250;
-	DMS_Survivor_Static_MoneyGain			= -100;						// The amount of Poptabs gained for killing a Survivor static gunner
+	DMS_Survivor_Static_MoneyGain		= -100;						// The amount of Poptabs gained for killing a Survivor static gunner
 	DMS_Survivor_Static_RepGain			= -100;						// The amount of Respect gained for killing a Survivor static gunner
 	DMS_Survivor_Static_RankGain		= -400;
 	DMS_Survivor_Vehicle_MoneyGain		= -500;						// The amount of Poptabs gained for killing a Survivor vehicle crew member
-	DMS_Survivor_Vehicle_RepGain			= -100;						// The amount of Respect gained for killing a Survivor vehicle crew member
+	DMS_Survivor_Vehicle_RepGain		= -100;						// The amount of Respect gained for killing a Survivor vehicle crew member
 	DMS_Survivor_Vehicle_RankGain		= -600;
-	
+
 	DMS_AIKill_DistanceBonusMinDistance	= 100;						// Minimum distance from the player to the AI to apply the distance bonus.
 	DMS_AIKill_DistanceBonusCoefficient	= 0.05;						// If the distance from the player to the killed unit is more than "DMS_AIKill_DistanceBonusMinDistance" meters then the player gets a respect bonus equivalent to the distance multiplied by this coefficient. For example, killing an AI from 400 meters will give 100 extra respect (when the coefficient is 0.25). Set to 0 to disable the bonus. This bonus will not be applied if there isn't a regular AI kill bonus.
 
@@ -300,7 +302,7 @@ DMS_Add_AIKill2DB = false;  // Adds killstat for player in the database ;)
 	DMS_Bandit_Vehicle_RoadkillMoney	= -10;						// The amount of Poptabs gained/lost for running over a bandit vehicle crew member
 	DMS_Bandit_Vehicle_RoadkillRep		= -5;						// The amount of Respect gained/lost for running over a bandit vehicle crew member
 	DMS_Bandit_Vehicle_RoadkillRank		= 50;
-/* DonkeyPunchDMS Custom RoadKill Settings for Hero AI*/	
+/* DonkeyPunchDMS Custom RoadKill Settings for Hero AI*/
 	DMS_Hero_Soldier_RoadkillMoney		= 20;						// The amount of Poptabs gained/lost for running over a hero soldier
 	DMS_Hero_Soldier_RoadkillRep		= 10;						// The amount of Respect gained/lost for running over a hero soldier
 	DMS_Hero_Soldier_RoadkillRank		= -40;
@@ -310,22 +312,22 @@ DMS_Add_AIKill2DB = false;  // Adds killstat for player in the database ;)
 	DMS_Hero_Vehicle_RoadkillMoney		= 20;						// The amount of Poptabs gained/lost for running over a hero vehicle crew member
 	DMS_Hero_Vehicle_RoadkillRep		= 10;						// The amount of Respect gained/lost for running over a hero vehicle crew member
 	DMS_Hero_Vehicle_RoadkillRank		= -100;
-/* DonkeyPunchDMS Custom Roadkill Settings for Survivor AI*/	
+/* DonkeyPunchDMS Custom Roadkill Settings for Survivor AI*/
 	DMS_Survivor_Soldier_RoadkillMoney	= -200;						// The amount of Poptabs gained/lost for running over a Survivor soldier
-	DMS_Survivor_Soldier_RoadkillRep		= -200;						// The amount of Respect gained/lost for running over a Survivor soldier
-	DMS_Survivor_Soldier_RoadkillRank		= -200;	
-	DMS_Survivor_Static_RoadkillMoney		= -200;						// The amount of Poptabs gained/lost for running over a Survivor static gunner
+	DMS_Survivor_Soldier_RoadkillRep	= -200;						// The amount of Respect gained/lost for running over a Survivor soldier
+	DMS_Survivor_Soldier_RoadkillRank	= -200;
+	DMS_Survivor_Static_RoadkillMoney	= -200;						// The amount of Poptabs gained/lost for running over a Survivor static gunner
 	DMS_Survivor_Static_RoadkillRep		= -200;						// The amount of Respect gained/lost for running over a Survivor static gunner
-	DMS_Survivor_Static_RoadkillRank		= -200;	
+	DMS_Survivor_Static_RoadkillRank	= -200;
 	DMS_Survivor_Vehicle_RoadkillMoney	= -500;						// The amount of Poptabs gained/lost for running over a Survivor vehicle crew member
-	DMS_Survivor_Vehicle_RoadkillRep		= -100;						// The amount of Respect gained/lost for running over a Survivor vehicle crew member
-	DMS_Survivor_Vehicle_RoadkillRank		= -100;
+	DMS_Survivor_Vehicle_RoadkillRep	= -100;						// The amount of Respect gained/lost for running over a Survivor vehicle crew member
+	DMS_Survivor_Vehicle_RoadkillRank	= -100;
 
 	DMS_banditSide						= EAST;						// The side (team) that AI Bandits will spawn on
 /* DonkeyPunchDMS Custom Side Factions */
 	DMS_heroSide						= WEST;						// The side (team) that AI Heros will spawn on
-	DMS_survivorSide						= CIV;						// The side (team) that AI Survivor will spawn on
-	
+	DMS_survivorSide					= CIV;						// The side (team) that AI Survivor will spawn on
+
 	DMS_clear_AI_body					= false;					// Clear AI body as soon as they die
 	DMS_clear_AI_body_chance			= 50;						// Percentage chance that AI bodies will be cleared when they die
 	DMS_ai_disable_ramming_damage 		= true;						// Disables damage due to ramming into AI. !!!NOTE: THIS WILL NOT BE RELIABLE WITH "DMS_ai_offload_to_client"!!!
@@ -357,10 +359,10 @@ DMS_Add_AIKill2DB = false;  // Adds killstat for player in the database ;)
 	DMS_ai_skill_randomDifficult		= ["hardcore","hardcore","difficult","difficult","difficult"];	// 60% chance for "difficult", 40% chance for "hardcore" AI.
 	DMS_ai_skill_randomEasy				= ["moderate","moderate","easy","easy","easy"];					// 60% chance for "easy", 40% chance for "moderate" AI.
 	DMS_ai_skill_randomIntermediate		= ["difficult","difficult","moderate","moderate","moderate"];	// 60% chance for "moderate", 40% chance for "difficult" AI.
-	DMS_AI_WP_Radius_easy				= 20;						// Waypoint radius for "easy" AI
-	DMS_AI_WP_Radius_moderate			= 30;						// Waypoint radius for "moderate" AI
-	DMS_AI_WP_Radius_difficult			= 50;						// Waypoint radius for "difficult" AI
-	DMS_AI_WP_Radius_hardcore			= 75;						// Waypoint radius for "hardcore" AI
+	DMS_AI_WP_Radius_easy				= 20;						// Waypoint radius for "easy" AI.
+	DMS_AI_WP_Radius_moderate			= 30;						// Waypoint radius for "moderate" AI.
+	DMS_AI_WP_Radius_difficult			= 50;						// Waypoint radius for "difficult" AI.
+	DMS_AI_WP_Radius_hardcore			= 75;						// Waypoint radius for "hardcore" AI.
 	DMS_AI_AimCoef_easy					= 0.9;						// "Custom Aim Coefficient" (weapon sway multiplier) for "easy" AI
 	DMS_AI_AimCoef_moderate				= 0.65;						// "Custom Aim Coefficient" (weapon sway multiplier) for "moderate" AI
 	DMS_AI_AimCoef_difficult			= 0.4;						// "Custom Aim Coefficient" (weapon sway multiplier) for "difficult" AI
@@ -369,7 +371,10 @@ DMS_Add_AIKill2DB = false;  // Adds killstat for player in the database ;)
 	DMS_AI_EnableStamina_moderate		= true;						// Whether or not to keep the stamina system for "moderate" AI.
 	DMS_AI_EnableStamina_difficult		= false;					// Whether or not to keep the stamina system for "difficult" AI.
 	DMS_AI_EnableStamina_hardcore		= false;					// Whether or not to keep the stamina system for "hardcore" AI.
-	DMS_AI_WP_Radius_base				= 5;						// Waypoint radius for AI in bases
+	DMS_AI_WP_Radius_base				= 5;						// Waypoint radius for AI in bases.
+	DMS_AI_WP_Radius_heli				= 500;						// Waypoint radius for AI in helis.
+
+	DMS_AI_destroyVehicleChance			= 75;						// Percent chance that an AI vehicle will be destroyed after the AI have been killed. Set to 100 for always, or 0 for never.
 
 	DMS_AI_destroyStaticWeapon			= true;						// Whether or not to destroy static HMGs after AI death.
 	DMS_AI_destroyStaticWeapon_chance	= 95;						// Percent chance that a static weapon will be destroyed (only applied if "DMS_AI_destroyStaticWeapon" is true)
@@ -693,6 +698,11 @@ DMS_Add_AIKill2DB = false;  // Adds killstat for player in the database ;)
 											"launch_B_Titan_F"
 										];
 
+	DMS_RHeli_Height					= 500;						// Altitude of the heli when flying to drop point.
+	DMS_RHeli_MinDistFromDrop			= 500;						// Minimum distance for the reinforcement heli to spawn from drop point.
+	DMS_RHeli_MaxDistFromDrop			= 5000;						// Maximum distance for the reinforcement heli to spawn from drop point.
+	DMS_RHeli_MinDistFromPlayers		= 1000;						// Minimum distance for the reinforcement heli to spawn from players.
+
 /* AI Settings */
 
 
@@ -837,6 +847,7 @@ DMS_Add_AIKill2DB = false;  // Adds killstat for player in the database ;)
 	DMS_BoxItems						= DMS_BoxSurvivalSupplies+DMS_BoxBuildingSupplies+DMS_BoxOptics;	// Random "items" can spawn optics, survival supplies, or building supplies
 
 	DMS_RareLoot						= true;						// Potential chance to spawn rare loot in any crate.
+	DMS_RareLootAmount					= 1;						// How many rare loot items to add.
 	DMS_RareLootList =					[							// List of rare loot to spawn
 											"Exile_Item_SafeKit",
 											"Exile_Item_CodeLock"
@@ -890,6 +901,10 @@ DMS_Add_AIKill2DB = false;  // Adds killstat for player in the database ;)
 											"Exile_Chopper_Hellcat_Green",
 											"Exile_Chopper_Taru_Transport_Black"
 										];
+
+	DMS_ReinforcementHelis =			[							// List of helis that can spawn for AI paratrooper reinforcements.
+											//"B_Heli_Transport_01_camo_F"		// Ghosthawk: You'll have to whitelist this in infistar if you want to use it.
+										] + DMS_TransportHelis;
 
 	DMS_CarThievesVehicles =			[							// List of vehicles that can spawn in the "car thieves" mission. By default, it's just "DMS_MilitaryVehicles" and "DMS_TransportTrucks".
 											//"Exile_Car_Offroad_Armed_Guerilla01"

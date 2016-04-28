@@ -67,7 +67,7 @@
 
 */
 
-private ["_added", "_pos", "_onEndingScripts", "_completionInfo", "_timeOutInfo", "_units", "_inputUnits", "_missionObjs", "_mines", "_difficulty", "_side", "_messages", "_markers", "_arr", "_timeStarted", "_timeUntilFail", "_buildings", "_vehs", "_crate_info_array", "_missionName", "_msgWIN", "_msgLose", "_markerDot", "_markerCircle", "_missionEvents", "_onSuccessScripts", "_onFailScripts"];
+private ["_added", "_pos", "_onEndingScripts", "_completionInfo", "_timeOutInfo", "_units", "_missionObjs", "_mines", "_difficulty", "_side", "_messages", "_markers", "_arr", "_timeStarted", "_timeUntilFail", "_buildings", "_vehs", "_crate_info_array", "_missionName", "_msgWIN", "_msgLose", "_markerDot", "_markerCircle", "_missionEvents", "_onSuccessScripts", "_onFailScripts"];
 
 
 _added = false;
@@ -78,7 +78,7 @@ if !(params
 	["_completionInfo","",[[]]],
 	["_groupReinforcementsInfo","",[[]]],
 	["_timeOutInfo","",[[]],[1,2]],
-	["_inputUnits","",[[]]],
+	["_units","",[[]]],
 	["_missionObjs","",[[]],[3,4]],
 	["_messages","",[[]],[3]],
 	["_markers","",[[]],[DMS_MissionMarkerCount]],
@@ -166,7 +166,7 @@ try
 			_timeStarted,
 			_timeUntilFail
 		],
-		_inputUnits,
+		_units,
 		[
 			_buildings,
 			_vehs,
@@ -192,10 +192,10 @@ try
 	DMS_StaticMission_Arr pushBack _arr;
 	_added = true;
 
-	if (DMS_MarkerText_ShowAICount) then
+	if (DMS_MarkerText_ShowAICount_Static) then
 	{
 		_markerDot = _markers select 0;
-		_markerDot setMarkerText (format ["%1 (%2 %3 remaining)",markerText _markerDot,count (_inputUnits call DMS_fnc_GetAllUnits),DMS_MarkerText_AIName]);
+		_markerDot setMarkerText (format ["%1 (%2 %3 remaining)",markerText _markerDot,count (_units call DMS_fnc_GetAllUnits),DMS_MarkerText_AIName]);
 	};
 
 	if (DMS_DEBUG) then

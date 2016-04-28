@@ -65,7 +65,7 @@ _crate1 = ["Box_NATO_Wps_F",_pos] call DMS_fnc_SpawnCrate;
 
 _rndDir = random 180;
 
-_wreck = createVehicle ["Land_FuelStation_Build_F",[_pos,10+(random 5),_rndDir+90] call DMS_fnc_SelectOffsetPos,[], 0, "CAN_COLLIDE"];
+_wreck = createVehicle ["Land_FuelStation_Build_F",_pos getPos [10+(random 5),_rndDir+90],[], 0, "CAN_COLLIDE"];
 
 
 _vehClass1 = "Exile_Car_SUV_Red";
@@ -90,12 +90,10 @@ if !(_extraParams isEqualTo []) then
 		};
 	};
 };
-_vehicle1 = [_vehClass1, [_pos,5+(random 3),_rndDir] call DMS_fnc_SelectOffsetPos] call DMS_fnc_SpawnNonPersistentVehicle;
-//_vehicle1 setPosATL ([_pos,5+(random 3),_rndDir] call DMS_fnc_SelectOffsetPos);
+_vehicle1 = [_vehClass1, _pos getPos [5+(random 3),_rndDir]] call DMS_fnc_SpawnNonPersistentVehicle;
 
 
-_vehicle2 = [_vehClass2, [_pos,5+(random 3),_rndDir+180] call DMS_fnc_SelectOffsetPos] call DMS_fnc_SpawnNonPersistentVehicle;
-//_vehicle2 setPosATL ([_pos,5+(random 3),_rndDir+180] call DMS_fnc_SelectOffsetPos);
+_vehicle2 = [_vehClass2, _pos getPos [5+(random 3),_rndDir+180]] call DMS_fnc_SpawnNonPersistentVehicle;
 
 
 

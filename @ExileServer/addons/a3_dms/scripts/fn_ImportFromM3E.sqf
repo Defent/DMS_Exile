@@ -43,12 +43,12 @@ if ((count _pos)<3) then
 };
 
 
-_objs = [];
+
 
 
 _export = call compile preprocessFileLineNumbers (format ["\x\addons\DMS\objects\%1.sqf",_file]);
 
-
+_objs = _export apply
 {
 	// Create the object
 	_obj = createVehicle [_x select 0, [0,0,0], [], 0, "CAN_COLLIDE"];
@@ -69,8 +69,10 @@ _export = call compile preprocessFileLineNumbers (format ["\x\addons\DMS\objects
 		_obj setPos _objPos;
 	};
 
-	_objs pushBack _obj;
-} foreach _export;
+	_obj enableSimulationGlobal false;
+
+	_obj;
+};
 
 
 _objs

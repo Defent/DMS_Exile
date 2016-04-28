@@ -92,6 +92,19 @@
 			]
 		NOTE: Every reinforcement vehicle counts as one unit given for monitor type "armed_vehicle" and "armed_vehicle_replace"
 
+		"heli_troopers":
+			_monitorParams =
+			[
+				_AICount,				// SCALAR: If the AI Group has fewer than "_AICount" living units, then the group will receive reinforcements.
+		        _ejectFFVGunners,               // BOOLEAN: Whether or not to eject Fire-From-Vehicle (FFV) gunners.
+		        _maxJumpers,                    // SCALAR: Maximum number of AI to eject from the aircraft. Set to a really high # to ignore (like 999).
+		        _remainAsGunship,               // BOOLEAN: Whether or not to keep the heli flying around as a gunship.
+		        _dropPoint,                     // OBJECT or ARRAY (OPTIONAL - Position2D or 3D): The location to drop the reinforcements at. The drop point will default to the group leader.
+		        _heliClass,                     // STRING (OPTIONAL): The classname of the heli to spawn.
+		        _spawnPos                       // ARRAY (OPTIONAL - Position2D or 3D): The position for the heli to spawn at.
+			]
+			This reinforcement type will attempt to drop the AI off at the group leader's position. The heli will spawn in the air 500-5000 meters away from the leader's position and 1000 meters away from a player (default).
+
 	Returns whether or not reinforcement waves or units given exceeds/matches maximum wave or unit reinforcements. If true, then no more reinforcements will be spawned (so the passed info should be deleted from the available reinforcements list).
 */
 
@@ -371,7 +384,7 @@ if (!_reinforcementsDepleted && {(diag_tickTime-_lastUpdated)>_updateDelay}) the
 				_veh =
 				[
 					[
-						if (_spawnLocations isEqualTo []) then {[_leaderPos,100+(random 200),random 360] call DMS_fnc_SelectOffsetPos} else {_spawnLocations call BIS_fnc_selectRandom},
+						if (_spawnLocations isEqualTo []) then {_leaderPos getPos [100+(random 200),random 360]} else {selectRandom _spawnLocations},
 						_leaderPos
 					],
 					_AIGroup,
@@ -417,7 +430,7 @@ if (!_reinforcementsDepleted && {(diag_tickTime-_lastUpdated)>_updateDelay}) the
 				_vehicle =
 				[
 					[
-						if (_spawnLocations isEqualTo []) then {[_leaderPos,100+(random 200),random 360] call DMS_fnc_SelectOffsetPos} else {_spawnLocations call BIS_fnc_selectRandom},
+						if (_spawnLocations isEqualTo []) then {[_leaderPos,100+(random 200),random 360] call DMS_fnc_SelectOffsetPos} else {selectRandom _spawnLocations},
 						_leaderPos
 					],
 					_AIGroup,
@@ -484,6 +497,58 @@ if (!_reinforcementsDepleted && {(diag_tickTime-_lastUpdated)>_updateDelay}) the
 				if (DMS_DEBUG) then
 				{
 					(format["GroupReinforcementsManager :: Group %1 received a ""%2"" static gun (%3) as reinforcement at %4.",_AIGroup, _staticGunClass, _staticGun, _gunPos]) call DMS_fnc_DebugLog;
+				};
+			};
+		};
+
+		case "heli_troopers":
+		{
+			if !(_monitorParams params
+			[
+				["_AICount",0,[0]],
+				["_ejectFFVGunners",false,[false]],
+			    ["_maxJumpers",0,[0]],
+			    ["_remainAsGunship", 0, [false]]
+			])
+			exitWith
+			{
+				_reinforcementsDepleted = true;
+				diag_log format ["DMS ERROR :: Calling DMS_fnc_GroupReinforcementsManager with invalid _monitorParams: %1 | _monitorType: %2 | Setting _reinforcementsDepleted to true.",_monitorParams,_monitorType];
+			};
+
+			if (_remainingUnits<_AICount) then
+			{
+				private _dropPoint = if ((count _monitorParams)>4) then {_monitorParams param [4, getPosATL (leader _AIGroup), [objNull,[]], [2,3]]} else {getPosATL (leader _AIGroup)};
+				private _heliClass = if ((count _monitorParams)>5) then {_monitorParams param [5, "", [""]]} else {selectRandom DMS_ReinforcementHelis};
+
+				private _params =
+				[
+			        _AIGroup,
+			        _class,
+			        _difficulty,
+			        _side,
+			        _dropPoint,
+			        _ejectFFVGunners,
+					_maxJumpers,
+			        _remainAsGunship,
+					_heliClass
+			    ];
+
+				if ((count _monitorParams)>6) then
+				{
+					_params pushBack (_monitorParams select 6);
+				};
+
+				private _heli = _params call DMS_fnc_SpawnHeliReinforcement;
+
+				// Every vehicle counts as one unit given, so the number of units given is equivalent to number of waves given.
+				_reinforcementWavesGiven = _reinforcementWavesGiven + 1;
+				_reinforcementUnitsGiven = _reinforcementWavesGiven;
+
+
+				if (DMS_DEBUG) then
+				{
+					(format["GroupReinforcementsManager :: Group %1 received a ""%2"" vehicle (%3) as reinforcements.", _AIGroup, typeOf _heliClass, _heli]) call DMS_fnc_DebugLog;
 				};
 			};
 		};

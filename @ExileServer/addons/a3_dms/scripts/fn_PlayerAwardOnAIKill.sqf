@@ -156,6 +156,8 @@ if ((!isNull _playerObj) && {(_playerUID != "") && {_playerObj isKindOf "Exile_U
 			(owner _playerObj) publicVariableClient "ExileClientPlayerScore";
 			ExileClientPlayerScore = nil;
 		};
+
+
 		//DONKEYPUNCH CUSTOM KILL STAT ADD FOR AI KILL
 		if (DMS_Add_AIKill2DB) then
 		{
@@ -167,6 +169,7 @@ if ((!isNull _playerObj) && {(_playerUID != "") && {_playerObj isKindOf "Exile_U
 			(owner _playerObj) publicVariableClient "ExileClientPlayerKills";
 			ExileClientPlayerKills = nil;
 		};
+
 		//DONKEYPUNCH CUSTOM KILL RANK CHANGE FOR AI KILL
 		if (DMS_Enable_RankChange) then
 		{
@@ -180,6 +183,8 @@ if ((!isNull _playerObj) && {(_playerUID != "") && {_playerObj isKindOf "Exile_U
 				ExileClientPlayerHumanity = nil;
 			};
 		};
+
+
 		if (DMS_DEBUG) then
 		{
 			format ["PlayerAwardOnAIKill :: %1 (%2) awarded %3 poptabs and %4 respect for killing %5. Player's money is now %6, and respect is now %7. Roadkill: %8", name _playerObj, _playerUID, _moneyChange, _repChange, _unit, _playerMoney, _playerRespect, _roadKilled] call DMS_fnc_DebugLog;

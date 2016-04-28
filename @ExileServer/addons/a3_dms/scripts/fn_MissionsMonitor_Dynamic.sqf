@@ -33,7 +33,6 @@
 
 	A semi-full breakdown can be found in fn_AddMissionToMonitor.sqf
 */
-if (DMS_Mission_Arr isEqualTo []) exitWith {};				// Empty array, no missions running
 
 private ["_pos", "_completionInfo", "_timeStarted", "_failTime", "_units", "_buildings", "_vehs", "_crate_info_array", "_mines", "_missionName", "_msgWIN", "_msgLose", "_markers", "_missionSide", "_arr", "_cleanupList"];
 
@@ -228,16 +227,13 @@ private ["_pos", "_completionInfo", "_timeStarted", "_failTime", "_units", "_bui
 			_dot setMarkerText (format ["%1 (%2 %3 remaining)",_text,count (_units call DMS_fnc_GetAllUnits),DMS_MarkerText_AIName]);
 		};
 
-		if !(_missionEvents isEqualTo []) then
-		{
-			/*
-			Coming soon...
+		/*
+		Coming soon...
 
-			{
-				_x call DMS_fnc_HandleMissionEvents;
-			} forEach _missionEvents;
-			*/
-		};
+		{
+			_x call DMS_fnc_HandleMissionEvents;
+		} forEach _missionEvents;
+		*/
 
 
 		if !(_onMonitorEnd isEqualTo {}) then

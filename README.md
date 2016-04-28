@@ -112,12 +112,12 @@ ___
 - [shaworth](https://github.com/shaworth) and [KawaiiPotato](https://github.com/KawaiiPotato) for making the README all nice and pretty :)
 - [maca134](http://maca134.co.uk/portfolio/m3editor-arma-3-map-editor/) for M3Editor Stuff
 - [Darth Rogue from SOA](http://soldiersofanarchy.net/) for the awesome base for the first DMS static mission :D
-- [William from Refugees of the Fallen](http://refugeesofthefallen.enjin.com/) for the amazing slums static mission base and ideas :)
+- [William from Refugees of the Fallen](http://rtfgaming.com/) for the amazing slums static mission base and ideas :)
 - [DONKEYPUNCH](https://github.com/donkeypunchepoch) for everything on the [February 17th 2016 commit](https://github.com/Defent/DMS_Exile#february-17-2016-600-pm-cst-america) ;)
 - Everbody's feedback on [the DMS thread on exile forums](http://www.exilemod.com/topic/61-dms-defents-mission-system/?do=findComment&comment=242)
 
 #### Testers/Reporters:
-- [William from Refugees of the Fallen](http://refugeesofthefallen.enjin.com/)
+- [William from Refugees of the Fallen](http://rtfgaming.com/)
 - [JamieKG from Eternal Gamer](http://eternal-gamer.com/)
 - [Valthos from The Altis Project](https://www.thealtisproject.co.uk/)
 - [Flowrider from Optimum Gaming](http://www.optimum-multigaming.com/)
@@ -151,6 +151,105 @@ ___
 ___
 
 # Changelog:
+#### April 27, 2016 (6:45 PM CST-America, RC):
+* **NEW CONFIG VALUES**
+
+		DMS_SpawnMissions_Scheduled
+		DMS_AI_WP_Radius_heli
+		DMS_AI_WP_Radius_heli
+		DMS_RHeli_Height
+		DMS_RHeli_MinDistFromDrop
+		DMS_RHeli_MaxDistFromDrop
+		DMS_RHeli_MinDistFromPlayers
+		DMS_RareLootAmount
+		DMS_ReinforcementHelis
+* Several optimizations (mostly due to the new scripting commands introduced in 1.56)
+* You can now spawn missions in scheduled environment.
+* DMS Version is set in the "config.cpp", and grabbed in pre-init.
+* You can now define how much rare loot to spawn.
+* Limit # of attempts in "DMS_fnc_FindSafePos" to 5000.
+* New function: DMS_fnc_FindSafePos_InRange; Uses "DMS_fnc_FindSafePos" and edits some variables to return a "safe" position within a certain area.
+* New function: DMS_fnc_GetEmptySeats; Returns all empty seats in a vehicle. Not used by DMS, I thought I needed it and I realized I didn't afterwards.
+* New function: DMS_fnc_HeliParatroopers_Monitor; Monitors helis/aircraft spawned for paratroopers.
+* New function: DMS_fnc_SpawnHeliReinforcement; Spawns a heli/aircraft with paratroopers for reinforcement.
+* New group reinforcement type: "heli_troopers".
+* You can now choose whether or not to destroy or simply unlock a used AI vehicle (with a random percentage chance).
+* You can now use "setVariable" to define individually on an AI vehicle its "DMS_DestructionChance". EG: ```_vehicle setVariable ["DMS_DestructionChance",100];``` to always destroy a vehicle when its crew is dead.
+* "DMS_DestructionChance" values are defaulted to "DMS_AI_destroyStaticWeapon_chance" or "DMS_AI_destroyVehicleChance" for static or regular vehicles, respectively.
+* Fixed an issue where static weapons would always be destroyed, ignoring other configs. Thanks to [second_coming](http://www.exilemod.com/profile/60-second_coming/)!
+* Disable simulation on objects imported from M3Editor. (Thanks to [second_coming](http://www.exilemod.com/profile/60-second_coming/) for the tip).
+* Fixed an issue where AI units would be shown in static missions if configured to do so for dynamic missions (at least at first).
+
+### Test Branch (Now Integrated Live):
+#### List Of new Config values:
+
+		DMS_SpawnMissions_Scheduled
+		DMS_AI_WP_Radius_heli
+		DMS_AI_WP_Radius_heli
+		DMS_RHeli_Height
+		DMS_RHeli_MinDistFromDrop
+		DMS_RHeli_MaxDistFromDrop
+		DMS_RHeli_MinDistFromPlayers
+		DMS_RareLootAmount
+		DMS_ReinforcementHelis
+
+#### April 20, 2016 (5:45 PM CST-America, RC):
+* The new "DMS_fnc_FindSafePos_InRange" function will ignore the config "DMS_UsePredefinedMissionLocations".
+* Disable simulation on objects imported from M3Editor. (Thanks to [second_coming](http://www.exilemod.com/profile/60-second_coming/) for the tip)
+
+#### April 15, 2016 (8:45 PM CST-America, RC):
+* Fixed an issue where static weapons would always be destroyed, ignoring other configs. Thanks to [second_coming](http://www.exilemod.com/profile/60-second_coming/)!
+
+#### April 15, 2016 (9:30 AM CST-America, RC):
+* Fixed script error in OnKilled EH when handling a used AI vehicle.
+
+#### April 14, 2016 (9:20 PM CST-America, RC):
+* Fix script error with saltflats.
+* "DMS_fnc_AddMissionToMonitor" will no longer convert given AI parameters to a list of objects, so you can now add other units to the mission (within the same group) without much issue.
+* Micro-optimizations here and there.
+* Fixed an issue with DMS_fnc_GetAllUnits such that it would return an empty list if given a list of AI objects.
+* You can now set the maximum limit of paratrooper reinforcements.
+* The pilot of the reinforcement heli should now fly away properly if configured to do so.
+* Updated group reinforcement manager for compatibility with latest syntax for paratrooper reinforcements (NOTE: UNTESTED).
+
+
+#### March 31, 2016 (6:00 PM CST-America):
+* You can now use "setVariable" to define individually on an AI vehicle its "DMS_DestructionChance". EG: ```_vehicle setVariable ["DMS_DestructionChance",100];``` to always destroy a vehicle when its crew is dead.
+* "DMS_DestructionChance" values are defaulted to "DMS_AI_destroyStaticWeapon_chance" or "DMS_AI_destroyVehicleChance" for static or regular vehicles, respectively.
+* Optimization + code cleanup for "DMS_fnc_SpawnHeliReinforcement".
+
+#### March 25, 2016 (6:00 PM CST-America):
+* **NEW CONFIG VALUES:**
+
+		DMS_AI_WP_Radius_heli
+		DMS_AI_WP_Radius_heli
+		DMS_RHeli_Height
+		DMS_RHeli_MinDistFromDrop
+		DMS_RHeli_MaxDistFromDrop
+		DMS_RHeli_MinDistFromPlayers
+		DMS_RareLootAmount
+		DMS_ReinforcementHelis
+* DMS Version is set in the "config.cpp", and grabbed in pre-init.
+* You can now define how much rare loot to spawn.
+* Limit # of attempts in "DMS_fnc_FindSafePos" to 5000.
+* New function: DMS_fnc_FindSafePos_InRange; Uses "DMS_fnc_FindSafePos" and edits some variables to return a "safe" position within a certain area.
+* New function: DMS_fnc_GetEmptySeats; Returns all empty seats in a vehicle. Not used by DMS, I thought I needed it and I realized I didn't afterwards.
+* New function: DMS_fnc_HeliParatroopers_Monitor; Monitors helis/aircraft spawned for paratroopers. **NOT YET COMPLETE**
+* New function: DMS_fnc_SpawnHeliReinforcement; Spawns a heli/aircraft with paratroopers for reinforcement. **NOT YET COMPLETE**
+* New group reinforcement type: "heli_troopers". Changes most likely to come.
+* You can now choose whether or not to destroy or simply unlock a used AI vehicle (with a random percentage chance).
+* Slight optimizations here and there (more to come).
+
+#### March 1, 2016 (12:30 AM CST-America):
+* Initial Test Branch commit
+* **NEW CONFIG VALUE:** DMS_SpawnMissions_Scheduled
+* Several optimizations (mostly due to the new scripting commands introduced in 1.56)
+* You can now spawn missions in scheduled environment.
+
+### End "March 1, 2016" Test Branch
+
+
+
 #### February 19, 2016 (5:45 PM CST-America):
 * Fixed a minor typo with a variable (part of the new Humanity support by DonkeyPunch).
 
@@ -310,7 +409,7 @@ ___
 * Please check out the new config values in config.sqf to see what they do :)
 * Fixed issue with "thieves" mission (and DMS-spawned persistent vehicles in general). Big thank you to [JamieKG from Eternal Gamer](http://eternal-gamer.com/) and Torndeco.
 * **New static mission: "slums"**
-	* Credit for the base goes to [William from Refugees of the Fallen](http://refugeesofthefallen.enjin.com/)
+	* Credit for the base goes to [William from Refugees of the Fallen](http://rtfgaming.com/)
 	* Spawns 2 crates at 2 different locations from a list of 5 locations.
 	* No AI vehicles, only infantry (introduces Close Quarters Combat)
 	* Added to Altis by default.
