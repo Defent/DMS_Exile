@@ -151,7 +151,7 @@ ___
 ___
 
 # Changelog:
-#### April 27, 2016 (6:45 PM CST-America, RC):
+#### April 27, 2016 (6:45 PM CST-America):
 * **NEW CONFIG VALUES**
 
 		DMS_SpawnMissions_Scheduled
