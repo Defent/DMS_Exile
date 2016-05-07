@@ -18,9 +18,6 @@
 	Returns the spawned vehicle.
 */
 
-private ["_OK", "_positions", "_veh", "_spawnPos", "_vehClass", "_driver", "_gunner", "_group", "_class", "_difficulty", "_side", "_crewCount"];
-
-
 if !(params
 [
 	["_positions",[],[[]],[1,2]],
@@ -45,7 +42,7 @@ exitWith
 	diag_log format ["DMS ERROR :: Calling DMS_fnc_SpawnAIVehicle with invalid _positions parameters: %1",_positions];
 };
 
-_vehClass =
+private _vehClass =
 	if ((count _this)>5) then
 	{
 		param [5,"random",[""]]
@@ -61,18 +58,18 @@ if (_vehClass == "random") then
 };
 
 
-_veh = createVehicle [_vehClass, _spawnPos, [], 0, "NONE"];
+private _veh = createVehicle [_vehClass, _spawnPos, [], 0, "NONE"];
 _veh setFuel 1;
 _veh engineOn true;
 _veh lock 2;
 
 _group addVehicle _veh;
 
-_driver = [_group,_spawnPos,_class,_difficulty,_side,"Vehicle"] call DMS_fnc_SpawnAISoldier;
+private _driver = [_group,_spawnPos,_class,_difficulty,_side,"Vehicle"] call DMS_fnc_SpawnAISoldier;
 _driver moveInDriver _veh;
 _driver setVariable ["DMS_AssignedVeh",_veh];
 
-_crewCount =
+private _crewCount =
 {
 	private _unit = [_group,_spawnPos,_class,_difficulty,_side,"Vehicle"] call DMS_fnc_SpawnAISoldier;
 	_unit moveInTurret [_veh, _x];
@@ -85,5 +82,6 @@ if (DMS_DEBUG) then
 {
 	(format ["SpawnAIVehicle :: Created a %1 armed vehicle (%2) with %3 crew members at %4 with %5 difficulty to group %6.",_side,_vehClass,_crewCount+1,_spawnPos,_difficulty,_group]) call DMS_fnc_DebugLog;
 };
+
 
 _veh

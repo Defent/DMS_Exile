@@ -12,9 +12,6 @@
 
 */
 
-private ["_OK", "_min", "_max", "_return"];
-
-
 if !(params
 [
 	["_min",0,[0]],
@@ -25,6 +22,4 @@ exitWith
 	diag_log format ["DMS ERROR :: Calling DMS_fnc_SelectRandomVal with invalid parameters: %1",_this];
 };
 
-_return	= _min + random(_max - _min);
-
-_return
+_min + random(_max - _min)

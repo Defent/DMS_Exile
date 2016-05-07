@@ -13,9 +13,6 @@
 	Returns true if the call was completed
 */
 
-private ["_OK", "_exit", "_group", "_behavior", "_pos", "_difficulty", "_radius", "_npos", "_i", "_wp"];
-
-
 if !(params
 [
 	["_group",grpNull,[grpNull,objNull]],
@@ -27,7 +24,7 @@ then
 	diag_log format ["DMS ERROR :: Calling DMS_fnc_SetGroupBehavior with invalid params: %1",_this];
 };
 
-_exit = false;
+private _exit = false;
 
 try
 {
@@ -52,7 +49,7 @@ catch
 if (_exit) exitWith {false};
 
 
-_behavior = if ((count _this)>3) then {_this select 3;} else {"COMBAT"};
+private _behavior = if ((count _this)>3) then {_this select 3;} else {"COMBAT"};
 
 
 _group setCombatMode "RED";
@@ -88,7 +85,7 @@ _difficulty =
 		};
 	};
 
-_radius = missionNamespace getVariable [format["DMS_AI_WP_Radius_%1",_difficulty],40];
+private _radius = missionNamespace getVariable [format["DMS_AI_WP_Radius_%1",_difficulty],40];
 
 
 // Remove all previous waypoints
@@ -100,14 +97,13 @@ for "_i" from count (waypoints _group) to 1 step -1 do
 // Add waypoints around the center position.
 for "_i" from 0 to 359 step 45 do
 {
-	_npos = _pos getPos [_radius,_i];
-	_wp = _group addWaypoint [_npos,5];
+	private _npos = _pos getPos [_radius,_i];
+	private _wp = _group addWaypoint [_npos,5];
 	_wp setWaypointType "MOVE";
 };
 
 _wp = _group addWaypoint [_pos,0];
 _wp setWaypointType "CYCLE";
-
 
 
 true

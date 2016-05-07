@@ -12,10 +12,7 @@
 	] call DMS_fnc_SpawnMinefield;
 */
 
-private ["_centerPos", "_difficulty", "_side", "_mines", "_minesInfo", "_AISide", "_mineCount", "_radius", "_randDirOffset", "_sign"];
-
-
-_mines = [];
+private _mines = [];
 
 if (DMS_SpawnMinesAroundMissions) then
 {
@@ -49,17 +46,21 @@ if (DMS_SpawnMinesAroundMissions) then
 	};
 
 
-	_minesInfo = _difficulty;
-	if (_difficulty isEqualType "") then
-	{
-		_minesInfo	= missionNamespace getVariable [format ["DMS_MineInfo_%1", _difficulty], [10,50]];
-	};
+	private _minesInfo =
+		if (_difficulty isEqualType "") then
+		{
+			_minesInfo	= missionNamespace getVariable [format ["DMS_MineInfo_%1", _difficulty], [10,50]];
+		}
+		else
+		{
+			_difficulty
+		};
 
-	_AISide		= missionNamespace getVariable [format ["DMS_%1Side", _side], EAST];
+	private _AISide		= missionNamespace getVariable [format ["DMS_%1Side", _side], EAST];
 
 
-	_mineCount	= _minesInfo select 0;
-	_radius		= _minesInfo select 1;
+	private _mineCount	= _minesInfo select 0;
+	private _radius		= _minesInfo select 1;
 
 
 	for "_i" from 1 to _mineCount do
@@ -87,10 +88,10 @@ if (DMS_SpawnMinesAroundMissions) then
 
 	if (_spawnWarningSign) then
 	{
-		_randDirOffset = random 45;
+		private _randDirOffset = random 45;
 		for "_i" from 0 to 359 step 90 do
 		{
-			_sign = createVehicle ["Land_Sign_Mines_F", [0,0,0], [], 0, "CAN_COLLIDE"];
+			private _sign = createVehicle ["Land_Sign_Mines_F", [0,0,0], [], 0, "CAN_COLLIDE"];
 			_sign setDir (180+_i);
 			_sign setPosATL (_centerPos getPos [_radius+2, _randDirOffset+_i]);
 			_sign setVectorUp [0,0,1];

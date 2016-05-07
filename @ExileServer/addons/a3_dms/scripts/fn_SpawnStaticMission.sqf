@@ -13,13 +13,9 @@
 	If the mission returns the string "delay", then DMS will attempt to spawn the mission again in 60 seconds.
 */
 
+private _missionType = param [0, selectRandom DMS_StaticMissionTypesArray, [""]];
 
-private ["_missionType", "_mission", "_parameters", "_return"];
-
-
-_missionType = param [0, selectRandom DMS_StaticMissionTypesArray, [""]];
-
-_mission =
+private _mission =
 [
 	missionNamespace getVariable format
 	[
@@ -41,11 +37,11 @@ try
 	};
 
 
-	_parameters = if ((count _this)>1) then {_this select 1} else {[]};
+	private _parameters = if ((count _this)>1) then {_this select 1} else {[]};
 
 	DMS_MissionCount = DMS_MissionCount + 1;
 
-	_return = _parameters call _mission;
+	private _return = _parameters call _mission;
 
 	if ((!isNil "_return") && {_return isEqualTo "delay"}) exitWith
 	{

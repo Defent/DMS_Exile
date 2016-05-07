@@ -6,14 +6,14 @@
 	It will also apply all regular Exile EventHandlers, as well as an additional "RopeAttach" EventHandler that will enable simulation on a vehicle that is about to be lifted to prevent issues. (Only for helis)
 
 	The vehicle is LOCKED, has godmode, disabled simulation, and is not able to be slingloaded on spawn.
-	
+
 	NOTE: This function only takes ATL, and will not necessarily spawn directly on the given pos. It will attempt to find a clear position for the given vehicle, and then spawn it at the "clear" position.
 	If you want the vehicle to be placed precisely at the position provided, you will have to do a setPosXXX at that position on the vehicle after spawning.
 
 	Created by Zupa
 	Edited by eraser1
-	
-	Usage: 
+
+	Usage:
     [
     	_vehicleClass,					// STRING: Classname of the vehicle
     	_pos 							// ARRAY: Position to spawn it at (roughly)
@@ -25,9 +25,6 @@
 	_exampleVeh = ['Exile_Chopper_Hummingbird_Green',_pos] call DMS_fnc_SpawnNonPersistentVehicle;
 
 */
-
-private ["_vehicleClass","_position","_vehpos","_maxDistance","_vehObj"];
-
 
 if !(params
 [
@@ -46,8 +43,8 @@ if !(isClass (configFile >> "CfgVehicles" >> _vehicleClass)) exitWith
 	objNull
 };
 
-_vehpos = [];
-_maxDistance = 5;
+private _vehpos = [];
+private _maxDistance = 5;
 
 while{count _vehpos < 1} do
 {
@@ -57,22 +54,22 @@ while{count _vehpos < 1} do
 
 _vehpos set [2, 0.1];
 
-_vehObj = createVehicle [_vehicleClass, _vehpos, [], 0, "CAN_COLLIDE"];
+private _vehObj = createVehicle [_vehicleClass, _vehpos, [], 0, "CAN_COLLIDE"];
 
 clearBackpackCargoGlobal 	_vehObj;
 clearItemCargoGlobal 		_vehObj;
 clearMagazineCargoGlobal 	_vehObj;
 clearWeaponCargoGlobal 		_vehObj;
 
-if (_vehicleClass isKindOf "I_UGV_01_F") then 
+if (_vehicleClass isKindOf "I_UGV_01_F") then
 {
 	createVehicleCrew _vehObj;
 };
-if (getNumber (configFile >> "CfgSettings" >> "VehicleSpawn" >> "nightVision") isEqualTo 0) then 
+if (getNumber (configFile >> "CfgSettings" >> "VehicleSpawn" >> "nightVision") isEqualTo 0) then
 {
 	_vehObj disableNVGEquipment true;
 };
-if (getNumber (configFile >> "CfgSettings" >> "VehicleSpawn" >> "thermalVision") isEqualTo 0) then 
+if (getNumber (configFile >> "CfgSettings" >> "VehicleSpawn" >> "thermalVision") isEqualTo 0) then
 {
 	_vehObj disableTIEquipment true;
 };
@@ -90,7 +87,7 @@ _vehObj addMPEventHandler ["MPKilled", { if !(isServer) exitWith {}; _this call 
 _vehObj addEventHandler ["GetIn", {_this call ExileServer_object_vehicle_event_onGetIn}];
 if (_vehObj isKindOf "Helicopter") then
 {
-	_vehObj addEventHandler ["RopeAttach", 
+	_vehObj addEventHandler ["RopeAttach",
 	{
 		private "_vehicle";
 		_vehicle = _this select 2;

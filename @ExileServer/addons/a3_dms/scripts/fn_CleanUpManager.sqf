@@ -24,8 +24,6 @@
 		(format ["CleanUpManager :: Checking Cleaning Status for: %1",_x]) call DMS_fnc_DebugLog;
 	};
 
-	private ["_objs","_timeAddedToList","_timeUntilClean"];
-
 
 	if !(_x params
 	[

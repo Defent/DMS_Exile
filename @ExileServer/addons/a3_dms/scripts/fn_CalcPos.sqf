@@ -11,11 +11,6 @@
 	Returns the absolute position from the provided relative position from the provided center position or object.
 */
 
-
-private ["_pos", "_relPos", "_npos"];
-
-
-
 if !(params
 [
 	["_pos","",[[],objNull],[2,3]],

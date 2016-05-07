@@ -1,14 +1,14 @@
 /*
-	DMS_fnc_ImportFromM3E_Convert
+	DMS_fnc_ImportFromM3E_3DEN_Convert
 	Created by eraser1
 
-	Check out M3 Editor: http://maca134.co.uk/portfolio/m3editor-arma-3-map-editor/
+	Check out M3 Editor - 3DEN: https://github.com/maca134/m3e_3den/releases
 
 	Usage:
 	[
 		_file,							// String: The filename (or filepath under the objects folder) that contains the exported M3E objects
 		_missionPos 					// Object or Array: Center position
-	] call DMS_fnc_ImportFromM3E_Convert;
+	] call DMS_fnc_ImportFromM3E_3DEN_Convert;
 
 	This function will take a file exported from M3Editor, convert it into relative position, then place the objects from the converted relative positions.
 	Use this function if you don't know how to get the relative position, and you only have the exported static positions.
@@ -51,23 +51,14 @@ if ((isNil "_export") || {!(_export isEqualType [])}) exitWith
 
 private _objs = _export apply
 {
-	private _obj = createVehicle [_x select 0, [0,0,0], [], 0, "CAN_COLLIDE"];
-	_obj enableSimulationGlobal false;
+	private _object = (_x select 0) createVehicle [0,0,0];
+	_object setPosASL ((_x select 1) vectorAdd [0,0,5000]);
+	_object setVectorDirAndUp (_x select 2);
 
-	private _pos = (_x select 1) vectorAdd [0,0,5000];
+	_object enableSimulationGlobal ((_x select 3) select 0);
+	_object allowDamage ((_x select 3) select 1);
 
-	if (_x select 4) then
-	{
-		_obj setDir (_x select 2);
-		_obj setPosATL _pos;
-	}
-	else
-	{
-		_obj setPosATL _pos;
-		_obj setVectorDirAndUp (_x select 3);
-	};
-
-	_obj;
+	_object;
 };
 
 [_objs,_missionPos] call DMS_fnc_SetRelPositions;

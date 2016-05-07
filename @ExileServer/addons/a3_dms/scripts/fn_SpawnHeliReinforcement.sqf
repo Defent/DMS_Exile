@@ -21,7 +21,7 @@
     Returns the index of the paratrooper info in "DMS_HeliParatrooper_Arr", -1 on error.
 */
 
-private ["_heliClass", "_groupOwner", "_spawnPos", "_heli", "_pilot", "_units", "_crewCount", "_paratrooperCount", "_unit", "_cargoIndex"];
+private ["_pilot", "_paratrooperCount", "_unit", "_cargoIndex"];
 
 
 if !(params
@@ -47,7 +47,7 @@ if (isNull _AIGroup) exitWith
     -1
 };
 
-_heliClass = if ((count _this)>8) then {_this param [8, "", [""]]} else {selectRandom DMS_ReinforcementHelis};
+private _heliClass = if ((count _this)>8) then {_this param [8, "", [""]]} else {selectRandom DMS_ReinforcementHelis};
 
 // Make the AI group local to add passengers.
 if !(local _AIGroup) then
@@ -57,7 +57,7 @@ if !(local _AIGroup) then
 };
 
 // Get the spawn position for the heli
-_spawnPos =
+private _spawnPos =
     if ((count _this)>9) then
     {
         _this param [9, [0,0,0], [[]], [2,3]]
@@ -86,7 +86,7 @@ _spawnPos set [2,DMS_RHeli_Height];
 
 
 // Spawn the heli
-_heli = createVehicle [_heliClass, _spawnPos, [], 0, "FLY"];
+private _heli = createVehicle [_heliClass, _spawnPos, [], 0, "FLY"];
 _heli setFuel 1;
 _heli engineOn true;
 _heli lock 2;
@@ -95,9 +95,8 @@ _AIGroup addVehicle _heli;
 
 
 // Spawn the AI paratroopers
-_units = [];
-_paratrooperCount = 0;
-_crewCount =
+private _paratrooperCount = 0;
+private _units = (fullCrew [_heli, "", true]) apply
 {
     _x params
     [
@@ -150,10 +149,9 @@ _crewCount =
             };
         };
     };
-    _units pushBack _unit;
 
-    true
-} count (fullCrew [_heli, "", true]);
+    _unit
+};
 
 
 // Set the heli pilot's behavior.
@@ -171,7 +169,7 @@ if !(isNil "_groupOwner") then
 
 if (DMS_DEBUG) then
 {
-	(format ["SpawnHeliReinforcement :: Created a %1 heli (%2) with %3 crew members at %4 with %5 difficulty to group %6, going to %7. Units: %8",_side,_heliClass,_crewCount+1,_spawnPos,_difficulty,_AIGroup,_dropPoint,_units]) call DMS_fnc_DebugLog;
+	(format ["SpawnHeliReinforcement :: Created a %1 heli (%2) with %3 crew members at %4 with %5 difficulty to group %6, going to %7. Units: %8",_side,_heliClass,count _units,_spawnPos,_difficulty,_AIGroup,_dropPoint,_units]) call DMS_fnc_DebugLog;
 };
 
 // Add the necessary information to the monitor.

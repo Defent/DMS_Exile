@@ -221,9 +221,12 @@ if (DMS_ShowDifficultyColorLegend) then
 	[_x] call DMS_fnc_SpawnBanditMission;
 } forEach DMS_BanditMissionsOnServerStart;
 
+if (DMS_StaticMission) then
 {
-	[_x] call DMS_fnc_SpawnStaticMission;
-} forEach DMS_StaticMissionsOnServerStart;
+	{
+		[_x] call DMS_fnc_SpawnStaticMission;
+	} forEach DMS_StaticMissionsOnServerStart;
+};
 
 
 // Add heli paratroopers monitor to the thread system.

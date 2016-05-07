@@ -216,8 +216,8 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 
 
 	DMS_StaticMissionTypes =			[							// List of STATIC missions with spawn chances.
-											//["saltflats",1],		//<--Example (already imported by default on Altis)
-											//["slums",1]			//<--Example (already imported by default on Altis)
+											//["saltflats",1],		//<--Example (already imported by default on Altis in map configs)
+											//["slums",1]			//<--Example (already imported by default on Altis in map configs)
 
 											//["sectorB",1]			//<--Example for Taviana
 										];
@@ -441,6 +441,15 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 	DMS_assault_equipment =				[							// Equipment for Assault Class AI (stuff that goes in toolbelt slots)
 											"ItemGPS"
 										];
+	DMS_assault_RandItemCount =			2;							// How many random items to add to the AI's inventory.
+	DMS_assault_RandItems =				[							// The random items that will be added to the AI's inventory.
+											"Exile_Item_Catfood_Cooked",
+											"Exile_Item_Surstromming_Cooked",
+											"Exile_Item_PowerDrink",
+											"Exile_Item_EnergyDrink",
+											"Exile_Item_Vishpirin",
+											"Exile_Item_Bandage"
+										];
 	DMS_assault_helmets	=				[							// Helmets for Assault Class
 											"H_HelmetSpecB_paint1",
 											"H_HelmetIA_camo",
@@ -515,6 +524,15 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 										];
 	DMS_MG_equipment =					[							// Equipment for MG Class AI (stuff that goes in toolbelt slots)
 											"Binocular"
+										];
+	DMS_MG_RandItemCount =				3;							// How many random items to add to the AI's inventory.
+	DMS_MG_RandItems =					[							// The random items that will be added to the AI's inventory.
+											"Exile_Item_EMRE",
+											"Exile_Item_Surstromming_Cooked",
+											"Exile_Item_PowerDrink",
+											"Exile_Item_PlasticBottleCoffee",
+											"Exile_Item_Vishpirin",
+											"Exile_Item_Instadoc"
 										];
 	DMS_MG_helmets =					[							// Helmets for MG Class
 											"H_PilotHelmetHeli_I",
@@ -601,6 +619,13 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 	DMS_sniper_equipment =				[							// Equipment for Sniper Class AI (stuff that goes in toolbelt slots)
 											"Rangefinder",
 											"ItemGPS"
+										];
+	DMS_sniper_RandItemCount =			3;							// How many random items to add to the AI's inventory.
+	DMS_sniper_RandItems =				[							// The random items that will be added to the AI's inventory.
+											"Exile_Item_EMRE",
+											"Exile_Item_PlasticBottleCoffee",
+											"Exile_Item_CanOpener",
+											"Exile_Item_Instadoc"
 										];
 	DMS_sniper_helmets =				[							// Helmets for Sniper Class
 											"H_HelmetSpecB_paint1",
@@ -779,7 +804,9 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 											"Exile_Item_ChristmasTinner_Cooked",
 											"Exile_Item_BBQSandwich_Cooked",
 											"Exile_Item_Catfood_Cooked",
-											"Exile_Item_DogFood_Cooked"
+											"Exile_Item_DogFood_Cooked",
+											"Exile_Item_EMRE",
+											"Exile_Item_EMRE"
 										];
 	DMS_BoxDrinks =						[
 											"Exile_Item_PlasticBottleCoffee",

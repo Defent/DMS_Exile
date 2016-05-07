@@ -11,8 +11,6 @@
 
 */
 
-private["_result","_position","_radius"];
-
 if !(params
 [
 	["_position",[],[[]],[2,3]],
@@ -23,11 +21,8 @@ exitWith
 	diag_log format["DMS ERROR :: Calling DMS_fnc_IsNearWater with invalid parameters: %1",_this];
 	false
 };
-_position 	= _this select 0;
-_radius		= _this select 1;
 
-
-_result 	= false;
+private _result 	= false;
 
 try
 {

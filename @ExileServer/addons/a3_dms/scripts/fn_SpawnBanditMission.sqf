@@ -11,12 +11,7 @@
 	Simply spawns a mission with the given mission type and passes parameters to it. Returns nothing
 */
 
-
-private ["_mission", "_parameters"];
-
-
-
-_mission =
+private _mission =
 [
 	missionNamespace getVariable format
 	[
@@ -31,7 +26,7 @@ if (_mission isEqualTo "no") then
 }
 else
 {
-	_parameters = if ((count _this)>1) then {_this select 1} else {[]};
+	private _parameters = if ((count _this)>1) then {_this select 1} else {[]};
 
 	DMS_MissionCount 			= DMS_MissionCount + 1;
 	DMS_RunningBMissionCount 	= DMS_RunningBMissionCount + 1;

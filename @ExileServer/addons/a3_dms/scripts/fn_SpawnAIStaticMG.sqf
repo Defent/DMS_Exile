@@ -21,9 +21,6 @@
 	Returns an array of static gun objects.
 */
 
-private ["_OK", "_guns", "_pos", "_MGClassInput", "_MGClass", "_gun", "_unit", "_group", "_class", "_difficulty", "_side", "_positions"];
-
-
 if !(params
 [
 	["_positions",[],[[]]],
@@ -37,34 +34,35 @@ exitWith
 	diag_log format ["DMS ERROR :: Calling DMS_fnc_SpawnAIStaticMG with invalid parameters: %1",_this];
 };
 
-_MGClassInput = "random";
-if ((count _this)>5) then
+private _MGClassInput =
+	if ((count _this)>5) then
+	{
+		param [5];
+	}
+	else
+	{
+		"random"
+	};
+
+
+private _guns = _positions apply
 {
-	_MGClassInput = param [5,"random",[""]];
-};
-
-
-_guns = [];
-
-{
-	_pos = _x;
-
-	_MGClass = _MGClassInput;
+	private _MGClass = _MGClassInput;
 	if (_MGClass == "random") then
 	{
 		_MGClass = selectRandom DMS_static_weapons;
 	};
 
-	_gun = createVehicle [_MGClass, [0,0,0], [], 0, "CAN_COLLIDE"];
+	private _gun = createVehicle [_MGClass, [0,0,0], [], 0, "CAN_COLLIDE"];
 	_gun setDir (random 360);
-	_gun setPosATL _pos;
+	_gun setPosATL _x;
 	_gun lock 2;
 
 	_group addVehicle _gun;
 
 	_guns pushBack _gun;
 
-	_unit = [_group,_pos,_class,_difficulty,_side,"Static"] call DMS_fnc_SpawnAISoldier;
+	private _unit = [_group,_x,_class,_difficulty,_side,"Static"] call DMS_fnc_SpawnAISoldier;
 
 	_unit moveInGunner _gun;
 	reload _unit;
@@ -72,9 +70,10 @@ _guns = [];
 
 	if (DMS_DEBUG) then
 	{
-		(format ["SpawnAIStaticMG :: Created unit %1 at %2 as static gunner in %3",_unit,_pos,_gun]) call DMS_fnc_DebugLog;
+		(format ["SpawnAIStaticMG :: Created unit %1 at %2 as static gunner in %3",_unit,_x,_gun]) call DMS_fnc_DebugLog;
 	};
-} forEach _positions;
+	_gun
+};
 
 
 if (DMS_DEBUG) then

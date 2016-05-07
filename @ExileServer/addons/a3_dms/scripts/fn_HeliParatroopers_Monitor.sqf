@@ -70,9 +70,9 @@
 
     if ((_heli distance2D _dropPoint)<200) then
     {
-        private["_groupOwner","_AIGroup"];
+        private ["_groupOwner"];
 
-        _AIGroup = group _heli;
+        private _AIGroup = group _heli;
 
         // Grab and lock locality to control AI if necessary.
         if !(local _AIGroup) then

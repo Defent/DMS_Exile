@@ -15,9 +15,6 @@
 
 */
 
-private ["_origin","_dis","_dir","_npos"];
-
-
 if !(params
 [
 	["_origin","",[objNull,[]],[2,3]],

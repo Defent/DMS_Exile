@@ -13,28 +13,26 @@
 		_type				// Type of AI: "soldier","static","vehicle","heli", etc.
 	] call DMS_fnc_OnKilled;
 */
-
-
-private ["_unit", "_killer", "_side", "_type", "_launcher", "_launcherVar", "_playerObj", "_removeAll", "_rockets", "_grp", "_grpUnits", "_av", "_memCount", "_gunner", "_driver", "_gunnerIsAlive", "_driverIsAlive", "_grp", "_owner", "_start", "_roadKilled", "_veh", "_boom", "_revealAmount", "_muzzle", "_silencer"];
-
-
 if (DMS_DEBUG) then
 {
 	(format ["OnKilled :: Logging AI death with parameters: %1",_this]) call DMS_fnc_DebugLog;
 };
 
-_unit 			= _this select 0;
-_killer 		= _this select 1;
-_side 			= _unit getVariable ["DMS_AI_Side", "bandit"];
-_type 			= _unit getVariable ["DMS_AI_Type", "soldier"];
-_launcher 		= secondaryWeapon _unit;
-_launcherVar	= _unit getVariable ["DMS_AI_Launcher",""];
-_playerObj		= objNull;
+params
+[
+	"_unit",
+	"_killer"
+];
+private _side 			= _unit getVariable ["DMS_AI_Side", "bandit"];
+private _type 			= _unit getVariable ["DMS_AI_Type", "soldier"];
+private _launcher 		= secondaryWeapon _unit;
+private _launcherVar	= _unit getVariable ["DMS_AI_Launcher",""];
+private _playerObj		= objNull;
 
 _unit call ([missionNamespace getVariable [_unit getVariable ["DMS_AI_CustomOnKilledFnc",""],{}]] param [0,{},[{}]]);
 
 // Some of the previously used functions work with non-local argument. Some don't. BIS is annoying
-_removeAll =
+private _removeAll =
 {
 	{_this removeWeaponGlobal _x;} forEach (weapons _this);
 	{_this unlinkItem _x;} forEach (assignedItems _this);
@@ -98,19 +96,19 @@ if(DMS_RemoveNVG) then
 	_unit unlinkItem "NVGoggles";
 };
 
-_grp = group _unit;
-_grpUnits = (units _grp) - [_unit];
+private _grp = group _unit;
+private _grpUnits = (units _grp) - [_unit];
 // Give the AI a new leader if the killed unit was the leader
 if (!(_grpUnits isEqualTo []) && {(leader _grp) isEqualTo _unit}) then
 {
 	_grp selectLeader (selectRandom _grpUnits);
 };
 
-_av = _unit getVariable ["DMS_AssignedVeh",objNull];
+private _av = _unit getVariable ["DMS_AssignedVeh",objNull];
 if (!isNull _av) then
 {
 	// Determine whether or not the vehicle has any active crew remaining.
-	_memCount = {[(alive _x),false] select (_unit isEqualTo _x);} count (crew _av);
+	private _memCount = {[(alive _x),false] select (_unit isEqualTo _x);} count (crew _av);
 
 
 	// Destroy the vehicle and add it to cleanup if there are no active crew members of the vehicle.
@@ -154,13 +152,13 @@ if (!isNull _av) then
 		// Only check for this stuff for ground vehicles that have guns...
 		if ((_av isKindOf "LandVehicle") && {(count (weapons _av))>0}) then
 		{
-			_gunner = gunner _av;
-			_driver = driver _av;
+			private _gunner = gunner _av;
+			private _driver = driver _av;
 
 
 			// The fact that I have to do this in the FUCKING ONKILLED EVENTHANDLER is a testament to why ArmA will make me die prematurely
-			_gunnerIsAlive = alive _gunner;
-			_driverIsAlive = alive _driver;
+			private _gunnerIsAlive = alive _gunner;
+			private _driverIsAlive = alive _driver;
 
 			if (_unit isEqualTo _gunner) then
 			{
@@ -177,11 +175,15 @@ if (!isNull _av) then
 			{
 				[_driver,_av,_killer] spawn
 				{
-					_driver 	= _this select 0;
-					_av 		= _this select 1;
-					_killer 	= _this select 2;
-					_grp 		= group _driver;
-					_owner 		= groupOwner _grp;
+					params
+					[
+						"_driver",
+						"_av",
+						"_killer"
+					];
+
+					private _grp 		= group _driver;
+					private _owner 		= groupOwner _grp;
 
 					_grp setVariable ["DMS_LockLocality",true];
 
@@ -227,7 +229,7 @@ if (!isNull _av) then
 
 					if (_owner!=2) then
 					{
-						_start = time;
+						private _start = time;
 
 						// Controlling AI... yes. I have to do this
 						waitUntil
@@ -269,11 +271,11 @@ if (!isNull _av) then
 	};
 };
 
-_roadKilled = false;
+private _roadKilled = false;
 
 if (isPlayer _killer) then
 {
-	_veh = vehicle _killer;
+	private _veh = vehicle _killer;
 
 	_playerObj = _killer;
 
@@ -293,7 +295,7 @@ if (isPlayer _killer) then
 
 		if (DMS_explode_onRoadkill) then
 		{
-			_boom = createVehicle ["SLAMDirectionalMine_Wire_Ammo", [0,0,100], [], 0, "CAN_COLLIDE"];
+			private _boom = createVehicle ["SLAMDirectionalMine_Wire_Ammo", [0,0,100], [], 0, "CAN_COLLIDE"];
 			_boom setPosATL (getPosATL _playerObj);
 			_boom setDamage 1;
 			if (DMS_DEBUG) then
@@ -316,13 +318,13 @@ if (isPlayer _killer) then
 	// Reveal the killer to the AI units
 	if (DMS_ai_share_info) then
 	{
-		_revealAmount = 4.0;
+		private _revealAmount = 4.0;
 
-		_muzzle = currentMuzzle _playerObj;
+		private _muzzle = currentMuzzle _playerObj;
 
 		if (_muzzle isEqualType "") then
 		{
-			_silencer = _playerObj weaponAccessories _muzzle select 0;
+			private _silencer = _playerObj weaponAccessories _muzzle select 0;
 			if (!isNil "_silencer" && {_silencer != ""}) then
 			{
 				_revealAmount = 2.0;

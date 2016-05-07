@@ -40,24 +40,21 @@
 	A semi-full breakdown can be found in fn_AddStaticMissionToMonitor.sqf
 */
 
-
 {
-	private ["_missionPos", "_completionInfo", "_groupReinforcementsInfo", "_timing", "_inputAIUnits", "_missionObjs", "_msgInfo", "_markers", "_missionSide", "_missionDifficulty", "_missionEvents", "_missionScripts", "_timeStarted", "_failTime", "_buildings", "_vehs", "_crate_info_array", "_mines", "_missionName", "_msgWIN", "_msgLose", "_onSuccessScripts", "_onFailScripts"];
-
 	if !(_x params
 	[
-		["_missionPos", 				[],		[[]],	[2,3]	],
-		["_completionInfo",				[],		[[]]			],
-		["_groupReinforcementsInfo",	[],		[[]]			],
-		["_timing",						[],		[[]],	[2]		],
-		["_inputAIUnits",				[],		[[]]			],
-		["_missionObjs",				[],		[[]],	[4]		],
-		["_msgInfo",					[],		[[]],	[3]		],
-		["_markers",					[],		[[]],	[DMS_MissionMarkerCount]		],
-		["_missionSide",				"",		[""]			],
-		["_missionDifficulty",			"",		[""]			],
-		["_missionEvents",				[],		[[]]			],
-		["_missionScripts",				[],		[[]],	[4]		]
+		"_missionPos",
+		"_completionInfo",
+		"_groupReinforcementsInfo",
+		"_timing",
+		"_inputAIUnits",
+		"_missionObjs",
+		"_msgInfo",
+		"_markers",
+		"_missionSide",
+		"_missionDifficulty",
+		"_missionEvents",
+		"_missionScripts"
 	])
 	then
 	{
@@ -65,19 +62,58 @@
 		diag_log format ["DMS ERROR :: Invalid Index (%1) in DMS_StaticMission_Arr: %2",_forEachIndex,_x];
 	};
 
-	_timeStarted				= _timing select 0;
-	_failTime					= _timing select 1;
-	_buildings					= _missionObjs select 0;
-	_vehs						= _missionObjs select 1;
-	_crate_info_array			= _missionObjs select 2;
-	_mines						= _missionObjs select 3;
-	_missionName				= _msgInfo select 0;
-	_msgWIN						= _msgInfo select 1;
-	_msgLose					= _msgInfo select 2;
-	_onSuccessScripts			= _missionScripts select 0;
-	_onFailScripts				= _missionScripts select 1;
-	_onMonitorStart				= _missionScripts select 2;
-	_onMonitorEnd				= _missionScripts select 3;
+
+	if !(_timing params
+	[
+		"_timeStarted",
+		"_failTime"
+	])
+	exitWith
+	{
+		DMS_StaticMission_Arr deleteAt _forEachIndex;
+		diag_log format ["DMS ERROR :: Invalid _timing (%1) in DMS_StaticMission_Arr: %2",_timing,_x];
+	};
+
+
+	if !(_missionObjs params
+	[
+		"_buildings",
+		"_vehs",
+		"_crate_info_array",
+		"_mines"
+	])
+	exitWith
+	{
+		DMS_StaticMission_Arr deleteAt _forEachIndex;
+		diag_log format ["DMS ERROR :: Invalid _missionObjs (%1) in DMS_StaticMission_Arr: %2",_missionObjs,_x];
+	};
+
+
+	if !(_msgInfo params
+	[
+		"_missionName",
+		"_msgWIN",
+		"_msgLose"
+	])
+	exitWith
+	{
+		DMS_StaticMission_Arr deleteAt _forEachIndex;
+		diag_log format ["DMS ERROR :: Invalid _msgInfo (%1) in DMS_StaticMission_Arr: %2",_msgInfo,_x];
+	};
+
+
+	if !(_missionScripts params
+	[
+		"_onSuccessScripts",
+		"_onFailScripts",
+		"_onMonitorStart",
+		"_onMonitorEnd"
+	])
+	exitWith
+	{
+		DMS_StaticMission_Arr deleteAt _forEachIndex;
+		diag_log format ["DMS ERROR :: Invalid _missionScripts (%1) in DMS_StaticMission_Arr: %2",_missionScripts,_x];
+	};
 
 	try
 	{
@@ -175,8 +211,7 @@
 				_cleanupList pushBack (_x select 0);
 			} forEach _crate_info_array;
 
-			private["_prev"];
-			_prev = DMS_CleanUp_PlayerNearLimit;
+			private _prev = DMS_CleanUp_PlayerNearLimit;
 			DMS_CleanUp_PlayerNearLimit = 0;			// Temporarily set the limit to 0 since we want to delete all the stuff regardless of player presence.
 
 			_cleanupList call DMS_fnc_CleanUp;
@@ -218,10 +253,8 @@
 
 		if (DMS_MarkerText_ShowAICount_Static) then
 		{
-			private ["_dot", "_text"];
-
-			_dot = _markers select 0;
-			_text = missionNamespace getVariable [format ["%1_text",_dot],_missionName];
+			private _dot = _markers select 0;
+			private _text = missionNamespace getVariable [format ["%1_text",_dot],_missionName];
 
 			if (DMS_MarkerText_ShowMissionPrefix) then
 			{

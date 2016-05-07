@@ -14,10 +14,6 @@
 	Returns nothing
 */
 
-
-private ["_missionName", "_messageInfo", "_titleColor", "_message"];
-
-
 if !(params
 [
 	["_missionName","",[""]],
@@ -47,8 +43,6 @@ if !(_message isEqualType "") then
 if (_message isEqualTo "") exitWith {};
 
 {
-	private "_args";
-
 	switch (toLower _x) do
 	{
 		case "systemchatrequest":

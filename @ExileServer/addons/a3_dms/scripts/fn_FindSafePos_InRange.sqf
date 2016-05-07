@@ -19,8 +19,6 @@
     Returns a position.
 */
 
-private ["_centerPos", "_distance", "_posParameters", "_original_x", "_original_y", "_original_Blacklist", "_center_x", "_center_y", "_usePresetOriginal", "_pos"];
-
 if !(params
 [
     ["_centerPos", 0, [[]], [2,3]],
@@ -35,13 +33,13 @@ exitWith
 };
 
 // Save the original values
-_original_x = DMS_MinMax_X_Coords;
-_original_y = DMS_MinMax_Y_Coords;
-_original_Blacklist = DMS_findSafePosBlacklist;
+private _original_x = DMS_MinMax_X_Coords;
+private _original_y = DMS_MinMax_Y_Coords;
+private _original_Blacklist = DMS_findSafePosBlacklist;
 
 // Get the center values
-_center_x = _centerPos select 0;
-_center_y = _centerPos select 1;
+private _center_x = _centerPos select 0;
+private _center_y = _centerPos select 1;
 
 // Set the restrictions
 DMS_MinMax_X_Coords = [_center_x - _distanceMax, _center_x + _distanceMax];
@@ -62,11 +60,11 @@ DMS_findSafePosBlacklist =
         []
     };
 
-_usePresetOriginal = DMS_UsePredefinedMissionLocations;
+private _usePresetOriginal = DMS_UsePredefinedMissionLocations;
 DMS_UsePredefinedMissionLocations = false;
 
 // NOW we get the position (hopefully)
-_pos = _posParameters call DMS_fnc_findSafePos;
+private _pos = _posParameters call DMS_fnc_findSafePos;
 
 // Reset the original values
 DMS_MinMax_X_Coords = _original_x;

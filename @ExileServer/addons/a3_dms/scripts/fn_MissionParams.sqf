@@ -47,10 +47,10 @@
 	]
 */
 
-private ["_parsedParams", "_extraParams", "_missionPosition", "_OK", "_posInfo", "_forceSpawn", "_findSafePosParams"];
+private ["_missionPosition"];
 
 
-_extraParams = [];
+private _extraParams = [];
 
 if (isNil "_this") then
 {
@@ -77,7 +77,7 @@ else
 		then
 		{
 			_missionPosition = _posInfo select 0;
-			_forceSpawn = if ((count _posInfo)>1) then {_posInfo select 1} else {false};
+			private _forceSpawn = if ((count _posInfo)>1) then {_posInfo select 1} else {false};
 
 			if (!(_missionPosition isEqualType []) || {(count _missionPosition)<2}) then
 			{
@@ -131,7 +131,7 @@ else
 	};
 };
 
-_parsedParams =
+private _parsedParams =
 [
 	_missionPosition,
 	_extraParams
