@@ -253,7 +253,8 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 
 /* AI Settings */
 	DMS_AI_Classname					= "O_recon_F";				// Since some of you wanted this...
-
+	DMS_AI_UseRealNames				= true;						// true if you want Arma assigned real names, false if you want random DMS assigned unit numbers
+	
 	DMS_Show_Kill_Poptabs_Notification	= true;						// Whether or not to show the poptabs gained/lost message on the player's screen when killing an AI. (It will still change the player's money, it just won't show the "Money Received" notification)
 	DMS_Show_Kill_Respect_Notification	= true;						// Whether or not to show the "Frag Message" on the player's screen when killing an AI. (It will still change the player's respect, it just won't show the "AI Killed" frag message)
 	DMS_Show_Kill_Rank_Notification		= true;
