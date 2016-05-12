@@ -97,7 +97,7 @@ if ((!isNull _playerObj) && {(_playerUID != "") && {_playerObj isKindOf "Exile_U
 			{
 				// Change message for players when they're actually LOSING poptabs
 				_msgType = "notificationRequest";
-				_msgParams = ["Whoops",[format ["Lost %1 poptabs from running over a %2 AI!",abs _moneyChange,_AIType]]];
+				_msgParams = ["Whoops",[format ["Lost %1 poptabs for killing %2 AI!",abs _moneyChange,_AIType]]]; //changed wording, negative result is not necessarily a roadkill
 
 				// With the error message the money value won't be updated on the client, so I just directly PVC the value.
 				ExileClientPlayerMoney = _playerMoney;

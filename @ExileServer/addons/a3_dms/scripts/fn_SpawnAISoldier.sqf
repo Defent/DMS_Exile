@@ -129,7 +129,7 @@ else
 };
 
 // Unit name
-_unit setName format["[DMS %1 %2 %3]",toUpper _side,_class,floor(random 1000)];
+//_unit setName format["[DMS %1 %2 %3]",toUpper _side,_class,floor(random 1000)];
 
 if (_customGearSet isEqualTo []) then
 {
