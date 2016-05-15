@@ -155,8 +155,12 @@ ___
 
 ### Test Branch:
 #### May 14, 2016 (2:00 PM CST-America):
+* **NEW CONFIG VALUES:**
+
+		DMS_AI_UseRealNames
 * More Micro-optimizations.
 * Fixed a lot of various errors from the last test branch update.
+* Integrated Exile Occupation by second coming :)
 
 
 #### May 6, 2016 (10:45 PM CST-America):

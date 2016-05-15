@@ -46,7 +46,7 @@ if (diag_fps >= DMS_MinServerFPS && {(count allPlayers) >= DMS_MinPlayerCount}) 
 
 		if (_availableMissions isEqualTo []) exitWith
 		{
-			DMS_StaticMissionLastStar
+			DMS_StaticMissionLastStart = _time;
 			if (DMS_DEBUG) then
 			{
 				(format ["SelectMission :: No available missions! Running missions: %1", DMS_RunningStaticMissions]) call DMS_fnc_DebugLog;

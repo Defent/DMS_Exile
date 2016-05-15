@@ -128,8 +128,11 @@ else
 	};
 };
 
-// Unit name
-_unit setName format["[DMS %1 %2 %3]",toUpper _side,_class,floor(random 1000)];
+// Set random DMS unit names if you don't want Arma assigned (real names)
+if !(DMS_AI_UseRealNames) then
+{
+	_unit setName format["[DMS %1 %2 %3]",toUpper _side,_class,floor(random 1000)];
+};
 
 if (_customGearSet isEqualTo []) then
 {

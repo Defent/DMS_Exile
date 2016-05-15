@@ -14,7 +14,7 @@ DMS_Use_Map_Config = true;	// Whether or not to use config overwrites specific t
 	For any questions regarding map-specific configs, please leave a reply in the DMS thread on the Exile forums.
 */
 
-DMS_Enable_RankChange = false; // Whether or not to use Rank Changes.
+DMS_Enable_RankChange = false; // Whether or not to use Rank Changes. (Required 'true' if using Occupation)
 /*
 	I am sharing this upgrade to all. If you utilize GR8 Humanity (fully compatible) or a custom version of a ranking system(simple variable changes), this will allow your players to score +/- for Bandit and Hero kills as well as a custom Survivor Faction added to DMS as well. You can still utilize the HERO / BANDIT / SURVIVOR respect and poptab settings for gameplay :) ENJOY! DONKEYPUNCH.INFO!
 */
@@ -208,26 +208,26 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 										];
 
 
-	DMS_StaticMissionTypes =			[							// List of STATIC missions with spawn chances.
-											//["saltflats",1],		//<--Example (already imported by default on Altis in map configs)
-											//["slums",1]			//<--Example (already imported by default on Altis in map configs)
-
+	DMS_StaticMissionTypes =			[								// List of STATIC missions with spawn chances.
+											//["saltflats",1]			//<--Example (already imported by default on Altis in map configs)
+											//["slums",1]				//<--Example (already imported by default on Altis in map configs)
+											//["occupation",1]		//<--Example
 											//["sectorB",1]			//<--Example for Taviana
 										];
 
-	DMS_BasesToImportOnServerStart = 	[							// List of static bases to import on server startup (spawned post-init). This will reduce the amount of work the server has to do when it actually spawns static missions, and players won't be surprised when a base suddenly pops up. You can also include any other M3E-exported bases to spawn here.
+	DMS_BasesToImportOnServerStart = 	[								// List of static bases to import on server startup (spawned post-init). This will reduce the amount of work the server has to do when it actually spawns static missions, and players won't be surprised when a base suddenly pops up. You can also include any other M3E-exported bases to spawn here.
 											//"saltflatsbase",		//<--Example (already imported by default on Altis)
-											//"slums_objects"		//<--Example (already imported by default on Altis)
+											//"slums_objects"			//<--Example (already imported by default on Altis)
 										];
 
 	DMS_BanditMissionsOnServerStart =	[
 											//"construction"		//<-- Example
 										];
 
-	DMS_StaticMissionsOnServerStart =	[							// List of STATIC missions with spawn chances.
-											//"saltflats",			//<--Example
-											//"slums				//<--Example
-
+	DMS_StaticMissionsOnServerStart =	[								// List of STATIC missions with spawn chances.
+											//"saltflats"				//<--Example
+											//"slums"				//<--Example
+											//"occupation"			//<--Example
 											//"sectorB"				//<--Example for Taviana
 										];
 
@@ -246,6 +246,7 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 
 /* AI Settings */
 	DMS_AI_Classname					= "O_recon_F";				// Since some of you wanted this...
+	DMS_AI_UseRealNames					= true;						// true if you want Arma assigned real names, false if you want random DMS assigned unit numbers
 
 	DMS_Show_Kill_Poptabs_Notification	= true;						// Whether or not to show the poptabs gained/lost message on the player's screen when killing an AI. (It will still change the player's money, it just won't show the "Money Received" notification)
 	DMS_Show_Kill_Respect_Notification	= true;						// Whether or not to show the "Frag Message" on the player's screen when killing an AI. (It will still change the player's respect, it just won't show the "AI Killed" frag message)
