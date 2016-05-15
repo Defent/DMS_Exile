@@ -48,6 +48,7 @@ try
 		DMS_MissionCount = DMS_MissionCount - 1;
 		// This will cause mission spawning to run in scheduled, but that should be a fairly minor issue.
 		[60, DMS_fnc_SpawnStaticMission, [_missionType], false] call ExileServer_system_thread_addTask;
+
 		if (DMS_DEBUG) then
 		{
 			(format ["SpawnStaticMission :: Mission ""%1"" requested delay",_missionType]) call DMS_fnc_DebugLog;
@@ -57,7 +58,6 @@ try
 	DMS_StaticMissionDelay = DMS_TimeBetweenStaticMissions call DMS_fnc_SelectRandomVal;
 	DMS_StaticMissionLastStart = diag_tickTime;
 	DMS_RunningStaticMissions pushBack _missionType;
-
 
 	if (DMS_DEBUG) then
 	{

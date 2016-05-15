@@ -545,7 +545,7 @@ if (!_reinforcementsDepleted && {(diag_tickTime-_lastUpdated)>_updateDelay}) the
 
 	if ((!isNil "_unitsToSpawn") && {_unitsToSpawn>0}) then
 	{
-		private ["_spawnPos"];
+		private _spawnPos = [];
 
 		if (_maxReinforcementUnits>0) then
 		{
@@ -583,7 +583,7 @@ if (!_reinforcementsDepleted && {(diag_tickTime-_lastUpdated)>_updateDelay}) the
 			// Add extra spawning locations if there are not enough.
 			for "_i" from 0 to (_unitsToSpawn-_spawningLocations_count-1) do
 			{
-				_spawningLocations pushBack (_spawningLocations select floor(random(_spawningLocations_count+_i)));
+				_spawningLocations pushBack (selectRandom _spawningLocations);
 			};
 
 			// Now to spawn the AI...

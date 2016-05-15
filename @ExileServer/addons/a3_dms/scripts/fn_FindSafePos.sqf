@@ -20,8 +20,6 @@
 */
 #define MAX_ATTEMPTS 5000
 
-private ["_pos", "_presetLocs", "_attempts"];
-
 params
 [
 	["_nearestObjectMinDistance",	25,							[0] ],
@@ -45,6 +43,7 @@ DMS_DebugMarkers = [];
 
 private _isValidSpot = false;
 
+private _presetLocs = [];
 private _presetLocsLength = 0;
 
 if (DMS_UsePredefinedMissionLocations) then
@@ -55,6 +54,8 @@ if (DMS_UsePredefinedMissionLocations) then
 };
 
 
+private _pos = [];
+
 for "_attempts" from 1 to MAX_ATTEMPTS do
 {
 	_pos =
@@ -64,7 +65,7 @@ for "_attempts" from 1 to MAX_ATTEMPTS do
 		}
 		else
 		{
-			[DMS_MinMax_X_Coords call DMS_fnc_SelectRandomVal,DMS_MinMax_Y_Coords call DMS_fnc_SelectRandomVal] isFlatEmpty [_nearestObjectMinDistance, 0, 9999, 1, 0, _waterSpawn, objNull]
+			[DMS_MinMax_X_Coords call DMS_fnc_SelectRandomVal,DMS_MinMax_Y_Coords call DMS_fnc_SelectRandomVal] isFlatEmpty [_nearestObjectMinDistance, 0, 9999, 1, 0, -1, objNull]
 		};
 
 	/*
@@ -97,7 +98,7 @@ for "_attempts" from 1 to MAX_ATTEMPTS do
 	if (_isValidSpot) exitWith {};
 };
 
-if (_attempts isEqualTo MAX_ATTEMPTS) exitWith
+if !(_isValidSpot) exitWith
 {
 	diag_log format["DMS ERROR :: Number of attempts in DMS_fnc_findSafePos (%1) reached maximum number of attempts!",MAX_ATTEMPTS];
 };

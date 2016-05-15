@@ -21,9 +21,6 @@
     Returns the index of the paratrooper info in "DMS_HeliParatrooper_Arr", -1 on error.
 */
 
-private ["_pilot", "_paratrooperCount", "_unit", "_cargoIndex"];
-
-
 if !(params
 [
     ["_AIGroup", 0, [grpNull]],
@@ -114,7 +111,7 @@ private _units = (fullCrew [_heli, "", true]) apply
             _unit = [_AIGroup,_spawnPos,_class,_difficulty,_side,"Vehicle"] call DMS_fnc_SpawnAISoldier;
             _unit moveInDriver _heli;
             _unit setVariable ["DMS_AssignedVeh",_heli];
-            _pilot = _unit;
+            _unit setDestination [_dropPoint, "VEHICLE PLANNED", true];
         };
 
         case "commander";
@@ -155,7 +152,6 @@ private _units = (fullCrew [_heli, "", true]) apply
 
 
 // Set the heli pilot's behavior.
-_pilot setDestination [_dropPoint, "VEHICLE PLANNED", true];
 _heli flyInHeight DMS_RHeli_Height;
 
 

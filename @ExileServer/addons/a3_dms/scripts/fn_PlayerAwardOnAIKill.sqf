@@ -83,7 +83,7 @@ if ((!isNull _playerObj) && {(_playerUID != "") && {_playerObj isKindOf "Exile_U
 
 		if (_moneyChange!=0) then
 		{
-			private ["_distance"];
+			private _distance = [];
 
 			// Set client's money
 			// I also make sure that they don't get negative poptabs
@@ -202,7 +202,7 @@ if ((!isNull _playerObj) && {(_playerUID != "") && {_playerObj isKindOf "Exile_U
 					"%1 killed %2 from %3 meters away and received %4 poptabs, and %5 respect.",
 					name _playerObj,
 					_unitName,
-					if !(isNil "_distance") then {_distance} else {floor(_unit distance _playerObj)},
+					if (_distance isEqualTo []) then {floor(_unit distance _playerObj)} else {_distance},
 					_moneyChange,
 					_repChange
 				];

@@ -6,13 +6,6 @@
 */
 
 
-// Enables debug logging in DMS functions.
-// Logs will be written in the RPT, and if you have infiSTAR's "ARMA_LOG" DLL loaded, it will also produce logs in the server directory.
-// If you have mARMA by maca134, DMS will also utilize mARMA logs.
-// This will produce A LOT of logs, so make sure you leave it to false unless you know what you're doing.
-DMS_DEBUG = false;
-
-
 
 DMS_Use_Map_Config = true;	// Whether or not to use config overwrites specific to the map.
 /*
@@ -240,7 +233,7 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 
 
 
-	DMS_findSafePosBlacklist =			[							// For BIS_fnc_findSafePos position blacklist info refer to: http://www.exilemod.com/topic/61-dms-defents-mission-system/?page=18#comment-31190
+	DMS_findSafePosBlacklist =			[							// For position blacklist info refer to: http://www.exilemod.com/topic/61-dms-defents-mission-system/?do=findComment&comment=31190
 											// An example is given in the altis_config.sqf (it blacklists the salt flats).
 											/*
 											// Blacklists most of the Northern Taviana Volcano

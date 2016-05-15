@@ -37,7 +37,7 @@ exitWith
 private _MGClassInput =
 	if ((count _this)>5) then
 	{
-		param [5];
+		_this select 5
 	}
 	else
 	{
@@ -59,8 +59,6 @@ private _guns = _positions apply
 	_gun lock 2;
 
 	_group addVehicle _gun;
-
-	_guns pushBack _gun;
 
 	private _unit = [_group,_x,_class,_difficulty,_side,"Static"] call DMS_fnc_SpawnAISoldier;
 

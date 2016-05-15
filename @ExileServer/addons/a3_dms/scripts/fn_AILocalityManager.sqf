@@ -21,8 +21,9 @@ if (!DMS_ai_offload_to_client) exitWith {};
 
 			private _groupOwner = groupOwner _group;
 			private _ownerObj = objNull;
+			private _isLocal = local _group;
 
-			if !(local _group) then								// Only check for the group owner in players if it doesn't belong to the server.
+			if !(_isLocal) then								// Only check for the group owner in players if it doesn't belong to the server.
 			{
 				{
 					if (_groupOwner isEqualTo (owner _x)) exitWith
@@ -33,7 +34,7 @@ if (!DMS_ai_offload_to_client) exitWith {};
 			};
 
 			// If the owner doesn't exist or is too far away...				Attempt to set a new player owner, and if none are found...	and if the group doesn't belong to the server...
-			if (((isNull _ownerObj) || {(_ownerObj distance2D _leader)>3500}) && {!([_group,_leader] call DMS_fnc_SetAILocality)} && {!(local _group)}) then
+			if (((isNull _ownerObj) || {(_ownerObj distance2D _leader)>3500}) && {!([_group,_leader] call DMS_fnc_SetAILocality)} && {!_isLocal}) then
 			{
 				// Reset locality to the server
 				_group setGroupOwner 2;

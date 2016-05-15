@@ -70,7 +70,7 @@
 
     if ((_heli distance2D _dropPoint)<200) then
     {
-        private ["_groupOwner"];
+        private _groupOwner = [];
 
         private _AIGroup = group _heli;
 
@@ -89,8 +89,7 @@
             {
                 /*
                 moveOut _unit;
-                private ["_parachute", "_dir"];
-                _parachute = createVehicle ["Steerable_Parachute_F", (getPosATL _unit), [], 0, "CAN_COLLIDE"];
+                private _parachute = createVehicle ["Steerable_Parachute_F", (getPosATL _unit), [], 0, "CAN_COLLIDE"];
                 _parachute setDir (getDir _unit);
                 _parachute enableSimulationGlobal true;
 
@@ -149,7 +148,7 @@
 
 
         // Revert and unlock locality if necessary.
-        if !(isNil "_groupOwner") then
+        if !(_groupOwner isEqualTo []) then
         {
             _AIGroup setGroupOwner _groupOwner;
             _AIGroup setVariable ["DMS_LockLocality", false];

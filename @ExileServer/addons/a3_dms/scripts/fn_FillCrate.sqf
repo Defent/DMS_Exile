@@ -114,46 +114,52 @@ if (_crate getVariable ["DMS_CrateEnableRope",DMS_EnableBoxMoving]) then
 
 if ((_lootValues isEqualType []) && {!((_lootValues select 1) isEqualType {})}) then
 {
-	private ["_wepCount", "_weps", "_itemCount", "_items", "_backpackCount", "_backpacks"];
-
 	// Weapons
-	if ((_lootValues select 0) isEqualType []) then
-	{
-		_wepCount	= (_lootValues select 0) select 0;
-		_weps	= (_lootValues select 0) select 1;
-	}
-	else
-	{
-		_wepCount	= _lootValues select 0;
-		_weps	= DMS_boxWeapons;
-	};
+	private _wepValues = _lootValues select 0;
+	private _wepCount = 0;
+	private _weps =
+		if (_wepValues isEqualType []) then
+		{
+			_wepCount	= _wepValues select 0;
+			_wepValues select 1
+		}
+		else
+		{
+			_wepCount	= _wepValues;
+			DMS_boxWeapons
+		};
 
 
 	// Items
-	if ((_lootValues select 1) isEqualType []) then
-	{
-		_itemCount	= (_lootValues select 1) select 0;
-		_items	= (_lootValues select 1) select 1;
-	}
-	else
-	{
-		_itemCount	= _lootValues select 1;
-		_items	= DMS_boxItems;
-	};
+	private _itemValues = _lootValues select 1;
+	private _itemCount = 0;
+	private _items =
+		if (_itemValues isEqualType []) then
+		{
+			_itemCount	= _itemValues select 0;
+			_itemValues select 1
+		}
+		else
+		{
+			_itemCount	= _itemValues;
+			DMS_boxItems
+		};
 
 
 	// Backpacks
-	if ((_lootValues select 2) isEqualType []) then
-	{
-		_backpackCount	= (_lootValues select 2) select 0;
-		_backpacks = (_lootValues select 2) select 1;
-	}
-	else
-	{
-		_backpackCount = _lootValues select 2;
-		_backpacks = DMS_boxBackpacks;
-	};
-
+	private _backpackValues = _lootValues select 2;
+	private _backpackCount = 0;
+	private _backpacks =
+		if ((_backpackValues) isEqualType []) then
+		{
+			_backpackCount	= _backpackValues select 0;
+			_backpackValues select 1
+		}
+		else
+		{
+			_backpackCount = _backpackValues;
+			DMS_boxBackpacks
+		};
 
 	if (DMS_DEBUG) then
 	{
@@ -259,7 +265,6 @@ else
 		};
 		_crate addBackpackCargoGlobal _x;
 	} forEach _backpacks;
-
 
 	if (DMS_DEBUG) then
 	{

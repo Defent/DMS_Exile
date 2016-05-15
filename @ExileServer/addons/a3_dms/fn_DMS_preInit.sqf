@@ -4,7 +4,13 @@
 */
 #define CALLFILE(FILE) call compile preprocessFileLineNumbers FILE;
 
-DMS_HC_Object = objNull;
+// Enables debug logging in DMS functions. !!!NOTE:!!! You must uncomment the line above if you want DMS to even check whether or not debug mode is enabled!
+// Logs will be written in the RPT, and if you have infiSTAR's "ARMA_LOG" DLL loaded, it will also produce logs in the server directory.
+// If you have mARMA by maca134, DMS will also utilize mARMA logs.
+// This will produce A LOT of logs, so make sure you leave it to false unless you know what you're doing.
+DMS_DEBUG = false;
+
+
 
 DMS_CleanUpList	= [];
 
@@ -41,6 +47,9 @@ DMS_MagRange = DMS_MaximumMagCount - DMS_MinimumMagCount;
 M3E_fnc_getCenter = DMS_fnc_GetCenter;
 
 M3E_fnc_subArr = DMS_fnc_SubArr;
+
+// Because I fucked up the name on first implementation and don't want to mess anybody up who didn't realize to change every occurence of "DMS_MaxSurfaceNormal" to "DMS_MinSurfaceNormal".
+DMS_MaxSurfaceNormal = DMS_MinSurfaceNormal;
 
 
 DMS_AttemptsUntilThrottle = DMS_AttemptsUntilThrottle + 1;

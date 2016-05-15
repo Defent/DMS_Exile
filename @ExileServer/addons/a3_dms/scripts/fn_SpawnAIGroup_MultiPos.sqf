@@ -23,9 +23,6 @@
 	Returns AI Group
 */
 
-private ["_launcherType"];
-
-
 if !(params
 [
 	["_positions","_positions ERROR",[[]]],
@@ -59,6 +56,9 @@ if (DMS_DEBUG) then
 {
 	(format["SpawnAIGroup_MultiPos :: Spawning %1 %2 %3 AI at positions %4 with %5 difficulty.",_count,_class,_side,_positions,_difficulty]) call DMS_fnc_DebugLog;
 };
+
+
+private _launcherType = "";
 
 // if soldier have AT/AA weapons
 if (_class isEqualType []) then
@@ -97,9 +97,9 @@ for "_i" from 1 to _count do
 };
 
 // An AI will definitely spawn with a launcher if you define type
-if ((!isNil "_launcherType") || {DMS_ai_use_launchers && {DMS_ai_launchers_per_group>0}}) then
+if ((DMS_ai_use_launchers && {DMS_ai_launchers_per_group>0}) || {!_launcherType isEqualTo ""}) then
 {
-	if (isNil "_launcherType") then
+	if (_launcherType isEqualTo "") then
 	{
 		_launcherType = "AT";
 	};

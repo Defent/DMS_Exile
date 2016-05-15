@@ -122,6 +122,7 @@ ___
 - [Valthos from The Altis Project](https://www.thealtisproject.co.uk/)
 - [Flowrider from Optimum Gaming](http://www.optimum-multigaming.com/)
 - [CEN from ATD Gaming](http://atdgaming.com/)
+- [second coming from ExileYorkshire](http://exileyorkshire.co.uk/)
 
 ___
 
@@ -153,6 +154,10 @@ ___
 # Changelog:
 
 ### Test Branch:
+#### May 14, 2016 (2:00 PM CST-America):
+* More Micro-optimizations.
+* Fixed a lot of various errors from the last test branch update.
+
 
 #### May 6, 2016 (10:45 PM CST-America):
 * **NEW CONFIG VALUES:**

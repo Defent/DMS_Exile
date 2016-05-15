@@ -50,12 +50,12 @@ moveOut _unit;
 _unit removeAllEventHandlers "HandleDamage";
 
 // Remove gear according to configs
-if (DMS_clear_AI_body && {(random 100) <= DMS_clear_AI_body_chance}) then
+if ((_unit getVariable ["DMS_clear_AI_body",DMS_clear_AI_body]) && {(random 100) <= (_unit getVariable ["DMS_clear_AI_body_chance",DMS_clear_AI_body_chance])}) then
 {
 	_unit call _removeAll;
 };
 
-if (DMS_ai_remove_launchers && {(_launcherVar != "") || {_launcher != ""}}) then
+if ((_unit getVariable ["DMS_ai_remove_launchers",DMS_ai_remove_launchers]) && {(_launcherVar != "") || {_launcher != ""}}) then
 {
 	// Because arma is stupid sometimes
 	if (_launcher isEqualTo "") then
@@ -91,7 +91,7 @@ if (DMS_ai_remove_launchers && {(_launcherVar != "") || {_launcher != ""}}) then
 	} forEach (magazines _unit);
 };
 
-if(DMS_RemoveNVG) then
+if (_unit getVariable ["DMS_RemoveNVG",DMS_RemoveNVG]) then
 {
 	_unit unlinkItem "NVGoggles";
 };
@@ -188,9 +188,9 @@ if (!isNull _av) then
 					_grp setVariable ["DMS_LockLocality",true];
 
 					// The AI has to be local in order for these commands to work, so I reset locality, just because it's really difficult to deal with otherwise
-					if (_owner!=2) then
+					if !(_owner in [2,0]) then
 					{
-						diag_log format ["Temporarily setting owner of %1 to server from %2. Success: %3",_grp,_owner,_grp setGroupOwner 2];
+						diag_log format ["DMS Seat Switcher :: Temporarily setting owner of %1 to server from %2. Success: %3",_grp,_owner,_grp setGroupOwner 2];
 					};
 
 					sleep 5+(random 3); // 5 to 8 seconds delay after gunner death
@@ -227,7 +227,7 @@ if (!isNull _av) then
 						(format["OnKilled :: Switched driver of AI Vehicle (%1) to gunner.",typeOf _av]) call DMS_fnc_DebugLog;
 					};
 
-					if (_owner!=2) then
+					if !(_owner in [2,0]) then
 					{
 						private _start = time;
 
@@ -261,7 +261,7 @@ if (!isNull _av) then
 
 						sleep 15;
 
-						diag_log format ["Resetting ownership of %1 to %2. Success: %3",_grp,_owner,_grp setGroupOwner _owner];
+						diag_log format ["DMS Seat Switcher :: Resetting ownership of %1 to %2. Success: %3",_grp,_owner,_grp setGroupOwner _owner];
 					};
 
 					_grp setVariable ["DMS_LockLocality",false];
@@ -293,7 +293,7 @@ if (isPlayer _killer) then
 
 		_roadKilled = true;
 
-		if (DMS_explode_onRoadkill) then
+		if (_unit getVariable ["DMS_explode_onRoadkill",DMS_explode_onRoadkill]) then
 		{
 			private _boom = createVehicle ["SLAMDirectionalMine_Wire_Ammo", [0,0,100], [], 0, "CAN_COLLIDE"];
 			_boom setPosATL (getPosATL _playerObj);
@@ -306,7 +306,7 @@ if (isPlayer _killer) then
 
 
 		// Remove gear from roadkills if configured to do so
-		if (DMS_remove_roadkill && {(random 100) <= DMS_remove_roadkill_chance}) then
+		if ((_unit getVariable ["DMS_remove_roadkill",DMS_remove_roadkill]) && {(random 100) <= (_unit getVariable ["DMS_remove_roadkill_chance",DMS_remove_roadkill_chance])}) then
 		{
 			_unit call _removeAll;
 		};
@@ -316,7 +316,7 @@ if (isPlayer _killer) then
 
 
 	// Reveal the killer to the AI units
-	if (DMS_ai_share_info) then
+	if (_unit getVariable ["DMS_ai_share_info",DMS_ai_share_info]) then
 	{
 		private _revealAmount = 4.0;
 
@@ -333,7 +333,7 @@ if (isPlayer _killer) then
 
 
 		{
-			if ((alive _x) && {!(isPlayer _x) && {(_x distance2D _unit) <= DMS_ai_share_info_distance}}) then
+			if ((alive _x) && {!(isPlayer _x) && {(_x distance2D _unit) <= (_unit getVariable ["DMS_ai_share_info_distance",DMS_ai_share_info_distance])}}) then
 			{
 				_x reveal [_killer, _revealAmount max (_x knowsAbout _playerObj)];
 			};

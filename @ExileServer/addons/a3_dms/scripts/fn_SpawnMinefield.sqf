@@ -65,10 +65,8 @@ if (DMS_SpawnMinesAroundMissions) then
 
 	for "_i" from 1 to _mineCount do
 	{
-		private ["_minePos", "_mine"];
-
-		_minePos = _centerPos getPos [random _radius,random 360];
-		_mine = createMine ["ATMine", [0,0,0], [], 0];
+		private _minePos = _centerPos getPos [random _radius,random 360];
+		private _mine = createMine ["ATMine", [0,0,0], [], 0];
 
 		// Fixes players shooting the mine and causing premature 'splosions
 		if (DMS_BulletProofMines) then

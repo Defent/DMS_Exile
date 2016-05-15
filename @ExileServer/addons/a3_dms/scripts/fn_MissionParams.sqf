@@ -47,8 +47,7 @@
 	]
 */
 
-private ["_missionPosition"];
-
+private _missionPosition = [];
 
 private _extraParams = [];
 
@@ -62,7 +61,7 @@ if (isNil "_this") then
 	// Simply use generated position with default values.
 	_missionPosition =
 	[
-		25,DMS_WaterNearBlacklist,DMS_MaxSurfaceNormal,DMS_SpawnZoneNearBlacklist,DMS_TraderZoneNearBlacklist,DMS_MissionNearBlacklist,DMS_PlayerNearBlacklist,DMS_TerritoryNearBlacklist,DMS_ThrottleBlacklists
+		25,DMS_WaterNearBlacklist,DMS_MinSurfaceNormal,DMS_SpawnZoneNearBlacklist,DMS_TraderZoneNearBlacklist,DMS_MissionNearBlacklist,DMS_PlayerNearBlacklist,DMS_TerritoryNearBlacklist,DMS_ThrottleBlacklists
 	] call DMS_fnc_FindSafePos;
 }
 else
@@ -71,7 +70,7 @@ else
 	{
 		if (params
 		[
-			["_findSafePosParams",[25,DMS_WaterNearBlacklist,DMS_MaxSurfaceNormal,DMS_SpawnZoneNearBlacklist,DMS_TraderZoneNearBlacklist,DMS_MissionNearBlacklist,DMS_PlayerNearBlacklist,DMS_TerritoryNearBlacklist,DMS_ThrottleBlacklists],[[]]],
+			["_findSafePosParams",[25,DMS_WaterNearBlacklist,DMS_MinSurfaceNormal,DMS_SpawnZoneNearBlacklist,DMS_TraderZoneNearBlacklist,DMS_MissionNearBlacklist,DMS_PlayerNearBlacklist,DMS_TerritoryNearBlacklist,DMS_ThrottleBlacklists],[[]]],
 			["_posInfo",[],[[]],[1,2]]
 		])
 		then
@@ -98,7 +97,7 @@ else
 					_missionPosition set [2,0];
 				};
 
-				if (!_forceSpawn && {!([_missionPosition,DMS_WaterNearBlacklist,DMS_MaxSurfaceNormal,DMS_SpawnZoneNearBlacklist,DMS_TraderZoneNearBlacklist,DMS_MissionNearBlacklist,DMS_PlayerNearBlacklist,DMS_TerritoryNearBlacklist] call DMS_fnc_IsValidPosition)}) then
+				if (!_forceSpawn && {!([_missionPosition,DMS_WaterNearBlacklist,DMS_MinSurfaceNormal,DMS_SpawnZoneNearBlacklist,DMS_TraderZoneNearBlacklist,DMS_MissionNearBlacklist,DMS_PlayerNearBlacklist,DMS_TerritoryNearBlacklist] call DMS_fnc_IsValidPosition)}) then
 				{
 					if (DMS_DEBUG) then
 					{
@@ -124,7 +123,7 @@ else
 	{
 		_missionPosition =
 		[
-			25,DMS_WaterNearBlacklist,DMS_MaxSurfaceNormal,DMS_SpawnZoneNearBlacklist,DMS_TraderZoneNearBlacklist,DMS_MissionNearBlacklist,DMS_PlayerNearBlacklist,DMS_TerritoryNearBlacklist,DMS_ThrottleBlacklists
+			25,DMS_WaterNearBlacklist,DMS_MinSurfaceNormal,DMS_SpawnZoneNearBlacklist,DMS_TraderZoneNearBlacklist,DMS_MissionNearBlacklist,DMS_PlayerNearBlacklist,DMS_TerritoryNearBlacklist,DMS_ThrottleBlacklists
 		] call DMS_fnc_FindSafePos;
 
 		_extraParams = _this;
