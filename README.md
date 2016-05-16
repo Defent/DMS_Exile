@@ -155,6 +155,9 @@ ___
 
 ### Test Branch:
 #### May 16, 2016 (11:00 AM CST-America):
+* Fixed an error in fn_SpawnAIGroup (and MultiPos variant)
+
+#### May 16, 2016 (11:00 AM CST-America):
 * Occupation will now print debug logs only if DMS_DEBUG is enabled.
 * Fixed an error with fn_FindSafePos.
 

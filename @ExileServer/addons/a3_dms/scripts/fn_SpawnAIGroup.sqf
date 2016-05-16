@@ -81,7 +81,7 @@ for "_i" from 1 to _count do
 };
 
 // An AI will definitely spawn with a launcher if you define type
-if ((DMS_ai_use_launchers && {DMS_ai_launchers_per_group>0}) || {!_launcherType isEqualTo ""}) then
+if ((DMS_ai_use_launchers && {DMS_ai_launchers_per_group>0}) || {!(_launcherType isEqualTo "")}) then
 {
 	if (_launcherType isEqualTo "") then
 	{
