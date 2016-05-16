@@ -65,7 +65,7 @@ for "_attempts" from 1 to MAX_ATTEMPTS do
 		}
 		else
 		{
-			[DMS_MinMax_X_Coords call DMS_fnc_SelectRandomVal,DMS_MinMax_Y_Coords call DMS_fnc_SelectRandomVal] isFlatEmpty [_nearestObjectMinDistance, 0, 9999, 1, 0, -1, objNull]
+			[DMS_MinMax_X_Coords call DMS_fnc_SelectRandomVal,DMS_MinMax_Y_Coords call DMS_fnc_SelectRandomVal] isFlatEmpty [_nearestObjectMinDistance, 0, -1, 1, -1, false, objNull]
 		};
 
 	/*

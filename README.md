@@ -154,7 +154,11 @@ ___
 # Changelog:
 
 ### Test Branch:
-#### May 14, 2016 (2:00 PM CST-America):
+#### May 16, 2016 (11:00 AM CST-America):
+* Occupation will now print debug logs only if DMS_DEBUG is enabled.
+* Fixed an error with fn_FindSafePos.
+
+#### May 15, 2016 (2:00 PM CST-America):
 * **NEW CONFIG VALUES:**
 
 		DMS_AI_UseRealNames

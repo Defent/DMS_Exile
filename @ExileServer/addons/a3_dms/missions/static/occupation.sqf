@@ -6,7 +6,7 @@
 private["_wp","_wp2","_wp3","_pos","_missionName","_msgStart","_msgWIN","_msgLOSE"];
 
 // For logging purposes
-_num = DMS_MissionCount;
+private _num = DMS_MissionCount;
 
 
 // Set mission side (only "bandit" is supported for now)
@@ -291,5 +291,7 @@ if !(_added) exitWith
 // Notify players
 [_missionName,_msgStart] call DMS_fnc_BroadcastMissionStatus;
 
-
-(format ["MISSION: (%1) :: Mission #%2 started at %3 with %4 AI units and %5 difficulty at time %6",_missionName,_num,_pos,_AICount,_difficulty,_time]) call DMS_fnc_DebugLog;
+if (DMS_DEBUG) then
+{
+	(format ["MISSION: (%1) :: Mission #%2 started at %3 with %4 AI units and %5 difficulty at time %6",_missionName,_num,_pos,_AICount,_difficulty,_time]) call DMS_fnc_DebugLog;
+};
