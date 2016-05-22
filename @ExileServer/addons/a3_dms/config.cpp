@@ -41,6 +41,7 @@ class CfgFunctions
 			class FindSafePos 					{};
 			class FindSafePos_InRange			{};
 			class FindSuppressor 				{};
+			class FreezeManager 				{};
 			class GetAllUnits					{};
 			class GetCenter						{};
 			class GetEmptySeats					{};
