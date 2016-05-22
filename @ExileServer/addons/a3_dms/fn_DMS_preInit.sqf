@@ -56,6 +56,7 @@ DMS_AttemptsUntilThrottle = DMS_AttemptsUntilThrottle + 1;
 
 DMS_HelisToClean = [];
 DMS_HeliParatrooper_Arr = [];
+DMS_FrozenAIGroups = [];
 
 
 // Initialize mission variables...

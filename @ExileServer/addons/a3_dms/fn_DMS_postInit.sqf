@@ -93,6 +93,11 @@ if ((isClass (configFile >> "CfgPatches" >> "Ryanzombies")) && {!DMS_ai_offload_
 	DMS_ai_offload_Only_DMS_AI = true;
 };
 
+if !(DMS_ai_offload_to_client) then
+{
+	DMS_ai_offloadOnUnfreeze = false;
+};
+
 
 
 DMS_A3_AllMarkerColors = [];
@@ -232,6 +237,8 @@ if (DMS_StaticMission) then
 // Add heli paratroopers monitor to the thread system.
 [5, DMS_fnc_HeliParatroopers_Monitor, [], true] call ExileServer_system_thread_addTask;
 
+// Add "freeze" monitor to the thread system.
+[DMS_ai_freezeCheckingDelay, DMS_fnc_FreezeManager, [], true] call ExileServer_system_thread_addTask;
 
 
 

@@ -127,11 +127,6 @@ ___
 ___
 
 # Roadmap:
-#### Continuous Optimization + Improvements.
-* ~~Implement the ability to "freeze" and "unfreeze" AI when there are no players nearby to improve performance. This will be under testing with a few selected server owners/community members. If you would like to participate in testing, please send a PM to [eraser1 on Exile Forums](http://www.exilemod.com/profile/96-eraser1/).~~ _This feature is slated for a future date_
-
-#### AI Heli Paratroopers/air support.
-
 #### Convoy Mission:
 * Regularly update marker position.
 * Implement function(s) for AI pathing.
@@ -146,6 +141,7 @@ ___
 * Spawning in a trader on mission completion ([Trillseeker82](http://www.exilemod.com/topic/61-dms-defents-mission-system/?do=findComment&comment=43932)). This might be done after the next Exile update due to the trader system overhaul :)
 
 #### Full Headless Client Support.
+* AI will still be offloaded to clients (ideally); strictly DMS functions will be handled by the HC.
 
 
 
@@ -154,6 +150,18 @@ ___
 # Changelog:
 
 ### Test Branch:
+#### May 22, 2016 (12:00 AM CST-America):
+* **NEW CONFIG VALUES:**
+		DMS_ai_allowFreezing
+		DMS_ai_freeze_Only_DMS_AI
+		DMS_ai_freezingDistance
+		DMS_ai_unfreezingDistance
+		DMS_ai_offloadOnUnfreeze
+		DMS_ai_freezeCheckingDelay
+* Removed a "Land_Wreck_Heli_Attack_01_F" from saltflats (it creates server threads)
+* Adjusted logic in "AILocalityManager": the variable "DMS_LockLocality" on a group should now be considered even if "DMS_ai_offload_Only_DMS_AI" is set to false.
+* You can now "freeze"/"un-freeze" AI! This has been a long-awaited feature for DMS. Using it should grant major performance benefits when you have lots of AI around the map that are inactive.
+
 #### May 16, 2016 (11:00 AM CST-America):
 * Fixed an error in fn_SpawnAIGroup (and MultiPos variant)
 
@@ -196,6 +204,7 @@ ___
 
 
 
+### Main Branch
 #### April 27, 2016 (6:45 PM CST-America):
 * **NEW CONFIG VALUES**
 
