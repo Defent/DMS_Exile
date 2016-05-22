@@ -66,6 +66,11 @@ private _guns = _positions apply
 	reload _unit;
 	_unit setVariable ["DMS_AssignedVeh",_gun];
 
+	if (_group getVariable ["DMS_isGroupFrozen",false]) then
+	{
+		_unit enableSimulationGlobal false;
+	};
+
 	if (DMS_DEBUG) then
 	{
 		(format ["SpawnAIStaticMG :: Created unit %1 at %2 as static gunner in %3",_unit,_x,_gun]) call DMS_fnc_DebugLog;

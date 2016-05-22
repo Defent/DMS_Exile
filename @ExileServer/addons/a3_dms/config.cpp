@@ -4,7 +4,7 @@ class CfgPatches
 	{
 		units[] = {};
 		weapons[] = {};
-		a3_DMS_version = "May 22, 2016 (TEST)";
+		a3_DMS_version = "May 22, 2016 (2) (TEST)";
 		requiredVersion = 1.36;
 		requiredAddons[] = {"exile_client","exile_server_config"};
 	};
@@ -42,6 +42,7 @@ class CfgFunctions
 			class FindSafePos_InRange			{};
 			class FindSuppressor 				{};
 			class FreezeManager 				{};
+			class FreezeToggle					{};
 			class GetAllUnits					{};
 			class GetCenter						{};
 			class GetEmptySeats					{};

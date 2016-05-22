@@ -65,15 +65,26 @@ _veh lock 2;
 
 _group addVehicle _veh;
 
+private _toFreeze = _group getVariable ["DMS_isGroupFrozen",false];
+
 private _driver = [_group,_spawnPos,_class,_difficulty,_side,"Vehicle"] call DMS_fnc_SpawnAISoldier;
 _driver moveInDriver _veh;
 _driver setVariable ["DMS_AssignedVeh",_veh];
+
+if (_toFreeze) then
+{
+	_driver enableSimulationGlobal false;
+};
 
 private _crewCount =
 {
 	private _unit = [_group,_spawnPos,_class,_difficulty,_side,"Vehicle"] call DMS_fnc_SpawnAISoldier;
 	_unit moveInTurret [_veh, _x];
 	_unit setVariable ["DMS_AssignedVeh",_veh];
+	if (_toFreeze) then
+	{
+		_unit enableSimulationGlobal false;
+	};
 	true
 } count (allTurrets [_veh, true]);
 

@@ -210,7 +210,7 @@ if (_customGearSet isEqualTo []) then
 		if((random 100) <= (missionNamespace getVariable [format["DMS_%1_suppressor_chance",_class],0])) then
 		{
 			private _suppressor = _weapon call DMS_fnc_FindSuppressor;
-			if(_suppressor != "") then
+			if (_suppressor != "") then
 			{
 				_unit addPrimaryWeaponItem _suppressor;
 			};

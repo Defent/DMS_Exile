@@ -138,6 +138,11 @@ _group setFormation "WEDGE";
 
 [_group,_positions select 0,_difficulty,"COMBAT"] call DMS_fnc_SetGroupBehavior;
 
+if (DMS_ai_freezeOnSpawn) then
+{
+	[_group,true] call DMS_fnc_FreezeToggle;
+};
+
 
 diag_log format ["DMS_SpawnAIGroup_MultiPos :: Spawned %1 AI using positions parameter: %2.",_count,_positions];
 

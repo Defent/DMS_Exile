@@ -24,12 +24,12 @@ private _recentlyUnfrozen = [];
         private _leader = leader _x;
         if ([_leader,DMS_ai_unfreezingDistance] call DMS_fnc_IsPlayerNearby) then
         {
-            {_x enableSimulationGlobal true} forEach (units _x);
+            [_x,false] call DMS_fnc_FreezeToggle;
             _recentlyUnfrozen pushBack _x;
 
             if (DMS_ai_offloadOnUnfreeze) then
             {
-                [_group, _leader] call DMS_fnc_SetAILocality;
+                [_x, _leader] call DMS_fnc_SetAILocality;
             };
 
             if (DMS_DEBUG) then
@@ -51,8 +51,12 @@ private _recentlyUnfrozen = [];
 
 		if ((!isNull _leader) && {alive _leader} && {!(isPlayer _leader)} && {!([_leader,DMS_ai_freezingDistance] call DMS_fnc_IsPlayerNearby)}) then
 		{
-            {_x enableSimulationGlobal false} forEach (units _group);
-            DMS_FrozenAIGroups pushBack _group;
+            [_group,true] call DMS_fnc_FreezeToggle;
+
+            if (DMS_DEBUG) then
+            {
+                format["FreezeManager :: Froze AI Group: %1",_group] call DMS_fnc_DebugLog;
+            };
 
             // So that we don't check this group for freezing later on.
             _group setVariable ["DMS_AllowFreezing",false];

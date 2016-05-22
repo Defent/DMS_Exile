@@ -16,7 +16,7 @@ private _weaponName	= getText  (configFile >> "cfgWeapons" >> _weapon >> "displa
 switch (true) do
 {
 	// Zafir accepts no suppressors :(
-	case ((_weapon find "Zafir")>-1) : {""};
+	//case ((_weapon find "Zafir")>-1) : {""};
 
 	case ((_weaponName find "6.5") > -1) :
 	{
@@ -41,4 +41,6 @@ switch (true) do
 	case ((_weaponName find ".338") > -1) : {selectRandom ["muzzle_snds_338_black","muzzle_snds_338_green","muzzle_snds_338_sand"]};
 
 	case ((_weaponName find "9.3 mm") > -1) : {selectRandom ["muzzle_snds_93mmg","muzzle_snds_93mmg_tan"]};
+
+	default	{""};
 };

@@ -150,6 +150,17 @@ ___
 # Changelog:
 
 ### Test Branch:
+#### May 22, 2016 (3:15 PM CST-America):
+* **NEW CONFIG VALUES:**
+		DMS_ai_freezeOnSpawn
+* Added the ability to freeze AI groups immediately upon spawn.
+* Units spawned to a group that has been frozen should now also be frozen.
+* Fixed an issue where "FindSuppressor" would return a boolean instead of empty string.
+* Fixed an issue with undefined variable when "DMS_ai_offloadOnUnfreeze" was set to true.
+* Added debug message when a group is frozen.
+* Created a new function "DMS_fnc_FreezeToggle" that actually handles freezing/unfreezing.
+* DMS will now apply a variable "DMS_isGroupFrozen" to groups that are frozen.
+
 #### May 22, 2016 (12:00 AM CST-America):
 * **NEW CONFIG VALUES:**
 		DMS_ai_allowFreezing

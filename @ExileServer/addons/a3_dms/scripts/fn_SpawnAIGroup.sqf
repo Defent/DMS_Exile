@@ -122,6 +122,11 @@ _group setFormation "WEDGE";
 
 [_group,_pos,_difficulty,"COMBAT"] call DMS_fnc_SetGroupBehavior;
 
+if (DMS_ai_freezeOnSpawn) then
+{
+	[_group,true] call DMS_fnc_FreezeToggle;
+};
+
 
 diag_log format ["DMS_SpawnAIGroup :: Spawned %1 AI at %2.",_count,_pos];
 
