@@ -15,7 +15,7 @@
 
 	Returns AI Group
 */
-private ["_OK", "_pos", "_count", "_difficulty", "_class", "_group", "_side", "_customGearSet", "_launcherType", "_launcher", "_unit", "_rocket"];
+private ["_OK", "_pos", "_count", "_difficulty", "_class", "_group", "_side", "_customGearSet", "_launcherType", "_launcher", "_unit", "_rocket", "_aiLauncherType"];
 
 
 if !(params
@@ -82,20 +82,22 @@ for "_i" from 1 to _count do
 // An AI will definitely spawn with a launcher if you define type
 if ((!isNil "_launcherType") || {DMS_ai_use_launchers && {DMS_ai_launchers_per_group>0}}) then
 {
-	if (isNil "_launcherType") then
-	{
-		_launcherType = "AT";
-	};
-
 	_units = units _group;
-
+	
 	for "_i" from 0 to (((DMS_ai_launchers_per_group min _count)-1) max 0) do
 	{
 		if ((random 100)<DMS_ai_use_launchers_chance) then
 		{
 			_unit = _units select _i;
 
-			_launcher = (selectRandom (missionNamespace getVariable [format ["DMS_AI_wep_launchers_%1",_launcherType],["launch_NLAW_F"]]));
+			_aiLauncherType = selectRandom ["AT","AA"];
+			
+			if !(isNil "_launcherType") then
+			{
+				_aiLauncherType = _launcherType;
+			};
+
+			_launcher = (selectRandom (missionNamespace getVariable [format ["DMS_AI_wep_launchers_%1",_aiLauncherType],["launch_NLAW_F"]]));
 
 			removeBackpackGlobal _unit;
 			_unit addBackpack "B_Carryall_mcamo";
