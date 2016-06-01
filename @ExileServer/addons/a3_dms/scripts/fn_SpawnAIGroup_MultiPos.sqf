@@ -1,7 +1,7 @@
 /*
 	DMS_fnc_SpawnAIGroup_MultiPos
 	Created by eraser1
-
+	
 
 	Spawns a group of AI with a given AI count at the provided list of location(s), with a given difficulty, class, and side.
 
@@ -23,7 +23,7 @@
 	Returns AI Group
 */
 
-private ["_OK", "_positions", "_count", "_difficulty", "_class", "_side", "_positionsCount", "_launcherType", "_group", "_unit", "_units", "_i", "_launcher", "_rocket"];
+private ["_OK", "_positions", "_count", "_difficulty", "_class", "_side", "_positionsCount", "_launcherType", "_group", "_unit", "_units", "_i", "_launcher", "_rocket", "_aiLauncherType"];
 
 
 if !(params
@@ -99,20 +99,23 @@ for "_i" from 1 to _count do
 // An AI will definitely spawn with a launcher if you define type
 if ((!isNil "_launcherType") || {DMS_ai_use_launchers && {DMS_ai_launchers_per_group>0}}) then
 {
-	if (isNil "_launcherType") then
-	{
-		_launcherType = "AT";
-	};
 
 	_units = units _group;
-
+	
 	for "_i" from 0 to (((DMS_ai_launchers_per_group min _count)-1) max 0) do
 	{
 		if ((random 100)<DMS_ai_use_launchers_chance) then
 		{
 			_unit = _units select _i;
+			
+			_aiLauncherType = selectRandom ["AT","AA"];
+			
+			if !(isNil "_launcherType") then
+			{
+				_aiLauncherType = _launcherType;
+			};
 
-			_launcher = (selectRandom (missionNamespace getVariable [format ["DMS_AI_wep_launchers_%1",_launcherType],["launch_NLAW_F"]]));
+			_launcher = ((missionNamespace getVariable [format ["DMS_AI_wep_launchers_%1",_aiLauncherType],["launch_NLAW_F"]]) call BIS_fnc_selectRandom);
 
 			removeBackpackGlobal _unit;
 			_unit addBackpack "B_Carryall_mcamo";
@@ -121,7 +124,7 @@ if ((!isNil "_launcherType") || {DMS_ai_use_launchers && {DMS_ai_launchers_per_g
 			[_unit, _launcher, DMS_AI_launcher_ammo_count,_rocket] call BIS_fnc_addWeapon;
 
 			_unit setVariable ["DMS_AI_Launcher",_launcher];
-
+			
 			if (DMS_DEBUG) then
 			{
 				(format["SpawnAIGroup_MultiPos :: Giving %1 a %2 launcher with %3 %4 rockets",_unit,_launcher,DMS_AI_launcher_ammo_count,_rocket]) call DMS_fnc_DebugLog;
