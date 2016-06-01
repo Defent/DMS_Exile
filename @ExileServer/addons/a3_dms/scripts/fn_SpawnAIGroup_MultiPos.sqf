@@ -99,10 +99,6 @@ for "_i" from 1 to _count do
 // An AI will definitely spawn with a launcher if you define type
 if ((!isNil "_launcherType") || {DMS_ai_use_launchers && {DMS_ai_launchers_per_group>0}}) then
 {
-	if (isNil "_launcherType") then
-	{
-		_launcherType = "AT";
-	};
 
 	_units = units _group;
 
@@ -111,6 +107,11 @@ if ((!isNil "_launcherType") || {DMS_ai_use_launchers && {DMS_ai_launchers_per_g
 		if ((random 100)<DMS_ai_use_launchers_chance) then
 		{
 			_unit = _units select _i;
+
+			if (isNil "_launcherType") then
+			{
+				_launcherType = selectRandom ["AT","AA"];
+			};
 
 			_launcher = ((missionNamespace getVariable [format ["DMS_AI_wep_launchers_%1",_launcherType],["launch_NLAW_F"]]) call BIS_fnc_selectRandom);
 
