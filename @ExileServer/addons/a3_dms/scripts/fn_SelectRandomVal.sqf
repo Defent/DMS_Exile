@@ -14,8 +14,8 @@
 
 if !(params
 [
-	["_min",0,[0]],
-	["_max",0,[0]]
+	"_min",
+	"_max"
 ])
 exitWith
 {

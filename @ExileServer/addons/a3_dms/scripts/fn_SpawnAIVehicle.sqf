@@ -20,11 +20,11 @@
 
 if !(params
 [
-	["_positions",[],[[]],[1,2]],
-	["_group",grpNull,[grpNull]],
-	["_class","random",[""]],
-	["_difficulty","static",[""]],
-	["_side","bandit",[""]]
+	"_positions",
+	"_group",
+	"_class",
+	"_difficulty",
+	"_side"
 ])
 exitWith
 {
@@ -32,15 +32,7 @@ exitWith
 };
 
 
-// Using another params-exitwith structure just for _spawnPos because it's pretty important...
-if !(_positions params
-[
-	["_spawnPos",[],[[]],[2,3]]
-])
-exitWith
-{
-	diag_log format ["DMS ERROR :: Calling DMS_fnc_SpawnAIVehicle with invalid _positions parameters: %1",_positions];
-};
+_spawnPos = _positions select 0;
 
 private _vehClass =
 	if ((count _this)>5) then

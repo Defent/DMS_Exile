@@ -18,11 +18,11 @@
 
 if !(params
 [
-	["_playerObj",	objNull,	[objNull]	],
-	["_unit",		objNull,	[objNull]	],
-	["_AISide",		"",			[""]		],
-	["_AIType",		"",			[""]		],
-	["_roadKilled",	false,		[false]		]
+	"_playerObj",
+	"_unit",
+	"_AISide",
+	"_AIType",
+	"_roadKilled"
 ])
 exitWith
 {

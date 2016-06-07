@@ -13,8 +13,8 @@
 
 if !(params
 [
-	["_position",[],[[]],[2,3]],
-	["_radius",0,[0]]
+	"_position",
+	"_radius"
 ])
 exitWith
 {

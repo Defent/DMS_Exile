@@ -37,12 +37,12 @@ private _unarmed = false;
 
 if !(params
 [
-	["_group",grpNull,[grpNull]],
-	["_pos",[0,0,0],[[]],[3]],
-	["_class","random",[""]],
-	["_difficulty","random",[""]],
-	["_side","bandit",[""]],
-	["_type","soldier",[""]]
+	"_group",
+	"_pos",
+	"_class",
+	"_difficulty",
+	"_side",
+	"_type"
 ])
 then
 {

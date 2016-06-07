@@ -12,7 +12,7 @@ if (!DMS_ai_offload_to_client) exitWith {};
 	{
 		private _leader = leader _x;
 		private _group = _x;
-		if ((!isNull _leader) && {(alive _leader) && {!isPlayer _leader}}) then
+		if !(isPlayer _leader) then
 		{
 			if (DMS_DEBUG) then
 			{

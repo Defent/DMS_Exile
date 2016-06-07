@@ -19,9 +19,9 @@ try
 {
 	if !(params
 	[
-		["_vehicleClass","",[""]],
-		["_pos",[],[[]],[2,3]],
-		["_pinCode","",[0,""]]
+		"_vehicleClass",
+		"_pos",
+		"_pinCode"
 	])
 	then
 	{

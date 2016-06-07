@@ -13,8 +13,8 @@
 
 if !(params
 [
-	["_pos", "", [objNull,[]], [2,3]],
-	["_dis", 0, [0]]
+	"_pos",
+	"_dis"
 ])
 exitWith
 {

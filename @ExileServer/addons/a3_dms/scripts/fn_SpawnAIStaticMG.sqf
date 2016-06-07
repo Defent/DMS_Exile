@@ -23,11 +23,11 @@
 
 if !(params
 [
-	["_positions",[],[[]]],
-	["_group",grpNull,[grpNull]],
-	["_class","random",[""]],
-	["_difficulty","static",[""]],
-	["_side","bandit",[""]]
+	"_positions",
+	"_group",
+	"_class",
+	"_difficulty",
+	"_side"
 ])
 exitWith
 {

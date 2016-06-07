@@ -28,8 +28,8 @@
 
 if !(params
 [
-	["_vehicleClass","",[""]],
-	["_position","",[[]],[2,3]]
+	"_vehicleClass",
+	"_position"
 ])
 exitWith
 {

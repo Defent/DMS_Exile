@@ -15,9 +15,9 @@
 
 if !(params
 [
-	["_group",grpNull,[grpNull,objNull]],
-	["_pos",[0,0,0],[[]],[2,3]],
-	["_difficulty","moderate",[""]]
+	"_group",
+	"_pos",
+	"_difficulty"
 ])
 then
 {

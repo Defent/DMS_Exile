@@ -71,17 +71,17 @@ private _added = false;
 
 if !(params
 [
-	["_pos","",[[]],[2,3]],
-	["_completionInfo","",[[]]],
-	["_groupReinforcementsInfo","",[[]]],
-	["_timeOutInfo","",[[]],[1,2]],
-	["_units","",[[]]],
-	["_missionObjs","",[[]],[3,4]],
-	["_messages","",[[]],[3]],
-	["_markers","",[[]],[DMS_MissionMarkerCount]],
-	["_side","bandit",[""]],
-	["_difficulty","moderate",[""]],
-	["_missionEvents",[],[[]]]
+	"_pos",
+	"_completionInfo",
+	"_groupReinforcementsInfo",
+	"_timeOutInfo",
+	"_units",
+	"_missionObjs",
+	"_messages",
+	"_markers",
+	"_side",
+	"_difficulty",
+	"_missionEvents"
 ])
 exitWith
 {

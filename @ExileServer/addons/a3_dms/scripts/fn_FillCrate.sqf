@@ -88,8 +88,8 @@
 
 if (!(params
 [
-	["_crate",objNull,[objNull]],
-	["_lootValues","",[0,"",[]],[2,3]]
+	"_crate",
+	"_lootValues"
 ])
 ||
 {isNull _crate})
@@ -230,9 +230,9 @@ else
 
 	if !((_crateValues params
 	[
-		["_weps", [], [[]]],
-		["_items", [], [[]]],
-		["_backpacks", [], [[]]]
+		"_weps",
+		"_items",
+		"_backpacks"
 	]))
 	exitWith
 	{

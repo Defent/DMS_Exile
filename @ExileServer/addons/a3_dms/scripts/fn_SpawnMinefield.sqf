@@ -18,9 +18,9 @@ if (DMS_SpawnMinesAroundMissions) then
 {
 	if !(params
 	[
-		["_centerPos","",[[]],[2,3]],
-		["_difficulty","",["",[]],[2]],
-		["_side","",[""]]
+		"_centerPos",
+		"_difficulty",
+		"_side"
 	])
 	exitWith
 	{

@@ -26,8 +26,8 @@ private _exit = false;
 	{
 		if !(_x params
 		[
-			["_completionType", "", [""] ],
-			["_completionArgs", [], [[],grpNull] ]
+			"_completionType",
+			"_completionArgs"
 		])
 		then
 		{

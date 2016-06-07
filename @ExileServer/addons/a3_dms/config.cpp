@@ -4,7 +4,7 @@ class CfgPatches
 	{
 		units[] = {};
 		weapons[] = {};
-		a3_DMS_version = "May 22, 2016 (2) (TEST)";
+		a3_DMS_version = "June 6, 2016 (RC1)";
 		requiredVersion = 1.36;
 		requiredAddons[] = {"exile_client","exile_server_config"};
 	};
@@ -57,6 +57,7 @@ class CfgFunctions
 			class ImportFromM3E_3DEN_Convert	{};
 			class ImportFromM3E_3DEN_Static		{};
 			class IsPlayerNearby				{};
+			class IsPosBlacklisted				{};
 			class IsNearWater 					{};
 			class IsValidPosition				{};
 			class MissionParams					{};

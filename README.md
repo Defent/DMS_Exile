@@ -94,9 +94,9 @@ If you are using Vilayer or some other GameServer hosting service, and/or the ab
 **DMS does not currently support headless client. Do not attempt to use HC with DMS unless you know what you are doing.**
 
 ## Troubleshooting:
-DMS won't spawn missions? Check RPT for config errors or make sure PBO is packed correctly by unpacking it and ensuring the folder structure is "\x\addons\a3_DMS\...".
+If you're having any issues with DMS, check your RPT for errors and make sure PBO is packed correctly by unpacking it and ensuring the folder structure is "\x\addons\a3_DMS\...".
 
-If you can't figure it out, leave a post on [the DMS thread on exile forums](http://www.exilemod.com/topic/61-dms-defents-mission-system/?do=findComment&comment=242). **Make sure to include your RPT, config.sqf, as well as any changed files.**
+If you can't figure it out, leave a post on [the DMS thread on exile forums](http://www.exilemod.com/topic/61-dms-defents-mission-system/?do=findComment&comment=242). **Make sure to include your RPT, config.sqf, as well as any changed files. Please use [pastebin](http://pastebin.com/), spoilers, or something similar; DO NOT PASTE EVERYTHING DIRECTLY INTO THE POST (without putting it in a spoiler)**
 
 ___
 
@@ -104,6 +104,7 @@ ___
 ### Authors:
 - [Defent](https://github.com/Defent) from [NumenaDayZ](http://numenadayz.com/).
 - [eraser1](https://github.com/eraser1) from [TrainwreckDayZ](http://www.trainwreckdayz.com/home).
+- [secondcoming](https://github.com/secondcoming) from [ExileYorkshire](http://exileyorkshire.co.uk/).
 
 
 ### Thanks:
@@ -122,7 +123,6 @@ ___
 - [Valthos from The Altis Project](https://www.thealtisproject.co.uk/)
 - [Flowrider from Optimum Gaming](http://www.optimum-multigaming.com/)
 - [CEN from ATD Gaming](http://atdgaming.com/)
-- [second coming from ExileYorkshire](http://exileyorkshire.co.uk/)
 
 ___
 
@@ -150,6 +150,15 @@ ___
 # Changelog:
 
 ### Test Branch:
+#### June 6, 2016 (10:45 PM CST-America) **Release Candidate 1**:
+* New function: DMS_fnc_IsPosBlacklisted (optimized replacement for "BIS_fnc_IsPosBlacklisted")
+* Config value "DMS_findSafePosBlacklist" now supports the ability to blacklist within a certain distance of a given position.
+* "DMS_CLIENT" functions are now compiled in pre-init (broadcasting is still done in post-init).
+* Notifications from "textTilesRequest" and "dynamicTextRequest" should no longer "stack" on each other; if two missions spawn right after another, the second mission notification will be delayed at least until the first one completes.
+* More Micro-optimizations on most functions; parameters passed to DMS functions will no longer be checked to see if they are the right type, etc. It was determined that they didn't really provide any benefit, as most errors either don't trigger the "params" error, or the error is simply reiterated elsewhere.
+* "DMS_fnc_FindSuppressor" has been overhauled; it simply checks the configs for the provided weapon classname to return a random muzzle/suppressor classname. Consequently, the function is smaller, faster, and perfectly compatible with any weapon.
+* The "freeze manager" will now unfreeze AI if needed regardless of setting "DMS_ai_allowFreezing" to false.
+
 #### May 22, 2016 (3:15 PM CST-America):
 * **NEW CONFIG VALUES:**
 		DMS_ai_freezeOnSpawn

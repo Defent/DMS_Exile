@@ -59,6 +59,64 @@ DMS_HeliParatrooper_Arr = [];
 DMS_FrozenAIGroups = [];
 
 
+
+DMS_CLIENT_fnc_spawnDynamicText = compileFinal
+("
+if (isNil 'DMS_CLIENT_DynamicText_inProgress') then
+{
+	DMS_CLIENT_DynamicText_inProgress = true;
+	_this spawn
+	{
+		[
+			_this,
+			0,
+			safeZoneY,
+			"+str DMS_dynamicText_Duration+",
+			"+str DMS_dynamicText_FadeTime+",
+			0,
+			24358
+		] call BIS_fnc_dynamicText;
+		DMS_CLIENT_DynamicText_inProgress = nil;
+	};
+}
+else
+{
+	["+str (DMS_dynamicText_Duration+DMS_dynamicText_FadeTime) +",{_this call DMS_CLIENT_fnc_spawnDynamicText},_this,false,false] call ExileClient_system_thread_addTask;
+};
+");
+
+DMS_CLIENT_fnc_spawnTextTiles = compileFinal
+("
+if (isNil 'DMS_CLIENT_TextTiles_inProgress') then
+{
+	DMS_CLIENT_TextTiles_inProgress = true;
+	_this spawn
+	{
+		[
+			parseText _this,
+			[
+				0,
+				safeZoneY,
+				1,
+				1
+			],
+			[10,10],
+			"+str DMS_textTiles_Duration+",
+			"+str DMS_textTiles_FadeTime+",
+			0
+		] call BIS_fnc_textTiles;
+		DMS_CLIENT_TextTiles_inProgress = nil;
+	};
+}
+else
+{
+	["+str (DMS_textTiles_Duration+DMS_textTiles_FadeTime) +",{_this call DMS_CLIENT_fnc_spawnTextTiles},_this,false,false] call ExileClient_system_thread_addTask;
+};
+");
+
+DMS_CLIENT_fnc_hintSilent = compileFinal "hintSilent parsetext format['%1',_this];";
+
+
 // Initialize mission variables...
 CALLFILE("\x\addons\dms\missions\static_init.sqf");
 CALLFILE("\x\addons\dms\missions\mission_init.sqf");

@@ -25,11 +25,11 @@
 
 if !(params
 [
-	["_positions","_positions ERROR",[[]]],
-	["_count","_count ERROR",[0]],
-	["_difficulty","_difficulty ERROR",[""]],
-	["_class","_class ERROR",[""]],
-	["_side","_side ERROR",[""]]
+	"_positions",
+	"_count",
+	"_difficulty",
+	"_class",
+	"_side"
 ])
 exitWith
 {

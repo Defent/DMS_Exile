@@ -24,10 +24,10 @@
 
 if !(params
 [
-    ["_units",[],[[]]],
-    ["_finalGroup",grpNull,[grpNull]],
-	["_pos",[0,0,0],[[]],[2,3]],
-	["_difficulty","moderate",[""]]
+    "_units",
+    "_finalGroup",
+	"_pos",
+	"_difficulty"
 ])
 then
 {

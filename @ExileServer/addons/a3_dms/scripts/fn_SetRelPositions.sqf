@@ -18,8 +18,8 @@
 
 if !(params
 [
-    ["_objects", [], [[]]],
-    ["_newCPos", [], [[]],[3]]
+    "_objects",
+    "_newCPos"
 ])
 exitWith
 {

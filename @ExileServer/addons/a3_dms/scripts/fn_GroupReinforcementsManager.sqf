@@ -111,15 +111,15 @@
 // Check ALL the variables
 if !(params
 [
-	["_AIGroup",			grpNull,	[grpNull]			],
-	["_reinforcementInfo",	[],			[[]],		[2]		],
-	["_updateInfo",			[],			[[]],		[2]		],
-	["_spawnLocations",		[],			[[]]				],
-	["_class",				"",			[""]				],
-	["_difficulty",			"",			[""]				],
-	["_side",				"",			[""]				],
-	["_monitorType",		"",			[""]				],
-	["_monitorParams",		[],			[[]]				]
+	"_AIGroup",
+	"_reinforcementInfo",
+	"_updateInfo",
+	"_spawnLocations",
+	"_class",
+	"_difficulty",
+	"_side",
+	"_monitorType",
+	"_monitorParams"
 ])
 exitWith
 {
@@ -130,8 +130,8 @@ exitWith
 
 if !(_reinforcementInfo params
 [
-	["_wavesInfo", [], [[]]],
-	["_unitsInfo", [], [[]]]
+	"_wavesInfo",
+	"_unitsInfo"
 ])
 exitWith
 {
@@ -142,8 +142,8 @@ exitWith
 
 if !(_wavesInfo params
 [
-	["_maxReinforcementWaves", -1, [0]],
-	["_reinforcementWavesGiven", 0, [0]]
+	"_maxReinforcementWaves",
+	"_reinforcementWavesGiven"
 ])
 exitWith
 {
@@ -154,8 +154,8 @@ exitWith
 
 if !(_unitsInfo params
 [
-	["_maxReinforcementUnits", -1, [0]],
-	["_reinforcementUnitsGiven", 0, [0]]
+	"_maxReinforcementUnits",
+	"_reinforcementUnitsGiven"
 ])
 exitWith
 {
@@ -166,8 +166,8 @@ exitWith
 
 if !(_updateInfo params
 [
-	["_updateDelay", 300, [0]],
-	["_lastUpdated", 0, [0]]
+	"_updateDelay",
+	"_lastUpdated"
 ])
 exitWith
 {
@@ -234,9 +234,9 @@ if (!_reinforcementsDepleted && {(diag_tickTime-_lastUpdated)>_updateDelay}) the
 		{
 			if !(_monitorParams params
 			[
-				["_posOrObj", [], [objNull,[]], [2,3]],
-				["_radius", 0, [0]],
-				["_reinforcementCount", 0, [0]]
+				"_posOrObj",
+				"_radius",
+				"_reinforcementCount"
 			])
 			exitWith
 			{
@@ -257,7 +257,7 @@ if (!_reinforcementsDepleted && {(diag_tickTime-_lastUpdated)>_updateDelay}) the
 		{
 			if !(_monitorParams params
 			[
-				["_AICount", 0, [0]]
+				"_AICount"
 			])
 			exitWith
 			{
@@ -276,8 +276,8 @@ if (!_reinforcementsDepleted && {(diag_tickTime-_lastUpdated)>_updateDelay}) the
 		{
 			if !(_monitorParams params
 			[
-				["_AICount", 0, [0]],
-				["_reinforcementCount", 0, [0]]
+				"_AICount",
+				"_reinforcementCount"
 			])
 			exitWith
 			{
@@ -298,9 +298,9 @@ if (!_reinforcementsDepleted && {(diag_tickTime-_lastUpdated)>_updateDelay}) the
 		{
 			if !(_monitorParams params
 			[
-				["_AICount", 0, [0]],
-				["_reinforcementCount", 0, [0]],
-				["_increment_AICount", 0, [0]]
+				"_AICount",
+				"_reinforcementCount",
+				"_increment_AICount"
 			])
 			exitWith
 			{
@@ -323,8 +323,8 @@ if (!_reinforcementsDepleted && {(diag_tickTime-_lastUpdated)>_updateDelay}) the
 		{
 			if !(_monitorParams params
 			[
-				["_AICount", 0, [0]],
-				["_reinforcementCount", 0, [0]]
+				"_AICount",
+				"_reinforcementCount"
 			])
 			exitWith
 			{
@@ -354,7 +354,7 @@ if (!_reinforcementsDepleted && {(diag_tickTime-_lastUpdated)>_updateDelay}) the
 		{
 			if !(_monitorParams params
 			[
-				["_AICount", 0, [0]]
+				"_AICount"
 			])
 			exitWith
 			{
@@ -396,7 +396,7 @@ if (!_reinforcementsDepleted && {(diag_tickTime-_lastUpdated)>_updateDelay}) the
 		{
 			if !(_monitorParams params
 			[
-				["_vehicle", objNull, [objNull]]
+				"_vehicle"
 			])
 			exitWith
 			{
@@ -442,8 +442,8 @@ if (!_reinforcementsDepleted && {(diag_tickTime-_lastUpdated)>_updateDelay}) the
 		{
 			if !(_monitorParams params
 			[
-				["_staticGun", objNull, [objNull]],
-				["_gunPos",	[],	[[]], [2,3]]
+				"_staticGun",
+				"_gunPos"
 			])
 			exitWith
 			{
@@ -488,10 +488,10 @@ if (!_reinforcementsDepleted && {(diag_tickTime-_lastUpdated)>_updateDelay}) the
 		{
 			if !(_monitorParams params
 			[
-				["_AICount",0,[0]],
-				["_ejectFFVGunners",false,[false]],
-			    ["_maxJumpers",0,[0]],
-			    ["_remainAsGunship", 0, [false]]
+				"_AICount",
+				"_ejectFFVGunners",
+			    "_maxJumpers",
+			    "_remainAsGunship"
 			])
 			exitWith
 			{

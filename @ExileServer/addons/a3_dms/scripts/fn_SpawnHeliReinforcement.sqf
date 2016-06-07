@@ -23,14 +23,14 @@
 
 if !(params
 [
-    ["_AIGroup", 0, [grpNull]],
-    ["_class", 0, [""]],
-    ["_difficulty", 0, [""]],
-    ["_side", 0, [""]],
-    ["_dropPoint", 0, [[],objNull], [2,3]],
-    ["_ejectFFVGunners", 0, [false]],
-    ["_maxJumpers",0,[0]],
-    ["_remainAsGunship", 0, [false]]
+    "_AIGroup",
+    "_class",
+    "_difficulty",
+    "_side",
+    "_dropPoint",
+    "_ejectFFVGunners",
+    "_maxJumpers",
+    "_remainAsGunship"
 ])
 exitWith
 {

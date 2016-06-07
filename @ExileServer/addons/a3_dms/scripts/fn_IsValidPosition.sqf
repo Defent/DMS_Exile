@@ -20,14 +20,14 @@
 
 if !(params
 [
-	["_pos", 						[],				[[]],		[0,2,3]],
-	["_waterNearLimit",				DMS_WaterNearBlacklist,		[0] ],
-	["_minSurfaceNormal",			DMS_MinSurfaceNormal,		[0] ],
-	["_spawnZoneNearLimit",			DMS_SpawnZoneNearBlacklist, [0]	],
-	["_traderZoneNearLimit",		DMS_TraderZoneNearBlacklist,[0] ],
-	["_missionNearLimit",			DMS_MissionNearBlacklist,	[0] ],
-	["_playerNearLimit",			DMS_PlayerNearBlacklist,	[0] ],
-	["_territoryNearLimit",			DMS_TerritoryNearBlacklist,	[0]	]
+	"_pos",
+	"_waterNearLimit",
+	"_minSurfaceNormal",
+	"_spawnZoneNearLimit",
+	"_traderZoneNearLimit",
+	"_missionNearLimit",
+	"_playerNearLimit",
+	"_territoryNearLimit"
 ])
 then
 {
@@ -51,7 +51,7 @@ else
 		};
 
 
-		if (!(DMS_findSafePosBlacklist isEqualTo []) && {([_pos, DMS_findSafePosBlacklist] call BIS_fnc_isPosBlacklisted)}) then
+		if (!(DMS_findSafePosBlacklist isEqualTo []) && {([_pos, DMS_findSafePosBlacklist] call DMS_fnc_IsPosBlacklisted)}) then
 		{
 			throw ("a blacklisted position");
 		};
@@ -153,6 +153,6 @@ else
 			(format ["IsValidPosition :: Position %1 is too close to %2!",_pos,_exception]) call DMS_fnc_DebugLog;
 		};
 	};
-	
+
 	_isValidPos
 };

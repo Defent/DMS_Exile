@@ -14,8 +14,8 @@
 
 if !(params
 [
-	["_crateClassName","_crateClassName ERROR",[""]],
-	["_pos","_pos ERROR",[[]],[3]]
+	"_crateClassName",
+	"_pos"
 ])
 exitWith
 {

@@ -16,8 +16,8 @@
 
 if !(params
 [
-	["_missionName","",[""]],
-	["_messageInfo",[],[[]],[2]]
+	"_missionName",
+	"_messageInfo"
 ])
 exitWith
 {
@@ -27,7 +27,7 @@ exitWith
 _messageInfo params
 [
 	["_titleColor","#FFFF00",[""]],
-	["_message","",[""]]
+	"_message"
 ];
 
 if (DMS_DEBUG) then

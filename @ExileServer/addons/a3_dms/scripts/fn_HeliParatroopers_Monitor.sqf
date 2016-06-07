@@ -46,9 +46,9 @@
 {
     if !(_x params
     [
-        ["_heli", objNull, [objNull]],
-        ["_dropPoint", 0, [[], objNull], [2,3]],
-        ["_remainAsGunship", false, [false]]
+        "_heli",
+        "_dropPoint",
+        "_remainAsGunship"
     ])
     exitWith
     {

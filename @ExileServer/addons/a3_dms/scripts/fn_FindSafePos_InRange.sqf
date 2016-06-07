@@ -21,10 +21,10 @@
 
 if !(params
 [
-    ["_centerPos", 0, [[]], [2,3]],
-    ["_distanceMin", 0, [0]],
-    ["_distanceMax", 0, [0]],
-    ["_posParameters", 0, [[]]]
+    "_centerPos",
+    "_distanceMin",
+    "_distanceMax",
+    "_posParameters"
 ])
 exitWith
 {

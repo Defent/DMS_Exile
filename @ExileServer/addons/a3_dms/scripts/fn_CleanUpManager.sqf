@@ -27,9 +27,9 @@
 
 	if !(_x params
 	[
-		["_objs",[objNull],[objNull,[],grpNull]],
-		["_timeAddedToList",diag_tickTime,[0]],
-		["_timeUntilClean",DMS_CompletedMissionCleanupTime,[0]]
+		"_objs",
+		"_timeAddedToList",
+		"_timeUntilClean"
 	])
 	then
 	{

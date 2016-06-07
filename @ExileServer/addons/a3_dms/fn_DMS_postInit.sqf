@@ -121,40 +121,9 @@ if !((toLower DMS_MissionMarkerLoseDotColor) in DMS_A3_AllMarkerColors) then
 
 
 
-// Create and send Client Functions using compileFinal for security.
-DMS_CLIENT_fnc_spawnDynamicText = compileFinal
-("
-[
-	_this,
-	0,
-	safeZoneY,
-	"+str DMS_dynamicText_Duration+",
-	"+str DMS_dynamicText_FadeTime+",
-	0,
-	24358+round(random 5)
-] spawn BIS_fnc_dynamicText;
-");
+// Send Client Functions using compileFinal for security.
 publicVariable "DMS_CLIENT_fnc_spawnDynamicText";
-
-DMS_CLIENT_fnc_spawnTextTiles = compileFinal
-("
-[
-	parseText _this,
-	[
-		0,
-		safeZoneY,
-		1,
-		1
-	],
-	[10,10],
-	"+str DMS_textTiles_Duration+",
-	"+str DMS_textTiles_FadeTime+",
-	0
-] spawn BIS_fnc_textTiles;
-");
 publicVariable "DMS_CLIENT_fnc_spawnTextTiles";
-
-DMS_CLIENT_fnc_hintSilent = compileFinal "hintSilent parsetext format['%1',_this];";
 publicVariable "DMS_CLIENT_fnc_hintSilent";
 
 publicVariable "DMS_Version";
