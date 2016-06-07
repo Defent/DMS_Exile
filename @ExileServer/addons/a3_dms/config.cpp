@@ -4,7 +4,7 @@ class CfgPatches
 	{
 		units[] = {};
 		weapons[] = {};
-		a3_DMS_version = "June 6, 2016 (RC1)";
+		a3_DMS_version = "June 7, 2016 (RC1.1)";
 		requiredVersion = 1.36;
 		requiredAddons[] = {"exile_client","exile_server_config"};
 	};
@@ -49,7 +49,6 @@ class CfgFunctions
 			class GroupReinforcementsManager	{};
 			//class HandleMissionEvents			{};
 			class HeliParatroopers_Monitor		{};
-			//class HeliPatrol					{};
 			class ImportFromM3E					{};
 			class ImportFromM3E_Convert			{};
 			class ImportFromM3E_Static			{};

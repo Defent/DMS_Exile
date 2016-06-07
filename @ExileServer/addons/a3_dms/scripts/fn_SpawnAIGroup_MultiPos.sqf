@@ -105,6 +105,7 @@ if ((DMS_ai_use_launchers && {DMS_ai_launchers_per_group>0}) || {!(_launcherType
 	};
 
 	private _units = units _group;
+	private _launchers = missionNamespace getVariable [format ["DMS_AI_wep_launchers_%1",_launcherType],["launch_NLAW_F"]];
 
 	for "_i" from 0 to (((DMS_ai_launchers_per_group min _count)-1) max 0) do
 	{
@@ -112,7 +113,7 @@ if ((DMS_ai_use_launchers && {DMS_ai_launchers_per_group>0}) || {!(_launcherType
 		{
 			private _unit = _units select _i;
 
-			private _launcher = (selectRandom (missionNamespace getVariable [format ["DMS_AI_wep_launchers_%1",_launcherType],["launch_NLAW_F"]]));
+			private _launcher = selectRandom _launchers;
 
 			removeBackpackGlobal _unit;
 			_unit addBackpack "B_Carryall_mcamo";

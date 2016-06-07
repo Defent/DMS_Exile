@@ -150,12 +150,16 @@ ___
 # Changelog:
 
 ### Test Branch:
+#### June 7, 2016 (11:15 PM CST-America) **Release Candidate 1.1**:
+* Slight optimization of SpawnAIGroup functions (if you have launchers enabled).
+
 #### June 6, 2016 (10:45 PM CST-America) **Release Candidate 1**:
 * New function: DMS_fnc_IsPosBlacklisted (optimized replacement for "BIS_fnc_IsPosBlacklisted")
 * Config value "DMS_findSafePosBlacklist" now supports the ability to blacklist within a certain distance of a given position.
 * "DMS_CLIENT" functions are now compiled in pre-init (broadcasting is still done in post-init).
 * Notifications from "textTilesRequest" and "dynamicTextRequest" should no longer "stack" on each other; if two missions spawn right after another, the second mission notification will be delayed at least until the first one completes.
 * More Micro-optimizations on most functions; parameters passed to DMS functions will no longer be checked to see if they are the right type, etc. It was determined that they didn't really provide any benefit, as most errors either don't trigger the "params" error, or the error is simply reiterated elsewhere.
+* Removed config value "DMS_MissionMarkerCount"
 * "DMS_fnc_FindSuppressor" has been overhauled; it simply checks the configs for the provided weapon classname to return a random muzzle/suppressor classname. Consequently, the function is smaller, faster, and perfectly compatible with any weapon.
 * The "freeze manager" will now unfreeze AI if needed regardless of setting "DMS_ai_allowFreezing" to false.
 
