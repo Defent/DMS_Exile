@@ -15,11 +15,11 @@
 
     A blacklist can be in the form:
         [[x1,y1],[x2,y2]]
-    where x1 is LESS than x2, and y1 is LESS than y2
+    where x1 is LESS than x2, and y1 is LESS than y2. This method is SLOWER.
 
     or,
         [[x,y],radius]
-    where any position within "radius" meters of position "x,y" is blacklisted.
+    where any position within "radius" meters of position "x,y" is blacklisted. This method is FASTER.
 
     Returns true if the given position is blacklisted.
 */
