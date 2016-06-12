@@ -150,6 +150,11 @@ ___
 # Changelog:
 
 ### Test Branch:
+#### June 12, 2016 (3:15 AM CST-America) **Release Candidate 1.2**:
+* Removed the marker color check in "DMS_fnc_CreateMarker". Invalid marker colors are up to server owners to detect.
+* Micro-optimized "DMS_fnc_IsPosBlacklisted" for the rectangular blacklist case; also rearranged the statements to be clearer and easier to understand.
+
+
 #### June 7, 2016 (11:15 PM CST-America) **Release Candidate 1.1**:
 * Slight optimization of SpawnAIGroup functions (if you have launchers enabled).
 

@@ -50,25 +50,13 @@ try
         }
         else
         {
-            _pos params
-            [
-                "_pos_x",
-                "_pos_y"
-            ];
-
-            _blacklist_pos params
-            [
-                "_minX",
-                "_minY"
-            ];
-
-            _blacklist_parameter params
-            [
-                "_maxX",
-                "_maxY"
-            ];
-
-            if ((_pos_x >= _minX) && {_pos_x <= _maxX} && {_pos_y >= _minY} && {_pos_y <= _maxY}) throw _x;
+            if
+            (
+                ((_pos select 0) >= (_blacklist_pos select 0)) &&               // if x is greater than x1 and
+                {(_pos select 0) <= (_blacklist_parameter select 0)} &&         // if x is less than x2 and
+                {(_pos select 1) >= (_blacklist_pos select 1)} &&               // if y is greater than y1 and
+                {(_pos select 1) <= (_blacklist_parameter select 1)}            // if y is less than y2
+            ) throw _x;                                                         // blacklisted
         };
     } forEach _blacklists;
 
