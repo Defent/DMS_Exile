@@ -75,7 +75,7 @@ after "7 createVehicle"
 
 
 ## infiSTAR:
-* If you are using infiSTAR and want to keep ```_CGM = true;```, then set ```_UMW = true;```.
+* If you are using infiSTAR and want to keep ```CGM = true;```, then set ```UMW = true;```.
 * Add ```'O_HMG_01_high_F'``` to ```_VehicleWhiteList```, as well as any other vehicles you add to DMS that are not whitelisted.
 
 
