@@ -50,6 +50,15 @@ switch (toLower worldName) do
 		_msgLOSE = ['#FF0000',"The troops have left Norinsk, taking the cache with them..."];
 	};
 
+	case "tanoa":
+	{
+		_pos = [11685,2666,0];
+		_missionName = "Lijnhaven Occupation";
+		_msgStart = ['#FFFF00',"Lijnhaven is under martial law! There are reports they have a large weapon cache..."];
+		_msgWIN = ['#0080FF',"Convicts have successfully assaulted the town of Lijnhaven and secured the cache!"];
+		_msgLOSE = ['#FF0000',"The troops have left Lijnhaven, taking the cache with them..."];
+	};		
+	
 	default
 	{
 	    diag_log format["DMS ERROR :: Attempting to run occupation with unsupported map: %1",worldName];
