@@ -150,6 +150,11 @@ ___
 # Changelog:
 
 ### Test Branch:
+#### June 16, 2016 (1:55 PM CST-America) **Release Candidate 1.3**:
+* Renamed the "mercbase.sqf" mission title to "Mercenary Outpost" to avoid confusion with the salt flats mission.
+* Fixed an issue with fn_SpawnMineField.sqf (thanks to CEN for providing important info)
+
+
 #### June 12, 2016 (3:15 AM CST-America) **Release Candidate 1.2**:
 * Removed the marker color check in "DMS_fnc_CreateMarker". Invalid marker colors are up to server owners to detect.
 * Micro-optimized "DMS_fnc_IsPosBlacklisted" for the rectangular blacklist case; also rearranged the statements to be clearer and easier to understand.

@@ -49,7 +49,7 @@ if (DMS_SpawnMinesAroundMissions) then
 	private _minesInfo =
 		if (_difficulty isEqualType "") then
 		{
-			_minesInfo	= missionNamespace getVariable [format ["DMS_MineInfo_%1", _difficulty], [10,50]];
+			missionNamespace getVariable [format ["DMS_MineInfo_%1", _difficulty], [10,50]];
 		}
 		else
 		{
