@@ -89,7 +89,6 @@ _difficulty =
 //Create unit
 private _unit = _group createUnit [DMS_AI_Classname, _pos, [], 0,"FORM"];
 _unit allowFleeing 0;
-[_unit] joinSilent _group;
 
 // Remove existing gear
 {_unit removeWeaponGlobal _x;} 	forEach (weapons _unit);
@@ -156,11 +155,18 @@ if (_customGearSet isEqualTo []) then
 	} forEach (missionNamespace getVariable [format ["DMS_%1_equipment",_class],[]]);
 
 
+	// Clothes
+	_unit addHeadgear 		(selectRandom (missionNamespace getVariable [format ["DMS_%1_helmets",_class],DMS_assault_helmets]));
+	_unit forceAddUniform 	(selectRandom (missionNamespace getVariable [format ["DMS_%1_clothes",_class],DMS_assault_clothes]));
+	_unit addVest 			(selectRandom (missionNamespace getVariable [format ["DMS_%1_vests",_class],DMS_assault_vests]));
+	_unit addBackpackGlobal	(selectRandom (missionNamespace getVariable [format ["DMS_%1_backpacks",_class],DMS_assault_backpacks]));
+
+
 	// Random items that can be added to the unit's inventory, such as food, meds, etc.
 	private _randItemCount = missionNamespace getVariable [format ["DMS_%1_RandItemCount",_class],0];
 	if (_randItemCount>0) then
 	{
-		private _randItems = missionNamespace getVariable [format ["DMS_%1_RandItems",_class],0];
+		private _randItems = missionNamespace getVariable [format ["DMS_%1_RandItems",_class],["Exile_Item_PlasticBottleFreshWater"]];
 		for "_i" from 1 to _randItemCount do
 		{
 			_unit addItem (selectRandom _randItems);
@@ -170,13 +176,6 @@ if (_customGearSet isEqualTo []) then
 
 	// Items (Loot stuff that goes in uniform/vest/backpack)
 	{_unit addItem _x;} forEach (missionNamespace getVariable [format ["DMS_%1_items",_class],[]]);
-
-
-	// Clothes
-	_unit addHeadgear 		(selectRandom (missionNamespace getVariable [format ["DMS_%1_helmets",_class],DMS_assault_helmets]));
-	_unit forceAddUniform 	(selectRandom (missionNamespace getVariable [format ["DMS_%1_clothes",_class],DMS_assault_clothes]));
-	_unit addVest 			(selectRandom (missionNamespace getVariable [format ["DMS_%1_vests",_class],DMS_assault_vests]));
-	_unit addBackpackGlobal	(selectRandom (missionNamespace getVariable [format ["DMS_%1_backpacks",_class],DMS_assault_backpacks]));
 
 	// Make AI effective at night
 	private _nighttime = (sunOrMoon != 1);
@@ -188,7 +187,7 @@ if (_customGearSet isEqualTo []) then
 	if (!_unarmed) then
 	{
 		private _weapon = selectRandom (missionNamespace getVariable [format ["DMS_%1_weps",_class],DMS_assault_weps]);
-		[_unit, _weapon, 6 + floor(random 3)] call BIS_fnc_addWeapon;
+		[_unit, _weapon, 6 + floor(random 3)] call DMS_fnc_AddWeapon;
 		_unit selectWeapon _weapon;
 
 
@@ -216,6 +215,7 @@ if (_customGearSet isEqualTo []) then
 			};
 		};
 
+		/*
 		// In case spawn position is water
 		if (DMS_ai_enable_water_equipment && {surfaceIsWater _pos}) then
 		{
@@ -224,14 +224,15 @@ if (_customGearSet isEqualTo []) then
 			_unit forceAddUniform "U_O_Wetsuit";
 			_unit addVest "V_RebreatherIA";
 			_unit addGoggles "G_Diving";
-			[_unit, "arifle_SDAR_F", 4 + floor(random 3), "20Rnd_556x45_UW_mag"] call BIS_fnc_addWeapon;
+			[_unit, "arifle_SDAR_F", 4 + floor(random 3), "20Rnd_556x45_UW_mag"] call DMS_fnc_AddWeapon;
 		};
+		*/
 
 		private _pistols = missionNamespace getVariable [format ["DMS_%1_pistols",_class],[]];
 		if !(_pistols isEqualTo []) then
 		{
 			private _pistol = selectRandom _pistols;
-			[_unit, _pistol, 2 + floor(random 2)] call BIS_fnc_addWeapon;
+			[_unit, _pistol, 2 + floor(random 2)] call DMS_fnc_AddWeapon;
 		};
 
 		// Infinite Ammo
@@ -288,14 +289,14 @@ else
 
 	if !(_launcher isEqualTo "") then
 	{
-		[_unit, _launcher, 0] call BIS_fnc_addWeapon;
+		_unit addWeapon _launcher;
 	};
 
 
 	// Add pistol and attachments
 	if !(_pistol isEqualTo "") then
 	{
-		[_unit, _pistol, 0] call BIS_fnc_addWeapon;
+		_unit addWeapon _pistol;
 
 		{
 			_unit addHandgunItem _x;
@@ -306,7 +307,7 @@ else
 	// Add gun and attachments
 	if !(_weapon isEqualTo "") then
 	{
-		[_unit, _weapon, 0] call BIS_fnc_addWeapon;
+		_unit addWeapon _weapon;
 
 		{
 			_unit addPrimaryWeaponItem _x;
@@ -419,6 +420,8 @@ if (DMS_DEBUG) then
 	(format ["SpawnAISoldier :: Spawned a %1 %2 %6 AI at %3 with %4 difficulty to group %5",_class,_side,_pos,_difficulty,_group,_type]) call DMS_fnc_DebugLog;
 };
 
+
+[_unit] joinSilent _group;
 
 
 _unit

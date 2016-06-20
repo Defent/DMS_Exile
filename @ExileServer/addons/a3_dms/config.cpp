@@ -4,7 +4,7 @@ class CfgPatches
 	{
 		units[] = {};
 		weapons[] = {};
-		a3_DMS_version = "June 12, 2016 (RC1.2)";
+		a3_DMS_version = "June 20, 2016 (RC1.5)";
 		requiredVersion = 1.36;
 		requiredAddons[] = {"exile_client","exile_server_config"};
 	};
@@ -30,6 +30,7 @@ class CfgFunctions
 			file = "\x\addons\dms\scripts";
 			class AddMissionToMonitor 			{};
 			class AddMissionToMonitor_Static	{};
+			class AddWeapon						{};
 			class AILocalityManager 			{};
 			class BroadcastMissionStatus 		{};
 			class CalcPos						{};

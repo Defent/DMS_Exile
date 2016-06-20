@@ -22,7 +22,7 @@ exitWith
 	false
 };
 
-private _result 	= false;
+private _result	= false;
 
 try
 {

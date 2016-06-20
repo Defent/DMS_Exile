@@ -7,7 +7,7 @@
 */
 
 
-DMS_MinDistFromWestBorder			= 2000;     // Exclude the 3 small islands
-DMS_MinDistFromEastBorder			= 1700;     // Mostly ocean and mountains in that area
-DMS_MinDistFromSouthBorder			= 1500;     // Exclude "Tuadua Island"
-DMS_MinDistFromNorthBorder			= 2500;     // Exclude the northern islands and airfields
+DMS_MinDistFromWestBorder			= 1300;
+DMS_MinDistFromEastBorder			= 800;
+DMS_MinDistFromSouthBorder			= 1500;
+DMS_MinDistFromNorthBorder			= 1900;

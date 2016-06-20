@@ -628,7 +628,8 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 											"Exile_Item_EMRE",
 											"Exile_Item_PlasticBottleCoffee",
 											"Exile_Item_CanOpener",
-											"Exile_Item_Instadoc"
+											"Exile_Item_Instadoc",
+											"Exile_Item_DuctTape"
 										];
 	DMS_sniper_helmets =				[							// Helmets for Sniper Class
 											"H_HelmetSpecB_paint1",

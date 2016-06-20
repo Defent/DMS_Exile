@@ -129,6 +129,9 @@ publicVariable "DMS_CLIENT_fnc_hintSilent";
 publicVariable "DMS_Version";
 
 
+format["DMS_Version: %1",DMS_Version] remoteExecCall ["diag_log", -2, "DMS_LogVersion_JIP_ID"]; 
+
+
 
 // Add the weighted predefined locations to the list of predefined locations
 {

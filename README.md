@@ -150,6 +150,12 @@ ___
 # Changelog:
 
 ### Test Branch:
+#### June 16, 2016 (1:55 PM CST-America) **Release Candidate 1.5**:
+* New function: DMS_fnc_AddWeapon. More efficient version of BIS_fnc_AddWeapon, and removed almost all error-checking.
+* DMS will now log the DMS version to the client RPT on login.
+* Fixed a couple issues in fn_SpawnAISoldier.sqf.
+* Updated Tanoa config, missions should now be (somewhat) less likely to spawn in the center valley of the main island.
+
 #### June 16, 2016 (1:55 PM CST-America) **Release Candidate 1.3**:
 * Renamed the "mercbase.sqf" mission title to "Mercenary Outpost" to avoid confusion with the salt flats mission.
 * Fixed an issue with fn_SpawnMineField.sqf (thanks to CEN for providing important info)
