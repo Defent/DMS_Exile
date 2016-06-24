@@ -14,19 +14,15 @@
 	Returns all living units from a given array of groups or objects.
 */
 
-private ["_units"];
-
 if !(_this isEqualType []) then
 {
 	_this = [_this];
 };
 
-
-_units = [];
+private _units = [];
 
 {
-	private ["_parameter"];
-	_parameter = _x;
+	private _parameter = _x;
 
 	_units append
 	(

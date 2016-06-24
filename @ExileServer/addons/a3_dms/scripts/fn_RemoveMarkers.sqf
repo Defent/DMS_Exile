@@ -12,12 +12,10 @@
 	] call DMS_fnc_RemoveMarkers;
 */
 
-private ["_markerDot", "_markerCircle", "_status", "_text"];
-
-_markerDot		= _this select 0 select 0;
-_markerCircle	= _this select 0 select 1;
-_status 		= _this select 1;
-_text 			= missionNamespace getVariable [format ["%1_text",_markerDot],markerText _markerDot];
+private _markerDot		= _this select 0 select 0;
+private _markerCircle	= _this select 0 select 1;
+private _status 		= _this select 1;
+private _text 			= missionNamespace getVariable [format ["%1_text",_markerDot],markerText _markerDot];
 
 
 if (DMS_DEBUG) then

@@ -4,7 +4,7 @@ class CfgPatches
 	{
 		units[] = {};
 		weapons[] = {};
-		a3_DMS_version = "April 27, 2016";
+		a3_DMS_version = "June 20, 2016 (RC1.5)";
 		requiredVersion = 1.36;
 		requiredAddons[] = {"exile_client","exile_server_config"};
 	};
@@ -30,6 +30,7 @@ class CfgFunctions
 			file = "\x\addons\dms\scripts";
 			class AddMissionToMonitor 			{};
 			class AddMissionToMonitor_Static	{};
+			class AddWeapon						{};
 			class AILocalityManager 			{};
 			class BroadcastMissionStatus 		{};
 			class CalcPos						{};
@@ -41,16 +42,22 @@ class CfgFunctions
 			class FindSafePos 					{};
 			class FindSafePos_InRange			{};
 			class FindSuppressor 				{};
+			class FreezeManager 				{};
+			class FreezeToggle					{};
 			class GetAllUnits					{};
+			class GetCenter						{};
 			class GetEmptySeats					{};
 			class GroupReinforcementsManager	{};
 			//class HandleMissionEvents			{};
 			class HeliParatroopers_Monitor		{};
-			//class HeliPatrol					{};
 			class ImportFromM3E					{};
 			class ImportFromM3E_Convert			{};
 			class ImportFromM3E_Static			{};
+			class ImportFromM3E_3DEN			{};
+			class ImportFromM3E_3DEN_Convert	{};
+			class ImportFromM3E_3DEN_Static		{};
 			class IsPlayerNearby				{};
+			class IsPosBlacklisted				{};
 			class IsNearWater 					{};
 			class IsValidPosition				{};
 			class MissionParams					{};
@@ -68,6 +75,7 @@ class CfgFunctions
 			class SetAILocality 				{};
 			class SetGroupBehavior 				{};
 			class SetGroupBehavior_Separate		{};
+			class SetRelPositions				{};
 			class SpawnAIGroup 					{};
 			class SpawnAIGroup_MultiPos			{};
 			class SpawnAIVehicle				{};
@@ -80,6 +88,7 @@ class CfgFunctions
 			class SpawnNonPersistentVehicle 	{};
 			class SpawnPersistentVehicle 		{};
 			class SpawnStaticMission			{};
+			class SubArr						{};
 			class TargetsKilled 				{};
 		};
 	};

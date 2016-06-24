@@ -18,16 +18,13 @@
 	Returns the spawned vehicle.
 */
 
-private ["_OK", "_positions", "_veh", "_spawnPos", "_vehClass", "_driver", "_gunner", "_group", "_class", "_difficulty", "_side", "_crewCount"];
-
-
 if !(params
 [
-	["_positions",[],[[]],[1,2]],
-	["_group",grpNull,[grpNull]],
-	["_class","random",[""]],
-	["_difficulty","static",[""]],
-	["_side","bandit",[""]]
+	"_positions",
+	"_group",
+	"_class",
+	"_difficulty",
+	"_side"
 ])
 exitWith
 {
@@ -35,17 +32,9 @@ exitWith
 };
 
 
-// Using another params-exitwith structure just for _spawnPos because it's pretty important...
-if !(_positions params
-[
-	["_spawnPos",[],[[]],[2,3]]
-])
-exitWith
-{
-	diag_log format ["DMS ERROR :: Calling DMS_fnc_SpawnAIVehicle with invalid _positions parameters: %1",_positions];
-};
+_spawnPos = _positions select 0;
 
-_vehClass =
+private _vehClass =
 	if ((count _this)>5) then
 	{
 		param [5,"random",[""]]
@@ -61,22 +50,33 @@ if (_vehClass == "random") then
 };
 
 
-_veh = createVehicle [_vehClass, _spawnPos, [], 0, "NONE"];
+private _veh = createVehicle [_vehClass, _spawnPos, [], 0, "NONE"];
 _veh setFuel 1;
 _veh engineOn true;
 _veh lock 2;
 
 _group addVehicle _veh;
 
-_driver = [_group,_spawnPos,_class,_difficulty,_side,"Vehicle"] call DMS_fnc_SpawnAISoldier;
+private _toFreeze = _group getVariable ["DMS_isGroupFrozen",false];
+
+private _driver = [_group,_spawnPos,_class,_difficulty,_side,"Vehicle"] call DMS_fnc_SpawnAISoldier;
 _driver moveInDriver _veh;
 _driver setVariable ["DMS_AssignedVeh",_veh];
 
-_crewCount =
+if (_toFreeze) then
+{
+	_driver enableSimulationGlobal false;
+};
+
+private _crewCount =
 {
 	private _unit = [_group,_spawnPos,_class,_difficulty,_side,"Vehicle"] call DMS_fnc_SpawnAISoldier;
 	_unit moveInTurret [_veh, _x];
 	_unit setVariable ["DMS_AssignedVeh",_veh];
+	if (_toFreeze) then
+	{
+		_unit enableSimulationGlobal false;
+	};
 	true
 } count (allTurrets [_veh, true]);
 
@@ -85,5 +85,6 @@ if (DMS_DEBUG) then
 {
 	(format ["SpawnAIVehicle :: Created a %1 armed vehicle (%2) with %3 crew members at %4 with %5 difficulty to group %6.",_side,_vehClass,_crewCount+1,_spawnPos,_difficulty,_group]) call DMS_fnc_DebugLog;
 };
+
 
 _veh

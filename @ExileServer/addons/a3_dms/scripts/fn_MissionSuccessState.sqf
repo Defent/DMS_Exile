@@ -16,23 +16,18 @@ if !(_this isEqualType []) exitWith
 	diag_log format ["DMS ERROR :: DMS_fnc_MissionSuccessState called with invalid parameter: %1",_this];
 };
 
-private ["_success", "_exit"];
-
-_success = true;
-_exit = false;
+private _success = true;
+private _exit = false;
 
 {
 	if (_exit) exitWith {};
 
 	try
 	{
-		private ["_OK","_completionType","_completionArgs","_absoluteWinCondition"];
-
-
 		if !(_x params
 		[
-			["_completionType", "", [""] ],
-			["_completionArgs", [], [[],grpNull] ]
+			"_completionType",
+			"_completionArgs"
 		])
 		then
 		{
@@ -41,7 +36,7 @@ _exit = false;
 		};
 
 
-		_absoluteWinCondition = if ((count _x)>2) then {_x select 2} else {false};
+		private _absoluteWinCondition = if ((count _x)>2) then {_x select 2} else {false};
 
 		if (!_success && {!_absoluteWinCondition}) then
 		{

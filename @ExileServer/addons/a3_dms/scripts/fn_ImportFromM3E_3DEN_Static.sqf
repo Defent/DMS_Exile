@@ -1,15 +1,15 @@
 /*
-	DMS_fnc_ImportFromM3E_Static
+	DMS_fnc_ImportFromM3E_3DEN_Static
 	Created by eraser1
 
-	Check out M3 Editor: http://maca134.co.uk/portfolio/m3editor-arma-3-map-editor/
+	Check out M3 Editor - 3DEN: https://github.com/maca134/m3e_3den/releases
 
 	Usage:
 	[
 		_file							// String: The filename (or filepath under the objects folder) that contains the exported M3E objects
-	] call DMS_fnc_ImportFromM3E_Static;
+	] call DMS_fnc_ImportFromM3E_3DEN_Static;
 
-	_file call DMS_fnc_ImportFromM3E_Static; // This also works
+	_file call DMS_fnc_ImportFromM3E_3DEN_Static; // This also works
 
 	This function will simply create the objects from a file that was exported from M3Editor, and return a list of those objects.
 */
@@ -45,23 +45,14 @@ if ((isNil "_export") || {!(_export isEqualType [])}) exitWith
 
 private _objs = _export apply
 {
-	private _obj = createVehicle [_x select 0, [0,0,0], [], 0, "CAN_COLLIDE"];
-	_obj enableSimulationGlobal false;
-	
-	private _pos = _x select 1;
+	private _object = (_x select 0) createVehicle [0,0,0];
+	_object setPosASL (_x select 1);
+	_object setVectorDirAndUp (_x select 2);
 
-	if (_x select 4) then
-	{
-		_obj setDir (_x select 2);
-		_obj setPosATL _pos;
-	}
-	else
-	{
-		_obj setPosATL _pos;
-		_obj setVectorDirAndUp (_x select 3);
-	};
+	_object enableSimulationGlobal ((_x select 3) select 0);
+	_object allowDamage ((_x select 3) select 1);
 
-	_obj;
+	_object;
 };
 
 

@@ -47,10 +47,9 @@
 	]
 */
 
-private ["_parsedParams", "_extraParams", "_missionPosition", "_OK", "_posInfo", "_forceSpawn", "_findSafePosParams"];
+private _missionPosition = [];
 
-
-_extraParams = [];
+private _extraParams = [];
 
 if (isNil "_this") then
 {
@@ -62,7 +61,7 @@ if (isNil "_this") then
 	// Simply use generated position with default values.
 	_missionPosition =
 	[
-		25,DMS_WaterNearBlacklist,DMS_MaxSurfaceNormal,DMS_SpawnZoneNearBlacklist,DMS_TraderZoneNearBlacklist,DMS_MissionNearBlacklist,DMS_PlayerNearBlacklist,DMS_TerritoryNearBlacklist,DMS_ThrottleBlacklists
+		25,DMS_WaterNearBlacklist,DMS_MinSurfaceNormal,DMS_SpawnZoneNearBlacklist,DMS_TraderZoneNearBlacklist,DMS_MissionNearBlacklist,DMS_PlayerNearBlacklist,DMS_TerritoryNearBlacklist,DMS_ThrottleBlacklists
 	] call DMS_fnc_FindSafePos;
 }
 else
@@ -71,13 +70,13 @@ else
 	{
 		if (params
 		[
-			["_findSafePosParams",[25,DMS_WaterNearBlacklist,DMS_MaxSurfaceNormal,DMS_SpawnZoneNearBlacklist,DMS_TraderZoneNearBlacklist,DMS_MissionNearBlacklist,DMS_PlayerNearBlacklist,DMS_TerritoryNearBlacklist,DMS_ThrottleBlacklists],[[]]],
+			["_findSafePosParams",[25,DMS_WaterNearBlacklist,DMS_MinSurfaceNormal,DMS_SpawnZoneNearBlacklist,DMS_TraderZoneNearBlacklist,DMS_MissionNearBlacklist,DMS_PlayerNearBlacklist,DMS_TerritoryNearBlacklist,DMS_ThrottleBlacklists],[[]]],
 			["_posInfo",[],[[]],[1,2]]
 		])
 		then
 		{
 			_missionPosition = _posInfo select 0;
-			_forceSpawn = if ((count _posInfo)>1) then {_posInfo select 1} else {false};
+			private _forceSpawn = if ((count _posInfo)>1) then {_posInfo select 1} else {false};
 
 			if (!(_missionPosition isEqualType []) || {(count _missionPosition)<2}) then
 			{
@@ -98,7 +97,7 @@ else
 					_missionPosition set [2,0];
 				};
 
-				if (!_forceSpawn && {!([_missionPosition,DMS_WaterNearBlacklist,DMS_MaxSurfaceNormal,DMS_SpawnZoneNearBlacklist,DMS_TraderZoneNearBlacklist,DMS_MissionNearBlacklist,DMS_PlayerNearBlacklist,DMS_TerritoryNearBlacklist] call DMS_fnc_IsValidPosition)}) then
+				if (!_forceSpawn && {!([_missionPosition,DMS_WaterNearBlacklist,DMS_MinSurfaceNormal,DMS_SpawnZoneNearBlacklist,DMS_TraderZoneNearBlacklist,DMS_MissionNearBlacklist,DMS_PlayerNearBlacklist,DMS_TerritoryNearBlacklist] call DMS_fnc_IsValidPosition)}) then
 				{
 					if (DMS_DEBUG) then
 					{
@@ -124,14 +123,14 @@ else
 	{
 		_missionPosition =
 		[
-			25,DMS_WaterNearBlacklist,DMS_MaxSurfaceNormal,DMS_SpawnZoneNearBlacklist,DMS_TraderZoneNearBlacklist,DMS_MissionNearBlacklist,DMS_PlayerNearBlacklist,DMS_TerritoryNearBlacklist,DMS_ThrottleBlacklists
+			25,DMS_WaterNearBlacklist,DMS_MinSurfaceNormal,DMS_SpawnZoneNearBlacklist,DMS_TraderZoneNearBlacklist,DMS_MissionNearBlacklist,DMS_PlayerNearBlacklist,DMS_TerritoryNearBlacklist,DMS_ThrottleBlacklists
 		] call DMS_fnc_FindSafePos;
 
 		_extraParams = _this;
 	};
 };
 
-_parsedParams =
+private _parsedParams =
 [
 	_missionPosition,
 	_extraParams

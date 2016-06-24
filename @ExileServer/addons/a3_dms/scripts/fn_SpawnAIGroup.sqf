@@ -15,16 +15,14 @@
 
 	Returns AI Group
 */
-private ["_OK", "_pos", "_count", "_difficulty", "_class", "_group", "_side", "_customGearSet", "_launcherType", "_launcher", "_unit", "_rocket"];
-
 
 if !(params
 [
-	["_pos","_pos ERROR",[[]],[3]],
-	["_count","_count ERROR",[0]],
-	["_difficulty","_difficulty ERROR",[""]],
-	["_class","_class ERROR",[""]],
-	["_side","_side ERROR",[""]]
+	"_pos",
+	"_count",
+	"_difficulty",
+	"_class",
+	"_side"
 ])
 exitWith
 {
@@ -44,6 +42,9 @@ if (DMS_DEBUG) then
 	(format["SpawnAIGroup :: Spawning %1 %2 %3 AI at %4 with %5 difficulty.",_count,_class,_side,_pos,_difficulty]) call DMS_fnc_DebugLog;
 };
 
+
+private _launcherType = "";
+
 // if soldier have AT/AA weapons
 if (_class isEqualType []) then
 {
@@ -52,7 +53,7 @@ if (_class isEqualType []) then
 };
 
 
-_customGearSet = [];
+private _customGearSet = [];
 
 if (_class == "custom") then
 {
@@ -80,26 +81,27 @@ for "_i" from 1 to _count do
 };
 
 // An AI will definitely spawn with a launcher if you define type
-if ((!isNil "_launcherType") || {DMS_ai_use_launchers && {DMS_ai_launchers_per_group>0}}) then
+if ((DMS_ai_use_launchers && {DMS_ai_launchers_per_group>0}) || {!(_launcherType isEqualTo "")}) then
 {
-	if (isNil "_launcherType") then
+	if (_launcherType isEqualTo "") then
 	{
 		_launcherType = "AT";
 	};
 
-	_units = units _group;
+	private _units = units _group;
+	private _launchers = missionNamespace getVariable [format ["DMS_AI_wep_launchers_%1",_launcherType],["launch_NLAW_F"]];
 
 	for "_i" from 0 to (((DMS_ai_launchers_per_group min _count)-1) max 0) do
 	{
 		if ((random 100)<DMS_ai_use_launchers_chance) then
 		{
-			_unit = _units select _i;
+			private _unit = _units select _i;
 
-			_launcher = (selectRandom (missionNamespace getVariable [format ["DMS_AI_wep_launchers_%1",_launcherType],["launch_NLAW_F"]]));
+			private _launcher = selectRandom _launchers;
 
 			removeBackpackGlobal _unit;
 			_unit addBackpack "B_Carryall_mcamo";
-			_rocket = _launcher call DMS_fnc_selectMagazine;
+			private _rocket = _launcher call DMS_fnc_selectMagazine;
 
 			[_unit, _launcher, DMS_AI_launcher_ammo_count,_rocket] call BIS_fnc_addWeapon;
 
@@ -120,6 +122,11 @@ _group setFormation "WEDGE";
 
 
 [_group,_pos,_difficulty,"COMBAT"] call DMS_fnc_SetGroupBehavior;
+
+if (DMS_ai_freezeOnSpawn) then
+{
+	[_group,true] call DMS_fnc_FreezeToggle;
+};
 
 
 diag_log format ["DMS_SpawnAIGroup :: Spawned %1 AI at %2.",_count,_pos];

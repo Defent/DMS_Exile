@@ -1,16 +1,13 @@
 /*
-	A lot of these configs are influenced by WAI :P
-	https://github.com/nerdalertdk/WICKED-AI
+	Main DMS Config File
 
 	Created by eraser1
+	Several revisions and additions have been made by community members.
+
+
+	A lot of these configs are influenced by WAI :P
+	https://github.com/nerdalertdk/WICKED-AI
 */
-
-
-// Enables debug logging in DMS functions.
-// Logs will be written in the RPT, and if you have infiSTAR's "ARMA_LOG" DLL loaded, it will also produce logs in the server directory.
-// If you have mARMA by maca134, DMS will also utilize mARMA logs.
-// This will produce A LOT of logs, so make sure you leave it to false unless you know what you're doing.
-DMS_DEBUG = false;
 
 
 
@@ -21,7 +18,7 @@ DMS_Use_Map_Config = true;	// Whether or not to use config overwrites specific t
 	For any questions regarding map-specific configs, please leave a reply in the DMS thread on the Exile forums.
 */
 
-DMS_Enable_RankChange = false; // Whether or not to use Rank Changes.
+DMS_Enable_RankChange = false; // Whether or not to use Rank Changes. (Required 'true' if using Occupation)
 /*
 	I am sharing this upgrade to all. If you utilize GR8 Humanity (fully compatible) or a custom version of a ranking system(simple variable changes), this will allow your players to score +/- for Bandit and Hero kills as well as a custom Survivor Faction added to DMS as well. You can still utilize the HERO / BANDIT / SURVIVOR respect and poptab settings for gameplay :) ENJOY! DONKEYPUNCH.INFO!
 */
@@ -59,7 +56,6 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 	DMS_AI_KillPercent					= 100;						// The percent amount of AI that need to be killed for "killPercent" mission requirement (NOT IMPLEMENTED)
 
 	/*Mission Marker settings*/
-	DMS_MissionMarkerCount				= 2;						// If you modify your CreateMarker and have multiple markers, you probably want to change this. *cough*Vish*cough*
 	DMS_ShowDifficultyColorLegend		= true;						// Whether or not to show a "color legend" at the bottom left of the map that shows which color corresponds to which difficulty. I know it's not very pretty, meh.
 	DMS_MarkerText_ShowMissionPrefix	= true;						// Whether or not to place a prefix before the mission marker text. Enable this if your players get confused by the marker names :P
 	DMS_MarkerText_MissionPrefix		= "Mission:";				// The text displayed before the mission name in the mission marker.
@@ -215,44 +211,47 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 										];
 
 
-	DMS_StaticMissionTypes =			[							// List of STATIC missions with spawn chances.
-											//["saltflats",1],		//<--Example (already imported by default on Altis)
-											//["slums",1]			//<--Example (already imported by default on Altis)
-
+	DMS_StaticMissionTypes =			[								// List of STATIC missions with spawn chances.
+											//["saltflats",1]			//<--Example (already imported by default on Altis in map configs)
+											//["slums",1]				//<--Example (already imported by default on Altis in map configs)
+											//["occupation",1]		//<--Example
 											//["sectorB",1]			//<--Example for Taviana
 										];
 
-	DMS_BasesToImportOnServerStart = 	[							// List of static bases to import on server startup (spawned post-init). This will reduce the amount of work the server has to do when it actually spawns static missions, and players won't be surprised when a base suddenly pops up. You can also include any other M3E-exported bases to spawn here.
+	DMS_BasesToImportOnServerStart = 	[								// List of static bases to import on server startup (spawned post-init). This will reduce the amount of work the server has to do when it actually spawns static missions, and players won't be surprised when a base suddenly pops up. You can also include any other M3E-exported bases to spawn here.
 											//"saltflatsbase",		//<--Example (already imported by default on Altis)
-											//"slums_objects"		//<--Example (already imported by default on Altis)
+											//"slums_objects"			//<--Example (already imported by default on Altis)
 										];
 
 	DMS_BanditMissionsOnServerStart =	[
 											//"construction"		//<-- Example
 										];
 
-	DMS_StaticMissionsOnServerStart =	[							// List of STATIC missions with spawn chances.
-											//"saltflats",			//<--Example
-											//"slums				//<--Example
-
+	DMS_StaticMissionsOnServerStart =	[								// List of STATIC missions with spawn chances.
+											//"saltflats"				//<--Example
+											//"slums"				//<--Example
+											//"occupation"			//<--Example
 											//"sectorB"				//<--Example for Taviana
 										];
 
 
 
-	DMS_findSafePosBlacklist =			[							// For BIS_fnc_findSafePos position blacklist info refer to: http://www.exilemod.com/topic/61-dms-defents-mission-system/?page=18#comment-31190
+	DMS_findSafePosBlacklist =			[							// For position blacklist info refer to: http://www.exilemod.com/topic/61-dms-defents-mission-system/?do=findComment&comment=31190
 											// An example is given in the altis_config.sqf (it blacklists the salt flats).
 											/*
 											// Blacklists most of the Northern Taviana Volcano
 											[[11375,16170],[14302,18600]],
 											[[13300,14670],[14875,16170]]
 											*/
+
+											//[[2350,4680],100]		// This random example blacklists any position within 100 meters of coordinates "[2350,4680]"
 										];
 /* Mission System Settings */
 
 
 /* AI Settings */
 	DMS_AI_Classname					= "O_recon_F";				// Since some of you wanted this...
+	DMS_AI_UseRealNames					= true;						// true if you want Arma assigned real names, false if you want random DMS assigned unit numbers
 
 	DMS_Show_Kill_Poptabs_Notification	= true;						// Whether or not to show the poptabs gained/lost message on the player's screen when killing an AI. (It will still change the player's money, it just won't show the "Money Received" notification)
 	DMS_Show_Kill_Respect_Notification	= true;						// Whether or not to show the "Frag Message" on the player's screen when killing an AI. (It will still change the player's respect, it just won't show the "AI Killed" frag message)
@@ -342,6 +341,14 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 	DMS_ai_offload_to_client			= true;						// Offload spawned AI groups to random clients. Helps with server performance.
 	DMS_ai_offload_Only_DMS_AI			= false;					// Do you use other mission systems on your server but still want to offload AI? You should probably enable this then, unless you have tested it for compatibility.
 	DMS_ai_offload_notifyClient			= false;					// Notify the client when AI has been offloaded to the client.
+
+	DMS_ai_allowFreezing				= true;						// Whether or not to "freeze" AI that are a certain distance away from players (and therefore inactive).
+	DMS_ai_freeze_Only_DMS_AI			= false;					// Whether or not to "freeze" AI that are not spawned by DMS.
+	DMS_ai_freezingDistance				= 3500;						// If there are no players within this distance of the leader of an AI group, then the AI group will be "frozen".
+	DMS_ai_unfreezingDistance			= 3500;						// If there are players within this distance of the leader of an AI group, then the AI group will be "un-frozen".
+	DMS_ai_offloadOnUnfreeze			= true;						// Whether or not to offload AI to clients once they have been "un-frozen". NOTE: This config will be ignored if "DMS_ai_offload_to_client" is set to false.
+	DMS_ai_freezeCheckingDelay			= 30;						// How often (in seconds) DMS will check whether to freeze/un-freeze AI.
+	DMS_ai_freezeOnSpawn				= true;						// Whether or not to freeze an AI group when initially spawned.
 
 	DMS_ai_share_info					= true;						// Share info about killer
 	DMS_ai_share_info_distance			= 300;						// The distance killer's info will be shared to other AI
@@ -441,6 +448,15 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 	DMS_assault_equipment =				[							// Equipment for Assault Class AI (stuff that goes in toolbelt slots)
 											"ItemGPS"
 										];
+	DMS_assault_RandItemCount =			2;							// How many random items to add to the AI's inventory.
+	DMS_assault_RandItems =				[							// The random items that will be added to the AI's inventory.
+											"Exile_Item_Catfood_Cooked",
+											"Exile_Item_Surstromming_Cooked",
+											"Exile_Item_PowerDrink",
+											"Exile_Item_EnergyDrink",
+											"Exile_Item_Vishpirin",
+											"Exile_Item_Bandage"
+										];
 	DMS_assault_helmets	=				[							// Helmets for Assault Class
 											"H_HelmetSpecB_paint1",
 											"H_HelmetIA_camo",
@@ -515,6 +531,15 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 										];
 	DMS_MG_equipment =					[							// Equipment for MG Class AI (stuff that goes in toolbelt slots)
 											"Binocular"
+										];
+	DMS_MG_RandItemCount =				3;							// How many random items to add to the AI's inventory.
+	DMS_MG_RandItems =					[							// The random items that will be added to the AI's inventory.
+											"Exile_Item_EMRE",
+											"Exile_Item_Surstromming_Cooked",
+											"Exile_Item_PowerDrink",
+											"Exile_Item_PlasticBottleCoffee",
+											"Exile_Item_Vishpirin",
+											"Exile_Item_Instadoc"
 										];
 	DMS_MG_helmets =					[							// Helmets for MG Class
 											"H_PilotHelmetHeli_I",
@@ -601,6 +626,14 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 	DMS_sniper_equipment =				[							// Equipment for Sniper Class AI (stuff that goes in toolbelt slots)
 											"Rangefinder",
 											"ItemGPS"
+										];
+	DMS_sniper_RandItemCount =			3;							// How many random items to add to the AI's inventory.
+	DMS_sniper_RandItems =				[							// The random items that will be added to the AI's inventory.
+											"Exile_Item_EMRE",
+											"Exile_Item_PlasticBottleCoffee",
+											"Exile_Item_CanOpener",
+											"Exile_Item_Instadoc",
+											"Exile_Item_DuctTape"
 										];
 	DMS_sniper_helmets =				[							// Helmets for Sniper Class
 											"H_HelmetSpecB_paint1",
@@ -779,7 +812,9 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 											"Exile_Item_ChristmasTinner_Cooked",
 											"Exile_Item_BBQSandwich_Cooked",
 											"Exile_Item_Catfood_Cooked",
-											"Exile_Item_DogFood_Cooked"
+											"Exile_Item_DogFood_Cooked",
+											"Exile_Item_EMRE",
+											"Exile_Item_EMRE"
 										];
 	DMS_BoxDrinks =						[
 											"Exile_Item_PlasticBottleCoffee",

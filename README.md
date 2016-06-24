@@ -75,8 +75,8 @@ after "7 createVehicle"
 
 
 ## infiSTAR:
-* If you are using infiSTAR and want to keep ```_CGM = true;```, then set ```_UMW = true;```.
-* Add ```'O_HMG_01_high_F'``` to "_VehicleWhiteList", as well as any other vehicles you add to DMS that are not whitelisted.
+* If you are using infiSTAR and want to keep ```CGM = true;```, then set ```UMW = true;```.
+* Add ```'O_HMG_01_high_F'``` to ```_VehicleWhiteList```, as well as any other vehicles you add to DMS that are not whitelisted.
 
 
 ### Vilayer or other Game Server Providers Instructions:
@@ -94,9 +94,9 @@ If you are using Vilayer or some other GameServer hosting service, and/or the ab
 **DMS does not currently support headless client. Do not attempt to use HC with DMS unless you know what you are doing.**
 
 ## Troubleshooting:
-DMS won't spawn missions? Check RPT for config errors or make sure PBO is packed correctly by unpacking it and ensuring the folder structure is "\x\addons\a3_DMS\...".
+If you're having any issues with DMS, check your RPT for errors and make sure PBO is packed correctly by unpacking it and ensuring the folder structure is "\x\addons\a3_DMS\...".
 
-If you can't figure it out, leave a post on [the DMS thread on exile forums](http://www.exilemod.com/topic/61-dms-defents-mission-system/?do=findComment&comment=242). **Make sure to include your RPT, config.sqf, as well as any changed files.**
+If you can't figure it out, leave a post on [the DMS thread on exile forums](http://www.exilemod.com/topic/61-dms-defents-mission-system/?do=findComment&comment=242). **Make sure to include your RPT, config.sqf, as well as any changed files. Please use [pastebin](http://pastebin.com/), spoilers, or something similar; DO NOT PASTE EVERYTHING DIRECTLY INTO THE POST (without putting it in a spoiler)**
 
 ___
 
@@ -104,6 +104,7 @@ ___
 ### Authors:
 - [Defent](https://github.com/Defent) from [NumenaDayZ](http://numenadayz.com/).
 - [eraser1](https://github.com/eraser1) from [TrainwreckDayZ](http://www.trainwreckdayz.com/home).
+- [secondcoming](https://github.com/secondcoming) from [ExileYorkshire](http://exileyorkshire.co.uk/).
 
 
 ### Thanks:
@@ -126,11 +127,6 @@ ___
 ___
 
 # Roadmap:
-#### Continuous Optimization + Improvements.
-* ~~Implement the ability to "freeze" and "unfreeze" AI when there are no players nearby to improve performance. This will be under testing with a few selected server owners/community members. If you would like to participate in testing, please send a PM to [eraser1 on Exile Forums](http://www.exilemod.com/profile/96-eraser1/).~~ _This feature is slated for a future date_
-
-#### AI Heli Paratroopers/air support.
-
 #### Convoy Mission:
 * Regularly update marker position.
 * Implement function(s) for AI pathing.
@@ -145,12 +141,110 @@ ___
 * Spawning in a trader on mission completion ([Trillseeker82](http://www.exilemod.com/topic/61-dms-defents-mission-system/?do=findComment&comment=43932)). This might be done after the next Exile update due to the trader system overhaul :)
 
 #### Full Headless Client Support.
+* AI will still be offloaded to clients (ideally); strictly DMS functions will be handled by the HC.
 
 
 
 ___
 
 # Changelog:
+
+### Test Branch:
+#### June 16, 2016 (1:55 PM CST-America) **Release Candidate 1.5**:
+* New function: DMS_fnc_AddWeapon. More efficient version of BIS_fnc_AddWeapon, and removed almost all error-checking.
+* DMS will now log the DMS version to the client RPT on login.
+* Fixed a couple issues in fn_SpawnAISoldier.sqf.
+* Updated Tanoa config, missions should now be (somewhat) less likely to spawn in the center valley of the main island.
+
+#### June 16, 2016 (1:55 PM CST-America) **Release Candidate 1.3**:
+* Renamed the "mercbase.sqf" mission title to "Mercenary Outpost" to avoid confusion with the salt flats mission.
+* Fixed an issue with fn_SpawnMineField.sqf (thanks to CEN for providing important info)
+
+
+#### June 12, 2016 (3:15 AM CST-America) **Release Candidate 1.2**:
+* Removed the marker color check in "DMS_fnc_CreateMarker". Invalid marker colors are up to server owners to detect.
+* Micro-optimized "DMS_fnc_IsPosBlacklisted" for the rectangular blacklist case; also rearranged the statements to be clearer and easier to understand.
+
+
+#### June 7, 2016 (11:15 PM CST-America) **Release Candidate 1.1**:
+* Slight optimization of SpawnAIGroup functions (if you have launchers enabled).
+
+#### June 6, 2016 (10:45 PM CST-America) **Release Candidate 1**:
+* New function: DMS_fnc_IsPosBlacklisted (optimized replacement for "BIS_fnc_IsPosBlacklisted")
+* Config value "DMS_findSafePosBlacklist" now supports the ability to blacklist within a certain distance of a given position.
+* "DMS_CLIENT" functions are now compiled in pre-init (broadcasting is still done in post-init).
+* Notifications from "textTilesRequest" and "dynamicTextRequest" should no longer "stack" on each other; if two missions spawn right after another, the second mission notification will be delayed at least until the first one completes.
+* More Micro-optimizations on most functions; parameters passed to DMS functions will no longer be checked to see if they are the right type, etc. It was determined that they didn't really provide any benefit, as most errors either don't trigger the "params" error, or the error is simply reiterated elsewhere.
+* Removed config value "DMS_MissionMarkerCount"
+* "DMS_fnc_FindSuppressor" has been overhauled; it simply checks the configs for the provided weapon classname to return a random muzzle/suppressor classname. Consequently, the function is smaller, faster, and perfectly compatible with any weapon.
+* The "freeze manager" will now unfreeze AI if needed regardless of setting "DMS_ai_allowFreezing" to false.
+
+#### May 22, 2016 (3:15 PM CST-America):
+* **NEW CONFIG VALUES:**
+		DMS_ai_freezeOnSpawn
+* Added the ability to freeze AI groups immediately upon spawn.
+* Units spawned to a group that has been frozen should now also be frozen.
+* Fixed an issue where "FindSuppressor" would return a boolean instead of empty string.
+* Fixed an issue with undefined variable when "DMS_ai_offloadOnUnfreeze" was set to true.
+* Added debug message when a group is frozen.
+* Created a new function "DMS_fnc_FreezeToggle" that actually handles freezing/unfreezing.
+* DMS will now apply a variable "DMS_isGroupFrozen" to groups that are frozen.
+
+#### May 22, 2016 (12:00 AM CST-America):
+* **NEW CONFIG VALUES:**
+		DMS_ai_allowFreezing
+		DMS_ai_freeze_Only_DMS_AI
+		DMS_ai_freezingDistance
+		DMS_ai_unfreezingDistance
+		DMS_ai_offloadOnUnfreeze
+		DMS_ai_freezeCheckingDelay
+* Removed a "Land_Wreck_Heli_Attack_01_F" from saltflats (it creates server threads)
+* Adjusted logic in "AILocalityManager": the variable "DMS_LockLocality" on a group should now be considered even if "DMS_ai_offload_Only_DMS_AI" is set to false.
+* You can now "freeze"/"un-freeze" AI! This has been a long-awaited feature for DMS. Using it should grant major performance benefits when you have lots of AI around the map that are inactive.
+
+#### May 16, 2016 (11:00 AM CST-America):
+* Fixed an error in fn_SpawnAIGroup (and MultiPos variant)
+
+#### May 16, 2016 (11:00 AM CST-America):
+* Occupation will now print debug logs only if DMS_DEBUG is enabled.
+* Fixed an error with fn_FindSafePos.
+
+#### May 15, 2016 (2:00 PM CST-America):
+* **NEW CONFIG VALUES:**
+
+		DMS_AI_UseRealNames
+* More Micro-optimizations.
+* Fixed a lot of various errors from the last test branch update.
+* Integrated Exile Occupation by second coming :)
+
+
+#### May 6, 2016 (10:45 PM CST-America):
+* **NEW CONFIG VALUES:**
+
+		DMS_assault_RandItemCount
+		DMS_assault_RandItems
+		DMS_MG_RandItemCount
+		DMS_MG_RandItems
+		DMS_sniper_RandItemCount
+		DMS_sniper_RandItems
+* New functions: DMS_fnc_ImportFromM3E_3DEN, DMS_fnc_ImportFromM3E_3DEN_Convert, DMS_fnc_ImportFromM3E_3DEN_Static.
+* Functions that were previously defined in preinit with regular code brackets ("GetCenter", "SetRelPositions", and "SubArr") are now defined as DMS functions (instead of M3E functions before) and have their own files.
+* "M3E" functions are still defined in DMS pre-init for compatibility with external code.
+* You can now allow a set of random inventory items that are given to AI. Amount and item types can be set per-class.
+* "DMS_StaticMissionsOnServerStart" will only be used if "DMS_StaticMission" is set to true. In other words, no static missions will be spawned on server start if you don't use static missions.
+* DMS will now issue an error if you set "DMS_Use_Map_Config" for map without a config. Hopefully this resolves an issue where the server wouldn't start if you tried to load a map config from a file that didn't exist.
+* Adjusted map config for chernarus: Missions should no longer spawn near map borders.
+* Micro-optimizations for almost all DMS functions (using the new functionality of "private", which is faster than the previous). Also, some variables that weren't previously defined as private are now fixed.
+* Removed legacy HC (headless client) support from "DMS_fnc_AILocalityManager".
+* Major optimizations for DMS_fnc_FindSafePos
+* Removed the useless ```_waterSpawn``` parameter from "FindSafePos" and "IsValidPosition". DMS is currently only used on land, a dedicated function for finding valid water spawns will come if/when needed.
+* All of the "Import" functions now check for invalid exports.
+* When using a "custom gear set", magazines and items are added about 0.5 seconds after the AI is spawned in order to account for an issue where the backpack isn't used (because it isn't added fast enough?). (Thanks to [second_coming](http://www.exilemod.com/profile/60-second_coming/) for the report)
+* NOTE: I didn't test any of this stuff, and there's LOTS of code changes. Do not be surprised if everything is broke! :p
+
+
+
+### Main Branch
 #### April 27, 2016 (6:45 PM CST-America):
 * **NEW CONFIG VALUES**
 
@@ -179,75 +273,6 @@ ___
 * Fixed an issue where static weapons would always be destroyed, ignoring other configs. Thanks to [second_coming](http://www.exilemod.com/profile/60-second_coming/)!
 * Disable simulation on objects imported from M3Editor. (Thanks to [second_coming](http://www.exilemod.com/profile/60-second_coming/) for the tip).
 * Fixed an issue where AI units would be shown in static missions if configured to do so for dynamic missions (at least at first).
-
-### Test Branch (Now Integrated Live):
-#### List Of new Config values:
-
-		DMS_SpawnMissions_Scheduled
-		DMS_AI_WP_Radius_heli
-		DMS_AI_WP_Radius_heli
-		DMS_RHeli_Height
-		DMS_RHeli_MinDistFromDrop
-		DMS_RHeli_MaxDistFromDrop
-		DMS_RHeli_MinDistFromPlayers
-		DMS_RareLootAmount
-		DMS_ReinforcementHelis
-
-#### April 20, 2016 (5:45 PM CST-America, RC):
-* The new "DMS_fnc_FindSafePos_InRange" function will ignore the config "DMS_UsePredefinedMissionLocations".
-* Disable simulation on objects imported from M3Editor. (Thanks to [second_coming](http://www.exilemod.com/profile/60-second_coming/) for the tip)
-
-#### April 15, 2016 (8:45 PM CST-America, RC):
-* Fixed an issue where static weapons would always be destroyed, ignoring other configs. Thanks to [second_coming](http://www.exilemod.com/profile/60-second_coming/)!
-
-#### April 15, 2016 (9:30 AM CST-America, RC):
-* Fixed script error in OnKilled EH when handling a used AI vehicle.
-
-#### April 14, 2016 (9:20 PM CST-America, RC):
-* Fix script error with saltflats.
-* "DMS_fnc_AddMissionToMonitor" will no longer convert given AI parameters to a list of objects, so you can now add other units to the mission (within the same group) without much issue.
-* Micro-optimizations here and there.
-* Fixed an issue with DMS_fnc_GetAllUnits such that it would return an empty list if given a list of AI objects.
-* You can now set the maximum limit of paratrooper reinforcements.
-* The pilot of the reinforcement heli should now fly away properly if configured to do so.
-* Updated group reinforcement manager for compatibility with latest syntax for paratrooper reinforcements (NOTE: UNTESTED).
-
-
-#### March 31, 2016 (6:00 PM CST-America):
-* You can now use "setVariable" to define individually on an AI vehicle its "DMS_DestructionChance". EG: ```_vehicle setVariable ["DMS_DestructionChance",100];``` to always destroy a vehicle when its crew is dead.
-* "DMS_DestructionChance" values are defaulted to "DMS_AI_destroyStaticWeapon_chance" or "DMS_AI_destroyVehicleChance" for static or regular vehicles, respectively.
-* Optimization + code cleanup for "DMS_fnc_SpawnHeliReinforcement".
-
-#### March 25, 2016 (6:00 PM CST-America):
-* **NEW CONFIG VALUES:**
-
-		DMS_AI_WP_Radius_heli
-		DMS_AI_WP_Radius_heli
-		DMS_RHeli_Height
-		DMS_RHeli_MinDistFromDrop
-		DMS_RHeli_MaxDistFromDrop
-		DMS_RHeli_MinDistFromPlayers
-		DMS_RareLootAmount
-		DMS_ReinforcementHelis
-* DMS Version is set in the "config.cpp", and grabbed in pre-init.
-* You can now define how much rare loot to spawn.
-* Limit # of attempts in "DMS_fnc_FindSafePos" to 5000.
-* New function: DMS_fnc_FindSafePos_InRange; Uses "DMS_fnc_FindSafePos" and edits some variables to return a "safe" position within a certain area.
-* New function: DMS_fnc_GetEmptySeats; Returns all empty seats in a vehicle. Not used by DMS, I thought I needed it and I realized I didn't afterwards.
-* New function: DMS_fnc_HeliParatroopers_Monitor; Monitors helis/aircraft spawned for paratroopers. **NOT YET COMPLETE**
-* New function: DMS_fnc_SpawnHeliReinforcement; Spawns a heli/aircraft with paratroopers for reinforcement. **NOT YET COMPLETE**
-* New group reinforcement type: "heli_troopers". Changes most likely to come.
-* You can now choose whether or not to destroy or simply unlock a used AI vehicle (with a random percentage chance).
-* Slight optimizations here and there (more to come).
-
-#### March 1, 2016 (12:30 AM CST-America):
-* Initial Test Branch commit
-* **NEW CONFIG VALUE:** DMS_SpawnMissions_Scheduled
-* Several optimizations (mostly due to the new scripting commands introduced in 1.56)
-* You can now spawn missions in scheduled environment.
-
-### End "March 1, 2016" Test Branch
-
 
 
 #### February 19, 2016 (5:45 PM CST-America):
@@ -565,7 +590,7 @@ ___
 * Debug logs for "DMS_fnc_MissionsMonitor" will only output the mission name and the position, instead of all of the parameters.
 * "DMS_fnc_IsNearWater" will now check the provided position itself for water.
 * "DMS_fnc_IsValidPosition" will now do a surfaceNormal check within a 5 meter radius of the provided position as well.
-* "_customGearSet" should now actually work for "DMS_fnc_SpawnAISoldier", and the function title comment has been updated for the slightly tweaked syntax.
+* ```_customGearSet``` should now actually work for "DMS_fnc_SpawnAISoldier", and the function title comment has been updated for the slightly tweaked syntax.
 
 
 #### October 8, 2015 (7:15 PM CST-America):
@@ -596,7 +621,7 @@ ___
 * These changes should make it much easier for people to use DMS notification functions for other purposes.
 * Fixed AI waypoints - the AI should now properly circle the objective at the proper radius.
 * Tweaked "DMS_AI_WP_Radius_moderate" and "DMS_AI_WP_Radius_difficult" (reduced the radii). Due to the AI pathing fix.
-* Fixed a couple typos in "DMS_fnc_SpawnAISoldier". "_customGearSet" should work now (although I'm fairly certain nobody uses it since nobody ever complained :P )
+* Fixed a couple typos in "DMS_fnc_SpawnAISoldier". ```_customGearSet``` should work now (although I'm fairly certain nobody uses it since nobody ever complained :P )
 * Improved "DMS_fnc_SpawnNonPersistentVehicle"; Vehicles should no longer spawn jumbled up in most cases (like cardealer). Also, it's updated to the latest Exile methods to ensure that vehicles have no nightvision/thermal if configured to do so in Exile configs. Also added the "MPKilled" EH used by Exile for non-persistent (persistent vehicles already had it).
 * You can now choose whether or not you want to display the poptabs or respect kill messages when killing an AI with "DMS_Show_Kill_Poptabs_Notification" and "DMS_Show_Kill_Respect_Notification". Both are enabled by default.
 * Fixed typos in the "OnKilled" EH (didn't really affect anything)
@@ -838,3 +863,75 @@ ___
 * Decreased default amount of money/respect gain on AI kills (Used to be 100 poptabs and 25 respect, it is now 50 poptabs and 10 respect)
 * Define functions in config.cpp. This resulted in ALL FILES being changed to some degree.
 * Fixed spawning Binocs and Rangefinders/Designators on AI.
+
+
+
+## Previous Test Branch Changes:
+
+### "March 1, 2016" Test Branch
+#### List Of new Config values:
+
+		DMS_SpawnMissions_Scheduled
+		DMS_AI_WP_Radius_heli
+		DMS_AI_WP_Radius_heli
+		DMS_RHeli_Height
+		DMS_RHeli_MinDistFromDrop
+		DMS_RHeli_MaxDistFromDrop
+		DMS_RHeli_MinDistFromPlayers
+		DMS_RareLootAmount
+		DMS_ReinforcementHelis
+
+#### April 20, 2016 (5:45 PM CST-America, RC):
+* The new "DMS_fnc_FindSafePos_InRange" function will ignore the config "DMS_UsePredefinedMissionLocations".
+* Disable simulation on objects imported from M3Editor. (Thanks to [second_coming](http://www.exilemod.com/profile/60-second_coming/) for the tip)
+
+#### April 15, 2016 (8:45 PM CST-America, RC):
+* Fixed an issue where static weapons would always be destroyed, ignoring other configs. Thanks to [second_coming](http://www.exilemod.com/profile/60-second_coming/)!
+
+#### April 15, 2016 (9:30 AM CST-America, RC):
+* Fixed script error in OnKilled EH when handling a used AI vehicle.
+
+#### April 14, 2016 (9:20 PM CST-America, RC):
+* Fix script error with saltflats.
+* "DMS_fnc_AddMissionToMonitor" will no longer convert given AI parameters to a list of objects, so you can now add other units to the mission (within the same group) without much issue.
+* Micro-optimizations here and there.
+* Fixed an issue with DMS_fnc_GetAllUnits such that it would return an empty list if given a list of AI objects.
+* You can now set the maximum limit of paratrooper reinforcements.
+* The pilot of the reinforcement heli should now fly away properly if configured to do so.
+* Updated group reinforcement manager for compatibility with latest syntax for paratrooper reinforcements (NOTE: UNTESTED).
+
+
+#### March 31, 2016 (6:00 PM CST-America):
+* You can now use "setVariable" to define individually on an AI vehicle its "DMS_DestructionChance". EG: ```_vehicle setVariable ["DMS_DestructionChance",100];``` to always destroy a vehicle when its crew is dead.
+* "DMS_DestructionChance" values are defaulted to "DMS_AI_destroyStaticWeapon_chance" or "DMS_AI_destroyVehicleChance" for static or regular vehicles, respectively.
+* Optimization + code cleanup for "DMS_fnc_SpawnHeliReinforcement".
+
+#### March 25, 2016 (6:00 PM CST-America):
+* **NEW CONFIG VALUES:**
+
+		DMS_AI_WP_Radius_heli
+		DMS_AI_WP_Radius_heli
+		DMS_RHeli_Height
+		DMS_RHeli_MinDistFromDrop
+		DMS_RHeli_MaxDistFromDrop
+		DMS_RHeli_MinDistFromPlayers
+		DMS_RareLootAmount
+		DMS_ReinforcementHelis
+* DMS Version is set in the "config.cpp", and grabbed in pre-init.
+* You can now define how much rare loot to spawn.
+* Limit # of attempts in "DMS_fnc_FindSafePos" to 5000.
+* New function: DMS_fnc_FindSafePos_InRange; Uses "DMS_fnc_FindSafePos" and edits some variables to return a "safe" position within a certain area.
+* New function: DMS_fnc_GetEmptySeats; Returns all empty seats in a vehicle. Not used by DMS, I thought I needed it and I realized I didn't afterwards.
+* New function: DMS_fnc_HeliParatroopers_Monitor; Monitors helis/aircraft spawned for paratroopers. **NOT YET COMPLETE**
+* New function: DMS_fnc_SpawnHeliReinforcement; Spawns a heli/aircraft with paratroopers for reinforcement. **NOT YET COMPLETE**
+* New group reinforcement type: "heli_troopers". Changes most likely to come.
+* You can now choose whether or not to destroy or simply unlock a used AI vehicle (with a random percentage chance).
+* Slight optimizations here and there (more to come).
+
+#### March 1, 2016 (12:30 AM CST-America):
+* Initial Test Branch commit
+* **NEW CONFIG VALUE:** DMS_SpawnMissions_Scheduled
+* Several optimizations (mostly due to the new scripting commands introduced in 1.56)
+* You can now spawn missions in scheduled environment.
+
+### End "March 1, 2016" Test Branch

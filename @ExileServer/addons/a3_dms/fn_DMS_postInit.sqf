@@ -93,6 +93,11 @@ if ((isClass (configFile >> "CfgPatches" >> "Ryanzombies")) && {!DMS_ai_offload_
 	DMS_ai_offload_Only_DMS_AI = true;
 };
 
+if !(DMS_ai_offload_to_client) then
+{
+	DMS_ai_offloadOnUnfreeze = false;
+};
+
 
 
 DMS_A3_AllMarkerColors = [];
@@ -116,43 +121,15 @@ if !((toLower DMS_MissionMarkerLoseDotColor) in DMS_A3_AllMarkerColors) then
 
 
 
-// Create and send Client Functions using compileFinal for security.
-DMS_CLIENT_fnc_spawnDynamicText = compileFinal
-("
-[
-	_this,
-	0,
-	safeZoneY,
-	"+str DMS_dynamicText_Duration+",
-	"+str DMS_dynamicText_FadeTime+",
-	0,
-	24358+round(random 5)
-] spawn BIS_fnc_dynamicText;
-");
+// Send Client Functions using compileFinal for security.
 publicVariable "DMS_CLIENT_fnc_spawnDynamicText";
-
-DMS_CLIENT_fnc_spawnTextTiles = compileFinal
-("
-[
-	parseText _this,
-	[
-		0,
-		safeZoneY,
-		1,
-		1
-	],
-	[10,10],
-	"+str DMS_textTiles_Duration+",
-	"+str DMS_textTiles_FadeTime+",
-	0
-] spawn BIS_fnc_textTiles;
-");
 publicVariable "DMS_CLIENT_fnc_spawnTextTiles";
-
-DMS_CLIENT_fnc_hintSilent = compileFinal "hintSilent parsetext format['%1',_this];";
 publicVariable "DMS_CLIENT_fnc_hintSilent";
 
 publicVariable "DMS_Version";
+
+
+format["DMS_Version: %1",DMS_Version] remoteExecCall ["diag_log", -2, "DMS_LogVersion_JIP_ID"]; 
 
 
 
@@ -221,14 +198,19 @@ if (DMS_ShowDifficultyColorLegend) then
 	[_x] call DMS_fnc_SpawnBanditMission;
 } forEach DMS_BanditMissionsOnServerStart;
 
+if (DMS_StaticMission) then
 {
-	[_x] call DMS_fnc_SpawnStaticMission;
-} forEach DMS_StaticMissionsOnServerStart;
+	{
+		[_x] call DMS_fnc_SpawnStaticMission;
+	} forEach DMS_StaticMissionsOnServerStart;
+};
 
 
 // Add heli paratroopers monitor to the thread system.
 [5, DMS_fnc_HeliParatroopers_Monitor, [], true] call ExileServer_system_thread_addTask;
 
+// Add "freeze" monitor to the thread system.
+[DMS_ai_freezeCheckingDelay, DMS_fnc_FreezeManager, [], true] call ExileServer_system_thread_addTask;
 
 
 

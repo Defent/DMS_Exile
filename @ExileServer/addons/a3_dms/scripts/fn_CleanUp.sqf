@@ -14,7 +14,6 @@
     _objectOrGroup call DMS_fnc_CleanUp;
 */
 
-
 if (DMS_DEBUG) then
 {
     (format ["CleanUp :: CLEANING UP: %1",_this]) call DMS_fnc_DebugLog;
@@ -25,14 +24,10 @@ if !(_this isEqualType []) then
     _this = [_this];
 };
 
-private ["_skippedObjects"];
 
-_skippedObjects = [];
-
-
+private _skippedObjects = [];
 {
-    private ["_parameter"];
-    _parameter = _x;
+    private _parameter = _x;
 
     switch (typeName _parameter) do
     {

@@ -14,14 +14,10 @@
 	Returns nothing
 */
 
-
-private ["_missionName", "_messageInfo", "_titleColor", "_message"];
-
-
 if !(params
 [
-	["_missionName","",[""]],
-	["_messageInfo",[],[[]],[2]]
+	"_missionName",
+	"_messageInfo"
 ])
 exitWith
 {
@@ -31,7 +27,7 @@ exitWith
 _messageInfo params
 [
 	["_titleColor","#FFFF00",[""]],
-	["_message","",[""]]
+	"_message"
 ];
 
 if (DMS_DEBUG) then
@@ -47,8 +43,6 @@ if !(_message isEqualType "") then
 if (_message isEqualTo "") exitWith {};
 
 {
-	private "_args";
-
 	switch (toLower _x) do
 	{
 		case "systemchatrequest":

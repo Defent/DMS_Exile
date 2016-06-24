@@ -130,7 +130,7 @@ _msgWIN = ['#0080ff',"Convicts have successfully assaulted the Mercenary Base an
 _msgLOSE = ['#FF0000',"Seems like the Mercenaries packed up and drove away..."];
 
 // Define mission name (for map marker and logging)
-_missionName = "Mercenary Base";
+_missionName = "Mercenary Outpost";
 
 // Create Markers
 _markers =

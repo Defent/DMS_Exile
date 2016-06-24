@@ -11,7 +11,6 @@
 		_traderZoneNearLimit,		// NUMBER (distance): Minimum distance from a trader zone.
 		_missionNearLimit,			// NUMBER (distance): Minimum distance from another mission.
 		_playerNearLimit,			// NUMBER (distance): Minimum distance from a player.
-		_waterSpawn					// BOOLEAN: Whether or not the mission is supposed to spawn on water.
 	] call DMS_fnc_IsValidPosition;
 
 	All parameters except "_pos" are optional.
@@ -19,30 +18,26 @@
 	Returns whether or not the provided position matches the parameters.
 */
 
-private ["_pos", "_nearestObjectMinDistance", "_waterNearLimit", "_minSurfaceNormal", "_spawnZoneNearLimit", "_traderZoneNearLimit", "_missionNearLimit", "_playerNearLimit", "_territoryNearLimit", "_waterSpawn", "_isValidPos"];
-
-
-
-_isValidPos = false;
-
 if !(params
 [
-	["_pos", 						[],				[[]],		[0,2,3]],
-	["_waterNearLimit",				DMS_WaterNearBlacklist,		[0] ],
-	["_minSurfaceNormal",			DMS_MinSurfaceNormal,		[0] ],
-	["_spawnZoneNearLimit",			DMS_SpawnZoneNearBlacklist, [0]	],
-	["_traderZoneNearLimit",		DMS_TraderZoneNearBlacklist,[0] ],
-	["_missionNearLimit",			DMS_MissionNearBlacklist,	[0] ],
-	["_playerNearLimit",			DMS_PlayerNearBlacklist,	[0] ],
-	["_territoryNearLimit",			DMS_TerritoryNearBlacklist,	[0]	],
-	["_waterSpawn",					false,						[false]	]
+	"_pos",
+	"_waterNearLimit",
+	"_minSurfaceNormal",
+	"_spawnZoneNearLimit",
+	"_traderZoneNearLimit",
+	"_missionNearLimit",
+	"_playerNearLimit",
+	"_territoryNearLimit"
 ])
 then
 {
 	diag_log format ["DMS ERROR :: Calling DMS_fnc_isValidPosition with invalid parameters: %1",_this];
+	false
 }
 else
 {
+	private _isValidPos = false;
+
 	try
 	{
 		if ((count _pos)<2) then
@@ -56,54 +51,36 @@ else
 		};
 
 
-		if (!(DMS_findSafePosBlacklist isEqualTo []) && {([_pos, DMS_findSafePosBlacklist] call BIS_fnc_isPosBlacklisted)}) then
+		if (!(DMS_findSafePosBlacklist isEqualTo []) && {([_pos, DMS_findSafePosBlacklist] call DMS_fnc_IsPosBlacklisted)}) then
 		{
 			throw ("a blacklisted position");
 		};
 
 
-		// Only do these checks if the mission is supposed to be on land.
-		if (!_waterSpawn) then
+		// Check for nearby water
+		if ((_waterNearLimit>0) && {[_pos,_waterNearLimit] call DMS_fnc_isNearWater}) then
 		{
-			// Check for nearby water
-			if ((_waterNearLimit>0) && {[_pos,_waterNearLimit] call DMS_fnc_isNearWater}) then
-			{
-				throw ("water");
-			};
+			throw ("water");
+		};
 
-			// Terrain steepness check
-			// 0 surfacenormal means completely vertical, 1 surfaceNormal means completely flat and horizontal.
-			// Take the arccos of the surfaceNormal to determine how many degrees it is from the horizontal. In SQF: {acos ((surfaceNormal _pos) select 2)}. Don't forget to define _pos.
-			if ((_minSurfaceNormal>0) && {_minSurfaceNormal<=1}) then
-			{
-				if (((surfaceNormal _pos) select 2)<_minSurfaceNormal) then
-				{
-					throw ("a steep location");
-				};
-
-				// Check the surrounding area (within 5 meters)
-				private "_dir";
-				for "_dir" from 0 to 359 step 45 do
-				{
-					if (((surfaceNormal (_pos getPos [5,_dir])) select 2)<_minSurfaceNormal) then
-					{
-						throw ("a nearby steep location");
-					};
-				};
-			};
-		}
-		else
+		// Terrain steepness check
+		// 0 surfacenormal means completely vertical, 1 surfaceNormal means completely flat and horizontal.
+		// Take the arccos of the surfaceNormal to determine how many degrees it is from the horizontal. In SQF: {acos ((surfaceNormal _pos) select 2)}. Don't forget to define _pos.
+		if ((_minSurfaceNormal>0) && {_minSurfaceNormal<=1}) then
 		{
-			// Check to see if the position is actually water.
-			if !(surfaceIsWater _pos) then
+			if (((surfaceNormal _pos) select 2)<_minSurfaceNormal) then
 			{
-				throw ("land");
+				throw ("a steep location");
 			};
 
-			// Check the depth of the water.
-			if ((getTerrainHeightASL _pos)<-DMS_MinWaterDepth) then
+			// Check the surrounding area (within 5 meters)
+			private "_dir";
+			for "_dir" from 0 to 359 step 45 do
 			{
-				throw ("shallow water");
+				if (((surfaceNormal (_pos getPos [5,_dir])) select 2)<_minSurfaceNormal) then
+				{
+					throw ("a nearby steep location");
+				};
 			};
 		};
 
@@ -176,7 +153,6 @@ else
 			(format ["IsValidPosition :: Position %1 is too close to %2!",_pos,_exception]) call DMS_fnc_DebugLog;
 		};
 	};
+
+	_isValidPos
 };
-
-
-_isValidPos;

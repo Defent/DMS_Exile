@@ -23,16 +23,13 @@
 	Returns AI Group
 */
 
-private ["_OK", "_positions", "_count", "_difficulty", "_class", "_side", "_positionsCount", "_launcherType", "_group", "_unit", "_units", "_i", "_launcher", "_rocket"];
-
-
 if !(params
 [
-	["_positions","_positions ERROR",[[]]],
-	["_count","_count ERROR",[0]],
-	["_difficulty","_difficulty ERROR",[""]],
-	["_class","_class ERROR",[""]],
-	["_side","_side ERROR",[""]]
+	"_positions",
+	"_count",
+	"_difficulty",
+	"_class",
+	"_side"
 ])
 exitWith
 {
@@ -40,7 +37,7 @@ exitWith
 	grpNull
 };
 
-_positionsCount = count _positions;
+private _positionsCount = count _positions;
 
 if (_positionsCount<1) exitWith
 {
@@ -59,6 +56,9 @@ if (DMS_DEBUG) then
 {
 	(format["SpawnAIGroup_MultiPos :: Spawning %1 %2 %3 AI at positions %4 with %5 difficulty.",_count,_class,_side,_positions,_difficulty]) call DMS_fnc_DebugLog;
 };
+
+
+private _launcherType = "";
 
 // if soldier have AT/AA weapons
 if (_class isEqualType []) then
@@ -85,7 +85,7 @@ if (_class == "custom") then
 
 
 
-_group = createGroup (missionNamespace getVariable [format ["DMS_%1Side",_side],EAST]);
+private _group = createGroup (missionNamespace getVariable [format ["DMS_%1Side",_side],EAST]);
 
 _group setVariable ["DMS_LockLocality",nil];
 _group setVariable ["DMS_SpawnedGroup",true];
@@ -93,30 +93,31 @@ _group setVariable ["DMS_Group_Side", _side];
 
 for "_i" from 1 to _count do
 {
-	_unit = [_group,_positions select (_i % _positionsCount),_class,_difficulty,_side,"Soldier",_customGearSet] call DMS_fnc_SpawnAISoldier;
+	private _unit = [_group,_positions select (_i % _positionsCount),_class,_difficulty,_side,"Soldier",_customGearSet] call DMS_fnc_SpawnAISoldier;
 };
 
 // An AI will definitely spawn with a launcher if you define type
-if ((!isNil "_launcherType") || {DMS_ai_use_launchers && {DMS_ai_launchers_per_group>0}}) then
+if ((DMS_ai_use_launchers && {DMS_ai_launchers_per_group>0}) || {!(_launcherType isEqualTo "")}) then
 {
-	if (isNil "_launcherType") then
+	if (_launcherType isEqualTo "") then
 	{
 		_launcherType = "AT";
 	};
 
-	_units = units _group;
+	private _units = units _group;
+	private _launchers = missionNamespace getVariable [format ["DMS_AI_wep_launchers_%1",_launcherType],["launch_NLAW_F"]];
 
 	for "_i" from 0 to (((DMS_ai_launchers_per_group min _count)-1) max 0) do
 	{
 		if ((random 100)<DMS_ai_use_launchers_chance) then
 		{
-			_unit = _units select _i;
+			private _unit = _units select _i;
 
-			_launcher = (selectRandom (missionNamespace getVariable [format ["DMS_AI_wep_launchers_%1",_launcherType],["launch_NLAW_F"]]));
+			private _launcher = selectRandom _launchers;
 
 			removeBackpackGlobal _unit;
 			_unit addBackpack "B_Carryall_mcamo";
-			_rocket = _launcher call DMS_fnc_selectMagazine;
+			private _rocket = _launcher call DMS_fnc_selectMagazine;
 
 			[_unit, _launcher, DMS_AI_launcher_ammo_count,_rocket] call BIS_fnc_addWeapon;
 
@@ -137,6 +138,11 @@ _group setFormation "WEDGE";
 
 
 [_group,_positions select 0,_difficulty,"COMBAT"] call DMS_fnc_SetGroupBehavior;
+
+if (DMS_ai_freezeOnSpawn) then
+{
+	[_group,true] call DMS_fnc_FreezeToggle;
+};
 
 
 diag_log format ["DMS_SpawnAIGroup_MultiPos :: Spawned %1 AI using positions parameter: %2.",_count,_positions];

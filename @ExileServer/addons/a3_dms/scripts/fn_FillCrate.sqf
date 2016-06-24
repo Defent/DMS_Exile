@@ -1,8 +1,8 @@
 /*
 	DMS_fnc_FillCrate
 
-	Original credit goes to WAI: https://github.com/nerdalertdk/WICKED-AI
-	Edited by eraser1
+	Inspired by WAI: https://github.com/nerdalertdk/WICKED-AI
+	created by eraser1
 
 	Usage:
 	[
@@ -86,14 +86,10 @@
 		]
 */
 
-private ["_crate","_lootValues","_wepCount","_weps","_itemCount","_items","_backpackCount","_backpacks","_weapon","_ammo","_item","_backpack","_crateValues","_rareLootChance","_marker"];
-
-
-
 if (!(params
 [
-	["_crate",objNull,[objNull]],
-	["_lootValues","",[0,"",[]],[2,3]]
+	"_crate",
+	"_lootValues"
 ])
 ||
 {isNull _crate})
@@ -119,43 +115,51 @@ if (_crate getVariable ["DMS_CrateEnableRope",DMS_EnableBoxMoving]) then
 if ((_lootValues isEqualType []) && {!((_lootValues select 1) isEqualType {})}) then
 {
 	// Weapons
-	if ((_lootValues select 0) isEqualType []) then
-	{
-		_wepCount	= (_lootValues select 0) select 0;
-		_weps	= (_lootValues select 0) select 1;
-	}
-	else
-	{
-		_wepCount	= _lootValues select 0;
-		_weps	= DMS_boxWeapons;
-	};
+	private _wepValues = _lootValues select 0;
+	private _wepCount = 0;
+	private _weps =
+		if (_wepValues isEqualType []) then
+		{
+			_wepCount	= _wepValues select 0;
+			_wepValues select 1
+		}
+		else
+		{
+			_wepCount	= _wepValues;
+			DMS_boxWeapons
+		};
 
 
 	// Items
-	if ((_lootValues select 1) isEqualType []) then
-	{
-		_itemCount	= (_lootValues select 1) select 0;
-		_items	= (_lootValues select 1) select 1;
-	}
-	else
-	{
-		_itemCount	= _lootValues select 1;
-		_items	= DMS_boxItems;
-	};
+	private _itemValues = _lootValues select 1;
+	private _itemCount = 0;
+	private _items =
+		if (_itemValues isEqualType []) then
+		{
+			_itemCount	= _itemValues select 0;
+			_itemValues select 1
+		}
+		else
+		{
+			_itemCount	= _itemValues;
+			DMS_boxItems
+		};
 
 
 	// Backpacks
-	if ((_lootValues select 2) isEqualType []) then
-	{
-		_backpackCount	= (_lootValues select 2) select 0;
-		_backpacks = (_lootValues select 2) select 1;
-	}
-	else
-	{
-		_backpackCount = _lootValues select 2;
-		_backpacks = DMS_boxBackpacks;
-	};
-
+	private _backpackValues = _lootValues select 2;
+	private _backpackCount = 0;
+	private _backpacks =
+		if ((_backpackValues) isEqualType []) then
+		{
+			_backpackCount	= _backpackValues select 0;
+			_backpackValues select 1
+		}
+		else
+		{
+			_backpackCount = _backpackValues;
+			DMS_boxBackpacks
+		};
 
 	if (DMS_DEBUG) then
 	{
@@ -163,13 +167,13 @@ if ((_lootValues isEqualType []) && {!((_lootValues select 1) isEqualType {})}) 
 	};
 
 
-	if ((_wepCount>0) && {count _weps>0}) then
+	if (count _weps>0) then
 	{
 		// Add weapons + mags
 		for "_i" from 1 to _wepCount do
 		{
-			_weapon = selectRandom _weps;
-			_ammo = _weapon call DMS_fnc_selectMagazine;
+			private _weapon = selectRandom _weps;
+			private _ammo = _weapon call DMS_fnc_selectMagazine;
 			if (_weapon isEqualType "") then
 			{
 				_weapon = [_weapon,1];
@@ -183,12 +187,12 @@ if ((_lootValues isEqualType []) && {!((_lootValues select 1) isEqualType {})}) 
 	};
 
 
-	if ((_itemCount > 0) && {count _items>0}) then
+	if (count _items>0) then
 	{
 		// Add items
 		for "_i" from 1 to _itemCount do
 		{
-			_item = selectRandom _items;
+			private _item = selectRandom _items;
 			if (_item isEqualType "") then
 			{
 				_item = [_item,1];
@@ -198,12 +202,12 @@ if ((_lootValues isEqualType []) && {!((_lootValues select 1) isEqualType {})}) 
 	};
 
 
-	if ((_backpackCount > 0) && {count _backpacks>0}) then
+	if (count _backpacks>0) then
 	{
 		// Add backpacks
 		for "_i" from 1 to _backpackCount do
 		{
-			_backpack = selectRandom _backpacks;
+			private _backpack = selectRandom _backpacks;
 			if (_backpack isEqualType "") then
 			{
 				_backpack = [_backpack,1];
@@ -214,7 +218,7 @@ if ((_lootValues isEqualType []) && {!((_lootValues select 1) isEqualType {})}) 
 }
 else
 {
-	_crateValues =
+	private _crateValues =
 		if (_lootValues isEqualType []) then
 		{
 			(_lootValues select 0) call (_lootValues select 1)
@@ -226,9 +230,9 @@ else
 
 	if !((_crateValues params
 	[
-		["_weps", [], [[]]],
-		["_items", [], [[]]],
-		["_backpacks", [], [[]]]
+		"_weps",
+		"_items",
+		"_backpacks"
 	]))
 	exitWith
 	{
@@ -262,7 +266,6 @@ else
 		_crate addBackpackCargoGlobal _x;
 	} forEach _backpacks;
 
-
 	if (DMS_DEBUG) then
 	{
 		(format["FillCrate :: Filled crate %1 (at %5) with weapons |%2|, items |%3|, and backpacks |%4|",_crate, _weps, _items, _backpacks, getPosATL _crate]) call DMS_fnc_DebugLog;
@@ -272,7 +275,7 @@ else
 
 if (DMS_RareLoot) then
 {
-	_rareLootChance =
+	private _rareLootChance =
 		if ((count _this)>2) then
 		{
 			_this param [2,DMS_RareLootChance,[0]]
@@ -300,16 +303,16 @@ if (DMS_RareLoot) then
 // You can choose if you want to enable/disable smoke individually using setVariable.
 if (_crate getVariable ["DMS_AllowSmoke", true]) then
 {
-	if(DMS_SpawnBoxSmoke && {sunOrMoon == 1}) then
+	if (DMS_SpawnBoxSmoke && {sunOrMoon == 1}) then
 	{
-		_marker = "SmokeShellPurple" createVehicle getPosATL _crate;
+		private _marker = "SmokeShellPurple" createVehicle getPosATL _crate;
 		_marker setPosATL (getPosATL _crate);
 		_marker attachTo [_crate,[0,0,0]];
 	};
 
 	if (DMS_SpawnBoxIRGrenade && {sunOrMoon != 1}) then
 	{
-		_marker = "B_IRStrobe" createVehicle getPosATL _crate;
+		private _marker = "B_IRStrobe" createVehicle getPosATL _crate;
 		_marker setPosATL (getPosATL _crate);
 		_marker attachTo [_crate, [0,0,0.5]];
 	};

@@ -15,9 +15,6 @@
 	Returns all created objects.
 */
 
-private ["_file", "_pos", "_objs", "_export", "_obj", "_objPos"];
-
-
 if !(params
 [
 	["_file","",[""]],
@@ -42,20 +39,22 @@ if ((count _pos)<3) then
 	_pos set [2,0];
 };
 
+private _export = call compile preprocessFileLineNumbers (format ["\x\addons\DMS\objects\%1.sqf",_file]);
 
+if ((isNil "_export") || {!(_export isEqualType [])}) exitWith
+{
+	diag_log format ["DMS ERROR :: Calling DMS_fnc_ImportFromM3E with invalid file/filepath: %1 | _export: %2",_file,_export];
+	[]
+};
 
-
-
-_export = call compile preprocessFileLineNumbers (format ["\x\addons\DMS\objects\%1.sqf",_file]);
-
-_objs = _export apply
+private _objs = _export apply
 {
 	// Create the object
-	_obj = createVehicle [_x select 0, [0,0,0], [], 0, "CAN_COLLIDE"];
+	private _obj = createVehicle [_x select 0, [0,0,0], [], 0, "CAN_COLLIDE"];
+	_obj enableSimulationGlobal false;
 
 	// Calculate the object's position using provided relative position
-	_objPos = [_pos,_x select 1] call DMS_fnc_CalcPos;
-
+	private _objPos = [_pos,_x select 1] call DMS_fnc_CalcPos;
 
 	if (((count _x)>4) && {!(_x select 4)}) then
 	{
@@ -68,8 +67,6 @@ _objs = _export apply
 		_obj setDir (_x select 2);
 		_obj setPos _objPos;
 	};
-
-	_obj enableSimulationGlobal false;
 
 	_obj;
 };
