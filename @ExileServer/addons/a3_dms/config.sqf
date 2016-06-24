@@ -1,8 +1,12 @@
 /*
-	A lot of these configs are influenced by WAI :P
-	https://github.com/nerdalertdk/WICKED-AI
+	Main DMS Config File
 
 	Created by eraser1
+	Several revisions and additions have been made by community members.
+
+
+	A lot of these configs are influenced by WAI :P
+	https://github.com/nerdalertdk/WICKED-AI
 */
 
 
