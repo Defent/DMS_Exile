@@ -149,85 +149,34 @@ ___
 
 # Changelog:
 
-### Test Branch:
-#### June 16, 2016 (1:55 PM CST-America) **Release Candidate 1.5**:
-* New function: DMS_fnc_AddWeapon. More efficient version of BIS_fnc_AddWeapon, and removed almost all error-checking.
-* DMS will now log the DMS version to the client RPT on login.
-* Fixed a couple issues in fn_SpawnAISoldier.sqf.
-* Updated Tanoa config, missions should now be (somewhat) less likely to spawn in the center valley of the main island.
-
-#### June 16, 2016 (1:55 PM CST-America) **Release Candidate 1.3**:
-* Renamed the "mercbase.sqf" mission title to "Mercenary Outpost" to avoid confusion with the salt flats mission.
-* Fixed an issue with fn_SpawnMineField.sqf (thanks to CEN for providing important info)
-
-
-#### June 12, 2016 (3:15 AM CST-America) **Release Candidate 1.2**:
-* Removed the marker color check in "DMS_fnc_CreateMarker". Invalid marker colors are up to server owners to detect.
-* Micro-optimized "DMS_fnc_IsPosBlacklisted" for the rectangular blacklist case; also rearranged the statements to be clearer and easier to understand.
-
-
-#### June 7, 2016 (11:15 PM CST-America) **Release Candidate 1.1**:
-* Slight optimization of SpawnAIGroup functions (if you have launchers enabled).
-
-#### June 6, 2016 (10:45 PM CST-America) **Release Candidate 1**:
-* New function: DMS_fnc_IsPosBlacklisted (optimized replacement for "BIS_fnc_IsPosBlacklisted")
-* Config value "DMS_findSafePosBlacklist" now supports the ability to blacklist within a certain distance of a given position.
-* "DMS_CLIENT" functions are now compiled in pre-init (broadcasting is still done in post-init).
-* Notifications from "textTilesRequest" and "dynamicTextRequest" should no longer "stack" on each other; if two missions spawn right after another, the second mission notification will be delayed at least until the first one completes.
-* More Micro-optimizations on most functions; parameters passed to DMS functions will no longer be checked to see if they are the right type, etc. It was determined that they didn't really provide any benefit, as most errors either don't trigger the "params" error, or the error is simply reiterated elsewhere.
-* Removed config value "DMS_MissionMarkerCount"
-* "DMS_fnc_FindSuppressor" has been overhauled; it simply checks the configs for the provided weapon classname to return a random muzzle/suppressor classname. Consequently, the function is smaller, faster, and perfectly compatible with any weapon.
-* The "freeze manager" will now unfreeze AI if needed regardless of setting "DMS_ai_allowFreezing" to false.
-
-#### May 22, 2016 (3:15 PM CST-America):
-* **NEW CONFIG VALUES:**
-		DMS_ai_freezeOnSpawn
-* Added the ability to freeze AI groups immediately upon spawn.
-* Units spawned to a group that has been frozen should now also be frozen.
-* Fixed an issue where "FindSuppressor" would return a boolean instead of empty string.
-* Fixed an issue with undefined variable when "DMS_ai_offloadOnUnfreeze" was set to true.
-* Added debug message when a group is frozen.
-* Created a new function "DMS_fnc_FreezeToggle" that actually handles freezing/unfreezing.
-* DMS will now apply a variable "DMS_isGroupFrozen" to groups that are frozen.
-
-#### May 22, 2016 (12:00 AM CST-America):
-* **NEW CONFIG VALUES:**
+### Main Branch
+June 24, 2016 (6:00 PM CST-America):
+* **NEW CONFIG VALUES**
+		DMS_AI_UseRealNames
 		DMS_ai_allowFreezing
 		DMS_ai_freeze_Only_DMS_AI
 		DMS_ai_freezingDistance
 		DMS_ai_unfreezingDistance
 		DMS_ai_offloadOnUnfreeze
 		DMS_ai_freezeCheckingDelay
-* Removed a "Land_Wreck_Heli_Attack_01_F" from saltflats (it creates server threads)
-* Adjusted logic in "AILocalityManager": the variable "DMS_LockLocality" on a group should now be considered even if "DMS_ai_offload_Only_DMS_AI" is set to false.
-* You can now "freeze"/"un-freeze" AI! This has been a long-awaited feature for DMS. Using it should grant major performance benefits when you have lots of AI around the map that are inactive.
-
-#### May 16, 2016 (11:00 AM CST-America):
-* Fixed an error in fn_SpawnAIGroup (and MultiPos variant)
-
-#### May 16, 2016 (11:00 AM CST-America):
-* Occupation will now print debug logs only if DMS_DEBUG is enabled.
-* Fixed an error with fn_FindSafePos.
-
-#### May 15, 2016 (2:00 PM CST-America):
-* **NEW CONFIG VALUES:**
-
-		DMS_AI_UseRealNames
-* More Micro-optimizations.
-* Fixed a lot of various errors from the last test branch update.
-* Integrated Exile Occupation by second coming :)
-
-
-#### May 6, 2016 (10:45 PM CST-America):
-* **NEW CONFIG VALUES:**
-
+		DMS_ai_freezeOnSpawn
 		DMS_assault_RandItemCount
 		DMS_assault_RandItems
 		DMS_MG_RandItemCount
 		DMS_MG_RandItems
 		DMS_sniper_RandItemCount
 		DMS_sniper_RandItems
-* New functions: DMS_fnc_ImportFromM3E_3DEN, DMS_fnc_ImportFromM3E_3DEN_Convert, DMS_fnc_ImportFromM3E_3DEN_Static.
+* http://pastebin.com/bSk3bNrX <-- List of config values with default values and explanations. You can paste this directly into your config.sqf for easier updating
+* Removed config value "DMS_MissionMarkerCount"
+* New functions: DMS_fnc_ImportFromM3E_3DEN, DMS_fnc_ImportFromM3E_3DEN_Convert, DMS_fnc_ImportFromM3E_3DEN_Static, DMS_fnc_AddWeapon, DMS_fnc_FreezeManager, DMS_fnc_FreezeToggle, DMS_fnc_GetCenter, DMS_fnc_IsPosBlacklisted, DMS_fnc_SetRelPositions, DMS_fnc_SubArr.
+* Lots and lots of optimizations
+* Various fixes
+* Renamed the "mercbase.sqf" mission title to "Mercenary Outpost" to avoid confusion with the salt flats mission.
+* DMS will now log the DMS version to the client RPT on login.
+* Config value "DMS_findSafePosBlacklist" now supports the ability to blacklist within a certain distance of a given position.
+* Notifications from "textTilesRequest" and "dynamicTextRequest" should no longer "stack" on each other; if two missions spawn right after another, the second mission notification will be delayed at least until the first one completes.
+* Removed the marker color check in "DMS_fnc_CreateMarker". Invalid marker colors are up to server owners to detect.
+* "DMS_CLIENT" functions are now compiled in pre-init (broadcasting is still done in post-init).
 * Functions that were previously defined in preinit with regular code brackets ("GetCenter", "SetRelPositions", and "SubArr") are now defined as DMS functions (instead of M3E functions before) and have their own files.
 * "M3E" functions are still defined in DMS pre-init for compatibility with external code.
 * You can now allow a set of random inventory items that are given to AI. Amount and item types can be set per-class.
@@ -240,11 +189,12 @@ ___
 * Removed the useless ```_waterSpawn``` parameter from "FindSafePos" and "IsValidPosition". DMS is currently only used on land, a dedicated function for finding valid water spawns will come if/when needed.
 * All of the "Import" functions now check for invalid exports.
 * When using a "custom gear set", magazines and items are added about 0.5 seconds after the AI is spawned in order to account for an issue where the backpack isn't used (because it isn't added fast enough?). (Thanks to [second_coming](http://www.exilemod.com/profile/60-second_coming/) for the report)
-* NOTE: I didn't test any of this stuff, and there's LOTS of code changes. Do not be surprised if everything is broke! :p
+* Removed a "Land_Wreck_Heli_Attack_01_F" from saltflats (it creates server threads)
+* Adjusted logic in "AILocalityManager": the variable "DMS_LockLocality" on a group should now be considered even if "DMS_ai_offload_Only_DMS_AI" is set to false.
+* You can now "freeze"/"un-freeze" AI! This has been a long-awaited feature for DMS. Using it will grant major performance benefits when you have lots of AI around the map that are inactive.
+* "DMS_fnc_FindSuppressor" has been overhauled; it simply checks the configs for the provided weapon classname to return a random muzzle/suppressor classname. Consequently, the function is smaller, faster, and perfectly compatible with any weapon.
 
 
-
-### Main Branch
 #### April 27, 2016 (6:45 PM CST-America):
 * **NEW CONFIG VALUES**
 
@@ -867,6 +817,99 @@ ___
 
 
 ## Previous Test Branch Changes:
+
+### "May 6, 2016" Test Branch
+#### June 16, 2016 (1:55 PM CST-America) **Release Candidate 1.5**:
+* New function: DMS_fnc_AddWeapon. More efficient version of BIS_fnc_AddWeapon, and removed almost all error-checking.
+* DMS will now log the DMS version to the client RPT on login.
+* Fixed a couple issues in fn_SpawnAISoldier.sqf.
+* Updated Tanoa config, missions should now be (somewhat) less likely to spawn in the center valley of the main island.
+
+#### June 16, 2016 (1:55 PM CST-America) **Release Candidate 1.3**:
+* Renamed the "mercbase.sqf" mission title to "Mercenary Outpost" to avoid confusion with the salt flats mission.
+* Fixed an issue with fn_SpawnMineField.sqf (thanks to CEN for providing important info)
+
+
+#### June 12, 2016 (3:15 AM CST-America) **Release Candidate 1.2**:
+* Removed the marker color check in "DMS_fnc_CreateMarker". Invalid marker colors are up to server owners to detect.
+* Micro-optimized "DMS_fnc_IsPosBlacklisted" for the rectangular blacklist case; also rearranged the statements to be clearer and easier to understand.
+
+
+#### June 7, 2016 (11:15 PM CST-America) **Release Candidate 1.1**:
+* Slight optimization of SpawnAIGroup functions (if you have launchers enabled).
+
+#### June 6, 2016 (10:45 PM CST-America) **Release Candidate 1**:
+* New function: DMS_fnc_IsPosBlacklisted (optimized replacement for "BIS_fnc_IsPosBlacklisted")
+* Config value "DMS_findSafePosBlacklist" now supports the ability to blacklist within a certain distance of a given position.
+* "DMS_CLIENT" functions are now compiled in pre-init (broadcasting is still done in post-init).
+* Notifications from "textTilesRequest" and "dynamicTextRequest" should no longer "stack" on each other; if two missions spawn right after another, the second mission notification will be delayed at least until the first one completes.
+* More Micro-optimizations on most functions; parameters passed to DMS functions will no longer be checked to see if they are the right type, etc. It was determined that they didn't really provide any benefit, as most errors either don't trigger the "params" error, or the error is simply reiterated elsewhere.
+* Removed config value "DMS_MissionMarkerCount"
+* "DMS_fnc_FindSuppressor" has been overhauled; it simply checks the configs for the provided weapon classname to return a random muzzle/suppressor classname. Consequently, the function is smaller, faster, and perfectly compatible with any weapon.
+* The "freeze manager" will now unfreeze AI if needed regardless of setting "DMS_ai_allowFreezing" to false.
+
+#### May 22, 2016 (3:15 PM CST-America):
+* **NEW CONFIG VALUES:**
+		DMS_ai_freezeOnSpawn
+* Added the ability to freeze AI groups immediately upon spawn.
+* Units spawned to a group that has been frozen should now also be frozen.
+* Fixed an issue where "FindSuppressor" would return a boolean instead of empty string.
+* Fixed an issue with undefined variable when "DMS_ai_offloadOnUnfreeze" was set to true.
+* Added debug message when a group is frozen.
+* Created a new function "DMS_fnc_FreezeToggle" that actually handles freezing/unfreezing.
+* DMS will now apply a variable "DMS_isGroupFrozen" to groups that are frozen.
+
+#### May 22, 2016 (12:00 AM CST-America):
+* **NEW CONFIG VALUES:**
+		DMS_ai_allowFreezing
+		DMS_ai_freeze_Only_DMS_AI
+		DMS_ai_freezingDistance
+		DMS_ai_unfreezingDistance
+		DMS_ai_offloadOnUnfreeze
+		DMS_ai_freezeCheckingDelay
+* Removed a "Land_Wreck_Heli_Attack_01_F" from saltflats (it creates server threads)
+* Adjusted logic in "AILocalityManager": the variable "DMS_LockLocality" on a group should now be considered even if "DMS_ai_offload_Only_DMS_AI" is set to false.
+* You can now "freeze"/"un-freeze" AI! This has been a long-awaited feature for DMS. Using it should grant major performance benefits when you have lots of AI around the map that are inactive.
+
+#### May 16, 2016 (11:00 AM CST-America):
+* Fixed an error in fn_SpawnAIGroup (and MultiPos variant)
+
+#### May 16, 2016 (11:00 AM CST-America):
+* Occupation will now print debug logs only if DMS_DEBUG is enabled.
+* Fixed an error with fn_FindSafePos.
+
+#### May 15, 2016 (2:00 PM CST-America):
+* **NEW CONFIG VALUES:**
+
+		DMS_AI_UseRealNames
+* More Micro-optimizations.
+* Fixed a lot of various errors from the last test branch update.
+* Integrated Exile Occupation by second coming :)
+
+
+#### May 6, 2016 (10:45 PM CST-America):
+* **NEW CONFIG VALUES:**
+
+		DMS_assault_RandItemCount
+		DMS_assault_RandItems
+		DMS_MG_RandItemCount
+		DMS_MG_RandItems
+		DMS_sniper_RandItemCount
+		DMS_sniper_RandItems
+* New functions: DMS_fnc_ImportFromM3E_3DEN, DMS_fnc_ImportFromM3E_3DEN_Convert, DMS_fnc_ImportFromM3E_3DEN_Static.
+* Functions that were previously defined in preinit with regular code brackets ("GetCenter", "SetRelPositions", and "SubArr") are now defined as DMS functions (instead of M3E functions before) and have their own files.
+* "M3E" functions are still defined in DMS pre-init for compatibility with external code.
+* You can now allow a set of random inventory items that are given to AI. Amount and item types can be set per-class.
+* "DMS_StaticMissionsOnServerStart" will only be used if "DMS_StaticMission" is set to true. In other words, no static missions will be spawned on server start if you don't use static missions.
+* DMS will now issue an error if you set "DMS_Use_Map_Config" for map without a config. Hopefully this resolves an issue where the server wouldn't start if you tried to load a map config from a file that didn't exist.
+* Adjusted map config for chernarus: Missions should no longer spawn near map borders.
+* Micro-optimizations for almost all DMS functions (using the new functionality of "private", which is faster than the previous). Also, some variables that weren't previously defined as private are now fixed.
+* Removed legacy HC (headless client) support from "DMS_fnc_AILocalityManager".
+* Major optimizations for DMS_fnc_FindSafePos
+* Removed the useless ```_waterSpawn``` parameter from "FindSafePos" and "IsValidPosition". DMS is currently only used on land, a dedicated function for finding valid water spawns will come if/when needed.
+* All of the "Import" functions now check for invalid exports.
+* When using a "custom gear set", magazines and items are added about 0.5 seconds after the AI is spawned in order to account for an issue where the backpack isn't used (because it isn't added fast enough?). (Thanks to [second_coming](http://www.exilemod.com/profile/60-second_coming/) for the report)
+* NOTE: I didn't test any of this stuff, and there's LOTS of code changes. Do not be surprised if everything is broke! :p
 
 ### "March 1, 2016" Test Branch
 #### List Of new Config values:
