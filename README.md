@@ -150,7 +150,7 @@ ___
 # Changelog:
 
 ### Main Branch
-June 24, 2016 (6:00 PM CST-America):
+#### June 24, 2016 (6:00 PM CST-America):
 * **NEW CONFIG VALUES**
 		DMS_AI_UseRealNames
 		DMS_ai_allowFreezing
