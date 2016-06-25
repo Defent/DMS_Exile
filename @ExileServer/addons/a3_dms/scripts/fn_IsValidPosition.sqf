@@ -51,88 +51,55 @@ else
 		};
 
 
-		if (!(DMS_findSafePosBlacklist isEqualTo []) && {([_pos, DMS_findSafePosBlacklist] call DMS_fnc_IsPosBlacklisted)}) then
-		{
-			throw ("a blacklisted position");
-		};
+		if ([_pos, DMS_findSafePosBlacklist] call DMS_fnc_IsPosBlacklisted) throw "a blacklisted position";
 
 
 		// Check for nearby water
-		if ((_waterNearLimit>0) && {[_pos,_waterNearLimit] call DMS_fnc_isNearWater}) then
-		{
-			throw ("water");
-		};
+		if ((_waterNearLimit>0) && {[_pos,_waterNearLimit] call DMS_fnc_isNearWater}) throw "water";
 
 		// Terrain steepness check
 		// 0 surfacenormal means completely vertical, 1 surfaceNormal means completely flat and horizontal.
 		// Take the arccos of the surfaceNormal to determine how many degrees it is from the horizontal. In SQF: {acos ((surfaceNormal _pos) select 2)}. Don't forget to define _pos.
 		if ((_minSurfaceNormal>0) && {_minSurfaceNormal<=1}) then
 		{
-			if (((surfaceNormal _pos) select 2)<_minSurfaceNormal) then
-			{
-				throw ("a steep location");
-			};
+			if (((surfaceNormal _pos) select 2)<_minSurfaceNormal) throw "a steep location";
 
 			// Check the surrounding area (within 5 meters)
 			private "_dir";
 			for "_dir" from 0 to 359 step 45 do
 			{
-				if (((surfaceNormal (_pos getPos [5,_dir])) select 2)<_minSurfaceNormal) then
-				{
-					throw ("a nearby steep location");
-				};
+				if (((surfaceNormal (_pos getPos [5,_dir])) select 2)<_minSurfaceNormal) throw "a nearby steep location";
 			};
 		};
 
 
 		{
-			if (((getMarkerPos _x) distance2D _pos)<=_missionNearLimit) then
-			{
-				throw ("an A3XAI mission");
-			};
+			if (((getMarkerPos _x) distance2D _pos)<=_missionNearLimit) throw "an A3XAI mission";
 		} forEach (missionNamespace getVariable ["A3XAI_mapMarkerArray",[]]);
 
 		{
 			// Check for nearby spawn points
-			if ((_spawnZoneNearLimit>0) && {((markertype _x) in DMS_SpawnZoneMarkerTypes) && {((getMarkerPos _x) distance2D _pos)<=_spawnZoneNearLimit}}) then
-			{
-				throw ("a spawn zone");
-			};
+			if ((_spawnZoneNearLimit>0) && {((markertype _x) in DMS_SpawnZoneMarkerTypes) && {((getMarkerPos _x) distance2D _pos)<=_spawnZoneNearLimit}}) throw "a spawn zone";
 
 			// Check for nearby trader zones
-			if ((_traderZoneNearLimit>0) && {((markertype _x) in DMS_TraderZoneMarkerTypes) && {((getMarkerPos _x) distance2D _pos)<=_traderZoneNearLimit}}) then
-			{
-				throw ("a trader zone");
-			};
+			if ((_traderZoneNearLimit>0) && {((markertype _x) in DMS_TraderZoneMarkerTypes) && {((getMarkerPos _x) distance2D _pos)<=_traderZoneNearLimit}}) throw "a trader zone";
 
 			// Check for nearby missions
 			if (_missionNearLimit>0) then
 			{
 				_missionPos = missionNamespace getVariable [format ["%1_pos",_x], []];
-				if (!(_missionPos isEqualTo []) && {(_missionPos distance2D _pos)<=_missionNearLimit}) then
-				{
-					throw ("a mission");
-				};
+				if (!(_missionPos isEqualTo []) && {(_missionPos distance2D _pos)<=_missionNearLimit}) throw "a mission";
 
-				if (((_x find "VEMFr_DynaLocInva_ID")>0) && {((getMarkerPos _x) distance2D _pos)<=_missionNearLimit}) then
-				{
-					throw ("a VEMF mission");
-				};
+				if (((_x find "VEMFr_DynaLocInva_ID")>0) && {((getMarkerPos _x) distance2D _pos)<=_missionNearLimit}) throw "a VEMF mission";
 			};
 		} forEach allMapMarkers;
 
 
 		// Check for nearby players
 		// This is done last because it is likely to be the most resource intensive.
-		if ((_playerNearLimit>0) && {[_pos,_playerNearLimit] call DMS_fnc_IsPlayerNearby}) then
-		{
-			throw ("a player");
-		};
+		if ((_playerNearLimit>0) && {[_pos,_playerNearLimit] call DMS_fnc_IsPlayerNearby}) throw "a player";
 
-		if ((_territoryNearLimit>0) && {[_pos,_territoryNearLimit] call ExileClient_util_world_isTerritoryInRange}) then
-		{
-			throw ("a territory");
-		};
+		if ((_territoryNearLimit>0) && {[_pos,_territoryNearLimit] call ExileClient_util_world_isTerritoryInRange}) throw "a territory";
 
 
 

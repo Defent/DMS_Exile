@@ -236,13 +236,8 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 
 
 
-	DMS_findSafePosBlacklist =			[							// For position blacklist info refer to: http://www.exilemod.com/topic/61-dms-defents-mission-system/?do=findComment&comment=31190
-											// An example is given in the altis_config.sqf (it blacklists the salt flats).
-											/*
-											// Blacklists most of the Northern Taviana Volcano
-											[[11375,16170],[14302,18600]],
-											[[13300,14670],[14875,16170]]
-											*/
+	DMS_findSafePosBlacklist =			[								// This list defines areas where missions WILL NOT spawn. For position blacklist info refer to: http://www.exilemod.com/topic/61-dms-defents-mission-system/?do=findComment&comment=31190
+											// There are examples in the altis map config (it blacklists the salt flats) and in the tavi/taviana map configs.
 
 											//[[2350,4680],100]		// This random example blacklists any position within 100 meters of coordinates "[2350,4680]"
 										];

@@ -150,6 +150,10 @@ ___
 # Changelog:
 
 ### Main Branch
+#### June 25, 2016 (5:00 PM CST-America):
+* Updated almost all map configs in regards to "DMS_findSafePosBlacklist"; they should no longer overwrite main config settings.
+* Optimized "fn_isValidPosition" with the "new" throw functionality (forgot to do it earlier lol).
+
 #### June 24, 2016 (6:00 PM CST-America):
 * **NEW CONFIG VALUES**
 		DMS_AI_UseRealNames

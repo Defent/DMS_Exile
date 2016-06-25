@@ -5,7 +5,7 @@
 	All of these configs exist in the main config. The configs below will simply override any config from the main config.
 */
 
-DMS_findSafePosBlacklist =
+DMS_findSafePosBlacklist append
 [
 	[[4866.21,7962.4],[5085.27,8157.23]],		// Sebjan Trader
 	[[4890.65,6535.2],[5090.37,6714.44]],		// Object A2

@@ -7,11 +7,6 @@
 	Explanations to all of these configs also exist in the main config.
 */
 
-DMS_findSafePosBlacklist =
-[
-	//Insert position blacklists here.
-];
-
 // Reduce the blacklist range since Esseker is a smaller map.
 DMS_PlayerNearBlacklist				= 750;
 DMS_SpawnZoneNearBlacklist			= 1250;

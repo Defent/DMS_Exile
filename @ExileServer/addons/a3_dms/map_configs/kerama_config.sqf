@@ -5,15 +5,10 @@
 	All of these configs exist in the main config. The configs below will simply override any config from the main config.
 */
 
-DMS_findSafePosBlacklist =
-[
-
-];
-
 // Kerama is a pretty small island
 DMS_WaterNearBlacklist				= 100;
 
-// Kerama is not super flat 
+// Kerama is not super flat
 DMS_MinSurfaceNormal				= 0.75;
 
 DMS_SpawnZoneNearBlacklist			= 500;

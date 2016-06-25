@@ -6,11 +6,6 @@
 	Explanations to all of these configs also exist in the main config.
 */
 
-DMS_findSafePosBlacklist =
-[
-	//Insert position blacklists here.
-];
-
 // These configs are the default values from the main config. Just included here as an example.
 DMS_PlayerNearBlacklist				= 2000;
 DMS_SpawnZoneNearBlacklist			= 2500;

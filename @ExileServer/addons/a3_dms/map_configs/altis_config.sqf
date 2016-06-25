@@ -6,9 +6,9 @@
 	Explanations to all of these configs also exist in the main config.
 */
 
-DMS_findSafePosBlacklist =
+DMS_findSafePosBlacklist append
 [
-	[[22500,19420],[24870,16725]]		// Salt flats are blacklisted for Altis by default.
+	[[23600,18200],1500]		// Salt flats are blacklisted for Altis by default.
 ];
 
 // These configs are the default values from the main config. Just included here as an example.

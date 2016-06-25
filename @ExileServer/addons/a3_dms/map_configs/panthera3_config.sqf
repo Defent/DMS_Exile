@@ -6,11 +6,6 @@
 	Explanations to all of these configs also exist in the main config.
 */
 
-DMS_findSafePosBlacklist =
-[
-	//Insert position blacklists here.
-];
-
 // Let missions spawn closer to water, since we aren't spoiled for choice with all of the steep terrain.
 DMS_WaterNearBlacklist				= 200;
 
