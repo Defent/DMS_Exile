@@ -154,6 +154,7 @@ ___
 * DMS should now properly detect VEMF markers (it wasn't working before because of a minor typo).
 * DMS will now detect (and avoid) ZCP missions if you're updated to the latest version of ZCP on the test branch.
 * Fixed an issue where distance wasn't shown in kill messages to group members. Thanks to Stoll on the forums for pointing that out.
+* DMS will no longer update player money and respect when an AI is killed. It isn't really necessary.
 * Updated function headers for functions that now have a wiki entry, as well as some clarification and cleanup.
 
 
