@@ -2,6 +2,8 @@
 	DMS_fnc_AILocalityManager
 	Created by Defent and eraser1
 
+	https://github.com/Defent/DMS_Exile/wiki/DMS_fnc_AILocalityManager
+
 	Offloads AI groups to a nearby client in order to improve server performance.
 */
 

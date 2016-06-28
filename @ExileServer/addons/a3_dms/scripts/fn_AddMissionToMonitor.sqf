@@ -2,6 +2,8 @@
 	DMS_fnc_AddMissionToMonitor
 	Created by eraser1
 
+	https://github.com/Defent/DMS_Exile/wiki/DMS_fnc_AddMissionToMonitor
+
 	Parses and adds mission information to "DMS_Mission_Arr" for Mission Monitoring.
 
 	Usage:

@@ -150,6 +150,13 @@ ___
 # Changelog:
 
 ### Main Branch
+#### June 27, 2016 (7:00 PM CST-America):
+* DMS should now properly detect VEMF markers (it wasn't working before because of a minor typo).
+* DMS will now detect (and avoid) ZCP missions if you're updated to the latest version of ZCP on the test branch.
+* Fixed an issue where distance wasn't shown in kill messages to group members. Thanks to Stoll on the forums for pointing that out.
+* Updated function headers for functions that now have a wiki entry, as well as some clarification and cleanup.
+
+
 #### June 25, 2016 (5:00 PM CST-America):
 * Updated almost all map configs in regards to "DMS_findSafePosBlacklist"; they should no longer overwrite main config settings.
 * Optimized "fn_isValidPosition" with the "new" throw functionality (forgot to do it earlier lol).

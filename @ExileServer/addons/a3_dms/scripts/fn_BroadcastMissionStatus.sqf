@@ -2,6 +2,8 @@
 	DMS_fnc_BroadcastMissionStatus
 	Created by eraser1
 
+	https://github.com/Defent/DMS_Exile/wiki/DMS_fnc_BroadcastMissionStatus
+
 	Usage:
 	[
 		_messageTitle,
@@ -16,7 +18,7 @@
 
 if !(params
 [
-	"_missionName",
+	"_messageTitle",
 	"_messageInfo"
 ])
 exitWith
@@ -26,7 +28,7 @@ exitWith
 
 _messageInfo params
 [
-	["_titleColor","#FFFF00",[""]],
+	"_titleColor",
 	"_message"
 ];
 
@@ -47,7 +49,7 @@ if (_message isEqualTo "") exitWith {};
 	{
 		case "systemchatrequest":
 		{
-			format["%1: %2",toUpper _missionName,_message] remoteExecCall ["systemChat",-2];
+			format["%1: %2",toUpper _messageTitle,_message] remoteExecCall ["systemChat",-2];
 		};
 
 		case "standardhintrequest":
@@ -58,7 +60,7 @@ if (_message isEqualTo "") exitWith {};
 				_titleColor,
 				DMS_standardHint_Title_Size,
 				DMS_standardHint_Title_Font,
-				_missionName,
+				_messageTitle,
 				DMS_standardHint_Message_Color,
 				DMS_standardHint_Message_Size,
 				DMS_standardHint_Message_Font,
@@ -74,7 +76,7 @@ if (_message isEqualTo "") exitWith {};
 				_titleColor,
 				DMS_dynamicText_Title_Size,
 				DMS_dynamicText_Title_Font,
-				_missionName,
+				_messageTitle,
 				DMS_dynamicText_Message_Color,
 				DMS_dynamicText_Message_Size,
 				DMS_dynamicText_Message_Font,
@@ -90,7 +92,7 @@ if (_message isEqualTo "") exitWith {};
 				_titleColor,
 				DMS_textTiles_Title_Size,
 				DMS_textTiles_Title_Font,
-				_missionName,
+				_messageTitle,
 				DMS_textTiles_Message_Color,
 				DMS_textTiles_Message_Size,
 				DMS_textTiles_Message_Font,

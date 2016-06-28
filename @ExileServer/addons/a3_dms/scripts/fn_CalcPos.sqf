@@ -2,6 +2,8 @@
 	DMS_fnc_CalcPos
 	Created by eraser1
 
+	https://github.com/Defent/DMS_Exile/wiki/DMS_fnc_CalcPos
+
 	Usage:
 	[
 		_positionOrObject,				// Object or Position: The center

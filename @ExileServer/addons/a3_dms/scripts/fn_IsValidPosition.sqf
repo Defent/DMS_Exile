@@ -90,17 +90,25 @@ else
 				_missionPos = missionNamespace getVariable [format ["%1_pos",_x], []];
 				if (!(_missionPos isEqualTo []) && {(_missionPos distance2D _pos)<=_missionNearLimit}) throw "a mission";
 
-				if (((_x find "VEMFr_DynaLocInva_ID")>0) && {((getMarkerPos _x) distance2D _pos)<=_missionNearLimit}) throw "a VEMF mission";
+				if
+				(
+					(
+						((_x find "ZCP_CM_dot_") >= 0)							// Look in the marker string for the ZCP marker prefix
+						||
+						{(_x find "VEMFr_DynaLocInva_ID") >= 0}					// Look in the marker string for the VEMF marker prefix
+					)
+					&&
+					{((getMarkerPos _x) distance2D _pos)<=_missionNearLimit}	// Then check if the marker is close to the position
+				) throw "a VEMF or ZCP mission";
 			};
 		} forEach allMapMarkers;
 
 
 		// Check for nearby players
-		// This is done last because it is likely to be the most resource intensive.
 		if ((_playerNearLimit>0) && {[_pos,_playerNearLimit] call DMS_fnc_IsPlayerNearby}) throw "a player";
 
+		// Check for nearby territories. This is done last because it is likely to be the most resource intensive.
 		if ((_territoryNearLimit>0) && {[_pos,_territoryNearLimit] call ExileClient_util_world_isTerritoryInRange}) throw "a territory";
-
 
 
 		// No exceptions found

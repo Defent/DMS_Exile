@@ -2,15 +2,17 @@
 	DMS_fnc_AddWeapon
 	created by eraser1 - based off of BIS_fnc_AddWeapon
 
+    https://github.com/Defent/DMS_Exile/wiki/DMS_fnc_AddWeapon
+
 	Description:
 	Add a weapon to a unit with the right magazines. Magazine class is obtained from the weapon's config.
 
     Usage:
     [
-        _unit,              // <object> unit that is issued new equipment
-        _weapon,            // <string> weapon classname
-        _magazineCount,     // <scalar> number of magazines
-        _magClassname       // (Optional): <scalar> index of magazine class in weapon's config (default 0) OR <string> magazine classname
+        _unit,              // <object> The unit that is to receive the weapon (and magazines).
+        _weapon,            // <string> The classname of the weapon to be added.
+        _magazineCount,     // <scalar> Number of magazines to be added.
+        _magClassname       // <string> (Optional) The classname of the magazine to be added.
     ] call DMS_fnc_AddWeapon;
 
 	Nothing is returned

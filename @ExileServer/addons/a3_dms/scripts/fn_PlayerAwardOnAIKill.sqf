@@ -73,6 +73,7 @@ if ((!isNull _playerObj) && {(_playerUID != "") && {_playerObj isKindOf "Exile_U
 		private _playerRespect = _playerObj getVariable ["ExileScore", 0];
 		private _playerRank = _playerObj getVariable ["ExileHumanity", 0];
 		private _unitName = name _unit;
+		private _distance = [];
 
 		/*
 		if (DMS_DEBUG) then
@@ -83,8 +84,6 @@ if ((!isNull _playerObj) && {(_playerUID != "") && {_playerObj isKindOf "Exile_U
 
 		if (_moneyChange!=0) then
 		{
-			private _distance = [];
-
 			// Set client's money
 			// I also make sure that they don't get negative poptabs
 			_playerMoney = (_playerMoney + _moneyChange) max 0;
@@ -184,9 +183,6 @@ if ((!isNull _playerObj) && {(_playerUID != "") && {_playerObj isKindOf "Exile_U
 		{
 			format ["PlayerAwardOnAIKill :: %1 (%2) awarded %3 poptabs and %4 respect for killing %5. Player's money is now %6, and respect is now %7. Roadkill: %8", name _playerObj, _playerUID, _moneyChange, _repChange, _unit, _playerMoney, _playerRespect, _roadKilled] call DMS_fnc_DebugLog;
 		};
-
-		// Update client database entry
-		format["setAccountMoneyAndRespect:%1:%2:%3", _playerMoney, _playerRespect, _playerUID] call ExileServer_system_database_query_fireAndForget;
 
 		if (DMS_Show_Party_Kill_Notification) then
 		{
