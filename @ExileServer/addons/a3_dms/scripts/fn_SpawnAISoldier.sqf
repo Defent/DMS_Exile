@@ -424,7 +424,7 @@ _unit setVariable
 _unit setVariable
 [
 	"DMS_AI_Respect",
-	missionNamespace getVariable [format ["DMS_%1_%2_RepGain",_AISide,_AIType],0]
+	missionNamespace getVariable [format ["DMS_%1_%2_RepGain",_side,_type],0]
 ];
 
 

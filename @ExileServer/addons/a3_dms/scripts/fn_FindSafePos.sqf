@@ -95,7 +95,13 @@ for "_attempts" from 1 to MAX_ATTEMPTS do
 
 	_isValidSpot = [_pos, _waterNearLimit, _minSurfaceNormal, _spawnZoneNearLimit, _traderZoneNearLimit, _missionNearLimit, _playerNearLimit, _territoryNearLimit] call DMS_fnc_IsValidPosition;
 
-	if (_isValidSpot) exitWith {};
+	if (_isValidSpot) exitWith
+	{
+		if (DMS_DEBUG) then
+		{
+			(format["FindSafePos :: Found mission position %1 in %2 attempts. _this: %3",_pos,_attempts,_this]) call DMS_fnc_DebugLog;
+		};
+	};
 };
 
 if !(_isValidSpot) exitWith
@@ -104,12 +110,6 @@ if !(_isValidSpot) exitWith
 };
 
 _pos set [2,0];
-
-
-if (DMS_DEBUG) then
-{
-	(format["FindSafePos :: Found mission position %1 in %2 attempts. _this: %3",_pos,_attempts,_this]) call DMS_fnc_DebugLog;
-};
 
 
 _pos;
