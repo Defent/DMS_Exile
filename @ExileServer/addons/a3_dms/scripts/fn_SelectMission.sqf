@@ -7,6 +7,7 @@
 */
 
 private _time = diag_tickTime;
+private _playerCount = count allPlayers;
 
 if (DMS_RunningBMissionCount >= DMS_MaxBanditMissions) then
 {
@@ -20,7 +21,7 @@ if ((count DMS_RunningStaticMissions) >= DMS_MaxStaticMissions) then
 
 
 
-if (diag_fps >= DMS_MinServerFPS && {(count allPlayers) >= DMS_MinPlayerCount}) then
+if (diag_fps >= DMS_MinServerFPS && {_playerCount >= DMS_MinPlayerCount}) then
 {
 	if (DMS_DynamicMission && {_time - DMS_BMissionLastStart > DMS_BMissionDelay}) then
 	{

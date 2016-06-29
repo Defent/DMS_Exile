@@ -410,14 +410,47 @@ if (_type == "Paratroopers") then
 	_unit addBackpackGlobal "B_Parachute";
 };
 
+// Set info variables
 _unit setVariable ["DMS_AISpawnTime", time];
 _unit setVariable ["DMS_AI_Side", _side];
 _unit setVariable ["DMS_AI_Type", _type];
 
+// Set money/respect variables
+_unit setVariable
+[
+	"DMS_AI_Money",
+	missionNamespace getVariable [format ["DMS_%1_%2_MoneyGain",_side,_type],0]
+];
+_unit setVariable
+[
+	"DMS_AI_Respect",
+	missionNamespace getVariable [format ["DMS_%1_%2_RepGain",_AISide,_AIType],0]
+];
+
+
+private _AIMoney =
+	if (DMS_Spawn_AI_With_Money) then
+	{
+		private _base_money_amount = missionNamespace getVariable [format["DMS_%1_%2_SpawnMoney",_side,_type], 0];
+		private _population_bonus = DMS_AIMoney_PopulationMultiplier * (if (isNil '_playerCount') then {count allPlayers} else {_playerCount});
+		_base_money_amount + _population_bonus
+	}
+	else
+	{
+		0
+	};
+
+_unit setVariable
+[
+	"ExileMoney",
+	_AIMoney,
+	true
+];
+
 
 if (DMS_DEBUG) then
 {
-	(format ["SpawnAISoldier :: Spawned a %1 %2 %6 AI at %3 with %4 difficulty to group %5",_class,_side,_pos,_difficulty,_group,_type]) call DMS_fnc_DebugLog;
+	(format ["SpawnAISoldier :: Spawned a %1 %2 %6 AI at %3 with %4 difficulty carrying %7 poptabs to group %5",_class,_side,_pos,_difficulty,_group,_type,_AIMoney]) call DMS_fnc_DebugLog;
 };
 
 

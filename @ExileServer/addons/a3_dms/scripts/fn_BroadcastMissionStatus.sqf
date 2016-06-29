@@ -42,7 +42,15 @@ if !(_message isEqualType "") then
 	_message = str _message;
 };
 
-if (_message isEqualTo "") exitWith {};
+private _status =
+	if ((count _this)>2) then
+	{
+		_this select 2
+	}
+	else
+	{
+		"start"
+	};
 
 {
 	switch (toLower _x) do
@@ -50,6 +58,38 @@ if (_message isEqualTo "") exitWith {};
 		case "systemchatrequest":
 		{
 			format["%1: %2",toUpper _messageTitle,_message] remoteExecCall ["systemChat",-2];
+		};
+
+		case "ExileToasts":
+		{
+			private _toast_type =
+				switch (_status) do
+				{
+					case "win": {"SuccessEmpty"};
+					case "lose": {"ErrorEmpty"};
+					default {"InfoEmpty"};		// case "start":
+				};
+
+			[
+			    "toastRequest",
+			    [
+			        _toast_type,
+			        [
+			            format
+			            [
+			                "<t color='%1' size='%2' font='%3'>%4</t><br/><t color='%5' size='%6' font='%7'>%8</t>",
+			                _titleColor,
+			                DMS_ExileToasts_Title_Size,
+			                DMS_ExileToasts_Title_Font,
+			                _messageTitle,
+			                DMS_ExileToasts_Message_Color,
+			                DMS_ExileToasts_Message_Size,
+			                DMS_ExileToasts_Message_Font,
+			                _message
+			            ]
+			        ]
+			    ]
+			] call ExileServer_system_network_send_broadcast;
 		};
 
 		case "standardhintrequest":

@@ -150,6 +150,31 @@ ___
 # Changelog:
 
 ### Main Branch
+#### June 29, 2016 (4:00 PM CST-America):
+* **NEW CONFIG VALUES**
+		DMS_ExileToasts_Title_Size
+		DMS_ExileToasts_Title_Font
+		DMS_ExileToasts_Message_Color
+		DMS_ExileToasts_Message_Size
+		DMS_ExileToasts_Message_Font
+		DMS_Spawn_AI_With_Money
+		DMS_AIMoney_PopulationMultiplier
+		DMS_GiveMoneyToPlayer_OnAIKill
+		DMS_GiveRespectToPlayer_OnAIKill
+		DMS_Bandit_Soldier_SpawnMoney
+		DMS_Bandit_Static_SpawnMoney
+		DMS_Bandit_Vehicle_SpawnMoney
+		DMS_Hero_Soldier_SpawnMoney
+		DMS_Hero_Static_SpawnMoney
+		DMS_Hero_Vehicle_SpawnMoney
+		DMS_Survivor_Soldier_SpawnMoney
+		DMS_Survivor_Static_SpawnMoney
+		DMS_Survivor_Vehicle_MoneyGain
+* Pastebin of new config values: http://pastebin.com/eXw93CkD
+* **It is also recommended to update "DMS_PlayerNotificationTypes"!!!**
+* Added support for new Exile "Toasts" notification. This is now the default (and only) DMS notification type.
+* Complete overhaul and update of "DMS_fnc_PlayerAwardOnAIKill", it is now more efficient and updated to new Exile standards.
+
 #### June 27, 2016 (7:00 PM CST-America):
 * DMS should now properly detect VEMF markers (it wasn't working before because of a minor typo).
 * DMS will now detect (and avoid) ZCP missions if you're updated to the latest version of ZCP on the test branch.
