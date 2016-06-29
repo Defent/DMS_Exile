@@ -125,7 +125,8 @@ if ((!isNull _playerObj) && {(_playerUID != "") && {_playerObj isKindOf "Exile_U
 	{
 		private _group = group _playerObj;
 		private _members = units _group;
-		if (!(_group isEqualTo ExileGraveyardGroup) && {(count _members)>1}) then
+		//if (!(_group isEqualTo ExileGraveyardGroup) && {(count _members)>1}) then
+		if ((count _members)>1) then
 		{
 			private _msg = format
 			[

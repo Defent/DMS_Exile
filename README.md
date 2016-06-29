@@ -150,6 +150,9 @@ ___
 # Changelog:
 
 ### Main Branch
+#### June 29, 2016 (6:00 PM CST-America):
+* Fixed a few issues (script errors, missions not broadcasting, group kill notifications not broadcasting).
+
 #### June 29, 2016 (4:00 PM CST-America):
 * **NEW CONFIG VALUES**
 

@@ -6,10 +6,11 @@
 
 	Usage:
 	[
-		_messageTitle,
+		_messageTitle,								// <string> The title of the message
 		[
-			_messageColor,
-			_message
+			_titleColor,							// <string> The color of the message (in hex colors)
+			_message,								// <any>	The actual message. Usually a string.
+			_status									// <string> (OPTIONAL) The mission status. eg "win" or "lose". Currently only used on Exile Toasts.
 		]
 	] call DMS_fnc_BroadcastMissionStatus;
 
@@ -43,9 +44,9 @@ if !(_message isEqualType "") then
 };
 
 private _status =
-	if ((count _this)>2) then
+	if ((count _messageInfo)>2) then
 	{
-		_this select 2
+		_messageInfo select 2
 	}
 	else
 	{
@@ -60,7 +61,7 @@ private _status =
 			format["%1: %2",toUpper _messageTitle,_message] remoteExecCall ["systemChat",-2];
 		};
 
-		case "ExileToasts":
+		case "exiletoasts":
 		{
 			private _toast_type =
 				switch (_status) do
