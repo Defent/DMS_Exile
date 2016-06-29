@@ -152,6 +152,7 @@ ___
 ### Main Branch
 #### June 29, 2016 (4:00 PM CST-America):
 * **NEW CONFIG VALUES**
+
 		DMS_ExileToasts_Title_Size
 		DMS_ExileToasts_Title_Font
 		DMS_ExileToasts_Message_Color
@@ -189,6 +190,7 @@ ___
 
 #### June 24, 2016 (6:00 PM CST-America):
 * **NEW CONFIG VALUES**
+
 		DMS_AI_UseRealNames
 		DMS_ai_allowFreezing
 		DMS_ai_freeze_Only_DMS_AI
