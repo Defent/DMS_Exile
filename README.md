@@ -150,6 +150,10 @@ ___
 # Changelog:
 
 ### Main Branch
+#### June 30, 2016 (2:30 AM CST-America):
+* DMS will now update player respect in the database when a player kills an AI (and respect is awarded to the player).
+* Optimizations related to "DMS_ai_share_info" (also, using a suppressor against AI might be better ;) )
+
 #### June 29, 2016 (6:00 PM CST-America):
 * Fixed a few issues (script errors, missions not broadcasting, group kill notifications not broadcasting).
 

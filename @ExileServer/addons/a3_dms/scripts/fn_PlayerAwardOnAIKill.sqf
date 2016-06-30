@@ -114,6 +114,9 @@ if ((!isNull _playerObj) && {(_playerUID != "") && {_playerObj isKindOf "Exile_U
 			[_playerObj, "showFragRequest", [_attributes]] call ExileServer_system_network_send_to;
 		};
 
+		// Update respect in database
+		format["setAccountScore:%1:%2", _playerRespect, _playerUID] call ExileServer_system_database_query_fireAndForget;
+
 		// Send updated respect value to client
 		ExileClientPlayerScore = _playerRespect;
 		(owner _playerObj) publicVariableClient "ExileClientPlayerScore";
