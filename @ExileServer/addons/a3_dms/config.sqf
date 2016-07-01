@@ -164,7 +164,7 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 		/*Exile Toasts Notification Settings*/
 	DMS_ExileToasts_Title_Size			= 22;						// Size for Client Exile Toasts  mission titles.
 	DMS_ExileToasts_Title_Font			= "puristaMedium";			// Font for Client Exile Toasts  mission titles.
-	DMS_ExileToasts_Message_Color		= "#ff979ba1";				// Exile Toasts color for "ExileToast" client notification type.
+	DMS_ExileToasts_Message_Color		= "#FFFFFF";				// Exile Toasts color for "ExileToast" client notification type.
 	DMS_ExileToasts_Message_Size		= 19;						// Exile Toasts size for "ExileToast" client notification type.
 	DMS_ExileToasts_Message_Font		= "PuristaLight";			// Exile Toasts font for "ExileToast" client notification type.
 		/*Exile Toasts Notification Settings*/
