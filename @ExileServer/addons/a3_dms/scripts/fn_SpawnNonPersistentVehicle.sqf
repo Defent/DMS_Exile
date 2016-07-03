@@ -46,7 +46,7 @@ if !(isClass (configFile >> "CfgVehicles" >> _vehicleClass)) exitWith
 private _vehpos = [];
 private _maxDistance = 5;
 
-while{count _vehpos < 1} do
+while {_vehpos isEqualTo []} do
 {
 	_vehpos = _position findEmptyPosition [0,_maxDistance,_vehicleClass];
 	_maxDistance = (_maxDistance + 5);
@@ -82,15 +82,15 @@ if ((getTerrainHeightASL _vehpos)>0) then
 	_vehObj setVectorUp (surfaceNormal _vehpos);
 };
 
+_vehObj setVariable ["ExileMoney",0,true];
 _vehObj setVariable ["ExileIsPersistent", false];
-_vehObj addMPEventHandler ["MPKilled", { if !(isServer) exitWith {}; _this call ExileServer_object_vehicle_event_onMPKilled;}];
+_vehObj addMPEventHandler ["MPKilled", { if (isServer) then {_this call ExileServer_object_vehicle_event_onMPKilled;};}];
 _vehObj addEventHandler ["GetIn", {_this call ExileServer_object_vehicle_event_onGetIn}];
 if (_vehObj isKindOf "Helicopter") then
 {
 	_vehObj addEventHandler ["RopeAttach",
 	{
-		private "_vehicle";
-		_vehicle = _this select 2;
+		private _vehicle = _this select 2;
 
 		if !(simulationEnabled _vehicle) then
 		{

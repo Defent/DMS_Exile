@@ -24,7 +24,8 @@
 		_difficulty,					// STRING: The difficulty of the AI to be spawned. Supported values: "random","static","hardcore","difficult","moderate", or "easy"
 		_side,							// STRING: The "side" that the AI are on. Currently only "bandit" is supported.
 		_monitorType,					// STRING: How the AI group should be managed. Supported types: "playernear", "maintain", "reinforce", "increasing_resistance", "armed_vehicle"
-		_monitorParams					// ARRAY: Parameters specific to the _monitorType. See below.
+		_monitorParams,					// ARRAY: Parameters specific to the _monitorType. See below.
+		_customGearSet					// (OPTIONAL) ARRAY: The custom gear set of the AI. Refer to documentation of fn_SpawnAISoldier.sqf for more info: https://github.com/Defent/DMS_Exile/blob/master/%40ExileServer/addons/a3_dms/scripts/fn_SpawnAISoldier.sqf
 	] call DMS_fnc_GroupReinforcementsManager;
 
 	About "_monitorType" types:
@@ -174,6 +175,16 @@ exitWith
 	diag_log format ["DMS ERROR :: Calling DMS_fnc_GroupReinforcementsManager with invalid _updateInfo: %1",_updateInfo];
 	true
 };
+
+private _customGearSet =
+	if ((count _this) > 9) then
+	{
+		_this select 9
+	}
+	else
+	{
+		[]
+	};
 
 
 
@@ -570,13 +581,13 @@ if (!_reinforcementsDepleted && {(diag_tickTime-_lastUpdated)>_updateDelay}) the
 
 			for "_i" from 0 to (_unitsToSpawn-1) do
 			{
-				_units pushBack ([_AIGroup,_spawnPos,_class,_difficulty,_side,"Soldier"] call DMS_fnc_SpawnAISoldier);
+				_units pushBack ([_AIGroup,_spawnPos,_class,_difficulty,_side,"Soldier",_customGearSet] call DMS_fnc_SpawnAISoldier);
 			};
 		}
 		else
 		{
-			// Shuffle the original list and make a copy.
-			private _spawningLocations = (_spawnLocations call ExileClient_util_array_shuffle) + [];
+			// Shuffle the list.
+			private _spawningLocations = _spawnLocations call ExileClient_util_array_shuffle;
 			_spawnPos = _spawningLocations select 0;				// Define it for spawning flares
 			_spawningLocations_count = count _spawningLocations;
 
@@ -589,7 +600,7 @@ if (!_reinforcementsDepleted && {(diag_tickTime-_lastUpdated)>_updateDelay}) the
 			// Now to spawn the AI...
 			for "_i" from 0 to (_unitsToSpawn-1) do
 			{
-				_units pushBack ([_AIGroup,_spawningLocations select _i,_class,_difficulty,_side,"Soldier"] call DMS_fnc_SpawnAISoldier);
+				_units pushBack ([_AIGroup,_spawningLocations select _i,_class,_difficulty,_side,"Soldier",_customGearSet] call DMS_fnc_SpawnAISoldier);
 			};
 		};
 

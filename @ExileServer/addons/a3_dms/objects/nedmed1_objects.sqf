@@ -1,0 +1,14 @@
+[
+	["Land_Medevac_house_V1_F",[0,15,0],0],
+	["Land_Medevac_house_V1_F",[6.2,15,0],0],
+	["Land_Medevac_house_V1_F",[-6.2,15,0],0],
+	["Land_Medevac_house_V1_F",[15,0,0],90],
+	["Land_Medevac_house_V1_F",[15,6.2,0],90],
+	["Land_Medevac_house_V1_F",[15,-6.2,0],90],
+	["Land_Medevac_house_V1_F",[0,-15,0],180],
+	["Land_Medevac_house_V1_F",[-6.2,-15,0],180],
+	["Land_Medevac_house_V1_F",[6.2,-15,0],180],
+	["Land_Medevac_house_V1_F",[-15,0,0],270],
+	["Land_Medevac_house_V1_F",[-15,-6.2,0],270],
+	["Land_Medevac_house_V1_F",[-15,6.2,0],270]
+]

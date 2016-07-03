@@ -46,8 +46,15 @@ try
 	if ((!isNil "_return") && {_return isEqualTo "delay"}) exitWith
 	{
 		DMS_MissionCount = DMS_MissionCount - 1;
-		// This will cause mission spawning to run in scheduled, but that should be a fairly minor issue.
-		[60, DMS_fnc_SpawnStaticMission, [_missionType], false] call ExileServer_system_thread_addTask;
+
+		if (DMS_SpawnMissions_Scheduled) then
+		{
+			[60, DMS_fnc_SpawnStaticMission, [_missionType], false] call ExileServer_system_thread_addTask;
+		}
+		else
+		{
+			[60, {[_this, DMS_fnc_SpawnStaticMission] execFSM "exile_server\fsm\call.fsm";}, [_missionType], false] call ExileServer_system_thread_addTask;
+		};
 
 		if (DMS_DEBUG) then
 		{

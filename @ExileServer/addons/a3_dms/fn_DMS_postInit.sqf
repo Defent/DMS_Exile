@@ -129,7 +129,7 @@ publicVariable "DMS_CLIENT_fnc_hintSilent";
 publicVariable "DMS_Version";
 
 
-format["DMS_Version: %1",DMS_Version] remoteExecCall ["diag_log", -2, "DMS_LogVersion_JIP_ID"]; 
+format["DMS_Version: %1",DMS_Version] remoteExecCall ["diag_log", -2, "DMS_LogVersion_JIP_ID"];
 
 
 
@@ -200,9 +200,14 @@ if (DMS_ShowDifficultyColorLegend) then
 
 if (DMS_StaticMission) then
 {
+	private _temp = DMS_StaticMinPlayerDistance;
+	DMS_StaticMinPlayerDistance = 0;
+	
 	{
 		[_x] call DMS_fnc_SpawnStaticMission;
 	} forEach DMS_StaticMissionsOnServerStart;
+
+	DMS_StaticMinPlayerDistance = _temp;
 };
 
 

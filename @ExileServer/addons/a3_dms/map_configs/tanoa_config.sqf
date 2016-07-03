@@ -11,3 +11,9 @@ DMS_MinDistFromWestBorder			= 1300;
 DMS_MinDistFromEastBorder			= 800;
 DMS_MinDistFromSouthBorder			= 1500;
 DMS_MinDistFromNorthBorder			= 1900;
+
+
+DMS_StaticMissionsOnServerStart append
+[
+	"underwater_stash"
+];

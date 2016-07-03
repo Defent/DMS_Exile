@@ -150,6 +150,15 @@ ___
 # Changelog:
 
 ### Main Branch
+### July 3, 2016 (1:40 AM CST-America):
+* Updated AI weapons to include new exile weapons.
+* Updated box loot with latest food, drink, crafting materials, and building supplies.
+* Added [red_ned's mission pack](http://www.exilemod.com/topic/12072-update31-dms-bandit-missions-either-new-or-reworked/).
+* New underwater mission for Tanoa! Go ahead and try it out, give me any suggestions/tips/bug reports (OTHER THAN THE AI SWIMMING THROUGH ROCKS).
+* Added support for custom gear sets in group reinforcments.
+* Slight optimizations here and there.
+* Static missions will now spawn unscheduled if configured to do so even after a delay has been applied (from a player being too close).
+
 #### June 30, 2016 (2:30 AM CST-America):
 * DMS will now update player respect in the database when a player kills an AI (and respect is awarded to the player).
 * Optimizations related to "DMS_ai_share_info" (also, using a suppressor against AI might be better ;) )

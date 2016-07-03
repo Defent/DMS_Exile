@@ -8,7 +8,11 @@
 	A lot of these configs are influenced by WAI :P
 	https://github.com/nerdalertdk/WICKED-AI
 */
+// If you don't want the AI to have marksman DLC weapons, then simply remove the line below, or comment it by putting // at the beginning of the line
+#define GIVE_AI_MARKSMAN_DLC_WEAPONS 1
 
+// If you don't want crates to spawn with marksman DLC weapons, simply remove the line below or comment it out.
+#define USE_MARKSMAN_DLC_WEAPONS_IN_CRATES 1
 
 
 DMS_Use_Map_Config = true;	// Whether or not to use config overwrites specific to the map.
@@ -199,24 +203,38 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 
 	/*Mission notification settings*/
 
-	DMS_BanditMissionTypes =			[							//	List of missions with spawn chances. If they add up to 100%, they represent the percentage chance each one will spawn
-											["donthasslethehoff",5],
-											["bandits",5],
-											["bauhaus",5],
-											["cardealer",5],
-											["humanitarian",5],
-											["foodtransport",5],
-											["blackhawkdown",4],
-											["construction",4],
-											["walmart",4],
-											["mercenaries",4],
-											["guntransport",4],
+	DMS_BanditMissionTypes =			[			//	List of missions with spawn chances. If they add up to 100%, they represent the percentage chance each one will spawn
+											["bandits",3],
+											["bauhaus",3],
 											["beertransport",3],
+											["behindenemylines",3],
+											["blackhawkdown",3],
+											["cardealer",3],
+											["construction",3],
+											["donthasslethehoff",3],
+											["foodtransport",3],
+											["guntransport",3],
+											["humanitarian",3],
+											["lost_battalion",3],
+											["medical",3],
+											["mercbase",2],
+											["mercenaries",3],
+											["nedbuilding1_mission",3],
+											["nedcar_mission",4],
+											["nedguns1_mission",3],
+											["nedhatchback_mission",3],
+											["nedhunter_mission",2],
+											["nedifrit_mission",2],
+											["nedlittlebird_mission",2],
+											["nedmedical1_mission",3],
+											["nedoffroad_mission",3],
+											["nedresearch_mission",3],
+											["nedsnipercamp_mission",3],
+											["nedstrider_mission",2],
+											["nedural_mission",3],
 											["roguenavyseals",3],
-											["thieves",2],
-											["lost_battalion",2],
-											["behindenemylines",2],
-											["mercbase",1]
+											["thieves",3],
+											["walmart",3]
 										];
 
 
@@ -373,7 +391,7 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 	DMS_ai_freezingDistance				= 3500;						// If there are no players within this distance of the leader of an AI group, then the AI group will be "frozen".
 	DMS_ai_unfreezingDistance			= 3500;						// If there are players within this distance of the leader of an AI group, then the AI group will be "un-frozen".
 	DMS_ai_offloadOnUnfreeze			= true;						// Whether or not to offload AI to clients once they have been "un-frozen". NOTE: This config will be ignored if "DMS_ai_offload_to_client" is set to false.
-	DMS_ai_freezeCheckingDelay			= 30;						// How often (in seconds) DMS will check whether to freeze/un-freeze AI.
+	DMS_ai_freezeCheckingDelay			= 15;						// How often (in seconds) DMS will check whether to freeze/un-freeze AI.
 	DMS_ai_freezeOnSpawn				= true;						// Whether or not to freeze an AI group when initially spawned.
 
 	DMS_ai_share_info					= false;					// Share info about killer
@@ -445,14 +463,25 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 											"arifle_TRG21_F",
 											"arifle_TRG20_F",
 											"arifle_Mk20_plain_F",
-											"arifle_Mk20_F"
+											"arifle_Mk20_F",
+											"Exile_Weapon_AK107",
+											"Exile_Weapon_AK107_GL",
+											"Exile_Weapon_AK74_GL",
+											"Exile_Weapon_AK47",
+											"Exile_Weapon_AKM",
+											"Exile_Weapon_AKS",
+											"Exile_Weapon_AKS_Gold"
 										];
 	DMS_assault_pistols =				[							// Pistols for Assault Class (Set to empty array if you don't want to give them any pistols)
 											"hgun_ACPC2_F",
 											"hgun_Rook40_F",
 											"hgun_P07_F",
 											"hgun_Pistol_heavy_01_F",
-											"hgun_Pistol_heavy_02_F"
+											"hgun_Pistol_heavy_02_F",
+											"Exile_Weapon_Colt1911",
+											"Exile_Weapon_Makarov",
+											"Exile_Weapon_Taurus",
+											"Exile_Weapon_TaurusGold"
 										];
 	DMS_assault_optics =				[							// Optics for Assault Class
 											"optic_Arco",
@@ -528,16 +557,26 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 
 	//Machine Gun Class
 	DMS_MG_weps	=						[							// Machine Guns
+											#ifdef GIVE_AI_MARKSMAN_DLC_WEAPONS
+											"MMG_01_hex_F",
+											"MMG_02_black_F",
+											#endif
 											"LMG_Zafir_F",
 											"LMG_Mk200_F",
-											"arifle_MX_SW_Black_F"
+											"arifle_MX_SW_Black_F",
+											"Exile_Weapon_RPK",
+											"Exile_Weapon_PKP"
 										];
-	DMS_MG_pistols =					[							// Pistols for MG Class (Set to empty array if you don't want to give them any pistols)
+	DMS_MG_pistols =				[							// Pistols for Assault Class (Set to empty array if you don't want to give them any pistols)
 											"hgun_ACPC2_F",
 											"hgun_Rook40_F",
 											"hgun_P07_F",
 											"hgun_Pistol_heavy_01_F",
-											"hgun_Pistol_heavy_02_F"
+											"hgun_Pistol_heavy_02_F",
+											"Exile_Weapon_Colt1911",
+											"Exile_Weapon_Makarov",
+											"Exile_Weapon_Taurus",
+											"Exile_Weapon_TaurusGold"
 										];
 	DMS_MG_optics =						[							//	Optics for MG Class
 											"optic_Hamr",
@@ -619,19 +658,31 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 	//Sniper Class
 	DMS_sniper_weps =					[							// Sniper Rifles
 											"srifle_EBR_F",
-											"srifle_DMR_01_F",
 											"srifle_GM6_F",
 											"srifle_LRR_F",
-											"arifle_MXM_F",
 											"arifle_MXM_Black_F",
-											"srifle_DMR_02_F"
+											"srifle_DMR_01_F",
+											#ifdef GIVE_AI_MARKSMAN_DLC_WEAPONS
+											"srifle_DMR_02_F",
+											"srifle_DMR_03_woodland_F",
+											//"srifle_DMR_04_F",			// Does anybody like the ASP-1? :p
+											"srifle_DMR_05_blk_F",
+											"srifle_DMR_06_olive_F",
+											#endif
+											"Exile_Weapon_DMR",
+											"Exile_Weapon_SVD",
+											"Exile_Weapon_VSSVintorez"
 										];
-	DMS_sniper_pistols =				[							// Pistols for Sniper Class (Set to empty array if you don't want to give them any pistols)
+	DMS_sniper_pistols =				[							// Pistols for Assault Class (Set to empty array if you don't want to give them any pistols)
 											"hgun_ACPC2_F",
 											"hgun_Rook40_F",
 											"hgun_P07_F",
 											"hgun_Pistol_heavy_01_F",
-											"hgun_Pistol_heavy_02_F"
+											"hgun_Pistol_heavy_02_F",
+											"Exile_Weapon_Colt1911",
+											"Exile_Weapon_Makarov",
+											"Exile_Weapon_Taurus",
+											"Exile_Weapon_TaurusGold"
 										];
 	DMS_sniper_optics =					[							// Optics for Sniper Class
 											"optic_SOS",
@@ -809,7 +860,18 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 											]
 										];
 	DMS_BoxWeapons =					[							// List of weapons that can spawn in a crate
+											#ifdef USE_MARKSMAN_DLC_WEAPONS_IN_CRATES
+											"srifle_DMR_02_F",
+											"srifle_DMR_03_woodland_F",
+											//"srifle_DMR_04_F",			// ASP-1 Kir
+											"srifle_DMR_05_blk_F",
+											"srifle_DMR_06_olive_F",
+											"MMG_01_hex_F",
+											"MMG_02_black_F",
+											#endif
 											"Exile_Melee_Axe",
+											"Exile_Melee_SledgeHammmer",
+											"Exile_Item_Shovel",
 											"arifle_Katiba_GL_F",
 											"arifle_MX_GL_Black_F",
 											"arifle_Mk20_GL_F",
@@ -820,16 +882,29 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 											"arifle_TRG20_F",
 											"arifle_Mk20_plain_F",
 											"arifle_Mk20_F",
+											"Exile_Weapon_AK107",
+											"Exile_Weapon_AK107_GL",
+											"Exile_Weapon_AK74_GL",
+											"Exile_Weapon_AK47",
+											"Exile_Weapon_AKM",
+											"Exile_Weapon_AKS",
+											"Exile_Weapon_AKS_Gold",
 											"LMG_Zafir_F",
 											"LMG_Mk200_F",
 											"arifle_MX_SW_Black_F",
+											"Exile_Weapon_RPK",
+											"Exile_Weapon_PK",
+											"Exile_Weapon_PKP",
 											"srifle_EBR_F",
 											"srifle_DMR_01_F",
 											"srifle_GM6_F",
 											"srifle_LRR_F",
-											"arifle_MXM_F",
 											"arifle_MXM_Black_F",
-											"srifle_DMR_02_F"
+											"Exile_Weapon_DMR",
+											"Exile_Weapon_SVD",
+											"Exile_Weapon_VSSVintorez",
+											"Exile_Weapon_CZ550",
+											"Exile_Weapon_SVDCamo"
 										];
 	DMS_BoxFood =						[							// List of food that can spawn in a crate.
 											"Exile_Item_GloriousKnakworst_Cooked",
@@ -840,14 +915,20 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 											"Exile_Item_Catfood_Cooked",
 											"Exile_Item_DogFood_Cooked",
 											"Exile_Item_EMRE",
-											"Exile_Item_EMRE"
+											"Exile_Item_BeefParts",
+											"Exile_Item_Noodles",
+											"Exile_Item_SeedAstics",
+											"Exile_Item_Raisins",
+											"Exile_Item_Moobar",
+											"Exile_Item_InstantCoffee"
 										];
 	DMS_BoxDrinks =						[
 											"Exile_Item_PlasticBottleCoffee",
 											"Exile_Item_PowerDrink",
 											"Exile_Item_PlasticBottleFreshWater",
 											"Exile_Item_EnergyDrink",
-											"Exile_Item_MountainDupe"
+											"Exile_Item_MountainDupe",
+											"Exile_Item_ChocolateMilk"
 										];
 	DMS_BoxMeds =						[
 											"Exile_Item_InstaDoc",
@@ -860,26 +941,59 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 											"Exile_Melee_Axe",
 											"Exile_Item_CanOpener"
 										] + DMS_BoxFood + DMS_BoxDrinks + DMS_BoxMeds;
-	DMS_BoxBaseParts =					[
-											"Exile_Item_CamoTentKit",
+	DMS_Box_BaseParts_Wood =			[							// List of wooden base parts.
 											"Exile_Item_WoodWallKit",
 											"Exile_Item_WoodWallHalfKit",
-											"Exile_Item_WoodDoorwayKit",
+											"Exile_Item_WoodWindowKit",
 											"Exile_Item_WoodDoorKit",
+											"Exile_Item_WoodDoorwayKit",
+											"Exile_Item_WoodGateKit",
 											"Exile_Item_WoodFloorKit",
 											"Exile_Item_WoodFloorPortKit",
-											"Exile_Item_WoodStairsKit",
-											"Exile_Item_WoodSupportKit",
-											"Exile_Item_FortificationUpgrade"
+											"Exile_Item_WoodStairsKit"
 										];
+	DMS_Box_BaseParts_Concrete =		[							// List of concrete base parts
+											"Exile_Item_ConcreteWallKit",
+											"Exile_Item_ConcreteWindowKit",
+											"Exile_Item_ConcreteDoorKit",
+											"Exile_Item_ConcreteDoorwayKit",
+											"Exile_Item_ConcreteGateKit",
+											"Exile_Item_ConcreteFloorKit",
+											"Exile_Item_ConcreteFloorPortKit",
+											"Exile_Item_ConcreteStairsKit"
+										];
+	DMS_BoxBaseParts =					[							// List of all base parts to spawn. Weighted towards wood base parts.
+											"Exile_Item_FortificationUpgrade",
+											"Exile_Item_FortificationUpgrade",
+											"Exile_Item_SandBagsKit_Long",
+											"Exile_Item_SandBagsKit_Long",
+											"Exile_Item_SandBagsKit_Corner",
+											"Exile_Item_SandBagsKit_Corner",
+											"Exile_Item_HBarrier5Kit"
+										] + DMS_Box_BaseParts_Wood + DMS_Box_BaseParts_Wood + DMS_Box_BaseParts_Wood + DMS_Box_BaseParts_Concrete;
 	DMS_BoxCraftingMaterials =			[
-											"Exile_Item_MetalPole",
+											"Exile_Item_Cement",
+											"Exile_Item_Sand",
+											"Exile_Item_Sand",
+											"Exile_Item_WaterCanisterDirtyWater",
 											"Exile_Item_MetalBoard",
-											"Exile_Item_JunkMetal"
+											"Exile_Item_MetalPole",
+											"Exile_Item_MetalPole",
+											"Exile_Item_JunkMetal",
+											"Exile_Item_JunkMetal",
+											"Exile_Item_JunkMetal",
+											"Exile_Item_WoodPlank",
+											"Exile_Item_WoodPlank",
+											"Exile_Item_WoodPlank",
+											"Exile_Item_WoodPlank"
 										];
 	DMS_BoxTools =						[
 											"Exile_Item_Grinder",
-											"Exile_Item_Handsaw"
+											"Exile_Item_Handsaw",
+											"Exile_Item_CanOpener",
+											"Exile_Item_Pliers",
+											"Exile_Item_Screwdriver",
+											"Exile_Item_Foolbox"
 										];
 	DMS_BoxBuildingSupplies	=			[							// List of building supplies that can spawn in a crate ("DMS_BoxBaseParts", "DMS_BoxCraftingMaterials", and "DMS_BoxTools" are automatically added to this list. "DMS_BoxCraftingMaterials" is added twice for weight.)
 											"Exile_Item_DuctTape",
@@ -906,6 +1020,15 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 											"B_Bergen_blk"
 										];
 	DMS_BoxItems						= DMS_BoxSurvivalSupplies+DMS_BoxBuildingSupplies+DMS_BoxOptics;	// Random "items" can spawn optics, survival supplies, or building supplies
+
+	DMS_Box_BreachingCharges =			[							// List of breaching charges (weighted). Not used (yet).
+											"BreachingChargeBigMomma",
+											"BreachingChargeMetal",
+											"BreachingChargeMetal",
+											"BreachingChargeWood",
+											"BreachingChargeWood",
+											"BreachingChargeWood"
+										];
 
 	DMS_RareLoot						= true;						// Potential chance to spawn rare loot in any crate.
 	DMS_RareLootAmount					= 1;						// How many rare loot items to add.
