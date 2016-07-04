@@ -150,6 +150,9 @@ ___
 # Changelog:
 
 ### Main Branch
+### July 3, 2016 (8:15 PM CST-America):
+* Player money will be saved on kill.
+
 ### July 3, 2016 (1:40 AM CST-America):
 * Updated AI weapons to include new exile weapons.
 * Updated box loot with latest food, drink, crafting materials, and building supplies.
