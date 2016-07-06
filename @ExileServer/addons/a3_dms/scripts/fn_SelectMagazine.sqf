@@ -9,11 +9,11 @@
 */
 
 private _result 	= "";
-private _ammoArray 	= getArray (configFile >> "CfgWeapons" >> _this >> "magazines");
+private _magArray 	= getArray (configFile >> "CfgWeapons" >> _this >> "magazines");
 
-if (count _ammoArray > 0) then
+if (count _magArray > 0) then
 {
-	_result = _ammoArray select 0;
+	_result = _magArray select 0;
 };
 
 _result

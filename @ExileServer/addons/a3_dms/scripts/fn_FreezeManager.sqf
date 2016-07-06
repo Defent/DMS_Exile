@@ -14,7 +14,7 @@ private _recentlyUnfrozen = [];
 {
     if (isNull _x) then
     {
-        diag_log format["DMS ERROR :: Null Group found in DMS_FrozenAIGroups! Index: %1",_forEachIndex];
+        diag_log format["DMS SORT OF AN ERROR :: Null Group found in DMS_FrozenAIGroups! Index: %1",_forEachIndex];
         DMS_FrozenAIGroups deleteAt _forEachIndex;
     }
     else

@@ -8,11 +8,29 @@
 	A lot of these configs are influenced by WAI :P
 	https://github.com/nerdalertdk/WICKED-AI
 */
+
+// You dawg... heard you like configs... so here's some configs for your config.... so you can configure your configuration to make it easier to configure your configuration http://i.imgur.com/9eJjEEo.jpg
+
+
 // If you don't want the AI to have marksman DLC weapons, then simply remove the line below, or comment it by putting // at the beginning of the line
 #define GIVE_AI_MARKSMAN_DLC_WEAPONS 1
 
 // If you don't want crates to spawn with marksman DLC weapons, simply remove the line below or comment it out.
 #define USE_MARKSMAN_DLC_WEAPONS_IN_CRATES 1
+
+// Uncomment this if you want Apex weapons on AI.
+//#define GIVE_AI_APEX_WEAPONS 1
+
+// Uncomment this if you want Apex gear on AI. Uniforms, Vests, Backpacks, Helmets,Scopes
+//#define GIVE_AI_APEX_GEAR
+
+// Uncomment this if you want Apex weapons in loot crates
+//#define USE_APEX_WEAPONS_IN_CRATES 1
+
+// Uncomment this if you want Apex vehicles to spawn for AI/missions
+//#define USE_APEX_VEHICLES 1
+
+
 
 
 DMS_Use_Map_Config = true;	// Whether or not to use config overwrites specific to the map.
@@ -330,7 +348,7 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 	DMS_Survivor_Vehicle_MoneyGain		= -500;						// The amount of Poptabs gained for killing a Survivor vehicle crew member
 	DMS_Survivor_Vehicle_RepGain		= -100;						// The amount of Respect gained for killing a Survivor vehicle crew member
 	DMS_Survivor_Vehicle_RankGain		= -600;
-	DMS_Survivor_Vehicle_MoneyGain		= 0;						// The amount of Poptabs carried by a Survivor vehicle crew member
+	DMS_Survivor_Vehicle_SpawnMoney		= 0;						// The amount of Poptabs carried by a Survivor vehicle crew member
 
 	DMS_AIKill_DistanceBonusMinDistance	= 100;						// Minimum distance from the player to the AI to apply the distance bonus.
 	DMS_AIKill_DistanceBonusCoefficient	= 0.05;						// If the distance from the player to the killed unit is more than "DMS_AIKill_DistanceBonusMinDistance" meters then the player gets a respect bonus equivalent to the distance multiplied by this coefficient. For example, killing an AI from 400 meters will give 100 extra respect (when the coefficient is 0.25). Set to 0 to disable the bonus. This bonus will not be applied if there isn't a regular AI kill bonus.
@@ -395,7 +413,7 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 	DMS_ai_freezeOnSpawn				= true;						// Whether or not to freeze an AI group when initially spawned.
 
 	DMS_ai_share_info					= false;					// Share info about killer
-	DMS_ai_share_info_distance			= 300;						// The distance killer's info will be shared to other AI
+	DMS_ai_share_info_distance			= 25;						// The distance killer's info will be shared to other AI
 
 	DMS_ai_nighttime_accessory_chance	= 75;						// Percentage chance that AI will have a flashlight or laser pointer on their guns if spawned during nighttime
 	DMS_ai_enable_water_equipment		= true;						// Enable/disable overriding default weapons of an AI if it spawns on/in water
@@ -454,6 +472,13 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 
 	//Assault Class
 	DMS_assault_weps =					[							// Assault Rifles
+											#ifdef GIVE_AI_APEX_WEAPONS
+											"arifle_AK12_F",
+											"arifle_ARX_ghex_F",
+											"arifle_CTAR_blk_F",
+											"arifle_SPAR_01_khk_F",
+											"arifle_SPAR_03_khk_F",
+											#endif
 											"arifle_Katiba_GL_F",
 											"arifle_MX_GL_Black_F",
 											"arifle_Mk20_GL_F",
@@ -484,6 +509,10 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 											"Exile_Weapon_TaurusGold"
 										];
 	DMS_assault_optics =				[							// Optics for Assault Class
+											#ifdef GIVE_AI_APEX_GEAR
+											"optic_ERCO_khk_F",
+											"optic_Holosight_blk_F",
+											#endif
 											"optic_Arco",
 											"optic_Hamr",
 											"optic_Aco",
@@ -513,15 +542,30 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 											"Exile_Item_Bandage"
 										];
 	DMS_assault_helmets	=				[							// Helmets for Assault Class
+											#ifdef GIVE_AI_APEX_GEAR
+											"H_HelmetB_TI_tna_F",
+											"H_HelmetB_Enh_tna_F",
+											"H_HelmetSpecO_ghex_F",
+											"H_HelmetCrew_O_ghex_F",
+											#endif
 											"H_HelmetSpecB_paint1",
 											"H_HelmetIA_camo",
 											"H_HelmetLeaderO_ocamo",
 											"H_HelmetLeaderO_oucamo"
 										];
 	DMS_assault_clothes	=				[							// Uniforms for Assault Class
+											#ifdef GIVE_AI_APEX_GEAR
+											"U_B_T_Soldier_F",
+											"U_B_T_Soldier_SL_F",
+											"U_B_CTRG_Soldier_F",
+											"U_O_V_Soldier_Viper_F",
+											"U_I_C_Soldier_Bandit_2_F",
+											"U_I_C_Soldier_Camo_F",
+											"U_B_CTRG_Soldier_urb_1_F",
+											#endif
 											"U_O_CombatUniform_ocamo",
 											"U_O_PilotCoveralls",
-											"U_B_Wetsuit",
+											//"U_B_Wetsuit",
 											"U_BG_Guerilla3_1",
 											"U_BG_Guerilla2_3",
 											"U_BG_Guerilla2_2",
@@ -534,6 +578,14 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 											"U_I_G_resistanceLeader_F"
 										];
 	DMS_assault_vests =					[							// Vests for Assault Class
+											#ifdef GIVE_AI_APEX_GEAR
+											"V_TacChestrig_grn_F",
+											"V_PlateCarrier2_tna_F",
+											"V_PlateCarrierSpec_tna_F",
+											"V_PlateCarrierGL_tna_F",
+											"V_TacVest_gen_F",
+											"V_PlateCarrier1_rgr_noflag_F",
+											#endif
 											"V_PlateCarrierH_CTRG",
 											"V_PlateCarrierSpec_rgr",
 											"V_PlateCarrierGL_blk",
@@ -546,6 +598,11 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 											"V_PlateCarrierIA2_dgtl"
 										];
 	DMS_assault_backpacks =				[							// Backpacks for Assault Class
+											#ifdef GIVE_AI_APEX_GEAR
+											"B_Bergen_tna_F",
+											"B_FieldPack_ghex_F",
+											"B_ViperLightHarness_khk_F",
+											#endif
 											"B_Bergen_rgr",
 											"B_Carryall_oli",
 											"B_Kitbag_mcamo",
@@ -560,6 +617,10 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 											#ifdef GIVE_AI_MARKSMAN_DLC_WEAPONS
 											"MMG_01_hex_F",
 											"MMG_02_black_F",
+											#endif
+
+											#ifdef GIVE_AI_APEX_WEAPONS
+											"LMG_03_F",
 											#endif
 											"LMG_Zafir_F",
 											"LMG_Mk200_F",
@@ -579,6 +640,11 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 											"Exile_Weapon_TaurusGold"
 										];
 	DMS_MG_optics =						[							//	Optics for MG Class
+											#ifdef GIVE_AI_APEX_GEAR
+											"optic_ERCO_khk_F",
+											"optic_DMS_ghex_F",
+											"optic_Arco_blk_F",
+											#endif
 											"optic_Hamr",
 											"optic_Aco",
 											"optic_Holosight",
@@ -607,6 +673,13 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 											"Exile_Item_Instadoc"
 										];
 	DMS_MG_helmets =					[							// Helmets for MG Class
+											#ifdef GIVE_AI_APEX_GEAR
+											"H_HelmetB_TI_tna_F",
+											"H_HelmetB_Enh_tna_F",
+											"H_HelmetSpecO_ghex_F",
+											"H_HelmetLeaderO_ghex_F",
+											"H_HelmetCrew_O_ghex_F",
+											#endif
 											"H_PilotHelmetHeli_I",
 											"H_PilotHelmetHeli_O",
 											"H_PilotHelmetFighter_I",
@@ -619,9 +692,18 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 											"H_HelmetLeaderO_oucamo"
 										];
 	DMS_MG_clothes =					[							// Uniforms for MG Class
+											#ifdef GIVE_AI_APEX_GEAR
+											"U_B_T_Soldier_F",
+											"U_B_T_Soldier_SL_F",
+											"U_B_CTRG_Soldier_F",
+											"U_O_V_Soldier_Viper_F",
+											"U_I_C_Soldier_Bandit_2_F",
+											"U_I_C_Soldier_Camo_F",
+											"U_B_CTRG_Soldier_urb_1_F",
+											#endif
 											"U_O_CombatUniform_ocamo",
 											"U_O_PilotCoveralls",
-											"U_B_Wetsuit",
+											//"U_B_Wetsuit",
 											"U_BG_Guerilla3_1",
 											"U_BG_Guerilla2_3",
 											"U_BG_Guerilla2_2",
@@ -634,6 +716,14 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 											"U_I_G_resistanceLeader_F"
 										];
 	DMS_MG_vests =						[							// Vests for MG Class
+											#ifdef GIVE_AI_APEX_GEAR
+											"V_TacChestrig_grn_F",
+											"V_PlateCarrier2_tna_F",
+											"V_PlateCarrierSpec_tna_F",
+											"V_PlateCarrierGL_tna_F",
+											"V_TacVest_gen_F",
+											"V_PlateCarrier1_rgr_noflag_F",
+											#endif
 											"V_PlateCarrierH_CTRG",
 											"V_PlateCarrierSpec_rgr",
 											"V_PlateCarrierGL_blk",
@@ -648,6 +738,12 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 											"V_HarnessO_gry"
 										];
 	DMS_MG_backpacks =					[							// Backpacks for MG Class
+											#ifdef GIVE_AI_APEX_GEAR
+											"B_Bergen_tna_F",
+											"B_Carryall_ghex_F",
+											"B_ViperHarness_ghex_F",
+											"B_ViperLightHarness_ghex_F",
+											#endif
 											"B_Bergen_rgr",
 											"B_Carryall_oli",
 											"B_Kitbag_mcamo",
@@ -669,11 +765,18 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 											"srifle_DMR_05_blk_F",
 											"srifle_DMR_06_olive_F",
 											#endif
+
+											#ifdef GIVE_AI_APEX_WEAPONS
+											"srifle_DMR_07_ghex_F",
+											#endif
 											"Exile_Weapon_DMR",
 											"Exile_Weapon_SVD",
 											"Exile_Weapon_VSSVintorez"
 										];
 	DMS_sniper_pistols =				[							// Pistols for Assault Class (Set to empty array if you don't want to give them any pistols)
+											#ifdef GIVE_AI_APEX_WEAPONS
+											"hgun_Pistol_01_F",
+											#endif
 											"hgun_ACPC2_F",
 											"hgun_Rook40_F",
 											"hgun_P07_F",
@@ -685,6 +788,15 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 											"Exile_Weapon_TaurusGold"
 										];
 	DMS_sniper_optics =					[							// Optics for Sniper Class
+											#ifdef GIVE_AI_APEX_GEAR
+											"optic_SOS_khk_F",
+											"optic_DMS_ghex_F",
+											"optic_LRPS_tna_F",
+											#endif
+
+											#ifdef GIVE_AI_MARKSMAN_DLC_WEAPONS
+											"optic_AMS_khk",
+											#endif
 											"optic_SOS",
 											"optic_DMS",
 											"optic_LRPS"
@@ -713,12 +825,24 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 											"Exile_Item_DuctTape"
 										];
 	DMS_sniper_helmets =				[							// Helmets for Sniper Class
+											#ifdef GIVE_AI_APEX_GEAR
+											//"H_HelmetO_ViperSP_ghex_F",			// Special helmet with in-built NVGs and thermal :o
+											"H_HelmetB_Enh_tna_F",
+											"H_HelmetSpecO_ghex_F",
+											"H_HelmetLeaderO_ghex_F",
+											#endif
 											"H_HelmetSpecB_paint1",
 											"H_HelmetIA_camo",
 											"H_HelmetLeaderO_ocamo",
 											"H_HelmetLeaderO_oucamo"
 										];
 	DMS_sniper_clothes =				[							// Uniforms for Sniper Class
+											#ifdef GIVE_AI_APEX_GEAR
+											"U_B_T_Sniper_F",
+											"U_B_T_FullGhillie_tna_F",				// Invisible to thermal? 0_o
+											"U_O_T_Sniper_F",
+											"U_O_T_FullGhillie_tna_F",
+											#endif
 											"U_O_GhillieSuit",
 											"U_B_FullGhillie_ard",
 											"U_B_FullGhillie_lsh",
@@ -733,6 +857,12 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 											"U_O_FullGhillie_sard"
 										];
 	DMS_sniper_vests =					[							// Vests for Sniper Class
+											#ifdef GIVE_AI_APEX_GEAR
+											"V_PlateCarrier2_tna_F",
+											"V_PlateCarrierSpec_tna_F",
+											"V_PlateCarrierGL_tna_F",
+											"V_PlateCarrier2_rgr_noflag_F",
+											#endif
 											"V_PlateCarrierH_CTRG",
 											"V_PlateCarrierSpec_rgr",
 											"V_PlateCarrierGL_blk",
@@ -747,6 +877,15 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 											"V_HarnessO_gry"
 										];
 	DMS_sniper_backpacks =				[							// Backpacks for Sniper Class
+											#ifdef GIVE_AI_APEX_GEAR
+											"B_Bergen_tna_F",
+											"B_Bergen_hex_F",
+											"B_Carryall_ghex_F",
+											"B_ViperHarness_ghex_F",
+											"B_ViperHarness_blk_F",
+											"B_ViperLightHarness_ghex_F",
+											"B_ViperLightHarness_khk_F",
+											#endif
 											"B_Bergen_rgr",
 											"B_Carryall_oli",
 											"B_Kitbag_mcamo",
@@ -800,6 +939,9 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 	DMS_ai_remove_launchers				= true;						// Remove rocket launchers on AI death
 
 	DMS_AI_wep_launchers_AT =			[							// AT Launchers
+											#ifdef GIVE_AI_APEX_WEAPONS
+											"launch_RPG7_F",
+											#endif
 											"launch_NLAW_F",
 											"launch_RPG32_F",
 											"launch_B_Titan_short_F"
@@ -868,6 +1010,16 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 											"srifle_DMR_06_olive_F",
 											"MMG_01_hex_F",
 											"MMG_02_black_F",
+											#endif
+
+											#ifdef USE_APEX_WEAPONS_IN_CRATES
+											"arifle_AK12_F",
+											"arifle_ARX_ghex_F",
+											"arifle_CTAR_blk_F",
+											"arifle_SPAR_01_khk_F",
+											"arifle_SPAR_03_khk_F",
+											//"srifle_DMR_07_ghex_F",				// Oh great, a 6.5mm 20 round sniper rifle... because everybody wanted a nerfed MXM :p
+											"LMG_03_F",
 											#endif
 											"Exile_Melee_Axe",
 											"Exile_Melee_SledgeHammmer",
@@ -1040,10 +1192,18 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 
 	// Vehicles
 	DMS_ArmedVehicles =					[							// List of armed vehicles that can spawn
+											#ifdef USE_APEX_VEHICLES
+											"B_T_LSV_01_armed_F",
+											"O_T_LSV_02_armed_F",
+											#endif
 											"Exile_Car_Offroad_Armed_Guerilla01"
 										];
 
-	DMS_MilitaryVehicles =				[							// List of military vehicles that can spawn
+	DMS_MilitaryVehicles =				[							// List of (unarmed) military vehicles that can spawn
+											#ifdef USE_APEX_VEHICLES
+											"B_T_LSV_01_unarmed_F",
+											"O_T_LSV_02_unarmed_F",
+											#endif
 											"Exile_Car_Strider",
 											"Exile_Car_Hunter",
 											"Exile_Car_Ifrit"
@@ -1068,6 +1228,10 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 										];
 
 	DMS_CivilianVehicles =				[							// List of civilian vehicles that can spawn
+											#ifdef USE_APEX_VEHICLES
+											"C_Offroad_02_unarmed_F",
+											"I_C_Van_01_transport_F",
+											#endif
 											"Exile_Car_SUV_Red",
 											"Exile_Car_Hatchback_Rusty1",
 											"Exile_Car_Hatchback_Rusty2",
@@ -1078,6 +1242,10 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 										];
 
 	DMS_TransportHelis =				[							// List of transport helis that can spawn
+											#ifdef USE_APEX_VEHICLES
+											"B_T_VTOL_01_infantry_F",
+											"O_T_VTOL_02_infantry_F",
+											#endif
 											"Exile_Chopper_Hummingbird_Green",
 											"Exile_Chopper_Orca_BlackCustom",
 											"Exile_Chopper_Mohawk_FIA",

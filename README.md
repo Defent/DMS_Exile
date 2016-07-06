@@ -73,12 +73,12 @@ after "7 createVehicle"
 3. Pack the a3_dms folder with a PBO tool ([PBO Manager](http://www.armaholic.com/page.php?id=16369), [Eliteness](https://dev.withsix.com/projects/mikero-pbodll/files), or [the Arma 3 Tools suite](http://store.steampowered.com/app/233800/))
 4. Put the generated PBO in your ```@ExileServer\addons\``` directory. It should be alongside ```exile_server.pbo``` and ```exile_server_config.pbo```.
 
-
+<br>
 ## infiSTAR:
 * If you are using infiSTAR and want to keep ```CGM = true;```, then set ```UMW = true;```.
 * Add ```'O_HMG_01_high_F'``` to ```_VehicleWhiteList```, as well as any other vehicles you add to DMS that are not whitelisted.
 
-
+<br><br>
 ### Vilayer or other Game Server Providers Instructions:
 
 If you are using Vilayer or some other GameServer hosting service, and/or the above steps did not work, then follow these instructions:
@@ -87,18 +87,19 @@ If you are using Vilayer or some other GameServer hosting service, and/or the ab
 2. Create a subfolder called "addons".
 3. Place the "a3_dms.pbo" in the "addons" subfolder.
 4. Edit your startup parameters/modline to include "@a3_dms". For example: ```-serverMod=@ExileServer;@a3_dms;```
-
-
-### HEADLESS CLIENT:
-
-**DMS does not currently support headless client. Do not attempt to use HC with DMS unless you know what you are doing.**
-
+<br><br>
 ## Troubleshooting:
 If you're having any issues with DMS, check your RPT for errors and make sure PBO is packed correctly by unpacking it and ensuring the folder structure is "\x\addons\a3_DMS\...".
 
 If you can't figure it out, leave a post on [the DMS thread on exile forums](http://www.exilemod.com/topic/61-dms-defents-mission-system/?do=findComment&comment=242). **Make sure to include your RPT, config.sqf, as well as any changed files. Please use [pastebin](http://pastebin.com/), spoilers, or something similar; DO NOT PASTE EVERYTHING DIRECTLY INTO THE POST (without putting it in a spoiler)**
 
+<br><br>
+### HEADLESS CLIENT:
+
+**DMS does not currently support headless client. Do not attempt to use HC with DMS unless you know what you are doing.**
+
 ___
+<br><br>
 
 # Credits:
 ### Authors:
@@ -125,6 +126,7 @@ ___
 - [CEN from ATD Gaming](http://atdgaming.com/)
 
 ___
+<br><br><br>
 
 # Roadmap:
 #### Convoy Mission:
@@ -144,12 +146,23 @@ ___
 * AI will still be offloaded to clients (ideally); strictly DMS functions will be handled by the HC.
 
 
-
 ___
+<br><br><br>
 
 # Changelog:
 
 ### Main Branch
+### July 5, 2016 (8:15 PM CST-America):
+* Fixed a typo in the config (the second ```DMS_Survivor_Vehicle_MoneyGain``` should be ```DMS_Survivor_Vehicle_SpawnMoney```).
+* Added Apex weapons, equipment, and vehicles to config (disabled by default).
+* Reduced ```DMS_ai_share_info_distance``` default value drastically, from 300 meters to 25 (it was overpowered and unrealistic).
+* "Armed Bandits" mission will select a random vehicle from "DMS_ArmedVehicles" instead of the armed offroad every time.
+* Fixed a typo in the "nedbuilding1_mission".
+* "DMS_fnc_AddWeapon" now uses "DMS_fnc_selectMagazine" to select a magazine instead of looking in the weapon config directly (the "DMS_fnc_selectMagazine" function does that).
+* Reduced the "reveal amount" for both suppressed and non-suppressed weapons when "DMS_ai_share_info" is enabled.
+* The "SpawnAIGroup" functions will now use "DMS_fnc_addWeapon" instead of the BIS variant to add launchers.
+* Slight tweaks of function/mission comments and error logs.
+
 ### July 3, 2016 (8:15 PM CST-America):
 * Player money will be saved on kill.
 

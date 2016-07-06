@@ -318,7 +318,7 @@ if (isPlayer _killer) then
 	// Reveal the killer to the AI units
 	if (_unit getVariable ["DMS_ai_share_info",DMS_ai_share_info]) then
 	{
-		private _revealAmount = 4.0;
+		private _revealAmount = 3;
 
 		private _muzzle = currentMuzzle _playerObj;
 
@@ -327,7 +327,7 @@ if (isPlayer _killer) then
 			private _silencer = _playerObj weaponAccessories _muzzle select 0;
 			if (!isNil "_silencer" && {_silencer != ""}) then
 			{
-				_revealAmount = 2.0;
+				_revealAmount = 1.5;
 			};
 		};
 

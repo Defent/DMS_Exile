@@ -1,7 +1,6 @@
 /*
-	"saltflats" static mission for Altis.
+	"Underwater Stash" mission for Tanoa
 	Created by eraser1
-	Credits to "Darth Rogue" for creating the base.
 */
 
 // For logging purposes

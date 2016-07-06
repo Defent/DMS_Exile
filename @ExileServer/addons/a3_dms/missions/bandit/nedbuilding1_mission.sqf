@@ -59,7 +59,7 @@ _difficulty = selectRandom _PossibleDifficulty;
 
 switch (_difficulty) do
 {
-	case:
+	case "easy":
 	{
 		_AICount = (4 + (round (random 4)));
 		_crate_weapons 		= (1 + (round (random 1)));

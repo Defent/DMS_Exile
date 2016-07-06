@@ -36,7 +36,7 @@ then
             }
             else
             {
-                (getArray (configFile >> "CfgWeapons" >> _weapon >> "magazines")) select 0
+                _weapon call DMS_fnc_selectMagazine
             };
 
 		for "_i" from 1 to _magazineCount do

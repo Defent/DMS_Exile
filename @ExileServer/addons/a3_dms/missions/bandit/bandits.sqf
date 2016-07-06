@@ -64,7 +64,7 @@ _crate = ["Box_NATO_Wps_F",_pos] call DMS_fnc_SpawnCrate;
 _vehClass =
 	if (_extraParams isEqualTo []) then
 	{
-		"Exile_Car_Offroad_Armed_Guerilla01"
+		selectRandom DMS_ArmedVehicles
 	}
 	else
 	{
@@ -80,7 +80,7 @@ _vehClass =
 			}
 			else
 			{
-				"Exile_Car_Offroad_Armed_Guerilla01"
+				selectRandom DMS_ArmedVehicles
 			};
 		};
 	};
