@@ -153,6 +153,9 @@ ___
 
 ### Main Branch
 ### July 5, 2016 (7:15 PM CST-America):
+* Fixed a typo in the "SpawnAIGroup" functions from the previous update
+
+### July 5, 2016 (7:15 PM CST-America):
 * Fixed a typo in the config (the second ```DMS_Survivor_Vehicle_MoneyGain``` should be ```DMS_Survivor_Vehicle_SpawnMoney```).
 * Added Apex weapons, equipment, and vehicles to config (disabled by default).
 * Reduced ```DMS_ai_share_info_distance``` default value drastically, from 300 meters to 25 (it was overpowered and unrealistic).
