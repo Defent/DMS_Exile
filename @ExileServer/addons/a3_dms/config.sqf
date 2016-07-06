@@ -1023,7 +1023,6 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 											#endif
 											"Exile_Melee_Axe",
 											"Exile_Melee_SledgeHammmer",
-											"Exile_Item_Shovel",
 											"arifle_Katiba_GL_F",
 											"arifle_MX_GL_Black_F",
 											"arifle_Mk20_GL_F",
@@ -1091,6 +1090,7 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 											"Exile_Item_Matches",
 											"Exile_Item_CookingPot",
 											"Exile_Melee_Axe",
+											"Exile_Item_Shovel",
 											"Exile_Item_CanOpener"
 										] + DMS_BoxFood + DMS_BoxDrinks + DMS_BoxMeds;
 	DMS_Box_BaseParts_Wood =			[							// List of wooden base parts.
