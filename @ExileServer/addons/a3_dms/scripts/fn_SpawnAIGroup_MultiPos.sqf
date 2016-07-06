@@ -97,7 +97,7 @@ for "_i" from 1 to _count do
 };
 
 // An AI will definitely spawn with a launcher if you define type
-if ((DMS_ai_use_launchers && {DMS_ai_launchers_per_group>0}) || {!(_launcherType isEqualTo "")}) then
+if ((DMS_ai_use_launchers || {!(_launcherType isEqualTo "")}) then
 {
 	if (_launcherType isEqualTo "") then
 	{
@@ -105,9 +105,9 @@ if ((DMS_ai_use_launchers && {DMS_ai_launchers_per_group>0}) || {!(_launcherType
 	};
 
 	private _units = units _group;
-	private _launchers = missionNamespace getVariable [format ["DMS_AI_wep_launchers_%1",_launcherType],["launch_NLAW_F"]];
+	private _launchers = missionNamespace getVariable [format ["DMS_AI_wep_launchers_%1",_launcherType],DMS_AI_wep_launchers_AT];
 
-	for "_i" from 0 to (((DMS_ai_launchers_per_group min _count)-1) max 0) do
+	for "_i" from 0 to ((DMS_ai_launchers_per_group min _count)-1) do
 	{
 		if ((random 100)<DMS_ai_use_launchers_chance) then
 		{
@@ -117,15 +117,14 @@ if ((DMS_ai_use_launchers && {DMS_ai_launchers_per_group>0}) || {!(_launcherType
 
 			removeBackpackGlobal _unit;
 			_unit addBackpack "B_Carryall_mcamo";
-			private _rocket = _launcher call DMS_fnc_selectMagazine;
 
-			[_unit, _launcher, DMS_AI_launcher_ammo_count,_rocket] call BIS_fnc_addWeapon;
+			[_unit, _launcher, DMS_AI_launcher_ammo_count] call DMS_fnc_addWeapon;
 
 			_unit setVariable ["DMS_AI_Launcher",_launcher];
 
 			if (DMS_DEBUG) then
 			{
-				(format["SpawnAIGroup_MultiPos :: Giving %1 a %2 launcher with %3 %4 rockets",_unit,_launcher,DMS_AI_launcher_ammo_count,_rocket]) call DMS_fnc_DebugLog;
+				(format["SpawnAIGroup_MultiPos :: Giving %1 a %2 launcher with %3 rockets",_unit,_launcher,DMS_AI_launcher_ammo_count]) call DMS_fnc_DebugLog;
 			};
 		};
 	};
