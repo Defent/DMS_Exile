@@ -152,7 +152,7 @@ ___
 # Changelog:
 
 ### Main Branch
-### July 9, 2016 (7:15 PM CST-America):
+### July 9, 2016 (8:40 PM CST-America):
 * **NEW CONFIG VALUES**
 
 		DMS_MixerNearBlacklist
