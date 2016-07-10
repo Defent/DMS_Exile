@@ -1030,7 +1030,7 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 											"LMG_03_F",
 											#endif
 											"Exile_Melee_Axe",
-											"Exile_Melee_SledgeHammmer",
+											"Exile_Melee_SledgeHammer",
 											//"Exile_Melee_Shovel",					// Not really interesting for players...
 											"arifle_Katiba_GL_F",
 											"arifle_MX_GL_Black_F",
