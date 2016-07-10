@@ -139,7 +139,14 @@ if (!isNull _av) then
 		}
 		else
 		{
-			_av lock 1;
+			if (local _av) then
+			{
+				_av lock 1;
+			}
+			else
+			{
+				[_av, 1] remoteExecCall ["lock", _av];
+			};
 
 			if (DMS_DEBUG) then
 			{

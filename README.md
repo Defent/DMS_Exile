@@ -153,6 +153,22 @@ ___
 
 ### Main Branch
 ### July 5, 2016 (7:15 PM CST-America):
+* **NEW CONFIG VALUES**
+
+		DMS_MixerNearBlacklist
+		DMS_ContaminatedZoneNearBlacklist
+		DMS_MixerMarkerTypes
+		DMS_ContaminatedZoneMarkerTypes
+* Pastebin for new config values: http://pastebin.com/QeNWRXgv
+* Increased "DMS_MinThrottledDistance" (from 100m to 500m).
+* Removed the Shovel from crate loot.
+* Edited "DMS_SpawnZoneMarkerTypes" and "DMS_TraderZoneMarkerTypes" to look for the corresponding "Icons" instead of the "circle" marker type, since some people like to remove the circle.
+* You can now define a minimum distance from "Contaminated Zones" and "Concrete Mixers" for (dynamic) missions.
+* "DMS_ai_freezeOnSpawn" will be set to false if "DMS_ai_allowFreezing" is disabled.
+* Fixed an issue where a vehicle wouldn't unlock when the crew was killed (locality issues).
+* Slight optimization(s) (thanks for the tip infiSTAR).
+
+### July 5, 2016 (8:15 PM CST-America):
 * Fixed a typo in the "SpawnAIGroup" functions from the previous update
 
 ### July 5, 2016 (7:15 PM CST-America):

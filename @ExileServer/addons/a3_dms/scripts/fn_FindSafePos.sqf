@@ -85,7 +85,7 @@ for "_attempts" from 1 to MAX_ATTEMPTS do
 		_playerNearLimit = (DMS_ThrottleCoefficient * _playerNearLimit) max DMS_MinThrottledDistance;
 
 		// SurfaceNormal is a bit more tricky than distances, so it's throttled differently. To convert from degrees to surfaceNormal, you take the cosine of the degrees from horizontal. Take the arc-cosine to convert surfaceNormal to degrees: arccos(0.8) in degrees ~= 37
-		_minSurfaceNormal = (_minSurfaceNormal - 0.005) max 0.8;
+		_minSurfaceNormal = (_minSurfaceNormal - 0.005) max 0.75;
 
 		if (DMS_DEBUG) then
 		{
@@ -93,7 +93,7 @@ for "_attempts" from 1 to MAX_ATTEMPTS do
 		};
 	};
 
-	_isValidSpot = [_pos, _waterNearLimit, _minSurfaceNormal, _spawnZoneNearLimit, _traderZoneNearLimit, _missionNearLimit, _playerNearLimit, _territoryNearLimit] call DMS_fnc_IsValidPosition;
+	_isValidSpot = [_pos, _waterNearLimit, _minSurfaceNormal, _spawnZoneNearLimit, _traderZoneNearLimit, _missionNearLimit, _playerNearLimit, _territoryNearLimit, DMS_MixerNearBlacklist, DMS_ContaminatedZoneNearBlacklist] call DMS_fnc_IsValidPosition;
 
 	if (_isValidSpot) exitWith
 	{

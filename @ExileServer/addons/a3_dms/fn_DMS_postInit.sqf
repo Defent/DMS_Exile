@@ -98,6 +98,11 @@ if !(DMS_ai_offload_to_client) then
 	DMS_ai_offloadOnUnfreeze = false;
 };
 
+if !(DMS_ai_allowFreezing) then
+{
+	DMS_ai_freezeOnSpawn = false;
+};
+
 
 
 DMS_A3_AllMarkerColors = [];
@@ -202,7 +207,7 @@ if (DMS_StaticMission) then
 {
 	private _temp = DMS_StaticMinPlayerDistance;
 	DMS_StaticMinPlayerDistance = 0;
-	
+
 	{
 		[_x] call DMS_fnc_SpawnStaticMission;
 	} forEach DMS_StaticMissionsOnServerStart;

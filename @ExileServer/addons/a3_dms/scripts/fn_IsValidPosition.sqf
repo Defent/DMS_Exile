@@ -11,6 +11,9 @@
 		_traderZoneNearLimit,		// NUMBER (distance): Minimum distance from a trader zone.
 		_missionNearLimit,			// NUMBER (distance): Minimum distance from another mission.
 		_playerNearLimit,			// NUMBER (distance): Minimum distance from a player.
+		_territoryNearLimit,		// NUMBER (distance): Minimum distance from a territory.
+		_mixerNearLimit,			// NUMBER (distance): Minimum distance from a concrete mixer.
+		_contaminatedZoneNearLimit	// NUMBER (distance): Minimum distance from a contaminated zone.
 	] call DMS_fnc_IsValidPosition;
 
 	All parameters except "_pos" are optional.
@@ -27,7 +30,9 @@ if !(params
 	"_traderZoneNearLimit",
 	"_missionNearLimit",
 	"_playerNearLimit",
-	"_territoryNearLimit"
+	"_territoryNearLimit",
+	"_mixerNearLimit",
+	"_contaminatedZoneNearLimit"
 ])
 then
 {
@@ -78,17 +83,25 @@ else
 		} forEach (missionNamespace getVariable ["A3XAI_mapMarkerArray",[]]);
 
 		{
+			private _markerType = markertype _x;
+
 			// Check for nearby spawn points
-			if ((_spawnZoneNearLimit>0) && {((markertype _x) in DMS_SpawnZoneMarkerTypes) && {((getMarkerPos _x) distance2D _pos)<=_spawnZoneNearLimit}}) throw "a spawn zone";
+			if ((_markerType in DMS_SpawnZoneMarkerTypes) && {((getMarkerPos _x) distance2D _pos)<=_spawnZoneNearLimit}) throw "a spawn zone";
 
 			// Check for nearby trader zones
-			if ((_traderZoneNearLimit>0) && {((markertype _x) in DMS_TraderZoneMarkerTypes) && {((getMarkerPos _x) distance2D _pos)<=_traderZoneNearLimit}}) throw "a trader zone";
+			if ((_markerType in DMS_TraderZoneMarkerTypes) && {((getMarkerPos _x) distance2D _pos)<=_traderZoneNearLimit}) throw "a trader zone";
+
+			// Check for nearby concrete mixers
+			if ((_markerType in DMS_MixerMarkerTypes) && {((getMarkerPos _x) distance2D _pos)<=_mixerNearLimit}) throw "a concrete mixer";
+
+			// Check for nearby contaminated zones
+			if ((_markerType in DMS_ContaminatedZoneMarkerTypes) && {((getMarkerPos _x) distance2D _pos)<=_contaminatedZoneNearLimit}) throw "a contaminated zone";
 
 			// Check for nearby missions
 			if (_missionNearLimit>0) then
 			{
 				_missionPos = missionNamespace getVariable [format ["%1_pos",_x], []];
-				if (!(_missionPos isEqualTo []) && {(_missionPos distance2D _pos)<=_missionNearLimit}) throw "a mission";
+				if (!(_missionPos isEqualTo []) && {(_missionPos distance2D _pos)<=_missionNearLimit}) throw "a DMS mission";
 
 				if
 				(

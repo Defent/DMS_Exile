@@ -46,9 +46,10 @@ if !(isClass (configFile >> "CfgVehicles" >> _vehicleClass)) exitWith
 private _vehpos = [];
 private _maxDistance = 5;
 
-while {_vehpos isEqualTo []} do
+for "_i" from 0 to 1000 do
 {
 	_vehpos = _position findEmptyPosition [0,_maxDistance,_vehicleClass];
+	if !(_vehpos isEqualTo []) exitWith {};
 	_maxDistance = (_maxDistance + 5);
 };
 
