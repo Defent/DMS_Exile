@@ -59,23 +59,23 @@ switch (toLower _difficulty) do
 	case "moderate":
 	{
 		_color = "ColorYellow";
-		_marker = "ExileMissionModerateIcon";
+		_markerType = "ExileMissionModerateIcon";
 	};
 	case "difficult":
 	{
 		_color = "ColorRed";
-		_marker = "ExileMissionDifficultIcon";
+		_markerType = "ExileMissionDifficultIcon";
 	};
 	case "hardcore":
 	{
 		_color = "ColorBlack";
-		_marker = "ExileMissionHardcoreIcon";
+		_markerType = "ExileMissionHardcoreIcon";
 	};
 
 	default
 	{
 		_color = _difficulty;
-		_marker = "mil_dot";
+		_markerType = "mil_dot";
 	};
 };
 

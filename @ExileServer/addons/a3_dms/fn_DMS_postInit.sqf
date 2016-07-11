@@ -176,17 +176,17 @@ if (DMS_ShowDifficultyColorLegend) then
 			case "moderate":
 			{
 				_color = "ColorYellow";
-				_marker = "ExileMissionModerateIcon";
+				_markerType = "ExileMissionModerateIcon";
 			};
 			case "difficult":
 			{
 				_color = "ColorRed";
-				_marker = "ExileMissionDifficultIcon";
+				_markerType = "ExileMissionDifficultIcon";
 			};
 			case "hardcore":
 			{
 				_color = "ColorBlack";
-				_marker = "ExileMissionHardcoreIcon";
+				_markerType = "ExileMissionHardcoreIcon";
 			};
 		};
 
