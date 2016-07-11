@@ -87,7 +87,9 @@ If you are using Vilayer or some other GameServer hosting service, and/or the ab
 2. Create a subfolder called "addons".
 3. Place the "a3_dms.pbo" in the "addons" subfolder.
 4. Edit your startup parameters/modline to include "@a3_dms". For example: ```-serverMod=@ExileServer;@a3_dms;```
+
 <br><br>
+
 ## Troubleshooting:
 If you're having any issues with DMS, check your RPT for errors and make sure PBO is packed correctly by unpacking it and ensuring the folder structure is "\x\addons\a3_DMS\...".
 

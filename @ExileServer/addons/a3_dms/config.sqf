@@ -273,7 +273,7 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 
 	DMS_BasesToImportOnServerStart = 	[								// List of static bases to import on server startup (spawned post-init). This will reduce the amount of work the server has to do when it actually spawns static missions, and players won't be surprised when a base suddenly pops up. You can also include any other M3E-exported bases to spawn here.
 											//"saltflatsbase",		//<--Example (already imported by default on Altis)
-											//"slums_objects"			//<--Example (already imported by default on Altis)
+											//"slums_objects"		//<--Example (already imported by default on Altis)
 										];
 
 	DMS_BanditMissionsOnServerStart =	[
@@ -281,7 +281,7 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 										];
 
 	DMS_StaticMissionsOnServerStart =	[								// List of STATIC missions with spawn chances.
-											//"saltflats"				//<--Example
+											//"saltflats"			//<--Example
 											//"slums"				//<--Example
 											//"occupation"			//<--Example
 											//"sectorB"				//<--Example for Taviana
