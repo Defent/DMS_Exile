@@ -203,10 +203,9 @@ if (DMS_ShowDifficultyColorLegend) then
 		};
 
 		private _dot = createMarker [format ["DMS_MissionMarker_Difficulty_%1",_difficulty],_pos];
-		_dot setMarkerColor "ColorWhite";
-		_dot setMarkerType "mil_dot";
-		_dot setMarkerAlpha 0.5;
+		_dot setMarkerType _markerType;
 		_dot setMarkerText _difficulty;
+		_dot setMarkerAlpha 0.5;
 	} forEach ["hardcore","difficult","moderate","easy"];
 };
 

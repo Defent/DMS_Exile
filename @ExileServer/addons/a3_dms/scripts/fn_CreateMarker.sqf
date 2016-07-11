@@ -99,7 +99,6 @@ if (DMS_ShowMarkerCircle) then
 };
 
 private _dot = createMarker [format ["DMS_MissionMarkerDot%1_%2",_num,round(time)], _pos];
-_dot setMarkerColor "ColorBlack";
 _dot setMarkerType _markerType;
 _dot setMarkerText _text;
 
