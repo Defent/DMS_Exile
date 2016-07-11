@@ -45,18 +45,42 @@ private _randomMarker =
 
 private _num = DMS_MissionCount;
 
-private _color =
-	switch (_difficulty) do
+private _color = "ColorGreen";
+private _markerType = "mil_dot";
+
+
+switch (toLower _difficulty) do
+{
+	case "easy":
 	{
-		case "easy": 		{"ColorGreen";};
-		case "moderate": 	{"ColorYellow";};
-		case "difficult": 	{"ColorRed";};
-		case "hardcore" : 	{"ColorBlack";};
-		default 			{_difficulty;};
+		_color = "ColorGreen";
+		_markerType = "ExileMissionEasyIcon";
+	};
+	case "moderate":
+	{
+		_color = "ColorYellow";
+		_marker = "ExileMissionModerateIcon";
+	};
+	case "difficult":
+	{
+		_color = "ColorRed";
+		_marker = "ExileMissionDifficultIcon";
+	};
+	case "hardcore":
+	{
+		_color = "ColorBlack";
+		_marker = "ExileMissionHardcoreIcon";
 	};
 
+	default
+	{
+		_color = _difficulty;
+		_marker = "mil_dot";
+	};
+};
+
 /*
-// Don't think this is really needed
+// Don't think this is really needed, ArmA gives you an error anyways.
 if !((toLower _color) in DMS_A3_AllMarkerColors) then
 {
 	diag_log format ["DMS ERROR :: Color ""%1"" is not a valid marker color! Switching to ""ColorRed""",_color];
@@ -65,14 +89,18 @@ if !((toLower _color) in DMS_A3_AllMarkerColors) then
 */
 
 private _circle = createMarker [format ["DMS_MissionMarkerCircle%1_%2",_num,round(time)], _pos];
-_circle setMarkerColor _color;
-_circle setMarkerShape "ELLIPSE";
-_circle setMarkerBrush "Solid";
-_circle setMarkerSize [150,150];
+
+if (DMS_ShowMarkerCircle) then
+{
+	_circle setMarkerColor _color;
+	_circle setMarkerShape "ELLIPSE";
+	_circle setMarkerBrush "Solid";
+	_circle setMarkerSize [150,150];
+};
 
 private _dot = createMarker [format ["DMS_MissionMarkerDot%1_%2",_num,round(time)], _pos];
 _dot setMarkerColor "ColorBlack";
-_dot setMarkerType "mil_dot";
+_dot setMarkerType _markerType;
 _dot setMarkerText _text;
 
 missionNamespace setVariable [format ["%1_pos",_dot], _pos];

@@ -165,27 +165,44 @@ if (DMS_ShowDifficultyColorLegend) then
 	_title setMarkerType "mil_dot";
 	_title setMarkerAlpha 0.5;
 	{
-		private ["_difficulty", "_color", "_num", "_pos", "_circle", "_dot"];
+		private _difficulty = _x;
 
-		_difficulty = _x;
+		private _color = "ColorGreen";
+		private _markerType = "ExileMissionEasyIcon";
+
+
 		switch (_difficulty) do
 		{
-			case "easy": 		{_color = "ColorGreen";};
-			case "moderate": 	{_color = "ColorYellow";};
-			case "difficult": 	{_color = "ColorRed";};
-			case "hardcore" : 	{_color = "ColorBlack";};
+			case "moderate":
+			{
+				_color = "ColorYellow";
+				_marker = "ExileMissionModerateIcon";
+			};
+			case "difficult":
+			{
+				_color = "ColorRed";
+				_marker = "ExileMissionDifficultIcon";
+			};
+			case "hardcore":
+			{
+				_color = "ColorBlack";
+				_marker = "ExileMissionHardcoreIcon";
+			};
 		};
 
-		_num = -200 * (_forEachIndex - 0.5);
-		_pos = [100,_num];
+		private _num = -200 * (_forEachIndex - 0.5);
+		private _pos = [100,_num];
 
-		_circle = createMarker [format ["DMS_MissionMarker_DifficultyColor_%1",_color], _pos];
-		_circle setMarkerColor _color;
-		_circle setMarkerShape "ELLIPSE";
-		_circle setMarkerBrush "Solid";
-		_circle setMarkerSize [100,100];
+		if (DMS_ShowMarkerCircle) then
+		{
+			private _circle = createMarker [format ["DMS_MissionMarker_DifficultyColor_%1",_color], _pos];
+			_circle setMarkerColor _color;
+			_circle setMarkerShape "ELLIPSE";
+			_circle setMarkerBrush "Solid";
+			_circle setMarkerSize [100,100];
+		};
 
-		_dot = createMarker [format ["DMS_MissionMarker_Difficulty_%1",_difficulty],_pos];
+		private _dot = createMarker [format ["DMS_MissionMarker_Difficulty_%1",_difficulty],_pos];
 		_dot setMarkerColor "ColorWhite";
 		_dot setMarkerType "mil_dot";
 		_dot setMarkerAlpha 0.5;

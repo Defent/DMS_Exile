@@ -154,6 +154,13 @@ ___
 # Changelog:
 
 ### Main Branch
+### July 11, 2016 (5:20 PM CST-America):
+* **NEW CONFIG VALUE**
+
+	DMS_ShowMarkerCircle
+* DMS now uses the new marker icons added in Exile v1.0.0
+
+
 ### July 9, 2016 (8:40 PM CST-America):
 * **NEW CONFIG VALUES**
 
