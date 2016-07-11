@@ -151,4 +151,4 @@ ___
 ___
 <br><br><br>
 
-# Changelog:
+# Changelog: https://github.com/Defent/DMS_Exile/blob/master/Changelog.md

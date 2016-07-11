@@ -7,7 +7,7 @@
 ### July 11, 2016 (5:20 PM CST-America):
 * **NEW CONFIG VALUE**
 
-	DMS_ShowMarkerCircle
+		DMS_ShowMarkerCircle
 * DMS now uses the new marker icons added in Exile v1.0.0
 
 
