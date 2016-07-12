@@ -4,6 +4,11 @@
 
 
 ### Main Branch
+### July 11, 2016 (7:00 PM CST-America):
+* Fixed spawning missions on server start if it wasn't listed in static/bandit missions.
+* Moved the freeze manager to FSM.
+* Slight optimizations + fixes for the new markers (they look amazing btw :D ).
+
 ### July 11, 2016 (5:20 PM CST-America):
 * **NEW CONFIG VALUE**
 

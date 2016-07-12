@@ -16,11 +16,14 @@ item11[] = {"Mission_Cleanup",2,250,697.923035,248.598328,797.923035,298.598328,
 item12[] = {"INITIALIZE",4,218,638.875183,-106.463760,728.875183,-56.463760,0.000000,"INITIALIZE"};
 item13[] = {"PREPARE",2,250,763.528931,-107.864372,853.528931,-57.864372,0.000000,"PREPARE"};
 item14[] = {"___min_loop",4,218,838.578918,171.729218,928.578918,221.729218,3.000000,"1 min loop"};
-item15[] = {"Select_Mission",2,4346,839.279602,248.118042,929.279663,298.118042,0.000000,"Select Mission"};
+item15[] = {"Select_Mission",2,250,839.279602,248.118042,929.279663,298.118042,0.000000,"Select Mission"};
 item16[] = {"",7,210,880.582092,366.639160,888.582092,374.639160,0.000000,""};
-item17[] = {"___min_loop__AI",4,218,975.237671,175.934219,1065.237793,225.934219,0.000000,"1 min loop (AI)"};
-item18[] = {"Set_AI_Ownership",2,250,975.237732,250.921417,1065.237305,300.921417,0.000000,"Set AI Ownership"};
-item19[] = {"",7,210,1016.540222,366.725281,1024.540283,374.725281,0.000000,""};
+item17[] = {"___min_loop__AI",4,218,954.751831,174.416748,1044.750732,224.416748,0.000000,"1 min loop (AI)"};
+item18[] = {"Set_AI_Ownership",2,250,953.993164,247.127747,1043.991455,297.127747,0.000000,"Set AI Ownership"};
+item19[] = {"",7,210,995.295715,366.725281,1003.295776,374.725281,0.000000,""};
+item20[] = {"Freeze_Loop",4,218,1067.345947,174.190506,1157.346191,224.190506,0.000000,"Freeze Loop"};
+item21[] = {"Freeze_Manager",2,250,1067.652466,248.645218,1157.652100,298.645233,0.000000,"Freeze Manager"};
+item22[] = {"",7,210,1108.954956,366.725311,1116.955078,374.725311,0.000000,""};
 link0[] = {0,10};
 link1[] = {1,12};
 link2[] = {2,3};
@@ -28,24 +31,28 @@ link3[] = {3,5};
 link4[] = {3,8};
 link5[] = {3,14};
 link6[] = {3,17};
-link7[] = {4,7};
-link8[] = {5,6};
-link9[] = {6,10};
-link10[] = {7,9};
-link11[] = {8,11};
-link12[] = {9,2};
-link13[] = {10,4};
-link14[] = {11,0};
-link15[] = {12,13};
-link16[] = {13,2};
-link17[] = {14,15};
-link18[] = {15,16};
-link19[] = {16,0};
-link20[] = {17,18};
-link21[] = {18,19};
-link22[] = {19,16};
-globals[] = {0.000000,0,0,0,0,640,480,2,454,6316128,1,432.812775,1219.813965,504.306030,-50.239235,799,589,1};
-window[] = {0,-1,-1,-1,-1,834,100,1394,100,1,817};
+link7[] = {3,20};
+link8[] = {4,7};
+link9[] = {5,6};
+link10[] = {6,10};
+link11[] = {7,9};
+link12[] = {8,11};
+link13[] = {9,2};
+link14[] = {10,4};
+link15[] = {11,0};
+link16[] = {12,13};
+link17[] = {13,2};
+link18[] = {14,15};
+link19[] = {15,16};
+link20[] = {16,0};
+link21[] = {17,18};
+link22[] = {18,19};
+link23[] = {19,16};
+link24[] = {20,21};
+link25[] = {21,22};
+link26[] = {22,19};
+globals[] = {0.000000,0,0,0,0,640,480,2,457,6316128,1,382.327179,1353.613037,520.585144,-195.419098,799,589,1};
+window[] = {0,-1,-1,-32000,-32030,859,125,1419,125,1,817};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -109,6 +116,16 @@ class FSM
           to="Check_Mission_Running";
           precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
           condition=/*%FSM<CONDITION""">*/"((diag_tickTime - _missionsMonitor) > 15)"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+        /*%FSM<LINK "Freeze_Loop">*/
+        class Freeze_Loop
+        {
+          priority = 0.000000;
+          to="Freeze_Manager";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"((diag_tickTime - _freeze) > DMS_ai_freezeCheckingDelay)"/*%FSM</CONDITION""">*/;
           action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
         };
         /*%FSM</LINK>*/
@@ -180,10 +197,11 @@ class FSM
       init = /*%FSM<STATEINIT""">*/"private [""_missionsMonitor"",""_cleanupTime"",""_selectMission""];" \n
        "diag_log (""DMS :: Initializing FSM mission script"");" \n
        "" \n
-       "_missionsMonitor = diag_tickTime;" \n
-       "_cleanupTime = diag_tickTime;" \n
-       "_selectMission = diag_tickTime;" \n
-       "_aiLocality = diag_tickTime;"/*%FSM</STATEINIT""">*/;
+       "_missionsMonitor = 0;" \n
+       "_cleanupTime = 0;" \n
+       "_selectMission = 0;" \n
+       "_aiLocality = 0;" \n
+       "_freeze = 0;"/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
       {
@@ -239,6 +257,30 @@ class FSM
        "" \n
        "_aiLocality = diag_tickTime;" \n
        "call DMS_fnc_AILocalityManager;"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "true">*/
+        class true
+        {
+          priority = 0.000000;
+          to="Waiting";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "Freeze_Manager">*/
+    class Freeze_Manager
+    {
+      name = "Freeze_Manager";
+      init = /*%FSM<STATEINIT""">*/"//(format [""FSM CHECK :: calling DMS_fnc_AILocalityManager""]) call DMS_fnc_DebugLog;" \n
+       "" \n
+       "_freeze = diag_tickTime;" \n
+       "call DMS_fnc_FreezeManager;"/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
       {

@@ -216,8 +216,15 @@ if (DMS_ShowDifficultyColorLegend) then
 
 
 {
+	missionNamespace setVariable
+	[
+		format["DMS_Mission_%1",_missionName],
+		compileFinal preprocessFileLineNumbers (format ["\x\addons\DMS\missions\bandit\%1.sqf",_missionName])
+	];
+
 	[_x] call DMS_fnc_SpawnBanditMission;
 } forEach DMS_BanditMissionsOnServerStart;
+
 
 if (DMS_StaticMission) then
 {
@@ -225,6 +232,12 @@ if (DMS_StaticMission) then
 	DMS_StaticMinPlayerDistance = 0;
 
 	{
+		missionNamespace setVariable
+		[
+			format["DMS_StaticMission_%1",_x],
+			compileFinal preprocessFileLineNumbers (format ["\x\addons\DMS\missions\static\%1.sqf",_x])
+		];
+
 		[_x] call DMS_fnc_SpawnStaticMission;
 	} forEach DMS_StaticMissionsOnServerStart;
 
@@ -234,9 +247,6 @@ if (DMS_StaticMission) then
 
 // Add heli paratroopers monitor to the thread system.
 [5, DMS_fnc_HeliParatroopers_Monitor, [], true] call ExileServer_system_thread_addTask;
-
-// Add "freeze" monitor to the thread system.
-[DMS_ai_freezeCheckingDelay, DMS_fnc_FreezeManager, [], true] call ExileServer_system_thread_addTask;
 
 
 

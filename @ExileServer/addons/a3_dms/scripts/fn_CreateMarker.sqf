@@ -45,39 +45,38 @@ private _randomMarker =
 
 private _num = DMS_MissionCount;
 
-private _color = "ColorGreen";
+
 private _markerType = "mil_dot";
 
+private _color =
+	switch (toLower _difficulty) do
+	{
+		case "easy":
+		{
+			_markerType = "ExileMissionEasyIcon";
+			"ColorGreen"
+		};
+		case "moderate":
+		{
+			_markerType = "ExileMissionModerateIcon";
+			"ColorYellow"
+		};
+		case "difficult":
+		{
+			_markerType = "ExileMissionDifficultIcon";
+			"ColorRed"
+		};
+		case "hardcore":
+		{
+			_markerType = "ExileMissionHardcoreIcon";
+			"ColorBlack"
+		};
 
-switch (toLower _difficulty) do
-{
-	case "easy":
-	{
-		_color = "ColorGreen";
-		_markerType = "ExileMissionEasyIcon";
+		default
+		{
+			_difficulty
+		};
 	};
-	case "moderate":
-	{
-		_color = "ColorYellow";
-		_markerType = "ExileMissionModerateIcon";
-	};
-	case "difficult":
-	{
-		_color = "ColorRed";
-		_markerType = "ExileMissionDifficultIcon";
-	};
-	case "hardcore":
-	{
-		_color = "ColorBlack";
-		_markerType = "ExileMissionHardcoreIcon";
-	};
-
-	default
-	{
-		_color = _difficulty;
-		_markerType = "mil_dot";
-	};
-};
 
 /*
 // Don't think this is really needed, ArmA gives you an error anyways.
