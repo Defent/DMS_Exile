@@ -151,4 +151,5 @@ ___
 ___
 <br><br><br>
 
-# Changelog: https://github.com/Defent/DMS_Exile/blob/master/Changelog.md
+# Changelog:
+https://github.com/Defent/DMS_Exile/blob/master/Changelog.md

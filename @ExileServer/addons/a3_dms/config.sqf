@@ -502,8 +502,6 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 											"Exile_Weapon_AK107_GL",
 											"Exile_Weapon_AK74_GL",
 											"Exile_Weapon_AK47",
-											"Exile_Weapon_AKM",
-											"Exile_Weapon_AKS",
 											"Exile_Weapon_AKS_Gold"
 										];
 	DMS_assault_pistols =				[							// Pistols for Assault Class (Set to empty array if you don't want to give them any pistols)
@@ -1047,8 +1045,6 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 											"Exile_Weapon_AK107_GL",
 											"Exile_Weapon_AK74_GL",
 											"Exile_Weapon_AK47",
-											"Exile_Weapon_AKM",
-											"Exile_Weapon_AKS",
 											"Exile_Weapon_AKS_Gold",
 											"LMG_Zafir_F",
 											"LMG_Mk200_F",
