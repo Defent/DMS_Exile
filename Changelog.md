@@ -4,6 +4,11 @@
 
 
 ### Main Branch
+### July 16, 2016 (12:15 AM CST-America):
+* Fixed a typo in the post-init when using "DMS_BanditMissionsOnServerStart" (thanks to [jmayr2000 on the forums](http://www.exilemod.com/profile/76602-jmayr2000/) for reporting the issue)
+* The "underwater_stash" mission will now actually spawn ammo for the SDARs in the crate on land (thanks to "Valthos" for pointing that out).
+* Members in the Exile "Lone Wolf" group will no longer get notified when another "Lone Wolf" kills an AI.
+
 ### July 11, 2016 (7:00 PM CST-America):
 * Fixed spawning missions on server start if it wasn't listed in static/bandit missions.
 * Moved the freeze manager to FSM.

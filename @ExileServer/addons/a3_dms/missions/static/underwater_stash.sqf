@@ -26,6 +26,16 @@ DMS_CrateCase_DiverGear =
         "arifle_SDAR_F"
     ],
     [
+        "20Rnd_556x45_UW_mag",
+        "20Rnd_556x45_UW_mag",
+        "20Rnd_556x45_UW_mag",
+        "20Rnd_556x45_UW_mag",
+        "20Rnd_556x45_UW_mag",
+        "20Rnd_556x45_UW_mag",
+        "20Rnd_556x45_UW_mag",
+        "20Rnd_556x45_UW_mag",
+        "20Rnd_556x45_UW_mag",
+        "20Rnd_556x45_UW_mag",
         "U_O_Wetsuit",
         "U_O_Wetsuit",
         "U_O_Wetsuit",

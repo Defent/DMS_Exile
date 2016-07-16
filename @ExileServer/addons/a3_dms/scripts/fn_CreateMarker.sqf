@@ -111,9 +111,8 @@ if (DMS_MarkerText_ShowMissionPrefix) then
 
 if (_randomMarker) then
 {
-	private _dir = random 360;
 	private _dis = DMS_MarkerPosRandomRadius call DMS_fnc_SelectRandomVal;
-	private _npos = _pos getPos [_dis,_dir];
+	private _npos = _pos getPos [_dis,random 360];
 
 	_circle setMarkerPos _npos;
 	_dot setMarkerPos _npos;

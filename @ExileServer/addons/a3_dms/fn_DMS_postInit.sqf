@@ -218,8 +218,8 @@ if (DMS_ShowDifficultyColorLegend) then
 {
 	missionNamespace setVariable
 	[
-		format["DMS_Mission_%1",_missionName],
-		compileFinal preprocessFileLineNumbers (format ["\x\addons\DMS\missions\bandit\%1.sqf",_missionName])
+		format["DMS_Mission_%1",_x],
+		compileFinal preprocessFileLineNumbers (format ["\x\addons\DMS\missions\bandit\%1.sqf",_x])
 	];
 
 	[_x] call DMS_fnc_SpawnBanditMission;
