@@ -1,3 +1,6 @@
+![Arma 1.62](https://img.shields.io/badge/Arma-1.62-blue.svg) ![Exile 1.0.0 Potato](https://img.shields.io/badge/Exile-1.0.0%20Potato-C72651.svg) ![DMS Version](https://img.shields.io/badge/DMS%20Version-2016--07--18-blue.svg) ![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)
+
+
 # To the User:
 ####Read the instructions carefully. Before leaving any questions regarding DMS, please read through the [DMS "config.sqf"](https://github.com/Defent/DMS_Exile/blob/master/%40ExileServer/addons/a3_dms/config.sqf?ts=4); the majority of the questions we receive are answered (directly or indirectly) by the config.
 

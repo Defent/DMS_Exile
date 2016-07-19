@@ -22,7 +22,7 @@
 
 params
 [
-	["_nearestObjectMinDistance",	25,							[0] ],
+	["_nearestObjectMinDistance",	5,							[0] ],
 	["_waterNearLimit",				DMS_WaterNearBlacklist,		[0] ],
 	["_minSurfaceNormal",			DMS_MinSurfaceNormal,		[0] ],
 	["_spawnZoneNearLimit",			DMS_SpawnZoneNearBlacklist, [0]	],

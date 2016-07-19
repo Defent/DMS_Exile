@@ -12,6 +12,9 @@ DMS_MinDistFromEastBorder			= 800;
 DMS_MinDistFromSouthBorder			= 1500;
 DMS_MinDistFromNorthBorder			= 1900;
 
+// Plenty of slopes
+DMS_MinSurfaceNormal				= 0.8;
+
 
 DMS_StaticMissionsOnServerStart append
 [

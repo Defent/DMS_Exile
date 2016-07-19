@@ -4,6 +4,12 @@
 
 
 ### Main Branch
+### July 18, 2016 (10:00 AM CST-America):
+* Reduce minimum surface normal on Tanoa
+* Reduce minimum distance to nearest object requirement for "construction" and "mercbase" missions.
+* Reduced default value for ```_nearestObjectMinDistance``` parameter in the "DMS_fnc_findSafePos" function.
+* Improved "error" log for the freeze manager when a null group was found.
+
 ### July 16, 2016 (12:15 AM CST-America):
 * Fixed a typo in the post-init when using "DMS_BanditMissionsOnServerStart" (thanks to [jmayr2000 on the forums](http://www.exilemod.com/profile/76602-jmayr2000/) for reporting the issue)
 * The "underwater_stash" mission will now actually spawn ammo for the SDARs in the crate on land (thanks to "Valthos" for pointing that out).

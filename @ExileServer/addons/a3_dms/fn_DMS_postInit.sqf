@@ -34,7 +34,7 @@ if !("isKnownAccount:DMS_PersistentVehicle" call ExileServer_system_database_que
 
 
 // Some custom maps don't have the proper safePos config entries.
-// If you are using one and you have an issue with mission spawns, please create an issue on GitHub or post a comment in the DMS thread.
+// DMS no longer uses these values as of October 30, 2015.
 switch (toLower worldName) do
 {
 	case "altis":										// [16000,16000] w/ radius of 16000 works well for Altis
@@ -72,12 +72,12 @@ DMS_MapCenterPos set [2,0];
 
 
 
-RESISTANCE setFriend[WEST,0];
-WEST setFriend[RESISTANCE,0];
-RESISTANCE setFriend[EAST,0];
-EAST setFriend[RESISTANCE,0];
 EAST setFriend[WEST,0];
+EAST setFriend[RESISTANCE,0];
+RESISTANCE setFriend[WEST,0];
+RESISTANCE setFriend[EAST,0];
 WEST setFriend[EAST,0];
+WEST setFriend[RESISTANCE,0];
 
 
 
