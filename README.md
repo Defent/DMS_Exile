@@ -155,4 +155,4 @@ ___
 <br><br><br>
 
 # Changelog:
-https://github.com/Defent/DMS_Exile/blob/master/Changelog.md
+https://github.com/Defent/DMS_Exile/wiki/Changelog
