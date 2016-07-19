@@ -361,7 +361,7 @@ else
 // Soldier killed event handler
 _unit addMPEventHandler ["MPKilled",'if (isServer) then {_this call DMS_fnc_OnKilled;};'];
 
-// Remove ramming damage from players. Also remove any damage within 5 seconds of spawning.
+// Remove ramming damage from players.
 // Will not work if unit is not local (offloaded)
 if (DMS_ai_disable_ramming_damage) then
 {

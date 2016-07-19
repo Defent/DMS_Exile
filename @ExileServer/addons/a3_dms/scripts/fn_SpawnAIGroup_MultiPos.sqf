@@ -87,7 +87,7 @@ if (_class == "custom") then
 
 private _group = createGroup (missionNamespace getVariable [format ["DMS_%1Side",_side],EAST]);
 
-_group setVariable ["DMS_LockLocality",nil];
+_group setVariable ["DMS_LockLocality",true];									// Lock locality until all units are spawned
 _group setVariable ["DMS_SpawnedGroup",true];
 _group setVariable ["DMS_Group_Side", _side];
 
@@ -142,6 +142,8 @@ if (DMS_ai_freezeOnSpawn) then
 {
 	[_group,true] call DMS_fnc_FreezeToggle;
 };
+
+_group setVariable ["DMS_LockLocality",false];									// Unlock locality now that we're done with the group
 
 
 diag_log format ["DMS_SpawnAIGroup_MultiPos :: Spawned %1 AI using positions parameter: %2.",_count,_positions];
