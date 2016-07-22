@@ -134,11 +134,13 @@ ___
 <br><br><br>
 
 # Roadmap:
+### Zombies are NOT SUPPORTED by DMS, nor do we ever plan to support zombies within DMS.
+
 #### Convoy Mission:
 * Regularly update marker position.
 * Implement function(s) for AI pathing.
 
-#### Underwater Missions
+#### Dynamic Underwater Missions
 
 #### Dynamic/Ambient AI Spawning
 * Spawn AI that are meant to "hunt" individual players.
