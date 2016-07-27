@@ -49,18 +49,25 @@ if (DMS_ai_allowFreezing) then
     		private _leader = leader _x;
     		private _group = _x;
 
-    		if (!(isPlayer _leader) && {!([_leader,DMS_ai_freezingDistance] call DMS_fnc_IsPlayerNearby)}) then
-    		{
-                [_group,true] call DMS_fnc_FreezeToggle;
+            if !(isPlayer _leader) then
+            {
+                // Ignore Exile flyovers.
+                if (((side _group) isEqualTo independent) && {(count (units _group)) isEqualTo 1}) exitWith {};
 
-                if (DMS_DEBUG) then
+
+                if !([_leader,DMS_ai_freezingDistance] call DMS_fnc_IsPlayerNearby) then
                 {
-                    format["FreezeManager :: Froze AI Group: %1",_group] call DMS_fnc_DebugLog;
-                };
+                    [_group,true] call DMS_fnc_FreezeToggle;
 
-                // So that we don't check this group for freezing later on.
-                _group setVariable ["DMS_AllowFreezing",false];
-    		};
+                    if (DMS_DEBUG) then
+                    {
+                        format["FreezeManager :: Froze AI Group: %1",_group] call DMS_fnc_DebugLog;
+                    };
+
+                    // So that we don't check this group for freezing later on.
+                    _group setVariable ["DMS_AllowFreezing",false];
+                };
+            };
     	};
     } forEach allGroups;
 };
