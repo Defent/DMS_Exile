@@ -16,6 +16,9 @@ if (!DMS_ai_offload_to_client) exitWith {};
 		private _group = _x;
 		if !(isPlayer _leader) then
 		{
+			// Ignore Exile flyovers.
+			if (((side _group) isEqualTo independent) && {(count (units _group)) isEqualTo 1}) exitWith {};
+
 			if (DMS_DEBUG) then
 			{
 				(format ["AILocalityManager :: Finding owner for group: %1",_group]) call DMS_fnc_DebugLog;

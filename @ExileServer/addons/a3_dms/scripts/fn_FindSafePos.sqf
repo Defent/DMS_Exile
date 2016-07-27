@@ -15,6 +15,7 @@
 		_traderZoneNearLimit,		// NUMBER (distance): Minimum distance from a trader zone.
 		_missionNearLimit,			// NUMBER (distance): Minimum distance from another mission.
 		_playerNearLimit,			// NUMBER (distance): Minimum distance from a player.
+		_territoryNearLimit,		// NUMBER (distance): Minimum distance from a territory.
 		_throttleParams				// BOOLEAN: Whether or not some of the distance values should be throttled on repeated attempts.
 	] call DMS_fnc_findSafePos;
 */

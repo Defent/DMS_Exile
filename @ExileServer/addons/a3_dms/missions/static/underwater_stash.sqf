@@ -275,7 +275,7 @@ _added =
         [
             [
                 _sub1,
-                {_this setVariable ["ExileMoney",15000,true]}                       // The submarine will have 15000 poptabs after the mission completes. The capacity is actually 5000, but I just overload it.
+                {_this setVariable ["ExileMoney",25000,true]}                       // The submarine will have 25,000 poptabs after the mission completes. The capacity is actually 5000, but I just overload it.
             ]
         ],
         [],

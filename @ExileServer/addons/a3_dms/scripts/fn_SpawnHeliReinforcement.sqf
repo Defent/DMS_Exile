@@ -73,7 +73,7 @@ private _spawnPos =
                 0,
                 0,
                 DMS_RHeli_MinDistFromPlayers,
-                true,
+                0,
                 false
             ]
         ] call DMS_fnc_FindSafePos_InRange

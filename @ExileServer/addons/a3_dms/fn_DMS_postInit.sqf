@@ -210,6 +210,10 @@ if (DMS_ShowDifficultyColorLegend) then
 };
 
 
+// Add heli paratroopers monitor to the thread system.
+[5, DMS_fnc_HeliParatroopers_Monitor, [], true] call ExileServer_system_thread_addTask;
+
+
 {
 	[_x] call DMS_fnc_ImportFromM3E_Static;			// Spawn all of the bases that are supposed to be spawned on server startup.
 } forEach DMS_BasesToImportOnServerStart;
@@ -245,8 +249,10 @@ if (DMS_StaticMission) then
 };
 
 
-// Add heli paratroopers monitor to the thread system.
-[5, DMS_fnc_HeliParatroopers_Monitor, [], true] call ExileServer_system_thread_addTask;
+for "_i" from 1 to DMS_RandomBanditMissionsOnStart do
+{
+	[selectRandom DMS_BanditMissionTypesArray] call DMS_fnc_SpawnBanditMission;
+};
 
 
 
