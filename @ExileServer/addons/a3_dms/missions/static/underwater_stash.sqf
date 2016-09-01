@@ -55,7 +55,7 @@ DMS_CrateCase_DiverGear =
 ];
 
 // I only made some of the variables in this file "private" because I couldn't bother making all of them private :p
-private _crate = ["I_CargoNet_01_ammo_F",[5630,3100,0]] call DMS_fnc_SpawnCrate;
+private _crate = ["Box_IND_AmmoVeh_F",[5630,3100,0]] call DMS_fnc_SpawnCrate;
 _crate setVariable ["DMS_AllowSmoke", false];
 
 
@@ -127,15 +127,10 @@ private _diverGroup =
 DMS_ai_use_launchers = _temp;
 
 
-
-// Remove all previous waypoints for the diver group
-for "_i" from count (waypoints _diverGroup) to 1 step -1 do
 {
-	deleteWaypoint ((waypoints _diverGroup) select _i);
-};
+    _x disableAI "PATH";
+} forEach (units _diverGroup);
 
-private _wp = _diverGroup addWaypoint [_sub1,0];
-_wp setWaypointType "GUARD";
 
 
 

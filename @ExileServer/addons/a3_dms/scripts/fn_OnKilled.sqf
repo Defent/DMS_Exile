@@ -48,6 +48,7 @@ private _removeAll =
 moveOut _unit;
 
 _unit removeAllEventHandlers "HandleDamage";
+_unit enableSimulationGlobal true;
 
 // Remove gear according to configs
 if ((_unit getVariable ["DMS_clear_AI_body",DMS_clear_AI_body]) && {(random 100) <= (_unit getVariable ["DMS_clear_AI_body_chance",DMS_clear_AI_body_chance])}) then
@@ -107,6 +108,8 @@ if (!(_grpUnits isEqualTo []) && {(leader _grp) isEqualTo _unit}) then
 private _av = _unit getVariable ["DMS_AssignedVeh",objNull];
 if (!isNull _av) then
 {
+	_av enableSimulationGlobal true;
+
 	// Determine whether or not the vehicle has any active crew remaining.
 	private _memCount = {[(alive _x),false] select (_unit isEqualTo _x);} count (crew _av);
 
@@ -129,7 +132,8 @@ if (!isNull _av) then
 		{
 			_av setDamage 1;
 			_av setVariable ["ExileDiedAt",time];
-			_av spawn {sleep 1;_this enableSimulationGlobal false;};
+
+			[if (_av isKindOf "Air") then {30} else {5}, {_this enableSimulationGlobal false}, _av, false, false] call ExileServer_system_thread_addTask;
 
 
 			if (DMS_DEBUG) then
@@ -146,6 +150,18 @@ if (!isNull _av) then
 			else
 			{
 				[_av, 1] remoteExecCall ["lock", _av];
+			};
+
+			_av call ExileServer_system_simulationMonitor_addVehicle;
+
+			_av setVariable ["ExileMoney",0,true];
+			_av setVariable ["ExileIsPersistent", false];
+			_av addMPEventHandler ["MPKilled", { if (isServer) then {_this call ExileServer_object_vehicle_event_onMPKilled;};}];
+			_av addEventHandler ["GetIn", {_this call ExileServer_object_vehicle_event_onGetIn}];
+
+			if (!isNil "AVS_Version") then
+			{
+				_av call AVS_fnc_sanitizeVehicle;
 			};
 
 			if (DMS_DEBUG) then
@@ -294,7 +310,7 @@ if (isPlayer _killer) then
 	};
 
 
-	if (!(_veh isEqualTo _killer) && {(driver _veh) isEqualTo _killer}) then
+	if (!(_veh isEqualTo _killer) && {(driver _veh) isEqualTo _killer} && {(_killer distance _unit)<10}) then
 	{
 		_playerObj = driver _veh;
 
@@ -355,3 +371,5 @@ if (isPlayer _killer) then
 // Let Exile handle the AI Body cleanup.
 _unit setVariable ["ExileDiedAt",time];
 _unit setVariable ["DMS_KillerObj",[_playerObj,_killer] select (isNull _playerObj)];
+
+[5, {_this enableSimulationGlobal false}, _unit, false, false] call ExileServer_system_thread_addTask;

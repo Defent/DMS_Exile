@@ -26,8 +26,8 @@ if (_freeze) then
         _x enableSimulationGlobal false;
         (vehicle _x) enableSimulationGlobal false;
     } forEach (units _group);
+
     _group setVariable ["DMS_isGroupFrozen",true];
-    DMS_FrozenAIGroups pushBack _group;
 }
 else
 {
@@ -35,5 +35,6 @@ else
         _x enableSimulationGlobal true;
         (vehicle _x) enableSimulationGlobal true;
     } forEach (units _group);
+    
     _group setVariable ["DMS_isGroupFrozen",false];
 };

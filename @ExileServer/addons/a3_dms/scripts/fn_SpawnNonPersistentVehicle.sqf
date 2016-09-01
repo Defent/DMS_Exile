@@ -43,24 +43,11 @@ if !(isClass (configFile >> "CfgVehicles" >> _vehicleClass)) exitWith
 	objNull
 };
 
-private _vehpos = [];
-private _maxDistance = 5;
+private _vehObj = createVehicle [_vehicleClass, _position, [], 0, "NONE"];
 
-for "_i" from 0 to 1000 do
-{
-	_vehpos = _position findEmptyPosition [0,_maxDistance,_vehicleClass];
-	if !(_vehpos isEqualTo []) exitWith {};
-	_maxDistance = (_maxDistance + 5);
-};
-
-_vehpos set [2, 0.1];
-
-private _vehObj = createVehicle [_vehicleClass, _vehpos, [], 0, "CAN_COLLIDE"];
-
-clearBackpackCargoGlobal 	_vehObj;
-clearItemCargoGlobal 		_vehObj;
-clearMagazineCargoGlobal 	_vehObj;
 clearWeaponCargoGlobal 		_vehObj;
+clearItemCargoGlobal 		_vehObj;
+clearBackpackCargoGlobal 	_vehObj;
 
 if (_vehicleClass isKindOf "I_UGV_01_F") then
 {
@@ -85,20 +72,10 @@ if ((getTerrainHeightASL _vehpos)>0) then
 
 _vehObj setVariable ["ExileMoney",0,true];
 _vehObj setVariable ["ExileIsPersistent", false];
+_vehObj setVariable ["ExileIsSimulationMonitored", false];
 _vehObj addMPEventHandler ["MPKilled", { if (isServer) then {_this call ExileServer_object_vehicle_event_onMPKilled;};}];
 _vehObj addEventHandler ["GetIn", {_this call ExileServer_object_vehicle_event_onGetIn}];
-if (_vehObj isKindOf "Helicopter") then
-{
-	_vehObj addEventHandler ["RopeAttach",
-	{
-		private _vehicle = _this select 2;
 
-		if !(simulationEnabled _vehicle) then
-		{
-			_vehicle enableSimulationGlobal true;
-		};
-	}];
-};
 
 if (!isNil "AVS_Version") then
 {
@@ -110,7 +87,6 @@ _vehObj allowDamage false;
 _vehObj enableRopeAttach false;
 _vehObj enableSimulationGlobal false;
 
-_vehObj setVariable ["ExileIsSimulationMonitored", false];
 
 if (DMS_DEBUG) then
 {

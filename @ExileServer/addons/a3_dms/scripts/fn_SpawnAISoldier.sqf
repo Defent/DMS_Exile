@@ -381,16 +381,18 @@ if (DMS_ai_disable_ramming_damage) then
 };
 
 
-{
-	_unit enableAI _x;
-} forEach ["TARGET", "AUTOTARGET", "MOVE", "ANIM", "FSM"];
-
-if (_difficulty=="hardcore") then
+if (_difficulty == "hardcore") then
 {
 	// Make him a little bit harder ;)
 	{
 		_unit disableAI _x;
 	} forEach ["SUPPRESSION", "AIMINGERROR"];
+};
+
+if (_difficulty == "easy") then
+{
+	// Disable visibility raycasts for "easy" AI.
+	_unit disableAI "CHECKVISIBLE";
 };
 
 _unit setCustomAimCoef (missionNamespace getVariable [format["DMS_AI_AimCoef_%1",_difficulty], 0.7]);
