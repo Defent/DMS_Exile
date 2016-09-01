@@ -65,9 +65,9 @@ if (getNumber (configFile >> "CfgSettings" >> "VehicleSpawn" >> "thermalVision")
 _vehObj setFuel (0.75+(random 0.25));
 _vehObj setDir (random 360);
 
-if ((getTerrainHeightASL _vehpos)>0) then
+if ((getTerrainHeightASL _position)>0) then
 {
-	_vehObj setVectorUp (surfaceNormal _vehpos);
+	_vehObj setVectorUp (surfaceNormal _position);
 };
 
 _vehObj setVariable ["ExileMoney",0,true];
@@ -90,7 +90,7 @@ _vehObj enableSimulationGlobal false;
 
 if (DMS_DEBUG) then
 {
-	(format ["SpawnNonPersistentVehicle :: Created %1 at %2 with calling parameters: %3",_vehObj,_vehpos,_this]) call DMS_fnc_DebugLog;
+	(format ["SpawnNonPersistentVehicle :: Created %1 at %2 with calling parameters: %3",_vehObj,_position,_this]) call DMS_fnc_DebugLog;
 };
 
 
