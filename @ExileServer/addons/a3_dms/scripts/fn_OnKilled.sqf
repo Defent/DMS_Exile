@@ -371,5 +371,3 @@ if (isPlayer _killer) then
 // Let Exile handle the AI Body cleanup.
 _unit setVariable ["ExileDiedAt",time];
 _unit setVariable ["DMS_KillerObj",[_playerObj,_killer] select (isNull _playerObj)];
-
-[5, {_this enableSimulationGlobal false}, _unit, false, false] call ExileServer_system_thread_addTask;
