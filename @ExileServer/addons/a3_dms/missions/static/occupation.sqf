@@ -50,14 +50,48 @@ switch (toLower worldName) do
 		_msgLOSE = ['#FF0000',"The troops have left Norinsk, taking the cache with them..."];
 	};
 
+	case "napf":
+	{
+		_chance = random 100;
+		if(_chance < 40) then
+		{
+			_pos = [8846.05,16066,0.00157166];
+			_missionName = "Lenzburg Occupation";
+			_msgStart = ['#FFFF00',"Lenzburg is under martial law! There are reports they have a large weapon cache..."];
+			_msgWIN = ['#0080FF',"Convicts have successfully assaulted the town of Lenzburg and secured the cache!"];
+			_msgLOSE = ['#FF0000',"The troops have left Lenzburg, taking the cache with them..."];
+		}
+		else
+		{
+			_pos = [2426.39,7712.04,0.00131989];
+			_missionName = "Worb Occupation";
+			_msgStart = ['#FFFF00',"Worb is under martial law! There are reports they have a large weapon cache..."];
+			_msgWIN = ['#0080FF',"Convicts have successfully assaulted the town of Worb and secured the cache!"];
+			_msgLOSE = ['#FF0000',"The troops have left Worb, taking the cache with them..."];
+		};
+
+	};
+	
 	case "tanoa":
 	{
-		_pos = [11685,2666,0];
-		_missionName = "Lijnhaven Occupation";
-		_msgStart = ['#FFFF00',"Lijnhaven is under martial law! There are reports they have a large weapon cache..."];
-		_msgWIN = ['#0080FF',"Convicts have successfully assaulted the town of Lijnhaven and secured the cache!"];
-		_msgLOSE = ['#FF0000',"The troops have left Lijnhaven, taking the cache with them..."];
-	};		
+		_chance = random 100;
+		if(_chance < 40) then
+		{
+			_pos = [11621,2648.86,0];
+			_missionName = "Lijnhaven Occupation";
+			_msgStart = ['#FFFF00',"Lijnhaven is under martial law! There are reports they have a large weapon cache..."];
+			_msgWIN = ['#0080FF',"Convicts have successfully assaulted the town of Lijnhaven and secured the cache!"];
+			_msgLOSE = ['#FF0000',"The troops have left Lijnhaven, taking the cache with them..."];
+		}
+		else
+		{
+			_pos = [5850.64,10216.4,0];
+			_missionName = "Georgetown Occupation";
+			_msgStart = ['#FFFF00',"Georgetown is under martial law! There are reports they have a large weapon cache..."];
+			_msgWIN = ['#0080FF',"Convicts have successfully assaulted the town of Georgetown and secured the cache!"];
+			_msgLOSE = ['#FF0000',"The troops have left Georgetown, taking the cache with them..."];
+		};
+	};			
 	
 	default
 	{
