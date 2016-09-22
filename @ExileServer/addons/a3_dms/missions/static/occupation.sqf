@@ -1,6 +1,7 @@
 /*
 	"Occupation" static mission for Altis, Chernarus, Namalsk and Taviana
 	Created by second_coming
+	Multi-map positions help from Diamond
 */
 
 private["_wp","_wp2","_wp3","_pos","_missionName","_msgStart","_msgWIN","_msgLOSE"];
@@ -14,24 +15,6 @@ _side = "bandit";
 
 switch (toLower worldName) do
 {
-	case "chernarus":
-	{
-		_pos = [3810,8887,0];
-		_missionName = "Vybor Occupation";
-		_msgStart = ['#FFFF00',"Vybor is under martial law! There are reports they have a large weapon cache..."];
-		_msgWIN = ['#0080FF',"Convicts have successfully assaulted the town of Vybor and secured the cache!"];
-		_msgLOSE = ['#FF0000',"The troops have left Vybor, taking the cache with them..."];
-	};
-
-	case "altis":
-	{
-		_pos = [12571,14337,0];
-		_missionName = "Neochori Occupation";
-		_msgStart = ['#FFFF00',"Neochori is under martial law! There are reports they have a large weapon cache..."];
-		_msgWIN = ['#0080FF',"Convicts have successfully assaulted the town of Neochori and secured the cache!"];
-		_msgLOSE = ['#FF0000',"The troops have left Neochori, taking the cache with them..."];
-	};
-
 	case "taviana":
 	{
 		_pos = [14000,12220,0];
@@ -52,47 +35,219 @@ switch (toLower worldName) do
 
 	case "napf":
 	{
-		_chance = random 100;
-		if(_chance < 40) then
+        _chance = floor(random 2);
+        switch (_chance) do
 		{
-			_pos = [8846.05,16066,0.00157166];
-			_missionName = "Lenzburg Occupation";
-			_msgStart = ['#FFFF00',"Lenzburg is under martial law! There are reports they have a large weapon cache..."];
-			_msgWIN = ['#0080FF',"Convicts have successfully assaulted the town of Lenzburg and secured the cache!"];
-			_msgLOSE = ['#FF0000',"The troops have left Lenzburg, taking the cache with them..."];
-		}
-		else
-		{
-			_pos = [2426.39,7712.04,0.00131989];
-			_missionName = "Worb Occupation";
-			_msgStart = ['#FFFF00',"Worb is under martial law! There are reports they have a large weapon cache..."];
-			_msgWIN = ['#0080FF',"Convicts have successfully assaulted the town of Worb and secured the cache!"];
-			_msgLOSE = ['#FF0000',"The troops have left Worb, taking the cache with them..."];
-		};
-
-	};
+            case 0:
+            {
+			    _pos = [8846,16066,0];
+			    _missionName = "Lenzburg Occupation";
+			    _msgStart = ['#FFFF00',"Lenzburg is under martial law! There are reports they have a large weapon cache..."];
+		    	_msgWIN = ['#0080FF',"Convicts have successfully assaulted the town of Lenzburg and secured the cache!"];
+		    	_msgLOSE = ['#FF0000',"The troops have left Lenzburg, taking the cache with them..."];
+            };
+            case 1:
+            {
+		      	_pos = [2426,7712,0];
+		    	_missionName = "Worb Occupation";
+		    	_msgStart = ['#FFFF00',"Worb is under martial law! There are reports they have a large weapon cache..."];
+		    	_msgWIN = ['#0080FF',"Convicts have successfully assaulted the town of Worb and secured the cache!"];
+		    	_msgLOSE = ['#FF0000',"The troops have left Worb, taking the cache with them..."];
+            };
+        };
+    };
 	
-	case "tanoa":
-	{
-		_chance = random 100;
-		if(_chance < 40) then
-		{
-			_pos = [11621,2648.86,0];
-			_missionName = "Lijnhaven Occupation";
-			_msgStart = ['#FFFF00',"Lijnhaven is under martial law! There are reports they have a large weapon cache..."];
-			_msgWIN = ['#0080FF',"Convicts have successfully assaulted the town of Lijnhaven and secured the cache!"];
-			_msgLOSE = ['#FF0000',"The troops have left Lijnhaven, taking the cache with them..."];
-		}
-		else
-		{
-			_pos = [5850.64,10216.4,0];
-			_missionName = "Georgetown Occupation";
-			_msgStart = ['#FFFF00',"Georgetown is under martial law! There are reports they have a large weapon cache..."];
-			_msgWIN = ['#0080FF',"Convicts have successfully assaulted the town of Georgetown and secured the cache!"];
-			_msgLOSE = ['#FF0000',"The troops have left Georgetown, taking the cache with them..."];
-		};
-	};			
+	case "chernarus":
+    {
+        _chance = floor(random 4);
+        switch (_chance) do
+        {
+            case 0:
+            {
+		        _pos = [3810,8887,0];
+	            _missionName = "Vybor Occupation";
+		        _msgStart = ['#FFFF00',"Vybor is under martial law! There are reports they have a large weapon cache..."];
+	         	_msgWIN = ['#0080FF',"Convicts have successfully assaulted the town of Vybor and secured the cache!"];
+	         	_msgLOSE = ['#FF0000',"The troops have left Vybor, taking the cache with them..."];
+            };
+            case 1:
+            {
+                _pos = [12024,9083,0];
+                _missionName = "Berenzio Occupation";
+		        _msgStart = ['#FFFF00',"Berenzio is under martial law! There are reports they have a large weapon cache..."];
+	         	_msgWIN = ['#0080FF',"Convicts have successfully assaulted the town of Berenzio and secured the cache!"];
+	         	_msgLOSE = ['#FF0000',"The troops have left Berenzio, taking the cache with them..."];
+            };
+            case 2:
+            {
+                _pos = [6773,2365,0];
+                _missionName = "Chernogorsk Occupation";
+		        _msgStart = ['#FFFF00',"Chernogorsk is under martial law! There are reports they have a large weapon cache..."];
+	         	_msgWIN = ['#0080FF',"Convicts have successfully assaulted the town of Chernogorsk and secured the cache!"];
+	         	_msgLOSE = ['#FF0000',"The troops have left Chernogorsk, taking the cache with them..."];
+            };
+            case 3:
+            {
+                _pos = [6079.98,7789,0];
+                _missionName = "Stary Sobar Occupation";
+		        _msgStart = ['#FFFF00',"Stary Sobar is under martial law! There are reports they have a large weapon cache..."];
+	         	_msgWIN = ['#0080FF',"Convicts have successfully assaulted the town of Stary Sobar and secured the cache!"];
+	         	_msgLOSE = ['#FF0000',"The troops have left Stary Sobar, taking the cache with them..."];
+            };
+        };
+    };
 	
+	case "altis":
+    {
+        _chance = floor(random 5);
+        switch (_chance) do
+        {
+            case 0:
+            {
+	        	_pos = [12571,14337,0];
+	         	_missionName = "Neochori Occupation";
+	        	_msgStart = ['#FFFF00',"Neochori is under martial law! There are reports they have a large weapon cache..."];
+	        	_msgWIN = ['#0080FF',"Convicts have successfully assaulted the town of Neochori and secured the cache!"];
+	         	_msgLOSE = ['#FF0000',"The troops have left Neochori, taking the cache with them..."];
+            };
+            case 1:
+            {
+                _pos = [3679,13048,0];
+                _missionName = "Kavala Occupation";
+		        _msgStart = ['#FFFF00',"Kavala is under martial law! There are reports they have a large weapon cache..."];
+	         	_msgWIN = ['#0080FF',"Convicts have successfully assaulted the town of Kavala and secured the cache!"];
+	         	_msgLOSE = ['#FF0000',"The troops have left Kavala, taking the cache with them..."];
+            };
+            case 2:
+            {
+                _pos = [16812,12610,0];
+                _missionName = "Pyrgos Occupation";
+		        _msgStart = ['#FFFF00',"Pyrgos is under martial law! There are reports they have a large weapon cache..."];
+	         	_msgWIN = ['#0080FF',"Convicts have successfully assaulted the town of Pyrgos and secured the cache!"];
+	         	_msgLOSE = ['#FF0000',"The troops have left Pyrgos, taking the cache with them..."];
+            };
+            case 3:
+            {
+                _pos = [20885,16947,0];
+                _missionName = "Paros Occupation";
+		        _msgStart = ['#FFFF00',"Paros is under martial law! There are reports they have a large weapon cache..."];
+	         	_msgWIN = ['#0080FF',"Convicts have successfully assaulted the town of Paros and secured the cache!"];
+	         	_msgLOSE = ['#FF0000',"The troops have left Paros, taking the cache with them..."];
+            };
+			case 4:
+            {
+                _pos = [25764,21344,0];
+                _missionName = "Sofia Occupation";
+		        _msgStart = ['#FFFF00',"Sofia is under martial law! There are reports they have a large weapon cache..."];
+	         	_msgWIN = ['#0080FF',"Convicts have successfully assaulted the town of Sofia and secured the cache!"];
+	         	_msgLOSE = ['#FF0000',"The troops have left Sofia, taking the cache with them..."];
+            };
+        };
+    };
+	
+	case "esseker":
+    {
+        _chance = floor(random 4);
+        switch (_chance) do
+        {
+            case 0:
+            {
+                _pos = [1120,10279,0];
+                _missionName = "Camp Spencer Occupation";
+                _msgStart = ['#FFFF00',"Camp Spencer is under bandit control! There are reports they have a large weapon cache..."];
+                _msgWIN = ['#0080FF',"Convicts have successfully assaulted Camp Spencer and secured the cache!"];
+                _msgLOSE = ['#FF0000',"The Bandits have left Camp Spencer, taking the cache with them..."];
+            };
+            case 1:
+            {
+                _pos = [11932,7920,0];
+                _missionName = "Novi Grad Occupation";
+                _msgStart = ['#FFFF00',"Novi Grad is under bandit control! There are reports they have a large weapon cache..."];
+                _msgWIN = ['#0080FF',"Convicts have successfully assaulted the town of Novi Grad and secured the cache!"];
+                _msgLOSE = ['#FF0000',"The Bandits have left Novi Grad, taking the cache with them..."];
+            };
+            case 2:
+            {
+                _pos = [8771,5438,0];
+                _missionName = "Old Essker Raid";
+                _msgStart = ['#FFFF00',"Old Essker is Being occupied by bandits! There are reports they have a large weapon cache..."];
+                _msgWIN = ['#0080FF',"Convicts have successfully assaulted the Old Essker Ruins and secured the cache!"];
+                _msgLOSE = ['#FF0000',"The bandits have left the Old Essker Ruins, taking the cache with them..."];
+            };
+            case 3:
+            {
+                _pos = [4493,3597,0];
+                _missionName = "Petlov Grad Park Occupation";
+                _msgStart = ['#FFFF00',"Petlov Grad Park is under bandits Occupation! There are reports they have a large weapon cache..."];
+                _msgWIN = ['#0080FF',"Convicts have successfully assaulted the Park and secured the cache!"];
+                _msgLOSE = ['#FF0000',"The bandits have left Petlov Grad Park, taking the cache with them..."];
+            };
+        };
+    };	
+	
+    case "tanoa":
+    {
+        _chance = floor(random 7);
+        switch (_chance) do
+        {
+            case 0:
+            {
+                _pos = [11621,2648,0];
+                _missionName = "Lijnhaven Occupation";
+                _msgStart = ['#FFFF00',"Lijnhaven is under martial law! There are reports they have a large weapon cache..."];
+                _msgWIN = ['#0080FF',"Convicts have successfully assaulted the town of Lijnhaven and secured the cache!"];
+                _msgLOSE = ['#FF0000',"The troops have left Lijnhaven, taking the cache with them..."];
+            };
+            case 1:
+            {
+                _pos = [5850,10216,0];
+                _missionName = "Georgetown Occupation";
+                _msgStart = ['#FFFF00',"Georgetown is under martial law! There are reports they have a large weapon cache..."];
+                _msgWIN = ['#0080FF',"Convicts have successfully assaulted the town of Georgetown and secured the cache!"];
+                _msgLOSE = ['#FF0000',"The troops have left Georgetown, taking the cache with them..."];
+            };
+            case 2:
+            {
+                _pos = [8414,10331,0];
+                _missionName = "Suger Company Raid";
+                _msgStart = ['#FFFF00',"Tanoa Suger Company is Being Raided by bandits! There are reports they have a large weapon cache..."];
+                _msgWIN = ['#0080FF',"Convicts have successfully assaulted the Suger Company and secured the cache!"];
+                _msgLOSE = ['#FF0000',"The troops have left the Suger Company, taking the cache with them..."];
+            };
+            case 3:
+            {
+                _pos = [13446,12303,0];
+                _missionName = "Blue Pearl Industrial Raid";
+                _msgStart = ['#FFFF00',"Blue Pearl Industrial is Being Raided by bandits! There are reports they have a large weapon cache..."];
+                _msgWIN = ['#0080FF',"Convicts have successfully assaulted the Blue Pearl Industrial Complex and secured the cache!"];
+                _msgLOSE = ['#FF0000',"The troops have left the Blue Pearl Complex, taking the cache with them..."];
+            };
+		    case 4:
+            {
+                _pos = [1812,13278,0];
+                _missionName = "Forbidden Village Occupation";
+                _msgStart = ['#FFFF00',"Forbidden Village is under Bandit Occupation! There are reports they have a large weapon cache..."];
+                _msgWIN = ['#0080FF',"Convicts have successfully assaulted the Forbidden Village and secured the cache!"];
+                _msgLOSE = ['#FF0000',"The Bandits have left the Forbidden Village, taking the cache with them..."];
+            };
+			case 5:
+            {
+                _pos = [10032,11796,0];
+                _missionName = "Comms ALPHA Occupation";
+                _msgStart = ['#FFFF00',"Comms ALPHA is under Bandit Occupation! There are reports they have a large weapon cache..."];
+                _msgWIN = ['#0080FF',"Convicts have successfully assaulted Comms ALPHA and secured the cache!"];
+                _msgLOSE = ['#FF0000',"The Bandits have left Comms ALPHA, taking the cache with them..."];
+            };
+			case 6:
+            {
+                _pos = [11157,11501,0];
+                _missionName = "Comms BRAVO Occupation";
+                _msgStart = ['#FFFF00',"Comms BRAVO is under Bandit Occupation! There are reports they have a large weapon cache..."];
+                _msgWIN = ['#0080FF',"Convicts have successfully assaulted Comms BRAVO and secured the cache!"];
+                _msgLOSE = ['#FF0000',"The Bandits have left Comms BRAVO, taking the cache with them..."];
+            };
+        };
+    };			
 	default
 	{
 	    diag_log format["DMS ERROR :: Attempting to run occupation with unsupported map: %1",worldName];
