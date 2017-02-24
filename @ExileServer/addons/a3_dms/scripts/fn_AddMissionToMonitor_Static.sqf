@@ -158,6 +158,8 @@ try
 		throw format["_onEndingScripts |%1|",_onEndingScripts];
 	};
 
+	private _unitCount = count (_units call DMS_fnc_GetAllUnits);
+
 	private _arr =
 	[
 		_pos,
@@ -188,7 +190,8 @@ try
 			_onFailScripts,
 			_onMonitorStart,
 			_onMonitorEnd
-		]
+		],
+		_unitCount
 	];
 	DMS_StaticMission_Arr pushBack _arr;
 	_added = true;
@@ -196,7 +199,7 @@ try
 	if (DMS_MarkerText_ShowAICount_Static) then
 	{
 		private _markerDot = _markers select 0;
-		_markerDot setMarkerText (format ["%1 (%2 %3 remaining)",markerText _markerDot,count (_units call DMS_fnc_GetAllUnits),DMS_MarkerText_AIName]);
+		_markerDot setMarkerText (format ["%1 (%2 %3 remaining)",markerText _markerDot,_unitCount,DMS_MarkerText_AIName]);
 	};
 
 	if (DMS_DEBUG) then

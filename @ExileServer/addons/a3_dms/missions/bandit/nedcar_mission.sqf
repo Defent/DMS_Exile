@@ -173,8 +173,9 @@ _PossibleVehicleClass =
 _VehicleClass = selectRandom _PossibleVehicleClass;
 
 
-//DMS_fnc_SpawnPersistentVehicle will automatically turn the pincode into a string and format it.
-_pinCode = round (random 9999);
+// DMS_fnc_SpawnPersistentVehicle will automatically turn the pincode into a string and format it.
+// Generate a pincode greater than 1000 because we shouldn't waste time having to format it in the mission messages.
+_pinCode = 1000 + round (random 8999);
 _vehicle = [_VehicleClass, _pos getPos [30, random 360], _pinCode] call DMS_fnc_SpawnPersistentVehicle;
 
 

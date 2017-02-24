@@ -14,7 +14,7 @@ if !(isServer) exitWith
 
 
 
-if (isNil "DMS_DynamicMission") exitWith
+if (isNil "DMS_ConfigLoaded") exitWith
 {
 	for "_i" from 0 to 99 do
 	{

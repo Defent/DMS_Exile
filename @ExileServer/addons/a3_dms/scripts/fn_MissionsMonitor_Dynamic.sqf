@@ -28,7 +28,8 @@
 			_onFailScripts,
 			_onMonitorStart,
 			_onMonitorEnd
-		]
+		],
+		_prevAICount
 	]
 
 	A semi-full breakdown can be found in fn_AddMissionToMonitor.sqf
@@ -47,7 +48,9 @@
 		"_missionSide",
 		"_missionDifficulty",
 		"_missionEvents",
-		"_missionScripts"
+		"_missionScripts",
+		"_prevAICount",
+		"_isSpecial"
 	])
 	then
 	{
@@ -134,10 +137,6 @@
 			if (_missionSide == "bandit") then
 			{
 				DMS_RunningBMissionCount = DMS_RunningBMissionCount - 1;
-			}
-			else
-			{
-				// Not yet implemented
 			};
 
 			{
@@ -195,70 +194,90 @@
 			throw format ["Mission (%1) Success at %2 with message %3.",_missionName,_pos,_msgWIN];
 		};
 
-		if ((diag_tickTime-_timeStarted)>_failTime) then
+
+		private _timeElapsed = diag_tickTime - _timeStarted;
+
+		if (DMS_ResetMissionTimeoutOnKill) then
 		{
-			// Check to see if the timeout should be extended before ending the mission.
-			if ((DMS_MissionTimeoutResetRange>0) && {[_pos,DMS_MissionTimeoutResetRange] call DMS_fnc_IsPlayerNearby}) then
+			private _AICount = count (_units call DMS_fnc_GetAllUnits);
+
+			if (_AICount != _prevAICount) then
 			{
 				_x set [2,[diag_tickTime,_failTime]];
-
-				throw format ["Mission Timeout Extended at %1 with timeout after %2 seconds. Position: %3",diag_tickTime,_failTime,_pos];
-			};
-
-			//Nobody is nearby so just cleanup objects from here
-			private _cleanupList = ((_units call DMS_fnc_GetAllUnits)+_buildings+_vehs+_mines);
-
-			{
-				_cleanupList pushBack (_x select 0);
-			} forEach _crate_info_array;
-
-			private _prev = DMS_CleanUp_PlayerNearLimit;
-			DMS_CleanUp_PlayerNearLimit = 0;			// Temporarily set the limit to 0 since we want to delete all the stuff regardless of player presence.
-
-			_cleanupList call DMS_fnc_CleanUp;
-
-			DMS_CleanUp_PlayerNearLimit = _prev;
-
-
-			if (_missionSide == "bandit") then
-			{
-				DMS_RunningBMissionCount = DMS_RunningBMissionCount - 1;
-			}
-			else
-			{
-				// Not yet implemented
-			};
-
-			{
-				_params = _x select 0;
-				_code = _x select 1;
-				if (_code isEqualType "") then
-				{
-					_code = compile _code;
-				};
-				_params call _code;
-			} forEach _onFailScripts;
-
-			[_missionName,_msgLose] call DMS_fnc_BroadcastMissionStatus;
-			[_markers,"lose"] call DMS_fnc_RemoveMarkers;
-
-			DMS_Mission_Arr deleteAt _forEachIndex;
-
-			throw format ["Mission (%1) Fail at %2 with message %3.",_missionName,_pos,_msgLose];
-		};
-
-		if ((diag_tickTime-_timeStarted)>DMS_MissionTimeoutResetFrequency) then
-		{
-			if ((DMS_MissionTimeoutResetRange>0) && {[_pos,DMS_MissionTimeoutResetRange] call DMS_fnc_IsPlayerNearby}) then
-			{
-				_x set [2,[diag_tickTime,_failTime]];
+				_x set [11, _AICount];
+				_timeElapsed = 0;
 
 				if (DMS_DEBUG) then
 				{
-					format["Mission Timeout Extended at %1 with timeout after %2 seconds. Position: %3",diag_tickTime,_failTime,_pos] call DMS_fnc_DebugLog;
+					format["MissionsMonitor_Dynamic :: Mission Timeout Extended to %1 more seconds; AI count changed from %2 to %3. Position: %4, MissionIndex: %5",_failTime, _prevAICount, _AICount,_pos,_forEachIndex] call DMS_fnc_DebugLog;
 				};
 			};
 		};
+
+		switch (true) do
+		{
+			case (_timeElapsed > DMS_MissionTimeoutResetFrequency):
+			{
+				if ([_pos,DMS_MissionTimeoutResetRange] call DMS_fnc_IsPlayerNearby) then
+				{
+					_x set [2,[diag_tickTime,_failTime]];
+
+					if (DMS_DEBUG) then
+					{
+						format["MissionsMonitor_Dynamic :: Mission Timeout Extended to %1 more seconds; player found within %2 meters. Position: %3, MissionIndex: %4",_failTime,DMS_MissionTimeoutResetRange,_pos,_forEachIndex] call DMS_fnc_DebugLog;
+					};
+				};
+			};
+
+			case (_timeElapsed > _failTime):
+			{
+				// Check to see if the timeout should be extended before ending the mission.
+				if ([_pos,DMS_MissionTimeoutResetRange] call DMS_fnc_IsPlayerNearby) then
+				{
+					_x set [2,[diag_tickTime,_failTime]];
+
+					throw format["Mission Timeout Extended to %1 more seconds; player found within %2 meters. Position: %3, MissionIndex: %4",_failTime,DMS_MissionTimeoutResetRange,_pos,_forEachIndex] call DMS_fnc_DebugLog;
+				};
+
+				//Nobody is nearby so just cleanup objects from here
+				private _cleanupList = ((_units call DMS_fnc_GetAllUnits)+_buildings+_vehs+_mines);
+
+				{
+					_cleanupList pushBack (_x select 0);
+				} forEach _crate_info_array;
+
+				private _prev = DMS_CleanUp_PlayerNearLimit;
+				DMS_CleanUp_PlayerNearLimit = 0;			// Temporarily set the limit to 0 since we want to delete all the stuff regardless of player presence.
+
+				_cleanupList call DMS_fnc_CleanUp;
+
+				DMS_CleanUp_PlayerNearLimit = _prev;
+
+
+				if (_missionSide == "bandit") then
+				{
+					DMS_RunningBMissionCount = DMS_RunningBMissionCount - 1;
+				};
+
+				{
+					_params = _x select 0;
+					_code = _x select 1;
+					if (_code isEqualType "") then
+					{
+						_code = compile _code;
+					};
+					_params call _code;
+				} forEach _onFailScripts;
+
+				[_missionName,_msgLose] call DMS_fnc_BroadcastMissionStatus;
+				[_markers,"lose"] call DMS_fnc_RemoveMarkers;
+
+				DMS_Mission_Arr deleteAt _forEachIndex;
+
+				throw format ["Mission (%1) Fail at %2 with message %3.",_missionName,_pos,_msgLose];
+			};
+		};
+
 
 		if (DMS_MarkerText_ShowAICount) then
 		{
@@ -272,14 +291,6 @@
 
 			_dot setMarkerText (format ["%1 (%2 %3 remaining)",_text,count (_units call DMS_fnc_GetAllUnits),DMS_MarkerText_AIName]);
 		};
-
-		/*
-		Coming soon...
-
-		{
-			_x call DMS_fnc_HandleMissionEvents;
-		} forEach _missionEvents;
-		*/
 
 
 		if !(_onMonitorEnd isEqualTo {}) then

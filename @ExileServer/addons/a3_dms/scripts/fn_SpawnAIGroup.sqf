@@ -8,7 +8,7 @@
 		_pos,					// ARRAY (positionATL): Position of AI
 		_count,					// SCALAR: Number of AI
 		_difficulty,			// STRING: AI Difficulty: "random","hardcore","difficult","moderate", or "easy"
-		_class,					// STRING: AI Class: "random","assault","MG","sniper" or "unarmed" OR [_class,_launcherType]
+		_class,					// STRING: AI Class: "random","assault","MG", or "sniper" OR [_class,_launcherType]
 		_side, 					// STRING: Only "bandit" is supported by default
 		_customGearSet			// (OPTIONAL) ARRAY: Manually defined AI gear. Refer to functional documentation of fn_SpawnAISoldier.sqf for more info: https://github.com/Defent/DMS_Exile/blob/master/%40ExileServer/addons/a3_dms/scripts/fn_SpawnAISoldier.sqf
 	] call DMS_fnc_SpawnAIGroup;
@@ -29,13 +29,6 @@ exitWith
 	diag_log format ["DMS ERROR :: Calling DMS_SpawnAIGroup with invalid parameters: %1",_this];
 	grpNull
 };
-
-if (_count < 1) exitWith
-{
-	diag_log format ["DMS ERROR :: Calling DMS_SpawnAIGroup with less than 1 _count! _this: %1",_this];
-	grpNull
-};
-
 
 if (DMS_DEBUG) then
 {

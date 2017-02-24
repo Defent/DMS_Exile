@@ -1,6 +1,6 @@
 /*
 	DMS Pre-init
-	Written by eraser1 (trainwreckdayz.com)
+	Created by eraser1
 */
 #define CALLFILE(FILE) call compile preprocessFileLineNumbers FILE;
 
@@ -19,6 +19,16 @@ DMS_Version = getText (configFile >> "CfgPatches" >> "a3_dms" >> "a3_DMS_version
 
 //Load main config
 CALLFILE("\x\addons\dms\config.sqf");
+
+// Let's be honest - you know it's gonna happen.
+if (isNil "DMS_AI_NamingType") then
+{
+	for "_i" from 0 to 99 do
+	{
+		diag_log format["!!!!!!!!MAKE SURE YOUR DMS CONFIG IS UPDATED!!!!!"];
+	};
+	DMS_ConfigLoaded = nil;
+};
 
 
 //Load map-specific configs. Should make it easier for people with multiple servers/maps. One PBO to rule them all...
@@ -120,3 +130,17 @@ DMS_CLIENT_fnc_hintSilent = compileFinal "hintSilent parsetext format['%1',_this
 // Initialize mission variables...
 CALLFILE("\x\addons\dms\missions\static_init.sqf");
 CALLFILE("\x\addons\dms\missions\mission_init.sqf");
+
+
+{
+	private _mission = _x select 0;
+
+	missionNamespace setVariable
+	[
+		format["DMS_SpecialMission_%1",_mission],
+		compileFinal preprocessFileLineNumbers (format ["\x\addons\DMS\missions\special\%1.sqf",_mission])
+	];
+
+	missionNamespace setVariable [format["DMS_SpecialMissionSpawnCount_%1",_mission], 0];
+	missionNamespace setVariable [format["DMS_SpecialMissionLastSpawn_%1",_mission], 0];
+} forEach DMS_SpecialMissions;

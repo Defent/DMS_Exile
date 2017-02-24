@@ -173,7 +173,7 @@ _VehicleClass = selectRandom _PossibleVehicleClass;
 
 
 //DMS_fnc_SpawnPersistentVehicle will automatically turn the pincode into a string and format it.
-_pinCode = round (random 9999);
+_pinCode = 1000 + round (random 8999);
 _vehicle = [_VehicleClass,[(_pos select 0) -30, (_pos select 1) -30],_pinCode] call DMS_fnc_SpawnPersistentVehicle;
 
 

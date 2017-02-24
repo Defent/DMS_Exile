@@ -23,9 +23,7 @@ if (DMS_DEBUG) then
 // Set mission frequencies from config
 DMS_BanditMissionTypesArray = [];
 {
-	private "_missionName";
-
-	_missionName = _x select 0;
+	private _missionName = _x select 0;
 
 	for "_i" from 1 to (_x select 1) do
 	{

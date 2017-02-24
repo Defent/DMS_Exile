@@ -5,13 +5,10 @@
 
 	Usage:
 	[
-		[
-			_killedUnit,
-			_killer
-		],
-		_side,				// "bandit" only for now
-		_type				// Type of AI: "soldier","static","vehicle","heli", etc.
+		_killedUnit,
+		_killer
 	] call DMS_fnc_OnKilled;
+	***Designed for use with the ArmA "MPKilled" EH. This function should not be explicitly called otherwise.***
 */
 if (DMS_DEBUG) then
 {

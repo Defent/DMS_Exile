@@ -68,4 +68,51 @@ if (diag_fps >= DMS_MinServerFPS && {_playerCount >= DMS_MinPlayerCount}) then
 			(format ["SelectMission :: Spawning of static mission ""%1"" complete!", _mission]) call DMS_fnc_DebugLog;
 		};
 	};
+
+
+	{
+		_x params
+		[
+			"_mission",
+			"_minPlayers",
+			"_maxPlayers",
+			"_maxTimesPerRestart",
+			"_timeBetween"
+		];
+
+		private _timesPerRestart = missionNamespace getVariable format["DMS_SpecialMissionSpawnCount_%1",_mission];
+
+		if
+		(
+			(_playerCount > _minPlayers) &&
+			{_playerCount < _maxPlayers} &&
+			{_maxTimesPerRestart < _timesPerRestart} &&
+			{(_time - (missionNamespace getVariable format["DMS_SpecialMissionLastSpawn_%1",_mission])) > _timeBetween}
+		) then
+		{
+			private _missionCode = missionNamespace getVariable format
+			[
+				"DMS_SpecialMission_%1",
+				"no"
+			];
+
+			if (_missionCode isEqualTo "no") then
+			{
+				diag_log format ["DMS ERROR :: Attempting to spawn a special mission that isn't precompiled! Parameters: %1", DMS_SpecialMissions deleteAt _forEachIndex];
+			}
+			else
+			{
+				missionNamespace setVariable [format["DMS_SpecialMissionSpawnCount_%1",_mission], _timesPerRestart+1];
+
+				call _missionCode;
+
+				missionNamespace setVariable [format["DMS_SpecialMissionLastSpawn_%1",_mission], _time];
+
+				if (DMS_DEBUG) then
+				{
+					(format ["SelectMission :: Spawned special mission %1. DMS_SpawnedSpecialMissions: %2", _mission, DMS_SpawnedSpecialMissions]) call DMS_fnc_DebugLog;
+				};
+			};
+		};
+	} forEach DMS_SpecialMissions;
 };

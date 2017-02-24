@@ -34,7 +34,8 @@
 			_onFailScripts,
 			_onMonitorStart,
 			_onMonitorEnd
-		]
+		],
+		_prevAICount
 	]
 
 	A semi-full breakdown can be found in fn_AddStaticMissionToMonitor.sqf
@@ -54,7 +55,8 @@
 		"_missionSide",
 		"_missionDifficulty",
 		"_missionEvents",
-		"_missionScripts"
+		"_missionScripts",
+		"_prevAICount"
 	])
 	then
 	{
@@ -194,62 +196,86 @@
 			throw format ["Mission (%1) Success at %2 with message %3.",_missionName,_missionPos,_msgWIN];
 		};
 
-		if ((diag_tickTime-_timeStarted)>_failTime) then
+
+		private _timeElapsed = diag_tickTime - _timeStarted;
+
+		if (DMS_ResetStaticMissionTimeoutOnKill) then
 		{
-			// Check to see if the timeout should be extended before ending the mission.
-			if ((DMS_StaticMissionTimeoutResetRange>0) && {[_missionPos,DMS_StaticMissionTimeoutResetRange] call DMS_fnc_IsPlayerNearby}) then
+			private _AICount = count (_inputAIUnits call DMS_fnc_GetAllUnits);
+
+			if (_AICount != _prevAICount) then
 			{
 				_x set [3,[diag_tickTime,_failTime]];
-
-				throw format ["Mission Timeout Extended at %1 with timeout after %2 seconds. Position: %3",diag_tickTime,_failTime,_missionPos];
-			};
-
-			//Nobody is nearby so just cleanup objects from here
-			_cleanupList = ((_inputAIUnits call DMS_fnc_GetAllUnits)+_buildings+_vehs+_mines);
-
-			{
-				_cleanupList pushBack (_x select 0);
-			} forEach _crate_info_array;
-
-			private _prev = DMS_CleanUp_PlayerNearLimit;
-			DMS_CleanUp_PlayerNearLimit = 0;			// Temporarily set the limit to 0 since we want to delete all the stuff regardless of player presence.
-
-			_cleanupList call DMS_fnc_CleanUp;
-
-			DMS_CleanUp_PlayerNearLimit = _prev;
-
-
-			{
-				_params = _x select 0;
-				_code = _x select 1;
-				if (_code isEqualType "") then
-				{
-					_code = compile _code;
-				};
-				_params call _code;
-			} forEach _onFailScripts;
-
-			[_missionName,_msgLose] call DMS_fnc_BroadcastMissionStatus;
-			[_markers,"lose"] call DMS_fnc_RemoveMarkers;
-
-			DMS_StaticMission_Arr deleteAt _forEachIndex;
-			DMS_RunningStaticMissions deleteAt _forEachIndex;
-
-			throw format ["Mission (%1) Fail at %2 with message %3.",_missionName,_missionPos,_msgLose];
-		};
-
-		if ((diag_tickTime-_timeStarted)>DMS_SMissionTimeoutResetFrequency) then
-		{
-			if ((DMS_StaticMissionTimeoutResetRange>0) && {[_missionPos,DMS_StaticMissionTimeoutResetRange] call DMS_fnc_IsPlayerNearby}) then
-			{
-				_x set [3,[diag_tickTime,_failTime]];
+				_x set [12, _AICount];
+				_timeElapsed = 0;
 
 				if (DMS_DEBUG) then
 				{
-					format["Static Mission Timeout Extended at %1 with timeout after %2 seconds. Position: %3",diag_tickTime,_failTime,_missionPos] call DMS_fnc_DebugLog;
+					format["MissionsMonitor_Static :: Static Mission Timeout Extended to %1 more seconds; AI count changed from %2 to %3. Position: %4, MissionIndex: %5",_failTime, _prevAICount, _AICount,_pos,_forEachIndex] call DMS_fnc_DebugLog;
 				};
 			};
 		};
+
+		switch (true) do
+		{
+			case (_timeElapsed > DMS_SMissionTimeoutResetFrequency):
+			{
+				if ([_missionPos,DMS_StaticMissionTimeoutResetRange] call DMS_fnc_IsPlayerNearby) then
+				{
+					_x set [3,[diag_tickTime,_failTime]];
+
+					if (DMS_DEBUG) then
+					{
+						format["MissionsMonitor_Static :: Static Mission Timeout Extended to %1 more seconds; player found within %2 meters. Position: %3, MissionIndex: %4",_failTime,DMS_StaticMissionTimeoutResetRange,_pos,_forEachIndex] call DMS_fnc_DebugLog;
+					};
+				};
+			};
+
+			case (_timeElapsed > _failTime):
+			{
+				// Check to see if the timeout should be extended before ending the mission.
+				if ((DMS_StaticMissionTimeoutResetRange>0) && {[_missionPos,DMS_StaticMissionTimeoutResetRange] call DMS_fnc_IsPlayerNearby}) then
+				{
+					_x set [3,[diag_tickTime,_failTime]];
+
+					throw format ["Mission Timeout Extended at %1 with timeout after %2 seconds. Position: %3",diag_tickTime,_failTime,_missionPos];
+				};
+
+				//Nobody is nearby so just cleanup objects from here
+				_cleanupList = ((_inputAIUnits call DMS_fnc_GetAllUnits)+_buildings+_vehs+_mines);
+
+				{
+					_cleanupList pushBack (_x select 0);
+				} forEach _crate_info_array;
+
+				private _prev = DMS_CleanUp_PlayerNearLimit;
+				DMS_CleanUp_PlayerNearLimit = 0;			// Temporarily set the limit to 0 since we want to delete all the stuff regardless of player presence.
+
+				_cleanupList call DMS_fnc_CleanUp;
+
+				DMS_CleanUp_PlayerNearLimit = _prev;
+
+
+				{
+					_params = _x select 0;
+					_code = _x select 1;
+					if (_code isEqualType "") then
+					{
+						_code = compile _code;
+					};
+					_params call _code;
+				} forEach _onFailScripts;
+
+				[_missionName,_msgLose] call DMS_fnc_BroadcastMissionStatus;
+				[_markers,"lose"] call DMS_fnc_RemoveMarkers;
+
+				DMS_StaticMission_Arr deleteAt _forEachIndex;
+				DMS_RunningStaticMissions deleteAt _forEachIndex;
+
+				throw format ["Mission (%1) Fail at %2 with message %3.",_missionName,_missionPos,_msgLose];
+			};
+		};
+
 
 		if (DMS_MarkerText_ShowAICount_Static) then
 		{
@@ -263,14 +289,6 @@
 
 			_dot setMarkerText (format ["%1 (%2 %3 remaining)",_text,count (_inputAIUnits call DMS_fnc_GetAllUnits),DMS_MarkerText_AIName]);
 		};
-
-		/*
-		Coming soon...
-
-		{
-			_x call DMS_fnc_HandleMissionEvents;
-		} forEach _missionEvents;
-		*/
 
 
 		if (DMS_AllowStaticReinforcements) then
