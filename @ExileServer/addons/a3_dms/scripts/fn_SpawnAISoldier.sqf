@@ -7,7 +7,7 @@
 	[
 		_group,					// GROUP: Group the AI will belong to
 		_pos,					// ARRAY (positionATL): Position of AI
-		_class,					// STRING: Classname: "random","assault","MG", or "sniper". Use "custom" to use "_customGearSet"
+		_class,					// STRING: Classname: "random","assault","MG", or "sniper".
 		_difficulty,			// STRING: Difficulty: "random","static","hardcore","difficult","moderate", or "easy"
 		_side, 					// STRING: "bandit" only by default
 		_type,					// STRING: Type of AI: "soldier","static","vehicle","heli", etc.
@@ -101,19 +101,6 @@ removeUniform 					_unit;
 removeVest 						_unit;
 removeBackpackGlobal 			_unit;
 
-// Give default items
-{
-	// "Why doesn't linkItem work with any of these? Because fuck you, that's why" - BIS
-	if (_x in ["Binocular","Rangefinder","Laserdesignator","Laserdesignator_02","Laserdesignator_03"]) then
-	{
-		_unit addWeapon _x;
-	}
-	else
-	{
-		_unit linkItem _x;
-	};
-} forEach DMS_ai_default_items;
-
 
 if (_class in DMS_ai_SupportedRandomClasses) then
 {
@@ -137,14 +124,22 @@ switch (DMS_AI_NamingType) do
 };
 
 
-if !(_class in DMS_ai_SupportedClasses) exitWith
-{
-	diag_log format ["DMS ERROR :: DMS_SpawnAISoldier called with unsupported _class: %1 | _this: %2",_class,_this];
-	deleteVehicle _unit;
-};
-
 if (_customGearSet isEqualTo []) then
 {
+	// Make sure the "_class" is supported. This check is moved here to maintain backwards compatibility.
+	if !(_class in DMS_ai_SupportedClasses) exitWith
+	{
+		diag_log format ["DMS ERROR :: DMS_SpawnAISoldier called with unsupported _class: %1 | _this: %2",_class,_this];
+	};
+
+
+	// Add Clothes first to make sure the unit can store everything...
+	_unit addHeadgear 		(selectRandom (missionNamespace getVariable [format ["DMS_%1_helmets",_class],DMS_assault_helmets]));
+	_unit forceAddUniform 	(selectRandom (missionNamespace getVariable [format ["DMS_%1_clothes",_class],DMS_assault_clothes]));
+	_unit addVest 			(selectRandom (missionNamespace getVariable [format ["DMS_%1_vests",_class],DMS_assault_vests]));
+	_unit addBackpackGlobal	(selectRandom (missionNamespace getVariable [format ["DMS_%1_backpacks",_class],DMS_assault_backpacks]));
+
+
 	// Equipment (Stuff that goes in the toolbelt slots)
 	{
 		if (_x in ["Binocular","Rangefinder","Laserdesignator","Laserdesignator_02","Laserdesignator_03"]) then
@@ -157,12 +152,6 @@ if (_customGearSet isEqualTo []) then
 		};
 	} forEach (missionNamespace getVariable [format ["DMS_%1_equipment",_class],[]]);
 
-
-	// Clothes
-	_unit addHeadgear 		(selectRandom (missionNamespace getVariable [format ["DMS_%1_helmets",_class],DMS_assault_helmets]));
-	_unit forceAddUniform 	(selectRandom (missionNamespace getVariable [format ["DMS_%1_clothes",_class],DMS_assault_clothes]));
-	_unit addVest 			(selectRandom (missionNamespace getVariable [format ["DMS_%1_vests",_class],DMS_assault_vests]));
-	_unit addBackpackGlobal	(selectRandom (missionNamespace getVariable [format ["DMS_%1_backpacks",_class],DMS_assault_backpacks]));
 
 
 	// Random items that can be added to the unit's inventory, such as food, meds, etc.
@@ -399,13 +388,26 @@ else
 	] call ExileServer_system_thread_addTask;
 };
 
+// Give default items
 {
-	_unit setSkill _x;
-} forEach (missionNamespace getVariable [format["DMS_ai_skill_%1",_difficulty],[]]);
+	// "Why doesn't linkItem work with any of these? Because fuck you, that's why" - BIS
+	if (_x in ["Binocular","Rangefinder","Laserdesignator","Laserdesignator_02","Laserdesignator_03"]) then
+	{
+		_unit addWeapon _x;
+	}
+	else
+	{
+		_unit linkItem _x;
+	};
+} forEach DMS_ai_default_items;
+
+
 
 
 // Soldier killed event handler
 _unit addMPEventHandler ["MPKilled",'if (isServer) then {_this call DMS_fnc_OnKilled;};'];
+
+
 
 // Remove ramming damage from players.
 // Will not work if unit is not local (offloaded)
@@ -427,6 +429,11 @@ if (DMS_ai_disable_ramming_damage) then
 };
 
 
+// Tweak difficulty stuff.
+{
+	_unit setSkill _x;
+} forEach (missionNamespace getVariable [format["DMS_ai_skill_%1",_difficulty],[]]);
+
 if (_difficulty == "hardcore") then
 {
 	// Make him a little bit harder ;)
@@ -445,6 +452,7 @@ _unit setCustomAimCoef (missionNamespace getVariable [format["DMS_AI_AimCoef_%1"
 _unit enableStamina (missionNamespace getVariable [format["DMS_AI_EnableStamina_%1",_difficulty], true]);
 
 
+
 if (_type=="Soldier") then
 {
 	_unit setVariable ["DMS_AISpawnPos",_pos];
@@ -457,6 +465,7 @@ if (_type == "Paratroopers") then
 	_type = "Soldier";
 	_unit addBackpackGlobal "B_Parachute";
 };
+
 
 // Set info variables
 _unit setVariable ["DMS_AISpawnTime", time];
