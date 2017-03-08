@@ -80,21 +80,25 @@ if (diag_fps >= DMS_MinServerFPS && {_playerCount >= DMS_MinPlayerCount}) then
 			"_timeBetween"
 		];
 
-		private _timesPerRestart = missionNamespace getVariable format["DMS_SpecialMissionSpawnCount_%1",_mission];
+		private _timesSpawned = missionNamespace getVariable format["DMS_SpecialMissionSpawnCount_%1",_mission];
 
 		if
 		(
 			(_playerCount > _minPlayers) &&
 			{_playerCount < _maxPlayers} &&
-			{_maxTimesPerRestart < _timesPerRestart} &&
+			{_maxTimesPerRestart > _timesSpawned} &&
 			{(_time - (missionNamespace getVariable format["DMS_SpecialMissionLastSpawn_%1",_mission])) > _timeBetween}
 		) then
 		{
-			private _missionCode = missionNamespace getVariable format
+			private _missionCode =
 			[
-				"DMS_SpecialMission_%1",
-				"no"
-			];
+				missionNamespace getVariable format
+				[
+					"DMS_SpecialMission_%1",
+					_mission
+				]
+			] param [0, "no",[{}]];
+
 
 			if (_missionCode isEqualTo "no") then
 			{
@@ -102,7 +106,7 @@ if (diag_fps >= DMS_MinServerFPS && {_playerCount >= DMS_MinPlayerCount}) then
 			}
 			else
 			{
-				missionNamespace setVariable [format["DMS_SpecialMissionSpawnCount_%1",_mission], _timesPerRestart+1];
+				missionNamespace setVariable [format["DMS_SpecialMissionSpawnCount_%1",_mission], _timesSpawned+1];
 
 				call _missionCode;
 
