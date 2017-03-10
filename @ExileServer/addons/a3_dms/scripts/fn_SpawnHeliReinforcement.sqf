@@ -131,7 +131,7 @@ private _units = (fullCrew [_heli, "", true]) apply
             	_unit setVariable ["DMS_AssignedVeh",_heli];
             };
 
-        	_unit moveInTurret [_heli, _x];
+        	_unit moveInTurret [_heli, _turretPath];
         };
 
         case "cargo":

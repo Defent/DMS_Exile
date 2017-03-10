@@ -1,4 +1,4 @@
-![ArmA 1.66](https://img.shields.io/badge/Arma-1.66-blue.svg) ![Exile 1.0.2 "Kohlrabi"](https://img.shields.io/badge/Exile-1.0.2%20Kohlrabi-C72651.svg) ![DMS Version](https://img.shields.io/badge/DMS%20Version-2017--02--25-blue.svg)
+![ArmA 1.66](https://img.shields.io/badge/Arma-1.66-blue.svg) ![Exile 1.0.2 "Kohlrabi"](https://img.shields.io/badge/Exile-1.0.2%20Kohlrabi-C72651.svg) ![DMS Version](https://img.shields.io/badge/DMS%20Version-2017--03--10-blue.svg)
 
 
 # To the User:
