@@ -105,7 +105,14 @@ if (!(_grpUnits isEqualTo []) && {(leader _grp) isEqualTo _unit}) then
 private _av = _unit getVariable ["DMS_AssignedVeh",objNull];
 if (!isNull _av) then
 {
-	_av enableSimulationGlobal true;
+	if(dynamicSimulationSystemEnabled)then
+	{
+		_av enableDynamicSimulation true;
+	}
+	else
+	{
+		_av enableSimulationGlobal true;
+	};
 
 	// Determine whether or not the vehicle has any active crew remaining.
 	private _memCount = {[(alive _x),false] select (_unit isEqualTo _x);} count (crew _av);
@@ -149,8 +156,16 @@ if (!isNull _av) then
 				[_av, 1] remoteExecCall ["lock", _av];
 			};
 
-			_av call ExileServer_system_simulationMonitor_addVehicle;
+			//_av call ExileServer_system_simulationMonitor_addVehicle;
 
+			if(dynamicSimulationSystemEnabled)then
+			{
+				_av enableDynamicSimulation true;
+			}
+			else
+			{
+				_av enableSimulationGlobal true;
+			};
 			_av setVariable ["ExileMoney",0,true];
 			_av setVariable ["ExileIsPersistent", false];
 			_av addMPEventHandler ["MPKilled", { if (isServer) then {_this call ExileServer_object_vehicle_event_onMPKilled;};}];
