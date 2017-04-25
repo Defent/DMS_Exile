@@ -104,8 +104,14 @@ if !(_crate getVariable ["DMS_CrateGodMode",DMS_GodmodeCrates]) then
 {
 	_crate allowDamage true;
 };
-
-_crate enableSimulationGlobal true;
+if(dynamicSimulationSystemEnabled)then
+{
+	_crate enableDynamicSimulation true;
+}
+else
+{
+	_crate enableSimulationGlobal true;
+};
 if (_crate getVariable ["DMS_CrateEnableRope",DMS_EnableBoxMoving]) then
 {
 	_crate enableRopeAttach true;
