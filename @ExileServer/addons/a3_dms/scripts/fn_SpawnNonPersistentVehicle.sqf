@@ -85,7 +85,14 @@ if (!isNil "AVS_Version") then
 _vehObj lock 2;
 _vehObj allowDamage false;
 _vehObj enableRopeAttach false;
-_vehObj enableSimulationGlobal false;
+if(dynamicSimulationSystemEnabled)then
+{
+	_vehObj enableDynamicSimulation true;
+}
+else
+{
+	_vehObj enableSimulationGlobal false;
+};
 
 
 if (DMS_DEBUG) then

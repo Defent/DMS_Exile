@@ -49,7 +49,14 @@ private _objs = _export apply
 	_object setPosASL (_x select 1);
 	_object setVectorDirAndUp (_x select 2);
 
-	_object enableSimulationGlobal ((_x select 3) select 0);
+	if(dynamicSimulationSystemEnabled)then
+	{
+		_object enableDynamicSimulation true;
+	}
+	else
+	{
+		_object enableSimulationGlobal ((_x select 3) select 0);
+	};
 	_object allowDamage ((_x select 3) select 1);
 
 	_object;
