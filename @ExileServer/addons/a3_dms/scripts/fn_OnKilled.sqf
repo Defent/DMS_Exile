@@ -105,11 +105,7 @@ if (!(_grpUnits isEqualTo []) && {(leader _grp) isEqualTo _unit}) then
 private _av = _unit getVariable ["DMS_AssignedVeh",objNull];
 if (!isNull _av) then
 {
-	if(dynamicSimulationSystemEnabled)then
-	{
-		_av enableDynamicSimulation true;
-	}
-	else
+	if!(dynamicSimulationEnabled _av)then
 	{
 		_av enableSimulationGlobal true;
 	};
@@ -156,14 +152,9 @@ if (!isNull _av) then
 				[_av, 1] remoteExecCall ["lock", _av];
 			};
 
-			//_av call ExileServer_system_simulationMonitor_addVehicle;
-
-			if(dynamicSimulationSystemEnabled)then
+			if!(dynamicSimulationEnabled _av)then
 			{
-				_av enableDynamicSimulation true;
-			}
-			else
-			{
+				_av call ExileServer_system_simulationMonitor_addVehicle;
 				_av enableSimulationGlobal true;
 			};
 			_av setVariable ["ExileMoney",0,true];
