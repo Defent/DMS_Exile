@@ -164,8 +164,10 @@
 				{
 					_x lock 1;
 				};
-
-				//_x call ExileServer_system_simulationMonitor_addVehicle;
+				if!(dynamicSimulationEnabled _x)then
+				{
+					_x call ExileServer_system_simulationMonitor_addVehicle;
+				};
 			} forEach _vehs;
 
 			{
