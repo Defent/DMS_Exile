@@ -122,6 +122,7 @@ ___
 - [William from Refugees of the Fallen](http://rtfgaming.com/) for the amazing slums static mission base and ideas :)
 - [DONKEYPUNCH](https://github.com/donkeypunchepoch) for everything on the [February 17th 2016 commit](https://github.com/Defent/DMS_Exile#february-17-2016-600-pm-cst-america) ;)
 - Everbody's feedback on [the DMS thread on exile forums](http://www.exilemod.com/topic/61-dms-defents-mission-system/?do=findComment&comment=242)
+- Finally, the entire ExileMod team, without them, you wouldn't have us. Show them some love!
 
 #### Testers/Reporters:
 - [William from Refugees of the Fallen](http://rtfgaming.com/)
