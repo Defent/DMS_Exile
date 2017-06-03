@@ -1,0 +1,10 @@
+DMS_MinDistFromWestBorder			= 500;
+DMS_MinDistFromEastBorder			= 500;
+DMS_MinDistFromSouthBorder			= 500;
+DMS_MinDistFromNorthBorder			= 500;
+DMS_MinSurfaceNormal				= 0.8;
+DMS_PlayerNearBlacklist				= 500;
+DMS_SpawnZoneNearBlacklist			= 1500;
+DMS_TraderZoneNearBlacklist			= 1500;
+DMS_MissionNearBlacklist			= 2500;
+DMS_WaterNearBlacklist				= 100;
