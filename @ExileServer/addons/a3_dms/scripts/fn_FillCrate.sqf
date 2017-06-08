@@ -150,7 +150,7 @@ if ((_lootValues isEqualType []) && {!((_lootValues select 1) isEqualType {})}) 
 	private _backpackValues = _lootValues select 2;
 	private _backpackCount = 0;
 	private _backpacks =
-		if ((_backpackValues) isEqualType []) then
+		if (_backpackValues isEqualType []) then
 		{
 			_backpackCount	= _backpackValues select 0;
 			_backpackValues select 1

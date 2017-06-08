@@ -47,7 +47,7 @@ else
 	{
 		if ((count _pos)<2) then
 		{
-			throw ("(ERROR UNDEFINED POSITION)");
+			throw ("(UNDEFINED POSITION)");
 		};
 
 		if ((count _pos) isEqualTo 2) then

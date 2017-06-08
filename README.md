@@ -58,7 +58,7 @@ It is highly recommended that you add
 !="(_this select 0) execVM \"\A3\Structures_F\Wrecks\Scripts\Wreck_Heli_Attack_01.sqf\""
 ```
 
-at ***the END of the line that starts with "7 exec" in scripts.txt*** . [Here is the pastebin](http://pastebin.com/W8bH252U).
+at ***the END of the line that starts with "7 exec" in scripts.txt*** (if it exists). [Here is the pastebin](http://pastebin.com/W8bH252U).
 
 ***AND:***
 

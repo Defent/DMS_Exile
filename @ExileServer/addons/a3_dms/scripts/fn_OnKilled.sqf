@@ -127,7 +127,7 @@ if (!isNull _av) then
 			] select (_av isKindOf "StaticWeapon"))
 		) then
 		{
-			_av setDamage 1;
+			_av setDamage [1, false];
 			_av setVariable ["ExileDiedAt",time];
 
 			[if (_av isKindOf "Air") then {30} else {5}, {_this enableSimulationGlobal false}, _av, false, false] call ExileServer_system_thread_addTask;
