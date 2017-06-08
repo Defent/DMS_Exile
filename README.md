@@ -2,23 +2,23 @@
 
 
 # To the User:
-####Read the instructions carefully. Before leaving any questions regarding DMS, please read through the [DMS "config.sqf"](https://github.com/Defent/DMS_Exile/blob/master/%40ExileServer/addons/a3_dms/config.sqf?ts=4); the majority of the questions we receive are answered (directly or indirectly) by the config.
+#### Read the instructions carefully. Before leaving any questions regarding DMS, please read through the [DMS "config.sqf"](https://github.com/Defent/DMS_Exile/blob/master/%40ExileServer/addons/a3_dms/config.sqf?ts=4); the majority of the questions we receive are answered (directly or indirectly) by the config.
 
-####Disclaimer:
+#### Disclaimer:
 Defent's Mission System (DMS) is written from the ground up to be an efficient, easy to install, and vastly customizable mission system for the ArmA 3 [Exile Mod](http://www.exilemod.com/).
 
 However, creating such a mission system takes a lot of time and testing. We (the authors of DMS) are not perfect, and as a result, there may be bugs, glitches, and/or errors within DMS. We appreciate your co-operation in identifying and resolving such issues to improve DMS; however we are not liable for any issues resulting from the usage of DMS on/by your server. We are also not liable to help you in resolving any issues that may arise.
 
 You are welcome to port DMS or any of its functions for any other mod or (legal) purposes. For more information read the License Overview below:
 
-###License Overview:
+### License Overview:
 This work is protected by [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)](http://creativecommons.org/licenses/by-nc-sa/4.0/). By using, downloading, or copying any of the work contained, you agree to the license included.
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">DMS</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/Defent/DMS_Exile" property="cc:attributionName" rel="cc:attributionURL">Defent and eraser1</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.<br />Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="https://github.com/Defent/DMS_Exile" rel="dct:source">https://github.com/Defent/DMS_Exile</a>.
 
 The following overview is a human-readable summary of (and not a substitute for) [the full license](http://creativecommons.org/licenses/by-nc-sa/4.0/legalcode).
 
-####You are free to:
+#### You are free to:
 
 **Share** — copy and redistribute the material in any medium or format.
 
@@ -26,7 +26,7 @@ The following overview is a human-readable summary of (and not a substitute for)
 
 
 
-####Under the following terms:
+#### Under the following terms:
 
 **Attribution** — You must give **appropriate credit**, provide a link to the license, and **indicate if changes were made**. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
 
@@ -38,7 +38,7 @@ The following overview is a human-readable summary of (and not a substitute for)
 
 
 
-####Notices:
+#### Notices:
 
 You do not have to comply with the license for elements of the material in the public domain or where your use is permitted by an applicable **exception or limitation**.
 No warranties are given. The license may not give you all of the permissions necessary for your intended use. For example, other rights such as **publicity, privacy, or moral rights** may limit how you use the material.

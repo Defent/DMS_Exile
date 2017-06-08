@@ -51,7 +51,11 @@ private _objs = _export apply
 {
 	// Create the object
 	private _obj = createVehicle [_x select 0, [0,0,0], [], 0, "CAN_COLLIDE"];
-	_obj enableSimulationGlobal true;
+
+	if (dynamicSimulationSystemEnabled) then
+	{
+		_obj enableDynamicSimulation true;
+	};
 
 	// Calculate the object's position using provided relative position
 	private _objPos = [_pos,_x select 1] call DMS_fnc_CalcPos;

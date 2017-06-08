@@ -52,6 +52,11 @@ private _objs = _export apply
 	{
 		_obj setDir (_x select 2);
 		_obj setPosATL _pos;
+
+		if(dynamicSimulationSystemEnabled)then
+		{
+			_obj enableDynamicSimulation true;
+		};
 	}
 	else
 	{
