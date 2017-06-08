@@ -46,8 +46,6 @@ if ((isNil "_export") || {!(_export isEqualType [])}) exitWith
 private _objs = _export apply
 {
 	private _obj = createVehicle [_x select 0, [0,0,0], [], 0, "CAN_COLLIDE"];
-	_obj enableSimulationGlobal false;
-	
 	private _pos = _x select 1;
 
 	if (_x select 4) then
@@ -59,6 +57,7 @@ private _objs = _export apply
 	{
 		_obj setPosATL _pos;
 		_obj setVectorDirAndUp (_x select 3);
+		_obj enableSimulationGlobal false;
 	};
 
 	_obj;
