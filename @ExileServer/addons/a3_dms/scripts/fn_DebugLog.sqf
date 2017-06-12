@@ -10,7 +10,7 @@
 */
 
 _this = format ['%1 |::|::| (DMS_Version: "%4" | time: %2 | diag_tickTime: %5 | %3 FPS)',_this,time,diag_fps,DMS_Version,diag_tickTime];
-"ARMA_LOG" callExtension format ["DMS_DEBUG:%1",_this];
+['DMS_DEBUG',_this] call FNC_A3_CUSTOMLOG;
 diag_log format ["DMS_DEBUG :: %1",_this];
 
 if (!isNil "MAR_fnc_log") then 			// mARMA logging
