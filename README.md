@@ -78,8 +78,7 @@ after "7 createVehicle"
 
 <br>
 ## infiSTAR:
-* If you are using infiSTAR and want to keep ```CGM = true;```, then set ```UMW = true;```.
-* Add ```'O_HMG_01_high_F'``` to ```_VehicleWhiteList```, as well as any other vehicles you add to DMS that are not whitelisted.
+* If you want to enable "VehicleWhiteList_check", make sure to add ```'O_HMG_01_high_F'``` to ```_VehicleWhiteList```, as well as any other vehicles you add to DMS that are not whitelisted.
 
 <br><br>
 ### Vilayer or other Game Server Providers Instructions:
