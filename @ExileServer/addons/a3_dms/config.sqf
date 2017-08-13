@@ -306,7 +306,7 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 
 
 /* AI Settings */
-	DMS_AI_Classname					= "O_recon_F";				// Since some of you wanted this...
+	DMS_AI_Classname					= "O_Soldier_unarmed_F";				// Since some of you wanted this...
 
 	DMS_AI_NamingType					= 0;						// This specifies the "naming scheme" for the AI. 0 corresponds with the default ArmA names; 1 means you want a DMS name (eg: [DMS BANDIT SOLDIER 123]); 2 means you want to generate a name from a list of first and last names (DMS_AI_FirstNames, DMS_AI_LastNames).
 	DMS_AI_FirstNames =					[							// List of "first names" that an AI can have. Only used when DMS_AI_NamingType = 2.
