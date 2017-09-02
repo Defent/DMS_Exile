@@ -104,18 +104,12 @@ if !(_crate getVariable ["DMS_CrateGodMode",DMS_GodmodeCrates]) then
 {
 	_crate allowDamage true;
 };
-if(dynamicSimulationSystemEnabled)then
-{
-	_crate enableDynamicSimulation true;
-}
-else
-{
-	_crate enableSimulationGlobal true;
-};
 if (_crate getVariable ["DMS_CrateEnableRope",DMS_EnableBoxMoving]) then
 {
 	_crate enableRopeAttach true;
 };
+
+_crate enableSimulationGlobal true;
 
 
 if ((_lootValues isEqualType []) && {!((_lootValues select 1) isEqualType {})}) then
@@ -309,9 +303,9 @@ if (DMS_RareLoot) then
 // You can choose if you want to enable/disable smoke individually using setVariable.
 if (_crate getVariable ["DMS_AllowSmoke", true]) then
 {
-	if (DMS_SpawnBoxSmoke && {sunOrMoon == 1}) then
+	if (DMS_SpawnBoxSmoke && {sunOrMoon isEqualTo 1}) then
 	{
-		private _marker = "SmokeShellPurple" createVehicle getPosATL _crate;
+		private _marker = (_crate getVariable ["DMS_CrateSmokeClassname", DMS_DefaultSmokeClassname]) createVehicle getPosATL _crate;
 		_marker setPosATL (getPosATL _crate);
 		_marker attachTo [_crate,[0,0,0]];
 	};

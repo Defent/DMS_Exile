@@ -167,6 +167,7 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 	DMS_HideBox							= false;					// "Hide" the box from being visible by players until the mission is completed.
 	DMS_EnableBoxMoving					= true;						// Whether or not to allow the box to move and/or be lifted by choppers.
 	DMS_SpawnBoxSmoke					= true;						// Spawn a smoke grenade on mission box upon misson completion during daytime
+	DMS_DefaultSmokeClassname 			= "SmokeShellPurple";		// Classname of the smoke you want to spawn.
 	DMS_SpawnBoxIRGrenade				= true;						// Spawn an IR grenade on mission box upon misson completion during nighttime
 	/*Crate/Box settings*/
 

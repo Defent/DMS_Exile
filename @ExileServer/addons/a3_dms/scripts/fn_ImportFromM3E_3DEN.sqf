@@ -52,14 +52,7 @@ private _objs = _export apply
 	private _object = (_x select 0) createVehicle [0,0,0];
 	_object setDir (_x select 2);
 	_object setPosATL (_center vectorAdd (_x select 1));
-	if(dynamicSimulationSystemEnabled)then
-	{
-		_object enableDynamicSimulation true;
-	}
-	else
-	{
-		_object enableSimulationGlobal ((_x select 3) select 0);
-	};
+	_object enableSimulationGlobal ((_x select 3) select 0);
 	_object allowDamage ((_x select 3) select 1);
 	_object;
 };

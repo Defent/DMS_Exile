@@ -24,10 +24,7 @@ if (_freeze) then
 {
     {
         _x enableSimulationGlobal false;
-		if!(dynamicSimulationEnabled (vehicle _x))then
-		{
-			(vehicle _x) enableSimulationGlobal false;
-		};
+        (vehicle _x) enableSimulationGlobal false;
     } forEach (units _group);
 
     _group setVariable ["DMS_isGroupFrozen",true];
@@ -36,11 +33,8 @@ else
 {
     {
         _x enableSimulationGlobal true;
-		if!(dynamicSimulationEnabled (vehicle _x))then
-		{
-			(vehicle _x) enableSimulationGlobal true;
-		};
+        (vehicle _x) enableSimulationGlobal true;
     } forEach (units _group);
-    
+
     _group setVariable ["DMS_isGroupFrozen",false];
 };

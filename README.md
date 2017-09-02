@@ -1,4 +1,4 @@
-![ArmA 1.68](https://img.shields.io/badge/Arma-1.68-blue.svg) ![Exile 1.0.3 "Lemon"](https://img.shields.io/badge/Exile-1.0.3%20Lemon-C72651.svg) ![DMS Version](https://img.shields.io/badge/DMS%20Version-2017--06--08-blue.svg)
+![ArmA 1.68](https://img.shields.io/badge/Arma-1.68-blue.svg) ![Exile 1.0.3 "Lemon"](https://img.shields.io/badge/Exile-1.0.3%20Lemon-C72651.svg) ![DMS Version](https://img.shields.io/badge/DMS%20Version-2017--09--02-blue.svg)
 
 
 # To the User:
@@ -119,8 +119,9 @@ ___
 - [maca134](http://maca134.co.uk/portfolio/m3editor-arma-3-map-editor/) for M3Editor Stuff
 - [Darth Rogue from SOA](http://soldiersofanarchy.net/) for the awesome base for the first DMS static mission :D
 - [William from Refugees of the Fallen](http://rtfgaming.com/) for the amazing slums static mission base and ideas :)
-- [DONKEYPUNCH](https://github.com/donkeypunchepoch) for everything on the [February 17th 2016 commit](https://github.com/Defent/DMS_Exile#february-17-2016-600-pm-cst-america) ;)
-- Everbody's feedback on [the DMS thread on exile forums](http://www.exilemod.com/topic/61-dms-defents-mission-system/?do=findComment&comment=242)
+- [DONKEYPUNCH](https://github.com/donkeypunchepoch) for everything on the [February 17th 2016 commit](https://github.com/Defent/DMS_Exile/wiki/Changelog#february-17-2016-600-pm-cst-america) ;)
+- [MGTDB](https://github.com/MGTDB) for the plethora of fixes, testing, and all-around doing our work for us :P
+- Everybody's feedback on [the DMS thread on exile forums](http://www.exilemod.com/topic/61-dms-defents-mission-system/?do=findComment&comment=242)
 
 #### Testers/Reporters:
 - [William from Refugees of the Fallen](http://rtfgaming.com/)
