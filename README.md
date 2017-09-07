@@ -1,4 +1,4 @@
-![ArmA 1.68](https://img.shields.io/badge/Arma-1.68-blue.svg) ![Exile 1.0.3 "Lemon"](https://img.shields.io/badge/Exile-1.0.3%20Lemon-C72651.svg) ![DMS Version](https://img.shields.io/badge/DMS%20Version-2017--09--02-blue.svg)
+![ArmA 1.68](https://img.shields.io/badge/Arma-1.68-blue.svg) ![Exile 1.0.3 "Lemon"](https://img.shields.io/badge/Exile-1.0.3%20Lemon-C72651.svg) ![DMS Version](https://img.shields.io/badge/DMS%20Version-2017--09--07-blue.svg)
 
 
 # To the User:

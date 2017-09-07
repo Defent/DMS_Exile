@@ -43,7 +43,7 @@ try
 
 	private _return = _parameters call _mission;
 
-	if ((!isNil "_return") && {_return isEqualTo "delay"}) exitWith
+	if ((!isNil "_return") && {_return isEqualTo "delay"}) then
 	{
 		DMS_MissionCount = DMS_MissionCount - 1;
 
@@ -60,15 +60,17 @@ try
 		{
 			(format ["SpawnStaticMission :: Mission ""%1"" requested delay",_missionType]) call DMS_fnc_DebugLog;
 		};
-	};
-
-	DMS_StaticMissionDelay = DMS_TimeBetweenStaticMissions call DMS_fnc_SelectRandomVal;
-	DMS_StaticMissionLastStart = diag_tickTime;
-	DMS_RunningStaticMissions pushBack _missionType;
-
-	if (DMS_DEBUG) then
+	}
+	else
 	{
-		(format ["SpawnStaticMission :: Spawned mission %1 with parameters (%2) | DMS_StaticMissionDelay set to %3 seconds", _missionType, _parameters, DMS_StaticMissionDelay]) call DMS_fnc_DebugLog;
+		DMS_StaticMissionDelay = DMS_TimeBetweenStaticMissions call DMS_fnc_SelectRandomVal;
+		DMS_StaticMissionLastStart = diag_tickTime;
+		DMS_RunningStaticMissions pushBack _missionType;
+
+		if (DMS_DEBUG) then
+		{
+			(format ["SpawnStaticMission :: Spawned mission %1 with parameters (%2) | DMS_StaticMissionDelay set to %3 seconds", _missionType, _parameters, DMS_StaticMissionDelay]) call DMS_fnc_DebugLog;
+		};
 	};
 }
 catch
