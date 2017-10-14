@@ -48,6 +48,7 @@ DMS_Enable_RankChange = false; // Whether or not to use Rank Changes. (Required 
 DMS_Add_AIKill2DB = false;  // Adds killstat for player in the database ;)
 
 DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a scheduled environment. Setting to true may help with lag when certain missions spawn.
+//Note, if you have the above to true, you need to set DMS_ai_freezeOnSpawn = false; and DMS_ai_share_info = true;
 
 /* Mission System Settings */
 	/*General settings for dynamic missions*/
