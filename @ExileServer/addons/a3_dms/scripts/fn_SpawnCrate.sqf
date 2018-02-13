@@ -29,7 +29,7 @@ if !(isClass (configFile >> "CfgVehicles" >> _crateClassName)) exitWith
 	objNull
 };
 
-private _spawnATL = if ((count _this)>2) then {_this select 2} else {true};
+private _spawnATL = param [2, true, [true]];
 
 private _crate = createVehicle [_crateClassName,_pos,[], 0, "CAN_COLLIDE"];
 

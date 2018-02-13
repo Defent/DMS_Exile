@@ -123,7 +123,7 @@ try
 		throw format["_missionObjs |%1|",_missionObjs];
 	};
 
-	private _mines = if ((count _missionObjs)>3) then { _missionObjs param [3,[],[[]]] } else { [] };
+	private _mines = _missionObjs param [3,[],[[]]];
 
 	// Don't spawn a minefield if there is one already defined in _missionObjs.
 	if (DMS_SpawnMinefieldForEveryMission && {_mines isEqualTo []}) then
@@ -155,7 +155,7 @@ try
 	])
 	then
 	{
-		throw format["_onEndingScripts |%1|",_onEndingScripts];
+		//throw format["_onEndingScripts |%1|",_onEndingScripts];
 	};
 
 	private _unitCount = count (_units call DMS_fnc_GetAllUnits);

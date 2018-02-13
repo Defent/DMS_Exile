@@ -49,7 +49,7 @@ catch
 if (_exit) exitWith {false};
 
 
-private _behavior = if ((count _this)>3) then {_this select 3;} else {"COMBAT"};
+private _behavior = param [3, "COMBAT", [""]];
 
 
 _group setCombatMode "RED";

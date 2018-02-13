@@ -37,25 +37,12 @@ try
 	};
 
 
-	private _parameters = if ((count _this)>1) then {_this select 1} else {[]};
-
-	DMS_MissionCount = DMS_MissionCount + 1;
+	private _parameters = param [1, []];
 
 	private _return = _parameters call _mission;
 
 	if ((!isNil "_return") && {_return isEqualTo "delay"}) then
 	{
-		DMS_MissionCount = DMS_MissionCount - 1;
-
-		if (DMS_SpawnMissions_Scheduled) then
-		{
-			[60, DMS_fnc_SpawnStaticMission, [_missionType], false] call ExileServer_system_thread_addTask;
-		}
-		else
-		{
-			[60, {[_this, DMS_fnc_SpawnStaticMission] execFSM "exile_server\fsm\call.fsm";}, [_missionType], false] call ExileServer_system_thread_addTask;
-		};
-
 		if (DMS_DEBUG) then
 		{
 			(format ["SpawnStaticMission :: Mission ""%1"" requested delay",_missionType]) call DMS_fnc_DebugLog;
@@ -63,6 +50,7 @@ try
 	}
 	else
 	{
+		DMS_MissionCount = DMS_MissionCount + 1;
 		DMS_StaticMissionDelay = DMS_TimeBetweenStaticMissions call DMS_fnc_SelectRandomVal;
 		DMS_StaticMissionLastStart = diag_tickTime;
 		DMS_RunningStaticMissions pushBack _missionType;

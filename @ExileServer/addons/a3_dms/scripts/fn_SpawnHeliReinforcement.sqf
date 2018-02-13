@@ -44,7 +44,7 @@ if (isNull _AIGroup) exitWith
     -1
 };
 
-private _heliClass = if ((count _this)>8) then {_this param [8, "", [""]]} else {selectRandom DMS_ReinforcementHelis};
+private _heliClass = param [8, selectRandom DMS_ReinforcementHelis, [""]];
 
 // Make the AI group local to add passengers.
 if !(local _AIGroup) then

@@ -36,7 +36,7 @@ private _exit = false;
 		};
 
 
-		private _absoluteWinCondition = if ((count _x)>2) then {_x select 2} else {false};
+		private _absoluteWinCondition = _x param [2, false, [true]];
 
 		if (!_success && {!_absoluteWinCondition}) then
 		{

@@ -24,17 +24,17 @@
 
 if !(params
 [
-    "_units",
-    "_finalGroup",
-	"_pos",
-	"_difficulty"
+  "_units",
+  "_finalGroup",
+  "_pos",
+  "_difficulty"
 ])
 then
 {
 	diag_log format ["DMS ERROR :: Calling DMS_fnc_SetGroupBehavior_Separate with invalid params: %1",_this];
 };
 
-private _behavior = if ((count _this)>3) then {_this select 3;} else {"COMBAT"};
+private _behavior = param [3, "COMBAT", [""]];
 
 private _tmpGroup = createGroup (side _finalGroup);
 

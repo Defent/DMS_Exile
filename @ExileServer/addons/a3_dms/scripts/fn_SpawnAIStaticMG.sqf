@@ -34,15 +34,7 @@ exitWith
 	diag_log format ["DMS ERROR :: Calling DMS_fnc_SpawnAIStaticMG with invalid parameters: %1",_this];
 };
 
-private _MGClassInput =
-	if ((count _this)>5) then
-	{
-		_this select 5
-	}
-	else
-	{
-		"random"
-	};
+private _MGClassInput = param [5, "random", [""]];
 
 
 private _guns = _positions apply

@@ -27,7 +27,7 @@ if (_missionCode isEqualTo "no") then
 }
 else
 {
-	private _parameters = if ((count _this)>1) then {_this select 1} else {[]};
+	private _parameters = _this param [1,[]];
 
 	DMS_MissionCount 			= DMS_MissionCount + 1;
 	DMS_RunningBMissionCount 	= DMS_RunningBMissionCount + 1;

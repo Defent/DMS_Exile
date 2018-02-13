@@ -27,17 +27,8 @@ if (DMS_SpawnMinesAroundMissions) then
 		diag_log format ["DMS ERROR :: Calling DMS_fnc_SpawnMinefield with invalid parameters: %1",_this];
 	};
 
-	_spawnWarningSign	= DMS_SpawnMineWarningSigns;
-	_mineClassname		= "ATMine";
-	if ((count _this)>3) then
-	{
-		_spawnWarningSign = param [3,DMS_SpawnMineWarningSigns,[true]];
-
-		if ((count _this)>4) then
-		{
-			_mineClassname = param [4,"ATMine",[true]];
-		};
-	};
+	private _spawnWarningSign = param [3,DMS_SpawnMineWarningSigns,[true]];
+	private _mineClassname = param [4,"ATMine",[true]];
 
 
 	if !(getText (configfile >> "CfgVehicles" >> _mineClassname >> "vehicleClass") isEqualTo "Mines") exitWith

@@ -34,15 +34,7 @@ exitWith
 
 _spawnPos = _positions select 0;
 
-private _vehClass =
-	if ((count _this)>5) then
-	{
-		param [5,"random",[""]]
-	}
-	else
-	{
-		"random"
-	};
+private _vehClass = param [5, "random", [""]];
 
 if (_vehClass == "random") then
 {

@@ -258,7 +258,7 @@ if (!_reinforcementsDepleted && {(diag_tickTime-_lastUpdated)>_updateDelay}) the
 
 			if ([_posOrObj,_radius] call DMS_fnc_IsPlayerNearby) then
 			{
-				private _maxAICount = if ((count _monitorParams)>3) then {_monitorParams param [3, 0, [0]]} else {0};
+				private _maxAICount = _monitorParams param [3, 0, [0]];
 
 				_unitsToSpawn = _reinforcementCount min ((_maxAICount-_remainingUnits) max 0);
 			};
@@ -299,7 +299,7 @@ if (!_reinforcementsDepleted && {(diag_tickTime-_lastUpdated)>_updateDelay}) the
 
 			if (_remainingUnits<_AICount) then
 			{
-				private _maxAICount = if ((count _monitorParams)>2) then {_monitorParams param [2, 0, [0]]} else {_AICount};
+				private _maxAICount = _monitorParams param [2, _AICount, [0]];
 
 				_unitsToSpawn = _reinforcementCount min ((_maxAICount-_remainingUnits) max 0);
 			};
@@ -322,7 +322,7 @@ if (!_reinforcementsDepleted && {(diag_tickTime-_lastUpdated)>_updateDelay}) the
 
 			if (_remainingUnits<_AICount) then
 			{
-				private _maxAICount = if ((count _monitorParams)>3) then {_monitorParams param [3, 0, [0]]} else {_AICount};
+				private _maxAICount = _monitorParams param [3, _AICount, [0]];
 
 				_unitsToSpawn = _reinforcementCount min ((_maxAICount-_remainingUnits) max 0);
 
@@ -355,7 +355,7 @@ if (!_reinforcementsDepleted && {(diag_tickTime-_lastUpdated)>_updateDelay}) the
 						case "hardcore": {"hardcore"};
 					};
 
-				private _maxAICount = if ((count _monitorParams)>3) then {_monitorParams param [3, 0, [0]]} else {_AICount};
+				private _maxAICount = _monitorParams param [3, _AICount, [0]];
 
 				_unitsToSpawn = _reinforcementCount min ((_maxAICount-_remainingUnits) max 0);
 			};
@@ -375,7 +375,7 @@ if (!_reinforcementsDepleted && {(diag_tickTime-_lastUpdated)>_updateDelay}) the
 
 			if (_remainingUnits<_AICount) then
 			{
-				private _vehClass = if ((count _monitorParams)>1) then {_monitorParams param [1, "", [""]]} else {"random"};
+				private _vehClass = _monitorParams param [1, "random", [""]];
 
 				private _leaderPos = getPosATL (leader _AIGroup);
 
@@ -419,7 +419,7 @@ if (!_reinforcementsDepleted && {(diag_tickTime-_lastUpdated)>_updateDelay}) the
 			{
 				deleteVehicle _vehicle;
 
-				private _vehClass = if ((count _monitorParams)>1) then {_monitorParams param [1, "", [""]]} else {"random"};
+				private _vehClass = _monitorParams param [1, "random", [""]];
 
 				private _leaderPos = getPosATL (leader _AIGroup);
 
@@ -466,7 +466,7 @@ if (!_reinforcementsDepleted && {(diag_tickTime-_lastUpdated)>_updateDelay}) the
 			{
 				deleteVehicle _staticGun;
 
-				private _staticGunClass = if ((count _monitorParams)>1) then {_monitorParams param [1, "", [""]]} else {"random"};
+				private _staticGunClass = _monitorParams param [1, "random", [""]];
 
 				private _leaderPos = getPosATL (leader _AIGroup);
 
@@ -512,8 +512,8 @@ if (!_reinforcementsDepleted && {(diag_tickTime-_lastUpdated)>_updateDelay}) the
 
 			if (_remainingUnits<_AICount) then
 			{
-				private _dropPoint = if ((count _monitorParams)>4) then {_monitorParams param [4, getPosATL (leader _AIGroup), [objNull,[]], [2,3]]} else {getPosATL (leader _AIGroup)};
-				private _heliClass = if ((count _monitorParams)>5) then {_monitorParams param [5, "", [""]]} else {selectRandom DMS_ReinforcementHelis};
+				private _dropPoint = _monitorParams param [4, getPosATL (leader _AIGroup), [objNull,[]], [2,3]];
+				private _heliClass = _monitorParams param [5, selectRandom DMS_ReinforcementHelis, [""]];
 
 				private _params =
 				[

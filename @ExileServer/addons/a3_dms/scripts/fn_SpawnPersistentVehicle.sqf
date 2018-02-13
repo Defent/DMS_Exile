@@ -76,7 +76,7 @@ try
 		throw (format ["invalid STRING _pinCode value (must be 4 digits): %1",_pinCode]);
 	};
 
-	private _spawnATL = if ((count _this)>3) then {_this select 3} else {true};
+	private _spawnATL = param [3, true, [true]];
 
 	// Create and set the vehicle
 	_vehObj = [_vehicleClass,_pos] call DMS_fnc_SpawnNonPersistentVehicle;
