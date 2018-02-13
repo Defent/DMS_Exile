@@ -1,4 +1,4 @@
-![ArmA 1.68](https://img.shields.io/badge/Arma-1.68-blue.svg) ![Exile 1.0.3 "Lemon"](https://img.shields.io/badge/Exile-1.0.3%20Lemon-C72651.svg) ![DMS Version](https://img.shields.io/badge/DMS%20Version-2017--09--07-blue.svg)
+![ArmA 1.80](https://img.shields.io/badge/Arma-1.80-blue.svg) ![Exile 1.0.3 "Lemon"](https://img.shields.io/badge/Exile-1.0.3%20Lemon-C72651.svg) ![DMS Version](https://img.shields.io/badge/DMS%20Version-2018--02--12-blue.svg)
 
 
 # To the User:
@@ -133,7 +133,7 @@ ___
 ___
 <br><br><br>
 
-# Roadmap:
+# Ideas:
 ### Zombies are NOT SUPPORTED by DMS, nor do we ever plan to support zombies within DMS.
 
 #### Convoy Mission:
@@ -147,7 +147,7 @@ ___
 * Air/Land AI Vehicle Patrols
 
 #### Random community ideas:
-* Spawning in a trader on mission completion ([Trillseeker82](http://www.exilemod.com/topic/61-dms-defents-mission-system/?do=findComment&comment=43932)). This might be done after the next Exile update due to the trader system overhaul :)
+* Spawning in a trader on mission completion ([Trillseeker82](http://www.exilemod.com/topic/61-dms-defents-mission-system/?do=findComment&comment=43932)).
 
 #### Full Headless Client Support.
 * AI will still be offloaded to clients (ideally); strictly DMS functions will be handled by the HC.
