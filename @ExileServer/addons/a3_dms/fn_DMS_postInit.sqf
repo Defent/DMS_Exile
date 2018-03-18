@@ -163,6 +163,10 @@ if (DMS_ShowDifficultyColorLegend) then
 	[_x] call DMS_fnc_ImportFromM3E_Static;			// Spawn all of the bases that are supposed to be spawned on server startup.
 } forEach DMS_BasesToImportOnServerStart;
 
+{
+	[_x] call DMS_fnc_ImportFromM3E_3DEN_Static;	// M3E 3DEN variant.
+} forEach DMS_BasesToImportOnServerStart_3DEN;
+
 
 {
 	missionNamespace setVariable

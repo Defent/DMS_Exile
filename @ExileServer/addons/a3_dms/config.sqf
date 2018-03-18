@@ -287,6 +287,10 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 											//"slums_objects"		//<--Example (already imported by default on Altis)
 										];
 
+	DMS_BasesToImportOnServerStart_3DEN = [								// Just like above, this defines bases to import on server startup. However, this uses the M3E 3DEN exports.
+											//"mybasename"
+										];
+
 	DMS_BanditMissionsOnServerStart =	[
 											//"construction"		//<-- Example
 										];
