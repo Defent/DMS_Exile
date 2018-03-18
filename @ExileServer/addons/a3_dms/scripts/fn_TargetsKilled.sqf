@@ -33,7 +33,10 @@ try
 		}
 		else
 		{
-			_x setVariable ["DMS_LastAIDistanceCheck",time];
+			if ((time - _lastDistanceCheckTime)>=DMS_AIDistanceCheckFrequency) then
+			{
+				_x setVariable ["DMS_LastAIDistanceCheck",time];
+			};
 			throw _x;
 		};
 	} forEach (_this call DMS_fnc_GetAllUnits);					// DMS_fnc_GetAllUnits will return living AI unit objects only, so we only need to check for runaway units
