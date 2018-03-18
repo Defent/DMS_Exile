@@ -22,18 +22,32 @@ private _killed = false;
 try
 {
 	{
-		private _lastDistanceCheckTime = _x getVariable ["DMS_LastAIDistanceCheck",time];
-		private _pos = getPosWorld _x;
-		private _spawnPos = _x getVariable ["DMS_AISpawnPos",0];
-
-		if ((DMS_MaxAIDistance>0) && {!(_spawnPos isEqualTo 0)} && {((time - _lastDistanceCheckTime)>DMS_AIDistanceCheckFrequency) && {(_pos distance2D _spawnPos)>DMS_MaxAIDistance}}) then
+		if (DMS_MaxAIDistance>0) then
 		{
-			_x setDamage 1;
-			diag_log format ["Killed a runaway unit! |%1| was more than %2m away from its spawn position %3!",_x,DMS_MaxAIDistance,_spawnPos];
+			private _lastDistanceCheckTime = _x getVariable ["DMS_LastAIDistanceCheck",time];
+			private _pos = getPosWorld _x;
+			private _spawnPos = _x getVariable ["DMS_AISpawnPos",0];
+
+			if (!(_spawnPos isEqualTo 0) && {(time - _lastDistanceCheckTime)>DMS_AIDistanceCheckFrequency}) then
+			{
+				if ((_pos distance2D _spawnPos)>DMS_MaxAIDistance) then
+				{
+					_x setDamage 1;
+					diag_log format ["Killed a runaway unit! |%1| was more than %2m away from its spawn position %3!",_x,DMS_MaxAIDistance,_spawnPos];
+				}
+				else
+				{
+					_x setVariable ["DMS_LastAIDistanceCheck",time];
+					throw _x;
+				};
+			}
+			else
+			{
+				throw _x;
+			};
 		}
 		else
 		{
-			_x setVariable ["DMS_LastAIDistanceCheck",time];
 			throw _x;
 		};
 	} forEach (_this call DMS_fnc_GetAllUnits);					// DMS_fnc_GetAllUnits will return living AI unit objects only, so we only need to check for runaway units

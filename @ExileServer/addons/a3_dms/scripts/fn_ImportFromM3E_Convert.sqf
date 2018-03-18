@@ -52,7 +52,7 @@ if ((isNil "_export") || {!(_export isEqualType [])}) exitWith
 private _objs = _export apply
 {
 	private _obj = createVehicle [_x select 0, [0,0,0], [], 0, "CAN_COLLIDE"];
-	_obj enableSimulationGlobal false;
+	_obj enableSimulationGlobal (_x param [5,false,[false]]);
 
 	private _pos = (_x select 1) vectorAdd [0,0,5000];
 

@@ -112,20 +112,21 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 	DMS_UsePredefinedMissionLocations	= false;					// Whether or not to use a list of pre-defined mission locations instead before attempting to find a random (valid) position. The positions will still be checked for validity. If none of the provided positions are valid, a random one will be generated.
 	DMS_PredefinedMissionLocations = 	[							// List of Preset/Predefined mission locations.
 											/* List of positions:
-											position1: [x_1,y_1,z_1],
-											position2: [x_2,y_2,z_2],
+											"x" and "y" are the center to a position on the map, and "r" is a radius about the center.
+											position1: [[x_1,y_1],r_1],
+											position2: [[x_2,y_2],r_2],
 											...
-											positionN: [x_N,y_N,z_N]
+											positionN: [[x_N,y_N],r_N]
 											*/
 
 										];
 
 	DMS_PredefinedMissionLocations_WEIGHTED = 	[					// List of Preset/Predefined mission locations WITH WEIGHTED CHANCES. This will NOT override "DMS_PredefinedMissionLocations", and everything from "DMS_PredefinedMissionLocations" will behave as though it has 1 weight per position.
 											/* List of arrays with position and weighted chance:
-											[[x_1,y_1,z_1], chance_1],
-											[[x_2,y_2,z_2], chance_2],
+											[[[x_1,y_1],r_1], weight_1],
+											[[[x_2,y_2],r_2], weight_2],
 											...
-											[[x_N,y_N,z_N], chance_N]
+											[[[x_N,y_N],r_N], weight_N]
 											*/
 
 										];

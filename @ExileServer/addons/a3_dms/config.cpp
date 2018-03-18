@@ -76,6 +76,7 @@ class CfgFunctions
 			class SetGroupBehavior 				{};
 			class SetGroupBehavior_Separate		{};
 			class SetRelPositions				{};
+			class ShuffleNewArray				{};
 			class SpawnAIGroup 					{};
 			class SpawnAIGroup_MultiPos			{};
 			class SpawnAIVehicle				{};

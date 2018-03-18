@@ -144,3 +144,62 @@ CALLFILE("\x\addons\dms\missions\mission_init.sqf");
 	missionNamespace setVariable [format["DMS_SpecialMissionSpawnCount_%1",_mission], 0];
 	missionNamespace setVariable [format["DMS_SpecialMissionLastSpawn_%1",_mission], 0];
 } forEach DMS_SpecialMissions;
+
+
+
+
+
+if ((!isNil "A3XAI_isActive") && {!DMS_ai_offload_Only_DMS_AI}) then
+{
+	diag_log 'DMS DETECTED A3XAI. Enabling "DMS_ai_offload_Only_DMS_AI"!';
+	DMS_ai_offload_Only_DMS_AI = true;
+};
+
+if ((isClass (configFile >> "CfgPatches" >> "Ryanzombies")) && {!DMS_ai_offload_Only_DMS_AI}) then
+{
+	diag_log 'DMS DETECTED RyanZombies. Enabling "DMS_ai_offload_Only_DMS_AI"!';
+	DMS_ai_offload_Only_DMS_AI = true;
+};
+
+if !(DMS_ai_offload_to_client) then
+{
+	DMS_ai_offloadOnUnfreeze = false;
+};
+
+if !(DMS_ai_allowFreezing) then
+{
+	DMS_ai_freezeOnSpawn = false;
+};
+
+
+
+DMS_A3_AllMarkerColors = [];
+for "_i" from 0 to ((count(configfile >> "CfgMarkerColors"))-1) do
+{
+	DMS_A3_AllMarkerColors pushBack (toLower (configName ((configfile >> "CfgMarkerColors") select _i)));
+};
+
+
+if !((toLower DMS_MissionMarkerWinDotColor) in DMS_A3_AllMarkerColors) then
+{
+	diag_log format ["DMS ERROR :: Unsupported color for DMS_MissionMarkerWinDotColor (""%1""). Switching color to ""ColorBlue"".",DMS_MissionMarkerWinDotColor];
+	DMS_MissionMarkerWinDotColor = "ColorBlue";
+};
+
+if !((toLower DMS_MissionMarkerLoseDotColor) in DMS_A3_AllMarkerColors) then
+{
+	diag_log format ["DMS ERROR :: Unsupported color for DMS_MissionMarkerLoseDotColor (""%1""). Switching color to ""ColorRed"".",DMS_MissionMarkerLoseDotColor];
+	DMS_MissionMarkerLoseDotColor = "ColorRed";
+};
+
+
+
+// Add the weighted predefined locations to the list of predefined locations
+{
+	for "_i" from 1 to (_x select 1) do
+	{
+		DMS_PredefinedMissionLocations pushBack (_x select 0);
+	};
+} forEach DMS_PredefinedMissionLocations_WEIGHTED;
+
+DMS_PredefinedMissionLocations = DMS_PredefinedMissionLocations call DMS_fnc_ShuffleNewArray;

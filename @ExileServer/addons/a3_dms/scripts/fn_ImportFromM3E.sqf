@@ -51,12 +51,12 @@ private _objs = _export apply
 {
 	// Create the object
 	private _obj = createVehicle [_x select 0, [0,0,0], [], 0, "CAN_COLLIDE"];
-	_obj enableSimulationGlobal false;
+	_obj enableSimulationGlobal (_x param [5,false,[false]]);
 
 	// Calculate the object's position using provided relative position
 	private _objPos = [_pos,_x select 1] call DMS_fnc_CalcPos;
 
-	if (((count _x)>4) && {!(_x select 4)}) then
+	if (_x param [4,false,[false]]) then
 	{
 		// Supports bank/pitch
 		_obj setPosATL _objPos;

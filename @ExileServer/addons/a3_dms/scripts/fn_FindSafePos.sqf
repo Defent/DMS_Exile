@@ -43,26 +43,15 @@ DMS_DebugMarkers = [];
 */
 
 private _isValidSpot = false;
-
-private _presetLocs = [];
-private _presetLocsLength = 0;
-
-if (DMS_UsePredefinedMissionLocations) then
-{
-	// Shuffle the array so that the positions are selected in random order
-	_presetLocs = DMS_PredefinedMissionLocations call ExileClient_util_array_shuffle;
-	_presetLocsLength = count _presetLocs;
-};
-
-
 private _pos = [];
 
 for "_attempts" from 1 to MAX_ATTEMPTS do
 {
 	_pos =
-		if (DMS_UsePredefinedMissionLocations && {_attempts<=_presetLocsLength}) then
+		if (DMS_UsePredefinedMissionLocations) then
 		{
-			_presetLocs select (_attempts - 1)
+			_posInfo = selectRandom DMS_UsePredefinedMissionLocations;
+			[_posInfo select 0,	random (_posInfo select 1), random 360] call DMS_fnc_SelectOffsetPos
 		}
 		else
 		{

@@ -51,11 +51,11 @@ if (!isNull _client) then
 		ExileServerOwnershipSwapQueue pushBack [_AI,_client];
 	};
 
+	private _msg = format ["DMS :: AI %1 |%2| has been offloaded to you.",_AIType,_AI];
+	_msg remoteExecCall ["diag_log", _client];
 	if (DMS_ai_offload_notifyClient) then
 	{
-		private _msg = format ["DMS :: AI %1 |%2| has been offloaded to you.",_AIType,_AI];
 		_msg remoteExecCall ["systemChat", _client];
-		_msg remoteExecCall ["diag_log", _client];
 	};
 
 	if (DMS_DEBUG) then

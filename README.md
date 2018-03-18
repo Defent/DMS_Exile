@@ -1,4 +1,4 @@
-![ArmA 1.80](https://img.shields.io/badge/Arma-1.80-blue.svg) ![Exile 1.0.3 "Lemon"](https://img.shields.io/badge/Exile-1.0.3%20Lemon-C72651.svg) ![DMS Version](https://img.shields.io/badge/DMS%20Version-2018--02--12-blue.svg)
+![ArmA 1.80](https://img.shields.io/badge/Arma-1.80-blue.svg) ![Exile 1.0.4 "Pineapple"](https://img.shields.io/badge/Exile-1.0.4%20Pineapple-C72651.svg) ![DMS Version](https://img.shields.io/badge/DMS%20Version-2018--03--18RC-blue.svg)
 
 
 # To the User:
@@ -100,16 +100,16 @@ If you can't figure it out, leave a post on [the DMS thread on exile forums](htt
 <br><br>
 ### HEADLESS CLIENT:
 
-**DMS does not currently support headless client. Do not attempt to use HC with DMS unless you know what you are doing.**
+**DMS does not run on a headless client. Do not attempt to use HC with DMS unless you know what you are doing.**
 
 ___
 <br><br>
 
 # Credits:
 ### Authors:
-- [Defent](https://github.com/Defent) from [NumenaDayZ](http://numenadayz.com/).
-- [eraser1](https://github.com/eraser1) from [TrainwreckDayZ](http://www.trainwreckdayz.com/home).
-- [secondcoming](https://github.com/secondcoming) from [ExileYorkshire](http://exileyorkshire.co.uk/).
+- [Defent](https://github.com/Defent)
+- [eraser1](https://github.com/eraser1)
+- [secondcoming](https://github.com/secondcoming)
 
 
 ### Thanks:
@@ -121,6 +121,7 @@ ___
 - [William from Refugees of the Fallen](http://rtfgaming.com/) for the amazing slums static mission base and ideas :)
 - [DONKEYPUNCH](https://github.com/donkeypunchepoch) for everything on the [February 17th 2016 commit](https://github.com/Defent/DMS_Exile/wiki/Changelog#february-17-2016-600-pm-cst-america) ;)
 - [MGTDB](https://github.com/MGTDB) for the plethora of fixes, testing, and all-around doing our work for us :P
+- [PrimusNZ](https://github.com/PrimusNZ) for some fixes.
 - Everybody's feedback on [the DMS thread on exile forums](http://www.exilemod.com/topic/61-dms-defents-mission-system/?do=findComment&comment=242)
 
 #### Testers/Reporters:
@@ -150,7 +151,7 @@ ___
 * Spawning in a trader on mission completion ([Trillseeker82](http://www.exilemod.com/topic/61-dms-defents-mission-system/?do=findComment&comment=43932)).
 
 #### Full Headless Client Support.
-* AI will still be offloaded to clients (ideally); strictly DMS functions will be handled by the HC.
+* Handling DMS functions/code as well as AI on the HC.
 
 
 ___
