@@ -84,8 +84,8 @@ if (diag_fps >= DMS_MinServerFPS && {_playerCount >= DMS_MinPlayerCount}) then
 
 		if
 		(
-			(_playerCount > _minPlayers) &&
-			{_playerCount < _maxPlayers} &&
+			(_playerCount >= _minPlayers) &&
+			{_playerCount <= _maxPlayers} &&
 			{_maxTimesPerRestart > _timesSpawned} &&
 			{(_time - (missionNamespace getVariable format["DMS_SpecialMissionLastSpawn_%1",_mission])) > _timeBetween}
 		) then
