@@ -50,7 +50,7 @@ for "_attempts" from 1 to MAX_ATTEMPTS do
 	_pos =
 		if (DMS_UsePredefinedMissionLocations) then
 		{
-			_posInfo = selectRandom DMS_UsePredefinedMissionLocations;
+			_posInfo = selectRandom DMS_PredefinedMissionLocations;
 			[_posInfo select 0,	random (_posInfo select 1), random 360] call DMS_fnc_SelectOffsetPos
 		}
 		else
