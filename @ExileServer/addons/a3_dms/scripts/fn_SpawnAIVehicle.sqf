@@ -68,6 +68,7 @@ private _toFreeze = _group getVariable ["DMS_isGroupFrozen",false];
 private _driver = [_group,_spawnPos,_class,_difficulty,_side,"Vehicle"] call DMS_fnc_SpawnAISoldier;
 _driver moveInDriver _veh;
 _driver setVariable ["DMS_AssignedVeh",_veh];
+_driver allowFleeing 0;
 
 if (_toFreeze) then
 {

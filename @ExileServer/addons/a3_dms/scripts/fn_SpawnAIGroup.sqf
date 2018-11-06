@@ -67,6 +67,7 @@ _group = createGroup (missionNamespace getVariable [format ["DMS_%1Side",_side],
 _group setVariable ["DMS_LockLocality",true];									// Lock locality until all units are spawned
 _group setVariable ["DMS_SpawnedGroup",true];
 _group setVariable ["DMS_Group_Side", _side];
+_group allowFleeing 0;
 
 for "_i" from 1 to _count do
 {
