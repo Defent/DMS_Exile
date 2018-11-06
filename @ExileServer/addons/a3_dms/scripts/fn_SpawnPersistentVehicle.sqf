@@ -90,9 +90,6 @@ try
 		_vehObj setPosASL _pos;
 	};
 
-	// Save vehicle on exit.
-	_vehObj addEventHandler ["GetOut", { _this call ExileServer_object_vehicle_event_onGetOut}];
-
 	// Set up vars
 	_vehObj setVariable ["ExileIsPersistent", true];
 	_vehObj setVariable ["ExileAccessCode", _pinCode];
@@ -103,6 +100,25 @@ try
 	_vehObj setVariable ["ExileLastLockToggleAt", time];
 	_vehObj setVariable ["ExileAccessDenied", true];
 	_vehObj setVariable ["ExileAccessDeniedExpiresAt", 999999];
+
+
+	// Save vehicle on exit.
+	_vehObj addEventHandler ["GetOut", { _this call ExileServer_object_vehicle_event_onGetOut}];
+
+	// Message player with PIN Code upon entering the vehicle.
+	private _vehEnteredEH = _vehObj addEventHandler ["GetIn",
+	{
+		params ["_vehObj", "_role", "_playerObj", "_turret"];
+		private _pinCode = _vehObj getVariable ["ExileAccessCode", "-1"];
+		private _sessionID = _playerObj getVariable ["ExileSessionID", ""];
+
+	    private _message = format["DMS Reward Vehicle Code: %1", _pinCode];
+	    [_sessionID, "toastRequest", ["SuccessTitleAndText", ["Mission Vehicle Claimed!", _message]]] call ExileServer_system_network_send_to;
+		_message remoteExecCall ["systemChat", _playerObj];
+
+		_vehObj removeEventHandler ["GetIn", _vehObj getVariable ["DMS_VehicleEnteredEH", -1]];
+	}];
+	_vehObj setVariable ["DMS_VehicleEnteredEH", _vehEnteredEH];	// Set EH ID so it can be removed later.
 }
 catch
 {
