@@ -22,10 +22,11 @@ params
 [
 	["_pos","ERROR",[[]],[2,3]],
 	["_text","ERROR",[""]],
-	["_difficulty","moderate",[""]]
+	["_difficulty","moderate",[""]],
+	["_randomMarker", DMS_MarkerPosRandomization, [false]]
 ];
 
-if ((_pos isEqualTo "ERROR") || ("_text" isEqualTo "ERROR")) exitWith
+if ((_pos isEqualTo "ERROR") || {"_text" isEqualTo "ERROR"}) exitWith
 {
 	diag_log format ["DMS ERROR :: Calling DMS_CreateMarker with invalid parameters: %1",_this];
 
@@ -33,18 +34,7 @@ if ((_pos isEqualTo "ERROR") || ("_text" isEqualTo "ERROR")) exitWith
 };
 
 
-private _randomMarker =
-	if ((count _this)>3) then
-	{
-		_this select 3;
-	}
-	else
-	{
-		DMS_MarkerPosRandomization;
-	};
-
 private _num = DMS_MissionCount;
-
 
 private _markerType = "mil_dot";
 
@@ -104,9 +94,16 @@ _dot setMarkerText _text;
 missionNamespace setVariable [format ["%1_pos",_dot], _pos];
 missionNamespace setVariable [format ["%1_text",_dot], _text];
 
-if (DMS_MarkerText_ShowMissionPrefix) then
+if (DMS_ShowMarkerDot) then
 {
-	_dot setMarkerText (format ["%1 %2",DMS_MarkerText_MissionPrefix,_text]);
+	if (DMS_MarkerText_ShowMissionPrefix) then
+	{
+		_dot setMarkerText (format ["%1 %2",DMS_MarkerText_MissionPrefix,_text]);
+	};
+}
+else
+{
+	_dot setMarkerAlpha 0;		// Simply deleting the marker dot will break things.
 };
 
 if (_randomMarker) then
