@@ -177,15 +177,21 @@
 				} forEach _mines;
 			};
 
+			if !(_onSuccessScripts isEqualTo []) then	// Make sure it's not empty
 			{
-				_params = _x select 0;
-				_code = _x select 1;
-				if (_code isEqualType "") then
-				{
-					_code = compile _code;
+				if ((_onSuccessScripts select 2) isEqualType {}) then
+				{	// Single element with [_parameters, _code]
+					(_onSuccessScripts select 1) call (_onSuccessScripts select 2);
+				}
+				else
+				{	// Multiple elements of [_parameters, _code]. Legacy support.
+					{
+						_params = _x select 0;
+						_code = _x select 1;
+						_params call _code;
+					} forEach _onSuccessScripts;
 				};
-				_params call _code;
-			} forEach _onSuccessScripts;
+			};
 
 			[_missionName,_msgWIN] call DMS_fnc_BroadcastMissionStatus;
 			[_markers,"win"] call DMS_fnc_RemoveMarkers;
@@ -256,15 +262,21 @@
 				DMS_CleanUp_PlayerNearLimit = _prev;
 
 
+				if !(_onFailScripts isEqualTo []) then	// Make sure it's not empty
 				{
-					_params = _x select 0;
-					_code = _x select 1;
-					if (_code isEqualType "") then
-					{
-						_code = compile _code;
+					if ((_onFailScripts select 2) isEqualType {}) then
+					{	// Single element with [_parameters, _code]
+						(_onFailScripts select 1) call (_onFailScripts select 2);
+					}
+					else
+					{	// Multiple elements of [_parameters, _code]. Legacy support.
+						{
+							_params = _x select 0;
+							_code = _x select 1;
+							_params call _code;
+						} forEach _onFailScripts;
 					};
-					_params call _code;
-				} forEach _onFailScripts;
+				};
 
 				[_missionName,_msgLose] call DMS_fnc_BroadcastMissionStatus;
 				[_markers,"lose"] call DMS_fnc_RemoveMarkers;

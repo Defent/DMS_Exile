@@ -48,8 +48,8 @@
 		_difficulty,
 		_missionEvents,
 		[
-			_onSuccessScripts,			// (OPTIONAL) Array of code or string to be executed on mission completion (in addition to regular code). Each element should be an array in the form [_params, _code].
-			_onFailScripts,				// (OPTIONAL) Array of code or string to be executed on mission failure (in addition to regular code). Each element should be an array in the form [_params, _code].
+			_onSuccessScripts,			// (OPTIONAL) Code to be executed on mission completion (in addition to regular scripts). Should be of the form [_params, _code], or multiple elements with the same form.
+			_onFailScripts,				// (OPTIONAL) Same as above, except only executed on mission failure (in addition to regular scripts).
 			_onMonitorStart,			// (OPTIONAL) Code to run when the monitor starts to check the mission status. The passed parameter (_this) is the mission data array itself.
 			_onMonitorEnd				// (OPTIONAL) Code to run when the monitor is done with checking the mission status. The passed parameter (_this) is the mission data array itself.
 		]
