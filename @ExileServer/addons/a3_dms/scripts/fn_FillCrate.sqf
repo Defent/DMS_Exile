@@ -317,3 +317,10 @@ if (_crate getVariable ["DMS_AllowSmoke", true]) then
 		_marker attachTo [_crate, [0,0,0.5]];
 	};
 };
+
+_crate setVariable
+[
+	"ExileMoney",
+	(_crate getVariable ["ExileMoney", 0]) + (_crate getVariable ["DMS_CrateMoney", 0]),
+	true
+];
