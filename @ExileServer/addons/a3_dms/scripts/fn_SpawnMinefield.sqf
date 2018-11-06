@@ -78,7 +78,7 @@ if (DMS_SpawnMinesAroundMissions) then
 	if (_spawnWarningSign) then
 	{
 		private _randDirOffset = random 45;
-		for "_i" from 0 to 359 step 90 do
+		for "_i" from 0 to 359 step 45 do
 		{
 			private _sign = createVehicle ["Land_Sign_Mines_F", [0,0,0], [], 0, "CAN_COLLIDE"];
 			_sign setDir (180+_i);
