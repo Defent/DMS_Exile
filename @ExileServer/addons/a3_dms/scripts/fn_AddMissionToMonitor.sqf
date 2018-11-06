@@ -80,7 +80,7 @@ exitWith
 	false;
 };
 
-private _onEndingScripts = if ((count _this)>10) then {_this select 10} else {[[],[],{},{}]};
+private _onEndingScripts = param [10, [[],[],{},{}], [[]], 4];
 
 
 try
