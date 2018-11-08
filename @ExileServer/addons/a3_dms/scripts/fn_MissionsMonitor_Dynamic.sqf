@@ -192,7 +192,10 @@
 				};
 			};
 
-			[_missionName,_msgWIN] call DMS_fnc_BroadcastMissionStatus;
+			if (DMS_BroadcastMissionSuccess) then
+			{
+				[_missionName,_msgWIN] call DMS_fnc_BroadcastMissionStatus;
+			};
 			[_markers,"win"] call DMS_fnc_RemoveMarkers;
 
 			DMS_Mission_Arr deleteAt _forEachIndex;
@@ -281,7 +284,10 @@
 					};
 				};
 
-				[_missionName,_msgLose] call DMS_fnc_BroadcastMissionStatus;
+				if (DMS_BroadcastMissionFail) then
+				{
+					[_missionName,_msgLose] call DMS_fnc_BroadcastMissionStatus;
+				};
 				[_markers,"lose"] call DMS_fnc_RemoveMarkers;
 
 				DMS_Mission_Arr deleteAt _forEachIndex;
