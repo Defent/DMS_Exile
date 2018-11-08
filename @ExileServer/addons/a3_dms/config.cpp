@@ -4,7 +4,7 @@ class CfgPatches
 	{
 		units[] = {};
 		weapons[] = {};
-		a3_DMS_version = "Nov 6, 2018";
+		a3_DMS_version = "Nov 7, 2018";
 		requiredVersion = 1.68;
 		requiredAddons[] = {"exile_client","exile_server_config"};
 	};

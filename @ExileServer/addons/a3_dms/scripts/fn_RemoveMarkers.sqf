@@ -30,13 +30,17 @@ missionNamespace setVariable [format ["%1_text",_markerDot], nil];
 
 if (_status == "win") then
 {
-	if (!DMS_MissionMarkerWinDot) exitWith
+	if (DMS_MissionMarkerWinDot) then
 	{
-		deleteMarker _markerDot;
+		_markerDot setMarkerText ("COMPLETED: "+_text);
+		_markerDot setMarkerColor DMS_MissionMarkerWinDotColor;
+		_markerDot setMarkerType DMS_MissionMarkerWinDot_Type;
+	}
+	else
+	{
+		_markerDot setMarkerAlpha 0;	// Hide instead of delete for other purposes.
 	};
-	_markerDot setMarkerText ("COMPLETED: "+_text);
-	_markerDot setMarkerColor DMS_MissionMarkerWinDotColor;
-	_markerDot setMarkerType DMS_MissionMarkerWinDot_Type;
+
 	//_markerDot spawn {sleep DMS_MissionMarkerWinDotTime;deleteMarker _this;};
 	[DMS_MissionMarkerWinDotTime, {deleteMarker (_this select 0);}, [_markerDot], false] call ExileServer_system_thread_addTask;
 	if (DMS_DEBUG) then
@@ -46,13 +50,17 @@ if (_status == "win") then
 }
 else
 {
-	if (!DMS_MissionMarkerLoseDot) exitWith
+	if (DMS_MissionMarkerLoseDot) then
 	{
-		deleteMarker _markerDot;
+		_markerDot setMarkerText ("FAILED: "+_text);
+		_markerDot setMarkerColor DMS_MissionMarkerLoseDotColor;
+		_markerDot setMarkerType DMS_MissionMarkerLoseDot_Type;
+	}
+	else
+	{
+		_markerDot setMarkerAlpha 0;
 	};
-	_markerDot setMarkerText ("FAILED: "+_text);
-	_markerDot setMarkerColor DMS_MissionMarkerLoseDotColor;
-	_markerDot setMarkerType DMS_MissionMarkerLoseDot_Type;
+
 	//_markerDot spawn {sleep DMS_MissionMarkerLoseDotTime;deleteMarker _this;};
 	[DMS_MissionMarkerLoseDotTime, {deleteMarker (_this select 0);}, [_markerDot], false] call ExileServer_system_thread_addTask;
 	if (DMS_DEBUG) then
