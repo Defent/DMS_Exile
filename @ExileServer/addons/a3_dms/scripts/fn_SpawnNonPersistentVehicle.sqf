@@ -43,6 +43,10 @@ if !(isClass (configFile >> "CfgVehicles" >> _vehicleClass)) exitWith
 	objNull
 };
 
+//make sure area to spawn vehicle is clear
+_objs = nearestTerrainObjects [_position, ["TREE","BUSH","SMALL TREE","ROCK","ROCKS","FENCE","WALL"], 50];
+{ _x hideObjectGlobal true; } forEach _objs;
+
 private _vehObj = createVehicle [_vehicleClass, _position, [], 0, "NONE"];
 
 clearWeaponCargoGlobal 		_vehObj;
