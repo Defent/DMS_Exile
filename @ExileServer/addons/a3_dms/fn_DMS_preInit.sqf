@@ -46,6 +46,7 @@ if (DMS_Use_Map_Config) then
 };
 
 DMS_MagRange = DMS_MaximumMagCount - DMS_MinimumMagCount;
+DMS_RareMagRange = DMS_RareLootMaxMagazines - DMS_RareLootMinMagazines;
 
 /*
 	Original Functions from

@@ -1230,6 +1230,9 @@ DMS_SpawnMissions_Scheduled = false;	// Whether or not to spawn missions in a sc
 											"Exile_Item_CodeLock"
 										];
 	DMS_RareLootChance					= 10;						// Percentage Chance to spawn rare loot in any crate | Default: 10%
+	DMS_RareLootSpawnMagazines			= true;						//If spawned rare loot is weapon, spawn magazines for it too
+	DMS_RareLootMinMagazines			= DMS_MinimumMagCount;		//We can spawn different count of magazines for rare weapons
+	DMS_RareLootMaxMagazines			= DMS_MaximumMagCount;
 
 	// Vehicles
 	DMS_ArmedVehicles =					[							// List of armed vehicles that can spawn

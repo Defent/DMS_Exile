@@ -286,14 +286,30 @@ if (DMS_RareLoot) then
 		};
 
 	// (Maybe) Add rare loot
-	if(random 100 < _rareLootChance) then
+	
+	for "_i" from 1 to DMS_RareLootAmount do
 	{
-		for "_i" from 1 to DMS_RareLootAmount do
+		if((random 100) < _rareLootChance) then
 		{
 			_item = selectRandom DMS_RareLootList;
 			if (_item isEqualType "") then
 			{
+				private _ammo = "";
+				
+				if (DMS_RareLootSpawnMagazines) then
+				{
+					_ammo = _item call DMS_fnc_selectMagazine;
+				};
+					
 				_item = [_item,1];
+				
+				if (_ammo isEqualType "") then
+				{
+					if !(_ammo in ["Exile_Magazine_Swing","Exile_Magazine_Boing","Exile_Magazine_Swoosh", ""]) then
+					{
+						_crate addItemCargoGlobal [_ammo, (DMS_RareLootMinMagazines + floor(random DMS_RareMagRange))];
+					};
+				};
 			};
 			_crate addItemCargoGlobal _item;
 		};
