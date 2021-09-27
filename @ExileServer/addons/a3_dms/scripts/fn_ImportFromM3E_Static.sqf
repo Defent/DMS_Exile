@@ -50,15 +50,16 @@ private _objs = _export apply
 	
 	private _pos = _x select 1;
 
-	if (_x select 4) then
+	if (((count _x)>4) && {!(_x select 4)}) then
 	{
-		_obj setDir (_x select 2);
+		// Supports bank/pitch
 		_obj setPosATL _pos;
+		_obj setVectorDirAndUp (_x select 3);
 	}
 	else
 	{
-		_obj setPosATL _pos;
-		_obj setVectorDirAndUp (_x select 3);
+		_obj setDir (_x select 2);
+		_obj setPos _pos;
 	};
 
 	_obj;
