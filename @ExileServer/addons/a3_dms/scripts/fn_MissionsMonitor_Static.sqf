@@ -211,7 +211,7 @@
 
 				if (DMS_DEBUG) then
 				{
-					format["MissionsMonitor_Static :: Static Mission Timeout Extended to %1 more seconds; AI count changed from %2 to %3. Position: %4, MissionIndex: %5",_failTime, _prevAICount, _AICount,_pos,_forEachIndex] call DMS_fnc_DebugLog;
+					format["MissionsMonitor_Static :: Static Mission Timeout Extended to %1 more seconds; AI count changed from %2 to %3. Position: %4, MissionIndex: %5",_failTime, _prevAICount, _AICount,_missionPos,_forEachIndex] call DMS_fnc_DebugLog;
 				};
 			};
 		};
@@ -226,7 +226,7 @@
 
 					if (DMS_DEBUG) then
 					{
-						format["MissionsMonitor_Static :: Static Mission Timeout Extended to %1 more seconds; player found within %2 meters. Position: %3, MissionIndex: %4",_failTime,DMS_StaticMissionTimeoutResetRange,_pos,_forEachIndex] call DMS_fnc_DebugLog;
+						format["MissionsMonitor_Static :: Static Mission Timeout Extended to %1 more seconds; player found within %2 meters. Position: %3, MissionIndex: %4",_failTime,DMS_StaticMissionTimeoutResetRange,_missionPos,_forEachIndex] call DMS_fnc_DebugLog;
 					};
 				};
 			};
