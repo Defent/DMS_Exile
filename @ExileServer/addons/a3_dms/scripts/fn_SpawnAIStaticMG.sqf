@@ -49,6 +49,7 @@ private _guns = _positions apply
 	_gun setDir (random 360);
 	_gun setPosATL _x;
 	_gun lock 2;
+	_gun enableWeaponDisassembly false;
 
 	_group addVehicle _gun;
 
